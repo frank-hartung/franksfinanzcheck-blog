@@ -3030,6 +3030,83 @@
       "zuletzt_gesehen": "2026-10-30 11:01 UTC"
     },
     {
+      "id": "29eea3c457afaba3d7bd",
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "fassung_sha256": "16dce3e5a79e7014f298540898de676654bd47f75ec4875fa5411532528fb8c4",
+      "text_sha256": "0a7e7319cf393202d7ca47252ff6b77a07342de861e672f7c93240865ffdd258",
+      "typ": "luecke",
+      "text": "Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-20 13:33 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "8a0df5531569ec042ec4",
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "fassung_sha256": "16dce3e5a79e7014f298540898de676654bd47f75ec4875fa5411532528fb8c4",
+      "text_sha256": "0a7e7319cf393202d7ca47252ff6b77a07342de861e672f7c93240865ffdd258",
+      "typ": "praezision",
+      "text": "Ein freier Standplatz steigert den Empfang um bis zu 40 %.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-20 13:33 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "bda1b543db068b3e00ff",
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "fassung_sha256": "16dce3e5a79e7014f298540898de676654bd47f75ec4875fa5411532528fb8c4",
+      "text_sha256": "0a7e7319cf393202d7ca47252ff6b77a07342de861e672f7c93240865ffdd258",
+      "typ": "luecke",
+      "text": "Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:33 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "3a3269aa4a2e95d780ad",
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "fassung_sha256": "d68e806f95faed787b4b70d6605280cc090dbb724415261e391a02f1c50e3bca",
+      "text_sha256": "074285a4a5c3578685dfde052d3684021876edc7839af7830fa77adde05e5e41",
+      "typ": "luecke",
+      "text": "Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-20 13:35 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "c3ff13d7ca048da95112",
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "fassung_sha256": "d68e806f95faed787b4b70d6605280cc090dbb724415261e391a02f1c50e3bca",
+      "text_sha256": "074285a4a5c3578685dfde052d3684021876edc7839af7830fa77adde05e5e41",
+      "typ": "luecke",
+      "text": "Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-20 13:35 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "ec052a0155f98740a3b5",
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "fassung_sha256": "d68e806f95faed787b4b70d6605280cc090dbb724415261e391a02f1c50e3bca",
+      "text_sha256": "074285a4a5c3578685dfde052d3684021876edc7839af7830fa77adde05e5e41",
+      "typ": "praezision",
+      "text": "Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-20 13:35 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "ee3a722844f4b84b84b8",
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "fassung_sha256": "d68e806f95faed787b4b70d6605280cc090dbb724415261e391a02f1c50e3bca",
+      "text_sha256": "074285a4a5c3578685dfde052d3684021876edc7839af7830fa77adde05e5e41",
+      "typ": "luecke",
+      "text": "Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-20 13:35 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "luecke",
       "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
       "beleg": "",
@@ -3080,6 +3157,28 @@
       "zuletzt_gesehen": "2026-11-04 12:30 UTC"
     },
     {
+      "id": "991bda7b2298b751f4e6",
+      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+      "fassung_sha256": "3b6082e2e3b65b0a9d8c8fea7bea17a1640c47f6a87d8712d80f9478bb7b8d27",
+      "text_sha256": "6ef697b5e46950e0f513a27a36c5f82ffb72de48f4e6fab2c1a6ddbbb4ee3979",
+      "typ": "praezision",
+      "text": "Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unternehmenspflichten und die Grundversorgung als Aufsichtsthemen auf.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "ae71596724d7a243217b",
+      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+      "fassung_sha256": "3b6082e2e3b65b0a9d8c8fea7bea17a1640c47f6a87d8712d80f9478bb7b8d27",
+      "text_sha256": "6ef697b5e46950e0f513a27a36c5f82ffb72de48f4e6fab2c1a6ddbbb4ee3979",
+      "typ": "luecke",
+      "text": "Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "luecke",
       "text": "Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
@@ -3128,6 +3227,28 @@
       "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
       "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
       "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "id": "91894b9b1535765acdca",
+      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+      "fassung_sha256": "5a5bc0a2f76b725e6670a6cb70c54ba0d0797b5a7782cd114c9d698236dd730e",
+      "text_sha256": "f65d1c827b58dbee288084449606f203924caaf5632fde225694dc5972b782dc",
+      "typ": "luecke",
+      "text": "Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "f7b9c93c6a9be1368b06",
+      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+      "fassung_sha256": "5a5bc0a2f76b725e6670a6cb70c54ba0d0797b5a7782cd114c9d698236dd730e",
+      "text_sha256": "f65d1c827b58dbee288084449606f203924caaf5632fde225694dc5972b782dc",
+      "typ": "veraltet",
+      "text": "Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern.",
+      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
     },
     {
       "typ": "luecke",
@@ -3298,6 +3419,61 @@
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
       "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
       "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "id": "0b4755213f0c38321710",
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "fassung_sha256": "dbc4dbe8b0725667dc55780e1572ff4a784433c4a3dd9f3cf591ec873c18396e",
+      "text_sha256": "6aa70b93119e8dd258132d8f2683ca0efb71d7e2dfa19d9c283ae40dc1032e9a",
+      "typ": "luecke",
+      "text": "Behauptung 'kein üblicher Wechselgewinn' ohne Daten",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "3e0c5fa74179e97866b8",
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "fassung_sha256": "dbc4dbe8b0725667dc55780e1572ff4a784433c4a3dd9f3cf591ec873c18396e",
+      "text_sha256": "6aa70b93119e8dd258132d8f2683ca0efb71d7e2dfa19d9c283ae40dc1032e9a",
+      "typ": "luecke",
+      "text": "Preisangabe 9,99 € monatlich ohne Quelle",
+      "beleg": "https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "ae90ebae2842ff9f97f1",
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "fassung_sha256": "dbc4dbe8b0725667dc55780e1572ff4a784433c4a3dd9f3cf591ec873c18396e",
+      "text_sha256": "6aa70b93119e8dd258132d8f2683ca0efb71d7e2dfa19d9c283ae40dc1032e9a",
+      "typ": "praezision",
+      "text": "Aussage über Downloadwert vs Gesprächsqualität ohne Beleg",
+      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "b2611d9120121d0ad785",
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "fassung_sha256": "dbc4dbe8b0725667dc55780e1572ff4a784433c4a3dd9f3cf591ec873c18396e",
+      "text_sha256": "6aa70b93119e8dd258132d8f2683ca0efb71d7e2dfa19d9c283ae40dc1032e9a",
+      "typ": "praezision",
+      "text": "Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "fcb8168c18bd423c5180",
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "fassung_sha256": "dbc4dbe8b0725667dc55780e1572ff4a784433c4a3dd9f3cf591ec873c18396e",
+      "text_sha256": "6aa70b93119e8dd258132d8f2683ca0efb71d7e2dfa19d9c283ae40dc1032e9a",
+      "typ": "praezision",
+      "text": "Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:37 UTC",
+      "herkunft": "dossier-nachlese"
     },
     {
       "typ": "luecke",
@@ -5559,6 +5735,28 @@
       "herkunft": "dossier-nachlese"
     },
     {
+      "id": "4232b77745f1559839a5",
+      "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check",
+      "fassung_sha256": "24ee56dc02ab55439493522c6742bdeaf898c471c18157b85a3118d1119e34e5",
+      "text_sha256": "caedf694f23e97b9d68242222b470a8d605032b5ffa2014e2f0cf84a79d600ed",
+      "typ": "luecke",
+      "text": "Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesnetzagentur.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:31 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "9c67474aa62927df4ee4",
+      "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check",
+      "fassung_sha256": "24ee56dc02ab55439493522c6742bdeaf898c471c18157b85a3118d1119e34e5",
+      "text_sha256": "caedf694f23e97b9d68242222b470a8d605032b5ffa2014e2f0cf84a79d600ed",
+      "typ": "luecke",
+      "text": "Die Angabe zum gesetzlichen Grenzwert für den Standby-Verbrauch (0,5 Watt) wird als Fakt dargestellt, ist aber in der Quelle zur Produktsicherheit nicht belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-20 13:31 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "luecke",
       "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
@@ -5854,5 +6052,10 @@
       "fachpruefung": "übersprungen (keine Fundstellen)",
       "aenderungen": []
     }
-  ]
+  ],
+  "nachlese": {
+    "zeit": "2026-11-20 13:38 UTC",
+    "ergaenzt": 18,
+    "quelle": "data/research/artikel"
+  }
 }

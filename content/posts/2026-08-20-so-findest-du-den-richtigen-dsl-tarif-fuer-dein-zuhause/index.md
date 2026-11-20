@@ -37,7 +37,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-10-13"
+faktencheck: 2026-11-20
 ---
 
 DSL Tarif finden im Check: Eine schnelle Leitung ist nützlich, wenn mehrere Menschen gleichzeitig streamen oder Dateien übertragen. Wer überwiegend E-Mails liest, sollte einen Aufpreis für mehr Bandbreite anders bewerten.

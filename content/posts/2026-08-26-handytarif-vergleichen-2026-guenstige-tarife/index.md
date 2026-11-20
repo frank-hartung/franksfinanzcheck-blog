@@ -40,7 +40,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-10-13"
+faktencheck: 2026-11-20
 ---
 
 Du brauchst nicht den günstigsten Handytarif auf einer Liste, sondern einen, der dort funktioniert, wo du ihn nutzt. Eine schlecht versorgte Bahnstrecke wird durch zusätzliches Datenvolumen nicht besser. Und für ein ungenutztes Datenpolster zahlst du auch dann, wenn der Preis pro Gigabyte niedrig aussieht.

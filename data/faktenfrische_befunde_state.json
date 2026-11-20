@@ -1,10 +1,10 @@
 {
-  "erzeugt": "2026-11-20T12:14:19Z",
+  "erzeugt": "2026-11-20T13:39:04Z",
   "stichtag": "2026-11-20",
-  "offen": 275,
-  "seiten": 72,
-  "live_seiten": 46,
-  "live_befunde": 172,
+  "offen": 293,
+  "seiten": 78,
+  "live_seiten": 51,
+  "live_befunde": 188,
   "ueberholt": 250,
   "ohne_fassung": 15,
   "seite_fehlt": 0,
@@ -21,12 +21,17 @@
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": 5,
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
+    "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": 3,
+    "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": 4,
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": 5,
+    "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": 2,
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": 5,
+    "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": 2,
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": 5,
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": 5,
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": 3,
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
+    "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": 5,
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": 5,
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": 5,
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": 2,
@@ -81,8 +86,9 @@
     "2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt": 5,
     "2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich": 4,
     "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung": 3,
-    "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
-    "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": 3,
+    "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check": 2,
+    "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
+    "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": 3,
     "frugalismus": 3,
     "internet-dsl": 2,
     "konto-karten": 2,
@@ -1514,7 +1520,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "1c6e4d2f12da24ec4081",
       "typ": "luecke",
@@ -1526,7 +1532,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "5b539daf371f7362a3ef",
       "typ": "praezision",
@@ -1538,7 +1544,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "77d809de9e06d1d6910d",
       "typ": "luecke",
@@ -1550,7 +1556,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "ad7c0a90ef52ff35130e",
       "typ": "luecke",
@@ -1562,7 +1568,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "f227178fbda2cc59c350",
       "typ": "luecke",
@@ -2641,7 +2647,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "842ddd33d3dd6b0b97f7",
       "typ": "luecke",
@@ -2653,7 +2659,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "d3e210fb738bd77ef594",
       "typ": "luecke",
@@ -2665,7 +2671,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "da84fa452f879ea8f2da",
       "typ": "luecke",
@@ -3123,6 +3129,204 @@
       "text": "Keine Quelle für die Aussage, dass viele Banken Neukunden‑Zinsgarantien für drei bis sechs Monate bieten.",
       "beleg": "",
       "alter_tage": 1,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "id": "29eea3c457afaba3d7bd",
+      "typ": "luecke",
+      "text": "Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme.",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "id": "8a0df5531569ec042ec4",
+      "typ": "praezision",
+      "text": "Ein freier Standplatz steigert den Empfang um bis zu 40 %.",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "id": "bda1b543db068b3e00ff",
+      "typ": "luecke",
+      "text": "Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "3a3269aa4a2e95d780ad",
+      "typ": "luecke",
+      "text": "Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "c3ff13d7ca048da95112",
+      "typ": "luecke",
+      "text": "Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "ec052a0155f98740a3b5",
+      "typ": "praezision",
+      "text": "Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "ee3a722844f4b84b84b8",
+      "typ": "luecke",
+      "text": "Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+      "id": "991bda7b2298b751f4e6",
+      "typ": "praezision",
+      "text": "Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unternehmenspflichten und die Grundversorgung als Aufsichtsthemen auf.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+      "id": "ae71596724d7a243217b",
+      "typ": "luecke",
+      "text": "Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+      "id": "91894b9b1535765acdca",
+      "typ": "luecke",
+      "text": "Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+      "id": "f7b9c93c6a9be1368b06",
+      "typ": "veraltet",
+      "text": "Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern.",
+      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "0b4755213f0c38321710",
+      "typ": "luecke",
+      "text": "Behauptung 'kein üblicher Wechselgewinn' ohne Daten",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "3e0c5fa74179e97866b8",
+      "typ": "luecke",
+      "text": "Preisangabe 9,99 € monatlich ohne Quelle",
+      "beleg": "https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "ae90ebae2842ff9f97f1",
+      "typ": "praezision",
+      "text": "Aussage über Downloadwert vs Gesprächsqualität ohne Beleg",
+      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "b2611d9120121d0ad785",
+      "typ": "praezision",
+      "text": "Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "fcb8168c18bd423c5180",
+      "typ": "praezision",
+      "text": "Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check",
+      "id": "4232b77745f1559839a5",
+      "typ": "luecke",
+      "text": "Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesnetzagentur.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check",
+      "id": "9c67474aa62927df4ee4",
+      "typ": "luecke",
+      "text": "Die Angabe zum gesetzlichen Grenzwert für den Standby-Verbrauch (0,5 Watt) wird als Fakt dargestellt, ist aber in der Quelle zur Produktsicherheit nicht belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""

@@ -6,8 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-20** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**172 offene Live-Befunde auf 46 Artikeln.** Für **122** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **50** Befunde haben keine frühere aktive Entscheidung.
+**188 offene Live-Befunde auf 51 Artikeln.** Für **122** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **66** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -21,6 +21,22 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `77520584b5afd8ebd7f7` · `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür.
 - `a3be3d50280d4fe0a1d8` · `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben.
 - `d6cc7bae16dead3e610b` · `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt.
+- `29eea3c457afaba3d7bd` · `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` · Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme.
+- `8a0df5531569ec042ec4` · `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` · Ein freier Standplatz steigert den Empfang um bis zu 40 %.
+- `bda1b543db068b3e00ff` · `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` · Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert.
+- `3a3269aa4a2e95d780ad` · `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung
+- `c3ff13d7ca048da95112` · `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen
+- `ec052a0155f98740a3b5` · `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen
+- `ee3a722844f4b84b84b8` · `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt
+- `991bda7b2298b751f4e6` · `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` · Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unternehmenspflichten und die Grundversorgung als Aufsichtsthemen auf.
+- `ae71596724d7a243217b` · `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` · Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst.
+- `91894b9b1535765acdca` · `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird.
+- `f7b9c93c6a9be1368b06` · `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern.
+- `0b4755213f0c38321710` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Behauptung 'kein üblicher Wechselgewinn' ohne Daten
+- `3e0c5fa74179e97866b8` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Preisangabe 9,99 € monatlich ohne Quelle
+- `ae90ebae2842ff9f97f1` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Aussage über Downloadwert vs Gesprächsqualität ohne Beleg
+- `b2611d9120121d0ad785` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg
+- `fcb8168c18bd423c5180` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
@@ -352,6 +368,86 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 - Heute in Zeile 76: 50 € – gekennzeichnet („annahme“)
 - Heute in Zeile 76: 80 € – gekennzeichnet („annahme“)
 
+## `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`
+
+- Datei-SHA256 (heute): `3386f0362724bb8e9c530687fd896b7670946aad190e439c40d22f4012fde958`
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `29eea3c457afaba3d7bd` | luecke | **neu** | 350 € in Zeile 58 gekennzeichnet · 24 Monate in Zeile 58 gekennzeichnet | Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme. |
+| `8a0df5531569ec042ec4` | praezision | **neu** | 40 % in Zeile 23 gekennzeichnet | Ein freier Standplatz steigert den Empfang um bis zu 40 %. |
+| `bda1b543db068b3e00ff` | luecke | **neu** | 45 € in Zeile 3 gekennzeichnet | Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert. |
+
+### `29eea3c457afaba3d7bd`
+
+**Befund:** Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 58: 350 € – gekennzeichnet („annahme“)
+- Heute in Zeile 58: 24 Monate – gekennzeichnet („annahme“)
+
+### `8a0df5531569ec042ec4`
+
+**Befund:** Ein freier Standplatz steigert den Empfang um bis zu 40 %.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 23: 40 % – gekennzeichnet („modellwert“)
+
+### `bda1b543db068b3e00ff`
+
+**Befund:** Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 3: 45 € – gekennzeichnet („modellwert“)
+
+## `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan`
+
+- Datei-SHA256 (heute): `baa30234d3103bce0ba235fe6c01e7352e5d9f279fdd145d97ca7792791f856d`
+- Offene Live-Befunde: **4**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `3a3269aa4a2e95d780ad` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung |
+| `c3ff13d7ca048da95112` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen |
+| `ec052a0155f98740a3b5` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen |
+| `ee3a722844f4b84b84b8` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt |
+
+### `3a3269aa4a2e95d780ad`
+
+**Befund:** Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `c3ff13d7ca048da95112`
+
+**Befund:** Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `ec052a0155f98740a3b5`
+
+**Befund:** Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `ee3a722844f4b84b84b8`
+
+**Befund:** Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`
 
 - Datei-SHA256 (heute): `fa562cc80c5d625f366d796567a8d2959393f532f2ebecb7b076661923bae959`
@@ -417,6 +513,32 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 - Im heutigen Text nicht mehr vorhanden: 180 €
 - Heute in Zeile 90: 120 € – gekennzeichnet („annahme“)
 
+## `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet`
+
+- Datei-SHA256 (heute): `eb27a0bea54f8961f3d7662534c09439dc9ab100ece0be39b5f90e12f98dbf05`
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `991bda7b2298b751f4e6` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unter… |
+| `ae71596724d7a243217b` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfüg… |
+
+### `991bda7b2298b751f4e6`
+
+**Befund:** Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unternehmenspflichten und die Grundversorgung als Aufsichtsthemen auf.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `ae71596724d7a243217b`
+
+**Befund:** Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`
 
 - Datei-SHA256 (heute): `29947cf1af73822c2ed050941d012ea2dae133e1f1d2844b9f8ab833ef50a7f6`
@@ -480,6 +602,32 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Heute in Zeile 120: 650 € – **ohne** Kennzeichnung
 - Heute in Zeile 121: 10,3 Jahre – **ohne** Kennzeichnung
+
+## `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause`
+
+- Datei-SHA256 (heute): `7395d2ecea84deeaaa30a6e1392a0400c132d9a66862f42b296807b5d87395e4`
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `91894b9b1535765acdca` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, ob… |
+| `f7b9c93c6a9be1368b06` | veraltet | **neu** | kein Wert genannt (Aussage/Präzision) | Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich… |
+
+### `91894b9b1535765acdca`
+
+**Befund:** Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `f7b9c93c6a9be1368b06`
+
+**Befund:** Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier`
 
@@ -719,6 +867,59 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 > Am heutigen Text geprüft (SHA-256 0a4e27a71e3d): Die verlangte Quelle steht im Abschnitt „Verbrauch ist dein zweites Sicherheitsnetz“ inline – „Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heiz“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
 - Heute in Zeile 3: 6 % – **ohne** Kennzeichnung
+
+## `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
+
+- Datei-SHA256 (heute): `557f19c26d46a8a6f5d2d9b45bcac9fbce3d98f96d3c79a017ad3cb4f8a83170`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `0b4755213f0c38321710` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Behauptung 'kein üblicher Wechselgewinn' ohne Daten |
+| `3e0c5fa74179e97866b8` | luecke | **neu** | 9,99 € in Zeile 25 gekennzeichnet | Preisangabe 9,99 € monatlich ohne Quelle |
+| `ae90ebae2842ff9f97f1` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Aussage über Downloadwert vs Gesprächsqualität ohne Beleg |
+| `b2611d9120121d0ad785` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg |
+| `fcb8168c18bd423c5180` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg |
+
+### `0b4755213f0c38321710`
+
+**Befund:** Behauptung 'kein üblicher Wechselgewinn' ohne Daten
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `3e0c5fa74179e97866b8`
+
+**Befund:** Preisangabe 9,99 € monatlich ohne Quelle
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 25: 9,99 € – gekennzeichnet („modellrechnung“)
+
+### `ae90ebae2842ff9f97f1`
+
+**Befund:** Aussage über Downloadwert vs Gesprächsqualität ohne Beleg
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `b2611d9120121d0ad785`
+
+**Befund:** Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `fcb8168c18bd423c5180`
+
+**Befund:** Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
@@ -2296,16 +2497,27 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b0aa3429d97e8c74ed
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7f66ec82ee1a3f095b0c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84c991c5d152b14a2675 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a70e7adc97c58317ccc1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 29eea3c457afaba3d7bd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8a0df5531569ec042ec4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden bda1b543db068b3e00ff --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3a3269aa4a2e95d780ad --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c3ff13d7ca048da95112 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec052a0155f98740a3b5 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee3a722844f4b84b84b8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dbeb2f8c51e78d11d49 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33e736ac6afe996b491a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 96b7b7768d402884810c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a25bb6bbcb25ba8b0e22 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f94f8ba1e4342e67e45a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 991bda7b2298b751f4e6 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae71596724d7a243217b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 43470330b3b48c9cee49 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8ddc1025e45be176ad3a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 95d6d2877620e5a056ce --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab16029999747466a638 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b057dee3603e09f494b5 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 91894b9b1535765acdca --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b9c93c6a9be1368b06 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4afb8daed73677ee6224 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9eb9a90899cc8ca66020 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b4bd085bc84a6131b644 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -2324,6 +2536,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 48a0a962046c8315270
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9326152f4d788cff56bd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab4d084fd367c8e4d518 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d215addd22dea72c44df --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0b4755213f0c38321710 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3e0c5fa74179e97866b8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae90ebae2842ff9f97f1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b2611d9120121d0ad785 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden fcb8168c18bd423c5180 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 278d89267d9122a1e9d8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 450c3aa629342062825e --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7601167c9f3560093fb0 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

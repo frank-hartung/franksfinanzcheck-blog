@@ -40,7 +40,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-10-13"
+faktencheck: 2026-11-20
 ---
 
 Eine lange Trefferliste macht den [DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) nicht einfacher. Streiche zuerst Angebote, die an deiner Adresse nicht verfügbar sind oder deinen Bedarf beim Upload nicht decken.

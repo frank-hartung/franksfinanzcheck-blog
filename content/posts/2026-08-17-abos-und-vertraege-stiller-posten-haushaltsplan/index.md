@@ -46,7 +46,7 @@ quellen:
     url: "https://www.gesetze-im-internet.de/bgb/__312k.html"
     herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
     datum: "2026-08-17"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-20
 kurzantwort: "Wiederkehrende Kosten sind im Haushaltsplan schwer zu sehen, weil jeder einzelne Betrag klein wirkt. Der wirksamste Weg ist eine vollständige Liste aller Abbuchungen der letzten zwölf Monate. Danach entscheidest du pro Posten, ob er bleibt. Verträge, die du online abgeschlossen hast, kannst du häufig über den vorgeschriebenen Kündigungsbutton beenden."
 ---
 

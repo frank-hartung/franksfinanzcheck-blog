@@ -4,8 +4,9 @@ description: Hohe Standby Kosten belasten dein Budget? Ich zeige dir, wie du hei
 kurzantwort: Heimliche Dauerverbraucher treiben die Grundlast deines Haushalts unbemerkt in die Höhe. Das Ziel ist es, gezielt Stromfresser entlarven zu können, statt wahllos Stecker zu ziehen.
 date: 2026-11-20T09:12:00Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-11-20T09:37:02Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+cadence_grund: "faktenfrische aufgehoben: faktencheck: 2026-11-20 – Re-Queue für vollständigen Publish-Gate-Lauf"
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -33,6 +34,7 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 19bcac524a64a0a7abe3184146fb63783f3a2e5caf23dca11aed5a7c203f3de4
     geprueft_am: 2026-11-20
+faktencheck: 2026-11-20
 ---
 
 Stell dir vor, in deiner Wohnung brennt Tag und Nacht eine kleine Taschenlampe. In jedem Zimmer. In jeder Ecke. Du siehst sie kaum, aber sie leuchtet ununterbrochen.

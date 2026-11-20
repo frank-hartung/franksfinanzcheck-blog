@@ -2,12 +2,12 @@
 
 _Stand 2026-11-20 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**275 offene Befunde auf 72 Seiten · davon 46 Live-Seiten mit 172 Befunden · ältester 21 Tage · Frist 14 Tage.**
+**293 offene Befunde auf 78 Seiten · davon 51 Live-Seiten mit 188 Befunden · ältester 21 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 275 |
-| Seiten betroffen | 72 (davon live: 46) |
+| Offene Befunde | 293 |
+| Seiten betroffen | 78 (davon live: 51) |
 | Text seit dem Befund geändert | 250 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-20 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 265 von 275 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 265 von 293 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -840,6 +840,88 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `0b4755213f0c38321710` | luecke | 0 T | Text unverändert seit dem Befund | Behauptung 'kein üblicher Wechselgewinn' ohne Daten | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `3e0c5fa74179e97866b8` | luecke | 0 T | Text unverändert seit dem Befund | Preisangabe 9,99 € monatlich ohne Quelle | [Quelle](https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag) |
+| `ae90ebae2842ff9f97f1` | praezision | 0 T | Text unverändert seit dem Befund | Aussage über Downloadwert vs Gesprächsqualität ohne Beleg | [Quelle](https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus) |
+| `b2611d9120121d0ad785` | praezision | 0 T | Text unverändert seit dem Befund | Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `fcb8168c18bd423c5180` | praezision | 0 T | Text unverändert seit dem Befund | Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0b4755213f0c38321710 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3e0c5fa74179e97866b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae90ebae2842ff9f97f1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b2611d9120121d0ad785 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden fcb8168c18bd423c5180 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `29eea3c457afaba3d7bd` | luecke | 0 T | Text unverändert seit dem Befund | Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme. | – |
+| `8a0df5531569ec042ec4` | praezision | 0 T | Text unverändert seit dem Befund | Ein freier Standplatz steigert den Empfang um bis zu 40 %. | – |
+| `bda1b543db068b3e00ff` | luecke | 0 T | Text unverändert seit dem Befund | Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 29eea3c457afaba3d7bd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8a0df5531569ec042ec4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden bda1b543db068b3e00ff --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · **LIVE** · Risikoklasse erhoeht · 4 Befund(e)
+
+Datei: `content/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `3a3269aa4a2e95d780ad` | luecke | 0 T | Text unverändert seit dem Befund | Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung | – |
+| `c3ff13d7ca048da95112` | luecke | 0 T | Text unverändert seit dem Befund | Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen | – |
+| `ec052a0155f98740a3b5` | praezision | 0 T | Text unverändert seit dem Befund | Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen | – |
+| `ee3a722844f4b84b84b8` | luecke | 0 T | Text unverändert seit dem Befund | Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3a3269aa4a2e95d780ad --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c3ff13d7ca048da95112 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec052a0155f98740a3b5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee3a722844f4b84b84b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `991bda7b2298b751f4e6` | praezision | 0 T | Text unverändert seit dem Befund | Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unternehmenspflichten und die Grundversorgung als Aufsichtsthemen auf. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `ae71596724d7a243217b` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 991bda7b2298b751f4e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae71596724d7a243217b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `91894b9b1535765acdca` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `f7b9c93c6a9be1368b06` | veraltet | 0 T | Text unverändert seit dem Befund | Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern. | [Quelle](https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 91894b9b1535765acdca --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b9c93c6a9be1368b06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden`
@@ -972,11 +1054,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3a69bd57886154a18b8
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4f777954306ac7b21e03 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
+### `2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
 
-Seite: `2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten`
+Seite: `2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten`
 
-Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
+Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
@@ -1210,11 +1292,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5f76a2f9b3a57de72e7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6df8b77e2840e62c5711 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` · nicht im Live-Bestand · 3 Befund(e)
+### `2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` · nicht im Live-Bestand · 3 Befund(e)
 
-Seite: `2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`
+Seite: `2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`
 
-Herkunft nach Datums-Lift: `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` → `2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
+Herkunft nach Datums-Lift: `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` → `2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
@@ -1310,6 +1392,20 @@ Seite: `konto-karten`
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5bf7111c673ee53be341 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b3c137c4bb2ebd44eb74 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check` · nicht im Live-Bestand · 2 Befund(e)
+
+Seite: `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `4232b77745f1559839a5` | luecke | 0 T | Text unverändert seit dem Befund | Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesnetzagentur. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `9c67474aa62927df4ee4` | luecke | 0 T | Text unverändert seit dem Befund | Die Angabe zum gesetzlichen Grenzwert für den Standby-Verbrauch (0,5 Watt) wird als Fakt dargestellt, ist aber in der Quelle zur Produktsicherheit nicht belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4232b77745f1559839a5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9c67474aa62927df4ee4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---
