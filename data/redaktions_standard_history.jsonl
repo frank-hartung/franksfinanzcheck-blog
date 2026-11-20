@@ -366,3 +366,4 @@
 {"zeit": "2026-11-18T23:36:30.967434+00:00", "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-20T09:33:29.627920+00:00", "slug": "2026-11-20-internet-tuning-kostenlos-mehr-speed-fuer-dein-wlan", "regel": "RS5", "aktion": "fix-deterministisch"}
 {"zeit": "2026-11-20T09:33:29.627920+00:00", "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-20T15:26:17.559604+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "RS1-RS6", "aktion": "fix-ki"}
