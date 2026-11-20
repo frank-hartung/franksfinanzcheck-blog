@@ -68,7 +68,7 @@ Die Tabelle verdeutlicht, dass steigende Strompreise die Wärmepumpe nicht sofor
 
 ## Umwelt und Förderungen – Mehr als nur Geld  
 
-Wärmepumpen reduzieren CO₂‑Emissionen, weil sie Strom aus erneuerbaren Quellen nutzen können. Gasheizungen erzeugen direkte CO₂‑Emissionen, die nicht kompensiert werden. Zusätzlich gibt es staatliche Förderungen für effiziente Wärmepumpen, die die Anschaffungskosten senken.  
+Wärmepumpen reduzieren CO₂‑Emissionen, weil sie Strom aus erneuerbaren Quellen nutzen können. Gasheizungen erzeugen direkte CO₂‑Emissionen, die nicht kompensiert werden. Zusätzlich gibt es staatliche Förderungen für effiziente Wärmepumpen, die Anschaffungskosten senken.  
 
 > **Rechenbeispiel:**  
 > Angenommen, deine Wärmepumpe spart 2 t CO₂ pro Jahr gegenüber Gas. Das entspricht etwa 4 % des durchschnittlichen deutschen Haushaltsausstoßes (Faustregel). Über 10 Jahre reduziert sich dein CO₂‑Fußabdruck um 20 t, was einer Baumpflanzung von rund 1 000 Bäumen entspricht (Faustregel).  
