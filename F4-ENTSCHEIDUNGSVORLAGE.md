@@ -6,7 +6,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-21** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**203 offene Live-Befunde auf 56 Artikeln.** Für **122** gibt es frühere Entscheidungen zu diesem Befund;
+**201 offene Live-Befunde auf 56 Artikeln.** Für **120** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **81** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -127,7 +127,7 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
 
-- Datei-SHA256 (heute): `1dbb57d8cb1476e64161fe19a81c4f8aeddb8c47bd6ec57d4e7540ac75acc38f`
+- Datei-SHA256 (heute): `bb45e554c45ac278b57327e44dbd51cf9f80bb39e5b43170318e0deac85422a8`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -212,7 +212,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Datei-SHA256 (heute): `37c4119659887f754d5705305149a13357dae3ac849e9152b40150d41ec47ad5`
+- Datei-SHA256 (heute): `ce46f818fe18a896a81ebc80dc877b1479edcd8614925cfc8b329c54781ddbd3`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -253,7 +253,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden`
 
-- Datei-SHA256 (heute): `e16e8c5eebd90957d9eb35da91c40b8a0f500c24540c385bbee862a175686157`
+- Datei-SHA256 (heute): `5372ac6cb7eccd4807f13afeed3eba6a913b369e4492a7f2712924a965a01728`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -317,27 +317,13 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 ## `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`
 
 - Datei-SHA256 (heute): `bfab6e93434f95fb9bafe7b75b8be5fcef1f178314174715df0d3ea6cd795031`
-- Offene Live-Befunde: **5**
+- Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `47f855cb4f0fe1e5c65f` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 400 €, 350 € · 150 € in Zeile 76 gekennzeichnet · 180 € in Zeile 100 ohne Kennzeichnung | Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangab… |
 | `6b0aa3429d97e8c74ed8` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 14,9 % · 8 % in Zeile 52 gekennzeichnet · 12 % in Zeile 9 gekennzeichnet | Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bere… |
-| `7f66ec82ee1a3f095b0c` | praezision | 2026-11-05 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“, ist nicht durch messbare Daten gestützt; ein Ve… |
 | `84c991c5d152b14a2675` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 1.300 € · 500 € in Zeile 108 ohne Kennzeichnung | Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung al… |
 | `a70e7adc97c58317ccc1` | luecke | 2026-11-05 · 1. Entscheidung | 50 € in Zeile 76 gekennzeichnet · 80 € in Zeile 76 gekennzeichnet | Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quell… |
-
-### `47f855cb4f0fe1e5c65f`
-
-**Befund:** Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.
-
-**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
-
-> Heutiger Text geprueft: die unbelegten Kfz-Spannen (150-400 Euro bzw. 180-350 Euro) sind entfernt; heute enthaelt der Artikel keine Wechsel-Zahl mehr. Befund gegenueber heutigem Text gegenstandslos.
-
-- Im heutigen Text nicht mehr vorhanden: 400 €, 350 €
-- Heute in Zeile 76: 150 € – gekennzeichnet („annahme“)
-- Heute in Zeile 100: 180 € – **ohne** Kennzeichnung
 
 ### `6b0aa3429d97e8c74ed8`
 
@@ -350,16 +336,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 - Im heutigen Text nicht mehr vorhanden: 14,9 %
 - Heute in Zeile 52: 8 % – gekennzeichnet („beispielrechnung“)
 - Heute in Zeile 9: 12 % – gekennzeichnet („beispielrechnung“)
-
-### `7f66ec82ee1a3f095b0c`
-
-**Befund:** Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“, ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten fehlt.
-
-**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
-
-> Nochmals gegen den heutigen Text geprueft (Stand 05.11.2026): Aussage 'lukrativste Spar-Saison des Jahres' entfernt; kein messbarer Jahreszeiten-Vergleich mehr im Text. Befund gegenstandslos gegenueber heutigem Text.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `84c991c5d152b14a2675`
 
@@ -530,7 +506,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet`
 
-- Datei-SHA256 (heute): `eb27a0bea54f8961f3d7662534c09439dc9ab100ece0be39b5f90e12f98dbf05`
+- Datei-SHA256 (heute): `a58c48178079a169605f1d434481a3ed70f65788646db79628659d2924102976`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -778,7 +754,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps`
 
-- Datei-SHA256 (heute): `52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e`
+- Datei-SHA256 (heute): `961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -822,7 +798,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen`
 
-- Datei-SHA256 (heute): `f92c9d24f79250a9610763cb5b6687a55c0abddab8e549f0de8228248dc99a34`
+- Datei-SHA256 (heute): `e7725a8d83c8d1629c9b03a779da12d180f1f550597907dbd2185395b322996e`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -885,7 +861,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
 
-- Datei-SHA256 (heute): `557f19c26d46a8a6f5d2d9b45bcac9fbce3d98f96d3c79a017ad3cb4f8a83170`
+- Datei-SHA256 (heute): `4aa28b480adaff6946aa6a1cd0e1e9833ef9a4c03f105822d967e31f81ba4975`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -938,7 +914,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
 
-- Datei-SHA256 (heute): `4ff5b0daf87b710b6f50a9239e2f9940070ae626e191b748653bc28aa51caeae`
+- Datei-SHA256 (heute): `4cc118b6303e1b1ab4a031cdca515e1dab2fb706a74b4a984d08269bd467f6a3`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -955,7 +931,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
-- Datei-SHA256 (heute): `815af18e3c2de40cd87d9247cabf49b2d128c6712eb5e2ffc773cf2d0d583efd`
+- Datei-SHA256 (heute): `78a47f7b40b892410d8adfbe6403545970cfc1ee00067fb6af4a0a1d61eda56e`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1214,7 +1190,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`
 
-- Datei-SHA256 (heute): `4f38b190222a4f18bdd60c522edc277a6e382e61b90ed17ba152b20371b99002`
+- Datei-SHA256 (heute): `6745cad7b490f4bccf2378802253b7acfdf2be536e66325b8a060ebfd2ae0d08`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1327,7 +1303,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
 
-- Datei-SHA256 (heute): `bf1b63bf785e7c0ca2567a3377936253865cd9b69c579813d969906e747262fe`
+- Datei-SHA256 (heute): `a71e33c0b91a8f85bd0b4859cb5fcf127757f025bdcc0e1fc33e149a159b5395`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1509,7 +1485,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser`
 
-- Datei-SHA256 (heute): `7c5a527b203b87d932ab10019586508f42e7bc9848194c6eaba4b80f4dd22434`
+- Datei-SHA256 (heute): `9743b62244f17f426d6cf17c686c25b95495f3243c7254d5ee023fd6b8f0299b`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1764,7 +1740,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig`
 
-- Datei-SHA256 (heute): `ef9dbb9f18580f562a5200a8d07f5fdce615d92efcdfbf578450891805f6f75d`
+- Datei-SHA256 (heute): `92e87410824d037d52ad9b227f42c87069d3fb8a9a320c40232d9d8058e77a46`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1863,7 +1839,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage`
 
-- Datei-SHA256 (heute): `8e44b7f68ca004bef7da2b3f8d558395f85c10e0f1b4d250e9bda17daf40876b`
+- Datei-SHA256 (heute): `70180b9cf5cce3a0c6233815ead5dbc3e480fd3be67fe1f6cd889e8ca8882ec2`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1906,7 +1882,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit`
 
-- Datei-SHA256 (heute): `fb646bb7e5e532c73754783dce04dfd5a28c0340ab9926afbced682e034128d8`
+- Datei-SHA256 (heute): `58d69be305f65c4dd02363998880a8d0905e2ca948e3dec03db859c11a0f0f0c`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2071,7 +2047,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken`
 
-- Datei-SHA256 (heute): `24ae6886a4e363dd3551177e6b9bf4fddf9c7d8988ade633a568d9a758c13c26`
+- Datei-SHA256 (heute): `750ff30d9d0a925dfd80cc8a8713edd6d73d99592b2c786e667893ad91499183`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2219,7 +2195,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken`
 
-- Datei-SHA256 (heute): `add9d0d80baf8348770b870116b7b39bf4758edacdfd4ec7cc6c71c0b7928b17`
+- Datei-SHA256 (heute): `8eea2b7a70ae14e12acbf94d15dc4f30a5c04f37c725e7b97003b4cf3c4f675e`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2682,9 +2658,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9fbacd9942c2dfa1447
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden da30cbb5fbc8c801daf0 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden db8a69f08dc0020adebd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e834f4702e87194affe7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 47f855cb4f0fe1e5c65f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b0aa3429d97e8c74ed8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7f66ec82ee1a3f095b0c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84c991c5d152b14a2675 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a70e7adc97c58317ccc1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 29eea3c457afaba3d7bd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
