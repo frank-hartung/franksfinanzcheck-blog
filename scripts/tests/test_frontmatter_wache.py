@@ -121,6 +121,47 @@ class DoppelterSchluesselToetetDenBauTest(unittest.TestCase):
         self.assertEqual(w.BLOCKER, doppelt[0]["schwere"],
                          "ein Duplikat toetet den Hugo-Bau – es ist ein Blocker")
 
+    # GEGENPROBE 21.11.2026: Der Falschbefund, der `main` lahmlegte.
+    # ------------------------------------------------------------------
+    # Am 19.11.2026 kam ein Artikel mit drei Quellen in einer Liste in den
+    # Bestand:
+    #     quellen:
+    #     - id: Q1
+    #     - id: Q3
+    #     - id: Q5
+    # Der Scanner entfernte das `- ` und zählte `id` dreimal als Schlüssel
+    # derselben Ebene -> F3-BLOCKER. Der Bau blieb stehen, obwohl die Datei
+    # einwandfrei baut. Diese drei Tests halten die Grenze fest: Listen sind
+    # keine Duplikate, echte Duplikate bleiben Blocker.
+    LISTE = SAUBER.replace(
+        "draft: false",
+        "draft: false\nquellen:\n- id: Q1\n  titel: Eins\n"
+        "- id: Q3\n  titel: Drei\n- id: Q5\n  titel: Fünf")
+
+    def test_listeneintraege_sind_keine_doppelten_schluessel(self) -> None:
+        befunde = pruefe(self.LISTE)
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertEqual([], doppelt,
+                         "dieselbe Kennung in MEHREREN Listen-Einträgen ist kein "
+                         "doppelter Mapping-Schlüssel – die Datei baut")
+
+    def test_listeneintraege_bleiben_auch_ohne_pyyaml_still(self) -> None:
+        befunde = pruefe(self.LISTE, yaml_modul="ohne")
+        self.assertEqual([], [b for b in befunde if "steht doppelt" in b["meldung"]])
+
+    @unittest.skipUnless(HAT_YAML, "ohne PyYAML keine Gegenprobe möglich")
+    def test_listengegenprobe_gegen_den_parser(self) -> None:
+        """Was der Parser strikt ohne Duplikat liest, darf kein Blocker sein."""
+        self.assertIsNotNone(yaml.safe_load(self.LISTE.split("---")[1]))
+
+    def test_echtes_duplikat_neben_liste_bleibt_blocker(self) -> None:
+        """Die Verschärfung darf nicht mit der Liste verschwinden."""
+        text = self.LISTE.replace(
+            "draft: false", "draft: false\ndescription: \"zweite Angabe\"")
+        doppelt = [b for b in pruefe(text) if "steht doppelt" in b["meldung"]]
+        self.assertTrue(doppelt, "echtes Duplikat neben einer Liste bleibt unentdeckt")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
+
     def test_ohne_pyyaml_ebenso_scharf(self) -> None:
         befunde = pruefe(self.KAPUTT_DOPPELT, yaml_modul="ohne")
         doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]

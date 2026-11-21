@@ -30,8 +30,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: dcbbc8546ff118b29543ce634daa5a301d6f41e79cf34b92f738e8c7e565cf40
-    geprueft_am: 2026-11-13
+    sha256: ea1697e01387daf32c3c4a4bb48ffe3070afb55a88fdb7a9ffb267671fd03842
+    geprueft_am: 2026-11-21
 faktencheck: 2026-11-09
 kurzantwort: "Ein Wechsel des Gasanbieters senkt hohe Heizkosten besonders beim Ausstieg aus der teuren Grundversorgung. Achte beim Vergleich auf Arbeitspreis, Grundpreis, kurze Laufzeiten und eine klare Preisgarantie – die Belieferung läuft während des gesamten Wechsels unterbrechungsfrei weiter."
 quellen:

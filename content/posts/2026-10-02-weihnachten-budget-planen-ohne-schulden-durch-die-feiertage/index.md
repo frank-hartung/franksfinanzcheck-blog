@@ -31,8 +31,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 7db38fceb77f099806cb302028455faafc4cf55b921c985423443f7ed57245a7
-    geprueft_am: 2026-11-13
+    sha256: 5cbec48db08d78818c1bc999af17a88716cd4db6626150eb9dec7a80d744dc71
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Effektiv sparen auch mit kleinem Budget"

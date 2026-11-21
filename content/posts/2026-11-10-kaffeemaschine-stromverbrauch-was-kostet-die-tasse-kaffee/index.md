@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 99dddf8f589a2d167af8a8e0430616f66afb9b3572d582fa17615bec3c4b81c3
-    geprueft_am: 2026-11-13
+    sha256: 24f7dd88836b31a52b943759ca88e62532c3dd98207ca7603eb216e21a421156
+    geprueft_am: 2026-11-21
 faktencheck: 2026-11-09
 kurzantwort: "Der Stromverbrauch einer Kaffeemaschine fällt vor allem durch Aufheizphasen, Spülvorgänge und dauerhaften Standby ins Gewicht, während im Alltag die Portionskosten den größten Unterschied machen. Wer nach dem Brühen abschaltet und ab mehreren Tassen täglich Bohnen oder Pulver statt Kapseln nutzt, senkt seine laufenden Kosten deutlich."
 quellen:

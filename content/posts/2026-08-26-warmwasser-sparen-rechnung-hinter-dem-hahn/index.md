@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 650f202ee3709fc60feb4da7fa9924e21cf90abb2c9600fc8f30176ad208e045
-    geprueft_am: 2026-11-13
+    sha256: 30c8e9da7f93afdba75a076aa20e6c5a9d051f44f1b526b8583752946e45a21d
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Warmwasser im Alltag sparen: So geht's"

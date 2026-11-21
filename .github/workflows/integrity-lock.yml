@@ -63,6 +63,13 @@
 #      Admin-Sitzungen wieder her – bewusst NICHT hier: ein Dauer-Rot ist Lärm,
 #      und Lärm war der Befund #206/#272. Erklärung und Rückbau:
 #      docs/PFLICHT-CHECK-RUNBOOK.md, Abschnitt „Dauerzustand“.
+#    · NACHTRAG 20.11.2026 (Highend-Nachzug): Belege nachgezogen (7 Regeln,
+#      drei Rulesets inkl. #24247857 required_linear_history); Frist-Wache
+#      `pflichtcheck_guard.py --frist-report` im Wochen-Governance-Lauf mahnt
+#      ≤ 35 Tage vor Ablauf der Prüffrist 31.12.2026 (AMBER) und bei Ablauf
+#      (RED) – der 01.01.2027 kommt nicht mehr still. Die Aktivierung des
+#      Pflicht-Checks bleibt der separate Admin-Schritt (C15); hier änderte
+#      sich nichts am Trigger, am Job und an den Schritten.
 #      Der harte Stopp (Schritt „Integritäts-Siegel prüfen“) bleibt davon
 #      unberührt: er läuft, prüft fail-closed und meldet Drift in den
 #      Kerndateien – er hält nur keinen Merge auf, weil keiner verlangt ist.

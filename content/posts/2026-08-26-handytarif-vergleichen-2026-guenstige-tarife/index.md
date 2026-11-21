@@ -18,8 +18,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 4aa34844a52fdad70c93a690ffe12a9cc106339e9793f6c770230a4400e4123b
-    geprueft_am: 2026-11-13
+    sha256: 23f7d492dde61f259fca6412fc543b2a60f622cb24f3faa6a2ba035d2fe324ab
+    geprueft_am: 2026-11-21
 kurzantwort: "Prüfe den Datenverbrauch auf deinen letzten Rechnungen und die Netzabdeckung an deinen üblichen Aufenthaltsorten. Vergleiche passende Angebote über dieselbe Laufzeit, einschließlich Anschlussgebühr und Preis nach Ablauf eines Rabatts."
 
 social_posted: true

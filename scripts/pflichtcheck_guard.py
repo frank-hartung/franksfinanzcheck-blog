@@ -55,6 +55,8 @@ Nutzung:
     python3 scripts/pflichtcheck_guard.py --strict         # Dauerzustand wieder hart (Admin/Audit)
     python3 scripts/pflichtcheck_guard.py --rules-file r.json   # Regeln aus Datei (offline)
     python3 scripts/pflichtcheck_guard.py --selftest       # Logik-Beweis: kein Netz, schreibt nie
+    python3 scripts/pflichtcheck_guard.py --frist-report F.md   # Frist-Wache des dokumentierten
+                                                                # Dauerzustands (Wochen-Governance, C18)
 
 Umgebung (im Gate gesetzt): GH_TOKEN/GITHUB_TOKEN (Lesen), GITHUB_REPOSITORY,
 GITHUB_BASE_REF (Ziel-Zweig des PR), GITHUB_STEP_SUMMARY (Kurzbericht).
@@ -62,9 +64,10 @@ Zusätzlich: PFLICHTCHECK_STRICT=1 entspricht `--strict` (für Läufe, in denen 
 Kommandozeile nicht erreichbar ist), PFLICHTCHECK_BRANCH als Ziel-Zweig-Ausnahme.
 
 Exit-Codes: 0 = Vertrag erfüllt · dokumentierter Dauerzustand (weicher Modus) ·
-              nicht prüfbar (dann ::warning::)
+              nicht prüfbar (dann ::warning::) · Frist-Wache: kein Handlungsbedarf
             1 = Vertrag verletzt und NICHT der dokumentierte Dauerzustand – oder
-                doch, aber `--strict` · 2 = Selbsttest defekt / Aufruffehler
+                doch, aber `--strict` · Frist-Wache: Frist nah (<= FRIST_WARN_TAGE)
+                oder abgelaufen · 2 = Selbsttest defekt / Aufruffehler
 NACHTRAG 19.09.2026 (zweiter Vorfall – Deploy-Ausfall, Issue #320)
 -------------------------------------------------------------------
 Dieselbe Wache meldete „✅ Vertrag erfüllt“, während `main` seit Stunden keinen
@@ -122,6 +125,30 @@ Der harte Stopp selbst ist von all dem nicht berührt: `integrity_guard.py --gat
 läuft im selben Job vorher, prüft fail-closed und stoppt die Produktion bei Drift.
 Er hält nur keinen Merge auf, weil kein Pflicht-Check verlangt ist – das ist die
 Lücke, nicht dieses Urteil.
+
+NACHTRAG 20.11.2026 (Highend-Nachzug – die Frist darf nicht überraschen)
+------------------------------------------------------------------------
+Der dokumentierte Dauerzustand trägt eine Prüffrist (`pruefung_bis`, im Vertrag).
+Bis dahin meldet der weiche Pfad höchstens "noch X Tage" im Log – und niemand
+nutzt das zwangsläufig, bevor es am 01.01.2027 hart umschlägt (jede PR = Exit 1).
+Neu: `--frist-report PFAD` schreibt eine Governance-Befundtabelle für den
+wöchentlichen Premium-Governance-Lauf (step `pflichtcheck` im Gate):
+
+  · Restlaufzeit > FRIST_WARN_TAGE (35) → INFO (`dauerzustand_frist`), kein Issue
+  · Restlaufzeit <= 35 Tage             → AMBER (`dauerzustand_frist`), handlungs-
+                                          bedürftig: Nachprüfung; Verlängerung nur
+                                          durch Menschen (Frank) oder Admin-Aktivierung
+  · Frist abgelaufen / unbrauchbar      → RED, der Wochen-Governance-Lauf geht rot
+  · keine Erklärung mehr im Vertrag     → INFO (`dauerzustand_weg`) – der erwartete
+                                          Zustand nach dem Rückbau (Aktivierung oder
+                                          ausdrückliche Verwerfung), sonst nichts zu messen
+
+Die Frist-Wache ändert kein Urteil des PR-Gates, schreibt nichts, braucht weder
+Netz noch Token und liest nur den Vertrag. Der PR-Gate zeigt weiterhin jede
+Abweichung hart – die Wochen-Wache sorgt dafür, dass der Termin nicht still
+vorbeigeht. C18 hält die Erklärung ehrlich: ohne hinterlegte Erklärung gibt es
+nichts zu verlängern – und der Weg zurück ins harte Regime (Aktivierung) steht
+im Runbook.
 
 Runbook: docs/PFLICHT-CHECK-RUNBOOK.md
 """
@@ -446,6 +473,87 @@ def dauerzustand_ueberholt(zustand, urteil: str, erwartet: str, branch: str) -> 
             f"`governance_contract.PFLICHT_CHECK_DAUERZUSTAND` im selben PR löschen (und Frist "
             f"sowie Belege mit), sonst erklärt der Vertrag einen Zustand, den es nicht mehr gibt. "
             f"Ablauf: {zustand.get('runbook', RUNBOOK)}"]
+
+
+# --------------------------------------------------------------------------- #
+#  Frist-Wache: der Dauerzustand darf nicht still ablaufen (20.11.2026)
+# --------------------------------------------------------------------------- #
+# FRIST_WARN_TAGE: ab dieser Restlaufzeit meldet die Wochen-Wache AMBER – bewusst
+# 35 Tage, damit der Montagslauf den Ablauf sieht, bevor er am 01.01.2027 hart
+# wird (fünf Wochentakte Vorlauf). Verlängern ist eine Menschen-Entscheidung.
+FRIST_WARN_TAGE = 35
+
+
+def frist_befund(heute: dt.date, zustand: dict | None = None) -> dict:
+    """Der eine Befund, auf den alles hinausläuft: wie lange gilt die Erklärung noch?
+
+    Reine Logik, kein Netz, keine Schreibrechte – testbar mit übergebener Uhr.
+    `zustand=None` liest den Vertrag frisch zum Aufrufzeitpunkt (der Lauf entscheidet
+    nicht über eine gecachte Erklärung von heute früh).
+    """
+    if zustand is None:
+        zustand = getattr(gc, "PFLICHT_CHECK_DAUERZUSTAND", None)
+    if not isinstance(zustand, dict) or not zustand:
+        return {"level": "info", "code": "dauerzustand_weg",
+                "message": "Keine Dauerzustand-Erklärung im Vertrag – die Frist-Wache "
+                           "hat nichts zu messen (zurückgebaut nach Aktivierung oder "
+                           "ausdrücklicher Verwerfung der Erklärung; siehe Runbook)."}
+    frist = _isodatum(zustand.get("pruefung_bis"))
+    if frist is None:
+        return {"level": "red", "code": "dauerzustand_frist",
+                "message": f"Prüffrist `{zustand.get('pruefung_bis')}` ist kein ISO-Datum, "
+                           f"obwohl eine Erklärung hinterlegt ist – die Frist ist die einzige "
+                           f"Bremse des Weichzeichnens; ohne sie gilt gar nichts."}
+    tage = (frist - heute).days
+    basis = (f"Prüffrist des dokumentierten Dauerzustands (`{zustand.get('check', '?')}` "
+             f"auf `{zustand.get('branch', '?')}`, festgestellt {zustand.get('festgestellt', '?')}, "
+             f"zu prüfen bis {frist.isoformat()})")
+    if tage < 0:
+        return {"level": "red", "code": "dauerzustand_frist",
+                "message": f"{basis} ist seit {-tage} Tag(en) abgelaufen – jeder PR auf "
+                           f"`main` meldet den Befund wieder als Vorfall. Verlängerung ist "
+                           f"eine Menschen-Entscheidung (`pruefung_bis` neu datieren), der "
+                           f"Rückbau steht im Runbook (Aktivierung des Pflicht-Checks)."}
+    if tage <= FRIST_WARN_TAGE:
+        return {"level": "amber", "code": "dauerzustand_frist",
+                "message": f"{basis} läuft in {tage} Tag(en) ab – jetzt nachprüfen: entweder "
+                           f"den Pflicht-Check aktivieren (Admin-Schritt, Runbook) oder die "
+                           f"Frist mit Begründung verlängern. Beides sind Menschen-Entscheidungen; "
+                           f"kein Lauf datiert die Frist von selbst um."}
+    return {"level": "info", "code": "dauerzustand_frist",
+            "message": f"{basis} hat {tage} Tage Vorlauf – kein Handlungsbedarf; die Wache "
+                       f"meldet ab {FRIST_WARN_TAGE} Tagen Restlaufzeit."}
+
+
+def frist_report(befund: dict, heute: dt.date) -> str:
+    """Governance-Befundtabelle (dasselbe Format wie die Automations-Wache)."""
+    level = {"red": "RED", "amber": "AMBER", "info": "INFO", "green": "GREEN"}.get(
+        befund.get("level", "info"), "INFO")
+    msg = str(befund.get("message") or "").replace("|", "/").replace("\n", " ")
+    return (f"# Pflicht-Check-Frist-Wache (Dauerzustand)\n\n"
+            f"Gemessen: {heute.isoformat()} · Vertrag: "
+            f"`governance_contract.PFLICHT_CHECK_DAUERZUSTAND`\n\n"
+            f"Ampel: **{level}**\n\n"
+            "| Level | Code | Meldung |\n|---|---|---|\n"
+            f"| {level} | {befund.get('code', 'dauerzustand_frist')} | {msg} |\n")
+
+
+def frist_probe(report: str = "", heute: dt.date | None = None) -> int:
+    heute = heute or dt.datetime.now(dt.timezone.utc).date()
+    befund = frist_befund(heute)
+    text = frist_report(befund, heute)
+    print(text)
+    if report:
+        with open(report, "w", encoding="utf-8") as fh:
+            fh.write(text)
+    step_summary([text])
+    if befund["level"] == "red":
+        annotate("error", befund["message"])
+        return 1
+    if befund["level"] == "amber":
+        annotate("warning", befund["message"])
+        return 1
+    return 0
 
 
 # --------------------------------------------------------------------------- #
@@ -1133,14 +1241,36 @@ def selftest() -> int:
         if runbuch and str(echt.get("runbook_abschnitt")) not in runbuch:
             f.append(f"Fall20: {echt.get('runbook')} führt den Abschnitt "
                      f"„{echt.get('runbook_abschnitt')}“ nicht – die Wache verweist ins Leere.")
+
+    # 21) Frist-Wache: die Grenze, ab der der Dauerzustand den Wochenlauf meldet.
+    _fr = {"check": name, "branch": "main", "festgestellt": "2026-09-19",
+           "dokumentiert": "2026-09-20", "pruefung_bis": "2026-12-31"}
+    if FRIST_WARN_TAGE != 35:
+        f.append("Fall21: FRIST_WARN_TAGE verschoben – Runbook und Gate-Meldung nennen 35.")
+    for tag, soll in ((dt.date(2026, 11, 20), "info"),   # 41 Tage Vorlauf
+                      (dt.date(2026, 11, 25), "info"),   # 36 Tage
+                      (dt.date(2026, 11, 26), "amber"),  # exakt FRIST_WARN_TAGE
+                      (dt.date(2026, 12, 31), "amber"),  # Stichtag noch weich
+                      (dt.date(2027, 1, 1), "red"),      # danach hart
+                      ):
+        fall = frist_befund(tag, _fr)
+        if fall["level"] != soll:
+            f.append(f"Fall21: Frist-Wache {tag.isoformat()} → {fall['level']}, erwartet {soll}.")
+    if frist_befund(dt.date(2026, 11, 20), {})["code"] != "dauerzustand_weg":
+        f.append("Fall21b: ohne Erklärung muss die Frist-Wache INFO melden, nicht rot.")
+    if frist_befund(dt.date(2026, 11, 20), {"pruefung_bis": "31.12.2026"})["level"] != "red":
+        f.append("Fall21c: unbrauchbare Prüffrist muss RED melden.")
+    text21 = frist_report(frist_befund(dt.date(2026, 11, 20), _fr), dt.date(2026, 11, 20))
+    if "| Level | Code | Meldung |" not in text21 or "dauerzustand_frist" not in text21:
+        f.append("Fall21d: frist_report liefert kein Governance-Format.")
     if f:
         print("❌ PFLICHTCHECK-SELBSTTEST FEHLGESCHLAGEN:")
         for z in f:
             print("   -", z)
         return 2
-    print(f"✅ Pflichtcheck-Selbsttest bestanden (20 Fallgruppen: Urteile, Diagnose, Reparatur, "
+    print(f"✅ Pflichtcheck-Selbsttest bestanden (21 Fallgruppen: Urteile, Diagnose, Reparatur, "
           f"Namensquelle, Ziel-Treffer, Bypass-Lücke, Direkt-Pusher, Trigger-Lage, "
-          f"Dauerzustand-Freigabe – erwartet `{gc.PFLICHT_CHECK_NAME}`).")
+          f"Dauerzustand-Freigabe, Frist-Wache – erwartet `{gc.PFLICHT_CHECK_NAME}`).")
     return 0
 
 
@@ -1148,6 +1278,10 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Verlangt der Branch-Schutz den Check, der hier läuft?")
     ap.add_argument("--automation", action="store_true", help="Bot-Stille auf main gegen Writer-Crons prüfen")
     ap.add_argument("--report", default="", help="Automation: Governance-Befunddatei schreiben")
+    ap.add_argument("--frist-report", default="", metavar="PFAD",
+                    help="Frist-Wache: Governance-Befunddatei über die Prüffrist des "
+                         "dokumentierten Dauerzustands schreiben (offline, read-only). "
+                         "Exit 0 = kein Handlungsbedarf · 1 = Frist nah/abgelaufen")
     ap.add_argument("--selftest", action="store_true", help="Logik-Beweis ohne Netz (schreibt nie)")
     ap.add_argument("--branch", default="", help="Ziel-Zweig (Standard: GITHUB_BASE_REF, sonst main)")
     ap.add_argument("--repo", default="", help="owner/repo (Standard: GITHUB_REPOSITORY, sonst origin)")
@@ -1157,6 +1291,10 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     if args.selftest:
         return selftest()
+    if args.frist_report is not None and args.frist_report != "":
+        if args.automation or args.strict or args.rules_file or args.report:
+            ap.error("--frist-report steht allein (offline, ohne --strict/--automation/--rules-file)")
+        return frist_probe(report=args.frist_report)
     if args.automation:
         if args.rules_file or args.branch not in ("", "main"):
             ap.error("--automation misst nur main live (kein --rules-file)")

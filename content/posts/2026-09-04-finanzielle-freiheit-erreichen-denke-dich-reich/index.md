@@ -26,8 +26,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 50d002a47de018a6314e632c931ee6ea4006fa68e23b536747d791bb47d99963
-    geprueft_am: 2026-11-13
+    sha256: 9a486dbe55b18d8c9688b84acdc00a4e03bf90c3a63cbef8130bac98b101f142
+    geprueft_am: 2026-11-21
 social_posted: false
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

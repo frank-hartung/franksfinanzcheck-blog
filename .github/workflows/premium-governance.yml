@@ -3,6 +3,8 @@
 #
 #  Die „Blatt-Steuerung" für FranksFinanzcheck – wöchentlich (Mo 07:15 MESZ):
 #    0. Selbsttests + Governance-VERTRAG (C1–C9)  – kaputte Wachen melden Unsinn
+#    0b. Pflicht-Check-Frist-Wache (C18-Dauerzustand, offline) – der dokumentierte
+#       Dauerzustand darf nicht still auslaufen (Frist 31.12.2026)
 #    1. Messen: Hugo-Build, Decay, Core-Web-Vitals, Secrets (live-Probe),
 #       Pinterest-Performance, Klick-Attribution,
 #       Umsatz-Funnel, Klick-Ketten-Guard (CTA→/go/→Gateway am gebauten Stand)
@@ -108,6 +110,21 @@ jobs:
           cat /tmp/automation.log
           python3 scripts/governance_gate.py --emit automation --report /tmp/automation-report.md \
             --log /tmp/automation.log --exit "$rc" --producer pflichtcheck_guard
+
+      # Pflicht-Check-Frist-Wache (20.11.2026, C18-Nachtrag zu #316): Der
+      # dokumentierte Dauerzustand (PFLICHT_CHECK_DAUERZUSTAND) trägt die Frist
+      # 31.12.2026. Bevor er still ausläuft und jeder PR hart rot wird, mahnt die
+      # Wache: > 35 Tage → INFO (schweigt), ≤ 35 Tage → AMBER (Menschen-Entscheidung
+      # verlängern oder Pflicht-Check aktivieren), abgelaufen → RED. Offline,
+      # read-only, kein Token – der Befund kommt aus dem Vertrag, nicht aus einer API.
+      - name: Pflicht-Check-Frist-Wache (Dauerzustand)
+        run: |
+          rc=0
+          python3 scripts/pflichtcheck_guard.py --frist-report /tmp/pflichtcheck-frist-report.md \
+            > /tmp/pflichtcheck-frist.log 2>&1 || rc=$?
+          cat /tmp/pflichtcheck-frist-report.md
+          python3 scripts/governance_gate.py --emit pflichtcheck --report /tmp/pflichtcheck-frist-report.md \
+            --log /tmp/pflichtcheck-frist.log --exit "$rc" --producer pflichtcheck_guard
 
       - name: Hugo installieren (Messgrundlage Core-Web-Vitals)
         uses: ./.github/actions/install-hugo

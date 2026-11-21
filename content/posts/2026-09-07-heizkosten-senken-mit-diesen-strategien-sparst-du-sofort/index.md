@@ -22,8 +22,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 823ec799c7c91f53ebcf85c06b7bc874a8a5921388f9ff936a249a54e07af250
-    geprueft_am: 2026-11-13
+    sha256: 28074a01d76b32f990dd6a82ec58b6aff4c97a616c0f94986d45b8bb52a0429f
+    geprueft_am: 2026-11-21
 kurzantwort: "Heizkosten senkst du zuerst über passende Raumtemperaturen, kurzes Stoßlüften und freie Heizkörper. Ein Grad weniger spart als Faustwert etwa 6 Prozent Heizenergie, sofern du vorher tatsächlich wärmer geheizt hast. Miss monatlich den Verbrauch und prüfe zusätzlich Arbeitspreis sowie Grundpreis; ein niedrigerer Abschlag allein spart nichts."
 quellen:
   - titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"

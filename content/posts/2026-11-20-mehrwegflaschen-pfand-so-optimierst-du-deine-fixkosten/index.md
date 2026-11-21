@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 18db7bed277c6c5e86bffb5fe6a17acb52f6fbdba03bc87640ba2d347f0022eb
-    geprueft_am: 2026-11-13
+    sha256: dfda5ef1332cd8d0921700de6b3e2b26a563d52a32d344abf7ee34fdb92bf99d
+    geprueft_am: 2026-11-21
 kurzantwort: "Mehrwegflaschen-Pfand bindet im Haushalt laufend bares Geld, das erst bei der Rückgabe wieder frei wird. Wer leere Gebinde mit festem Sammelplatz bei jedem Einkauf zurückbringt und Pfandbons sofort an der Kasse einlöst, vermeidet unnötige Verluste im Haushaltsbudget."
 quellen:
   - id: "Q1"

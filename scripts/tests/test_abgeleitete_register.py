@@ -12,6 +12,7 @@ Nachzug hätte ihn geheilt; erst diese Tests halten die Verbindung.
 """
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 import sys
@@ -147,6 +148,39 @@ class BefundAkteRegisterTest(unittest.TestCase):
             "--push-only) – sonst bleibt die Lücke für fremde Workflows offen")
         for pfad in ("BEFUND-AKTE.md", "data/faktenfrische_befunde_state.json"):
             self.assertIn(pfad, sync)
+
+    def test_probe_haengt_nicht_an_der_befundzahl(self):
+        """Die Sabotage-Probe darf nicht auf einen Bestandswert zeigen.
+
+        ANLASS (21.11.2026, zweite Runde): Die Probe stand auf
+        `**293 offene Befunde`. Sieben Heizöl-Folgeentscheidungen schlossen
+        sieben Befunde, die Zahl wurde 286 – und der Selbsttest meldete
+        „Sabotage hat nichts geändert (Probe taugt nicht)". Das war kein
+        Befund über die Drift-Erkennung, sondern über den Kalender: Jede
+        redaktionelle Entscheidung hätte den Test rot gemacht.
+
+        Die Probe muss auf Struktur zielen, die in jeder Fassung vorkommt.
+        """
+        reg = next(r for r in ar.REGISTER if r.pfad == "BEFUND-AKTE.md")
+        suchtext, ersatz = reg.probe
+        self.assertIsNone(re.search(r"\d", suchtext),
+                          f"Probe {suchtext!r} enthält eine Zahl – sie bricht, "
+                          "sobald sich der Bestand ändert")
+        self.assertNotEqual(suchtext, ersatz)
+
+        # Gegenprobe am echten Artefakt: Die Probe muss greifen. Sonst wäre
+        # der Test oben nur eine Stilregel ohne Beweis.
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import datetime as dt
+        import faktenfrische_befund_akte as akte
+        stichtag = json.loads(
+            (ROOT / "data" / "faktenfrische_befunde_state.json")
+            .read_text(encoding="utf-8"))["stichtag"]
+        markdown, _ = akte.projektion(dt.date.fromisoformat(stichtag))
+        self.assertIn(suchtext, markdown,
+                      f"Probe {suchtext!r} kommt im heutigen Artefakt nicht vor – "
+                      "die Sabotage liefe ins Leere")
+
 
 
 class SchreiberIdempotenzTest(unittest.TestCase):

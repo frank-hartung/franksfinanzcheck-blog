@@ -39,7 +39,7 @@ Pünktlich zum Heizperiode Beginn im Oktober stellt sich die Frage: Zahlst du f�
 * Der Oktober ist der strategisch beste Monat für einen Wechsel. Du nutzt die volle Sparwirkung genau dann, wenn dein Verbrauch am höchsten ist.
 * Ein Neukundenbonus Gas kann die Gesamtkosten im ersten Jahr deutlich senken. Er wirkt oft wie ein Rabatt auf den Arbeitspreis.
 * Wer jetzt [Gastarife vergleichen](../../posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/) Oktober nutzt, sichert sich oft bessere Konditionen vor der winterlichen Hochpreisphase.
-* Mit dem Franks Finanzcheck 4K-Prüfpfad behältst du die volle Kontrolle über deine [Energiekosten](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/).
+* Mit dem FranksFinanzcheck 4K-Prüfpfad behältst du die volle Kontrolle über deine [Energiekosten](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/).
 
 
 
@@ -66,7 +66,7 @@ Stell dir vor, dein Gasvertrag läuft einfach weiter. Die Preise sind vielleicht
 
 Beim Thema Gas geht es nicht nur um den Preis pro Kilowattstunde. Es geht um das Gesamtpaket.
 
-In meinem Franks Finanzcheck nutze ich dafür den 4K-Prüfpfad. Dieser Pfad hilft dir, den Überblick zu behalten. Er schützt dich vor voreiligen Entscheidungen.
+In meinem FranksFinanzcheck nutze ich dafür den 4K-Prüfpfad. Dieser Pfad hilft dir, den Überblick zu behalten. Er schützt dich vor voreiligen Entscheidungen.
 
 1. **Kosten sehen:** Suche deine letzte Jahresabrechnung heraus. Wie viele Kilowattstunden hast du verbraucht? Wie hoch ist dein aktueller Grundpreis? Notiere dir diese Zahlen. Ohne diese Basis ist jeder Vergleich nur ein Raten.
 2. **Konditionen rechnen:** Hier schaust du dir die neuen Angebote an. Achte nicht nur auf den Bonus. Wie hoch ist der Arbeitspreis nach dem ersten Jahr? Gibt es eine Preisgarantie? Passt die Laufzeit zu deiner Lebensplanung?

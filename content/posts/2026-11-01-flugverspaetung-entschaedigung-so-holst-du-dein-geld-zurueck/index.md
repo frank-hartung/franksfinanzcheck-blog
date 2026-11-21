@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: b284ab6f9a980457b6a7c4cdac407766c345924d38986271e2fee0b10e4e8e4b
-    geprueft_am: 2026-11-13
+    sha256: ee7741997607322838a5ff54a64e1b8981e7fb937786ba20b34e7769f9645f3a
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Mein Flug war verspätet: Bekomme ich eine Entschädigung?"

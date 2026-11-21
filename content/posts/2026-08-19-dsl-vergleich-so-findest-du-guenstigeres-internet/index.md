@@ -18,8 +18,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 3335d3afaa59168f5caded03908955b93c714d70125276c974bbc5cf5e29d503
-    geprueft_am: 2026-11-13
+    sha256: 54decf91efa55659a56743587ba5beac186f408f3f5d3b7304d2d48b41248a6e
+    geprueft_am: 2026-11-21
 kurzantwort: "Vergleiche dieselbe Bandbreite am selben Anschluss. Addiere über die gewünschte Laufzeit alle Grundpreise, Anschluss- und Routerkosten und ziehe nur tatsächlich nutzbare Gutschriften ab. Die Differenz hängt vom alten Vertrag und dem konkreten Angebot ab."
 
 social_posted: true

@@ -26,8 +26,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: b2bb496260440eb0ddccf7ec1f257c955836f93bef581709758fa453b588d293
-    geprueft_am: 2026-11-13
+    sha256: 8434af6745d24ca398f68d756c6be4255f02c2d20a0ed16550c9454b6902cdab
+    geprueft_am: 2026-11-21
 kurzantwort: "Buche deinen Mietwagen 3‑4 Wochen vor Reisebeginn und nutze Vergleichsportale, um die günstigsten Angebote zu finden. Im September senken viele Anbieter ihre Preise um 20 %–30 %, weil die Nachfrage niedriger ist. Wähle Abholung und Rückgabe außerhalb von Flughäfen, um zusätzliche Gebühren zu vermeiden."
 social_posted: true
 quellen:

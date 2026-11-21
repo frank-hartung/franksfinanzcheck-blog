@@ -16,7 +16,11 @@
   erfüllbaren** Teil (kein Ruleset verlangt den Check; Rulesets ändern ist
   Admin-Aufgabe, C15) als **bekannten Dauerzustand**: Exit 0 mit `::warning::`,
   das 🛑 bleibt in Log und Summary – Erklärung `PFLICHT_CHECK_DAUERZUSTAND`,
-  Prüffrist bis 31.12.2026, harter Ausweg `--strict`. Nicht „reparieren“, nicht
+  Prüffrist bis 31.12.2026, harter Ausweg `--strict`. Seit 20.11.2026 mahnt die
+  Frist-Wache (`pflichtcheck_guard.py --frist-report`, Schritt im Wochen-Governance-
+  Lauf, Gate-Kennung `pflichtcheck`) ≤ 35 Tage vor Ablauf als `AMBER` und bei Ablauf
+  als `RED` – Verlängern der Frist bleibt Menschen-Entscheidung.
+  Nicht „reparieren“, nicht
   grün waschen, nicht im Workflow auf `--strict` umstellen; Rückbau und Ablauf
   stehen im Runbook-Abschnitt „Dauerzustand“.
 - Agenten-Tokens haben KEINE `workflows`-Permission: Workflow-Dateien nur
