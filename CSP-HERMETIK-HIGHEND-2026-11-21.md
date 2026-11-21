@@ -102,6 +102,17 @@ reisen mit jeder Antwort; der Bericht weist aus, ob die eigene CSP im Dokument
 wiedergefunden wurde (`cspBelege.eigeneImDokument`) und ob eine **fremde** CSP
 dazukam (`cspBelege.fremd`, `fremdherkunft`).
 
+**Der Service Worker wird für die Messung umgangen.** Die Seite registriert
+`sw.js` (`layouts/index.sw.js`). Ab der zweiten Navigation liefert er die
+Antwort — und Puppeteer sieht deren Kopfzeilen nicht mehr. Der erste grüne
+CI-Lauf wies deshalb „Kopfzeile auf **1 von 14** Seiten" aus, obwohl der
+Messserver sie bei jedem HTML setzte. Mit `page.setBypassServiceWorker(true)`
+misst der Audit wieder die Serverantwort: **14 von 14**, 0 Fremd-CSP. Das ist
+keine Abschwächung: Der Audit soll die Kopfzeilen aus `static/_headers`
+prüfen; das Verhalten des Service Workers prüft `scripts/robustheits_gate.py`
+(R5). Im Betrieb reicht `networkFirst()` die Netzantwort unverändert weiter,
+die Edge-Kopfzeilen bleiben also erhalten.
+
 ### 4.3 Weiterleitungsseiten sind keine Artikelprobe
 
 Das Sample folgt jetzt dem Datumspräfix (`2026-11-21-…`) absteigend statt
@@ -124,7 +135,7 @@ erscheint als Frühwarnung mit Grund und Herkunft. Das ist die Belegpflicht aus
 
 ### 4.5 Der Beweis läuft ohne Browser
 
-`node scripts/layout_browser_check.js --selftest` prüft 32 Fälle ohne Chrome
+`node scripts/layout_browser_check.js --selftest` prüft 38 Fälle ohne Chrome
 und ohne Netz: CSP-Parser gegen `static/_headers`, Herkunftsvergleich,
 Erkennung der echten Alt-Seite `zinseszinseffekt-formel-erklaert`, Sample-Regel
 (Datum gewinnt, Weiterleitung und Altlast ohne Datum fallen raus). Der Schritt
@@ -187,7 +198,8 @@ kein Defekt des Werkzeugs.
 
 | Prüfung | Ergebnis |
 |---|---|
-| `node scripts/layout_browser_check.js --selftest` | 32 Fälle grün, davon 19 Hermetik-Fälle |
+| `node scripts/layout_browser_check.js --selftest` | 38 Fälle grün, davon 25 Hermetik-Fälle |
+| `node scripts/layout_browser_check.js --serve-probe` | HTML mit CSP (ohne `frame-ancestors`), statische Datei ohne CSP, Digest + Nonce |
 | `python3 -m unittest scripts.tests.test_layout_audit_csp_beleg` | 20 Tests grün |
 | `python3 -m unittest scripts.tests.test_blog_header_gate` | 49 Tests grün |
 | `python3 scripts/blog_header_gate.py --offline` | grün (S1/S2, Meta-CSP, Wachen-Regeln) |
@@ -217,6 +229,14 @@ er ausgeführt wird.
   `scripts/weiterleitungen.py` sind für Suchmaschinen gedacht; echter
   301 entsteht erst über Cloudflare. Der Audit behandelt sie deshalb als
   Weiterleitung — nicht als Artikel.
+* **Die Offline-Antwort des Service Workers trägt keine CSP.** Der 503-Fallback
+  in `networkFirst()` setzt nur `Content-Type` und `Cache-Control`; er ist
+  damit die einzige Antwort der eigenen Herkunft ohne Sicherheits-Kopfzeilen.
+  Der Audit sieht ihn nicht (er misst am SW vorbei), und im Betrieb erscheint
+  er nur ohne Netz. Das ist eine benannte Lücke, keine stille: Wer sie
+  schließen will, muss die CSP im Worker duplizieren oder aus einer Quelle
+  laden – beides ist eine eigene Entscheidung, kein Nebenprodukt dieser
+  Messung.
 * **`www` kann anders antworten als erwartet.** Die Messung akzeptiert 200
   und 3xx (erste Antwort). Ein 404/5xx auf `www` bleibt STÖRUNG, kein
   Header-Befund — Nicht-Messbarkeit ist kein Sicherheitsbefund.
