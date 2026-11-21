@@ -202,3 +202,69 @@ Repo. Der Audit lief am 19.11. auf `main` noch grün, seither wurde an `layouts/
 nichts geändert. **Die Ursache liegt außerhalb dieses Diffs** und wurde nicht
 angefasst; ein CSP-Eintrag für die Analytics-Domain wäre ein eigener,
 abgestimmter Schritt.
+
+---
+
+## 7. Zweite Merge-Runde (21.11.2026, abends)
+
+`main` war erneut voraus (`191a4273`). Vier Konflikte, jeder einzeln belegt:
+
+**1. `scripts/frontmatter_wache.py` + Test — gleiche Ursache, unabhängig repariert.**
+`main` hat den F3-Fehlalarm am selben Tag selbst behoben (WF-1291) — mit
+demselben Ansatz (`sequenz` merken, *bevor* der Eintragsmarker fällt), aber
+mit mehr Selbsttest-Fällen als mein `6c1c530`. Übernommen: die `main`-Fassung.
+Zwei unabhängige Reparaturen derselben Wurzel sind kein Widerspruch, sondern
+eine Bestätigung der Analyse.
+
+**2. `content/posts/2026-11-21-heizperiode-…/index.md` — stiller Auto-Merge-Fehler.**
+`main` hat den Artikel von `2026-11-20-…` auf `2026-11-21-…` umbenannt und dabei
+Cover **und** Pfad neu erzeugt. Git hat die Umbenennung mit meiner Änderung
+zusammengeführt und **Konfliktmarker in eine Datei geschrieben, die nicht als
+unmerged galt** (`git status` zeigte sie nicht). Gefunden hat es nicht der
+Konfliktmarker-Grep — der sieht `=======` allein nicht —, sondern
+`test_bestand_ohne_blocker` mit einem F2-BLOCKER („YAML-Parser lehnt das
+Frontmatter ab"). Übernommen: `main`. Mein `ki_pruefung`-Attest (`d9c45726…`)
+passte auf das alte Cover; das neue hat `05c04753…`. Ein veraltetes Attest
+mitzuschleppen wäre schlechter als keins.
+
+**3. `data/reserve-readiness.json` — `ready` galt für Bytes, die es nicht mehr gibt.**
+`main` meldet `mehrwegflaschen` wieder als `ready` (SHA `1b2e3abc…`). Das ist der
+Stand **vor** meinem Cover-Attest: Der Artikel trägt jetzt
+`ki_pruefung.sha256 = dfda5ef1…`, die Datei hasht `fad86da0…`.
+`reserve_artifacts.py --check` sagt das wörtlich. Zurückgezogen mit
+`--withdraw-invalid` (das dafür gebaute Werkzeug), **nicht** per Hand:
+`ready` 2 → 1, `pool_size: 12` von `main` bleibt. Bewusst **keine**
+Nachzertifizierung — die wäre eine neue Messung.
+
+Nachgerechnet: Die Befund-Akte fällt dadurch von 293 auf 286 offene Befunde.
+Der Unterschied ist **kein Datenverlust**: Es sind die sieben
+Heizöl-Folgeentscheidungen aus `abf7ea35`, jede mit Befund-ID und Begründung.
+`offen` == Summe `je_seite` == 286.
+
+**4. `abgeleitete_register.py` — Zeitbombe im Selbsttest entschärft.**
+Die Sabotage-Probe der Befund-Akte stand auf `**293 offene Befunde`. Als die
+Zahl durch (2) auf 286 fiel, meldete der Selbsttest „Sabotage hat nichts
+geändert (Probe taugt nicht)" — ein roter Test, der nicht die
+Drift-Erkennung prüfte, sondern den Bestand. Jede redaktionelle Entscheidung
+hätte ihn rot gemacht. Die Probe zielt jetzt auf die Tabellenzeile
+`| Offene Befunde |`; ein neuer Test verbietet Ziffern in der Probe **und**
+prüft am echten Artefakt, dass sie greift. Sabotage-Gegenprobe: Zahl zurück
+in die Probe → Test rot.
+
+### Messung nach der zweiten Runde
+
+| | vorher | jetzt |
+|---|---|---|
+| Tests | 6216 | **6252** |
+| rot | 9 FAIL + 1 ERROR | **9 FAIL + 1 ERROR** |
+| davon neu | — | **0** |
+| geheilt | — | `test_abgeleitete_register` |
+
+`test_gas_artikel_flesch_ueber_publish_schwelle` (Flesch 59,9 < 60,0) bleibt:
+An der Datei wurde **nur** das Cover-Attest geändert, kein Fließtext; der Wert
+war an der Basis `d047978` derselbe.
+
+**Zusatzbefund für den Betrieb:** Ein Rename mit Inhaltsänderung kann bei Git
+Konfliktmarker in einer *nicht* als unmerged gemeldeten Datei hinterlassen.
+Der `konfliktmarker_wache`-Grep findet sie nur, wenn er auch `=======` allein
+prüft; verlässlich gefangen hat sie erst der YAML-Parser-Test.
