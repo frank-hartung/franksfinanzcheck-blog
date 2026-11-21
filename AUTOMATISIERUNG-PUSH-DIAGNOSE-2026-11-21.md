@@ -186,6 +186,43 @@ in verschiedenen Einträgen sind YAML-korrekt.
 (`draft: false` / `draft: true`) ist weiter BLOCKER – ohne Parser und mit
 Parser. Der Fehlalarm ist nicht gegen einen Blindfleck getauscht.
 
+### 2.5 Nebenbefund aus dem PR-Lauf: Beacon ohne CSP-Erlaubnis
+
+Der erste PR-Lauf (449…) meldete im Layout-Audit auf **jeder** betroffenen
+Seite denselben Konsolenfehler:
+
+```
+Loading the script 'https://static.cloudflareinsights.com/beacon.min.js'
+violates the following Content Security Policy directive:
+"script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com"
+```
+
+`static/_headers` erlaubt Cloudflare nur für Turnstile
+(`challenges.cloudflare.com`). Der Web-Analytics-Beacon läuft über eine
+**andere** Domain. Das Partial `cloudflare_analytics.html` rendert nur bei
+`mode = "manual"` **und** gesetztem `website`/`token` – in `hugo.toml` steht
+davon nichts. Das Skript kam also über Cloudflares automatische Injektion
+ins ausgelieferte HTML; das Repo konnte die CSP-Verletzung nicht verhindern.
+
+**Geändert (vertretbar ohne Workflow-/Cloudflare-Rechte):**
+
+* Der Vertrag steht jetzt **am Ort der Einbindung** statt nur in einem
+  Bericht: Wer den Beacon lädt, ergänzt zuerst
+  `https://static.cloudflareinsights.com` bei `script-src` **und**
+  `connect-src` in `static/_headers` – und in `cloudflare/edge-schutz.md`,
+  sonst driftet die Edge-Kante vom Repo.
+* `scripts/tests/test_cloudflare_analytics_csp.py` prüft die Kombination
+  (nicht die Einstellung): Ist der Beacon aktiv, MUSS die CSP ihn erlauben;
+  ist er still, darf die Domain **nicht** in der CSP stehen (keine
+  unnötige Angriffsfläche). Gegenprobe belegt: Bei simuliert aktiver
+  Einbindung wird der Test rot.
+
+**Nicht geändert:** `static/_headers` und `cloudflare/**` sind
+sicherheitsrelevante Dateien (Sicherheitsregel 3, `CLAUDE.md`). Die
+eigentliche Wahl – Beacon behalten und CSP erweitern **oder** die
+automatische Injektion im Cloudflare-Dashboard abschalten – trifft der
+Inhaber.
+
 ---
 
 ## 3. Was ausdrücklich NICHT geändert wurde
@@ -221,6 +258,9 @@ python3 -m unittest scripts.tests.test_frontmatter_wache
 
 # 5. Alarme werden gebündelt
 python3 scripts/veroeffentlichungs_wache.py --selftest
+
+# 6. Beacon-Behelf: keine Auslieferung gegen die eigene CSP
+python3 -m unittest scripts.tests.test_cloudflare_analytics_csp
 ```
 
 **Erwartete Ergebnisse (auf diesem Stand gemessen):**
@@ -234,6 +274,11 @@ python3 scripts/veroeffentlichungs_wache.py --selftest
 | `veroeffentlichungs_wache.py --selftest` | 17 Fälle grün |
 | `push_diagnose.py --selftest` | 8 Klassenproben grün |
 | `python3 -m unittest scripts.tests.test_git_sync` | 60 Tests grün |
+| `python3 -m unittest scripts.tests.test_cloudflare_analytics_csp` | 6 Tests grün |
+| `integrity_guard.py --gate` · `--selftest` · 66 Vertragstests | grün |
+| `workflow_vertrag_wache.py --online --gate` | 103 Workflows, 0 Verstoß |
+| `artefakt_waechter.py` | 709 Artefakte heil |
+| `pflichtcheck_guard.py` | Exit 0 (Bekannt-Befund, kein neuer Vorfall) |
 
 ---
 
