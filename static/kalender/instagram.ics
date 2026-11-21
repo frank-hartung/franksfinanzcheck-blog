@@ -6,11 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
+UID:instagram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-bra
+ uchst-dein:nutzen:2026-11-21@franksfinanzcheck.de
+DTSTAMP:20261121T133329Z
+DTSTART:20261121T174500Z
+DTEND:20261121T180000Z
+SUMMARY:Instagram: Wie viel Bandbreite brauchst du fürs Streaming? (nu
+ tzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-ba
+ ndbreite-du-wirklich-brauchst-dein/
+URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
+ andbreite-du-wirklich-brauchst-dein/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:instagram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-w
- issen-musst:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
-DTSTART:20261121T104500Z
-DTEND:20261121T110000Z
+ issen-musst:nutzen:2026-11-22@franksfinanzcheck.de
+DTSTAMP:20261121T133329Z
+DTSTART:20261122T104500Z
+DTEND:20261122T110000Z
 SUMMARY:Instagram: Geschenkkarte: Was du beim Kauf und Aufladen wissen
   musst (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -21,24 +36,9 @@ URL:https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-al
- ten-rahmen:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
-DTSTART:20261122T104500Z
-DTEND:20261122T110000Z
-SUMMARY:Instagram: Fenster abdichten: So stoppst du Zugluft an alten R
- ahmen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-
- stoppst-du-zugluft-an-alten-rahmen/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so
- -stoppst-du-zugluft-an-alten-rahmen/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:instagram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-de
  in-geld-zurueck:nutzen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
+DTSTAMP:20261121T133329Z
 DTSTART:20261124T104500Z
 DTEND:20261124T110000Z
 SUMMARY:Instagram: Flugverspätung: Wann kommt eine Entschädigung infra
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-ro
  uter-standort:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
+DTSTAMP:20261121T133329Z
 DTSTART:20261126T104500Z
 DTEND:20261126T110000Z
 SUMMARY:Instagram: Router Standort: So findest du einen guten Platz – 
@@ -66,11 +66,26 @@ URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-
- sparst:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
+UID:instagram:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-al
+ ten-rahmen:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261121T133329Z
 DTSTART:20261128T104500Z
 DTEND:20261128T110000Z
+SUMMARY:Instagram: Fenster abdichten: So stoppst du Zugluft an alten R
+ ahmen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-
+ stoppst-du-zugluft-an-alten-rahmen/
+URL:https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so
+ -stoppst-du-zugluft-an-alten-rahmen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-
+ sparst:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261121T133329Z
+DTSTART:20261129T104500Z
+DTEND:20261129T110000Z
 SUMMARY:Instagram: Secondhand-Kleidung kaufen: So prüfst du Stoff\, Nä
  hte (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -81,24 +96,9 @@ URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-bra
- uchst-dein:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
-DTSTART:20261129T104500Z
-DTEND:20261129T110000Z
-SUMMARY:Instagram: Wie viel Bandbreite brauchst du fürs Streaming? (nu
- tzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-ba
- ndbreite-du-wirklich-brauchst-dein/
-URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
- andbreite-du-wirklich-brauchst-dein/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:instagram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-
  tasse-kaffee:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
+DTSTAMP:20261121T133329Z
 DTSTART:20261201T104500Z
 DTEND:20261201T110000Z
 SUMMARY:Instagram: Kaffeemaschine: Was kostet eine Tasse wirklich? (nu
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloecher
  n-in-der-wohnung:nutzen:2026-12-03@franksfinanzcheck.de
-DTSTAMP:20261120T221553Z
+DTSTAMP:20261121T133329Z
 DTSTART:20261203T104500Z
 DTEND:20261203T110000Z
 SUMMARY:Instagram: Mesh-WLAN nachrüsten: Wann lohnt sich die Investiti
@@ -123,6 +123,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
  -schluss-mit-funkloechern-in-der-wohnung/
 URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
  n-schluss-mit-funkloechern-in-der-wohnung/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fix
+ kosten:nutzen:2026-12-05@franksfinanzcheck.de
+DTSTAMP:20261121T133329Z
+DTSTART:20261205T104500Z
+DTEND:20261205T110000Z
+SUMMARY:Instagram: Energieeffiziente Geräte: So sinken deine Fixkosten
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ger
+ aete-so-sinken-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ge
+ raete-so-sinken-deine-fixkosten/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
