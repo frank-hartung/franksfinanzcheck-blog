@@ -1,25 +1,25 @@
 {
- "zeitstempel": "2026-11-20T16:33:05.633627+02:00",
+ "zeitstempel": "2026-11-21T15:51:54.927474+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
-  "ok": 22,
+  "ok": 21,
   "cache": 0,
-  "fehler": 3,
+  "fehler": 4,
   "uebersprungen": 0
  },
- "treffer_gesamt": 190,
+ "treffer_gesamt": 180,
  "treffer_organisch": 0,
  "datenqualitaet": {
-  "anfragen_erfolgreich": 22,
+  "anfragen_erfolgreich": 21,
   "anfragen_organisch": 0,
-  "anfragen_rueckfall": 22,
-  "treffer_gesamt": 190,
+  "anfragen_rueckfall": 21,
+  "treffer_gesamt": 180,
   "treffer_organisch": 0,
-  "treffer_rueckfall": 190,
+  "treffer_rueckfall": 180,
   "rueckfall_anteil": 1.0,
   "anbieter": {
-   "wikipedia": 22
+   "wikipedia": 21
   },
   "aussagekraft": "keine"
  },
@@ -31,6 +31,10 @@
   {
    "anfrage": "Gaskosten senken",
    "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Gaskosten+senken&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treff"
+  },
+  {
+   "anfrage": "Urlaub sparen",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Urlaub sparen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Urlaub+sparen&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Bl"
   },
   {
    "anfrage": "Urlaubskosten planen",
@@ -129,16 +133,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Unfallversicherung",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Unnötige Versicherungen kündigen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -160,16 +154,6 @@
   },
   {
    "anfrage": "Urlaub Mietwagen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Urlaub sparen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -257,6 +241,16 @@
    "url": "",
    "quelle": "wikipedia",
    "sichtbar": false
+  },
+  {
+   "anfrage": "Versicherungsarten",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
   }
  ],
  "wettbewerb": {
@@ -265,6 +259,6 @@
   "merkmale": {}
  },
  "quota": {
-  "wikipedia": 22
+  "wikipedia": 21
  }
 }

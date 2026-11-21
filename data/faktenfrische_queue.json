@@ -3476,6 +3476,17 @@
       "herkunft": "dossier-nachlese"
     },
     {
+      "id": "3ad12cdcf94bd8459bd8",
+      "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+      "fassung_sha256": "e8d2e7d7ecd22c9d61d63fe16d5a2b61dd918a849f014e334d5d85d77baf71cc",
+      "text_sha256": "13c46f2611c7dd317bc17e0ab1d3c5ee23e85880036a924f623209ea0cddfe00",
+      "typ": "luecke",
+      "text": "Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt.",
+      "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
+      "zuletzt_gesehen": "2026-11-21 12:58 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "luecke",
       "text": "Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
@@ -3524,6 +3535,138 @@
       "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
       "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
       "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "id": "1cc830a25d3ae505dd0e",
+      "slug": "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen",
+      "fassung_sha256": "9caabd1a948c6f910a7f602d189cb2110da8b0a71bb6ad1df8f82b058f28f7f3",
+      "text_sha256": "dde45fc8842b53ce0f96ee67b2aa8c4abdfa0f2dfcba0e7083a55d8bd08ba97d",
+      "typ": "praezision",
+      "text": "Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschriften (ohne Mandat) beträgt die gesetzliche Frist zur Rückgabe 13 Monate.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "32f827af8f4695488e97",
+      "slug": "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen",
+      "fassung_sha256": "9caabd1a948c6f910a7f602d189cb2110da8b0a71bb6ad1df8f82b058f28f7f3",
+      "text_sha256": "dde45fc8842b53ce0f96ee67b2aa8c4abdfa0f2dfcba0e7083a55d8bd08ba97d",
+      "typ": "praezision",
+      "text": "Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Deckung oder wegen eines berechtigten Widerspruchs erfolgt.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "642d9c53e557ff642257",
+      "slug": "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen",
+      "fassung_sha256": "9caabd1a948c6f910a7f602d189cb2110da8b0a71bb6ad1df8f82b058f28f7f3",
+      "text_sha256": "dde45fc8842b53ce0f96ee67b2aa8c4abdfa0f2dfcba0e7083a55d8bd08ba97d",
+      "typ": "luecke",
+      "text": "Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht autorisierter oder fehlerhafter Kartenzahlungen.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "8230373c2c33722d66d8",
+      "slug": "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen",
+      "fassung_sha256": "9caabd1a948c6f910a7f602d189cb2110da8b0a71bb6ad1df8f82b058f28f7f3",
+      "text_sha256": "dde45fc8842b53ce0f96ee67b2aa8c4abdfa0f2dfcba0e7083a55d8bd08ba97d",
+      "typ": "praezision",
+      "text": "Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sicherheitsmechanismen.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "efee7b0cefffa501cc57",
+      "slug": "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen",
+      "fassung_sha256": "9caabd1a948c6f910a7f602d189cb2110da8b0a71bb6ad1df8f82b058f28f7f3",
+      "text_sha256": "dde45fc8842b53ce0f96ee67b2aa8c4abdfa0f2dfcba0e7083a55d8bd08ba97d",
+      "typ": "praezision",
+      "text": "Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist die Lastschrift der Standard, um Zahlungsfehler zu vermeiden.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "dc1e5d50a58f50e0ade1",
+      "slug": "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt",
+      "fassung_sha256": "e0086f00af7ea184638dd571754a02d98b17fa4801f9723d2ce12a53829a5f55",
+      "text_sha256": "4e0c10a93fccd3d00b5f3cb13d8694db632c54a648cfa6819eb5b641fb426806",
+      "typ": "luecke",
+      "text": "Die verlinkte Seite der Bundesnetzagentur ist eine reine Navigations-Übersicht und enthält keine der im Text versprochenen Beschreibungen zu Tarifbestandteilen oder Preisregelungen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "def8ad23c34566c795fe",
+      "slug": "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt",
+      "fassung_sha256": "e0086f00af7ea184638dd571754a02d98b17fa4801f9723d2ce12a53829a5f55",
+      "text_sha256": "4e0c10a93fccd3d00b5f3cb13d8694db632c54a648cfa6819eb5b641fb426806",
+      "typ": "praezision",
+      "text": "Die Verknüpfung der HT/NT-Definition mit der Bundesnetzagentur ist unpräzise, da die verlinkte Seite lediglich eine Themenübersicht ohne fachliche Definitionen darstellt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "19a724ba20628f34cd01",
+      "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte",
+      "fassung_sha256": "8fe546affd922d296b0d1472a2d5b40a65628f7b4e1ee4095a61b136237c81aa",
+      "text_sha256": "bca163366137431bf7874d8b59f6ad56b2c60ce3184d3becb9b83420fd95a232",
+      "typ": "luecke",
+      "text": "Eine feste Frist für die Entstörung nennt das Gesetz nicht.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "4126d33a9dd92716b286",
+      "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte",
+      "fassung_sha256": "8fe546affd922d296b0d1472a2d5b40a65628f7b4e1ee4095a61b136237c81aa",
+      "text_sha256": "bca163366137431bf7874d8b59f6ad56b2c60ce3184d3becb9b83420fd95a232",
+      "typ": "luecke",
+      "text": "Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "67fbe0b49bb4e6bb48b7",
+      "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte",
+      "fassung_sha256": "8fe546affd922d296b0d1472a2d5b40a65628f7b4e1ee4095a61b136237c81aa",
+      "text_sha256": "bca163366137431bf7874d8b59f6ad56b2c60ce3184d3becb9b83420fd95a232",
+      "typ": "luecke",
+      "text": "Die Pflichten aus dem TKG gelten für alle Zugangsarten.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "cb5f849bfd26ad8121eb",
+      "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte",
+      "fassung_sha256": "8fe546affd922d296b0d1472a2d5b40a65628f7b4e1ee4095a61b136237c81aa",
+      "text_sha256": "bca163366137431bf7874d8b59f6ad56b2c60ce3184d3becb9b83420fd95a232",
+      "typ": "luecke",
+      "text": "Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "f108d554ff8861370b64",
+      "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte",
+      "fassung_sha256": "8fe546affd922d296b0d1472a2d5b40a65628f7b4e1ee4095a61b136237c81aa",
+      "text_sha256": "bca163366137431bf7874d8b59f6ad56b2c60ce3184d3becb9b83420fd95a232",
+      "typ": "luecke",
+      "text": "Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:59 UTC",
+      "herkunft": "dossier-nachlese"
     },
     {
       "typ": "luecke",
@@ -3681,6 +3824,28 @@
       "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
       "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
       "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "id": "009906e47bcc8265b36a",
+      "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+      "fassung_sha256": "dac3639a228efc957cab58feb16cc3305fe7c55fb0f58a6c008c015ca781788a",
+      "text_sha256": "c8e33490955f3ad917870a075af72c942ea1788a73fca10388d60d2dacb7a4e5",
+      "typ": "luecke",
+      "text": "Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "zuletzt_gesehen": "2026-11-21 13:00 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "e0293a43782c64955b27",
+      "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+      "fassung_sha256": "dac3639a228efc957cab58feb16cc3305fe7c55fb0f58a6c008c015ca781788a",
+      "text_sha256": "c8e33490955f3ad917870a075af72c942ea1788a73fca10388d60d2dacb7a4e5",
+      "typ": "luecke",
+      "text": "Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "zuletzt_gesehen": "2026-11-21 13:00 UTC",
+      "herkunft": "dossier-nachlese"
     },
     {
       "typ": "luecke",
@@ -5757,6 +5922,39 @@
       "herkunft": "dossier-nachlese"
     },
     {
+      "id": "05386fbefbe0bd793d3d",
+      "slug": "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026",
+      "fassung_sha256": "df5be52269ed55cf4bbca067201b50fd635b4328c002f416b9bd75ec6f79c995",
+      "text_sha256": "7dd7d2d518431b1349af53ee74f10dff5aac60bf7cb8ff18ee0ecf31999349cc",
+      "typ": "luecke",
+      "text": "Die Prognose zu Preisunterschieden zwischen variablen und Festpreisen ist ein Marktdatum, das ohne Bezug auf offizielle Monitoring-Daten der Aufsichtsbehörde bleibt.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:58 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "10917941e9fae9a9cf04",
+      "slug": "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026",
+      "fassung_sha256": "df5be52269ed55cf4bbca067201b50fd635b4328c002f416b9bd75ec6f79c995",
+      "text_sha256": "7dd7d2d518431b1349af53ee74f10dff5aac60bf7cb8ff18ee0ecf31999349cc",
+      "typ": "luecke",
+      "text": "Bei der Empfehlung zum Prüfen von Kündigungsfristen und Verträgen fehlt der Hinweis auf die gesetzlichen Schlichtungs- und Beschwerdestellen der Bundesnetzagentur.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-21 12:58 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "ab0470bc947932366bc4",
+      "slug": "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026",
+      "fassung_sha256": "df5be52269ed55cf4bbca067201b50fd635b4328c002f416b9bd75ec6f79c995",
+      "text_sha256": "7dd7d2d518431b1349af53ee74f10dff5aac60bf7cb8ff18ee0ecf31999349cc",
+      "typ": "luecke",
+      "text": "Der Artikel führt Marktdaten und Preis-Szenarien für 2026 an, ohne die Bundesnetzagentur als zuständige Aufsichtsbehörde für die Marktbeobachtung zu nennen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-21 12:58 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "luecke",
       "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
@@ -6054,7 +6252,7 @@
     }
   ],
   "nachlese": {
-    "zeit": "2026-11-20 13:38 UTC",
+    "zeit": "2026-11-21 13:02 UTC",
     "ergaenzt": 18,
     "quelle": "data/research/artikel"
   }

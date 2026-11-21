@@ -4,7 +4,7 @@ description: "Dokumentiere Ausfälle mit Zeitpunkt und Störungsmeldung. Untersc
 lastmod: 2026-10-13
 date: 2026-08-31T06:10:00Z
 draft: false
-faktencheck: 2026-10-13
+faktencheck: 2026-11-21
 tags: ["Internet und Mobilfunk", "DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -54,8 +54,6 @@ quellen:
     datum: "2026-08-31"
 kurzantwort: "Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer geben. Bewahre Datum, Uhrzeit, Messwerte und jede Nachricht auf. Der Anbieter muss die Störung zeitnah beheben; bleibt der Anschluss länger tot, prüfe eine Gutschrift oder Entschädigung und wende dich an die Bundesnetzagentur, wenn die Reaktion ausbleibt."
 ---
-
-
 
 Eine Störung beim [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht; das ist ein Modellwert. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Dann beginnt der schwierige Teil. Viele Verbraucher geben auf, obwohl sie im Recht sind.
 

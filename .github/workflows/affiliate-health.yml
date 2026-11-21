@@ -30,7 +30,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: affiliate-health
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

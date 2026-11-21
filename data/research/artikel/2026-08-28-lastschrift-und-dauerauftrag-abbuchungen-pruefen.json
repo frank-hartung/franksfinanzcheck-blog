@@ -1,14 +1,16 @@
 {
   "slug": "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen",
   "titel": "Lastschrift und Dauerauftrag: Was du prüfen solltest",
-  "erzeugt": "2026-10-13 09:36 UTC",
+  "erzeugt": "2026-11-21 12:59 UTC",
   "faellig": {
-    "faellig": true,
-    "prio": 1,
+    "faellig": false,
+    "prio": 9,
     "klasse": "YMYL",
-    "grund": "46 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL)",
-    "alter_tage": 46,
-    "intervall": 45
+    "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
+    "alter_tage": 39,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 6
   },
   "geo": {
     "punkte": 6,
@@ -24,9 +26,57 @@
       "faktencheck": true
     }
   },
-  "treffer": [],
-  "befunde": [],
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesbank.de",
+      "url": "https://www.bundesbank.de/de/presse/pressenotizen",
+      "datum": "",
+      "quelle": "bundesbank.de",
+      "kanal": "web",
+      "auszug": "URL Source: https://www.bundesbank.de/de/presse/pressenotizen\n\nFinal URL: https://www.bundesbank.de/de/presse/pressemitteilungen\n\nMarkdown Content:\n*   [Hauptnavigation](https://www.bundesbank.de/de/presse/pressemitteilungen#main-navigation \" Sprung zur Hauptnavigation\")\n*   [Suche](https://www.bundesbank.de/de/presse/pressemitteilungen#header-search \"Sprung zur Suche\")\n*   [Inhaltsbereich](https://www.bundesbank.de/de/presse/pressemitteilungen#main-content \"Sprung zum Inhaltsbereich\")\n\n*   [Kontakt](https://www.bundesbank.de/de/startseite/kontakt \"Kontakt\")\n*   [Glossar](https://www.bundesbank.de/de/startseite/glossar \"Glossar\")\n*   [Gebärdensprache](https://www.bundesbank.de/de/startseite/gebaerdensprache \"Gebärdensprache\")\n*   [Leichte Sprache](https://publikationen.bundesbank.de/publikationen-de/die-bundes-bank-in-leichter-sprache)\n*   [EN](https://www.bundesbank.de/en)\n\nSuche\n*   Suche\n*   Bankleitzahlen\n\n*   [Anmelden](https://www.bundesbank.de/de/startseite/anmelden \"Anmelden\")\n\n[![Image 1: Deutsche Bundesbank](https://www.bundesbank.de/resource/crblob/722082/6a4e8cec477af9daea8b48e194795928/472B63F073F071307366337C94F8C870/logo-data.svg)](https://www.bundesbank.de/de \"Deutsche Bundesbank\")\n\nNavigation anzeigen  Suche anzeigen \n*   [en](https://www.bundesbank.de/en \"English\")\n\n*   Bundesbank\n\n![Image 2: Ein Wald mit Birkenbäumen von unten fotografiert ©smallredgirl / Fotolia](https://www.bundesbank.de/resource/image/805446/ratio16x9/200/112/3fccbccc44a034100aa1efb86d9cb250/596993BD12C7EECAB46FFEC124C39005/AD5D49A215827A28B0A618B149FFEC04/baum-gruen.jpg)© smallredgirl / Fotolia   Green Finance   Der Klimawandel stellt auch den Finanzsektor vor große Herausforderungen.Die Bundesbank unterstützt den Wandel hin zu einer kohlenstoffarmen Wirtschaft.  [Green Finance](h",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Deutsche Bundesbank",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "praezision",
+      "text": "Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschriften (ohne Mandat) beträgt die gesetzliche Frist zur Rückgabe 13 Monate.",
+      "stelle": "unberechtigte Abbuchungen kannst du innerhalb von acht Wochen zurückgeben.",
+      "beleg": ""
+    },
+    {
+      "typ": "praezision",
+      "text": "Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Deckung oder wegen eines berechtigten Widerspruchs erfolgt.",
+      "stelle": "Möglich sind Entgelte, die im Preis- und Leistungsverzeichnis stehen.",
+      "beleg": ""
+    },
+    {
+      "typ": "praezision",
+      "text": "Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist die Lastschrift der Standard, um Zahlungsfehler zu vermeiden.",
+      "stelle": "Typische Fälle sind Miete und Stromabschlag.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht autorisierter oder fehlerhafter Kartenzahlungen.",
+      "stelle": "Bewahre Kassenzettel bei größeren Beträgen auf, bis die Buchung auf dem Auszug erscheint.",
+      "beleg": ""
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sicherheitsmechanismen.",
+      "stelle": "Die wirksamste Maßnahme kostet nichts. Stelle in deiner Banking-App die Benachrichtigung für Umsätze ein.",
+      "beleg": ""
+    }
+  ],
   "fehler": [
-    "offline: keine Abrufe"
-  ]
+    "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "9caabd1a948c6f910a7f602d189cb2110da8b0a71bb6ad1df8f82b058f28f7f3",
+  "text_sha256": "dde45fc8842b53ce0f96ee67b2aa8c4abdfa0f2dfcba0e7083a55d8bd08ba97d",
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)"
 }

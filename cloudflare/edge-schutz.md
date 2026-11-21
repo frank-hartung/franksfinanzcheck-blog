@@ -35,7 +35,7 @@ Modify Response Header → Create rule**
 | `Permissions-Policy` | `camera=(), microphone=(), geolocation=(), payment=(), usb=()` |
 | `Cross-Origin-Opener-Policy` | `same-origin` |
 | `Cross-Origin-Resource-Policy` | `same-origin` |
-| `Content-Security-Policy` | `default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://abos.franksfinanzcheck.de https://stats.franksfinanzcheck.de https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://abos.franksfinanzcheck.de; object-src 'none'` |
+| `Content-Security-Policy` | `default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://abos.franksfinanzcheck.de https://stats.franksfinanzcheck.de https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://abos.franksfinanzcheck.de; object-src 'none'` |
 
 **Warum die CSP so aussieht:** `'unsafe-inline'` bei `script-src` ist noch
 nötig (Inline-Skripte für Theme und Service-Worker-Registrierung). Auch damit

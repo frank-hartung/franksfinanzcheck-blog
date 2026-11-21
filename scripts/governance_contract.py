@@ -571,6 +571,18 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Install. Eine Wache, die niemand verlangt, führt niemand aus –
           # deshalb steht ihr Selbsttest im vertraglichen Minimum (C6).
           "manifest_guard.py",
+          # Schreiber-Serialisierung (21.11.2026, #1244–#1246): Drei Läufe
+          # scheiterten am Montag, 16.11., beim Committen/Pushen –
+          # FrankAutoOps (04:45), ZEIT-Rechtschreib-Wache (04:35),
+          # Hemingway-Check (04:50). Jeder hatte eine concurrency-Gruppe,
+          # aber eine EIGENE: Eine eigene Gruppe serialisiert einen
+          # Workflow gegen sich selbst und gegen nichts sonst.
+          # Die Wache prüft die eine Regel, deren Verletzung den Fehler
+          # erzeugte (wer schreibt, teilt die Sperre) und belegt die
+          # Kollisionen mit den Cron-Zeiten. Ohne Eintrag hier liefe ihr
+          # Selbsttest in keinem Gate (C6) – und eine Wache, die niemand
+          # verlangt, führt irgendwann niemand aus.
+          "schreiber_serialisierung.py",
           # Wachen-Vertrag (16.10.2026, WF-6F7F / #783): PR #776 hat beim
           # Rebase Kopf und Selbsttest der Redaktions-Wache aus der neueren
           # Fassung genommen und den Rumpf aus der älteren – eine Datei, die

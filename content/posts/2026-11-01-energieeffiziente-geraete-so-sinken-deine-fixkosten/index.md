@@ -41,6 +41,8 @@ kurzantwort: "Energieeffiziente Geräte senken die laufenden Stromkosten deutlic
 
 Wenn die Tage kürzer werden, flattern oft die Stromrechnungen ins Haus. Viele Menschen erschrecken dann über die hohen Nachzahlungen. Oft suchen wir die Schuld beim Stromanbieter oder bei den steigenden Preisen. Doch der wahre Grund für hohe Fixkosten versteckt sich meist in der eigenen Küche oder im Keller. **Energieeffiziente** **Geräte** sind der Hebel, mit dem du deine Kosten wirklich kontrollierst.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 In deinem **Zuhause** arbeiten viele Helfer rund um die Uhr. Ein alter Kühlschrank oder eine betagte Waschmaschine können echte Geldfresser sein.
 
 Wer hier nicht genau hinschaut, zahlt jeden Monat extra. Hier schauen wir uns an, wie du diese Kostenfresser entlarvst. Wir rechnen gemeinsam nach, wann sich ein Neukauf für dich lohnt.
@@ -136,7 +138,7 @@ Es dauert drei Stunden, kostet dich aber am wenigsten; das ist ein Modellwert.
 
 Du willst jetzt starten und deine [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)? Dann folge diesem Plan. So behältst du den Überblick und triffst kluge Entscheidungen für dein Budget.
 
-1. **Bestandsaufnahme machen:** Gehe durch jeden Raum. Schreibe auf, wie alt deine Großgeräte sind. Suche nach dem Typenschild und google den Verbrauch, falls du kein Messgerät hast.  
+1. **Bestandsaufnahme machen:** Gehe durch jeden Raum. Schreibe auf, wie alt deine Großgeräte sind. Suche nach dem Typenschild und Google den Verbrauch, falls du kein Messgerät hast.  
    Der Kühlschrank ist rund um die Uhr in Betrieb; das ist ein Rechenbeispiel. Er hat Priorität. Danach folgen Trockner und Waschmaschine.  
 2. **Vergleichsrechnung aufstellen:** Nutze meine Modellrechnung von oben. Setze deine eigenen Zahlen ein. Sei ehrlich zu dir selbst. Wenn sich ein Gerät erst nach 20 Jahren rechnet, behalte das alte Modell, solange es läuft.  
 3. **Angebote prüfen:** Suche gezielt nach Auslaufmodellen mit guter Effizienzklasse. Oft gibt es Vorjahresmodelle viel günstiger, obwohl die Technik fast identisch ist.  

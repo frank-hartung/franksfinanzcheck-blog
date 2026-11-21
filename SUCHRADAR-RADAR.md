@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-20 16:33:05 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-21 15:51:54 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -8,21 +8,21 @@
 | Kennzahl | Wert |
 |---|---|
 | Anfragen geplant | 25 |
-| Erfolgreich | 22 |
+| Erfolgreich | 21 |
 | Aus dem Zwischenspeicher | 0 |
-| Fehlgeschlagen | 3 |
+| Fehlgeschlagen | 4 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 190 |
+| Treffer gesamt | 180 |
 | Davon organisch | 0 |
-| Eigene Treffer | 0 von 22 Anfragen |
+| Eigene Treffer | 0 von 21 Anfragen |
 
 ## Datenqualität
 
 | Kennzahl | Wert |
 |---|---|
-| Anfragen mit echtem Suchindex | 0 von 22 |
-| Anfragen nur mit Wissens-Rückfall | 22 |
-| Organische Treffer | 0 von 190 |
+| Anfragen mit echtem Suchindex | 0 von 21 |
+| Anfragen nur mit Wissens-Rückfall | 21 |
+| Organische Treffer | 0 von 180 |
 | Rückfall-Anteil | 100 % |
 | Aussagekraft | keine |
 
@@ -32,7 +32,7 @@ _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfal
 
 | Anbieter | Abrufe | Limit |
 |---|---|---|
-| wikipedia | 22 | 300 |
+| wikipedia | 21 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -48,6 +48,7 @@ _Keine Treffer ausgewertet._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / ht |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / https: |
+| Urlaub sparen | Kein Anbieter lieferte Treffer für 'Urlaub sparen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / https://o |
 | Urlaubskosten planen | Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / ht |
 
 ## Einordnung

@@ -1,0 +1,60 @@
+{
+  "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+  "titel": "Tagesgeld vergleichen: Was bleibt nach dem Aktionszins?",
+  "erzeugt": "2026-11-21 12:58 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
+    "alter_tage": 39,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 6
+  },
+  "geo": {
+    "punkte": 5,
+    "maximum": 6,
+    "prozent": 83,
+    "offen": [
+      "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": false,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesbank.de",
+      "url": "https://www.bundesbank.de/de/presse/pressenotizen",
+      "datum": "",
+      "quelle": "bundesbank.de",
+      "kanal": "web",
+      "auszug": "*   [Einlagensicherung](https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/einlagensicherung-597886) \n            *   [FinTech](https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/fintech-598228) \n            *   [Kredit­dienstleistungs­institute](https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/kreditdienstleistungsinstitute-799404) \n            *   [Groß- und Millionenkredite](https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/gross-und-millionenkredite) \n            *   [Liquidität](https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/liquiditaet)",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Deutsche Bundesbank",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt.",
+      "stelle": "Ein Portal kann die Eröffnung erleichtern, ist aber nicht zwingend die Bank, bei der dein Guthaben liegt.",
+      "beleg": "https://www.bundesbank.de/de/presse/pressenotizen"
+    }
+  ],
+  "fehler": [
+    "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "e8d2e7d7ecd22c9d61d63fe16d5a2b61dd918a849f014e334d5d85d77baf71cc",
+  "text_sha256": "13c46f2611c7dd317bc17e0ab1d3c5ee23e85880036a924f623209ea0cddfe00",
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 3 Befund(e) ohne belegbaren Textanker verworfen"
+}

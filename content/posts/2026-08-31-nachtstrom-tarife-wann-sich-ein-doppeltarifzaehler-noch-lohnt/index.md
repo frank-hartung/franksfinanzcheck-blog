@@ -4,7 +4,7 @@ description: "Ein Nachtstromtarif lohnt sich nicht allein wegen des niedrigen Ar
 lastmod: 2026-11-04
 date: 2026-08-31T06:10:00Z
 draft: false
-faktencheck: 2026-10-13
+faktencheck: 2026-11-21
 tags: ["Stromkosten senken", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -54,9 +54,6 @@ quellen:
     datum: "2026-08-31"
 kurzantwort: "Ein Doppeltarifzähler erfasst Strom getrennt nach Zeiten: nachts günstiger, tagsüber teurer. Er lohnt sich nur, wenn du einen großen Teil deines Verbrauchs in die günstigen Stunden verschieben kannst. Als Orientierung gilt ein Nachtanteil von mindestens 30 bis 40 Prozent – darunter ist ein Tarif mit einem Preis für alle Stunden meist einfacher und nicht teurer."
 ---
-
-
-
 
 Die Idee klingt einleuchtend: Strom, der nachts fließt, ist billiger. Also verschiebe ich [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/), Trockner und Geschirrspüler in die Nacht und spare.
 
