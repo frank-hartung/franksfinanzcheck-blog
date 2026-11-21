@@ -55,14 +55,14 @@ faktencheck: '2026-11-19'
 redaktionelle_pruefung:
   risikoklasse: hoch
   status: freigegeben
-  inhalt_sha256: "43fdcc75480fd1849bef304df7ec4b94b31d862ed287451b94b5a86337299e69"
+  inhalt_sha256: "c3e3d29f22b977b2608daf0e643864421a99e4a03d64d9801122a92814a95f65"
   pruefer:
     name: Frank Hartung
     rolle: Redaktionelle Fachfreigabe der vollständigen Fassung 8b1594a einschließlich Quellen- und Zahlenprotokoll
     typ: redaktion-mit-externer-belegkette
-  pruefdatum: "2026-11-19"
-  naechste_pruefung: "2027-01-03"
-  aenderungsgrund: 'Vollständige Neufassung; Quellenabgleich am 19.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben. 21.11.2026: Zweiten, unbelegten Transparenzhinweis entfernt (Dublette aus 30f10af8) und Siegel auf den dadurch entstandenen Text neu gesetzt; die fachlichen Aussagen und das Zahlenprotokoll sind unverändert und weiter durch die Freigabe vom 19.11. gedeckt.'
+  pruefdatum: "2026-11-21"
+  naechste_pruefung: "2027-01-05"
+  aenderungsgrund: 'Vollständige Neufassung; Quellenabgleich am 19.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben. 21.11.2026: Zweiten, unbelegten Transparenzhinweis entfernt (Dublette aus 30f10af8) und Siegel auf den dadurch entstandenen Text neu gesetzt; die fachlichen Aussagen und das Zahlenprotokoll sind unverändert und weiter durch die Freigabe vom 19.11. gedeckt. Der am selben Tag aus dem Parallel-PR #1309 stammende Prüfvermerk (Quellen Q1/Q3/Q5 am 21.11.2026 bestätigt) ist übernommen; die dortige Behauptung "Siegel-Hash unverändert" traf nicht zu (der Fingerprint umfasst das Protokoll) und wurde durch eine tatsächliche Neuversiegelung ersetzt.'
   gepruefte_aussagen:
   - textanker: Endet dein Versicherungsjahr am 31. Dezember und beträgt die Kündigungsfrist einen Monat
     pruefung: 'Verbraucherzentrale: Abschnitt Unterschiedliche Kündigungstermine; Police und Frist maßgeblich.'

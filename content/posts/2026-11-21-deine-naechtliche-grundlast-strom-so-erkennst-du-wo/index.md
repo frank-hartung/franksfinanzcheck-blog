@@ -18,6 +18,9 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+  pruefdatum: "2026-11-21"
+  naechste_pruefung: "2027-01-05"
+  aenderungsgrund: "Casing-Fix: doppelte Affiliate-Blöcke und Plural-Fehler korrigiert; Status bleibt ausstehend (Standard-Risiko)"
 
 inspiration: "Grundlast messen: Wo dein Strom nachts hingeht"
 cover:

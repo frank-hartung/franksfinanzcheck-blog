@@ -45,14 +45,14 @@ faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "d4f662d997d71a83eea04766edf64b64429b1d78fc1fd4a1c4c3413b6e57d155"
+  inhalt_sha256: "68036f5d84121762cef68c33b1fb98ec7e9f5bcfcbf26b3afa9dc6a763d0b7b1"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Elementar- und Unterversicherungs-Aussagen belegt, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-11-21"
   naechste_pruefung: "2027-01-05"
-  aenderungsgrund: 'Nachprüfung am 21.11.2026 (Wiedervorlage vom 19.11.2026 überfällig, Gate E09/E10): Alle vier Textanker und alle 14 Zahlen des Protokolls gegen die drei Quellen erneut durchgesehen. Die drei Belegketten wurden am 21.11.2026 einzeln abgerufen: Q1 (Verbraucherzentrale, Stand 14.08.2026) lebt und trägt den Elementarschutz-Kernsatz wörtlich; Q2 (GDV, Stand 10.10.2022) trägt die Mechanik der gleitenden Neuwertversicherung; Q3 (GDV-Klimadossier, Stand 13.08.2024) trägt die Starkregen-Aussage, die dortige Aussage zum obligatorischen Anbieten ist jedoch nur für 2024 belegt und im Protokoll entsprechend gebunden. Alle Rechenwege nachgerechnet: Untergrenze 3.000+2.000+1.500+800 = 7.300 €, Obergrenze 7.000+8.000+6.000+2.500 = 23.500 €, Staffel 420-40 = 380 € und 420-80 = 340 €, Rangfolge 285 < 395 < 580 < 735 € – alle exakt bestätigt. Die Modellspanne 120/180 € ist im Fließtext jetzt ausdrücklich als redaktionelle Annahme gekennzeichnet, nicht als Marktmittel. Keine Preise, Beitragssätze oder Marktaussagen wurden neu behauptet.'
+  aenderungsgrund: 'Nachprüfung am 21.11.2026 (Wiedervorlage vom 19.11.2026 überfällig, Gate E09/E10): Alle vier Textanker und alle 14 Zahlen des Protokolls gegen die drei Quellen erneut durchgesehen. Die drei Belegketten wurden am 21.11.2026 einzeln abgerufen: Q1 (Verbraucherzentrale, Stand 14.08.2026) lebt und trägt den Elementarschutz-Kernsatz wörtlich; Q2 (GDV, Stand 10.10.2022) trägt die Mechanik der gleitenden Neuwertversicherung; Q3 (GDV-Klimadossier, Stand 13.08.2024) trägt die Starkregen-Aussage, die dortige Aussage zum obligatorischen Anbieten ist jedoch nur für 2024 belegt und im Protokoll entsprechend gebunden. Alle Rechenwege nachgerechnet: Untergrenze 3.000+2.000+1.500+800 = 7.300 €, Obergrenze 7.000+8.000+6.000+2.500 = 23.500 €, Staffel 420-40 = 380 € und 420-80 = 340 €, Rangfolge 285 < 395 < 580 < 735 € – alle exakt bestätigt. Die Modellspanne 120/180 € ist im Fließtext jetzt ausdrücklich als redaktionelle Annahme gekennzeichnet, nicht als Marktmittel. Keine Preise, Beitragssätze oder Marktaussagen wurden neu behauptet. Der aus dem Parallel-PR #1309 stammende Vermerk "Inhalt/Quellen/Siegel unverändert" traf nicht zu: Die Verlängerung des Prüftermins allein ist keine Nachprüfung, und weil der Fingerprint das Prüfprotokoll einschließt, war das Siegel danach gebrochen.'
   gepruefte_aussagen:
     - textanker: "Genau dafür braucht es meist den Baustein **Elementarschutz**"
       pruefung: "Bestätigt: Starkregen, Rückstau und Überschwemmung sind in Standardtarifen nicht automatisch enthalten und benötigen den Elementar-Baustein (Verbraucherzentrale, GDV)"

@@ -197,8 +197,7 @@ In einer Modellrechnung (Annahme: 15 km Fahrt pro Tag bei 0,30 € pro Wegst
 Viel schwerer wiegt der Bedarf für einen Leihwagen.  
 Wenn du ohne Auto nicht zur Unterkunft kommst, musst du diesen Preis voll einrechnen.
 
-Ein Mietwagen bietet Freiheit – er stellt aber einen großen Fixposten dar.  
-Achte bei der Buchung auf die Tankregelung und Versicherungen ohne Selbstbeteiligung.
+Ein Mietwagen bietet Freiheit – er stellt aber einen großen Fixposten dar. Achte bei der Buchung auf die Tankregelung und Versicherungen ohne Selbstbeteiligung.  
 Hohe Kautionen schränken zudem deinen finanziellen Spielraum im Urlaub ein.
 Plane diesen Puffer unbedingt ein, wenn du dein Budget festlegst.
 
