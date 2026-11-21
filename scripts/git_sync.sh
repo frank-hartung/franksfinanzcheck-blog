@@ -1263,6 +1263,80 @@ abbildungen_nachziehen() {
 }
 
 # ========================================================================
+#  BEFUND-AKTE FOLGT IHRER QUELLE – IM SELBEN COMMIT (21.11.2026)
+#  --------------------------------------------------------------
+#  DIE KLASSE (#1229·#1251·#1252·#1266·#1267·#1271):
+#    `BEFUND-AKTE.md` + `data/faktenfrische_befunde_state.json` sind eine
+#    ABLEITUNG aus `data/faktenfrische_queue.json` und
+#    `data/faktenfrische_entscheidungen.yaml`. Wer die Quelle committet,
+#    ohne die Ableitung nachzuziehen, macht sie still alt. Sichtbar wurde es
+#    erst Stunden später auf `main` – über die Nachlauf-Wache, die dafür ein
+#    neues Issue öffnete. Fünf Nummern für einen Gegenstand waren die Folge.
+#    Genau diese Lücke schließt `abbildungen_nachziehen` für Bildzeilen seit
+#    dem 30.10.2026; die Akte hatte sie nicht.
+#
+#  WAS HIER PASSIERT (bewusst eng):
+#    · Nur wenn DIESER Commit die Quelle anfasst (`content/posts/**`,
+#      Faktenfrische-Queue/Entscheidungen/Scorecard-Siegel).
+#    · Der Schreiber wird aufgerufen, danach werden AUSSCHLIESSLICH seine
+#      beiden Artefakte gestagt – kein `git add -A`, keine fremde Arbeit.
+#    · Fehler blockieren nie den Commit (der Bestand geht vor); das harte
+#      Gate bleibt `scripts/abgeleitete_register.py --check` im PR-Pfad und
+#      die Nachlauf-Wache auf `main`.
+#    Der Schreiber ist idempotent auf Bytes (gleicher Inhalt → gleicher
+#    Zeitstempel) – ein Commit ohne echte Änderung entsteht hier nicht.
+#    $1 = staged (Vollbedienung) | push (--push-only)
+# ========================================================================
+faktenfrische_akte_nachziehen() {
+  local modus="${1:-staged}" treffer="" status=0
+  [ -f scripts/faktenfrische_befund_akte.py ] || return 0
+  if [ "${DRY_RUN:-0}" = "1" ]; then
+    echo "DRY_RUN – Befund-Akte bleibt unangetastet."
+    return 0
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "::warning::git_sync.sh: python3 fehlt – Befund-Akte ungeprüft (kein Nachzug)."
+    return 0
+  fi
+  case "$modus" in
+    staged)
+      treffer=$(git diff --cached --name-only 2>/dev/null | grep -E \
+        '^(content/posts/|data/faktenfrische_queue\.json|data/faktenfrische_entscheidungen\.yaml|data/release_scorecard_state\.json|scripts/faktenfrische_befund_(akte|ledger)\.py)' \
+        || true)
+      ;;
+    push)
+      if git rev-parse --verify -q "origin/$BRANCH" >/dev/null 2>&1; then
+        treffer=$(git diff --name-only "origin/$BRANCH...HEAD" 2>/dev/null | grep -E \
+          '^(content/posts/|data/faktenfrische_queue\.json|data/faktenfrische_entscheidungen\.yaml|data/release_scorecard_state\.json|scripts/faktenfrische_befund_(akte|ledger)\.py)' \
+          || true)
+      else
+        treffer="unbekannt"   # ohne Remote-Ref lieber prüfen als raten
+      fi
+      ;;
+  esac
+  [ -n "$treffer" ] || return 0
+  # Schreibt nur, wenn die Projektion wirklich abweicht (Byte-Idempotenz).
+  python3 scripts/faktenfrische_befund_akte.py --schreiben >/dev/null 2>&1 || status=$?
+  if [ "$status" -ne 0 ]; then
+    echo "::warning::git_sync.sh: Befund-Akte konnte nicht nachgezogen werden (Exit $status) – sie bleibt auf dem alten Stand; die Nachlauf-Wache meldet den Rest."
+    return 0
+  fi
+  local gestagt=0 pfad
+  for pfad in BEFUND-AKTE.md data/faktenfrische_befunde_state.json; do
+    [ -f "$pfad" ] || continue
+    if ! git diff --quiet -- "$pfad" 2>/dev/null; then
+      git add -- "$pfad" || true
+      gestagt=$((gestagt + 1))
+      echo "  ↻ Befund-Akte nachgezogen: $pfad"
+    fi
+  done
+  if [ "$gestagt" -gt 0 ]; then
+    echo "git_sync.sh: Befund-Akte folgt ihrer Quelle (Ableitung, kein neuer Inhalt)."
+  fi
+  return 0
+}
+
+# ========================================================================
 #  b) --push-only: nur rebasen und pushen
 # ========================================================================
 if [ "$PUSH_ONLY" = "1" ]; then
@@ -1274,6 +1348,17 @@ if [ "$PUSH_ONLY" = "1" ]; then
   if ! git diff --cached --quiet 2>/dev/null; then
     if git commit -q -m "chore(abbildungen): abgeleitete Bildzeilen nachgezogen (Textpflege)"; then
       echo "git_sync.sh: Abbildungs-Nachzug als eigener Commit angehängt."
+    fi
+  fi
+
+  # 21.11.2026: Fremde Workflows committen selbst (`git add -A`). Steckt darin
+  # eine geänderte Faktenfrische-Quelle ohne nachgezogene Befund-Akte, wird
+  # die Ableitung hier als eigener Commit hinterhergeschoben – dieselbe
+  # Bauart wie oben (#1229/#1251/#1252).
+  faktenfrische_akte_nachziehen push
+  if ! git diff --cached --quiet 2>/dev/null; then
+    if git commit -q -m "chore(faktenfrische): Befund-Akte aus der Quelle nachgezogen"; then
+      echo "git_sync.sh: Befund-Akte als eigener Commit angehängt."
     fi
   fi
 
@@ -1341,6 +1426,12 @@ done
 # in DENSELBEN Commit (kein neuer Satz, nur Ableitung) – sonst steht der
 # Befund später bei einem fremden PR.
 abbildungen_nachziehen staged
+
+# 21.11.2026: Dasselbe für die Faktenfrische-Ableitung. Wer Queue,
+# Entscheidungen, Scorecard-Siegel oder Bestand committet, zieht die
+# Befund-Akte in DENSELBEN Commit – sonst meldet die Nachlauf-Wache sie
+# Stunden später als „veraltet auf main“ (#1229/#1251/#1252).
+faktenfrische_akte_nachziehen staged
 
 if [ "$staged" -eq 0 ] || git diff --cached --quiet; then
   echo "git_sync.sh: keine Änderungen – nichts zu committen."

@@ -538,6 +538,33 @@ jobs:
             const codeqlRedosFailed = isCodeql && failedJobs.some(j =>
               String(j.name).startsWith('ReDoS-Wache') && j.steps.some(s =>
                 /^(Eigenprüfung der Rückfallsperre|Python-Bestand auf Alert-Nr\.-87-Strukturen prüfen|Sicherheitsvertrag zu Alert Nr\. 87|Linearer Frontmatter-Parser der GSC-Abdeckung)/.test(String(s))));
+
+            // ================================================================
+            //  #1244–#1246, #1229, #1251, #1252, #1254 (21.11.2026): COMMIT/
+            //  PUSH-FEHLER BEKOMMEN EINE URSACHE STATT EINES VORWURFS
+            //  --------------------------------------------------------------
+            //  Vier rote Läufe vom 16./17.11. hatten DREI verschiedene
+            //  Ursachen – im Issue stand für alle derselbe Rat („API-Key
+            //  abgelaufen"), und keiner der vier Schritte benutzt überhaupt
+            //  einen Schlüssel: Sie rufen `git_sync.sh` auf. Die Wahrheit lag
+            //  die ganze Zeit in der Annotation des roten Schritts.
+            //
+            //  `scripts/push_diagnose.py` liest genau diese Annotation (die
+            //  Run-Logs sind nach 90 Tagen weg, die Check-Run-Annotation
+            //  nicht) und ordnet sie einer Klasse zu: schutz | auth |
+            //  konflikt | push_rennen | rate_limit | netzwerk | unbekannt.
+            //  Rote Tests und Builds werden ausdrücklich NICHT gewertet –
+            //  sonst wiederholte das Werkzeug den Fehler, den es behebt.
+            //
+            //  Hier wird nur der SCHRITT ERKANNT; klassifiziert wird im
+            //  Lauf selbst (`--json`), damit das Issue den Beleg trägt und
+            //  nicht eine zweite, driftende Kopie der Muster. Ist das
+            //  Werkzeug nicht verfügbar, bleibt es beim bisherigen Verhalten
+            //  (fail-open) – ein Melder darf nicht zum Vorfall werden.
+            const istCommitPushSchritt =
+              /commit|committen|pushen|git config user\.name|git_sync|push-only|Audit-Log-Stand|Gate-Heilungen/i;
+            const commitPushFailed = failedJobs.some(j =>
+              (j.steps || []).some(st => istCommitPushSchritt.test(String(st))));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
             // classifier, not necessarily the root cause. Phase 0.5 has a
             // more specific signature; otherwise its ::error:: annotation
@@ -738,6 +765,11 @@ jobs:
               // Trigger-Vollständigkeit). Ein generischer „API-Key?"-Rat wäre
               // hier so falsch wie bei der Sicherheits-Wache (C34).
               : istSkriptSyntax ? 'skript-syntax'
+              // 21.11.2026 (#1244–#1246): Der rote Schritt committet oder
+              // pusht – dann ist die Ursache eine Git-Klasse, nicht ein
+              // Schlüssel. Bewusst VOR `selbsttest`: Ein Commit-Schritt, der
+              // `python3` aufruft, ist trotzdem ein Commit-Schritt.
+              : commitPushFailed ? 'commit-push'
               // WF-7B6B / #925: ein Messgate am Bestand (Snippet, Metadaten,
               // Linktext, H1) – eigener Rat, kein API-Key-Raten.
               : messGateFailed ? 'messgate-bestand'
@@ -900,7 +932,21 @@ jobs:
             // deshalb beide Läufe – ein Rat, der nur auf den halben Weg zeigt,
             // schickt den Betreiber nach dem Lesen wieder ins Suchen.
             const backupFrischLaeufe = repoUrl + '/actions/workflows/backup-frischwache.yml';
-            const handlung = runbookKlasse === 'engine-fruehabbruch'
+            // 21.11.2026 (#1244–#1246): EIN RAT, DER NIE ZUTREFFEN KANN, IST
+            // KEINE DIAGNOSE – hier zum zweiten Mal (siehe WF-E813). Die vier
+            // Läufe vom 16./17.11. bekamen „API-Key abgelaufen"; ihre roten
+            // Schritte rufen aber ausschließlich `git_sync.sh` auf. Der Rat
+            // unten nennt deshalb zuerst den Befehl, der die Klasse BELEGT,
+            // und gibt je Klasse genau einen nächsten Schritt – keinen
+            // Neustart als Allheilmittel.
+            const handlung = runbookKlasse === 'commit-push'
+              ? [
+                  '1. **Beleg holen, nicht raten:** `python3 scripts/push_diagnose.py --tage 14` liest die Annotationen der roten Läufe und nennt die Klasse (`schutz` | `auth` | `konflikt` | `push_rennen` | `rate_limit` | `netzwerk` | `unbekannt`) samt Quelle. Die Run-Logs sind nach 90 Tagen weg – die Check-Run-Annotation bleibt. `--json` gibt denselben Befund maschinenlesbar aus.',
+                  '2. **Was der Rat NICHT ist:** Ein API-Key kann diesen Schritt nicht rot machen – `git_sync.sh` benutzt kein Modell und keine Registry. „Workflow neu starten" ist nur bei `netzwerk` richtig; bei `schutz`, `auth` und `rate_limit` wiederholt es denselben Fehlschlag.',
+                  '3. **Je Klasse der eine nächste Schritt:** `konflikt` = zwei Läufe haben dieselben Zeilen geändert (bei Bestandsartikeln ein gewollter harter Stopp; heilende Läufe serialisieren). `push_rennen` = ein anderer Lauf war schneller (gemeinsame `concurrency`-Gruppe für Schreiber auf `main`). `schutz` = ein Ruleset lehnt ab (`docs/PFLICHT-CHECK-RUNBOOK.md`, „Direkte Pushes" – nicht pauschal lockern). `auth` = `contents: write`/Token prüfen. `rate_limit` = drosseln statt wiederholen (429 kommt oft als 403 getarnt).',
+                  '4. **Nachweis vor dem Schließen:** Erst ein grüner Lauf DESSELBEN Workflows auf `main`, in dem der Commit-/Push-Schritt `success` ist, schließt diese Meldung – nicht der bloße Neustart.'
+                ]
+              : runbookKlasse === 'engine-fruehabbruch'
               ? [
                   '1. **Frühabbruch vor der Endabnahme:** Phase 0.5 ist der fehlgeschlagene Pflichtschritt. Falls „Do not report a quota deficit as success“ ebenfalls rot ist, ist es nur die Schlussklassifikation. Das belegt weder ein Tagesdefizit noch einen API-Key-Ausfall.',
                   '2. Öffne das Log von „Phase 0.5 – Kadenz-Gate sicherstellen“. Die ERR-Annotation nennt den exakten Befehl und Exit-Code.',

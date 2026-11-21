@@ -1249,6 +1249,33 @@ await run('F-09 Gegenprobe: sauberer Name bleibt lesbar',
   { workflowName: 'Layout-AI', branch: 'main', event: 'push', conclusion: 'failure', jobs: [] },
   true, ['**Workflow:** Layout-AI', '**Branch:** main'], null, ['Layout-AI·']);
 
+// 14. COMMIT/PUSH-FEHLER (#1244–#1246, 21.11.2026): Der rote Schritt ist
+//     ein Commit-/Push-Schritt. Der Rat muss die Git-Klasse nennen und den
+//     Beleg-Befehl – nicht „API-Key abgelaufen". Die reale Annotation des
+//     Laufs vom 16.11.2026 (Audit-Log-Stand committen, „zuletzt: netzwerk")
+//     ist der Anlass.
+// Der Kanal ist der ECHTE: #1246 kam aus „FrankAutoOps-Report", der in der
+// Wacht-Liste von alert-on-failure.yml steht (identitaet() muss ihn kennen).
+await run('COMMIT-PUSH: roter Commit-Schritt bekommt die Git-Diagnose statt API-Key',
+  { workflowName: 'FrankAutoOps-Report', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'audit-log', conclusion: 'failure', html_url: 'https://x/jobs/1246',
+             steps: [{ name: 'Audit-Log-Stand committen', conclusion: 'failure' }] }] },
+  true,
+  ['<!-- alert-runbook: commit-push -->', 'push_diagnose.py', 'git_sync.sh'],
+  null,
+  ['API-Key abgelaufen', 'alert-runbook: allgemein']);
+
+// 15. GEGENPROBE: Ein roter TEST ist kein Commit-/Push-Befund. Der Schritt
+//     heißt „Selbsttest …" und darf weiterhin die Selbsttest-Klasse
+//     bekommen – sonst würde jeder rote Test als Git-Fehler gelesen, also
+//     genau der Fehler, den push_diagnose.py ausschließt.
+await run('COMMIT-PUSH Gegenprobe: roter Selbsttest bleibt Code-Regression',
+  { workflowName: 'Qualitäts-Gate (Build + interne Links)', branch: 'main', event: 'push',
+    conclusion: 'failure',
+    jobs: [{ name: 'gate', conclusion: 'failure', html_url: 'https://x/jobs/1',
+             steps: [{ name: 'Selbsttest der Wachen', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: selbsttest -->'], null, ['commit-push']);
+
 console.log(failed === 0
   ? `\n✅ SIMULATION: alle ${count} Szenarien korrekt`
   : `\n❌ SIMULATION: ${failed} von ${count} Szenarien falsch`);
