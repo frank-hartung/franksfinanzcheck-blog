@@ -61,7 +61,7 @@ permissions:
   issues: write     # für automatische Issue-Erstellung bei Qualitätsverstoß
 
 concurrency:
-  group: sprach-qualitaet-pipeline
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

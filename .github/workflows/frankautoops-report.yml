@@ -27,7 +27,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: frankautoops-report
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

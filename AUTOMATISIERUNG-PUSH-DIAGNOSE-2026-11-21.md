@@ -335,3 +335,142 @@ python3 -m unittest scripts.tests.test_cloudflare_analytics_csp
   #1252, #1229) schließen sich über den regulären Weg: ein grüner Lauf auf
   `main` – oder der nächste Befundstand, der sie als überholt erklärt.
   Sie werden nicht von Hand „weggeschlossen".
+
+---
+
+## 7. Nachtrag: die beiden offenen Punkte sind entschieden (21.11.2026)
+
+Der Inhaber hat beide Fragen beantwortet. Beide Antworten sind unten
+umgesetzt — und bei beiden hat die Umsetzung meinen ersten Befund korrigiert.
+
+### 7.1 Serialisierung: „Nur belegte Kollisionen"
+
+**Die Entscheidung.** Nicht alle 61 Schreiber in eine Gruppe, sondern die
+geometrisch belegten Kollisionen.
+
+**Warum nicht alle — in Zahlen.** Eine Gruppe über alle 61 Schreiber hätte
+als Obergrenze die Summe ihrer Job-Timeouts: **2.015 Minuten = 33,6
+Stunden** Warteschlange, inklusive `deploy.yml` (170 min). `cancel-in-progress:
+false` heißt: Es wird gewartet, nicht abgebrochen. Ein einzelner hängender
+Lauf hätte die gesamte Nachtkette blockiert.
+
+**Der eigentliche Befund.** Meine erste Erklärung („die drei Läufe starten
+gleichzeitig") war **falsch**. Ihre Cron-Zeiten sind 04:35, 04:45 und 04:50 —
+verschiedene Minuten. Der 16.11.2026 war ein **Montag**. Die Überlappung
+kommt nicht von der Startminute, sondern von der **Laufzeit**:
+
+| Workflow | Start | Gemessene Laufzeit |
+|---|---|---|
+| ZEIT-Rechtschreib-Wache | 04:35 | 40 s |
+| FrankAutoOps-Report | 04:45 | **693 s (11,6 min)** → bis 04:56 |
+| Hemingway-Check | 04:50 | 55 s |
+
+04:45 + 11,6 min reicht über den Start der beiden anderen hinaus. Alle drei
+hatten eine `concurrency`-Gruppe — aber eine **eigene**. Eine eigene Gruppe
+serialisiert einen Workflow gegen *sich selbst* und gegen nichts sonst.
+
+**Was jetzt gilt** (`scripts/schreiber_serialisierung.py`, Gruppe
+`main-schreiber`):
+
+* die Montagskette (`zeit-rechtschreibung`, `frankautoops-report`,
+  `hemingway-check`) — der belegte Vorfall;
+* die vier Minuten-Kollisionen aus dem Bericht (04:30, 04:53, 07:00, 09:30);
+* **10 von 60** Schreibern.
+
+**Was ausdrücklich draußen bleibt:** `deploy.yml`. Ein Deploy, der hinter
+Bot-Läufen wartet, verzögert die Auslieferung. Die Ausnahme steht als
+begründeter Eintrag (`EIGENE_GRUPPE`), nicht als Lücke.
+
+**Was die Wache prüft** — und was sie NICHT prüft:
+
+```
+$ python3 scripts/schreiber_serialisierung.py
+Schreiber-Serialisierung: 10/60 Schreiber teilen die Gruppe `main-schreiber`
+51 Befund(e): …
+```
+
+Die 51 offenen Befunde sind **ehrlich offen**, nicht weggedrückt: Der
+Zuschnitt ist eine Entscheidung, kein Messergebnis. Wird die Wache als
+blockierendes Gate verdrahtet, wäre sie rot, solange der Zuschnitt gilt.
+Deshalb läuft sie als **Messung** (Selbsttest blockierend im Governance-Gate,
+`C6`/`GUARDS`): Die Regel wird bei jedem Lauf geprüft, der Ist-Zustand
+berichtet. Wer einen weiteren Schreiber serialisieren will, trägt ihn ein —
+und der Befund verschwindet, statt sich zu wiederholen.
+
+**Drei Fehlversuche, die die Wache selbst gebaut haben** (alle als
+Gegenprobe im Selbsttest, 12 Fälle):
+
+1. Textsuche fand `git_sync.sh` in einem `#`-Kommentar.
+2. Nach dem Filtern aller `#`-Zeilen fand sie es in einem `//`-Kommentar
+   des JS-Blocks von `alert-on-failure.yml`.
+3. Nach dem Filtern von `#` und `//` fand sie es in einem **JS-String** —
+   dem Rat-Text „Was der Rat NICHT ist: … `git_sync.sh` benutzt kein
+   Modell". Ein Stück Prosa, das zufällig einen Dateinamen enthält.
+
+Drei Filter, drei neue Löcher. Die Wache liest deshalb **YAML strukturell**
+und prüft ausschließlich `run:`-Blöcke. Ein vierter Fehler kam vom
+Regressionstest, nicht von mir: `git -c user.name="Bot" push` wurde nicht
+erkannt — genau die Form, die in mehreren Workflows steht.
+
+### 7.2 CSP/Beacon: „CSP erweitern + Audit härten"
+
+**Die Entscheidung.** Beacon bleibt, CSP erlaubt ihn, und der Audit belegt
+künftig, woher eine CSP stammt.
+
+**Erweitert** (`static/_headers` **und** `cloudflare/edge-schutz.md`, damit
+die Edge-Kante nicht vom Repo driftet — geprüft von `blog_header_gate.py`,
+Regel S1/S2):
+
+```
+script-src  … https://static.cloudflareinsights.com
+connect-src … https://cloudflareinsights.com
+```
+
+**Gehärtet** (`scripts/layout_browser_check.js`): Der Audit nimmt jede
+Antwort-Kopfzeile auf und unterscheidet:
+
+* CSP-Verstoß **mit** beobachteter Direktive → Seitenbefund (rot, wie bisher).
+* CSP-Verstoß **ohne** beobachtete Direktive → **unbelegt**: Er erscheint als
+  Frühwarnung mit Grund, macht den Lauf aber nicht rot.
+
+**Warum das nötig war, in einem Satz:** Die Meta-CSP im gebauten HTML hat
+gar kein `script-src`, und der lokale Messserver setzt überhaupt keine
+CSP-Kopfzeile. Die Direktive im Befund konnte aus keiner der beiden Quellen
+stammen — der Audit hat eine Bedingung gemeldet, die er selbst nie gesehen
+hatte. Ein Befund, dessen Ursache niemand zuordnen kann, ist eine
+Behauptung, kein Befund.
+
+**Ein Test musste umgeschrieben werden.** Die alte Prämisse von
+`test_cloudflare_analytics_csp.py` war „der Beacon wird nie geladen, also
+darf die Domain nicht in der CSP stehen". Der Befund vom 21.11. widerlegt
+das: Der Beacon war im ausgelieferten HTML, obwohl das Partial nichts
+rendert — die Injektion passiert an der Edge. Der Test hält jetzt die
+Gegenrichtung fest (Gegenprobe: ohne die Freigabe wird er rot, 2 Tests).
+
+### 7.3 Korrektur eines früheren Befunds von mir
+
+Ich hatte behauptet, `main` erscheine in einem frischen Checkout **wegen
+eines `chmod`-Artefakts im 06:56-Commit** als komplett neu. Das war
+**falsch**. Ursache war meine eigene Umgebung: Der Checkout war *shallow*
+(`git rev-parse --is-shallow-repository` → true), also hatte der einzige
+sichtbare Commit keinen Vorfahren.
+
+Mit voller Historie (`git fetch --unshallow`, 5.950 Commits) ist `8af6f73`
+ein normaler Commit mit dem Elternteil `ce6d96b` und **drei geänderten
+Dateien**. Alle Dateimodi im Baum sind `100644`/`100755` — kein
+`chmod`-Artefakt. Die Behauptung ist damit zurückgezogen.
+
+### 7.4 Nachweis
+
+| Prüfung | Ergebnis |
+|---|---|
+| `schreiber_serialisierung.py --selftest` | 12/12 Fälle grün |
+| `python3 -m unittest scripts.tests.test_schreiber_serialisierung` | 18 Tests grün |
+| `python3 -m unittest scripts.tests.test_layout_audit_csp_beleg` | 7 Tests grün |
+| `python3 -m unittest scripts.tests.test_cloudflare_analytics_csp` | 6 Tests grün |
+| `blog_header_gate.py --offline` (S1/S2: Repo ↔ Edge-Vorlage) | grün |
+| `governance_contract.py` (47 Regeln, C6/`GUARDS`) | erfüllt |
+| `wachen_vertrag.py` | 408 Skripte, 0 Funde |
+| `workflow_vertrag_wache.py --gate` | 103 Workflows, 0 Verstoß |
+| `skript_syntax_wache.py --check` | 730 Dateien grün |
+| `redos_guard.py` | 814 Dateien, 0 Funde |

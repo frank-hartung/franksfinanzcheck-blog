@@ -35,7 +35,7 @@ permissions:
   issues: write
 
 concurrency:          # AUDIT-FIX
-  group: update-quarterly
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

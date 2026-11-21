@@ -63,7 +63,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: newsletter-daily
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

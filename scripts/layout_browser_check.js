@@ -394,17 +394,60 @@ async function loadRuntime(browser, url, viewport) {
   const sammlung = { aktiv: true };
   const sandboxArtefakt = (text) => /about:srcdoc/.test(text)
     && /sandbox|allow-scripts/i.test(text);
+  // ===================================================================
+  //  CSP-BEFUNDE NUR MIT BELEG (21.11.2026)
+  //  ---------------------------------------------------------------
+  //  Der Layout-Audit meldete auf jeder Seite:
+  //    "Loading the script '…/beacon.min.js' violates … Content Security
+  //     Policy directive: \"script-src 'self' … \""
+  //  — und niemand konnte nachvollziehen, WOHER diese Direktive kommt:
+  //    * Die Meta-CSP im gebauten HTML (layouts/_partials/head.html) hat
+  //      gar kein `script-src`; ohne Header-CSP wäre der Beacon erlaubt.
+  //    * Der lokale Messserver (serve(), oben) setzt KEINE CSP-Kopfzeile –
+  //      er kann `static/_headers` gar nicht ausliefern.
+  //  Es gibt also keine Repo-Quelle für den Text. Er stammt aus einer
+  //  Kopfzeile, die außerhalb dieses Repositories gesetzt wird.
+  //
+  //  Ein Befund, dessen Ursache niemand zuordnen kann, ist kein Befund,
+  //  sondern eine Behauptung. Deshalb: Die Meldung wird aufgenommen, aber
+  //  als BELEGT nur, wenn der Audit die Direktive selbst sieht (Kopfzeile
+  //  der Antwort). Sieht er sie nicht, wird der Befund als `unbelegt`
+  //  markiert und getrennt ausgewiesen – nicht stillschweigend verschluckt
+  //  und nicht als Seitenfehler ausgegeben.
+  // ===================================================================
+  const cspDirektiven = [];
+  const cspQuelle = { kopfzeile: false, meta: false };
+  const cspBefund = (text) => /Content Security Policy/i.test(text);
   page.on('pageerror', e => {
     if (sammlung.aktiv && !sandboxArtefakt(e.message)) {
       errors.push('JS: ' + e.message);
     }
   });
+  const unbelegt = [];
   page.on('console', m => {
-    if (sammlung.aktiv && m.type() === 'error' && !sandboxArtefakt(m.text())) {
-      errors.push('console: ' + m.text());
+    if (!sammlung.aktiv || m.type() !== 'error' || sandboxArtefakt(m.text())) return;
+    if (cspBefund(m.text()) && cspDirektiven.length === 0) {
+      // CSP-Verstoß, aber keine einzige CSP-Kopfzeile in dieser Messung:
+      // Die Direktive im Text stammt nicht aus dem, was wir ausgeliefert
+      // haben. Aufnehmen, aber als unbelegt kennzeichnen.
+      unbelegt.push(m.text());
+      return;
     }
+    errors.push('console: ' + m.text());
   });
-  page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
+  page.on('response', r => {
+    if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url());
+    // Woher kommt eine CSP, falls eine kommt? Nur die Antwort kann sie
+    // setzen – der Messserver tut es nicht, also bleibt das Feld leer.
+    try {
+      const h = r.headers() || {};
+      const wert = h['content-security-policy'];
+      if (wert) {
+        cspQuelle.kopfzeile = true;
+        if (!cspDirektiven.includes(wert)) cspDirektiven.push(wert);
+      }
+    } catch (e) { /* Kopfzeilen nicht lesbar: kein Beleg, kein Befund */ }
+  });
   const t0 = Date.now();
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
     .catch(e => errors.push('load: ' + e.message));
@@ -415,7 +458,9 @@ async function loadRuntime(browser, url, viewport) {
     const el = document.querySelector('h1');
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
-  return { page, metrics, title, h1, errors, httpErrors, loadMs, sammlung };
+  return { page, metrics, title, h1, errors, httpErrors, loadMs, sammlung,
+           csp: { direktiven: cspDirektiven, quelle: cspQuelle,
+                  unbelegt: unbelegt.slice(0, 3) } };
 }
 
 /** Die ausgelieferte HTML im Sandbox-Iframe parsen: echter Browserparser,
@@ -516,6 +561,17 @@ async function auditPage(browser, url, viewport, ctx) {
   await laufzeit.page.close();
 
   const { issues, warnings } = evaluateBudgets(metrics, ctx.budgets, true);
+
+  // CSP-Befunde OHNE Beleg wandern in die Frühwarnungen, nicht in `issues`.
+  // Sie machen den Lauf nicht rot, weil sie keine Seite beschreiben, die das
+  // Repo ausliefert – aber sie verschwinden auch nicht: Der Bericht nennt sie
+  // samt Grund (keine CSP-Kopfzeile in dieser Messung).
+  const csp = laufzeit.csp || { direktiven: [], quelle: {}, unbelegt: [] };
+  for (const text of csp.unbelegt || []) {
+    warnings.push('CSP ohne Belegquelle (nicht aus dem ausgelieferten HTML, '
+      + 'keine CSP-Kopfzeile in der Antwort – Herkunft außerhalb des Repos): '
+      + String(text).slice(0, 180));
+  }
   const drift = [];
   if (errors.length) issues.push(...errors.slice(0, 5));
   if (httpErrors.length) issues.push(...httpErrors.slice(0, 5));
@@ -585,6 +641,10 @@ async function auditPage(browser, url, viewport, ctx) {
     h1,
     issues,
     warnings,
+    // Woher stammt eine CSP in dieser Messung? Leer = keine beobachtet.
+    csp: { direktiven: (csp.direktiven || []).length,
+           kopfzeile: !!(csp.quelle && csp.quelle.kopfzeile),
+           unbelegt: (csp.unbelegt || []).length },
   };
 }
 
