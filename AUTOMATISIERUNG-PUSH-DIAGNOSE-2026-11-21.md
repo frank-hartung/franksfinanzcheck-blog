@@ -335,3 +335,46 @@ python3 -m unittest scripts.tests.test_cloudflare_analytics_csp
   #1252, #1229) schließen sich über den regulären Weg: ein grüner Lauf auf
   `main` – oder der nächste Befundstand, der sie als überholt erklärt.
   Sie werden nicht von Hand „weggeschlossen".
+
+---
+
+## 6. Abschluss: Nachweis auf `main` (21.11.2026)
+
+Gemerged als `ad44b04` (PR #1294). Danach auf `main` ausgelöst und **dieselben
+Schritte** geprüft, die am 16.11. rot waren:
+
+| Workflow | Roter Schritt am 16.11. | Lauf am 21.11. auf `main` |
+|---|---|---|
+| FrankAutoOps-Report | `Audit-Log-Stand committen` | 44899609474 — **success** |
+| ZEIT-Niveau Rechtschreib-Wache | `Änderungen committen & pushen` | 44899634411 — **success** |
+| Hemingway-Lesbarkeitscheck | `Änderungen committen & pushen` | 44899648481 — **success** |
+
+Auf einem sauberen Worktree von `main`:
+
+```
+$ python3 scripts/abgeleitete_register.py --check
+✅ Abgeleitete Register aktuell (3 geprüft)
+
+$ python3 scripts/faktenfrische_befund_akte.py --check
+✅ Befund-Akte folgt ihrer Quelle (293 offene Befunde, Stichtag 2026-11-21).
+
+$ python3 scripts/veroeffentlichungs_wache.py --wache
+🛑 1 Befund: [metadaten] M1 – 64 > 60 Zeichen (Kfz) → eigener Vorgang,
+   kein Automatikfehler
+
+$ python3 scripts/push_diagnose.py --tage 14
+✅ kein Commit-/Push-Fehlschlag im Zeitfenster
+```
+
+**Geschlossen, nicht weggedrückt:** #1229, #1251, #1252 (Register/Akte) nach
+belegtem Befund auf `main`. #1244, #1246 hat das Fehler-Alerting selbst
+geschlossen – weil die Läufe auf `main` grün waren **und** der gemeldete Job
+`success` ist (Jobbeweis, WF-E813/#809). #1254, #1245 waren schon vorher
+geschlossen und sind der Ursache nachträglich zugeordnet.
+
+**Was ausdrücklich offen bleibt:** Der `layout-audit`-Konsolenfehler
+(`static.cloudflareinsights.com` gegen die eigene CSP) ist **nicht** behoben.
+Das Skript kommt über Cloudflares automatische Injektion ins ausgelieferte
+HTML; das Repo kann nur den Vertrag festhalten (getan, mit Test), nicht die
+Entscheidung treffen. Die Wahl „CSP erweitern" oder „Injektion abschalten"
+gehört dem Inhaber.
