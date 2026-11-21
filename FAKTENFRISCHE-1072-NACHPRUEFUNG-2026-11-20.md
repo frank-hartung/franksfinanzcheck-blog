@@ -183,25 +183,45 @@ Build)`, `Quellen, Stand, Einheit und Methodik`, `CodeQL (python/js)`,
 |---|---|---|
 | `YMYL-Siegelprüfung` | `test_metadaten_wache`: M1-Titel 64 > 60 Zeichen | Frank (Freigabe-Hash) |
 | `Playwright-Suite` | derselbe M1-Titel im Schritt „Metadaten-Wache" | Frank |
-| `ReDoS-Wache` | `test_gsc_abdeckung`: bestehender Inlink-Befund | Redaktion |
-| `layout-audit` | Cloudflare-Beacon gegen `_headers`-CSP | separat zu klären |
 
-**Zum M1-Titel:** Er steht seit `60dc4d4` (19.11.2026, PR #1276, „freigegebene
+Stand nach der dritten Merge-Runde (21.11.2026): `layout-audit` ist durch
+`65029c7b` geheilt; es bleiben **drei** rote Checks, davon zwei aus demselben
+M1-Titel.
+| `ReDoS-Wache` | `test_gsc_abdeckung`: bestehender Inlink-Befund | Redaktion |
+| `layout-audit` | Cloudflare-Beacon gegen `_headers`-CSP | **von Frank geschlossen** (`65029c7b`) |
+
+**Zum M1-Titel:** Er stand seit `60dc4d4` (19.11.2026, PR #1276, „freigegebene
 Neufassung veröffentlichen", Autor Frank Hartung) im Bestand. `inhalt_sha256`
-versiegelt ihn. Eine Änderung durch mich würde seine Freigabe entwerten —
-deshalb **nicht** angefasst, sondern gemeldet. Kürzungsvorschlag (58 Zeichen):
+versiegelte ihn. Eine Änderung durch mich hätte seine Freigabe entwertet —
+deshalb **nicht** angefasst, sondern gemeldet.
+
+**Nachtrag 21.11.2026:** Frank hat den Titel selbst geändert — auf
+„Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?". Das sind
+**weiterhin 64 Zeichen**; M1 (max. 60) greift unverändert. Der Befund ist also
+nach der Änderung *derselbe*, nur an einem neuen Wortlaut. Gemessen über den
+ganzen Bestand (145 Dateien): **genau dieser eine** M1-Befund, kein zweiter.
+Der Vorschlag, kürzer und inhaltlich gleich (58 Zeichen):
 „Kfz-Versicherung vergleichen: Was zählt außer dem Beitrag?"
 
-**Zum `layout-audit`:** Der Befund ist ein Browser-Konsolenfehler gegen
-`static.cloudflareinsights.com/beacon.min.js`, geblockt von der CSP in
-`static/_headers`. Gegenprüfung: Im gebauten HTML steht **kein** Beacon
-(`grep` über 131 Seiten: 0 Treffer); `layouts/_partials/cloudflare_analytics.html`
-rendert nur bei gesetzter `website`+`token`, beide sind in `hugo.toml`
-auskommentiert. Das Skript kommt von der Cloudflare-Edge (Weg A), nicht aus dem
-Repo. Der Audit lief am 19.11. auf `main` noch grün, seither wurde an `layouts/`
-nichts geändert. **Die Ursache liegt außerhalb dieses Diffs** und wurde nicht
-angefasst; ein CSP-Eintrag für die Analytics-Domain wäre ein eigener,
-abgestimmter Schritt.
+Das ist bewusst eine **Entscheidungsvorlage, keine Änderung**: Der Titel sitzt
+in einem freigegebenen, versiegelten Artikel; ihn zu kürzen ist eine
+redaktionelle Entscheidung mit Neuzeichnung des Siegels, keine Aufräumarbeit.
+
+**Zum `layout-audit` — inzwischen GESCHLOSSEN, von Frank:** Der Befund war ein
+Browser-Konsolenfehler gegen `static.cloudflareinsights.com/beacon.min.js`,
+geblockt von der CSP in `static/_headers`. Gegenprüfung damals: Im gebauten HTML
+stand **kein** Beacon (`grep` über 131 Seiten: 0 Treffer);
+`layouts/_partials/cloudflare_analytics.html` rendert nur bei gesetzter
+`website`+`token`, beide in `hugo.toml` auskommentiert — das Skript kommt von
+der Cloudflare-Edge (Weg A), nicht aus dem Repo.
+
+**Nachtrag 21.11.2026:** Frank hat das in `65029c7b` (PR #1303) selbst
+entschieden: `script-src` und `connect-src` erlauben jetzt
+`https://static.cloudflareinsights.com` bzw. `https://cloudflareinsights.com`,
+mit eigenem Test (`test_cloudflare_analytics_csp.py`). Meine Analyse war
+richtig — die Ursache lag außerhalb meines Diffs —, aber der Befund ist damit
+**kein offener Punkt mehr**. Ich lasse ihn hier stehen, damit nachvollziehbar
+bleibt, wer ihn wann und mit welcher Begründung geschlossen hat.
 
 ---
 
@@ -268,3 +288,37 @@ war an der Basis `d047978` derselbe.
 Konfliktmarker in einer *nicht* als unmerged gemeldeten Datei hinterlassen.
 Der `konfliktmarker_wache`-Grep findet sie nur, wenn er auch `=======` allein
 prüft; verlässlich gefangen hat sie erst der YAML-Parser-Test.
+
+---
+
+## 8. Dritte Merge-Runde: ein Fehler kam mit `main` herein
+
+Nach dem Merge von `cc26b102` sind es **6282 Tests, 9 FAIL + 1 ERROR** — in
+Zahl unverändert, aber die Zusammensetzung hat sich verschoben:
+
+| | vorher | jetzt |
+|---|---|---|
+| `test_lcp_image_optimizer` | rot | **geheilt** (`main` hat das Manifest nachgezogen) |
+| `test_layout_ai_bauausfall` | grün | **rot** – neu, aus `#1303` |
+
+**Der neue Fehler ist nicht meiner, und ich habe ihn nicht behoben.** Nachweis
+in einem separaten Worktree auf `origin/main` (`cc26b102`), ohne meine Commits:
+
+    cd /tmp/maincheck/scripts/tests
+    python -m unittest test_layout_ai_bauausfall.AlarmLebenszyklusTest.test_laeufe_stehen_in_einer_reihe
+    AssertionError: 'layout-ai' != 'main-schreiber'
+    FAILED (failures=1)
+
+`#1303` („Serialisierung der belegten Kollisionen") hat `layout-ai.yml` auf die
+gemeinsame Gruppe `main-schreiber` umgestellt — richtig für die Kollision —, aber
+der Test hält noch die alte Gruppe `layout-ai` fest. Das ist ein **Widerspruch
+zwischen zwei Verträgen in `main` selbst**: Wer ihn auflöst, muss entscheiden,
+ob die Gruppenzugehörigkeit oder der Test die Wahrheit ist. Diese Entscheidung
+gehört dem, der `#1303` gemacht hat; sie stillschweigend zu „heilen", indem ich
+den Test auf `main-schreiber` umschreibe, wäre genau die Testentspannung, die
+hier verboten ist.
+
+**Konsequenz für die Freigabe:** Der PR ist nicht „alles grün". Er ist:
+meine Arbeit grün, das PR-Gate (`Integritäts-Siegel`) grün, und **zehn rote
+Tests, von denen keiner durch diesen PR entstanden ist** — neun vorbestehend
+an der Basis, einer durch `#1303` auf `main` hinzugekommen.
