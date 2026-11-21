@@ -267,6 +267,14 @@ jobs:
           fi
 
       # ============ BROWSER-AUDIT (Puppeteer) ============
+      # Vertrag ohne Browser: Die Entscheidungen, die den Fehlbefund vom
+      # 21.11.2026 ausgelöst haben (Weiterleitung → Produktion, CSP aus
+      # static/_headers, fremde Herkünfte), laufen OHNE Chrome. Der Selbsttest
+      # braucht kein Netz und keine Installation – er kann deshalb VOR dem
+      # teuren Browser-Teil rot werden.
+      - name: Selbsttest des Browser-Audits (Hermetik, ohne Chrome)
+        run: node scripts/layout_browser_check.js --selftest
+
       - name: Browser-Audit (Chrome headless – Performance & Fehler)
         id: browser
         # Ohne `public/` gibt es keine Seite zu laden. Der Audit meldete

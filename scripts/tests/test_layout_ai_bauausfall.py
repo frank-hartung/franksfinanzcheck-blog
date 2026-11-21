@@ -178,7 +178,15 @@ class AlarmLebenszyklusTest(unittest.TestCase):
 
     def test_laeufe_stehen_in_einer_reihe(self) -> None:
         # Zwei gleichzeitige Läufe würden dasselbe Issue parallel beschreiben.
-        self.assertEqual("layout-ai", self.wf["concurrency"]["group"])
+        # Seit #1303 (21.11.2026) teilen sich die schreibenden Workflows EINE
+        # Gruppe (`main-schreiber`) statt je einer eigenen: Eine eigene Gruppe
+        # serialisiert nur einen Workflow gegen sich selbst – genau das hatte
+        # die Push-Rennen #1244–#1246 erzeugt. Der hiesige Vertrag ist deshalb
+        # nicht mehr der Gruppenname, sondern: geteilte Gruppe, kein Abbruch.
+        gruppe = self.wf["concurrency"]["group"]
+        self.assertFalse(str(gruppe).startswith("layout-ai"),
+                         "Eine eigene Gruppe serialisiert nur gegen sich selbst")
+        self.assertEqual("main-schreiber", gruppe)
         self.assertFalse(self.wf["concurrency"]["cancel-in-progress"])
 
 

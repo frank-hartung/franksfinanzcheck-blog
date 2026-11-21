@@ -92,6 +92,8 @@
  */
 const SELFTEST = process.argv.includes('--selftest');
 const http = require('http');
+const crypto = require('crypto');
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
 
@@ -121,6 +123,12 @@ const MIN_ARTIKEL = 1;
 const CHROME = process.env.CHROME_PATH || '';
 const DOM_JSON = process.env.LAYOUT_DOM_JSON ||
   path.join(__dirname, '..', '.cache', 'layout', 'dom-audit.json');
+// EINE Quelle für die CSP der Messung: die Datei, die auch ausgeliefert würde.
+// Sie liegt nach dem Bau unter <BASE>/_headers (Hugo kopiert static/ dorthin);
+// im Quellbaum ist es static/_headers. Beide werden in dieser Reihenfolge
+// gelesen – so misst der Audit den Sollstand des Repositories, nicht den
+// Kopfzeilen-Zufall der Umgebung.
+const HEADERS_DATEI = path.join(__dirname, '..', 'static', '_headers');
 const EXTRA_RISK_PAGES = parseInt(process.env.LAYOUT_RISK_PAGES || '3', 10);
 // Laufzeit-Zugaben des Browsers (siehe Kopf): nachträglich eingehängte
 // Prefetch-Links im <head>, ggf. Sentinel-Div aus dem Top-Link-Skript
@@ -147,6 +155,133 @@ const FALLBACK = {
   rows: [],
 };
 
+/**
+ * CSP aus einer `_headers`-Datei lesen (Format Cloudflare Pages / Netlify).
+ *
+ * WARUM DAS HIER STEHT (21.11.2026): Der Audit hat bisher GAR KEINE CSP
+ * gesetzt. Was der Browser an CSP sah, kam von außen – und war damit nicht die
+ * CSP dieses Repositories. Genau das war der offene Widerspruch: „die CSP der
+ * Umgebung ist veraltet, sie ist nur nicht die dieses Repositories“.
+ *
+ * Jetzt liefert der Messserver die CSP aus `static/_headers` selbst aus. Die
+ * Messung prüft damit den Sollstand des Repos und kann von einer fremden
+ * Kopfzeile nur noch ERGÄNZT, nicht mehr ersetzt werden – und genau diese
+ * Ergänzung wird als Fremdquelle ausgewiesen (siehe `cspQuelle` unten).
+ *
+ * Rückgabe: der Wert der Regel `/*` oder null (dann fail-closed in `main`).
+ */
+function cspAusHeaders(text) {
+  const zeilen = String(text || '').split(/\r?\n/);
+  let imBlock = false;
+  for (const zeile of zeilen) {
+    const ohneKommentar = zeile.replace(/\s+#.*$/, '');
+    const kern = ohneKommentar.trim();
+    if (!kern) continue;
+    // Regelkopf beginnt in Spalte 0. `/*` ist die Regel für alle Pfade.
+    if (!/^\s/.test(ohneKommentar)) {
+      imBlock = kern === '/*';
+      continue;
+    }
+    if (!imBlock) continue;
+    const treffer = ohneKommentar.match(
+      /^\s{2,}Content-Security-Policy:\s*(.+?)\s*$/i);
+    if (treffer) return treffer[1];
+  }
+  return null;
+}
+
+/**
+ * Die CSP, die der Messserver ausliefert – ohne `frame-ancestors`.
+ *
+ * WARUM (21.11.2026): `frame-ancestors` ist eine reine Header-Direktive. Sie
+ * regelt, WER die Seite einbetten darf, und wird bei `about:srcdoc` vom
+ * Eltern-Dokument geerbt. Im Audit würde sie damit die eigene
+ * Referenzmessung (Sandbox-Iframe) blockieren, ohne etwas über Skripte,
+ * Stile oder Verbindungen der Seite zu sagen. Sie bleibt im Sollstand und
+ * wird von `blog_header_gate.py` (offline S1, live) geprüft – ausgeliefert
+ * für die Messung wird sie nicht.
+ */
+function cspFuerMessung(csp) {
+  return String(csp || '').split(';')
+    .map(teil => teil.trim())
+    .filter(teil => teil && !/^frame-ancestors\b/i.test(teil))
+    .join('; ');
+}
+
+/** Liegt die URL auf der Herkunft der Messung (Schema + Host + Port)? */
+function istEigeneHerkunft(url, herkunft) {
+  try {
+    return new URL(url).origin === herkunft;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * Ist die Datei eine Weiterleitungsseite (Meta-Refresh auf eine fremde URL)?
+ *
+ * DER BEFUND (21.11.2026): `buildSampleUrls` nahm die lexikografisch letzten
+ * drei Verzeichnisse unter `posts/`. Das sind keine neuen Artikel, sondern
+ * Altlasten ohne Datumspräfix – 251 Meta-Refresh-Seiten aus
+ * `scripts/weiterleitungen.py`. Chrome folgt dem Refresh nach
+ * `https://franksfinanzcheck.de/...`; der Audit misst dann die PRODUKTION,
+ * obwohl in der Meldung `http://127.0.0.1:…` steht. Die dort beobachtete CSP
+ * (ohne die beiden Beacon-Domains) und der von Cloudflare injizierte Beacon
+ * stammen aus der Edge-Regel – nicht aus dem Runner. Deshalb wird eine solche
+ * Seite gar nicht erst als Artikelprobe verwendet.
+ */
+function istWeiterleitungsseite(html) {
+  if (typeof html !== 'string' || !html) return false;
+  if (/<meta\b[^>]*\bname\s*=\s*["']ff-weiterleitung["']/i.test(html)) return true;
+  return /<meta\b[^>]*\bhttp-equiv\s*=\s*["']refresh["'][^>]*\bcontent\s*=\s*["'][^"']*url\s*=\s*https?:/i
+    .test(html);
+}
+
+/** `2026-11-21-slug` → `2026-11-21`; alles ohne Datumspräfix → null. */
+function slugDatum(name) {
+  const treffer = /^(\d{4}-\d{2}-\d{2})-/.exec(String(name || ''));
+  return treffer ? treffer[1] : null;
+}
+
+/**
+ * Die wirklich neuesten Artikel – nicht die alphabetisch letzten.
+ *
+ * Sortiert nach Datumspräfix (absteigend), prüft jeden Kandidaten auf die
+ * Weiterleitungs-Marke und überspringt Altlasten wie `…(1)`. Es werden so
+ * viele Dateien gelesen, bis `anzahl` echte Artikel beisammen sind.
+ */
+function neuesteArtikel(postsDir, anzahl) {
+  let eintraege = [];
+  try {
+    eintraege = fs.readdirSync(postsDir, { withFileTypes: true })
+      .filter(d => d.isDirectory()
+        && fs.existsSync(path.join(postsDir, d.name, 'index.html')))
+      .map(d => ({ name: d.name, datum: slugDatum(d.name) }))
+      .filter(x => x.datum && /^[a-z0-9][a-z0-9-]{0,159}$/.test(x.name))
+      .sort((a, b) => b.datum.localeCompare(a.datum)
+        || b.name.localeCompare(a.name));
+  } catch (e) {
+    return { artikel: [], weiterleitungen: [] };
+  }
+  const artikel = [];
+  const weiterleitungen = [];
+  for (const k of eintraege) {
+    if (artikel.length >= anzahl) break;
+    let text = '';
+    try {
+      text = fs.readFileSync(path.join(postsDir, k.name, 'index.html'), 'utf8');
+    } catch (e) {
+      continue;
+    }
+    if (istWeiterleitungsseite(text)) {
+      weiterleitungen.push(k.name);
+      continue;
+    }
+    artikel.push(k.name);
+  }
+  return { artikel, weiterleitungen };
+}
+
 function loadDomAudit() {
   try {
     const data = JSON.parse(fs.readFileSync(DOM_JSON, 'utf8'));
@@ -160,12 +295,17 @@ function loadDomAudit() {
   }
 }
 
-function serve(baseDir, port) {
+function serve(baseDir, port, optionen = {}) {
+  const csp = optionen.csp || '';
+  const nonce = optionen.nonce || '';
+  const cspDigest = optionen.cspDigest || '';
   const server = http.createServer((req, res) => {
     let p = decodeURIComponent(req.url.split('?')[0]);
     if (p.endsWith('/')) p += 'index.html';
     let file = path.normalize(path.join(baseDir, p));
-    if (!file.startsWith(baseDir)) { res.writeHead(403); res.end(); return; }
+    if (file !== baseDir && !file.startsWith(baseDir + path.sep)) {
+      res.writeHead(403); res.end(); return;
+    }
     fs.readFile(file, (err, data) => {
       if (err) { res.writeHead(404); res.end('not found'); return; }
       const ext = path.extname(file);
@@ -173,7 +313,19 @@ function serve(baseDir, port) {
                      '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp',
                      '.avif': 'image/avif', '.woff2': 'font/woff2', '.svg': 'image/svg+xml',
                      '.xml': 'application/xml', '.txt': 'text/plain', '.json': 'application/json'};
-      res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream'});
+      // Die Herkunft ist der Audit selbst. Deshalb kann er genau sagen, welche
+      // Kopfzeilen ER gesetzt hat – jede zusätzliche CSP ist damit als fremd
+      // belegbar (Nonce + Digest reisen mit).
+      const kopf = {
+        'Content-Type': types[ext] || 'application/octet-stream',
+        'X-FF-Audit-Nonce': nonce,
+        'Cache-Control': 'no-store',
+      };
+      if (ext === '.html' && csp) {
+        kopf['Content-Security-Policy'] = csp;
+        kopf['X-FF-Audit-CSP'] = cspDigest;
+      }
+      res.writeHead(200, kopf);
       res.end(data);
     });
   });
@@ -182,7 +334,10 @@ function serve(baseDir, port) {
   return new Promise((resolve, reject) => {
     server.once('error', (err) => {
       if (err && err.code === 'EADDRINUSE' && port !== 0) {
-        serve(baseDir, 0).then(resolve, reject);
+        // WICHTIG: Optionen (CSP, Nonce, Digest) müssen mitwandern. Sonst
+        // lieferte der Ausweich-Port Seiten ohne eigene CSP – und der Audit
+        // hielte jede CSP-Meldung für unbelegt (Frühwarnung statt Befund).
+        serve(baseDir, 0, optionen).then(resolve, reject);
         return;
       }
       reject(err);
@@ -321,14 +476,100 @@ function runSelftest() {
         + `${wantIssues}), warnings=${warnings.length} (erwartet ${wantWarnings})`);
     }
   }
+
+  // ---- Hermetik-Vertrag (21.11.2026) ---------------------------------
+  // Diese Fälle brauchen KEIN Chrome: Es sind die Entscheidungen, an denen
+  // der Fehlbefund vom 21.11.2026 hing (Weiterleitung → Produktion).
+  const hermetik = [];
+  const pruefe = (name, ist, soll) => hermetik.push([name, ist, soll]);
+
+  let csp = null;
+  try { csp = cspAusHeaders(fs.readFileSync(HEADERS_DATEI, 'utf8')); }
+  catch (e) { csp = null; }
+  pruefe('CSP aus static/_headers lesbar', !!csp, true);
+  pruefe('CSP nennt script-src', /(^|;)\s*script-src\s/.test(csp || ''), true);
+  pruefe('CSP nennt Beacon-Skript-Domain',
+    /static\.cloudflareinsights\.com/.test(csp || ''), true);
+  pruefe('CSP nennt Beacon-Messdomain',
+    /(^|[\s;])https:\/\/cloudflareinsights\.com/.test(csp || ''), true);
+  pruefe('_headers ohne CSP ergibt null',
+    cspAusHeaders('/*\n  X-Test: 1\n\n/images/*\n  Cache-Control: max-age=1\n'), null);
+  pruefe('CSP in Kommentarzeile zählt nicht',
+    cspAusHeaders('# Content-Security-Policy: default-src *\n/*\n  X-Test: 1\n'), null);
+  const fuerMessung = cspFuerMessung(csp);
+  pruefe('frame-ancestors wird für die Messung entfernt',
+    /frame-ancestors/i.test(fuerMessung), false);
+  pruefe('default-src bleibt erhalten',
+    /(^|;)\s*default-src\s/.test(fuerMessung), true);
+  pruefe('script-src bleibt erhalten',
+    /(^|;)\s*script-src\s/.test(fuerMessung), true);
+  pruefe('fehlende CSP bleibt leer', cspFuerMessung(null), '');
+
+  pruefe('gleiche Herkunft ist eigene',
+    istEigeneHerkunft('http://127.0.0.1:1234/a', 'http://127.0.0.1:1234'), true);
+  pruefe('Produktion ist fremde Herkunft',
+    istEigeneHerkunft('https://franksfinanzcheck.de/x', 'http://127.0.0.1:1234'), false);
+  pruefe('unparsebare URL ist nicht eigene',
+    istEigeneHerkunft('keine-url', 'http://127.0.0.1:1'), false);
+
+  const stubDatei = path.join(__dirname, '..', 'static', 'posts',
+    'zinseszinseffekt-formel-erklaert', 'index.html');
+  if (fs.existsSync(stubDatei)) {
+    pruefe('echte Alt-Seite ist eine Weiterleitung',
+      istWeiterleitungsseite(fs.readFileSync(stubDatei, 'utf8')), true);
+  }
+  pruefe('normale Seite ist keine Weiterleitung',
+    istWeiterleitungsseite('<html><head><title>x</title></head><body><h1>x</h1></body></html>'),
+    false);
+
+  // Sample-Regel an einem künstlichen Bau: Datum gewinnt, Weiterleitung
+  // und Altlast ohne Datum fallen raus.
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ff-layout-'));
+  try {
+    const anlegen = (name, html) => {
+      const d = path.join(tmp, name);
+      fs.mkdirSync(d);
+      fs.writeFileSync(path.join(d, 'index.html'), html, 'utf8');
+    };
+    const normal = '<html><head><title>x</title></head><body><h1>x</h1></body></html>';
+    anlegen('2026-01-01-normal', normal);
+    anlegen('2026-01-02-neuer', normal);
+    anlegen('2025-12-31-alt', '<meta name="ff-weiterleitung" content="regel-C">'
+      + '<meta http-equiv="refresh" content="0; url=https://franksfinanzcheck.de/x/">');
+    anlegen('z-altlast', '<meta http-equiv="refresh" '
+      + 'content="0; url=https://franksfinanzcheck.de/y/">');
+    const gewaehlt = neuesteArtikel(tmp, 3);
+    pruefe('Sample nimmt den neuesten datierten Artikel zuerst',
+      gewaehlt.artikel[0], '2026-01-02-neuer');
+    pruefe('Weiterleitung ist nicht im Sample',
+      gewaehlt.artikel.includes('2025-12-31-alt'), false);
+    pruefe('Altlast ohne Datumspräfix ist nicht im Sample',
+      gewaehlt.artikel.includes('z-altlast'), false);
+    pruefe('Weiterleitung wird ausgewiesen',
+      gewaehlt.weiterleitungen.includes('2025-12-31-alt'), true);
+  } finally {
+    try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+  }
+
+  for (const [name, ist, soll] of hermetik) {
+    if (JSON.stringify(ist) !== JSON.stringify(soll)) {
+      fehler++;
+      console.error(`✗ ${name}: ${JSON.stringify(ist)} (erwartet ${JSON.stringify(soll)})`);
+    }
+  }
+
   if (fehler) {
-    console.error(`Selbsttest FEHLGESCHLAGEN (${fehler} von ${faelle.length})`);
+    console.error(`Selbsttest FEHLGESCHLAGEN (${fehler} von `
+      + `${faelle.length + hermetik.length})`);
     process.exit(1);
   }
   console.log(JSON.stringify({
-    selftest: 'ok', cases: faelle.length,
+    selftest: 'ok', cases: faelle.length + hermetik.length,
+    budgetFaelle: faelle.length, hermetikFaelle: hermetik.length,
     vertrag: 'nur Lighthouse-Grenzen und Fehler sind rot, Frühwarnungen grün; '
-      + 'Laufzeit-DOM und ausgelieferte HTML haben eigene Frühwarnwerte',
+      + 'Laufzeit-DOM und ausgelieferte HTML haben eigene Frühwarnwerte; '
+      + 'CSP kommt aus static/_headers, fremde Herkünfte werden abgebrochen, '
+      + 'Weiterleitungsseiten sind keine Artikelprobe',
   }));
   process.exit(0);
 }
@@ -378,12 +619,31 @@ async function measureDom(page) {
   });
 }
 
-/** Die Seite laden und vermessen, wie Leser sie bekommen (Laufzeit-DOM). */
-async function loadRuntime(browser, url, viewport) {
+/** Die Seite laden und vermessen, wie Leser sie bekommen (Laufzeit-DOM).
+ *
+ *  HERMETISCH SEIT 21.11.2026
+ *  --------------------------
+ *  Der Audit misst NUR den lokalen Bau. Jede Hauptnavigation, die die eigene
+ *  Herkunft (127.0.0.1:<port>) verlassen will, wird abgebrochen. Grund: Der
+ *  Bericht vom 21.11.2026 zeigte `http://127.0.0.1:43437/posts/…` als
+ *  Befund-URL, die gemessene CSP und der blockierte Beacon kamen aber aus
+ *  der PRODUKTION. Ursache waren Meta-Refresh-Seiten aus
+ *  `scripts/weiterleitungen.py`, die der Browser still verfolgt hat.
+ *
+ *  Was der Browser tatsächlich sieht, wird belegt: Nonce und CSP-Digest
+ *  reisen mit jeder Antwort des Messservers. Stimmt die beobachtete
+ *  Dokument-CSP nicht mit der ausgelieferten überein, ist sie als
+ *  FREMDQUELLE ausgewiesen – und ein CSP-Verstoß daraus ist kein Befund
+ *  über diese Seite.
+ */
+async function loadRuntime(browser, url, viewport, ctx) {
   const page = await browser.newPage();
   await page.setViewport(viewport);
+  const eigeneHerkunft = ctx.herkunft || new URL(url).origin;
+  const gesendet = ctx.csp || '';
   const errors = [];
   const httpErrors = [];
+  const fremdnav = [];
   // Sammel-Schalter: Nach dem Laden wird die Referenzmessung im Sandbox-Iframe
   // erzeugt. Chrome protokolliert dabei „Blocked script execution in
   // 'about:srcdoc' … (sandbox)" als Konsolenfehler – das ist ein Artefakt
@@ -394,32 +654,37 @@ async function loadRuntime(browser, url, viewport) {
   const sammlung = { aktiv: true };
   const sandboxArtefakt = (text) => /about:srcdoc/.test(text)
     && /sandbox|allow-scripts/i.test(text);
-  // ===================================================================
-  //  CSP-BEFUNDE NUR MIT BELEG (21.11.2026)
-  //  ---------------------------------------------------------------
-  //  Der Layout-Audit meldete auf jeder Seite:
-  //    "Loading the script '…/beacon.min.js' violates … Content Security
-  //     Policy directive: \"script-src 'self' … \""
-  //  — und niemand konnte nachvollziehen, WOHER diese Direktive kommt:
-  //    * Die Meta-CSP im gebauten HTML (layouts/_partials/head.html) hat
-  //      gar kein `script-src`; ohne Header-CSP wäre der Beacon erlaubt.
-  //    * Der lokale Messserver (serve(), oben) setzt KEINE CSP-Kopfzeile –
-  //      er kann `static/_headers` gar nicht ausliefern.
-  //  Es gibt also keine Repo-Quelle für den Text. Er stammt aus einer
-  //  Kopfzeile, die außerhalb dieses Repositories gesetzt wird.
-  //
-  //  Ein Befund, dessen Ursache niemand zuordnen kann, ist kein Befund,
-  //  sondern eine Behauptung. Deshalb: Die Meldung wird aufgenommen, aber
-  //  als BELEGT nur, wenn der Audit die Direktive selbst sieht (Kopfzeile
-  //  der Antwort). Sieht er sie nicht, wird der Befund als `unbelegt`
-  //  markiert und getrennt ausgewiesen – nicht stillschweigend verschluckt
-  //  und nicht als Seitenfehler ausgegeben.
-  // ===================================================================
-  const cspDirektiven = [];
-  const cspQuelle = { kopfzeile: false, meta: false };
+  // Eigene Abbrüche erzeugen ebenfalls Konsolenzeilen. Sie sind der Beweis,
+  // dass die Hermetik greift – kein Seitenfehler.
+  const eigenerAbbruch = (text) => fremdnav.length > 0
+    && /ERR_BLOCKED_BY_CLIENT|ERR_ABORTED|blockedbyclient/i.test(text);
+
+  // ---- Hermetik: keine Hauptnavigation verlässt die eigene Herkunft ----
+  await page.setRequestInterception(true);
+  page.on('request', req => {
+    let eigene = true;
+    try {
+      const istHauptnavigation = req.isNavigationRequest()
+        && req.frame() === page.mainFrame()
+        && /^https?:/i.test(req.url());
+      if (istHauptnavigation && !istEigeneHerkunft(req.url(), eigeneHerkunft)) {
+        eigene = false;
+      }
+    } catch (e) {
+      eigene = true;   // nicht entscheidbar → dem Browser nicht in den Weg stellen
+    }
+    if (!eigene) {
+      fremdnav.push(req.url());
+      ctx.fremdnav.push(req.url());
+      req.abort('blockedbyclient').catch(() => {});
+      return;
+    }
+    req.continue().catch(() => {});
+  });
+
   const cspBefund = (text) => /Content Security Policy/i.test(text);
   page.on('pageerror', e => {
-    if (sammlung.aktiv && !sandboxArtefakt(e.message)) {
+    if (sammlung.aktiv && !sandboxArtefakt(e.message) && !eigenerAbbruch(e.message)) {
       errors.push('JS: ' + e.message);
     }
   });
@@ -427,45 +692,74 @@ async function loadRuntime(browser, url, viewport) {
   const unbelegt = [];
   page.on('console', m => {
     if (!sammlung.aktiv || m.type() !== 'error' || sandboxArtefakt(m.text())) return;
+    if (eigenerAbbruch(m.text())) return;
     if (cspBefund(m.text())) {
       // Die CSP-Kopfzeile kann NACH dem ersten Skriptfehler eintreffen
       // (z. B. bei Umleitungen). Ob sie existiert, entscheidet sich erst
-      // am Ende der Messung – siehe `cspImBefund` nach page.goto().
+      // am Ende der Messung – siehe die Auswertung nach page.goto().
       cspMeldungen.push(m.text());
       return;
     }
     errors.push('console: ' + m.text());
   });
+  const cspBeobachtet = [];     // {wert, url, eigene}
   page.on('response', r => {
     if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url());
-    // Woher kommt eine CSP, falls eine kommt? Nur die Antwort kann sie
-    // setzen – der Messserver tut es nicht, also bleibt das Feld leer.
-    // NUR die Dokument-Antwort kann die Seite per CSP steuern. Die erste
-    // Fassung dieses Filters sammelte Kopfzeilen von JEDER Antwort – der
-    // Browserfehler blieb dadurch als „belegt" stehen, obwohl der
-    // Messserver nie eine CSP setzt. Ein Beleg, der aus einer fremden
-    // Antwort stammt, ist kein Beleg für diese Seite.
+    // NUR die Dokument-Antwort kann eine Seite per CSP steuern. Die erste
+    // Fassung sammelte Kopfzeilen von JEDER Antwort – ein Beleg aus der
+    // Antwort eines Skripts/Bildes sagt nichts über diese Seite.
     if (!/^(document|iframe)$/i.test(String(r.request().resourceType()))) return;
     try {
-      const h = r.headers() || {};
-      const wert = h['content-security-policy'];
-      if (wert) {
-        cspQuelle.kopfzeile = true;
-        if (!cspDirektiven.includes(wert)) cspDirektiven.push(wert);
-      }
+      const wert = (r.headers() || {})['content-security-policy'];
+      if (!wert) return;
+      cspBeobachtet.push({
+        wert: String(wert),
+        url: r.url(),
+        eigene: istEigeneHerkunft(r.url(), eigeneHerkunft),
+      });
     } catch (e) { /* Kopfzeilen nicht lesbar: kein Beleg, kein Befund */ }
   });
+
   const t0 = Date.now();
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
     .catch(e => errors.push('load: ' + e.message));
   const loadMs = Date.now() - t0;
-  // Jetzt steht fest, ob diese Seite überhaupt per CSP-Kopfzeile gesteuert
-  // wurde. Erst hier wird aus einem CSP-Verstoß ein Befund oder ein Belegmangel.
+
+  // Wo steht die Messung am Ende – und welche CSP hat sie wirklich gesehen?
+  const endUrl = page.url();
+  const herkunftOk = istEigeneHerkunft(endUrl, eigeneHerkunft);
+  const normal = (s) => String(s || '').replace(/\s+/g, ' ').trim();
+  const eigeneCsp = cspBeobachtet.filter(e => e.eigene);
+  const fremdeCsp = cspBeobachtet.filter(e => !e.eigene);
+  const traegtEigene = !!gesendet
+    && eigeneCsp.some(e => normal(e.wert).includes(normal(gesendet)));
+  const fremdherkunft = [...new Set(fremdeCsp.map(e => {
+    try { return new URL(e.url).origin; } catch (x) { return e.url; }
+  }))];
+  const cspQuelle = {
+    kopfzeile: cspBeobachtet.length > 0,
+    eigene: traegtEigene,
+    fremd: fremdeCsp.length > 0 || (eigeneCsp.length > 0 && !traegtEigene),
+    fremdherkunft,
+    herkunft: endUrl,
+    herkunftOk,
+  };
+
+  // Jetzt steht fest, woher die CSP stammt. Erst hier wird aus einem
+  // CSP-Verstoß ein Befund oder ein Belegmangel.
   for (const text of cspMeldungen) {
-    if (cspQuelle.kopfzeile) {
-      errors.push('console: ' + text);
+    if (!herkunftOk) {
+      unbelegt.push('Dokument kam von ' + endUrl
+        + ' (Herkunft außerhalb der Messung): ' + text);
+    } else if (!traegtEigene) {
+      unbelegt.push('keine eigene CSP-Kopfzeile beobachtet'
+        + (fremdherkunft.length ? ' (Fremd-CSP von ' + fremdherkunft.join(', ') + ')'
+                                : '') + ': ' + text);
+    } else if (fremdherkunft.length || (eigeneCsp.length > 0 && !traegtEigene)) {
+      unbelegt.push('Fremd-CSP ergänzt die eigene ('
+        + (fremdherkunft.join(', ') || 'unbekannte Herkunft') + '): ' + text);
     } else {
-      unbelegt.push(text);
+      errors.push('console: ' + text);
     }
   }
   const metrics = await measureDom(page);
@@ -475,7 +769,9 @@ async function loadRuntime(browser, url, viewport) {
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
   return { page, metrics, title, h1, errors, httpErrors, loadMs, sammlung,
-           csp: { direktiven: cspDirektiven, quelle: cspQuelle,
+           herkunftOk, endUrl, fremdnav,
+           csp: { direktiven: cspBeobachtet.map(e => e.wert),
+                  quelle: cspQuelle,
                   unbelegt: unbelegt.slice(0, 3) } };
 }
 
@@ -547,9 +843,20 @@ function fileForUrl(urlPath) {
                                 catch (e) { return false; } }) || null;
 }
 
+/** Liegt unter diesem Pfad im Bau eine Weiterleitungsseite? */
+function istWeiterleitungPfad(rel) {
+  const datei = fileForUrl(String(rel || '/'));
+  if (!datei) return false;
+  try {
+    return istWeiterleitungsseite(fs.readFileSync(datei, 'utf8'));
+  } catch (e) {
+    return false;
+  }
+}
+
 async function auditPage(browser, url, viewport, ctx) {
   // 1) Laufzeit: die Seite, wie Leser sie bekommen.
-  const laufzeit = await loadRuntime(browser, url, viewport);
+  const laufzeit = await loadRuntime(browser, url, viewport, ctx);
   const metrics = laufzeit.metrics;
   const errors = laufzeit.errors;
   const httpErrors = laufzeit.httpErrors;
@@ -584,9 +891,8 @@ async function auditPage(browser, url, viewport, ctx) {
   // samt Grund (keine CSP-Kopfzeile in dieser Messung).
   const csp = laufzeit.csp || { direktiven: [], quelle: {}, unbelegt: [] };
   for (const text of csp.unbelegt || []) {
-    warnings.push('CSP ohne Belegquelle (nicht aus dem ausgelieferten HTML, '
-      + 'keine CSP-Kopfzeile in der Antwort – Herkunft außerhalb des Repos): '
-      + String(text).slice(0, 180));
+    warnings.push('CSP-Meldung nicht dem Repository zuordenbar – kein Befund '
+      + 'über diese Seite: ' + String(text).slice(0, 220));
   }
   const drift = [];
   if (errors.length) issues.push(...errors.slice(0, 5));
@@ -657,26 +963,44 @@ async function auditPage(browser, url, viewport, ctx) {
     h1,
     issues,
     warnings,
-    // Woher stammt eine CSP in dieser Messung? Leer = keine beobachtet.
-    // Die beobachtete DIREKTIVE wird mitgeschrieben (gekürzt), damit ein
-    // Befund nachprüfbar ist: Steht im Browsertext eine andere Direktive
-    // als die hier belegte, stammt sie NICHT aus dieser Antwort.
+    // HERMETIK: Herkunft der Messung. `herkunftOk === false` heißt, die
+    // Seite hat die eigene Herkunft verlassen – dann ist die Messung
+    // unbrauchbar (Werkzeugfehler in main()), kein Seitenbefund.
+    herkunftOk: laufzeit.herkunftOk !== false,
+    herkunft: laufzeit.endUrl || url,
+    fremdnav: (laufzeit.fremdnav || []).slice(0, 3),
+    // Woher stammt eine CSP in dieser Messung?
+    // `gesendet` = Digest der CSP aus static/_headers (die eigene),
+    // `quelle.eigene` = im Dokument wiedergefunden,
+    // `quelle.fremd`/`fremdherkunft` = zusätzliche/abweichende Kopfzeile.
     csp: { direktiven: (csp.direktiven || []).length,
            kopfzeile: !!(csp.quelle && csp.quelle.kopfzeile),
+           eigene: !!(csp.quelle && csp.quelle.eigene),
+           fremd: !!(csp.quelle && csp.quelle.fremd),
+           fremdherkunft: (csp.quelle && csp.quelle.fremdherkunft) || [],
+           gesendet: ctx.cspDigest || '',
            unbelegt: (csp.unbelegt || []).length,
            gesehen: (csp.direktiven || []).slice(0, 1)
              .map(d => String(d).slice(0, 200)) },
   };
 }
 
-/** Sample: Startseite + 3 neueste Artikel + die statisch schwersten Seiten. */
+/**
+ * Sample: Startseite + 3 neueste Artikel + die statisch schwersten Seiten.
+ *
+ * KORREKTUR 21.11.2026: „neueste" stand hier, war aber `sort().slice(-3)` –
+ * alphabetisch. Damit bestand das Sample aus Altlasten ohne Datumspräfix,
+ * zuletzt zwei Meta-Refresh-Seiten, die den Browser in die Produktion
+ * schickten. Jetzt: Datumspräfix absteigend, Weiterleitungsseiten raus –
+ * auch aus den Risiko-Seiten des statischen Audits.
+ */
 function buildSampleUrls(domAudit, basisUrl) {
-  const slugs = fs.readdirSync(path.join(BASE, 'posts'))
-    .filter(d => fs.existsSync(path.join(BASE, 'posts', d, 'index.html')))
-    .sort().slice(-3).reverse();
+  const postsDir = path.join(BASE, 'posts');
+  const neueste = neuesteArtikel(postsDir, 3);
+  const slugs = neueste.artikel;
+  const ausgelassen = [...neueste.weiterleitungen];
   const urls = [basisUrl + '/'];
   const seen = new Set(['/']);
-  // Nur strikt geformte Pfade ansteuern (CodeQL js/file-access-to-http):
   // Slugs und Pfade stammen aus Dateien des Builds und gehen in Anfragen.
   const SLUG_SICHER = /^[a-z0-9][a-z0-9-]{0,159}$/;
   const PFAD_SICHER = /^\/[a-z0-9][a-z0-9\/._-]{0,239}$/;
@@ -693,13 +1017,18 @@ function buildSampleUrls(domAudit, basisUrl) {
   [...rows].sort((a, b) => b.headchildren - a.headchildren).forEach(push);
   [...rows].sort((a, b) => b.maxchildren - a.maxchildren).forEach(push);
   [...rows].sort((a, b) => b.elements - a.elements).forEach(push);
-  const risk = ranked.slice(0, Math.max(0, EXTRA_RISK_PAGES));
-  for (const r of risk) {
+  const risk = [];
+  for (const r of ranked) {
+    if (risk.length >= Math.max(0, EXTRA_RISK_PAGES)) break;
     const rel = typeof r.rel === 'string' ? r.rel : '';
     if (!PFAD_SICHER.test(rel) || /\.\./.test(rel)) continue;
-    urls.push(`${basisUrl}${rel}`);
+    // DER BEFUND: Auch eine Risiko-Seite kann eine Weiterleitung sein.
+    if (istWeiterleitungPfad(rel)) { ausgelassen.push(rel); continue; }
+    risk.push(r);
   }
-  return { urls, slugs, risk: risk.map(r => r.rel) };
+  for (const r of risk) urls.push(`${basisUrl}${r.rel}`);
+  return { urls, slugs, risk: risk.map(r => r.rel),
+           weiterleitungenAusgelassen: [...new Set(ausgelassen)] };
 }
 
 if (SELFTEST) {
@@ -724,16 +1053,40 @@ if (SELFTEST) {
   const puppeteer = ladePuppeteer();
   if (!puppeteer) process.exit(2);
   const domAudit = loadDomAudit();
-  const ctx = { domAudit, budgets: domAudit.budgets || FALLBACK.budgets };
+
+  // ---- CSP des Repositories: EINE Quelle, fail-closed ------------------
+  // Gemessen wird der Sollstand aus `static/_headers` (im Bau: `_headers`).
+  // Fehlt er, wird NICHT gemessen: eine Messung ohne bekannten Sollstand
+  // wäre wieder eine Behauptung über eine Kopfzeile, die niemand gesetzt hat.
+  const headersDatei = fs.existsSync(path.join(BASE, '_headers'))
+    ? path.join(BASE, '_headers') : HEADERS_DATEI;
+  let cspSoll = null;
+  try {
+    cspSoll = cspAusHeaders(fs.readFileSync(headersDatei, 'utf8'));
+  } catch (err) {
+    cspSoll = null;
+  }
+  const csp = cspFuerMessung(cspSoll);
+  if (!csp || !/(^|;)\s*default-src\s/.test(csp)) {
+    console.error('Werkzeugfehler: keine brauchbare Content-Security-Policy in '
+      + headersDatei + ' gefunden (' + (cspSoll ? 'ohne default-src' : 'keine CSP')
+      + ') – ohne Sollstand misst der Audit nichts (Exit 3, fail-closed).');
+    process.exit(3);
+  }
+  const cspDigest = crypto.createHash('sha256').update(csp).digest('hex').slice(0, 16);
+  const nonce = crypto.randomBytes(8).toString('hex');
+  const ctx = { domAudit, budgets: domAudit.budgets || FALLBACK.budgets,
+                csp, cspDigest, nonce, herkunft: null, fremdnav: [] };
   let server;
   try {
-    server = await serve(BASE, PORT);
+    server = await serve(BASE, PORT, { csp, cspDigest, nonce });
   } catch (err) {
     console.error('Werkzeugfehler: lokaler Messserver nicht startbar ('
       + err.message + ') – Exit 3, fail-closed.');
     process.exit(3);
   }
   const basisUrl = 'http://127.0.0.1:' + server.address().port;
+  ctx.herkunft = new URL(basisUrl).origin;
   const browser = await puppeteer.launch({
     executablePath: CHROME,
     args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
@@ -750,6 +1103,7 @@ if (SELFTEST) {
   server.close();
 
   const critical = results.filter(r => r.issues.length > 0);
+  const herkunftVerletzt = results.filter(r => r.herkunftOk === false);
   const warnPages = results.filter(r => r.warnings.length > 0);
   const drift = results.filter(r => r.parserDrift.length > 0);
   const maxChildrenResult = results.reduce((max, cur) =>
@@ -800,17 +1154,47 @@ if (SELFTEST) {
     warningPages: warnPages.map(r => ({
       url: r.url, viewport: r.viewport, warnings: r.warnings,
     })),
+    hermetik: {
+      herkunft: ctx.herkunft,
+      fremdnavigationenBlockiert: [...new Set(ctx.fremdnav)],
+      herkunftsverletzungen: herkunftVerletzt.map(r => ({
+        url: r.url, herkunft: r.herkunft,
+      })),
+      weiterleitungenAusgelassen: sample.weiterleitungenAusgelassen || [],
+      hinweis: 'Der Audit misst ausschließlich den lokalen Bau '
+        + '(127.0.0.1). Hauptnavigationen zu fremden Herkünften werden '
+        + 'abgebrochen; Weiterleitungsseiten aus scripts/weiterleitungen.py '
+        + 'werden gar nicht erst als Probe verwendet.',
+    },
     cspBelege: {
+      gesendet: cspDigest,
+      quelle: 'static/_headers, Regel /* (EINE Quelle; frame-ancestors '
+        + 'wird separat geprüft, weil sie nur als Kopfzeile wirkt)',
       seitenMitKopfzeile: results.filter(r => r.csp && r.csp.kopfzeile).length,
+      eigeneImDokument: results.filter(r => r.csp && r.csp.eigene).length,
+      fremd: results.reduce((n, r) => n + (r.csp && r.csp.fremd ? 1 : 0), 0),
+      fremdherkunft: [...new Set(results.flatMap(
+        r => (r.csp && r.csp.fremdherkunft) || []))],
       gesehen: [...new Set(results.flatMap(r => (r.csp && r.csp.gesehen) || []))],
       unbelegt: results.reduce((n, r) => n + ((r.csp && r.csp.unbelegt) || 0), 0),
-      hinweis: 'gesehen = CSP-Kopfzeile der Dokument-Antwort in DIESER '
-        + 'Messung. Steht im Browsertext eine andere Direktive, stammt sie '
-        + 'nicht aus dem ausgelieferten HTML.',
+      hinweis: 'gesendet = SHA-256-Kurzform der ausgelieferten CSP aus '
+        + 'static/_headers. eigeneImDokument = im Dokument wiedergefunden; '
+        + 'fremd = zusätzliche oder abweichende Kopfzeile einer anderen '
+        + 'Herkunft. Nur eine eigene, unverfälschte CSP macht einen '
+        + 'CSP-Verstoß zum Seitenbefund.',
     },
-    allOk: critical.length === 0,
+    allOk: critical.length === 0 && herkunftVerletzt.length === 0,
     greenWithWarnings: critical.length === 0 && warnPages.length > 0,
   };
   console.log(JSON.stringify(summary, null, 2));
+  // Eine Messung, die die eigene Herkunft verlassen hat, ist kein Befund
+  // über die Seite, sondern ein Werkzeugfehler (Exit 3, fail-closed).
+  if (herkunftVerletzt.length) {
+    console.error('Werkzeugfehler: ' + herkunftVerletzt.length
+      + ' Messung(en) haben die eigene Herkunft verlassen ('
+      + herkunftVerletzt.map(r => r.herkunft).join(', ')
+      + ') – Exit 3, fail-closed. Die Hermetik-Sperre hat nicht gegriffen.');
+    process.exit(3);
+  }
   process.exit(critical.length ? 1 : 0);
 })();

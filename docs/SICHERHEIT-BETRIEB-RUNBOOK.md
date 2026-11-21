@@ -63,18 +63,24 @@ Das überträgt zwischen Cloudflare und GitHub unverschlüsselt.
 
 **Schritt 3 — Header-Regel:** Die komplette Regel (Filter + acht Kopfzeilen)
 steht kopierfertig in `cloudflare/edge-schutz.md`, Abschnitt A1. Einfach
-übernehmen.
+übernehmen. Der Filter muss **beide Hosts** enthalten
+(`franksfinanzcheck.de` und `www.franksfinanzcheck.de`) — sonst liefert `www`
+keine Sicherheits-Header. Die Anleitung wird aus derselben A1-Tabelle erzeugt:
+`python3 scripts/cloudflare_edge_freigabe.py --dashboard`.
 
 **Schritt 4 — prüfen:**
 
 ```bash
 curl -sI https://franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'
-npm run header:check:live          # Selbsttest + Live-Messung, Exit 1 bei Befund
+curl -sI https://www.franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'
+npm run header:check:live          # Selbsttest + Live-Messung BEIDER Hosts, Exit 1 bei Befund
 npm run edge:freigabe              # dasselbe auf Cloudflare-Ebene (DNS, SSL, Regel)
 ```
 
 Erwartet: fünf Zeilen (`Strict-Transport-Security`, `X-Content-Type-Options`,
-`X-Frame-Options`, `Referrer-Policy`, `Content-Security-Policy`).
+`X-Frame-Options`, `Referrer-Policy`, `Content-Security-Policy`) **auf beiden
+Hosts**. Für `www` zählt die erste Antwort (meist 301); die Live-Messung folgt
+der Weiterleitung bewusst nicht.
 
 **Danach zwingend B7 (Datenschutz anpassen)** — der Proxy ist rechtlich eine
 Änderung, nicht nur eine technische.
