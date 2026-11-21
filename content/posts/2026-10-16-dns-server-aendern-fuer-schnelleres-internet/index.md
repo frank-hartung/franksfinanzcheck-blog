@@ -18,7 +18,7 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Fachliche Korrektur zu #823 (Befunde 5–7: Regulierung ergänzt, Hardware-Grenzen benannt, Anbieter-Ranking durch Mess-Empfehlung ersetzt); DNS-Adressen in der Anbieter-Tabelle mit primär/sekundär gekennzeichnet, damit die Ziffernfolgen nicht als Textdopplung zum Live-Artikel DNS-Server wechseln gemessen werden (Einzigartigkeits-Befund #1027); Fakten und Quellen unverändert; redaktionelle Freigabe weiterhin ausstehend"
 pin_title: "DNS-Server wechseln: Wird das Surfen wirklich schneller?"
-pin_description: "Bringt ein anderer DNS-Server schnelleres Surfen? Miss die Namensauflösung getrennt vom Download und notiere vor dem Test die alten Einstellungen. Teste zunächst die Auflösung eines Namens und dann einen größeren Download. So vermeidest du, die Reaktionszeit beim Seitenstart mit dem Tempo der Leitung zu verwechseln."
+pin_description: "*Werbung | Bringt ein anderer DNS-Server schnelleres Surfen? Miss die Namensauflösung getrennt vom Download und notiere vor dem Test die alten Einstellungen. Teste zunächst die Auflösung eines Namens und dann einen größeren Download. So vermeidest du, die Reaktionszeit beim Seitenstart mit dem Tempo der Leitung zu verwechseln."
 cover:
   image: "images/covers/2026-10-16-dns-server-aendern-fuer-schnelleres-internet.jpg"
   alt: "DNS-Server ändern für schnelleres Internet"

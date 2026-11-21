@@ -41,6 +41,8 @@ kurzantwort: "Energieeffiziente Geräte senken die laufenden Stromkosten deutlic
 
 Wenn die Tage kürzer werden, flattern oft die Stromrechnungen ins Haus. Viele Menschen erschrecken dann über die hohen Nachzahlungen. Oft suchen wir die Schuld beim Stromanbieter oder bei den steigenden Preisen. Doch der wahre Grund für hohe Fixkosten versteckt sich meist in der eigenen Küche oder im Keller. **Energieeffiziente** **Geräte** sind der Hebel, mit dem du deine Kosten wirklich kontrollierst.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 In deinem **Zuhause** arbeiten viele Helfer rund um die Uhr. Ein alter Kühlschrank oder eine betagte Waschmaschine können echte Geldfresser sein.
 
 Wer hier nicht genau hinschaut, zahlt jeden Monat extra. Hier schauen wir uns an, wie du diese Kostenfresser entlarvst. Wir rechnen gemeinsam nach, wann sich ein Neukauf für dich lohnt.

@@ -95,6 +95,8 @@ korrektur: '19.11.2026: Die Kündigungsfrist richtet sich nach dem Vertragsablau
 
 Nimm die letzte Beitragsrechnung und die Police zur Hand. Ein günstigeres Angebot kann denselben Schutz bieten – oder nur deshalb weniger kosten, weil du im Schadenfall mehr selbst trägst. Notiere zuerst, was beim Wechsel unverändert bleiben soll. Erst dann lohnt der Blick auf den Preis.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Transparenz:** Der gekennzeichnete Partnerlink kann uns bei einem Abschluss eine Provision bringen. Für dich wird der Vertrag dadurch nicht teurer. Ein Portal bildet nicht zwingend den gesamten Markt ab. Hole bei Bedarf zusätzlich ein direktes Angebot ein.
 
 ## Welcher Kündigungstermin gilt für meine Police?
