@@ -551,6 +551,20 @@ function runSelftest() {
     try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
   }
 
+  // Der Messserver selbst: Kopfzeile auf HTML, nicht auf statischen Dateien.
+  // Geprüft wird das Verhalten (echter HTTP-Aufruf), nicht der Quelltext.
+  const probe = require('child_process').spawnSync(process.execPath,
+    [__filename, '--serve-probe'], { encoding: 'utf8', timeout: 20000 });
+  let p = null;
+  try { p = JSON.parse(probe.stdout || '{}'); } catch (e) { p = null; }
+  pruefe('Probe liefert HTML-Kopfzeilen', !!(p && p.html), true);
+  pruefe('Probe CSP enthält default-src', !!(p && /default-src/.test(p.html || '')), true);
+  pruefe('Probe CSP enthält script-src', !!(p && /script-src/.test(p.html || '')), true);
+  pruefe('Probe CSP ohne frame-ancestors',
+    !!(p && !/frame-ancestors/i.test(p.html || '')), true);
+  pruefe('Probe statische Datei ohne CSP', !!(p && p.css === null), true);
+  pruefe('Probe trägt Digest und Nonce', !!(p && p.digest && p.nonce), true);
+
   for (const [name, ist, soll] of hermetik) {
     if (JSON.stringify(ist) !== JSON.stringify(soll)) {
       fehler++;
@@ -725,9 +739,26 @@ async function loadRuntime(browser, url, viewport, ctx) {
   });
 
   const t0 = Date.now();
-  await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
-    .catch(e => errors.push('load: ' + e.message));
+  const antwort = await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
+    .catch(e => { errors.push('load: ' + e.message); return null; });
   const loadMs = Date.now() - t0;
+
+  // ZWEITE BELEGQUELLE (21.11.2026): `page.goto` liefert die Hauptantwort
+  // selbst. Der `response`-Listener allein war auf 13 von 14 Messungen leer –
+  // dann fehlt der Beleg, obwohl die Kopfzeile ausgeliefert wurde. Beide
+  // Quellen werden zusammengeführt (dedupliziert), damit der Bericht die
+  // tatsächliche Antwort beschreibt und nicht die Laune eines Events.
+  try {
+    const kopf = antwort && (antwort.headers() || {})['content-security-policy'];
+    if (kopf && !cspBeobachtet.some(e => e.wert === String(kopf)
+        && e.url === antwort.url())) {
+      cspBeobachtet.push({
+        wert: String(kopf),
+        url: antwort.url(),
+        eigene: istEigeneHerkunft(antwort.url(), eigeneHerkunft),
+      });
+    }
+  } catch (e) { /* Kopfzeilen nicht lesbar: kein Beleg, kein Befund */ }
 
   // Wo steht die Messung am Ende – und welche CSP hat sie wirklich gesehen?
   const endUrl = page.url();
@@ -900,6 +931,11 @@ async function auditPage(browser, url, viewport, ctx) {
   // Repo ausliefert – aber sie verschwinden auch nicht: Der Bericht nennt sie
   // samt Grund (keine CSP-Kopfzeile in dieser Messung).
   const csp = laufzeit.csp || { direktiven: [], quelle: {}, unbelegt: [] };
+  if (laufzeit.herkunftOk !== false && !(csp.quelle && csp.quelle.kopfzeile)) {
+    warnings.push('keine eigene CSP-Kopfzeile in dieser Messung beobachtet ('
+      + ((csp.quelle && csp.quelle.grund) || 'unbekannt') + ') – ein '
+      + 'CSP-Verstoß wäre auf dieser Seite nicht belegbar');
+  }
   for (const text of csp.unbelegt || []) {
     warnings.push('CSP-Meldung nicht dem Repository zuordenbar – kein Befund '
       + 'über diese Seite: ' + String(text).slice(0, 220));
@@ -1042,11 +1078,65 @@ function buildSampleUrls(domAudit, basisUrl) {
            weiterleitungenAusgelassen: [...new Set(ausgelassen)] };
 }
 
-if (SELFTEST) {
+/**
+ * Kopfzeilen-Probe ohne Browser (für den Selbsttest).
+ *
+ * WARUM (21.11.2026): Der erste grüne CI-Lauf meldete „Kopfzeile auf 1 von 14
+ * Seiten". Der Verdacht lag beim Browser-Event – also muss die andere Hälfte
+ * (der Messserver) beweisbar sein: HTML bekommt die CSP, statische Dateien
+ * nicht, `frame-ancestors` ist für die Messung entfernt.
+ */
+async function serveProbe() {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ff-probe-'));
+  fs.writeFileSync(path.join(tmp, 'index.html'), '<html><body>x</body></html>');
+  fs.writeFileSync(path.join(tmp, 'a.css'), 'body{color:#000}');
+  const headersDatei = fs.existsSync(path.join(process.env.LAYOUT_BASE || '',
+    '_headers')) ? path.join(process.env.LAYOUT_BASE, '_headers') : HEADERS_DATEI;
+  let soll = null;
+  try {
+    soll = cspAusHeaders(fs.readFileSync(headersDatei, 'utf8'));
+  } catch (e) { soll = null; }
+  const csp = cspFuerMessung(soll);
+  if (!csp) {
+    console.error('Probe: keine CSP in ' + headersDatei);
+    process.exit(3);
+  }
+  const server = await serve(tmp, 0, { csp, nonce: 'probe', cspDigest: 'probe' });
+  const port = server.address().port;
+  const hole = (pfad) => new Promise((res, rej) => {
+    http.get({ host: '127.0.0.1', port, path: pfad }, r => {
+      r.resume();
+      res(r.headers);
+    }).on('error', rej);
+  });
+  try {
+    const html = await hole('/');
+    const css = await hole('/a.css');
+    console.log(JSON.stringify({
+      html: html['content-security-policy'] || null,
+      digest: html['x-ff-audit-csp'] || null,
+      nonce: html['x-ff-audit-nonce'] || null,
+      css: css['content-security-policy'] || null,
+    }));
+  } finally {
+    server.close();
+    try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+  }
+  process.exit(0);
+}
+
+if (process.argv.includes('--serve-probe')) {
+  serveProbe().catch(err => {
+    console.error('Probe fehlgeschlagen: ' + (err && err.message));
+    process.exit(3);
+  });
+} else if (SELFTEST) {
   runSelftest();
 }
 
 (async () => {
+  // Die Kopfzeilen-Probe ist ein eigener, browserfreier Lauf.
+  if (process.argv.includes('--serve-probe')) return;
   // Reihenfolge = Wahrheitsreihenfolge: erst „gibt es etwas zu messen?",
   // dann „können wir messen?". Ein leerer Bau ist ein Werkzeugfehler (3) und
   // kein Layout-Befund (1) und keine weiche Überspringung (2).
