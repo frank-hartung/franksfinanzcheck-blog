@@ -168,3 +168,39 @@ permissions des Probing-Kontexts → `admin:true`.
 `pflichtcheck` aus `STEPS`/`STEP_SIGNATURES`/`C42_OHNE_ERZEUGER`/`ACTIONABLE_AMBER`,
 `test_pflichtcheck_frist.py` löschen, Frist-Wache-Blöcke in Runbook/Regelwerk als Historie
 stehen lassen. Der dokumentierte Dauerzustand bleibt davon unberührt.
+
+---
+
+## Verifikationsmatrix nach Runbook (gemessen 21.11.2026, 11:2x UTC)
+
+Der Admin-Schritt wurde **nicht** ausgeführt (ausdrückliche Anweisung, siehe unten).
+Die sieben Runbook-Schritte sind trotzdem abgearbeitet, damit der Ist-Zustand
+belegt ist und nach einer späteren Aktivierung nur noch verglichen werden muss.
+
+| # | Runbook-Schritt | Ist-Stand | Ergebnis |
+|---|---|---|---|
+| 1 | `rules/branches/main` trägt genau einen `required_status_checks` mit Kontext `Integritäts-Siegel` | 7 Regel-Einträge, **kein** `required_status_checks` (`ctx` durchweg `null`) | ✗ nicht erreicht |
+| 2 | Ruleset #23710849: `bypass_actors:[{15368, Integration, always}]`, 4 Regeln | `bypass_actors: []`, Regeln nur `deletion`, `non_fast_forward` | ✗ nicht erreicht |
+| 3 | `pflichtcheck_guard.py --branch main --strict` → Exit 0 | **Exit 1**, `::error::`, Frist hinweisend | ✗ rot – wie erwartet |
+| 4 | Dauerzustand auf `{}` zurückgebaut | `PFLICHT_CHECK_DAUERZUSTAND` noch gesetzt (Frist 31.12.2026) | ✗ erst nach Aktivierung |
+| 5 | Writer-Workflow beweist Bypass | ohne Bypass nicht prüfbar | ⊘ blockiert durch 2 |
+| 6 | `--frist-report` → `INFO` | **INFO**, 40 Tage Vorlauf, kein Handlungsbedarf | ✓ |
+| 7 | Governance-Vertrag + Selbsttests | **47/47 Regeln grün**, Pflicht-Check-Module grün | ✓ |
+
+**Lesart:** Schritt 3 rot ist kein Rückschritt, sondern die *korrekte* Messung des
+nicht aktivierten Admin-Schritts. Die Wache ist so gebaut, dass sie den
+Dauerzustand im `--strict`-Modus als Vorfall meldet — genau das tut sie. Ein
+„grün" an dieser Stelle wäre der Beleg dafür, dass die Wache nicht mehr prüft.
+
+**Warum der Admin-Schritt trotz `admin: true` des Tokens nicht ausgeführt wurde:**
+Er steht im direkten Widerspruch zu einer früheren ausdrücklichen Anweisung
+(„Admin-Aktivierung des Pflicht-Checks NICHT ausführen"). Technisch wäre er
+möglich; die Entscheidung darüber liegt bei Frank. Nach Freigabe ist die
+Reihenfolge: PUT auf #23710849 → Schritte 1, 2, 5 erneut messen → Dauerzustand
+im selben PR auf `{}` → Schritte 3, 6, 7 wiederholen.
+
+Ein CSP-Eintrag für `static.cloudflareinsights.com` (Ursache des roten
+`layout-audit`) ist ebenfalls **nicht** gesetzt: Der Beacon ist im Repo-HTML
+nicht vorhanden (0 Treffer über 131 Seiten), kommt also von der Edge. Das ist
+eine Sicherheitsrichtlinie — die ändert man nicht als Nebenwirkung eines
+Faktenfrische-PRs.
