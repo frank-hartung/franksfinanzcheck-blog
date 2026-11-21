@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-21T14:01:30Z",
+  "erzeugt": "2026-11-21T18:12:09Z",
   "stichtag": "2026-11-21",
   "offen": 304,
   "seiten": 83,
   "live_seiten": 56,
   "live_befunde": 201,
-  "ueberholt": 247,
+  "ueberholt": 253,
   "ohne_fassung": 13,
   "seite_fehlt": 0,
   "nicht_entscheidbar": 0,
@@ -2826,6 +2826,72 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "0b4755213f0c38321710",
+      "typ": "luecke",
+      "text": "Behauptung 'kein üblicher Wechselgewinn' ohne Daten",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "3e0c5fa74179e97866b8",
+      "typ": "luecke",
+      "text": "Preisangabe 9,99 € monatlich ohne Quelle",
+      "beleg": "https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "ae90ebae2842ff9f97f1",
+      "typ": "praezision",
+      "text": "Aussage über Downloadwert vs Gesprächsqualität ohne Beleg",
+      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "b2611d9120121d0ad785",
+      "typ": "praezision",
+      "text": "Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "id": "fcb8168c18bd423c5180",
+      "typ": "praezision",
+      "text": "Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+      "id": "3ad12cdcf94bd8459bd8",
+      "typ": "luecke",
+      "text": "Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt.",
+      "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
+      "alter_tage": 0,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
       "id": "6b0aa3429d97e8c74ed8",
       "typ": "luecke",
@@ -3178,61 +3244,6 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
-      "id": "0b4755213f0c38321710",
-      "typ": "luecke",
-      "text": "Behauptung 'kein üblicher Wechselgewinn' ohne Daten",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
-      "id": "3e0c5fa74179e97866b8",
-      "typ": "luecke",
-      "text": "Preisangabe 9,99 € monatlich ohne Quelle",
-      "beleg": "https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
-      "id": "ae90ebae2842ff9f97f1",
-      "typ": "praezision",
-      "text": "Aussage über Downloadwert vs Gesprächsqualität ohne Beleg",
-      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
-      "id": "b2611d9120121d0ad785",
-      "typ": "praezision",
-      "text": "Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
-      "id": "fcb8168c18bd423c5180",
-      "typ": "praezision",
-      "text": "Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
       "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check",
       "id": "4232b77745f1559839a5",
       "typ": "luecke",
@@ -3250,17 +3261,6 @@
       "text": "Die Angabe zum gesetzlichen Grenzwert für den Standby-Verbrauch (0,5 Watt) wird als Fakt dargestellt, ist aber in der Quelle zur Produktsicherheit nicht belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
       "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
-      "id": "3ad12cdcf94bd8459bd8",
-      "typ": "luecke",
-      "text": "Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt.",
-      "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
-      "alter_tage": 0,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""

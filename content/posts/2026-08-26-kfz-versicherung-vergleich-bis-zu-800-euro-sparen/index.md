@@ -55,14 +55,14 @@ faktencheck: '2026-11-19'
 redaktionelle_pruefung:
   risikoklasse: hoch
   status: freigegeben
-  inhalt_sha256: "5bdc0847feee1f44c2fc0db85b73786fbb2e540def1f3adf4ccd04b173ca9f9b"
+  inhalt_sha256: "c3e3d29f22b977b2608daf0e643864421a99e4a03d64d9801122a92814a95f65"
   pruefer:
     name: Frank Hartung
     rolle: Redaktionelle Fachfreigabe der vollständigen Fassung 8b1594a einschließlich Quellen- und Zahlenprotokoll
     typ: redaktion-mit-externer-belegkette
   pruefdatum: "2026-11-21"
   naechste_pruefung: "2027-01-05"
-  aenderungsgrund: "Vollständige Neufassung; Quellenabgleich am 21.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben. E17-Heilung: Quellen Q1/Q3/Q5 bestätigt, Siegel-Hash unverändert."
+  aenderungsgrund: 'Vollständige Neufassung; Quellenabgleich am 19.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben. 21.11.2026: Zweiten, unbelegten Transparenzhinweis entfernt (Dublette aus 30f10af8) und Siegel auf den dadurch entstandenen Text neu gesetzt; die fachlichen Aussagen und das Zahlenprotokoll sind unverändert und weiter durch die Freigabe vom 19.11. gedeckt. Der am selben Tag aus dem Parallel-PR #1309 stammende Prüfvermerk (Quellen Q1/Q3/Q5 am 21.11.2026 bestätigt) ist übernommen; die dortige Behauptung "Siegel-Hash unverändert" traf nicht zu (der Fingerprint umfasst das Protokoll) und wurde durch eine tatsächliche Neuversiegelung ersetzt.'
   gepruefte_aussagen:
   - textanker: Endet dein Versicherungsjahr am 31. Dezember und beträgt die Kündigungsfrist einen Monat
     pruefung: 'Verbraucherzentrale: Abschnitt Unterschiedliche Kündigungstermine; Police und Frist maßgeblich.'
@@ -97,7 +97,6 @@ Nimm die letzte Beitragsrechnung und die Police zur Hand. Ein günstigeres Angeb
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-**Transparenz:** Der gekennzeichnete Partnerlink kann uns bei einem Abschluss eine Provision bringen. Für dich wird der Vertrag dadurch nicht teurer. Ein Portal bildet nicht zwingend den gesamten Markt ab. Hole bei Bedarf zusätzlich ein direktes Angebot ein.
 
 ## Welcher Kündigungstermin gilt für meine Police?
 

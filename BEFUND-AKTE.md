@@ -8,7 +8,7 @@ _Stand 2026-11-21 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 |---|---|
 | Offene Befunde | 304 |
 | Seiten betroffen | 83 (davon live: 56) |
-| Text seit dem Befund geändert | 247 |
+| Text seit dem Befund geändert | 253 |
 | Altbestand ohne Fassungs-Hash | 13 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 119 |
@@ -32,7 +32,7 @@ _Stand 2026-11-21 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 260 von 304 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 266 von 304 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -782,6 +782,38 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 91894b9b1535765acdc
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b9c93c6a9be1368b06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `0b4755213f0c38321710` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung 'kein üblicher Wechselgewinn' ohne Daten | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `3e0c5fa74179e97866b8` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Preisangabe 9,99 € monatlich ohne Quelle | [Quelle](https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag) |
+| `ae90ebae2842ff9f97f1` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aussage über Downloadwert vs Gesprächsqualität ohne Beleg | [Quelle](https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus) |
+| `b2611d9120121d0ad785` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `fcb8168c18bd423c5180` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0b4755213f0c38321710 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3e0c5fa74179e97866b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae90ebae2842ff9f97f1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b2611d9120121d0ad785 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden fcb8168c18bd423c5180 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
+
+Datei: `content/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `3ad12cdcf94bd8459bd8` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad12cdcf94bd8459bd8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/index.md`
@@ -896,38 +928,6 @@ Datei: `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 991bda7b2298b751f4e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae71596724d7a243217b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
-
-Datei: `content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `0b4755213f0c38321710` | luecke | 1 T | Text unverändert seit dem Befund | Behauptung 'kein üblicher Wechselgewinn' ohne Daten | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `3e0c5fa74179e97866b8` | luecke | 1 T | Text unverändert seit dem Befund | Preisangabe 9,99 € monatlich ohne Quelle | [Quelle](https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag) |
-| `ae90ebae2842ff9f97f1` | praezision | 1 T | Text unverändert seit dem Befund | Aussage über Downloadwert vs Gesprächsqualität ohne Beleg | [Quelle](https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus) |
-| `b2611d9120121d0ad785` | praezision | 1 T | Text unverändert seit dem Befund | Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `fcb8168c18bd423c5180` | praezision | 1 T | Text unverändert seit dem Befund | Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0b4755213f0c38321710 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3e0c5fa74179e97866b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae90ebae2842ff9f97f1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b2611d9120121d0ad785 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden fcb8168c18bd423c5180 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
-
-Datei: `content/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `3ad12cdcf94bd8459bd8` | luecke | 0 T | Text unverändert seit dem Befund | Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad12cdcf94bd8459bd8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)

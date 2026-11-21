@@ -47,8 +47,6 @@ Du brauchst nicht den günstigsten Handytarif auf einer Liste, sondern einen, de
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-**Transparenz:** Der gekennzeichnete Partnervergleich kann uns bei einem Abschluss eine Provision bringen. Für dich entstehen dadurch keine Mehrkosten.
-
 ## Bedarf aus der Rechnung ablesen – Handytarif 2026 vergleichen
 
 Öffne die Verbrauchsübersicht für mehrere vollständige Abrechnungsmonate. Schau auf das **verbrauchte**, nicht das gebuchte Volumen. Notiere einen gewöhnlichen Monat und einen mit besonders hoher Nutzung. War der Spitzenwert die Ausnahme, etwa weil du im Urlaub dein Handy als Hotspot verwendet hast? Dann vergleiche die Kosten einer gelegentlichen Nachbuchung mit denen eines dauerhaft größeren Pakets.
