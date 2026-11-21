@@ -1,142 +1,147 @@
 {
   "2026-11-21-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
-    "datei_sha256": "35b750d89428083e1d8cf452e077716c46a4268c3dd625672bd2a9da7d6fd65c",
+    "datei_sha256": "1d900226ad3ccd608f5b64021203616c9cacfad76e42beaf1ed1c517c246f66e",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:43:49Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
   "2026-11-21-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
-    "datei_sha256": "5d07e6bdc76263f07f942a9145b57db55e0c83c5b3e9cb3f46a740db2db6bad4",
+    "datei_sha256": "8835483014e9b3437a57bdda4a20590fb631d91e10c6098a4ff26fb167cf547d",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:43:49Z",
     "grund": "Zeichenlänge (check_length.py) nicht bestanden",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "zeichenlänge (check_length.py) nicht bestanden"
   },
   "2026-11-21-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
-    "datei_sha256": "fdf88b44f2a1078160b0514d6e958207511f8f11d415634466f9660d6f1d2b5a",
+    "datei_sha256": "8066ebb73f59ae22369fc687c512796fc9f3a35ea9d38792e814379e7abae428",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:57:13Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
   "2026-11-21-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
-    "datei_sha256": "3b4384eb7dfd951b5bb6ee38aded891fced82f179fbf05b55137ec347715290b",
+    "datei_sha256": "7779308b6ea01ebefeab2f65ecccb2376db855141c3d7b9b0fbb379c602c8a12",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:57:13Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
   "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
     "datei_sha256": "7713acde6ab7126c7b0a724140125ab186cc4d20204d1e4a8c44701760d15713",
     "fassung_gewechselt": true,
     "first": "2026-11-21T12:04:42Z",
+    "geschont": true,
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
-    "hits": 1,
+    "heiler": [
+      "faktenfrische.py"
+    ],
+    "hits": 2,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44899366791",
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
   "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-    "datei_sha256": "e48c26f0c55f0f26cb1c3a437b058c2b391d55c2a92c67e46f4480292b769579",
+    "datei_sha256": "4e465aa69edf5e5096d8c881fb8ff138494a8bcacbd53b6625b1df23a5926d08",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:43:49Z",
     "grund": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
     "hits": 1,
     "klasse": "menschlich",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "faktenfrische nicht bestanden: <n>c<n>e<n>d<n>f<n>da<n>ec<n> (luecke): der hinweis, dass ein anbieterwechsel im durchschnitt <n>‑<n> wochen dauert, fehlt eine nachweisbare quelle.; <n>b<n>daf<n>f<n>a<"
   },
   "2026-11-21-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
-    "datei_sha256": "bf214e72226d2787e7fd08ec520b0b1ce794287cb4478cbf4ff8f759447b948a",
+    "datei_sha256": "95f039f3adcb92430c158227d7ffc6eb57ed6f86e60babc0e113a7e4d73246c6",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T12:04:42Z",
-    "grund": "Reserve-Qualitäts-Gate: Umfang: 720 Wörter / 5185 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+    "first": "2026-11-21T16:57:13Z",
+    "grund": "Reserve-Qualitäts-Gate: Umfang: 708 Wörter / 5128 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
   },
   "2026-11-21-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
-    "datei_sha256": "47351a03de82f94b42461e361936a103287c4e6499ace25b592d99bf07af6444",
+    "datei_sha256": "74ba1c48466bc41341721b4e5d1926971dea0bdff324a8a98dadf9ea964755fa",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:43:49Z",
     "grund": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
     "hits": 1,
     "klasse": "unheilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "quellen-gate nicht bestanden: quellenbasis fehlt – veröffentlichte ratgeber brauchen einen nicht-leeren `quellen:`-block im frontmatter (m<n>, #<n>–#<n>)"
   },
   "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
-    "datei_sha256": "51d0abf540542c08d1281af24c225351a11cc5b502baa7ca6d80605d56b8f6b1",
+    "datei_sha256": "21363e6345fe70b713cd0b0862c53ddb78120217b6786847b6ef95fc1e9f424c",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:43:49Z",
     "grund": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
     "hits": 1,
     "klasse": "menschlich",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "faktenfrische nicht bestanden: <n>ddd<n>d<n>dd<n>b<n>b<n>f<n> (luecke): muffiger geruch deutet oft auf tiefliegenden schimmel oder feuchtigkeit hin.; d<n>e<n>fb<n>bd<n>ef<n> (luecke): neue möbel verli"
   },
   "2026-11-21-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
-    "datei_sha256": "21f9fc990898406d564b0ae0ed4e42d3d5555276dd315b381c7b653e749acec2",
+    "datei_sha256": "e8bd5deef5303c4cff54583ffe932cc5762e5f8c20ec816cb6ac3c66930af3c8",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T11:51:40Z",
+    "first": "2026-11-21T16:43:49Z",
     "grund": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
     "hits": 1,
     "klasse": "unheilbar",
     "laeufe": [
-      "run:44899366791"
+      "run:44924314419"
     ],
-    "last": "2026-11-21T12:04:42Z",
-    "lauf": "run:44899366791",
+    "last": "2026-11-21T16:57:13Z",
+    "lauf": "run:44924314419",
     "signatur": "quellen-gate nicht bestanden: quellenbasis fehlt – veröffentlichte ratgeber brauchen einen nicht-leeren `quellen:`-block im frontmatter (m<n>, #<n>–#<n>)"
   }
 }
