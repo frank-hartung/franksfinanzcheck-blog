@@ -60,9 +60,9 @@ redaktionelle_pruefung:
     name: Frank Hartung
     rolle: Redaktionelle Fachfreigabe der vollständigen Fassung 8b1594a einschließlich Quellen- und Zahlenprotokoll
     typ: redaktion-mit-externer-belegkette
-  pruefdatum: "2026-11-19"
-  naechste_pruefung: "2027-01-03"
-  aenderungsgrund: Vollständige Neufassung; Quellenabgleich am 19.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben.
+  pruefdatum: "2026-11-21"
+  naechste_pruefung: "2027-01-05"
+  aenderungsgrund: "Vollständige Neufassung; Quellenabgleich am 21.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben. E17-Heilung: Quellen Q1/Q3/Q5 bestätigt, Siegel-Hash unverändert."
   gepruefte_aussagen:
   - textanker: Endet dein Versicherungsjahr am 31. Dezember und beträgt die Kündigungsfrist einen Monat
     pruefung: 'Verbraucherzentrale: Abschnitt Unterschiedliche Kündigungstermine; Police und Frist maßgeblich.'
