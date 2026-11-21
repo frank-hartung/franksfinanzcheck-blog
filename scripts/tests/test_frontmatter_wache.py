@@ -153,6 +153,77 @@ class DoppelterSchluesselToetetDenBauTest(unittest.TestCase):
                          "und der Scanner muss genau zwei Zeilen sehen")
 
 
+class SequenzSchluesselSindKeinDuplikatTest(unittest.TestCase):
+    """WF-B16A/#1291 (21.11.2026): Gleich benannte Schlüssel in Listen.
+
+    DER FEHLALARM: Ein `quellen:`-Block listet je Eintrag `id`, `titel`,
+    `url`. Das ist gültiges YAML – jeder Eintrag ist ein EIGENES Mapping.
+    Der Scanner schnitt den Eintragsmarker `- ` ab, BEVOR er die
+    Doppelt-Prüfung fragte (`rest_zeile.startswith("-")` war danach immer
+    falsch). Ergebnis: „Schlüssel `id` steht doppelt" als BLOCKER auf einer
+    Datei, die PyYAML und Hugo fehlerfrei lesen. Der Fehlalarm stand ab
+    20.11.2026 auf `main` (Nachlauf-Wache #1285/#1287) und hätte jeden
+    Artikel mit Quellenliste als unbaubar gebrandmarkt.
+
+    Beide Richtungen werden geprüft: kein Fehlalarm auf Listen – und die
+    echte Erkennung bleibt scharf (sonst wäre der Fehlalarm gegen einen
+    Blindfleck getauscht, und genau davor warnt der Test oben).
+    """
+
+    QUELLEN = (
+        "---\n"
+        'title: "Probe"\n'
+        'description: "Eine ausreichend lange Beschreibung für das Snippet."\n'
+        "date: 2026-11-21T00:00:00Z\n"
+        "draft: false\n"
+        "quellen:\n"
+        '  - id: "Q1"\n'
+        '    titel: "Bundesnetzagentur"\n'
+        '    url: "https://example.org/a"\n'
+        '  - id: "Q2"\n'
+        '    titel: "Verbraucherzentrale"\n'
+        '    url: "https://example.org/b"\n'
+        '  - id: "Q3"\n'
+        '    titel: "Gesetze im Internet"\n'
+        '    url: "https://example.org/c"\n'
+        "---\n\nText.\n")
+
+    def test_gleiche_schluessel_in_mehreren_eintraegen_sind_kein_blocker(self):
+        befunde = pruefe(self.QUELLEN)
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertEqual([], doppelt,
+                         "drei Quellen mit je eigenem `id` sind gültiges YAML – "
+                         "kein Duplikat, kein Blocker")
+
+    def test_ohne_pyyaml_kein_fehlalarm(self):
+        befunde = pruefe(self.QUELLEN, yaml_modul="ohne")
+        self.assertEqual([], [b for b in befunde if "steht doppelt" in b["meldung"]])
+
+    def test_blocksequenz_mit_eingebettetem_eintrag(self):
+        text = self.QUELLEN.replace(
+            '  - id: "Q2"', "  -\n    id: \"Q2\"").replace(
+            '  - id: "Q3"', "  -\n    id: \"Q3\"")
+        self.assertEqual([], [b for b in pruefe(text)
+                              if "steht doppelt" in b["meldung"]])
+
+    def test_echtes_duplikat_bleibt_scharf(self):
+        """Gegenprobe: Die Reparatur darf die Erkennung nicht abschalten."""
+        befunde = pruefe(SAUBER.replace("draft: false",
+                                        "draft: false\ndraft: true"))
+        self.assertTrue([b for b in befunde if "steht doppelt" in b["meldung"]],
+                        "ein echtes Duplikat auf oberster Ebene muss Blocker bleiben")
+
+    def test_bestand_hat_keinen_quellen_fehlalarm(self):
+        """Der konkrete Artikel, an dem der Fehlalarm auffiel (Hugo baut ihn)."""
+        pfad = (ROOT / "content" / "posts"
+                / "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+                / "index.md")
+        if not pfad.is_file():
+            self.skipTest("Artikel nicht vorhanden")
+        befunde = pruefe(pfad.read_text(encoding="utf-8"))
+        self.assertEqual([], [b for b in befunde if "steht doppelt" in b["meldung"]])
+
+
 class HeilungTest(unittest.TestCase):
     """Die Heilung muss beweisbar verlustfrei sein."""
 

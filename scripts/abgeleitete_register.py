@@ -65,6 +65,16 @@ class Register:
     modul: str         # Importname des Schreibers (für den Selbsttest)
     zweck: str         # wofür die Ableitung gebraucht wird
     probe: Tuple[str, str] = ("anzahl:", "anzahl :")  # Sabotage-Paar für Selbsttest
+    # 21.11.2026: Nicht jeder Schreiber erzeugt Text mit einem `anzahl:`-Paar.
+    # Die Sabotage-Probe muss zum Artefakt passen – `render`/`collect` liefert
+    # bei der Befund-Akte Markdown, nicht das YAML des Fachprüfungs-Registers.
+    # `check`/`fix` benennen die Unterbefehle des Schreibers (Default leer =
+    # `--check` / kein Argument, wie bei den beiden ersten Registern).
+    check: str = "--check"
+    fix: str = ""
+    # Schreiber, deren Wahrheit ein Zustands-JSON ist (nicht der Markdown-
+    # Text): Die Sabotage richtet sich dann gegen den Ziel-Ausdruck direkt.
+    probe_collect: bool = True
 
 
 REGISTER: Tuple[Register, ...] = (
@@ -81,6 +91,35 @@ REGISTER: Tuple[Register, ...] = (
         modul="generate_llms_txt",
         zweck="Maschinenlesbares Verzeichnis für KI-Antwortmaschinen (Regel M9, #1236)",
         probe=("# FranksFinanzcheck", "#  FranksFinanzcheck"),
+    ),
+    # ==================================================================
+    #  WF-B16A / #1229·#1251·#1252·#1266·#1267·#1271 (21.11.2026)
+    #  ----------------------------------------------------------------
+    #  Die BEFUND-AKTE ist die zweite große Ableitung des Hauses: 162 KB
+    #  Markdown + ein Zustands-JSON, erzeugt aus `data/faktenfrische_queue.json`
+    #  und `data/faktenfrische_entscheidungen.yaml`. Sie stand NICHT in diesem
+    #  Verzeichnis – und damit fehlte ihr genau der Nachzug-Pfad, den das
+    #  Fachprüfungs-Register seit dem 09.11.2026 hat.
+    #
+    #  Folge (fünf Tage, fünf Meldungen): `faktenfrische.yml` schrieb die
+    #  Quelle, die Akte zog niemand nach, `veroeffentlichungs_wache.py` fand
+    #  sie Stunden später veraltet auf `main` – und jede Meldung nannte nur
+    #  „Akte: 202 offen, Ledger: 202“, also zwei gleiche Zahlen statt der
+    #  Ursache. Der Nachzug läuft jetzt dort, wo ohnehin committet wird, und
+    #  der Test unten hält die Einhängung fest.
+    #
+    #  `--schreiben` ist der Nachzug, `--check` das Urteil, `--selftest` der
+    #  Sabotage-Schutz: dasselbe Dreigespann wie bei den anderen Registern.
+    # ==================================================================
+    Register(
+        pfad="BEFUND-AKTE.md",
+        skript="scripts/faktenfrische_befund_akte.py",
+        modul="faktenfrische_befund_akte",
+        zweck="Redaktionsakte der offenen Fachbefunde (F4) aus Queue + "
+              "Entscheidungen – Schließweg je Befund",
+        check="--check",
+        fix="--schreiben",
+        probe=("**293 offene Befunde", "**294 offene Befunde"),
     ),
 )
 
@@ -106,13 +145,14 @@ def _abweichung(erwartet: str, ist: str) -> List[str]:
 
 def pruefen(register: Register) -> Tuple[bool, str]:
     """Delegiert an den Schreiber: SEIN `--check` ist die Wahrheit."""
-    erg = _lauf(register.skript, "--check")
+    erg = _lauf(register.skript, register.check)
     text = (erg.stdout or erg.stderr or "").strip()
     return erg.returncode == 0, text
 
 
 def nachziehen(register: Register) -> str:
-    erg = _lauf(register.skript)
+    args = (register.fix,) if register.fix else ()
+    erg = _lauf(register.skript, *args)
     return (erg.stdout or erg.stderr or "").strip()
 
 
@@ -149,11 +189,28 @@ def selftest() -> int:
             erwartet = modul.render(modul.collect())
         elif hasattr(modul, "build"):
             erwartet = modul.build()
+        elif hasattr(modul, "projektion"):
+            # Befund-Akte (21.11.2026): Die Wahrheit ist die Projektion aus
+            # Queue + Entscheidungen, nicht der Markdown-Text allein. Gewählt
+            # wird der dokumentierte Stichtag, damit die Probe nicht vom
+            # Kalender abhängt (ein neuer Tag ist keine fachliche Änderung).
+            # `projektion()` liefert (Markdown, Zustand) – die Probe zielt auf
+            # den MARKDOWN-Text, denn dessen Bytes werden committet.
+            import datetime as _dt
+            import json as _json
+            _zustand_datei = ROOT / "data" / "faktenfrische_befunde_state.json"
+            stichtag = _json.loads(
+                _zustand_datei.read_text(encoding="utf-8"))["stichtag"]
+            erwartet, _zustand = modul.projektion(_dt.date.fromisoformat(stichtag))
         else:
             fehler.append(f"{register.modul}: render/collect bzw. build fehlen – "
                           "der Nachzug wäre blind")
             continue
         # Drift-Erkennung selbst beweisen: zwei Fassungen, ein Unterschied.
+        # Die Probe muss auf DAS ARTEFAKT passen (YAML-Text vs. Markdown).
+        if not isinstance(erwartet, str):
+            import json as _json
+            erwartet = _json.dumps(erwartet, ensure_ascii=False, sort_keys=True)
         suchtext, ersatz = register.probe
         getampert = erwartet.replace(suchtext, ersatz, 1)
         if getampert == erwartet:
