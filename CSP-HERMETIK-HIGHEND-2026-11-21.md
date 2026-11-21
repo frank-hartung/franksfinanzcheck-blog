@@ -135,7 +135,7 @@ erscheint als Frühwarnung mit Grund und Herkunft. Das ist die Belegpflicht aus
 
 ### 4.5 Der Beweis läuft ohne Browser
 
-`node scripts/layout_browser_check.js --selftest` prüft 38 Fälle ohne Chrome
+`node scripts/layout_browser_check.js --selftest` prüft 39 Fälle ohne Chrome
 und ohne Netz: CSP-Parser gegen `static/_headers`, Herkunftsvergleich,
 Erkennung der echten Alt-Seite `zinseszinseffekt-formel-erklaert`, Sample-Regel
 (Datum gewinnt, Weiterleitung und Altlast ohne Datum fallen raus). Der Schritt
@@ -198,8 +198,8 @@ kein Defekt des Werkzeugs.
 
 | Prüfung | Ergebnis |
 |---|---|
-| `node scripts/layout_browser_check.js --selftest` | 38 Fälle grün, davon 25 Hermetik-Fälle |
-| `node scripts/layout_browser_check.js --serve-probe` | HTML mit CSP (ohne `frame-ancestors`), statische Datei ohne CSP, Digest + Nonce |
+| `node scripts/layout_browser_check.js --selftest` | 39 Fälle grün, davon 26 Hermetik-Fälle |
+| `node scripts/layout_browser_check.js --serve-probe` | HTML mit CSP (ohne `frame-ancestors`), statische Datei ohne CSP, Digest + Nonce, drei Pfad-Ausbrüche → 404 |
 | `python3 -m unittest scripts.tests.test_layout_audit_csp_beleg` | 20 Tests grün |
 | `python3 -m unittest scripts.tests.test_blog_header_gate` | 49 Tests grün |
 | `python3 scripts/blog_header_gate.py --offline` | grün (S1/S2, Meta-CSP, Wachen-Regeln) |

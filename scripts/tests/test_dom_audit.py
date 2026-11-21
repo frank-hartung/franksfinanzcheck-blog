@@ -168,9 +168,34 @@ class BrowserCheckVertragTests(unittest.TestCase):
                         "fs.readFileSync(quelle"):
             with self.subTest(pflicht=pflicht):
                 self.assertIn(pflicht, self.text)
-        self.assertNotIn("setRequestInterception", self.text,
-                         "Netzfilter ist als Referenz nachweislich unbrauchbar "
-                         "(Inline-Skripte, Cache) – nicht zurückholen")
+
+    def test_netzsperre_trifft_nur_fremde_hauptnavigationen(self):
+        """Der Netzfilter ist Herkunftssperre, nicht Referenzmessung.
+
+        WARUM DIE ALTE SPERRE FIEL (21.11.2026): Bis hierher galt „kein
+        `setRequestInterception`" – weil ein breiter Netzfilter 2026 die
+        Referenzmessung zerstörte (Inline-Skripte, Cache). Der Fehlbefund vom
+        21.11. hatte aber eine andere Ursache: Zwei Meta-Refresh-Stubs
+        schickten den Messbrowser nach `franksfinanzcheck.de`. Deshalb gibt es
+        jetzt EINE schmale Sperre: nur Hauptnavigationen, nur fremde
+        Herkünfte, alles andere geht unverändert weiter. Die Referenz bleibt
+        die Sandbox-Messung der Datei (CI-Beleg: 14 Messungen, Drift 0).
+        """
+        self.assertIn("setRequestInterception", self.text)
+        block = self.text[self.text.index("page.on('request'"):
+                           self.text.index("const cspBefund")]
+        for pflicht in ("req.isNavigationRequest()",
+                        "req.frame() === page.mainFrame()",
+                        "istEigeneHerkunft(req.url(), eigeneHerkunft)",
+                        "if (!eigene)",
+                        "req.continue()"):
+            with self.subTest(pflicht=pflicht):
+                self.assertIn(pflicht, block)
+        self.assertEqual(block.count("req.abort("), 1,
+                         "genau EIN Abbruch: die fremde Hauptnavigation")
+        self.assertLess(block.index("req.abort("), block.index("req.continue()"),
+                        "erst die Ausnahme abbrechen, dann alles andere weiterleiten")
+        self.assertIn("req.abort('blockedbyclient')", block)
 
     def test_sandbox_artefakte_werden_nicht_zu_befunden(self):
         """Chrome protokolliert blockierte Skripte im Sandbox-Iframe als
