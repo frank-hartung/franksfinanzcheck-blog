@@ -2047,7 +2047,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken`
 
-- Datei-SHA256 (heute): `750ff30d9d0a925dfd80cc8a8713edd6d73d99592b2c786e667893ad91499183`
+- Datei-SHA256 (heute): `5ecee17b86277342baae1fe92b14ffa40ba1d0a3d5056a1c008f8daa3dfa4d23`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2571,7 +2571,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
 
-- Datei-SHA256 (heute): `4cd2ff447deb42c9f98bf472e107a643d84336405d4a97f6a726ec6702fe1c74`
+- Datei-SHA256 (heute): `1a39fede00e5a4acd0fbdc0637e78096ecd9d7a87f970a3ede0dd20bebe1126f`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
