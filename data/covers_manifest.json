@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-11-20T13:17:41+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-11-21T11:42:06+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1404,8 +1404,8 @@
   }
  },
  "2026-10-26-gastarife-vergleichen-vor-dem-herbst": {
-  "title": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
-  "ts": "2026-11-20T13:17:43+00:00",
+  "title": "Gasvergleich: Kosten, Fristen und Verbrauch prüfen",
+  "ts": "2026-11-21T11:42:08+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1431,8 +1431,8 @@
   }
  },
  "2026-10-28-dsl-und-internet-flat-guenstig-sichern": {
-  "title": "Internet-Flats vergleichen: Was kostet der Anschluss",
-  "ts": "2026-11-20T13:17:45+00:00",
+  "title": "DSL Vergleich: Was kostet der Anschluss",
+  "ts": "2026-11-21T11:42:10+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1557,8 +1557,8 @@
   }
  },
  "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": {
-  "title": "Günstige Flüge für den Spätsommer finden",
-  "ts": "2026-11-20T13:17:47+00:00",
+  "title": "Flugtickets günstig: Günstige Flüge für den Spätsommer",
+  "ts": "2026-11-21T11:42:12+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -2300,6 +2300,96 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-21-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+  "title": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
+  "ts": "2026-11-21T11:53:45+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-11-21-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+  "title": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
+  "ts": "2026-11-21T11:53:47+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-21-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+  "title": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
+  "ts": "2026-11-21T11:53:50+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-11-21-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+  "title": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
+  "ts": "2026-11-21T11:53:52+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+  "title": "Strompreis 2026: Herbst-Check für deine Stromkosten",
+  "ts": "2026-11-21T11:53:56+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-21-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+  "title": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
+  "ts": "2026-11-21T11:53:58+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-21-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+  "title": "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe",
+  "ts": "2026-11-21T11:54:01+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
+  "title": "Gebrauchte Möbel: Woran erkennst du gute Qualität?",
+  "ts": "2026-11-21T11:54:03+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-21-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
+  "title": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
+  "ts": "2026-11-21T11:54:05+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
+  "title": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
+  "ts": "2026-11-21T11:53:54+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }

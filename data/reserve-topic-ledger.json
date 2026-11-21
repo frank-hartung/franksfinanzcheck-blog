@@ -512,6 +512,14 @@
     "letzter_versuch": "2026-09-30",
     "sperre_bis": "2027-03-29"
   },
+  "Lebensmittel retten: So wirfst du weniger weg": {
+    "fehler": 0,
+    "grund": "produziert: lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-21",
+    "letzter_versuch": "2026-11-21",
+    "sperre_bis": "2027-05-20"
+  },
   "Mehrwegflaschen: So rechnet sich die Rückgabe": {
     "fehler": 0,
     "grund": "produziert: mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
