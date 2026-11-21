@@ -6,8 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-21** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**188 offene Live-Befunde auf 51 Artikeln.** Für **122** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **66** Befunde haben keine frühere aktive Entscheidung.
+**203 offene Live-Befunde auf 56 Artikeln.** Für **122** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **81** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -37,6 +37,21 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `ae90ebae2842ff9f97f1` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Aussage über Downloadwert vs Gesprächsqualität ohne Beleg
 - `b2611d9120121d0ad785` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg
 - `fcb8168c18bd423c5180` · `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` · Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg
+- `3ad12cdcf94bd8459bd8` · `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` · Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt.
+- `1cc830a25d3ae505dd0e` · `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschriften (ohne Mandat) beträgt die gesetzliche Frist zur Rückgabe 13 Monate.
+- `32f827af8f4695488e97` · `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Deckung oder wegen eines berechtigten Widerspruchs erfolgt.
+- `642d9c53e557ff642257` · `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht autorisierter oder fehlerhafter Kartenzahlungen.
+- `8230373c2c33722d66d8` · `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sicherheitsmechanismen.
+- `efee7b0cefffa501cc57` · `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist die Lastschrift der Standard, um Zahlungsfehler zu vermeiden.
+- `dc1e5d50a58f50e0ade1` · `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` · Die verlinkte Seite der Bundesnetzagentur ist eine reine Navigations-Übersicht und enthält keine der im Text versprochenen Beschreibungen zu Tarifbestandteilen oder Preisregelungen.
+- `def8ad23c34566c795fe` · `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` · Die Verknüpfung der HT/NT-Definition mit der Bundesnetzagentur ist unpräzise, da die verlinkte Seite lediglich eine Themenübersicht ohne fachliche Definitionen darstellt.
+- `19a724ba20628f34cd01` · `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · Eine feste Frist für die Entstörung nennt das Gesetz nicht.
+- `4126d33a9dd92716b286` · `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest.
+- `67fbe0b49bb4e6bb48b7` · `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · Die Pflichten aus dem TKG gelten für alle Zugangsarten.
+- `cb5f849bfd26ad8121eb` · `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung.
+- `f108d554ff8861370b64` · `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung.
+- `009906e47bcc8265b36a` · `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` · Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit
+- `e0293a43782c64955b27` · `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` · Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
@@ -763,7 +778,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps`
 
-- Datei-SHA256 (heute): `961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b`
+- Datei-SHA256 (heute): `52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -921,6 +936,23 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
+## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
+
+- Datei-SHA256 (heute): `4ff5b0daf87b710b6f50a9239e2f9940070ae626e191b748653bc28aa51caeae`
+- Offene Live-Befunde: **1**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `3ad12cdcf94bd8459bd8` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bunde… |
+
+### `3ad12cdcf94bd8459bd8`
+
+**Befund:** Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
 - Datei-SHA256 (heute): `815af18e3c2de40cd87d9247cabf49b2d128c6712eb5e2ffc773cf2d0d583efd`
@@ -983,6 +1015,138 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 > Am heutigen Text geprüft (SHA-256 e30b40915c72): Die verlangte Quelle steht im Abschnitt „Modellrechnung: vier Personen, ein Jahr“ inline – „Zum Vergleich: Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/) nennt für Haushaltsstrom im Oktober 2026 durchschnittlich 37,3 Cent je kWh.“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
 - Heute in Zeile 53: 0,30 € – gekennzeichnet („rechenannahme“)
+
+## `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen`
+
+- Datei-SHA256 (heute): `71ed78206803503d20c2db0154df487a415de36bfb335b8dc9cfbc6d1ca148dd`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `1cc830a25d3ae505dd0e` | praezision | **neu** | 13 Monate in Zeile 177 ohne Kennzeichnung | Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschr… |
+| `32f827af8f4695488e97` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Dec… |
+| `642d9c53e557ff642257` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht auto… |
+| `8230373c2c33722d66d8` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sich… |
+| `efee7b0cefffa501cc57` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist d… |
+
+### `1cc830a25d3ae505dd0e`
+
+**Befund:** Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschriften (ohne Mandat) beträgt die gesetzliche Frist zur Rückgabe 13 Monate.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 177: 13 Monate – **ohne** Kennzeichnung
+
+### `32f827af8f4695488e97`
+
+**Befund:** Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Deckung oder wegen eines berechtigten Widerspruchs erfolgt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `642d9c53e557ff642257`
+
+**Befund:** Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht autorisierter oder fehlerhafter Kartenzahlungen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `8230373c2c33722d66d8`
+
+**Befund:** Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sicherheitsmechanismen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `efee7b0cefffa501cc57`
+
+**Befund:** Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist die Lastschrift der Standard, um Zahlungsfehler zu vermeiden.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt`
+
+- Datei-SHA256 (heute): `c53fe1b23f89997e8b93ff10f7397340ea4abf4f8fbee1948f43de3d18383eff`
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `dc1e5d50a58f50e0ade1` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Die verlinkte Seite der Bundesnetzagentur ist eine reine Navigations-Übersicht und enthält keine der im Text versproc… |
+| `def8ad23c34566c795fe` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Verknüpfung der HT/NT-Definition mit der Bundesnetzagentur ist unpräzise, da die verlinkte Seite lediglich eine T… |
+
+### `dc1e5d50a58f50e0ade1`
+
+**Befund:** Die verlinkte Seite der Bundesnetzagentur ist eine reine Navigations-Übersicht und enthält keine der im Text versprochenen Beschreibungen zu Tarifbestandteilen oder Preisregelungen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `def8ad23c34566c795fe`
+
+**Befund:** Die Verknüpfung der HT/NT-Definition mit der Bundesnetzagentur ist unpräzise, da die verlinkte Seite lediglich eine Themenübersicht ohne fachliche Definitionen darstellt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte`
+
+- Datei-SHA256 (heute): `d8dd69be9de2a7e972502709d0f2ff248274200d77ac163be2e8225bb57e0ae8`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `19a724ba20628f34cd01` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Eine feste Frist für die Entstörung nennt das Gesetz nicht. |
+| `4126d33a9dd92716b286` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest. |
+| `67fbe0b49bb4e6bb48b7` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Die Pflichten aus dem TKG gelten für alle Zugangsarten. |
+| `cb5f849bfd26ad8121eb` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstö… |
+| `f108d554ff8861370b64` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögeru… |
+
+### `19a724ba20628f34cd01`
+
+**Befund:** Eine feste Frist für die Entstörung nennt das Gesetz nicht.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `4126d33a9dd92716b286`
+
+**Befund:** Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `67fbe0b49bb4e6bb48b7`
+
+**Befund:** Die Pflichten aus dem TKG gelten für alle Zugangsarten.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `cb5f849bfd26ad8121eb`
+
+**Befund:** Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `f108d554ff8861370b64`
+
+**Befund:** Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen`
 
@@ -1199,6 +1363,32 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 **Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
 
 > Hinweise auf Schlichtungsstelle Energie (verlinkt) und Bundesnetzagentur-Verbraucherportal je artikel-eigen ergänzt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster`
+
+- Datei-SHA256 (heute): `2e9d6419ac1a7cb89226890d403163e8c60dfa288be871c947fa72cdcdd3a731`
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `009906e47bcc8265b36a` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit |
+| `e0293a43782c64955b27` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen |
+
+### `009906e47bcc8265b36a`
+
+**Befund:** Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `e0293a43782c64955b27`
+
+**Befund:** Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
@@ -2541,11 +2731,24 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3e0c5fa74179e97866b
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae90ebae2842ff9f97f1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b2611d9120121d0ad785 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fcb8168c18bd423c5180 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad12cdcf94bd8459bd8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 278d89267d9122a1e9d8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 450c3aa629342062825e --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7601167c9f3560093fb0 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7efbcd7a4275fe1577bb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 971a719f94ca492f640e --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1cc830a25d3ae505dd0e --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32f827af8f4695488e97 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 642d9c53e557ff642257 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8230373c2c33722d66d8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden efee7b0cefffa501cc57 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc1e5d50a58f50e0ade1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden def8ad23c34566c795fe --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 19a724ba20628f34cd01 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4126d33a9dd92716b286 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 67fbe0b49bb4e6bb48b7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cb5f849bfd26ad8121eb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f108d554ff8861370b64 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 16b3b8584ff802803aa9 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7ff042b6fe804cdf101b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bec83c4b814183fa1086 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -2562,6 +2765,8 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8cc00288af8a1f2b02d
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f0a88ede9d44ee910cb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 51e259fd2d8582e774f7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 55f8eeedc587cf0895ee --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5a1bf10697f58e5fe14a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e48f9237cff6397c49a6 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f6de6b078d49f9d42e0e --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

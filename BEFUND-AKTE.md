@@ -2,12 +2,12 @@
 
 _Stand 2026-11-21 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**293 offene Befunde auf 78 Seiten · davon 51 Live-Seiten mit 188 Befunden · ältester 22 Tage · Frist 14 Tage.**
+**311 offene Befunde auf 84 Seiten · davon 56 Live-Seiten mit 203 Befunden · ältester 22 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 293 |
-| Seiten betroffen | 78 (davon live: 51) |
+| Offene Befunde | 311 |
+| Seiten betroffen | 84 (davon live: 56) |
 | Text seit dem Befund geändert | 252 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-21 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 267 von 293 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 267 von 311 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -860,6 +860,18 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden b2611d9120121d0ad78
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fcb8168c18bd423c5180 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
+
+Datei: `content/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `3ad12cdcf94bd8459bd8` | luecke | 0 T | Text unverändert seit dem Befund | Bei der Erläuterung von Vermittlungsportalen fehlt die Einordnung als 'Kreditdienstleistungsinstitute', die die Bundesbank als spezifischen Aspekt der Finanzaufsicht führt. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad12cdcf94bd8459bd8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · **LIVE** · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md`
@@ -920,6 +932,74 @@ Datei: `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 991bda7b2298b751f4e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae71596724d7a243217b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · **LIVE** · Risikoklasse erhoeht · 5 Befund(e)
+
+Datei: `content/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1cc830a25d3ae505dd0e` | praezision | 0 T | Text unverändert seit dem Befund | Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschriften (ohne Mandat) beträgt die gesetzliche Frist zur Rückgabe 13 Monate. | – |
+| `32f827af8f4695488e97` | praezision | 0 T | Text unverändert seit dem Befund | Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Deckung oder wegen eines berechtigten Widerspruchs erfolgt. | – |
+| `642d9c53e557ff642257` | luecke | 0 T | Text unverändert seit dem Befund | Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht autorisierter oder fehlerhafter Kartenzahlungen. | – |
+| `8230373c2c33722d66d8` | praezision | 0 T | Text unverändert seit dem Befund | Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sicherheitsmechanismen. | – |
+| `efee7b0cefffa501cc57` | praezision | 0 T | Text unverändert seit dem Befund | Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist die Lastschrift der Standard, um Zahlungsfehler zu vermeiden. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1cc830a25d3ae505dd0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32f827af8f4695488e97 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 642d9c53e557ff642257 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8230373c2c33722d66d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden efee7b0cefffa501cc57 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` · **LIVE** · Risikoklasse erhoeht · 2 Befund(e)
+
+Datei: `content/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `dc1e5d50a58f50e0ade1` | luecke | 0 T | Text unverändert seit dem Befund | Die verlinkte Seite der Bundesnetzagentur ist eine reine Navigations-Übersicht und enthält keine der im Text versprochenen Beschreibungen zu Tarifbestandteilen oder Preisregelungen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `def8ad23c34566c795fe` | praezision | 0 T | Text unverändert seit dem Befund | Die Verknüpfung der HT/NT-Definition mit der Bundesnetzagentur ist unpräzise, da die verlinkte Seite lediglich eine Themenübersicht ohne fachliche Definitionen darstellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc1e5d50a58f50e0ade1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden def8ad23c34566c795fe --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · **LIVE** · Risikoklasse erhoeht · 5 Befund(e)
+
+Datei: `content/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `19a724ba20628f34cd01` | luecke | 0 T | Text unverändert seit dem Befund | Eine feste Frist für die Entstörung nennt das Gesetz nicht. | – |
+| `4126d33a9dd92716b286` | luecke | 0 T | Text unverändert seit dem Befund | Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `67fbe0b49bb4e6bb48b7` | luecke | 0 T | Text unverändert seit dem Befund | Die Pflichten aus dem TKG gelten für alle Zugangsarten. | – |
+| `cb5f849bfd26ad8121eb` | luecke | 0 T | Text unverändert seit dem Befund | Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung. | – |
+| `f108d554ff8861370b64` | luecke | 0 T | Text unverändert seit dem Befund | Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 19a724ba20628f34cd01 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4126d33a9dd92716b286 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 67fbe0b49bb4e6bb48b7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cb5f849bfd26ad8121eb --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f108d554ff8861370b64 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `009906e47bcc8265b36a` | luecke | 0 T | Text unverändert seit dem Befund | Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `e0293a43782c64955b27` | luecke | 0 T | Text unverändert seit dem Befund | Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
@@ -1406,6 +1486,22 @@ Seite: `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check`
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4232b77745f1559839a5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9c67474aa62927df4ee4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `05386fbefbe0bd793d3d` | luecke | 0 T | Text unverändert seit dem Befund | Die Prognose zu Preisunterschieden zwischen variablen und Festpreisen ist ein Marktdatum, das ohne Bezug auf offizielle Monitoring-Daten der Aufsichtsbehörde bleibt. | – |
+| `10917941e9fae9a9cf04` | luecke | 0 T | Text unverändert seit dem Befund | Bei der Empfehlung zum Prüfen von Kündigungsfristen und Verträgen fehlt der Hinweis auf die gesetzlichen Schlichtungs- und Beschwerdestellen der Bundesnetzagentur. | – |
+| `ab0470bc947932366bc4` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel führt Marktdaten und Preis-Szenarien für 2026 an, ohne die Bundesnetzagentur als zuständige Aufsichtsbehörde für die Marktbeobachtung zu nennen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 05386fbefbe0bd793d3d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 10917941e9fae9a9cf04 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab0470bc947932366bc4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

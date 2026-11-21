@@ -1,0 +1,80 @@
+{
+  "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte",
+  "titel": "Störung beim Internetanbieter: So sicherst du deine Rechte",
+  "erzeugt": "2026-11-21 12:59 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
+    "alter_tage": 39,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 6
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammern/BK_Start.html \"Beschlusskammern\") \n4.   **Telekom­munikation**\n5.   [UntermenuOeffnen](javascript:void(0))[Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html \"Breitband\")[Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html \"Kupfer Glas Migration, Glasfaserausbau\")[Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html \"Frequenzen\")[Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html \"Nummerierung\")[Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html \"Unternehmenspflichten\")[Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html \"Technik\")[Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicher",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung.",
+      "stelle": "Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung.",
+      "stelle": "Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Eine feste Frist für die Entstörung nennt das Gesetz nicht.",
+      "stelle": "Eine feste Frist für die Entstörung nennt das Gesetz nicht.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest.",
+      "stelle": "Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Pflichten aus dem TKG gelten für alle Zugangsarten.",
+      "stelle": "Die Pflichten aus dem TKG gelten für alle Zugangsarten. Der Weg zur Behebung ist je nach Technik verschieden.",
+      "beleg": ""
+    }
+  ],
+  "fehler": [],
+  "fassung_sha256": "8fe546affd922d296b0d1472a2d5b40a65628f7b4e1ee4095a61b136237c81aa",
+  "text_sha256": "bca163366137431bf7874d8b59f6ad56b2c60ce3184d3becb9b83420fd95a232",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
+}

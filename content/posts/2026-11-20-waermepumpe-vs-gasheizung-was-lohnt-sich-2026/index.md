@@ -21,6 +21,7 @@ cover:
   image: "images/covers/2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026.jpg"
   alt: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
   caption: "Tipp von FranksFinanzcheck"
+faktencheck: 2026-11-21
 ---
 
 Im späten Sommer überlegst du, wie du die bevorstehende Heizperiode finanziell entlasten kannst. Du hast das Gefühl, dass die steigenden Energiepreise deine Haushaltsrechnung sprengen könnten. Die zentrale Frage lautet: Solltest du jetzt in eine Wärmepumpe investieren oder lieber bei einer Gasheizung bleiben? Dieser Ratgeber gibt dir klare Zahlen, zeigt versteckte Kosten und hilft dir, die richtige Entscheidung für 2026 zu treffen.  

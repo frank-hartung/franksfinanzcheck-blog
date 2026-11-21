@@ -46,7 +46,7 @@ quellen:
     url: "https://kontenvergleich.bafin.de/"
     herausgeber: "Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin)"
     datum: "2026-08-28"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-21
 kurzantwort: "Geld verlässt ein Konto auf drei Wegen: per Überweisung, per Dauerauftrag und per Lastschrift. Bei der Lastschrift gibst du dem Empfänger ein Mandat, selbst abzubuchen. Deshalb ist der regelmäßige Blick auf die Umsätze wichtig. Passt ein Betrag nicht, klärst du zuerst den Sachverhalt und wendest dich dann an den Anbieter und deine Bank."
 ---
 
