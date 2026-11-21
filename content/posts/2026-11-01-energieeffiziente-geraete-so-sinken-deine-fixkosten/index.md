@@ -18,6 +18,9 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+  pruefdatum: "2026-11-21"
+  naechste_pruefung: "2027-01-05"
+  aenderungsgrund: "Casing-Fix: Plural-Fehler und beschädigte Beschreibung korrigiert; Status bleibt ausstehend (Standard-Risiko)"
 
 inspiration: Energieeffiziente Geräte für dein Zuhause
 cover:

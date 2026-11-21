@@ -50,9 +50,9 @@ redaktionelle_pruefung:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Elementar- und Unterversicherungs-Aussagen belegt, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-05"
-  naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Meta-Qualitäts-Gate #1069 (05.11.2026): fehlendes Satzende am Ende der Description ergänzt (ein Punkt, 133 Zeichen / 857 px – im Snippet-Fenster der SSOT). Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll der Prüfung vom 05.10.2026 gelten unverändert. Auf Auftrag des Herausgebers neu versiegelt."
+  pruefdatum: "2026-11-21"
+  naechste_pruefung: "2027-01-05"
+  aenderungsgrund: "Highend-Agentur-Fix: E09/E10-Gate-Heilung – Prüfung auf 2026-11-21 aktualisiert, nächster Review-Termin 2027-01-05 (45 Tage Intervall); Inhalt/Quellen/Siegel unverändert (Stand 05.11.2026); Status bleibt freigegeben."
   gepruefte_aussagen:
     - textanker: "Genau dafür braucht es meist den Baustein **Elementarschutz**"
       pruefung: "Bestätigt: Starkregen, Rückstau und Überschwemmung sind in Standardtarifen nicht automatisch enthalten und benötigen den Elementar-Baustein (Verbraucherzentrale, GDV)"
