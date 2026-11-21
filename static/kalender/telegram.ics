@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wi
- ssen-musst:nutzen:2026-11-20@franksfinanzcheck.de
-DTSTAMP:20261120T140847Z
-DTSTART:20261120T170000Z
-DTEND:20261120T171500Z
-SUMMARY:Telegram (Kanal): Geschenkkarte: Was du beim Kauf und Aufladen
-  wissen musst (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-
- was-du-beim-kauf-und-aufladen-wissen-musst/
-URL:https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du
- -beim-kauf-und-aufladen-wissen-musst/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:telegram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
  parst:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261120T140847Z
+DTSTAMP:20261120T221553Z
 DTSTART:20261121T060000Z
 DTEND:20261121T061500Z
 SUMMARY:Telegram (Kanal): Secondhand-Kleidung kaufen: So prüfst du Sto
@@ -36,11 +21,26 @@ URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dei
- n-geld-zurueck:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261120T140847Z
+UID:telegram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wi
+ ssen-musst:nutzen:2026-11-22@franksfinanzcheck.de
+DTSTAMP:20261120T221553Z
 DTSTART:20261122T060000Z
 DTEND:20261122T061500Z
+SUMMARY:Telegram (Kanal): Geschenkkarte: Was du beim Kauf und Aufladen
+  wissen musst (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-
+ was-du-beim-kauf-und-aufladen-wissen-musst/
+URL:https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du
+ -beim-kauf-und-aufladen-wissen-musst/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dei
+ n-geld-zurueck:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261120T221553Z
+DTSTART:20261128T060000Z
+DTEND:20261128T061500Z
 SUMMARY:Telegram (Kanal): Flugverspätung: Wann kommt eine Entschädigun
  g infrage? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -52,10 +52,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-rou
- ter-standort:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261120T140847Z
-DTSTART:20261128T060000Z
-DTEND:20261128T061500Z
+ ter-standort:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261120T221553Z
+DTSTART:20261129T060000Z
+DTEND:20261129T061500Z
 SUMMARY:Telegram (Kanal): Router Standort: So findest du einen guten P
  latz – WLAN (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -63,21 +63,6 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  sen-so-findest-du-den-besten-router-standort/
 URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
  -findest-du-den-besten-router-standort/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alt
- en-rahmen:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261120T140847Z
-DTSTART:20261129T060000Z
-DTEND:20261129T061500Z
-SUMMARY:Telegram (Kanal): Fenster abdichten: So stoppst du Zugluft an 
- alten Rahmen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdich
- ten-so-stoppst-du-zugluft-an-alten-rahmen/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so
- -stoppst-du-zugluft-an-alten-rahmen/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

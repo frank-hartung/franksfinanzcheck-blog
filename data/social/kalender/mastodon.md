@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 20.11.2026 15:08 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.11.2026 23:15 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 20. November 2026
-- **11:30** ⏳ Wie viel Bandbreite brauchst du fürs Streaming? — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
 ### Mo, 23. November 2026
 - **07:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
@@ -41,13 +38,14 @@
 - **11:30** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
 ### Fr, 04. Dezember 2026
-- **07:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
-- **11:30** ⏳ Tagesgeld vergleichen: Was bleibt nach dem Aktionszins? — _zahl_ · Evergreen  
+- **07:30** ⏳ Tagesgeld vergleichen: Was bleibt nach dem Aktionszins? — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
+- **11:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 20.11.2026 23:15 · Wie viel Bandbreite brauchst du fürs Streaming? → https://mastodon.social/@FranksFinanzcheck/117651076043563430
 - ✅ 20.11.2026 15:08 · Fenster abdichten: So stoppst du Zugluft an alten Rahmen → https://mastodon.social/@FranksFinanzcheck/117649160681794420
 - ✅ 18.11.2026 23:37 · WLAN-Frust lösen: So findest du den besten Router Standort → https://mastodon.social/@FranksFinanzcheck/117639837069950225
 - ✅ 18.11.2026 15:15 · Flugverspätung Entschädigung: So holst du dein Geld zurück → https://mastodon.social/@FranksFinanzcheck/117637863727269953
@@ -57,7 +55,6 @@
 - ✅ 13.11.2026 14:13 · Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas → https://mastodon.social/@FranksFinanzcheck/117609307232793284
 - ✅ 11.11.2026 13:47 · Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen → https://mastodon.social/@FranksFinanzcheck/117597882570629474
 - ✅ 10.11.2026 00:48 · Preisgarantie Gas: Was bei Preiserhöhung hilft → https://mastodon.social/@FranksFinanzcheck/117589153983480017
-- ✅ 09.11.2026 15:01 · DNS-Server wechseln: Datenschutz, Filter und Einrichtung → https://mastodon.social/@FranksFinanzcheck/117586845999926723
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

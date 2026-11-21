@@ -1,15 +1,15 @@
 {
-  "stand": "2026-11-19T19:37:01Z",
+  "stand": "2026-11-20T19:14:48Z",
   "urteil": "rot",
   "probleme": [
-    "KI-Anteil live: 87.5 % (rot ab 65 %)",
+    "KI-Anteil live: 87.8 % (rot ab 65 %)",
     "Thin Content live: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
-    "KI-Artikel ohne Werbe-Offenlegung: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten, 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang, 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
+    "KI-Artikel ohne Werbe-Offenlegung: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten, 2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten, 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
   ],
   "kpis": {
-    "live_artikel": 88,
-    "ki_artikel": 77,
-    "ki_anteil_prozent": 87.5,
+    "live_artikel": 90,
+    "ki_artikel": 79,
+    "ki_anteil_prozent": 87.8,
     "tempo_max_pro_tag": 2,
     "tempo_letzte7_tage": 6,
     "auto_freigaben_letzte7_tage": 0,
@@ -21,6 +21,7 @@
     "titel_duplikate": [],
     "offenlegung_fehlt": [
       "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
       "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee"
