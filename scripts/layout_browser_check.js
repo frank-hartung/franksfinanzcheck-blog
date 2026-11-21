@@ -657,6 +657,14 @@ async function loadRuntime(browser, url, viewport, ctx) {
   // zurückkommen. Genau diese Kopfzeilen sind hier der Beleg – der Audit muss
   // sie vom Messserver sehen, nicht aus einem Zwischenspeicher erraten.
   try { await page.setCacheEnabled(false); } catch (e) { /* alt genug: egal */ }
+  // KEIN SERVICE WORKER (Befund 21.11.2026): Die Seite registriert `sw.js`
+  // (layouts/index.sw.js). Ab der zweiten Navigation bedient er die Seite aus
+  // dem Netz – aber der Browser zeigt Puppeteer die Kopfzeilen dieser Antwort
+  // nicht mehr. Ergebnis im CI: „Kopfzeile auf 1 von 14 Seiten". Der Audit
+  // misst deshalb am Service Worker vorbei: Er prüft die Antwort des Servers
+  // (CSP aus static/_headers), nicht das Cache-Verhalten des SW. Dessen
+  // Verträge prüft `scripts/robustheits_gate.py` (R5).
+  try { await page.setBypassServiceWorker(true); } catch (e) { /* alt genug: egal */ }
   const eigeneHerkunft = ctx.herkunft || new URL(url).origin;
   const gesendet = ctx.csp || '';
   const errors = [];
