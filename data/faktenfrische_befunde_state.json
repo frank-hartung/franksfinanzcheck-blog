@@ -1,5 +1,5 @@
 {
-  "erzeugt": "2026-11-21T02:51:51Z",
+  "erzeugt": "2026-11-21T12:05:29Z",
   "stichtag": "2026-11-21",
   "offen": 293,
   "seiten": 78,
@@ -87,8 +87,8 @@
     "2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich": 4,
     "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung": 3,
     "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check": 2,
-    "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
-    "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": 3,
+    "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
+    "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": 3,
     "frugalismus": 3,
     "internet-dsl": 2,
     "konto-karten": 2,
@@ -1520,7 +1520,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "1c6e4d2f12da24ec4081",
       "typ": "luecke",
@@ -1532,7 +1532,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "5b539daf371f7362a3ef",
       "typ": "praezision",
@@ -1544,7 +1544,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "77d809de9e06d1d6910d",
       "typ": "luecke",
@@ -1556,7 +1556,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "ad7c0a90ef52ff35130e",
       "typ": "luecke",
@@ -1568,7 +1568,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "f227178fbda2cc59c350",
       "typ": "luecke",
@@ -2647,7 +2647,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "842ddd33d3dd6b0b97f7",
       "typ": "luecke",
@@ -2659,7 +2659,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "d3e210fb738bd77ef594",
       "typ": "luecke",
@@ -2671,7 +2671,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "da84fa452f879ea8f2da",
       "typ": "luecke",
