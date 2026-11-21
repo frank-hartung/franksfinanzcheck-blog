@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 21.11.2026 14:35 (Europe/Berlin)  
+> Automatisch aktualisiert: 21.11.2026 21:55 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,9 +12,7 @@
 
 ## Kommende Beiträge
 
-### Sa, 21. November 2026
-- **14:15** ⚪ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
+_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
 
 ## Zuletzt veröffentlicht
 

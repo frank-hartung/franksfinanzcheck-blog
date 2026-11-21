@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 21.11.2026 14:35 (Europe/Berlin)  
+> Automatisch aktualisiert: 21.11.2026 21:55 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Sa, 21. November 2026
-- **18:00** ⏳ Wie viel Bandbreite brauchst du fürs Streaming? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
 ### So, 22. November 2026
 - **07:00** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/

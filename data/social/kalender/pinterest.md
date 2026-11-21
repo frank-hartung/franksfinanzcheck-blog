@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Pinterest
 
-> Automatisch aktualisiert: 21.11.2026 14:35 (Europe/Berlin)  
+> Automatisch aktualisiert: 21.11.2026 21:55 (Europe/Berlin)  
 > Profil: https://www.pinterest.de/franksfinanzcheck/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `pinterest.ics`
 
@@ -12,21 +12,18 @@
 
 ## Kommende Beiträge
 
-### Sa, 21. November 2026
-- **21:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### So, 22. November 2026
+- **10:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+### Di, 24. November 2026
 - **10:15** ⏳ Sicher heizen: Welche Kosten sind geschützt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-### Di, 24. November 2026
+### Do, 26. November 2026
 - **10:15** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
-### Do, 26. November 2026
+### Sa, 28. November 2026
 - **10:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
-### Sa, 28. November 2026
-- **10:15** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/
 ### So, 29. November 2026
 - **10:15** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
@@ -34,11 +31,11 @@
 - **10:15** ⏳ Gasrechnung senken: Welche Fehler lassen sich vor — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 ### Do, 03. Dezember 2026
+- **10:15** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/
+### Sa, 05. Dezember 2026
 - **10:15** ⏳ Kostenloses Girokonto: Ein Konto ohne Gebühren finden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
-### Sa, 05. Dezember 2026
-- **10:15** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 
 ## Zuletzt veröffentlicht
 
