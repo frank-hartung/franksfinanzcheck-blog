@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "regel": "url-substring",
+  "basis": "py/incomplete-url-substring-sanitization (CodeQL)",
+  "pruefer": "scripts/url_substring_guard.py",
+  "helper_module": "scripts/url_host.py",
+  "helper_funktionen": [
+    "ist_host_oder_subdomain"
+  ],
+  "heil_branch_praefix": "automation/code-selbstheilung-",
+  "ledger": "data/code_schutz_belege.jsonl",
+  "max_heilbare_dateien": 40,
+  "ausgeschlossene_dateien": [
+    "scripts/url_substring_guard.py"
+  ],
+  "begruendung": "Automatische Heilung von URL-substring-Fundstellen (#709) statt Blind-Merge/Handarbeit auf main; Vertrag = einzige Quelle für Regel, Helper, Ausnahmen und PR-Grenzen."
+}

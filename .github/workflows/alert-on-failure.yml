@@ -189,6 +189,10 @@ on:
       # Abhängigkeiten darf bei Eichproben-Bruch (Exit 3) oder Rollback (Exit 2)
       # niemals stumm scheitern.
       - "Abhängigkeits-Schutz · Selbstheilung"
+      # CodeQL-Alert #709 (12.10.2026): Dieselbe Vertragsidee wie bei #79 –
+      # die Code-Selbstheilung darf bei Eichproben-Bruch (Exit 3) oder
+      # Rollback (Exit 2) niemals stumm fehlschlagen.
+      - "Code-Selbstheilung · Heilungs-PR"
     types:
       - completed
 
