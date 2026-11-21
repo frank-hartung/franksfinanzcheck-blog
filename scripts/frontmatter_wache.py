@@ -351,6 +351,30 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
 
         rest_zeile = zeile[einzug:]
         # Sequenz-Eintrag: `- key: wert` oder `- wert`
+        #
+        # BEFUND 21.11.2026 (Falschbefund auf main, seit 19.11. rot)
+        # ---------------------------------------------
+        # Hier wurde das `- ` ENTFERNT und die Zeile danach wie ein
+        # Mapping-Schlüssel gezählt. Für
+        #     quellen:
+        #     - id: Q1
+        #     - id: Q3
+        # sah das aus wie drei Angaben desselben Schlüssels `id` auf
+        # oberster Ebene – gemeldet als F3-BLOCKER („Hugo bricht den Bau
+        # daran ab"). Das war falsch: Es sind drei getrennte Mappings einer
+        # Liste. Die Datei baut, PyYAML parst sie strikt ohne Duplikat, und
+        # der Test `gegenprobe_eintrag_gegen_den_parser` zeigt es.
+        # Folge des Fehlers: Die Frontmatter-Vorprüfung von
+        # `.github/actions/hugo-build` brach JEDEN Bau ab, die Entity-Wache
+        # kam über „Site bauen" nicht hinaus.
+        #
+        # Die Doppelt-Prüfung gilt deshalb nur für Schlüssel, die WIRKLICH
+        # auf oberster Ebene eines Mappings stehen (`einzug == 0` und kein
+        # Sequenz-Eintrag). Der `gesehen`-Zähler wird jetzt ausschließlich
+        # dort gefüllt, wo er ausgewertet wird; vorher sammelte er auch
+        # Listeneinträge und Tiefen-Schlüssel, was dieselbe Verwechslung
+        # auf jeder Ebene erlaubte.
+        ist_sequenz = rest_zeile.startswith("- ") or rest_zeile == "-"
         if rest_zeile.startswith("- "):
             rest_zeile = rest_zeile[2:]
         elif rest_zeile == "-":
@@ -369,7 +393,7 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             continue                      # `key:` ohne Leerzeichen ist kein Mapping
         wert = wert.lstrip(" ")
 
-        if einzug == 0 and not rest_zeile.startswith("-"):
+        if einzug == 0 and not ist_sequenz:
             if key in gesehen:
                 # WF-990: BLOCKER, nicht HINWEIS. Hugo bricht an einem
                 # doppelten Mapping-Schlüssel den ganzen Bau ab – PyYAML
