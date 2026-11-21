@@ -1,0 +1,1 @@
+{"ts": "2026-11-21T11:44:09Z", "module": "ops_report", "action": "daily-report", "input": {"cron": true}, "output": {"status": "ok"}, "status": "ok", "critical": false, "commit": null}
