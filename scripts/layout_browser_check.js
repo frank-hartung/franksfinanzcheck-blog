@@ -658,9 +658,14 @@ async function auditPage(browser, url, viewport, ctx) {
     issues,
     warnings,
     // Woher stammt eine CSP in dieser Messung? Leer = keine beobachtet.
+    // Die beobachtete DIREKTIVE wird mitgeschrieben (gekürzt), damit ein
+    // Befund nachprüfbar ist: Steht im Browsertext eine andere Direktive
+    // als die hier belegte, stammt sie NICHT aus dieser Antwort.
     csp: { direktiven: (csp.direktiven || []).length,
            kopfzeile: !!(csp.quelle && csp.quelle.kopfzeile),
-           unbelegt: (csp.unbelegt || []).length },
+           unbelegt: (csp.unbelegt || []).length,
+           gesehen: (csp.direktiven || []).slice(0, 1)
+             .map(d => String(d).slice(0, 200)) },
   };
 }
 
@@ -795,6 +800,14 @@ if (SELFTEST) {
     warningPages: warnPages.map(r => ({
       url: r.url, viewport: r.viewport, warnings: r.warnings,
     })),
+    cspBelege: {
+      seitenMitKopfzeile: results.filter(r => r.csp && r.csp.kopfzeile).length,
+      gesehen: [...new Set(results.flatMap(r => (r.csp && r.csp.gesehen) || []))],
+      unbelegt: results.reduce((n, r) => n + ((r.csp && r.csp.unbelegt) || 0), 0),
+      hinweis: 'gesehen = CSP-Kopfzeile der Dokument-Antwort in DIESER '
+        + 'Messung. Steht im Browsertext eine andere Direktive, stammt sie '
+        + 'nicht aus dem ausgelieferten HTML.',
+    },
     allOk: critical.length === 0,
     greenWithWarnings: critical.length === 0 && warnPages.length > 0,
   };

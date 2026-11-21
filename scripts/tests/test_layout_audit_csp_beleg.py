@@ -156,6 +156,46 @@ class CspBrauchtEinenBelegTest(unittest.TestCase):
                          "Belegpflicht oben nicht mehr der richtige Hebel")
 
 
+class DerBelegStehtImBerichtTest(unittest.TestCase):
+    """Ohne den Beleg im Bericht ist die Unterscheidung nicht nachprüfbar.
+
+    Der CI-Lauf von PR #1303 zeigte den Grenzfall: Der Befund nannte die alte
+    Direktive, obwohl `static/_headers` sie längst nicht mehr führt. Ob diese
+    Direktive in der Messung GESEHEN wurde oder nicht, ließ sich den
+    Annotationen nicht entnehmen — genau diese Lücke schließt die Notice.
+    """
+
+    def test_notice_nennt_die_gesehene_direktive(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import layout_annotations as la
+        b = {"domMetrics": {"maxChildren": 50, "maxChildrenElement": "x",
+                            "maxHeadChildren": 50, "maxDepth": 12,
+                            "maxElements": 1196},
+             "cspBelege": {"gesehen": ["script-src 'self' https://beispiel.test"],
+                           "unbelegt": 2}}
+        text = la.summary_notice({}, b)
+        self.assertIn("CSP-Beleg: Dokument-Antwort führt", text)
+        self.assertIn("https://beispiel.test", text)
+
+    def test_notice_sagt_es_wenn_keine_kopfzeile_gemessen_wurde(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import layout_annotations as la
+        b = {"domMetrics": {"maxChildren": 50, "maxChildrenElement": "x",
+                            "maxHeadChildren": 50, "maxDepth": 12,
+                            "maxElements": 1196},
+             "cspBelege": {"gesehen": [], "unbelegt": 4}}
+        text = la.summary_notice({}, b)
+        self.assertIn("keine CSP-Kopfzeile in dieser Messung", text)
+        self.assertIn("Frühwarnung, nicht Befund", text)
+
+    def test_browser_check_schreibt_die_direktive_mit(self):
+        text = (ROOT / "scripts" / "layout_browser_check.js").read_text(encoding="utf-8")
+        self.assertIn("cspBelege", text)
+        self.assertIn("gesehen:", text)
+
+
 class KeinStillerAusfallTest(unittest.TestCase):
     """Die Gegenrichtung: Die Belegpflicht darf echte Befunde nicht kosten."""
 

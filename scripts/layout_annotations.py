@@ -117,6 +117,20 @@ def summary_notice(dom: dict, browser: dict) -> str:
     if check:
         parts.append(f"Parser-Gegenrechnung an {check.get('compared', 0)} Messungen, "
                      f"Drift: {len(check.get('drift', []))}")
+    # Beleglage zur CSP (21.11.2026): Ein CSP-Befund ist nur dann ein
+    # Seitenbefund, wenn diese Messung die Direktive gesehen hat. Ohne diese
+    # Zeile wäre im Nachhinein nicht prüfbar, worüber gestritten wird.
+    csp = (browser or {}).get("cspBelege") or {}
+    if csp:
+        if csp.get("gesehen"):
+            parts.append("CSP-Beleg: Dokument-Antwort führt "
+                         + "; ".join(csp["gesehen"])[:160])
+        else:
+            parts.append("CSP-Beleg: keine CSP-Kopfzeile in dieser Messung "
+                         "(Herkunft außerhalb des Repos)")
+        if csp.get("unbelegt"):
+            parts.append(f"{csp['unbelegt']} CSP-Meldung(en) ohne Belegquelle "
+                         "→ Frühwarnung, nicht Befund")
     if not parts:
         return "Layout-Audit: keine Zahlen gefunden (kein Bau/kein Bericht?)."
     return " · ".join(parts)
