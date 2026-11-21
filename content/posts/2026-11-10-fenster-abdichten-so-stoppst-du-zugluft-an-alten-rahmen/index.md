@@ -176,7 +176,7 @@ Du kannst diese Arbeit problemlos selbst erledigen. Ist der Rahmen jedoch verzog
 
 Ein flatterndes Feuerzeug vor dem Fenster ist ein guter Beweis. Frage im Zweifel einen Fachmann für Fensterbau um Rat. Er kann die Beschläge professionell und dauerhaft einstellen. **Für deinen nächsten Check:** Teste die Dichtung an mehreren Stellen desselben Fensters. Ein Problem an einer Ecke erfordert nicht zwangsläufig neue Dichtungen für den ganzen Rahmen.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Energieeffiziente Geräte](../../posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/) **Lesetipp:** Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden
 
 ## Häufige Fragen
 

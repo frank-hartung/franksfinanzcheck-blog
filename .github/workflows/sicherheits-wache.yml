@@ -105,6 +105,16 @@ on:
       - "data/abhaengigkeits_schutz_belege.jsonl"
       - ".gitattributes"
       - ".github/workflows/abhaengigkeits-selbstheilung.yml"
+      # Code-Selbstheilung (#709, 12.10.2026): der selben Vertragsmuster
+      # in der #709-Klasse. Ein Befund ist erst behoben, wenn er nicht
+      # zurückkommen kann – daher wandert jede Änderung daran in diesen Lauf.
+      - "scripts/code_selbstheilung.py"
+      - "scripts/tests/test_code_selbstheilung.py"
+      - "scripts/url_substring_guard.py"
+      - "scripts/url_host.py"
+      - "data/code_schutz_vertrag.json"
+      - "data/code_schutz_belege.jsonl"
+      - ".github/workflows/code-selbstheilung.yml"
       # Trigger-Wache (W1/W3), 27.10.2026: Der gemeinsame Kommando-Melder
       # entscheidet, ob ein Befund als Annotation erscheint. Ändert er sich,
       # muss DIESER Lauf ihn prüfen – er ist der Kanal, der WF-E813 führt.
@@ -184,6 +194,16 @@ on:
       - "data/abhaengigkeits_schutz_belege.jsonl"
       - ".gitattributes"
       - ".github/workflows/abhaengigkeits-selbstheilung.yml"
+      # Code-Selbstheilung (#709, 12.10.2026): der selben Vertragsmuster
+      # in der #709-Klasse. Ein Befund ist erst behoben, wenn er nicht
+      # zurückkommen kann – daher wandert jede Änderung daran in diesen Lauf.
+      - "scripts/code_selbstheilung.py"
+      - "scripts/tests/test_code_selbstheilung.py"
+      - "scripts/url_substring_guard.py"
+      - "scripts/url_host.py"
+      - "data/code_schutz_vertrag.json"
+      - "data/code_schutz_belege.jsonl"
+      - ".github/workflows/code-selbstheilung.yml"
       - "scripts/github_kommando.py"
       - "scripts/tests/test_github_kommando.py"
       - "requirements*.txt"
@@ -289,6 +309,8 @@ jobs:
           python3 scripts/abhaengigkeits_wache.py --selftest
           python3 scripts/abhaengigkeits_selbstheilung.py --selftest
           python3 scripts/abhaengigkeits_selbstheilung.py --wache
+          python3 scripts/code_selbstheilung.py --selftest
+          python3 scripts/code_selbstheilung.py --wache
 
       - name: Struktur-Gate – jeder Pin ist eine Aussage (offline)
         # A1 Pins · A2 Quelle/Hash-Lock · A3 Lockfile · A4 Action-SHA
@@ -297,7 +319,7 @@ jobs:
         run: python3 scripts/abhaengigkeits_wache.py --check
 
       - name: Vertragstests der Wache
-        run: python3 -m unittest scripts.tests.test_abhaengigkeits_wache scripts.tests.test_abhaengigkeits_selbstheilung -v
+        run: python3 -m unittest scripts.tests.test_abhaengigkeits_wache scripts.tests.test_abhaengigkeits_selbstheilung scripts.tests.test_code_selbstheilung -v
 
       - name: Audit-Bedarf bestimmen (Tageslauf, Zuruf oder Paket-Diff)
         id: audit_bedarf
