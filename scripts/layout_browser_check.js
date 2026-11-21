@@ -423,14 +423,15 @@ async function loadRuntime(browser, url, viewport) {
       errors.push('JS: ' + e.message);
     }
   });
+  const cspMeldungen = [];      // vorläufig: CSP-Verstoß, Beleg noch offen
   const unbelegt = [];
   page.on('console', m => {
     if (!sammlung.aktiv || m.type() !== 'error' || sandboxArtefakt(m.text())) return;
-    if (cspBefund(m.text()) && cspDirektiven.length === 0) {
-      // CSP-Verstoß, aber keine einzige CSP-Kopfzeile in dieser Messung:
-      // Die Direktive im Text stammt nicht aus dem, was wir ausgeliefert
-      // haben. Aufnehmen, aber als unbelegt kennzeichnen.
-      unbelegt.push(m.text());
+    if (cspBefund(m.text())) {
+      // Die CSP-Kopfzeile kann NACH dem ersten Skriptfehler eintreffen
+      // (z. B. bei Umleitungen). Ob sie existiert, entscheidet sich erst
+      // am Ende der Messung – siehe `cspImBefund` nach page.goto().
+      cspMeldungen.push(m.text());
       return;
     }
     errors.push('console: ' + m.text());
@@ -439,6 +440,12 @@ async function loadRuntime(browser, url, viewport) {
     if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url());
     // Woher kommt eine CSP, falls eine kommt? Nur die Antwort kann sie
     // setzen – der Messserver tut es nicht, also bleibt das Feld leer.
+    // NUR die Dokument-Antwort kann die Seite per CSP steuern. Die erste
+    // Fassung dieses Filters sammelte Kopfzeilen von JEDER Antwort – der
+    // Browserfehler blieb dadurch als „belegt" stehen, obwohl der
+    // Messserver nie eine CSP setzt. Ein Beleg, der aus einer fremden
+    // Antwort stammt, ist kein Beleg für diese Seite.
+    if (!/^(document|iframe)$/i.test(String(r.request().resourceType()))) return;
     try {
       const h = r.headers() || {};
       const wert = h['content-security-policy'];
@@ -452,6 +459,15 @@ async function loadRuntime(browser, url, viewport) {
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
     .catch(e => errors.push('load: ' + e.message));
   const loadMs = Date.now() - t0;
+  // Jetzt steht fest, ob diese Seite überhaupt per CSP-Kopfzeile gesteuert
+  // wurde. Erst hier wird aus einem CSP-Verstoß ein Befund oder ein Belegmangel.
+  for (const text of cspMeldungen) {
+    if (cspQuelle.kopfzeile) {
+      errors.push('console: ' + text);
+    } else {
+      unbelegt.push(text);
+    }
+  }
   const metrics = await measureDom(page);
   const title = await page.title();
   const h1 = await page.evaluate(() => {

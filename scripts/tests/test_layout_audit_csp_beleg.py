@@ -76,14 +76,52 @@ class CspBrauchtEinenBelegTest(unittest.TestCase):
     def test_verstoss_ohne_direktive_wird_unbelegt(self):
         self.assertIn("cspBefund", self.text)
         self.assertIn("unbelegt", self.text)
-        # Die Bedingung, die den Unterschied macht: Verstoß UND keine
-        # beobachtete Direktive -> nicht in `errors`.
-        treffer = re.search(
-            r"if \(cspBefund\(m\.text\(\)\) && cspDirektiven\.length === 0\)", self.text)
-        self.assertIsNotNone(
-            treffer,
-            "Die Unterscheidung muss an `cspDirektiven.length === 0` hängen. "
-            "Hängt sie an etwas anderem (z. B. am Seitennamen), ist sie Willkür.")
+        # Die Bedingung, die den Unterschied macht: Ein CSP-Verstoß wird
+        # vorgemerkt und NACH dem Laden anhand der belegten Direktive
+        # entweder Befund (`errors`) oder Belegmangel (`unbelegt`).
+        # Zeilenweise geprüft statt mit mehrzeiligen Regexen (CLAUDE.md,
+        # Regel 6). Der erste Anlauf scheiterte an doppelten Escapes im
+        # Python-String – der Code war richtig, der Test falsch.
+        zeilen = [z.strip() for z in self.text.splitlines()]
+        self.assertIn("if (cspBefund(m.text())) {", zeilen,
+                      "Ein CSP-Verstoß muss zunächst vorgemerkt werden – beim "
+                      "Eintreffen der Konsolenzeile ist die Beleglage offen")
+        self.assertIn("cspMeldungen.push(m.text());", zeilen)
+        self.assertIn("if (cspQuelle.kopfzeile) {", zeilen,
+                      "Mit belegter Direktive bleibt der Verstoß ein Befund")
+        self.assertIn("errors.push('console: ' + text);", zeilen)
+        self.assertIn("unbelegt.push(text);", zeilen,
+                      "Ohne Beleg wandert er nach `unbelegt`")
+
+    def test_nur_die_dokument_antwort_ist_ein_beleg(self):
+        """Der Fehlversuch, den erst der CI-Lauf gezeigt hat.
+
+        Die erste Fassung sammelte CSP-Kopfzeilen von JEDER Antwort. Der
+        Browserfehler blieb dadurch als „belegt" stehen – obwohl der
+        Messserver nie eine CSP setzt. Ein Beleg aus der Antwort eines
+        FREMDEN Hosts sagt nichts über die Steuerung dieser Seite.
+        """
+        self.assertIn("resourceType()", self.text,
+                      "Der Beleg muss auf die Dokument-Antwort eingegrenzt sein")
+        self.assertRegex(
+            self.text, r"/\^\(document\|iframe\)\$/i",
+            "Genau document|iframe sind die Typen, die eine Seite per CSP "
+            "steuern – ein Skript-/Bild-Response ist es nicht")
+
+    def test_beleg_wird_nach_dem_laden_ausgewertet(self):
+        """Die Kopfzeile kann nach dem ersten Skriptfehler eintreffen.
+
+        Die zweite Fassung entschied beim Eintreffen der Konsolenzeile. Bei
+        einer Umleitung wäre die Dokument-Antwort da noch nicht gesehen –
+        ein echter Befund wäre stillschweigend zur Frühwarnung geworden.
+        """
+        self.assertIn("cspMeldungen", self.text,
+                      "CSP-Meldungen müssen vorgemerkt und NACH dem Laden "
+                      "ausgewertet werden")
+        self.assertRegex(
+            self.text,
+            r"for \(const text of cspMeldungen\) \{\s*\n\s*if \(cspQuelle\.kopfzeile\)",
+            "Die Entscheidung hängt am ENDZUSTAND von cspQuelle")
 
     def test_unbelegt_landet_in_den_fruehwarnungen(self):
         self.assertIn("CSP ohne Belegquelle", self.text,
