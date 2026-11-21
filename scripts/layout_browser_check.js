@@ -295,17 +295,48 @@ function loadDomAudit() {
   }
 }
 
+/**
+ * Alle Dateien des Baus als Map `URL-Pfad → absoluter Pfad`.
+ *
+ * WARUM (21.11.2026): Der Messserver soll eine Anfrage nicht in einen
+ * Dateisystempfad übersetzen. Was nicht im Bau liegt, ist nicht adressierbar.
+ */
+function dateiIndex(baseDir) {
+  const index = new Map();
+  const gehe = (dir, prefix) => {
+    let eintraege = [];
+    try { eintraege = fs.readdirSync(dir, { withFileTypes: true }); } catch (e) { return; }
+    for (const e of eintraege) {
+      const absol = path.join(dir, e.name);
+      const relPfad = prefix + '/' + e.name;
+      if (e.isDirectory()) gehe(absol, relPfad);
+      else index.set(relPfad, absol);
+    }
+  };
+  gehe(path.resolve(baseDir), '');
+  return index;
+}
+
 function serve(baseDir, port, optionen = {}) {
   const csp = optionen.csp || '';
   const nonce = optionen.nonce || '';
   const cspDigest = optionen.cspDigest || '';
+  // PFAD-SICHERHEIT (CodeQL js/path-injection, 21.11.2026): Es gibt keinen
+  // Pfad aus der Anfrage. Der Server liest beim Start EINMAL den Bau ein und
+  // bedient danach nur noch Treffer aus diesem Verzeichnis. Eine Anfrage kann
+  // damit nichts außerhalb des Baus adressieren – nicht durch `..`, nicht
+  // durch Kodierung, nicht durch NUL-Bytes.
+  const dateien = dateiIndex(baseDir);
   const server = http.createServer((req, res) => {
-    let p = decodeURIComponent(req.url.split('?')[0]);
-    if (p.endsWith('/')) p += 'index.html';
-    let file = path.normalize(path.join(baseDir, p));
-    if (file !== baseDir && !file.startsWith(baseDir + path.sep)) {
-      res.writeHead(403); res.end(); return;
+    let p;
+    try {
+      p = decodeURIComponent(req.url.split('?')[0]);
+    } catch (e) {
+      res.writeHead(400); res.end('bad request'); return;
     }
+    if (p.endsWith('/')) p += 'index.html';
+    const file = dateien.get(p);
+    if (!file) { res.writeHead(404); res.end('not found'); return; }
     fs.readFile(file, (err, data) => {
       if (err) { res.writeHead(404); res.end('not found'); return; }
       const ext = path.extname(file);
@@ -488,10 +519,15 @@ function runSelftest() {
   catch (e) { csp = null; }
   pruefe('CSP aus static/_headers lesbar', !!csp, true);
   pruefe('CSP nennt script-src', /(^|;)\s*script-src\s/.test(csp || ''), true);
+  // Direktivenweise statt „irgendwo im String": Ein Vorkommen in der falschen
+  // Direktive wäre kein Beleg (CodeQL js/regex/missing-regexp-anchor).
+  const cspZeilen = String(csp || '').split(';').map(t => t.trim());
+  const scriptSrc = cspZeilen.find(t => /^script-src\b/.test(t)) || '';
+  const connectSrc = cspZeilen.find(t => /^connect-src\b/.test(t)) || '';
   pruefe('CSP nennt Beacon-Skript-Domain',
-    /static\.cloudflareinsights\.com/.test(csp || ''), true);
+    scriptSrc.split(/\s+/).includes('https://static.cloudflareinsights.com'), true);
   pruefe('CSP nennt Beacon-Messdomain',
-    /(^|[\s;])https:\/\/cloudflareinsights\.com/.test(csp || ''), true);
+    connectSrc.split(/\s+/).includes('https://cloudflareinsights.com'), true);
   pruefe('_headers ohne CSP ergibt null',
     cspAusHeaders('/*\n  X-Test: 1\n\n/images/*\n  Cache-Control: max-age=1\n'), null);
   pruefe('CSP in Kommentarzeile zählt nicht',
@@ -564,6 +600,8 @@ function runSelftest() {
     !!(p && !/frame-ancestors/i.test(p.html || '')), true);
   pruefe('Probe statische Datei ohne CSP', !!(p && p.css === null), true);
   pruefe('Probe trägt Digest und Nonce', !!(p && p.digest && p.nonce), true);
+  pruefe('Probe wehrt Pfad-Ausbrüche ab',
+    !!(p && p.ausbruch && p.ausbruch.every(st => st === 404)), true);
 
   for (const [name, ist, soll] of hermetik) {
     if (JSON.stringify(ist) !== JSON.stringify(soll)) {
@@ -1061,7 +1099,10 @@ function buildSampleUrls(domAudit, basisUrl) {
   const PFAD_SICHER = /^\/[a-z0-9][a-z0-9\/._-]{0,239}$/;
   for (const s of slugs) {
     if (!SLUG_SICHER.test(s)) continue;
-    urls.push(`${basisUrl}/posts/${s}/`);
+    // encodeURIComponent: Der Name kommt aus dem Dateisystem. Kodiert ist er
+    // ein reiner Pfadbestandteil und kann die Anfrage nicht umlenken
+    // (CodeQL js/file-access-to-http, 21.11.2026).
+    urls.push(`${basisUrl}/posts/${encodeURIComponent(s)}/`);
     seen.add(`/posts/${s}/`);
   }
   // Risiko-Seiten: größte gemessene Werte zuerst, Paginierung/Vorlagen raus
@@ -1081,7 +1122,10 @@ function buildSampleUrls(domAudit, basisUrl) {
     if (istWeiterleitungPfad(rel)) { ausgelassen.push(rel); continue; }
     risk.push(r);
   }
-  for (const r of risk) urls.push(`${basisUrl}${r.rel}`);
+  for (const r of risk) {
+    const pfad = r.rel.split('/').map(encodeURIComponent).join('/');
+    urls.push(`${basisUrl}${pfad}`);
+  }
   return { urls, slugs, risk: risk.map(r => r.rel),
            weiterleitungenAusgelassen: [...new Set(ausgelassen)] };
 }
@@ -1114,17 +1158,24 @@ async function serveProbe() {
   const hole = (pfad) => new Promise((res, rej) => {
     http.get({ host: '127.0.0.1', port, path: pfad }, r => {
       r.resume();
-      res(r.headers);
+      res({ status: r.statusCode, headers: r.headers });
     }).on('error', rej);
   });
   try {
     const html = await hole('/');
     const css = await hole('/a.css');
+    // Ausbruchsversuche: Der Server kennt nur Dateien aus dem Bau.
+    const ausbruch = [];
+    for (const pfad of ['/../package.json', '/%2e%2e/%2e%2e/package.json',
+      '/a.css/../../package.json']) {
+      ausbruch.push((await hole(pfad)).status);
+    }
     console.log(JSON.stringify({
-      html: html['content-security-policy'] || null,
-      digest: html['x-ff-audit-csp'] || null,
-      nonce: html['x-ff-audit-nonce'] || null,
-      css: css['content-security-policy'] || null,
+      html: html.headers['content-security-policy'] || null,
+      digest: html.headers['x-ff-audit-csp'] || null,
+      nonce: html.headers['x-ff-audit-nonce'] || null,
+      css: css.headers['content-security-policy'] || null,
+      ausbruch,
     }));
   } finally {
     server.close();
