@@ -1,15 +1,15 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-20 23:21 UTC  
+**Stand:** 2026-11-21 01:19 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-11-20): 2 Artikel – Ziel erfüllt. – Bestand: 4 von Gates gehalten (ältester 9 Tage: faktenfrische: 05ae2eeee6a578aac17b (luecke): Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.; 2980f6b227953c5ac8af (luecke): Keine Quelle für die Aussage, …)
+**Befund:** Letzter Publikationstag (2026-11-20): 2 Artikel – Ziel erfüllt. – Bestand: 4 von Gates gehalten (ältester 10 Tage: faktenfrische: 05ae2eeee6a578aac17b (luecke): Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.; 2980f6b227953c5ac8af (luecke): Keine Quelle für die Aussage, …)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-11-20 (Freitag) |
-| Publikationstag heute | ja |
+| Heute | 2026-11-21 (Samstag) |
+| Publikationstag heute | nein |
 | Artikel letzter Publikationstag (2026-11-20) | 2 |
-| Letzter Artikel überhaupt | 2026-11-20 (0 Tage her) |
+| Letzter Artikel überhaupt | 2026-11-20 (1 Tage her) |
 | Live-Artikel gesamt | 90 |
 | Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 4 |
