@@ -1,8 +1,61 @@
 {
-  "generated_at": "2026-10-30",
+  "generated_at": "2026-11-21",
   "high_risk_total": 10,
-  "approved": 10,
-  "open_live": 0,
-  "open_drafts": 0,
-  "items": []
+  "approved": 6,
+  "open_live": 2,
+  "open_drafts": 2,
+  "items": [
+    {
+      "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst",
+      "path": "content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md",
+      "state": "live",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E09",
+          "detail": "Prüfung ist älter als 45 Tage"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin ist überfällig"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+      "path": "content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md",
+      "state": "live",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
+      "path": "content/posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin ist überfällig"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten",
+      "path": "content/posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin ist überfällig"
+        }
+      ]
+    }
+  ]
 }
