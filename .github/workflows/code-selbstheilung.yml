@@ -34,6 +34,9 @@ on:
       - "scripts/tests/test_code_selbstheilung.py"
       - "scripts/url_substring_guard.py"
       - "scripts/url_host.py"
+      # W1 (Trigger-Wache, 21.11.2026): Der Lauf RUFT git_sync.sh auf – eine
+      # Änderung daran muss ihn deshalb auch auslösen (beide Filter).
+      - "scripts/git_sync.sh"
       - "data/code_schutz_vertrag.json"
       - "data/code_schutz_belege.jsonl"
       - ".gitattributes"
@@ -46,6 +49,9 @@ on:
       - "scripts/tests/test_code_selbstheilung.py"
       - "scripts/url_substring_guard.py"
       - "scripts/url_host.py"
+      # W1 (Trigger-Wache, 21.11.2026): Der Lauf RUFT git_sync.sh auf – eine
+      # Änderung daran muss ihn deshalb auch auslösen (beide Filter).
+      - "scripts/git_sync.sh"
       - "data/code_schutz_vertrag.json"
       - "data/code_schutz_belege.jsonl"
       - ".gitattributes"
