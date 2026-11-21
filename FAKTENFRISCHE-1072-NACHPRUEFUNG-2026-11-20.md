@@ -322,3 +322,43 @@ hier verboten ist.
 meine Arbeit grün, das PR-Gate (`Integritäts-Siegel`) grün, und **zehn rote
 Tests, von denen keiner durch diesen PR entstanden ist** — neun vorbestehend
 an der Basis, einer durch `#1303` auf `main` hinzugekommen.
+
+---
+
+## 9. `layout-audit` bleibt rot – und die Messung sagt jetzt genau, warum
+
+Nachdem `#1303` die CSP-Freigabe ergänzt hat, ist `layout-audit` **weiterhin
+rot** — auf Commit `cff79f5b`. Der Grund steht in der `::notice::` des Laufs
+(Job 136874503921), und er ist der interessanteste Befund des Tages:
+
+    CSP-Beleg: Dokument-Antwort führt
+      default-src 'self'; script-src 'self' 'unsafe-inline'
+      https://challenges.cloudflare.com; style-src …
+
+Das ist die **alte** Direktive — ohne `https://static.cloudflareinsights.com`.
+Obwohl `static/_headers` sie seit `65029c7b` enthält. Die Kette erklärt das
+vollständig:
+
+1. Der Audit baut `public/` lokal und serviert es über einen Node-Server, der
+   nur `Content-Type` setzt (`layout_browser_check.js`, Zeile 176).
+2. Der Browser lädt Seiten, die **im HTML eine Meta-CSP** tragen
+   (`layouts/_partials/head.html`).
+3. Die im Browserfehler zitierte Direktive stammt aber aus der
+   **Dokument-Antwort** — und die kommt nicht aus dem Repo: `cloudflare/edge-schutz.md`
+   hält selbst fest, dass **GitHub Pages `static/_headers` ignoriert** und die
+   Header nur über den Cloudflare-Proxy gesetzt werden.
+4. Also: Die Regel „wer den Beacon lädt, erlaubt seine Domain in der CSP"
+   ist im Repo erfüllt — in der **Auslieferung** aber noch nicht. Franks
+   `static/_headers`-Änderung ist die halbe Reparatur; die andere Hälfte ist
+   eine Cloudflare-Einstellung, die nicht in diesem Repository liegt.
+
+**Was ich daraus nicht mache:** Ich setze die Cloudflare-Regel nicht (kein
+Zugang, und es ist eine Sicherheitsrichtlinie), und ich nehme den Befund
+nicht aus dem Audit (das wäre genau die Testentspannung, die hier verboten
+ist). Der Audit meldet korrekt: Solange die Edge die alte CSP sendet, lädt der
+Beacon ins Leere.
+
+**Wer es schließt:** Frank in Cloudflare → Rules → Transform Rules →
+Response Header Modification, mit der Zeile aus
+`cloudflare/edge-schutz.md` (Zeile 38) — sie ist bereits aktuell.
+Danach ist `layout-audit` grün, ohne dass am Repo etwas geändert werden muss.
