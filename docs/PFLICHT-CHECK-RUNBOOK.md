@@ -1,12 +1,45 @@
 # Runbook: Pflicht-Check `Integritäts-Siegel` (PR-Schutz für `main`)
 
-**Stand:** 20.09.2026 (Nachprüfung: Befund unverändert offen, als Dauerzustand abgelegt –
-siehe Abschnitt „Dauerzustand – dokumentiert statt Dauer-Alarm“) · **Vertrag:** Governance-Regel **C18**
+**Stand:** 20.11.2026 (Nachprüfung – Befund weiterhin offen, Belege aktualisiert, Frist-Wache
+ergänzt; Aktivierung bleibt separater Admin-Schritt) · vorherige Nachprüfung 20.09.2026
+(Befund unverändert offen, als Dauerzustand abgelegt – siehe Abschnitt „Dauerzustand –
+dokumentiert statt Dauer-Alarm“) · **Vertrag:** Governance-Regel **C18**
 (`scripts/governance_contract.py`) · **Wache:** `scripts/pflichtcheck_guard.py`
 · **Anlass:** [Integritäts-Vorfall](INCIDENT-2026-09-19-integritaets-lock.md),
 PR #317 und Deploy-Ausfall #320 / PR #321.
 
-## Aktueller Befund – Nachprüfung 20.09.2026 (read-only, ohne Admin-Recht)
+## Nachprüfung 20.11.2026 (Highend-Nachzug, read-only, ohne Admin-Eingriff)
+
+Geprüft am **20.11.2026** gegen die Live-API (nur GET, keine Schreibrechte, keine
+Ruleset-Änderung ausgeführt). **Der Befund ist unverändert**: `main` verlangt den
+Check `Integritäts-Siegel` nicht. Was sich seit 20.09.2026 geändert hat, ist die
+Evidenz drumherum – sie ist hiermit auf den lebendigen Zustand nachgezogen.
+
+| Frage | Antwort (API-Beleg, 20.11.2026) |
+|---|---|
+| Verlangt `main` den Check `Integritäts-Siegel`? | **Nein.** `GET /rules/branches/main` liefert **7 Einträge**: je `deletion` + `non_fast_forward` aus #23710849, zusätzlich `deletion` + `non_fast_forward` + `required_linear_history` aus **#24247857** („Premium-Schutz für main“, aktiv seit 30.09.2026, ohne Bypass-Akteure) sowie `deletion` + `non_fast_forward` aus #23705980. Kein `required_status_checks`, keine `pull_request`-Regel. |
+| Aktive Rulesets (target `branch`) | **#23710849** „Integritäts-Lock (PR-Gate)“ (`active`, `~DEFAULT_BRANCH`, deletion + non_fast_forward, bypass `[]`) · **#24247857** „Premium-Schutz für main“ (`active`, + `required_linear_history`, bypass `[]`) · **#23705980** „main – Unveränderlichkeit (ohne Bypass)“ (`active`, deletion + non_fast_forward, bypass `[]`). Kein Ruleset trägt eine Status-Check-Pflicht. |
+| Hat ein aktiver Bypass die Automation offen gehalten? | **Es gibt keinen Bypass-Akteur** in einem der drei Rulesets (`bypass_actors: []`) – die Lage bleibt wie am 20.09.: keine Rule blockiert direkte Pushes über PR-/Status-Pflichten (es gibt keine PR-/Status-Pflicht), `required_linear_history` betrifft nur Merge-Kompatibilität. Der 19.09.-Stillstand (PR-Pflicht ohne Actions-Bypass) existiert weiterhin nicht. |
+| Wie sieht der für Repository-Analysen genutzte Probing-Kontext aus? | `GET /repos/frank-hartung/franksfinanzcheck-blog` meldet für diesen Kontext `permissions: {"admin": true, "maintain": true, …}` – die technisch fehlerfreie Reparatur wäre also ausführbar. Sie bleibt **ausdrücklich ein separater Admin-Schritt (C15)** und wurde **nicht** ausgeführt; ebenso wenig wurde `pruefung_bis` verlängert. |
+| PR-Gate jetzt | `python3 scripts/pflichtcheck_guard.py --branch main` → **BEKANNT** (Exit 0, 🛑 + `::warning::`); `--strict` → Exit 1. `integrity_guard.py --gate` → grün (55 Kerndateien == signierter Stand, HEAD `d047978`). Governance-Vertrag: 47 Regeln grün. |
+| Was neu ist (Dauerhaftigkeit) | **Frist-Wache**: `pflichtcheck_guard.py --frist-report` + Schritt „Pflicht-Check-Frist-Wache (Dauerzustand)“ im wöchentlichen `premium-governance.yml` (step `pflichtcheck` im Governance-Gate). > 35 Tage Vorlauf → INFO · ≤ 35 Tage → AMBER (handlungsbedürftig, Menschen-Entscheidung) · abgelaufen → RED · Erklärung zurückgebaut → INFO `dauerzustand_weg`. Offline, read-only, kein Token. |
+| Frist | **31.12.2026** (41 Tage ab 20.11.2026). Verlängern = `pruefung_bis` im Vertrag neu datieren – Menschen-Entscheidung, kein Lauf tut das. Ab 01.01.2027 meldet die Wache wieder hart (Exit 1, `::error::`). |
+
+**Einordnung bypass_actors:** Das Feld ist in allen drei Rulesets vorhanden und
+explizit leer (`[]`) – das ist eine belegte Leere, kein Sichtbarkeitsartefakt
+(kein fehlendes Feld). Deshalb warnt die grüne Nachprüfung hier nicht und der
+weiche Dauerzustand gilt weiterhin: Es gibt kein neues Ruleset, das direkte
+Pushes blockiert oder einen Bypass fehlt, der zu einem 19.09.-artigen Stillstand
+führen würde.
+
+**Warum die Belege aktualisiert wurden:** Die Erklärung von 20.09. nennt „vier
+Einträge“ aus zwei Rulesets – seit 30.09.2026 steht `required_linear_history`
+zusätzlich im Bestand (#24247857). C18 verlangt keine bestimmte Zahl, aber eine
+Erklärung, deren Belege still altern, wäre beim nächsten Audit eine zweite
+Wahrheit. Aktualisiert wurden nur die Belege; `festgestellt` (2026-09-19),
+`dokumentiert` (2026-09-20) und `pruefung_bis` (2026-12-31) bleiben unverändert.
+
+## Aktueller Befund – Nachprüfung 20.09.2026 (read-only, ohne Admin-Recht) · Historie
 
 Geprüft am **20.09.2026** mit dem Arena-Bot-Token. `GET /repos/…` meldet für
 diesen Zugang `permissions: {"admin": false, "maintain": false, "pull": false,
@@ -14,6 +47,10 @@ diesen Zugang `permissions: {"admin": false, "maintain": false, "pull": false,
 Rulesets ändern bleibt damit Admin-Aufgabe (Governance-Regel **C15**: Regeln
 ändert ein Mensch, die Wache repariert nie selbst). Der Zielzustand unten ist
 vorbereitet und **nicht live angewendet**.
+
+> **Historischer Stand.** Diese Tabelle beschreibt den 20.09.2026 und ist als
+> Beleg dieser Nachprüfung archiviert; die aktuellen Zahlen stehen in der
+> Nachprüfung 20.11.2026 über diesem Abschnitt.
 
 | Frage | Antwort (API-Beleg, 20.09.2026) |
 |---|---|
@@ -99,8 +136,23 @@ der Pipeline. Repariert ein Admin das Ruleset, meldet der **grüne** Lauf die Er
    entfernen); diesen Abschnitt als Historie stehen lassen.
 3. `python3 scripts/pflichtcheck_guard.py --selftest`,
    `python3 scripts/governance_contract.py --quick` und
-   `python3 -m unittest scripts/tests/test_pflichtcheck.py scripts/tests/test_ruleset_restoration.py`
+   `python3 -m unittest scripts/tests/test_pflichtcheck.py scripts/tests/test_ruleset_restoration.py scripts/tests/test_pflichtcheck_frist.py`
    müssen grün sein, bevor das Ruleset als repariert gilt.
+
+**Frist-Wache (seit 20.11.2026, dauerhaft).** Damit der 01.01.2027 nicht als Überraschung
+kommt, meldet der wöchentliche `premium-governance.yml`-Lauf (Schritt „Pflicht-Check-Frist-Wache
+(Dauerzustand)“, Step-Kennung `pflichtcheck` im Governance-Gate) den Reststand **bevor** er
+abgelaufen ist: Restlaufzeit > 35 Tage → `INFO` (`dauerzustand_frist`, schweigt) · ≤ 35 Tage
+→ `AMBER` (handlungsbedürftig: Nachprüfung, Entscheidung Frank) · abgelaufen oder unbrauchbare
+Frist → `RED` (der Wochen-Governance-Lauf geht rot, Issue) · Erklärung zurückgebaut → `INFO`
+(`dauerzustand_weg`, nichts zu messen). Die Frist-Wache ist offline, read-only, ohne Token und
+ändert **nie** ein Urteil des PR-Gates – sie erzeugt den Handlungs-Druck, der vorher fehlte,
+statt den Alarm zu drehen. Prüf-Befehl:
+
+```bash
+python3 scripts/pflichtcheck_guard.py --frist-report /tmp/pflichtcheck-frist-report.md
+cat /tmp/pflichtcheck-frist-report.md   # Ampel + Befundtabelle fürs Governance-Gate
+```
 
 ## Der Zielvertrag (PR-Scoping, aber Automation bleibt schreibfähig)
 
@@ -338,6 +390,43 @@ meldet die Wache „nicht prüfbar“, nicht „kein Bypass“; nur explizites `
 belegt eine leere Liste. API-Ausfälle dieser Zusatzprüfung sind best effort; die Betriebswache ist
 separat und wird nicht an den PR-Check gekoppelt.
 
+## Verifikation nach der Aktivierung (Admin-Schritt, verbindlich)
+
+Die Aktivierung selbst (PUT auf das Ruleset / Klickweg oben) ist der separate Admin-Schritt
+und **kein Bestandteil dieses Repos**. Wer sie ausführt, verifiziert danach **in dieser
+Reihenfolge** – erst dann gilt der Vertrag als erfüllt:
+
+1. **Zielzustand lesen** – `GET /repos/frank-hartung/franksfinanzcheck-blog/rules/branches/main`
+   muss unter den Einträgen genau einen `required_status_checks` tragen: Kontext
+   `Integritäts-Siegel`, `integration_id: 15368` (GitHub Actions). Kein anderer Kontext
+   darf den Namen `lock` oder einen Vorläufer tragen.
+2. **Ruleset im Ganzen** – `GET /repos/frank-hartung/franksfinanzcheck-blog/rulesets/23710849`
+   (bzw. die im Browser bestätigte ID, sonst #23710849 exakt) muss zeigen:
+   `enforcement: active`, `conditions.ref_name.include: ["~DEFAULT_BRANCH"]`,
+   `bypass_actors: [{actor_id: 15368, actor_type: Integration, bypass_mode: always}]`,
+   Regeln `deletion`, `non_fast_forward`, `required_status_checks`, `pull_request`
+   (0 Approvals). Das Unveränderlichkeits-Ruleset #23705980 und #24247857
+   (`required_linear_history`) bleiben unverändert aktiv.
+3. **Live-Wache** – `python3 scripts/pflichtcheck_guard.py --branch main --strict` →
+   `✅ Vertrag erfüllt` (Exit 0). Der `--strict`-Modus ist hier bewusst der Maßstab: Er
+   kennt keinen Dauerzustand und meldet denselben Befund, den die Aktivierung beseitigen soll.
+4. **Dauerzustand zurückgebaut** – `PFLICHT_CHECK_DAUERZUSTAND` wird im selben PR auf `{}`
+   gesetzt (oder entfernt); die Wache meldet den grünen Lauf sonst als „überholt“. Der
+   Rückbau-Schritt 3 oben ist verbindlich, bevor der Vorgang als abgeschlossen gilt.
+5. **Automation nachweisbar** – ein Writer-Workflow mit echtem State-Commit auf `main`
+   (z. B. Deploy oder Social-Autopilot) muss durchlaufen; `--automation` darf keinen
+   `automation_blocked` melden. Ein grün deploytes gh-pages allein beweist den Bypass
+   seit der Publish-Prioritäts-Änderung nicht mehr.
+6. **Frist-Wache** – `--frist-report` meldet danach `INFO` (`dauerzustand_weg`): nichts zu
+   messen, weil nichts mehr offen ist. `premium-governance.yml` und das Gate brauchen keine
+   weitere Änderung.
+7. **Governance-Vertrag** – `python3 scripts/governance_contract.py --quick` bleibt grün
+   (47 Regeln); `python3 scripts/pflichtcheck_guard.py --selftest` und sämtliche Pflicht-Check-
+   Testmodule laufen grün.
+
+Jeder Schritt mit ✗ heißt: **nicht** als repariert melden. 404/403 ist kein Erfolg
+(falsche ID oder fehlendes Recht) – dann nicht nachhelfen, sondern melden.
+
 ## Zustand prüfen und Regression (Entwicklung, optionales Terminal)
 
 ```bash
@@ -347,13 +436,14 @@ gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets/23710849
 gh api repos/frank-hartung/franksfinanzcheck-blog/rules/branches/main
 python3 scripts/pflichtcheck_guard.py --branch main
 python3 scripts/pflichtcheck_guard.py --automation
+python3 scripts/pflichtcheck_guard.py --frist-report /tmp/frist.md   # Frist-Wache (offline)
 
 # Offline und ohne Schreibzugriff am Bestand:
 python3 scripts/pflichtcheck_guard.py --selftest
 python3 scripts/governance_gate.py --selftest
 python3 scripts/governance_contract.py --selftest
 python3 scripts/governance_contract.py --quick
-python3 -m unittest scripts/tests/test_pflichtcheck.py scripts/tests/test_ruleset_restoration.py -v
+python3 -m unittest scripts/tests/test_pflichtcheck.py scripts/tests/test_ruleset_restoration.py scripts/tests/test_pflichtcheck_frist.py -v
 python3 -m unittest discover -s scripts/tests -v
 python3 scripts/pflichtcheck_guard.py --rules-file r.json # effektive Branch-Regeln (Liste)
 ```

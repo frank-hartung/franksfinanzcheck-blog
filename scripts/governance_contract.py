@@ -779,6 +779,10 @@ STEP_SIGNATURES = {
     "revenue-funnel": (r"--emit\s+revenue-funnel\b", r"revenue_funnel\.py"),
     "click-chain": (r"--emit\s+click-chain\b", r"click_chain_guard\.py"),
     "scorecard": (r"--emit\s+scorecard\b", r"editorial_scorecard\.py"),
+    # Pflicht-Check-Frist (20.11.2026): eigener Emit-Schritt im Workflow;
+    # Signatur, damit C1/C3-Platzierung und Deckungsgleichheit (test_regression)
+    # auch diesen Schritt sehen. C42 ohne Erzeuger meldet ihn separat (offline).
+    "pflichtcheck": (r"--emit\s+pflichtcheck\b", r"pflichtcheck_guard\.py"),
 }
 
 
@@ -1865,6 +1869,13 @@ RE_PFLICHT_CHECK_SCHRITT = re.compile(r"integrity_guard\.py\s+--gate\b")
 # festgestellten Zweig und nur bis `pruefung_bis`; danach – und bei jeder
 # Abweichung davon – meldet die Wache wieder hart (Exit 1, ::error::). `--strict`
 # stellt den alten Zähler für Admin-Sitzungen und Nachprüfungen wieder her.
+#
+# NACHTRAG 20.11.2026 (Highend-Nachzug): Die Belege sind auf den lebendigen
+# Zustand nachgezogen (7 Regeln/3 Rulesets inkl. #24247857; Probing-Kontext
+# meldet admin:true – die Aktivierung bleibt trotzdem separater Admin-Schritt
+# nach C15 und wurde NICHT ausgeführt). Die Prüffrist bleibt Menschen-Entscheidung
+# (2026-12-31); die Frist-Wache `pflichtcheck_guard.py --frist-report` mahnt im
+# Wochen-Governance-Lauf, bevor sie abläuft.
 PFLICHT_CHECK_DAUERZUSTAND = {
     "zweck": "Pflicht-Check `Integritäts-Siegel` wird von `main` nicht verlangt und "
              "kann im Repo nicht eingetragen werden: Rulesets ändern ist Admin-Aufgabe (C15).",
@@ -1876,18 +1887,24 @@ PFLICHT_CHECK_DAUERZUSTAND = {
     "pruefung_bis": "2026-12-31",          # danach meldet die Wache wieder als Vorfall
     "belege": {
         "branch-schutz": "GET /repos/frank-hartung/franksfinanzcheck-blog/rules/branches/main "
-                         "(20.09.2026) → 4 Einträge, je `deletion` + `non_fast_forward` aus den "
-                         "Rulesets #23710849 und #23705980; kein `required_status_checks`, "
+                         "(Nachprüfung 20.11.2026; Erstnachprüfung 20.09.2026) → 7 Einträge: "
+                         "deletion + non_fast_forward aus Ruleset #23710849, deletion + "
+                         "non_fast_forward + required_linear_history aus Ruleset #24247857 "
+                         "(„Premium-Schutz für main“, aktiv seit 30.09.2026) sowie deletion + "
+                         "non_fast_forward aus Ruleset #23705980; kein `required_status_checks`, "
                          "keine `pull_request`-Regel",
-        "keine-admin-rechte": "GET /repos/frank-hartung/franksfinanzcheck-blog → "
-                              "permissions {admin:false, maintain:false, pull:false, push:false, "
-                              "triage:false} – kein administration:write, PUT auf ein Ruleset "
-                              "ist dem Bot verwehrt",
+        "keine-admin-rechte": "Der PR-Gate läuft mit `github.token` (`permissions: contents: read`) – "
+                              "kein administration:write, PUT auf ein Ruleset ist diesem Token "
+                              "verwehrt. Nachprüfung 20.11.2026: der für Repository-Analysen "
+                              "genutzte Probing-Kontext meldet `permissions: admin:true` – die "
+                              "Aktivierung bleibt trotzdem ein ausdrücklich separater Admin-Schritt "
+                              "(C15) und wurde nicht ausgeführt",
         "kein-merge-blocker": "PR #327 ist am 20.09.2026 15:43 UTC trotz Check-Konclusion "
                                "FAILURE gemergt (Merge-Commit 4b91938, Run 35520108131) – das "
                                "rote Kreuz hält nachweislich keinen Merge auf",
         "harter-stopp": "Schritte 4 und 5 desselben Laufs sind grün "
-                        "(`integrity_guard.py --gate`: 43 Kerndateien == signierter Stand) – "
+                        "(`integrity_guard.py --gate`: 55 Kerndateien == signierter Stand, "
+                        "Nachprüfung 20.11.2026; am 20.09.2026 waren es 43) – "
                         "der Sabotage-Schutz läuft und meldet Drift, er blockiert nur nicht",
     },
     "runbook": "docs/PFLICHT-CHECK-RUNBOOK.md",
@@ -3480,7 +3497,12 @@ def c41_schreiber_misst_vor_dem_schreiben(script_texts, root=BLOG_DIR,
 #   b) Das Skript existiert noch – sonst „Datenlage offen“ ohne Ende.
 #   c) Schritte ohne Report sind Ausnahmen und werden namentlich genannt
 #      (C42_OHNE_ERZEUGER) – kein stiller Sammelplatz fuer Tote Schritte.
-C42_OHNE_ERZEUGER = ("automation", "build")
+# `pflichtcheck` (Frist-Wache, 20.11.2026) hat wie `automation` keinen
+# Befund-Report im Bestand: Der Befund kommt frisch aus dem Vertrag
+# (`--frist-report` schreibt /tmp, der Gate liest es sofort) – ein Report-
+# Datei-Scanner hätte hier nie etwas zu finden und würde "Datenlage offen"
+# als Dauerzeile erzeugen. Beliebt ist der Pfad nicht, er ist dokumentiert.
+C42_OHNE_ERZEUGER = ("automation", "build", "pflichtcheck")
 
 
 def _gate_schritte(root=BLOG_DIR):
