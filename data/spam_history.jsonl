@@ -407,3 +407,5 @@
 {"ts": "2026-11-21T19:33:19Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet", "rules": ["B3", "B5"]}
 {"ts": "2026-11-21T19:33:20Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-21T19:33:20Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 13}
+{"ts": "2026-11-21T23:24:36Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-21T23:24:36Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 12}
