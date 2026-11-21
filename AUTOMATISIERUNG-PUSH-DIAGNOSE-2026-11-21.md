@@ -474,3 +474,49 @@ Dateien**. Alle Dateimodi im Baum sind `100644`/`100755` — kein
 | `workflow_vertrag_wache.py --gate` | 103 Workflows, 0 Verstoß |
 | `skript_syntax_wache.py --check` | 730 Dateien grün |
 | `redos_guard.py` | 814 Dateien, 0 Funde |
+
+### 7.5 Der Widerspruch, der die Regel endgültig macht
+
+Der Lauf nach der Härtung (`layout-audit`, Commit `361d1a6`) meldet in der
+Notice:
+
+```
+CSP-Beleg: Dokument-Antwort führt default-src 'self'; script-src 'self'
+'unsafe-inline' https://challenges.cloudflare.com; style-src …
+```
+
+Im Repo steht in `static/_headers`:
+
+```
+script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com
+            https://static.cloudflareinsights.com
+```
+
+**Die ausgelieferte Direktive ist nicht die des Repos.** Der Messserver in
+`layout_browser_check.js` setzt keine CSP-Kopfzeile (nachgelesen: `serve()`
+schreibt nur `Content-Type`), die Meta-CSP im HTML hat kein `script-src`
+(nachgelesen und als Test festgehalten). Trotzdem liefert die
+Dokument-Antwort der Messung eine vollständige, **veraltete** CSP-Direktive.
+
+Damit ist bewiesen, was vorher nur Vermutung war: Die CSP dieser Messung
+stammt aus der **Runner-Umgebung**, nicht aus dem Repository. Eine Änderung
+an `static/_headers` kann sie deshalb nicht beeinflussen — weder früher noch
+jetzt.
+
+**Was das für die Entscheidung „CSP erweitern" heißt (offen, ehrlich):**
+
+* Für die **Produktion** ist die Erweiterung richtig und wird von
+  `blog_header_gate.py` (S1/S2) sowie `test_cloudflare_analytics_csp.py`
+  gegen die Edge-Vorlage geprüft. Wenn die Edge-Transform-Rule aus
+  `cloudflare/edge-schutz.md` ausgerollt wird, ist der Beacon dort erlaubt.
+* Für den **Audit-Lauf** ändert sie nichts, solange die Umgebung ihre eigene
+  CSP mitbringt. Der Befund bleibt dort rot — er beschreibt eine Bedingung,
+  die das Repo nicht setzt.
+* Die Belegpflicht (Abschnitt 7.2) ist deshalb kein Ausweichen, sondern die
+  einzige korrekte Antwort: Sie macht sichtbar, **welche** Direktive gemessen
+  wurde. Der nächste Schritt wäre, die Herkunft in der Umgebung abzustellen
+  (Runner-Image bzw. Proxy-Konfiguration) — das liegt außerhalb dieses
+  Repositories und braucht einen eigenen Auftrag.
+
+**Nicht behauptet:** dass der Befund damit verschwindet. Er ist jetzt
+beweisbar zugeordnet, und `static/_headers` ist für die Produktion korrekt.
