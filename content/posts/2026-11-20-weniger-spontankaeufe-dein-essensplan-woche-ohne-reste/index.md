@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 73a882cc7e31b4531113f7903c7ae00174e2eb98a2ffe4e92cba9487d9efbe16
-    geprueft_am: 2026-11-13
+    sha256: 0ea428bd26ad8823dc5f87a17b9c387724b80c8fed70db20e695774883cc24c9
+    geprueft_am: 2026-11-21
 kurzantwort: "Ein guter Essensplan für die Woche stoppt teure Spontankäufe im Markt und sorgt dafür, dass offene Zutaten ganz aufgebraucht werden. Wer erst seine Vorräte prüft, passende Gerichte kombiniert und strikt nach Liste einkauft, senkt seine Ausgaben dauerhaft ohne Verzicht."
 faktencheck: 2026-11-13
 faktenfrische_aliases:

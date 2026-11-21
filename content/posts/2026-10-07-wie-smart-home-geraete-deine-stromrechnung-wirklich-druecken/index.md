@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 151bb1240b317002659e435ff44d85970287633258b44427bc0a55dfed8b5429
-    geprueft_am: 2026-11-13
+    sha256: 8ce894d32959c33a2899b22fd70d88fbda208f4846849bf2c2af3a248307a739
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Energiesparen im Haushalt"

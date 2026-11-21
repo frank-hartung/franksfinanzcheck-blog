@@ -29,8 +29,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: cadd62703d3c9d823cdb71a27cd907d1a9a1ab1f072051b8ee495d19c167455c
-    geprueft_am: 2026-11-17
+    sha256: 10133afa481278c5ebf521a1c90fc1c8e76ec7327cd4422db45dfb8b4e4d3cea
+    geprueft_am: 2026-11-21
 faktencheck: 2026-11-17
 faktenfrische_aliases:
   - "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet"

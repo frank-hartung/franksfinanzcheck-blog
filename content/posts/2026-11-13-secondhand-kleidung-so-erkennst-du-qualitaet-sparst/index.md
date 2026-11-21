@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 192d7da6c5269359ec99e27184d6c68d2aa731fb148c1d3b9505d837afe4334c
-    geprueft_am: 2026-11-13
+    sha256: ea8fd1e88eaaca01e0bfcc6169f68111aa517667d6aba775f00d1170f4c5a697
+    geprueft_am: 2026-11-21
 kurzantwort: "Hochwertige Secondhand-Kleidung erkennst du an dichten Naturfasern wie Wolle, Baumwolle oder Leinen sowie an festen Nähten und leichtgängigen Reißverschlüssen. Wer beim Gebrauchtkauf gezielt auf Material, Passform und Geruchsfreiheit achtet, ersetzt kurzlebige Billigware und senkt seine Ausgaben dauerhaft."
 quellen:
   - id: "Q1"

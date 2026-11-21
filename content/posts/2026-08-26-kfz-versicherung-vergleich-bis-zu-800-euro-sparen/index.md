@@ -18,9 +18,9 @@ cover:
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
-    verfahren: generate_covers.py (Pillow, deterministisch)
-    sha256: 4599371af5008f63d5c62a0fc496df4abeda12b69e9393e8fcb3cae7cc9bb5f8
-    geprueft_am: 2026-11-13
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 6068e525b155f942f7ad1449bebf4270931a004023f9acba3f89f8ad3d70bec4
+    geprueft_am: 2026-11-21
 kurzantwort: Nimm die letzte Beitragsrechnung und die Police zur Hand. Vergleiche zwei Angebote mit derselben Fahrleistung, demselben Fahrerkreis und derselben Selbstbeteiligung. Für den Kündigungstermin brauchst du Versicherungsablauf und vereinbarte Frist; ein allgemeiner November-Stichtag reicht nicht.
 social_posted: true
 keywords:

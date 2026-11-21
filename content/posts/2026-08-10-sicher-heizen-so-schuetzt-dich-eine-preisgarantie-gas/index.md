@@ -17,8 +17,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: f7d9228ea348c649b4aeec5deac71b2bc36b33eba5bb50065b47764e6a3c4c9b
-    geprueft_am: 2026-11-13
+    sha256: ac997fbd4895afdce43ea0b52ccf1934f7e4abea53270e6ab850103616518559
+    geprueft_am: 2026-11-21
 kurzantwort: "Eine Gaspreisgarantie schützt nur die Teile des Preises, die im Vertrag stehen, und nur für eine feste Zeit. Meist ist der Einkauf des Gases erfasst. Steuern, Abgaben, Umlagen und Netzkosten können außen vor bleiben. Die Garantie lohnt sich, wenn Preis, Umfang und Laufzeit zusammenpassen. Sie lohnt sich nicht, wenn du schon zum Start deutlich zu viel zahlst."
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Heizkosten", "Heizkosten sparen", "Brandschutz beim"]

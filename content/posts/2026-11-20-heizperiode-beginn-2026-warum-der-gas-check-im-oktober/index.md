@@ -25,6 +25,13 @@ cover:
   image: "images/covers/2026-11-20-heizperiode-beginn-2026-warum-der-gas-check-im-oktober.jpg"
   alt: "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: d9c45726856fc3e278b204fa9cdae04930bce9b0262509bd4a7df855bebec212
+    geprueft_am: 2026-11-21
+
 ---
 
 Draußen sinken die Temperaturen. Der erste Frost kündigt sich an. Du gehst zum Heizkörper in deinem Wohnzimmer. Du drehst den Thermostatkopf auf Stufe drei.

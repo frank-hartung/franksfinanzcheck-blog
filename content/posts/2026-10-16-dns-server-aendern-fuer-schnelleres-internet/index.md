@@ -27,8 +27,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 55a8ea27e34efc16163725b0adaa247de2be5828897ad1559b3ef8cf8af72521
-    geprueft_am: 2026-11-13
+    sha256: 8ffea71d5c6787ec3a30447e185d92d22f8bb2618610a1e5b128cbe3d2a4bed7
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Fachthemen Telekommunikation"

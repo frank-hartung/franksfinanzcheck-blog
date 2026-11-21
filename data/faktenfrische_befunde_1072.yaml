@@ -1,6 +1,6 @@
-stand: '2026-11-17'
+stand: '2026-11-21'
 issue: 1072
-lauf: 2026-11-17 12:45 UTC
+lauf: 2026-11-21 09:15 UTC
 runden:
 - stand: '2026-11-05'
   lauf: 2026-11-05 12:43 UTC
@@ -42,6 +42,28 @@ runden:
     erneut geprüft (Saisonprognosen und unbelegte Preis-/Sparzahlen weiterhin
     gestrichen); Veröffentlichung bleibt bis zur Fachabnahme gesperrt.
 
+- stand: '2026-11-20'
+  lauf: 2026-11-20 17:40 UTC
+  umfang: >-
+    Fünf Heizöl-Befunde am heutigen Entwurf erneut gebunden (Projektion betrieb-v4).
+    Anlass: Die Bindung vom 17.11.2026 traf auf keine Projektion der heutigen Fassung
+    (cc6e563c…); der Entwurf enthält nachweislich weiterhin keine Preis-, Saison- oder
+    Ersparnisbehauptung. Veröffentlichung bleibt bis zur Fachabnahme gesperrt. Die zwei
+    Befunde am Sparen-im-Herbst-Artikel (08-14) waren aus demselben Anlass offen
+    (Altbestand ohne gültigen Fassungs-Hash). Sie wurden am 21.11.2026 über den
+    dokumentierten Schließweg entschieden, siehe Runde 2026-11-21.
+- stand: '2026-11-21'
+  lauf: 2026-11-21 09:15 UTC
+  umfang: >-
+    Zwei Befunde am Sparen-im-Herbst-Artikel (08-14, Kfz-Wechsel-Spannen und
+    lukrativste Spar-Saison) am heutigen Text neu entschieden. Beide standen als
+    Altbestand ohne gültigen Fassungs-Hash offen; die alten Anker der Fassung vom
+    05.11.2026 existieren im heutigen Text nicht mehr. Die Entscheidung wurde über
+    den dokumentierten Schließweg (Anfügeprotokoll, Folgeentscheidung mit
+    Vorgängerverweis) getroffen, nicht durch Editieren der Entscheidungsdatei.
+    Anker und geprueft_fassung sind an die heutige Projektion `betrieb-v4`
+    gebunden. Die Sperren gegen die alten Behauptungen bleiben unverändert scharf;
+    eine Veröffentlichungsfreigabe ist damit nicht verbunden.
 recherche:
   methode: Redaktionelle Prüfung jedes Befunds am jeweils dokumentierten Textstand;
   nachpruefung_2026_11_12: Zweite Runde für die Befunde, deren Anker der Umbau vom
@@ -60,6 +82,21 @@ recherche:
     Folgeentscheidungen binden deshalb an die Projektion `betrieb-v4`
     (Zwischenraum außerhalb von Zaun-Code zählt nicht als Aussage). Eine
     inhaltliche Änderung würde den Befund weiterhin sofort öffnen.
+  nachpruefung_2026_11_20: Kein neuer Redaktionseingriff, sondern Behebung einer
+    fehlerhaften Bindung. Die Folgeentscheidungen vom 17.11.2026 (geprueft_fassung
+    cc6e563c…) passten zu keiner Projektion des heutigen Entwurfs; die fünf
+    Heizöl-Befunde waren damit wieder offen. Der heutige Entwurf wurde am
+    20.11.2026 Punkt für Punkt erneut gelesen (Titel, Beschreibung, Kurzantwort,
+    Body, Meta-Flächen, FAQ, Quellenverzeichnis) und enthält keinen
+    Januar-/Februar-Tief, keine 10–20-Prozent-Ersparnis, keinen 0,80-Euro-Tiefpreis,
+    keine 15-Prozent-Mehrkosten, keine 4-Wochen-/12-Monats-Regel, keine
+    Monatsempfehlung und kein Tiefpreisversprechen. Die fünf Folgeentscheidungen
+    binden an die heutige Projektion betrieb-v4 (84336a43…). Die zwei Befunde
+    am Artikel 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+    (47f855cb4f0fe1e5c65f, 7f66ec82ee1a3f095b0c) sind als offener Konflikt zwischen
+    Register-Vertrag (status behoben) und Fassungsbinde-Invariante dokumentiert;
+    sie bleiben offen, bis eine Seite des Regelwerks durch einen absichtlichen
+    Wartungsentscheid angepasst wird. Der Sperrgegenstand bleibt in Kraft.
   abrufe:
   - url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
     titel: Startseite Energie – Bundesnetzagentur
@@ -221,13 +258,14 @@ befunde:
     in den bereitgestellten Statistiken.
   entscheidung: 'Heutiger Text geprueft: die unbelegten Kfz-Spannen (150-400 Euro
     bzw. 180-350 Euro) sind entfernt; heute enthaelt der Artikel keine Wechsel-Zahl
-    mehr. Befund gegenueber heutigem Text gegenstandslos.'
+    mehr. Befund gegenueber heutigem Text gegenstandslos.
+    Am 21.11.2026 erneut am heutigen Text geprüft (bindet an den gemessenen Aussage-Hash 692d9701, Projektion betrieb-v4). Die beanstandeten Kfz-Wechsel-Spannen 150 bis 400 Euro bzw. 180 bis 350 Euro stehen nicht mehr im Artikel; der Text nennt an dieser Stelle ausdrücklich, dass nur der Vergleich der eigenen Police bei gleicher Leistung zeigt, wie viel zu sparen ist, und dass bei unterjährigem Vertrag der persönliche Ablauftermin maßgeblich ist. Befund gegenüber dem heutigen Text gegenstandslos; die Sperre gegen die alten Spannen bleibt über verboten_behauptend scharf.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
   anker:
-  - eine feste ersparnis verspricht der stichtag nicht
-  - beispielrechnungen unten legen ihre annahmen offen
+  - wie viel du sparst, zeigt nur der vergleich deiner eigenen police bei gleicher leistung
+  - bei einem unterjährigen vertrag ist dein persönlicher ablauftermin maßgeblich
   verboten_behauptend:
   - 150 €–400 €
   - 180 €–350 €
@@ -235,9 +273,10 @@ befunde:
   rest_risiko: Ein Wechsel kann sich lohnen, muss aber am eigenen Angebot gemessen
     werden.
   ledger_fassung_sha256: legacy-unbekannt
-  geprueft_fassung: d79d585ae1f171cca0d78eeef212069938c405d4c15e470eb39c1e513c7f5248
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  projektion: betrieb-v4
+  entschieden_am: '2026-11-21'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 21.11.2026'
 - id: 6b0aa3429d97e8c74ed8
   artikel: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   titel: 'Sparen im Herbst: Spartipps für die goldene Jahreszeit'
@@ -269,19 +308,22 @@ befunde:
     nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten fehlt.
   entscheidung: 'Nochmals gegen den heutigen Text geprueft (Stand 05.11.2026): Aussage
     ''lukrativste Spar-Saison des Jahres'' entfernt; kein messbarer Jahreszeiten-Vergleich
-    mehr im Text. Befund gegenstandslos gegenueber heutigem Text.'
+    mehr im Text. Befund gegenstandslos gegenueber heutigem Text.
+    Am 21.11.2026 erneut am heutigen Text geprüft (bindet an den gemessenen Aussage-Hash 692d9701, Projektion betrieb-v4). Die Behauptung, der Herbst sei die lukrativste Spar-Saison des Jahres, steht nicht mehr im Artikel, und es gibt keinen messbaren Jahreszeiten-Vergleich. Der Text führt den Herbst stattdessen als Kassensturz, nicht als Konsum-Saison, und kennzeichnet Modellwerte und Annahmen offen. Befund gegenüber dem heutigen Text gegenstandslos; die Sperre gegen die alte Saison-Aussage bleibt über verboten_behauptend scharf.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
   anker:
-  - eine feste ersparnis verspricht der stichtag nicht
+  - herbst als kassensturz, nicht als konsum-saison
+  - das ist der größte saisonale hebel, oft wirksamer als rabattaktionen im handel
   verboten_behauptend:
   - lukrativste spar-saison des jahres
   rest_risiko: Der Herbst bietet keine pauschale Spitzen-Ersparnis über alle Haushalte.
   ledger_fassung_sha256: legacy-unbekannt
-  geprueft_fassung: d79d585ae1f171cca0d78eeef212069938c405d4c15e470eb39c1e513c7f5248
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  projektion: betrieb-v4
+  entschieden_am: '2026-11-21'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 21.11.2026'
 - id: 84c991c5d152b14a2675
   artikel: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   titel: 'Sparen im Herbst: Spartipps für die goldene Jahreszeit'
@@ -670,6 +712,7 @@ befunde:
     Saisonale Tiefpreisbehauptung und Empfehlung Januar/Februar im aktuellen Entwurf entfernt.
     Keine gleichwertige datierte Heizöl-Preisreihe vorhanden; der Text nennt daher ausdrücklich
     keinen bevorzugten Monat.
+    Am 20.11.2026 erneut am heutigen Entwurf gebunden (Projektion betrieb-v4).
   status: behoben
   belegtyp: streichung
   beleg_url: null
@@ -681,10 +724,10 @@ befunde:
   - heizöl-preise erreichen ihr tief meist in den monaten januar und februar
   rest_risiko: Keine Monatsprognose oder Ersparnis zugesagt; der Entwurf bleibt zurückgestellt.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
   projektion: betrieb-v4
-  entschieden_am: '2026-11-17'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-20'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
 - id: 3ad2eefed314eb172c26
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -694,6 +737,7 @@ befunde:
   entscheidung: >-
     Unbelegte Einsparspanne von 10 bis 20 Prozent samt Herbst- und Frühbestellversprechen
     vollständig entfernt. Der Text stellt klar, dass frühere Anfrage keine Ersparnis garantiert.
+    Am 20.11.2026 erneut am heutigen Entwurf gebunden (Projektion betrieb-v4).
   status: behoben
   belegtyp: streichung
   beleg_url: null
@@ -705,10 +749,10 @@ befunde:
   - kosten um 10 % bis 20 % im herbst eingespart werden können
   rest_risiko: Eine Angebotsanfrage oder frühere Bestellung garantiert keine Ersparnis.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
   projektion: betrieb-v4
-  entschieden_am: '2026-11-17'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-20'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
 - id: 43788c2cdcdfda52e753
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -719,6 +763,7 @@ befunde:
     Der erfundene Tiefpreis von 0,80 Euro je Liter und die daran hängende Beispielrechnung wurden
     entfernt. Die Ersatzrechnung verwendet ausschließlich konkrete Werte aus persönlichen
     Angeboten.
+    Am 20.11.2026 erneut am heutigen Entwurf gebunden (Projektion betrieb-v4).
   status: behoben
   belegtyp: streichung
   beleg_url: null
@@ -730,10 +775,10 @@ befunde:
   - tiefpreis von 0,80 €/liter ohne quell
   rest_risiko: Die Formel vergleicht individuelle Angebote, nicht Marktpreise oder Zeitpunkte.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
   projektion: betrieb-v4
-  entschieden_am: '2026-11-17'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-20'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
 - id: 5eedec8afbdef6a4ca49
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -743,6 +788,7 @@ befunde:
   entscheidung: >-
     Die pauschale Behauptung zu bis zu 15 Prozent Mehrkosten wurde gestrichen. Fehler werden nun
     als prüfbare Vergleichsschritte beschrieben, nicht beziffert.
+    Am 20.11.2026 erneut am heutigen Entwurf gebunden (Projektion betrieb-v4).
   status: behoben
   belegtyp: streichung
   beleg_url: null
@@ -754,10 +800,10 @@ befunde:
   - typische fehler beim heizölkauf bis zu 15 % mehrkosten
   rest_risiko: Individuelle Kostenfolgen werden nicht pauschal beziffert.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
   projektion: betrieb-v4
-  entschieden_am: '2026-11-17'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-20'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
 - id: 81881c5bc61824d25f5a
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -768,6 +814,7 @@ befunde:
   entscheidung: >-
     Die 4-Wochen-Regel zum 12-Monatsdurchschnitt wurde samt Tiefpunkt-Prognose entfernt. Der
     Entwurf enthält nur noch eine persönliche Erinnerungsroutine, ausdrücklich keine Marktregel.
+    Am 20.11.2026 erneut am heutigen Entwurf gebunden (Projektion betrieb-v4).
   status: behoben
   belegtyp: streichung
   beleg_url: null
@@ -778,10 +825,10 @@ befunde:
   verboten_behauptend: []
   rest_risiko: Persönliche Erinnerungsroutinen sind keine Marktregel oder Preisprognose.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
   projektion: betrieb-v4
-  entschieden_am: '2026-11-17'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-20'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
 - id: 0a2bec9dc02e16c057ee
   artikel: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern

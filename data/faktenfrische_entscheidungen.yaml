@@ -6412,3 +6412,164 @@ entscheidungen:
     Die frühere Belegbegründung bleibt damit auf den heutigen Text anwendbar.'
   vorgaenger_geprueft_fassung: 2b0dad1058c36178dfb7088e51b3c29a53d8bbcf6018dad94fc766e81276a267
   folgeentscheidung: true
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 0b564f460c41218244bd
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten
+    Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
+  entschieden_am: '2026-11-20'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung 20.11.2026: Der Anker der 17.11.2026er Bindung (cc6e563c…)
+    passt zu keiner Projektion des heutigen Entwurfs; die Befunde waren damit wieder
+    offen. Der heutige Entwurf wurde am 20.11.2026 Punkt für Punkt erneut gelesen
+    (Titel, Beschreibung, Kurzantwort, Body, Meta-Flächen, FAQ, Quellenverzeichnis):
+    keine Januar-/Februar-Tiefpreisprognose, keine Saisonempfehlung, kein bevorzugter
+    Monat im heutigen Text; die FAQ beantwortet den besten-Monat-Befund ausdrücklich
+    abweisend. Die Sperre gegen die alte Behauptung bleibt unverändert in Kraft. Bindung
+    an die heutige Projektion betrieb-v4 (84336a43…). Der Entwurf bleibt draft:true
+    / reserve_blocked (#1072); Veröffentlichung weiterhin bis zur Fachabnahme gesperrt.'
+  vorgaenger_geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  folgeentscheidung: true
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 3ad2eefed314eb172c26
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
+  typ: luecke
+  beanstandung: Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis
+    20 % im Herbst eingespart werden können, ist unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
+  entschieden_am: '2026-11-20'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung 20.11.2026: Der Anker der 17.11.2026er Bindung (cc6e563c…)
+    passt zu keiner Projektion des heutigen Entwurfs; die Befunde waren damit wieder
+    offen. Der heutige Entwurf wurde am 20.11.2026 Punkt für Punkt erneut gelesen
+    (Titel, Beschreibung, Kurzantwort, Body, Meta-Flächen, FAQ, Quellenverzeichnis):
+    keine 10-bis-20-Prozent-Ersparnis, kein Herbst-Versprechen, kein Frühbestellversprechen;
+    nur das nicht bezifferte Vergleichen in sachfremdem Zeitrahmen. Die Sperre gegen
+    die alte Behauptung bleibt unverändert in Kraft. Bindung an die heutige Projektion
+    betrieb-v4 (84336a43…). Der Entwurf bleibt draft:true / reserve_blocked (#1072);
+    Veröffentlichung weiterhin bis zur Fachabnahme gesperrt.'
+  vorgaenger_geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  folgeentscheidung: true
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 43788c2cdcdfda52e753
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
+  typ: luecke
+  beanstandung: Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne
+    dass diese Preisangabe belegt wird.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
+  entschieden_am: '2026-11-20'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung 20.11.2026: Der Anker der 17.11.2026er Bindung (cc6e563c…)
+    passt zu keiner Projektion des heutigen Entwurfs; die Befunde waren damit wieder
+    offen. Der heutige Entwurf wurde am 20.11.2026 Punkt für Punkt erneut gelesen
+    (Titel, Beschreibung, Kurzantwort, Body, Meta-Flächen, FAQ, Quellenverzeichnis):
+    kein 0,80-Euro-Wert, keine Preisprognose, kein Beispiel mit Tiefpreis; die Rechnung
+    nutzt ausschließlich konkrete Werte aus persönlichen Angeboten. Die Sperre gegen
+    die alte Behauptung bleibt unverändert in Kraft. Bindung an die heutige Projektion
+    betrieb-v4 (84336a43…). Der Entwurf bleibt draft:true / reserve_blocked (#1072);
+    Veröffentlichung weiterhin bis zur Fachabnahme gesperrt.'
+  vorgaenger_geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  folgeentscheidung: true
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 5eedec8afbdef6a4ca49
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
+  typ: luecke
+  beanstandung: Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15
+    % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
+  entschieden_am: '2026-11-20'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung 20.11.2026: Der Anker der 17.11.2026er Bindung (cc6e563c…)
+    passt zu keiner Projektion des heutigen Entwurfs; die Befunde waren damit wieder
+    offen. Der heutige Entwurf wurde am 20.11.2026 Punkt für Punkt erneut gelesen
+    (Titel, Beschreibung, Kurzantwort, Body, Meta-Flächen, FAQ, Quellenverzeichnis):
+    keine 15-Prozent-Mehrkosten-Angabe, keine bezifferten Fehlerfolgen; Fehler stehen
+    als prüfbare Vergleichsschritte im Text. Die Sperre gegen die alte Behauptung
+    bleibt unverändert in Kraft. Bindung an die heutige Projektion betrieb-v4 (84336a43…).
+    Der Entwurf bleibt draft:true / reserve_blocked (#1072); Veröffentlichung weiterhin
+    bis zur Fachabnahme gesperrt.'
+  vorgaenger_geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  folgeentscheidung: true
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 81881c5bc61824d25f5a
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 84336a434d4c4b63692827c5721a0a444ed8df1a9f1776396e4aae00e53cbc61
+  typ: praezision
+  beanstandung: Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen
+    unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle
+    genannt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
+  entschieden_am: '2026-11-20'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung 20.11.2026: Der Anker der 17.11.2026er Bindung (cc6e563c…)
+    passt zu keiner Projektion des heutigen Entwurfs; die Befunde waren damit wieder
+    offen. Der heutige Entwurf wurde am 20.11.2026 Punkt für Punkt erneut gelesen
+    (Titel, Beschreibung, Kurzantwort, Body, Meta-Flächen, FAQ, Quellenverzeichnis):
+    keine 4-Wochen-/12-Monats-Regel, keine Tiefpunkt-Parallele, keine saisonale Bestellregel;
+    nur eine persönliche Erinnerungsroutine. Die Sperre gegen die alte Behauptung
+    bleibt unverändert in Kraft. Bindung an die heutige Projektion betrieb-v4 (84336a43…).
+    Der Entwurf bleibt draft:true / reserve_blocked (#1072); Veröffentlichung weiterhin
+    bis zur Fachabnahme gesperrt.'
+  vorgaenger_geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 47f855cb4f0fe1e5c65f
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  typ: luecke
+  beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
+    bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
+    in den bereitgestellten Statistiken.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
+  entschieden_am: '2026-11-21'
+  fassung_wechsel: true
+  begruendung: Am 20.11.2026 erneut am heutigen Text geprüft (bindet an den gemessenen
+    Aussage-Hash 692d9701, Projektion betrieb-v4). Die beanstandeten Kfz-Wechsel-Spannen
+    (150 bis 400 Euro bzw. 180 bis 350 Euro) stehen nicht mehr im Artikel; der Text
+    nennt an dieser Stelle ausdrücklich, dass nur der Vergleich der eigenen Police
+    bei gleicher Leistung zeigt, wie viel zu sparen ist, und dass bei unterjährigem
+    Vertrag der persönliche Ablauftermin maßgeblich ist. Befund gegenüber dem heutigen
+    Text gegenstandslos; die Sperre gegen die alten Spannen bleibt über verboten_behauptend
+    scharf.
+  vorgaenger_geprueft_fassung: a217963d44f2fe0ccd579aa042ebbfcd22e175a7008824549d4f006db15dadd4
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 7f66ec82ee1a3f095b0c
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  typ: praezision
+  beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
+    ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
+    fehlt.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 20.11.2026'
+  entschieden_am: '2026-11-21'
+  fassung_wechsel: true
+  begruendung: Am 20.11.2026 erneut am heutigen Text geprüft (bindet an den gemessenen
+    Aussage-Hash 692d9701, Projektion betrieb-v4). Die Behauptung, der Herbst sei
+    die lukrativste Spar-Saison des Jahres, steht nicht mehr im Artikel und es gibt
+    keinen messbaren Jahreszeiten-Vergleich. Der Text führt den Herbst stattdessen
+    als Kassensturz, nicht als Konsum-Saison, und kennzeichnet Modellwerte und Annahmen
+    offen. Befund gegenüber dem heutigen Text gegenstandslos; die Sperre gegen die
+    alte Saison-Aussage bleibt über verboten_behauptend scharf.
+  vorgaenger_geprueft_fassung: a217963d44f2fe0ccd579aa042ebbfcd22e175a7008824549d4f006db15dadd4
+  folgeentscheidung: true

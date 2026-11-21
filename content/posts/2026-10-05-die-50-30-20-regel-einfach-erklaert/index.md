@@ -19,8 +19,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 6eb2bdd8dae8d036fa4615ebc1f8d0e59975786d2f48e34189dc20f8dbb107b1
-    geprueft_am: 2026-11-13
+    sha256: 2f34f48b54dc0f1e1cc0e9b6e474a3e121cc4c5d63cd4685210cfa2182189813
+    geprueft_am: 2026-11-21
 pin_title: "50-30-20-Regel: Was tun, wenn die Miete kaum Spielraum lässt?"
 pin_description: "*Werbung | Passt die 50-30-20-Regel zu deiner Miete? Ordne zuerst die festen Verpflichtungen ein und passe die Anteile an dein wirklich verfügbares Einkommen an. Ziehe Jahresrechnungen anteilig mit ab, bevor du den freien Betrag verteilst. Ein hoher Kontostand am Monatsanfang ist noch keine Rücklage."
 quellen:

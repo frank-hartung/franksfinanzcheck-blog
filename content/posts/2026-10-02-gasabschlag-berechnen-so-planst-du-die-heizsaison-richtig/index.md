@@ -31,8 +31,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: e7b11ebab1237af15da5bc9f07f3d12f27f665303904ff909d7fb3826ded8d61
-    geprueft_am: 2026-11-13
+    sha256: 5188cd0a085a857bf0f409d2fe277f5b50e9c179e7226381f6362475b7c801ad
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Heizung: 10 einfache Tipps zum Heizkosten-Sparen"

@@ -25,8 +25,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: d6dd5606be3f3e5d034f03bea6bc155cacaea6c3d6cc27871c22b2481ed8e09f
-    geprueft_am: 2026-11-13
+    sha256: 9a0404988bce341c68012dbbfa5238566f57c5fdeda2ba9a88b93bf26d957fca
+    geprueft_am: 2026-11-21
 faktencheck: 2026-11-10
 kurzantwort: "Ein effektiver Vergleich von Handytarifen basiert auf dem realen Datenverbrauch der letzten drei Monate. Prüfen Sie zuerst die Netzabdeckung sowie das Datenvolumen und vergleichen Sie erst danach die monatlichen Kosten nach Ablauf der meist 24-monatigen Aktionsphase."
 ---

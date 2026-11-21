@@ -30,8 +30,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 5be9ce909f29b13878552ec6cbcd9ad2b8d0683370311dec656a912e45b4daa8
-    geprueft_am: 2026-11-17
+    sha256: 516c5683f9f7b0b16d2ddcc0b1ee972b082e9d7f5d5841cdb2b49f2b00646135
+    geprueft_am: 2026-11-21
 faktenfrische_aliases:
   - "2026-11-16-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater"
   - "2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater"
