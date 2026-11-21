@@ -73,6 +73,20 @@ KLASSEN: tuple[tuple[str, str, str], ...] = (
      "docs/PFLICHT-CHECK-RUNBOOK.md, Abschnitt „Direkte Pushes“ – Pflicht-"
      "Checks gelten auch für direkte Pushes und brauchen einen Bypass-Akteur "
      "im Ruleset oder einen PR-Pfad."),
+    # DROSSELUNG GEHOERT VOR "auth" – in KLASSEN, weil DIESE Reihenfolge die
+    # Rangfolge ist (`RANG`). GitHub drosselt mit HTTP 403 und dem Text
+    # "secondary rate limit"; das Auth-Muster liest "403". Stuende diese
+    # Klasse dahinter, waere eine Drosselung ein angebliches Token-Problem –
+    # genau die Verwechslung, die dieses Werkzeug behebt.
+    ("rate_limit", "GitHub-Drosselung (Rate-Limit)",
+     "GitHub hat die Anfrage absichtlich abgelehnt (429 oder „secondary "
+     "rate limit“, oft als 403 getarnt). ERNEUT VERSUCHEN MACHT ES "
+     "SCHLIMMER: Jede weitere Runde zählt auf dasselbe, erschöpfte "
+     "Kontingent. Deshalb steht diese Klasse vor „auth“ und vor „netzwerk“: "
+     "Ein 429 ist kein Wackelkontakt, sondern eine Antwort. Reparatur: "
+     "Läufe serialisieren (concurrency-Gruppe), Schreibfrequenz senken, bei "
+     "„secondary rate limit“ mindestens eine Minute Abstand. „Re-run“ ist "
+     "hier die falsche Antwort."),
     ("auth", "Berechtigung / Token",
      "Der Push wurde nicht autorisiert. Prüfen: `permissions: contents: write` "
      "im Workflow, Gültigkeit des Tokens, ob der Workflow aus einem "
@@ -109,6 +123,9 @@ COMMIT_SCHRITT = re.compile(
 # die Git-Meldungen, die dort NICHT vorkommen (weil sie vor der
 # Klassifikation abgefangen werden).
 MUSTER: tuple[tuple[str, str], ...] = (
+    ("rate_limit", r"\b429\b|rate limit|rate-limit|secondary rate|"
+                   r"abuse detection|too many requests|"
+                   r"API rate limit exceeded|You have exceeded a secondary"),
     ("schutz", r"GH00[1367]|GH01[34]|push protection|protected branch|"
                r"repository rule|rule violation|required status check|"
                r"changes must be made through a pull request|hook declined|"

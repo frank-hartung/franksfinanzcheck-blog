@@ -164,5 +164,62 @@ class CliTest(unittest.TestCase):
         self.assertIn("Restmenge", text)
 
 
+class DrosselungIstKeinTokenProblemTest(unittest.TestCase):
+    """#1244–#1246: Der Rat „API-Key/Token prüfen" war der Dauerschaden.
+
+    GitHub drosselt mit HTTP 429 UND mit „secondary rate limit" – und tarnt
+    beides oft als 403. Das Auth-Muster liest „403". Steht `rate_limit` nicht
+    VOR `auth` in KLASSEN (= Rangfolge `RANG`), wird aus einer Drosselung ein
+    angebliches Token-Problem, und der Lauf wiederholt sich, bis das
+    Kontingent noch tiefer im Keller ist. Diese Klasse hält beides fest:
+    die richtige Einordnung UND die Gegenprobe, dass echtes Auth rot bleibt.
+    """
+
+    def test_429_ist_eine_drosselung(self):
+        self.assertEqual("rate_limit", pd.klassifiziere("HTTP 429: Too Many Requests"))
+
+    def test_als_403_getarnte_drosselung_ist_kein_auth_fehler(self):
+        text = ("remote: You have exceeded a secondary rate limit. "
+                "Please wait a few minutes before you try again. (HTTP 403)")
+        self.assertEqual("rate_limit", pd.klassifiziere(text))
+
+    def test_api_rate_limit_mit_403(self):
+        self.assertEqual("rate_limit",
+                         pd.klassifiziere("error: 403 Forbidden – API rate limit exceeded"))
+
+    def test_echtes_auth_bleibt_auth(self):
+        """Gegenprobe: Die Drosselungs-Regel darf Auth nicht verschlucken."""
+        for text in (
+            "fatal: Authentication failed for 'https://github.com/x/y.git/'",
+            "remote: Invalid username or password.",
+            "fatal: could not read Username for 'https://github.com': No such device",
+        ):
+            with self.subTest(text=text):
+                self.assertEqual("auth", pd.klassifiziere(text))
+
+    def test_drosselung_steht_vor_auth_und_netzwerk(self):
+        rang = pd.RANG
+        self.assertLess(rang.index("rate_limit"), rang.index("auth"))
+        self.assertLess(rang.index("rate_limit"), rang.index("netzwerk"))
+
+    def test_der_rat_widerspricht_dem_neustart(self):
+        """Der Rat muss den Neustart AUSDRÜCKLICH verneinen, nicht nur meiden.
+
+        Erste Fassung dieses Tests prüfte „enthält nicht die Wörter erneut
+        versuchen" – und war damit falsch: Der Rat sagt „ERNEUT VERSUCHEN
+        MACHT ES SCHLIMMER". Ein Test, der eine Verneinung mit einem
+        WortverboT verwechselt, hätte den Satz gelöscht statt geprüft.
+        """
+        handlung = pd.handlung("rate_limit")
+        self.assertIn("SCHLIMMER", handlung)
+        self.assertIn("Re-run", handlung)
+        self.assertIn("falsche Antwort", handlung)
+
+    def test_gewOEhnlicher_netzwerkfehler_bleibt_netzwerk(self):
+        """Gegenprobe: Die neue Klasse darf die Restmenge nicht schlucken."""
+        self.assertEqual("netzwerk",
+                         pd.klassifiziere("fatal: RPC failed; the remote end hung up"))
+
+
 if __name__ == "__main__":
     unittest.main()

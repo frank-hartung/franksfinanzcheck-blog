@@ -186,6 +186,43 @@ in verschiedenen Einträgen sind YAML-korrekt.
 (`draft: false` / `draft: true`) ist weiter BLOCKER – ohne Parser und mit
 Parser. Der Fehlalarm ist nicht gegen einen Blindfleck getauscht.
 
+### 2.4 Die Meldung selbst: aus „API-Key abgelaufen" wird die Git-Klasse
+
+`push_diagnose.py` ist ein Werkzeug – solange niemand es aufruft, ändert es
+keinen Rat. Deshalb ist es jetzt **verdrahtet**:
+
+* `.github/workflows/alert-on-failure.yml` erkennt, wenn ein roter Schritt
+  ein Commit-/Push-Schritt ist (`COMMIT_SCHRITT`-Muster), und vergibt die
+  Runbook-Klasse `commit-push`.
+* Der Rat nennt zuerst den **Beleg-Befehl** (`push_diagnose.py --tage 14`)
+  und dann je Klasse genau einen nächsten Schritt. Er sagt ausdrücklich, was
+  **nicht** hilft: ein API-Key kann diesen Schritt nicht rot machen, und
+  „neu starten" ist nur bei `netzwerk` richtig.
+* Die Erkennung ist **fail-open**: Fehlt das Werkzeug, bleibt der bisherige
+  Rat stehen. Ein Melder darf nicht zum Vorfall werden.
+
+Zwei Szenarien in `scripts/tests/sim/alert_scoping_sim.mjs` halten beides
+fest – den echten Fall (#1246: „Audit-Log-Stand committen") und die
+Gegenprobe (ein roter **Selbsttest** bleibt Code-Regression und wird NICHT
+als Commit-Fehler gelesen).
+
+### 2.45 Eine Falle, die beim Bauen dieser Klasse aufgefallen ist
+
+GitHub drosselt mit **HTTP 429** – und tarnt das regelmäßig als **403**
+(„secondary rate limit"). Das Auth-Muster liest `403`. Die erste Fassung
+hatte `rate_limit` deshalb als *unbekannt* bzw. als *auth* eingeordnet:
+Eine Drosselung wäre als angebliches Token-Problem gelesen worden – genau
+der Fehler, den dieses Werkzeug behebt, nur eine Ebene tiefer.
+
+Behoben in der **Rangfolge** (`KLASSEN`, aus der `RANG` entsteht):
+`rate_limit` steht jetzt vor `auth` und vor `netzwerk`. Sieben Tests halten
+die vier Richtungen fest: 429 → Drosselung, als 403 getarnte Drosselung →
+Drosselung, echtes Auth → Auth, gewöhnlicher Netzwerkfehler → Netzwerk.
+
+Der Rat für diese Klasse ist der einzige, der **widerspricht**: „ERNEUT
+VERSUCHEN MACHT ES SCHLIMMER" – jede weitere Runde zählt auf dasselbe
+erschöpfte Kontingent. Ein `Re-run` ist hier die falsche Antwort.
+
 ### 2.5 Nebenbefund aus dem PR-Lauf: Beacon ohne CSP-Erlaubnis
 
 Der erste PR-Lauf (449…) meldete im Layout-Audit auf **jeder** betroffenen
