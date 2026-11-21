@@ -45,37 +45,37 @@ faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "210c16a84fefe83872ae42db27541fd2d6c626076caf18257262b8d1a0a95c1d"
+  inhalt_sha256: "d4f662d997d71a83eea04766edf64b64429b1d78fc1fd4a1c4c3413b6e57d155"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Elementar- und Unterversicherungs-Aussagen belegt, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-05"
-  naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Meta-Qualitäts-Gate #1069 (05.11.2026): fehlendes Satzende am Ende der Description ergänzt (ein Punkt, 133 Zeichen / 857 px – im Snippet-Fenster der SSOT). Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll der Prüfung vom 05.10.2026 gelten unverändert. Auf Auftrag des Herausgebers neu versiegelt."
+  pruefdatum: "2026-11-21"
+  naechste_pruefung: "2027-01-05"
+  aenderungsgrund: 'Nachprüfung am 21.11.2026 (Wiedervorlage vom 19.11.2026 überfällig, Gate E09/E10): Alle vier Textanker und alle 14 Zahlen des Protokolls gegen die drei Quellen erneut durchgesehen. Die drei Belegketten wurden am 21.11.2026 einzeln abgerufen: Q1 (Verbraucherzentrale, Stand 14.08.2026) lebt und trägt den Elementarschutz-Kernsatz wörtlich; Q2 (GDV, Stand 10.10.2022) trägt die Mechanik der gleitenden Neuwertversicherung; Q3 (GDV-Klimadossier, Stand 13.08.2024) trägt die Starkregen-Aussage, die dortige Aussage zum obligatorischen Anbieten ist jedoch nur für 2024 belegt und im Protokoll entsprechend gebunden. Alle Rechenwege nachgerechnet: Untergrenze 3.000+2.000+1.500+800 = 7.300 €, Obergrenze 7.000+8.000+6.000+2.500 = 23.500 €, Staffel 420-40 = 380 € und 420-80 = 340 €, Rangfolge 285 < 395 < 580 < 735 € – alle exakt bestätigt. Die Modellspanne 120/180 € ist im Fließtext jetzt ausdrücklich als redaktionelle Annahme gekennzeichnet, nicht als Marktmittel. Keine Preise, Beitragssätze oder Marktaussagen wurden neu behauptet.'
   gepruefte_aussagen:
     - textanker: "Genau dafür braucht es meist den Baustein **Elementarschutz**"
       pruefung: "Bestätigt: Starkregen, Rückstau und Überschwemmung sind in Standardtarifen nicht automatisch enthalten und benötigen den Elementar-Baustein (Verbraucherzentrale, GDV)"
       quellen: ["Q1", "Q3"]
     - textanker: "Im Schadenfall soll dein Haus zu heutigen Baukosten ersetzt werden"
-      pruefung: "Gleitende Neuwertversicherung passt die Versicherungssumme jährlich an Baupreis- und Tariflohnindex des Statistischen Bundesamts an (GDV); Aussage bestätigt"
+      pruefung: "Gleitende Neuwertversicherung passt die Versicherungssumme jährlich an Baupreis- und Tariflohnindex des Statistischen Bundesamts an (GDV). Quelle trägt den Stand 10.10.2022; die Mechanik ist unverändert, die dort genannten Prozentwerte (2023: +15 %, Zehnjahresmittel 3 %) werden im Artikel nicht verwendet."
       quellen: ["Q2"]
     - textanker: "Wird der Wert zu niedrig angesetzt oder nicht sauber angepasst, kann die Versicherung im Schadenfall kürzen"
       pruefung: "Quotale Leistungskürzung bei Unterversicherung ist dokumentierte Wirkung zu niedrig angesetzter Versicherungssummen (GDV, Verbraucherzentrale)"
       quellen: ["Q2", "Q1"]
     - textanker: "reicht aber oft schon ein starker Regen, um Keller, Böden oder Technik teuer zu beschädigen"
-      pruefung: "GDV-Klimadossier bestätigt zunehmende Starkregen- und Hochwasserschäden auch abseits großer Flüsse; Elementarschutz wird bei Neuverträgen inzwischen obligatorisch mit angeboten"
+      pruefung: "GDV-Klimadossier bestätigt zunehmende Starkregen- und Hochwasserschäden auch abseits großer Flüsse. Die Aussage zum obligatorischen Anbieten des Elementarschutzes steht dort im Stand 13.08.2024 (Seitenstand, nicht Abrufdatum); für 2026 ist sie nicht erneut belegt."
       quellen: ["Q3"]
   gepruefte_zahlen:
     - aussage: "Beispiel-Aufpreis Elementarschutz"
       wert: "120 € bis 180 € pro Jahr"
-      fundstelle: "Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann."
+      fundstelle: "Schon ein Aufpreis von **120 € oder 180 € pro Jahr** (redaktionelle Modellspanne, kein Marktmittel) wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann."
       pruefung: "Redaktionelle Beispielspanne für den Elementar-Zusatzbaustein eines Einfamilienhauses; marktübliche Größenordnung"
       konsistenzpruefung: "Gering im Vergleich zum dokumentierten Einzelschaden (8.000 € bis 15.000 €); Verhältnis im Artikel zutreffend eingeordnet"
       quellen: ["Q3", "Q1"]
     - aussage: "Einzelschaden-Größenordnung Elementar/Wasser"
       wert: "8.000 € bis 15.000 €"
-      fundstelle: "Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann."
+      fundstelle: "Schon ein Aufpreis von **120 € oder 180 € pro Jahr** (redaktionelle Modellspanne, kein Marktmittel) wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann."
       pruefung: "Größenordnung eines mittleren Wasser-/Elementarschadens; mit der Beispielrechnung des Artikels abgeglichen"
       konsistenzpruefung: "Deckungsgleich mit der Schadenrechnung (Gesamtspanne 7.300 € bis 23.500 €)"
       quellen: ["Q1"]
@@ -216,7 +216,7 @@ Genau dafür braucht es meist den Baustein **Elementarschutz**.
 
 Viele Eigentümer halten das für ein Spezialfall-Thema. In der Praxis reicht aber oft schon ein starker Regen, um Keller, Böden oder Technik teuer zu beschädigen.
 
-Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann. Genau deshalb sollte Elementarschutz nicht als Luxus wirken, sondern als nüchterne Risiko-Frage.
+Schon ein Aufpreis von **120 € oder 180 € pro Jahr** (redaktionelle Modellspanne, kein Marktmittel) wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann. Genau deshalb sollte Elementarschutz nicht als Luxus wirken, sondern als nüchterne Risiko-Frage.
 
 ### Beispielhafte Schadenrechnung
 

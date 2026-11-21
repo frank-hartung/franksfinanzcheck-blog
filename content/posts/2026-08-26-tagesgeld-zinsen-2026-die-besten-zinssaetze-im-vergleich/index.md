@@ -47,7 +47,6 @@ Tagesgeldkonto im Check: Zwei Banken werben mit unterschiedlichen Tagesgeldzinse
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-**Transparenz:** Dieser Ratgeber enthält einen gekennzeichneten Affiliate-Link. Bei einem Abschluss können wir eine Provision erhalten. Für dich wird das Konto dadurch nicht teurer.
 
 ![Merkkarte: Kernaussagen zu Tagesgeld vergleichen: Was bleibt nach dem Aktionszins?](abbildung-merkkarte.svg)
 

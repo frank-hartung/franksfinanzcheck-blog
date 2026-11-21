@@ -4,7 +4,9 @@ Die Fälle spiegeln die realen Befunde aus dem Audit #743 wider: zu lange
 Pillar-Titel, zu lange Description, lastmod vor date, unbelegte Spar-Pillen
 („1.250 €“, „ab ca. 5 € im Monat“) und Entwürfe, die nicht bewertet werden.
 """
+import re
 import unittest
+from pathlib import Path
 
 import scripts.metadaten_wache as w
 
@@ -259,6 +261,33 @@ class RepositoryMetadatenRegression(unittest.TestCase):
         self.assertEqual(healed, [])
         self.assertEqual(findings, [], "\n".join(
             f"{f['file']}: {f['rule']} {f['msg']}" for f in findings))
+
+    def test_kein_artikel_traegt_zwei_transparenzhinweise(self):
+        """Ein Artikel hat GENAU EINEN Werbehinweis – nicht zwei.
+
+        BEFUND 21.11.2026 (dreifach aufgetreten): Mehrere Heiler bringen
+        ihren eigenen `**Transparenz:**`-Block mit. Stand schon einer im
+        Text, entstanden zwei aufeinanderfolgende Absätze mit derselben
+        Aussage – sichtbar für jeden Leser, und bei Artikeln mit Freigabe
+        zusätzlich ein E17-Problem, weil der zweite Block ohne neues Siegel
+        in den Body kam (kfz-Versicherung, 30f10af8).
+
+        Der Test prüft die KLASSE, nicht den Einzelfall: kein Artikel darf
+        mehr als einen solchen Block tragen, unabhängig davon, welches
+        Werkzeug ihn geschrieben hat.
+        """
+        posts = sorted((Path(__file__).resolve().parents[2] / "content" / "posts").glob("*/index.md"))
+        self.assertGreater(len(posts), 50, "Ein leerer Bestand ist kein grüner Nachweis")
+        mehrfach = []
+        for pfad in posts:
+            try:
+                text = pfad.read_text(encoding="utf-8")
+            except OSError:
+                continue
+            anzahl = len(re.findall(r"(?m)^\*\*Transparenz:\*\*", text))
+            if anzahl > 1:
+                mehrfach.append(f"{pfad.parent.name}: {anzahl} Transparenzhinweise")
+        self.assertEqual([], mehrfach, "\n".join(mehrfach))
 
 
 if __name__ == "__main__":
