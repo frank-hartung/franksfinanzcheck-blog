@@ -85,6 +85,9 @@ Sachverhalt (Ablösung durch Nachprüfungsdokument) bezeichnet.
 | `test_faktenfrische_1072` (Register, 15 Tests) | **OK** |
 | `faktenfrische_befund_akte.py --wache` | **Exit 0**, Akte auf dem Stand der Queue |
 | Bildherkunft `ki_cover_herkunft.py --pruefen` | **142 Cover gemessen, 0 Befunde** |
+| Entity-Marken-Wache `--source-only` / `--public` | 0 Fehler (vorher 1× E6) |
+| Hugo-Build (`--minify --cleanDestinationDir`) | grün, 131 Seiten |
+| Frontmatter-Wache über den Bestand | 173 Dateien, 0 Blocker, 0 Hinweise |
 
 **Ökostrom-Cover:** Frontmatter nannte `a1bb625359…`, die Datei auf Platte war
 `a6878e81cf…` (Fehler #1028-Klasse, Encoder-Doppelwrite). Statt den Hash blind
@@ -109,25 +112,51 @@ bleiben als Historie stehen, die Nachmessung ist als offen markiert.
 
 ## 4. Scope-Grenze: was hier nicht repariert wurde
 
-Ein voller `unittest discover` über `scripts/tests` meldet **14 rote Tests**
-(6210 Tests, 44 übersprungen). Alle 14 sind **am Basis-Commit `d047978` in einem
-sauberen Worktree byte-identisch rot** — nachgewiesen, nicht behauptet. Sie gehören
-nicht zu diesem Vorgang und sind hier nicht angefasst:
+**Nachtrag 21.11.2026.** Der erste Stand dieses Abschnitts nannte 14 rote Tests.
+Drei davon waren kein Inhalt, sondern ein Fehlalarm der Frontmatter-Wache: Sie
+meldete auf `quellen:`-Listen F3-BLOCKER („Schlüssel `id` steht doppelt"), weil sie
+das `- ` eines Listeneintrags entfernte und die Zeile danach als Mapping-Schlüssel
+zählte. Das ist behoben (eigener Commit, 4 neue Tests, Sabotage-Probe). Folge:
+`test_reserve_frontmatter_gate`, `test_veroeffentlichungs_wache` und
+`test_bestand_ohne_blocker`/`test_scanner_stimmt_mit_dem_parser_ueberein` sind grün.
 
-- `test_1098_produktionswahrheit` (2): `F4-ENTSCHEIDUNGSVORLAGE.md` veraltet
-- `test_einzigartigkeit_1027` (1): Flesch 59,9 < Schwelle 60,0
+Der Fehlalarm war nicht harmlos: `.github/actions/hugo-build` prüft Frontmatter
+**vor** dem Bau und ist fail-closed. Jeder Bau brach ab, die Entity-Marken-Wache
+erreichte ihren Build-Schritt nie und stand seit dem 19.11. rot auf `main`. Die
+Wache läuft auf `6c1c530` wieder grün (manueller Lauf `44895014155`).
+
+**Es bleiben 10 rote Tests in 9 Modulen** (9 FAIL + 1 ERROR; voller `discover`
+über `scripts/tests`: 6216 Tests, 39 übersprungen). Sie sind inhaltlich, gehören
+nicht zu diesem Vorgang und sind hier bewusst **nicht** angefasst — jeder
+verlangt eine redaktionelle Entscheidung, nicht einen Werkzeug-Fix. Alle zehn
+sind zusätzlich am Basis-Commit `d047978` in einem separaten Worktree
+byte-identisch rot; nachgewiesen, nicht behauptet:
+
+- `test_metadaten_wache` (1): Titel mit 64 Zeichen überschreitet die
+  60-Zeichen-Grenze (M1) in `2026-08-26-kfz-versicherung-…`. **Nicht korrigiert,
+  weil der Titel Teil der redaktionellen Freigabe ist**: `inhalt_sha256` vom
+  19.11.2026 bindet Titel, Beschreibung, Quellen und Body; das Siegel ist aktuell
+  intakt. Eine Titeländerung entwertet Franks Freigabe und ist seine Entscheidung.
+  Kürzungsvorschlag liegt bereit (58 Zeichen), ist aber nicht eingebaut.
+- `test_inhalts_register` (1): drei Artikel ohne Pillar-Link
+- `test_faktenfrische_763` (1): im Reisekassen-Artikel fehlt der Rechtshinweis
+  „Das lässt sich nicht pauschal zusagen." – dort steht stattdessen
+  „das ist ein Modellwert." mitten in einem DSGVO-Satz. Das ist ein echter
+  Textfehler; die Korrektur ist inhaltlich, nicht mechanisch.
+- `test_einzigartigkeit_1027` (1): Flesch 59,9 vs. Schwelle 60,0
 - `test_einzigartigkeit_bestand` (1): 5 überlappende Phrasen live↔live
-- `test_faktenfrische_763` (1): fehlender Rechtshinweis im Reisekassen-Artikel
-- `test_frontmatter_wache` (2) / `test_metadaten_wache` (2) /
-  `test_reserve_frontmatter_gate` (1) / `test_veroeffentlichungs_wache` (1):
-  doppelter `id`-Schlüssel + Titel über 60 Zeichen in
-  `2026-08-26-kfz-versicherung-…`
-- `test_gsc_abdeckung` (1), `test_inhalts_register` (1),
-  `test_ki_provenienz_gate` (1, fehlender Hugo-Build `public/index.xml`)
+- `test_gsc_abdeckung` (1): eine Seite ohne redaktionellen Inlink
+- `test_1098_produktionswahrheit` (2): `F4-ENTSCHEIDUNGSVORLAGE.md` veraltet
+- `test_ki_provenienz_gate` (1, ERROR): verlangt `public/index.xml` – die Datei
+  entsteht erst durch den Hugo-Build und ist bewusst nicht eingecheckt.
+- `test_lcp_image_optimizer` (1): eingechecktes `data/lcp_images.json` passt
+  nicht zur Quelle. **Nicht** durch Neu-Generieren „geheilt" – das Manifest wird
+  vom Betrieb geschrieben, nicht von diesem Vorgang.
 
-Ein Teil davon (doppelter YAML-Schlüssel) ist ein echter Build-Blocker und
-gehört in einen eigenen Vorgang — er ist hier ausdrücklich **nicht** als erledigt
-gemeldet.
+**Ehrliche Einschränkung zur Messung:** Ein lokal gebautes `public/` lässt den
+`ki_provenienz_gate`-ERROR verschwinden, ohne dass etwas repariert wäre. Genau
+deshalb ist `public/` vor der Messung wieder entfernt worden; die Zahl oben gilt
+für den Zustand ohne Build-Artefakt.
 
 ---
 
