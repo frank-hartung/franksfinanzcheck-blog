@@ -17,8 +17,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 9db41c76f49c332435b0f249e400b2f40a686859587bde1ee957daccff47b09f
-    geprueft_am: 2026-11-13
+    sha256: db454681f1655869a2012eac5c2aed69bfd71a4e5c82c9cf361e5bec6bbed18c
+    geprueft_am: 2026-11-21
 kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein unrealistischer Abschlag, fehlende Zählerstände, ein aufgeschobener Heizungs-Check und pauschale Technik-Einstellungen. Prüfe Arbeitspreis, Grundpreis und Vorjahresverbrauch getrennt. Entlüfte nur bei Bedarf; wiederkehrender Druckverlust, Störungen und Arbeiten am Wärmeerzeuger gehören zum Fachbetrieb."
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie", "Gas spare", "Heizkosten sparen"]

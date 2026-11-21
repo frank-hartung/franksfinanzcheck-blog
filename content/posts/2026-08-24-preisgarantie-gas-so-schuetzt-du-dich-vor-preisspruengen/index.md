@@ -17,8 +17,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: a53f2b2162fb163214470b81f63417501a739278f37df625a0036b48635de2be
-    geprueft_am: 2026-11-13
+    sha256: 5846d5b5d0f6b4a8661610002c58df4f5c95961a1db3777b050dacfab831fb4d
+    geprueft_am: 2026-11-21
 kurzantwort: "Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglich geschützten Bestandteilen. Erhöht der Anbieter trotzdem den Preis, vergleichst du Änderungsgrund und Klausel, notierst das Wirksamkeitsdatum und prüfst dein Sonderkündigungsrecht. Reagiere auf dein konkretes Schreiben – nicht auf kurzfristige Börsenmeldungen."
 social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung", "Gaspreis trotz Garantie erhöht"]

@@ -114,14 +114,28 @@ class WiederhergestellteBelege(unittest.TestCase):
         self.assertEqual(snapshot["offen"], len(snapshot["befunde"]))
         self.assertEqual(snapshot["offen"], 148)
         # Nach Datums-Lifts steht derselbe Befund im Snapshot unter einem
-        # anderen Slug als in der Queue. Die ID bleibt über alle Lifts stabil;
-        # alle alten Snapshot-IDs müssen als Fachbefund erhalten sein.
+        # anderen Slug als in der Queue. Die ID bleibt über alle Lifts stabil.
+        # "Erhalten" heißt seit dem Nachlauf vom 17.11.2026: offen in der Queue
+        # ODER durch eine dokumentierte Folgeentscheidung geschlossen – nie
+        # still verschwunden. Fünf Snapshot-IDs (Reisekassen-Dublette) sind
+        # am 17.11.2026 mit `fassung_wechsel: true` am kanonischen Artikel
+        # entschieden worden und stehen deshalb nicht mehr im offenen
+        # `fachbefunde`-Bestand; ihr Verschwinden aus der Queue ist der
+        # dokumentierte Schließweg, kein Verlust.
         queue = json.loads((ROOT / "data/faktenfrische_queue.json").read_text(encoding="utf-8"))
         bekannte_ids = (
             {b["id"] for b in queue["fachbefunde"]}
             | {b["id"] for b in (queue.get("ausgemusterte_entwurfsbefunde") or [])}
         )
-        self.assertTrue({b["id"] for b in snapshot["befunde"]} <= bekannte_ids)
+        entschiedene_ids = {
+            b.get("befund_id")
+            for b in ledger._laden_streng(ROOT / "data/faktenfrische_entscheidungen.yaml").get("entscheidungen", [])
+            if b.get("befund_id")
+        }
+        fehlende = {b["id"] for b in snapshot["befunde"]} - bekannte_ids - entschiedene_ids
+        self.assertEqual(
+            fehlende, set(),
+            f"Snapshot-Befunde weder in der Queue noch per Entscheidung belegt: {sorted(fehlende)}")
         for lauf in archiv["aeltere_laeufe_nicht_in_main"]:
             for befund in lauf["befunde"]:
                 self.assertIn(ledger.befund_id(lauf["slug"], befund), bekannte_ids)

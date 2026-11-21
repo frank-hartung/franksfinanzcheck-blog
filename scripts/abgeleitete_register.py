@@ -119,7 +119,19 @@ REGISTER: Tuple[Register, ...] = (
               "Entscheidungen – Schließweg je Befund",
         check="--check",
         fix="--schreiben",
-        probe=("**293 offene Befunde", "**294 offene Befunde"),
+        # 21.11.2026 (ZWEITE Runde): Die Probe stand auf dem Wortlaut einer
+        # bestimmten Befundzahl („**293 offene Befunde"). Sobald eine
+        # redaktionelle Entscheidung einen Befund schließt – hier: sieben
+        # Heizöl-Folgeentscheidungen – ändert sich die Zahl, und die
+        # Sabotage-Probe findet ihren Suchtext nicht mehr. Ergebnis: „Sabotage
+        # hat nichts geändert (Probe taugt nicht)" – ein roter Test, der nicht
+        # die Drift-Erkennung prüft, sondern nur den Kalender.
+        #
+        # Die Probe zielt deshalb auf die Tabellenzeile, die es in JEDER
+        # Fassung gibt: `| Offene Befunde | 286 |` bleibt als Struktur stabil,
+        # auch wenn 286 eine andere Zahl wird. Sabotiert wird die Zellentrennung
+        # – daran muss die Drift-Erkennung scheitern, unabhängig vom Bestand.
+        probe=("| Offene Befunde |", "| Offene Befunde  |"),
     ),
 )
 

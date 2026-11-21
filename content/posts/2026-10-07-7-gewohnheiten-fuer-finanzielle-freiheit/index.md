@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 980627d531e5d1368e2bc1043cdbd867a832c21488bf83aea69ca7f076c409d5
-    geprueft_am: 2026-11-13
+    sha256: 660d8d98101bad68ab9da3dbcb95213bf3736da9711470f05ec3461f20351cf2
+    geprueft_am: 2026-11-21
 pin_title: "Sieben Gewohnheiten für den Umgang mit deinem Geld"
 pin_description: "*Werbung | Wähle eine von sieben Geldgewohnheiten und gib ihr einen festen Termin. Kontrolliere beim nächsten Kontoauszug, ob sie im Alltag tatsächlich funktioniert. Mach den Termin klein genug für eine normale Woche: erst Abbuchungen prüfen, beim nächsten Termin die Rücklage. Ein erledigter Schritt bringt mehr als eine lange Wunschliste."
 quellen:

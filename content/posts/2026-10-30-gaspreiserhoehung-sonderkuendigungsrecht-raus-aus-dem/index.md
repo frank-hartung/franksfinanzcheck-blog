@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: eee3ca84df2521342b2c95023a3a2481a4565ad8c33d160fdc855486a5687c32
-    geprueft_am: 2026-11-13
+    sha256: af8884ad7fb1bb19653d7da004d74140a5fa48fdd809731ea6715cf57261c364
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"

@@ -709,6 +709,19 @@ und Test in beide Richtungen. Betriebsanleitung:
   verlangt ihren Rückbau. Nicht geändert: der harte Stopp
   (`integrity_guard.py --gate`) — er prüft wie vorher fail-closed. Runbook:
   `docs/PFLICHT-CHECK-RUNBOOK.md`, Abschnitt „Dauerzustand“.
+- **20.11.2026 (Nachtrag zu Regel 8 / C18):** Highend-Nachzug zum Dauerzustand.
+  Neu belegt: `GET /rules/branches/main` liefert **7 Einträge** aus **drei** aktiven
+  Rulesets (#23710849 Lösch-/Force-Push-Schutz, #24247857 „Premium-Schutz für main“
+  zusätzlich `required_linear_history`, #23705980 Unveränderlichkeit) – weiterhin
+  kein `required_status_checks`, keine `pull_request`-Regel, keine Bypass-Akteure.
+  Die Belege in `PFLICHT_CHECK_DAUERZUSTAND` und im Runbook sind auf den lebendigen
+  Stand nachgezogen (Alarm-Alterung hätte eine zweite Wahrheit hinterlegt). Die
+  **Frist-Wache** (`pflichtcheck_guard.py --frist-report` + Wochen-Governance-Schritt
+  `pflichtcheck` im Gate) mahnt ≤ 35 Tage vor Ablauf der Prüffrist 31.12.2026 als
+  `AMBER`, bei Ablauf als `RED` – Verlängern bleibt Menschen-Entscheidung, und der
+  01.01.2027 kommt nicht mehr als stiller Umschlag. **Die Aktivierung des
+  Pflicht-Checks selbst bleibt der separate Admin-Schritt (C15) und wurde nicht
+  ausgeführt.** Governance-Vertrag danach: 47 Regeln grün.
 - **19.09.2026 (Nachtrag):** Der Pflicht-Check des PR-Gates hieß `lock` (Job-ID
   ohne Anzeigename) und war in einem Ruleset ohne Ziel-Zweig eingetragen —
   `main` war ungeschützt. Jetzt: Job-Anzeigename **`Integritäts-Siegel`** als

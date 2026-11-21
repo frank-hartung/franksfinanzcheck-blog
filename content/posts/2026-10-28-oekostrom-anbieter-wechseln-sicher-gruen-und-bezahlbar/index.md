@@ -29,8 +29,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: a1bb625359346045e2dc9e0c8bdd2281e2c3fc37837bddeb455d2a641f077237
-    geprueft_am: 2026-11-13
+    sha256: bd8e317f5808846286ba27c11c704bd8a4a4d6d631b783332c66b60392964eac
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Lieferantenwechsel – Informationen für Verbraucherinnen und Verbraucher"
@@ -220,7 +220,7 @@ So wird das Thema Strom von einer lästigen Pflicht zu einem kontrollierten Proz
 Bei einem regulären Lieferantenwechsel wird die Versorgung nicht unterbrochen; dein Netzanschluss und Zähler bleiben bestehen. Entsteht ausnahmsweise eine Zuordnungslücke, greift je nach Situation die Grund- oder Ersatzversorgung ([Bundesnetzagentur, Q3](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/Ersatzversorgung/start.html)). Prüfe die Bestätigung des neuen Anbieters auf den vereinbarten Lieferbeginn; eine Ersatzversorgung kann andere und gegebenenfalls höhere Preise haben.
 
 ### Wie lange dauert ein Wechsel zum Ökostromanbieter?
- Davon zu unterscheiden ist der technische Stromlieferantenwechsel: Er ist seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich; das ist ein Beispielwert. Diese technische Frist beendet deinen laufenden Vertrag nicht früher und ersetzt keine Kündigung ([Bundesnetzagentur, Q1](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html)). Lass dir den bestätigten Lieferbeginn vom neuen Anbieter schriftlich nennen.
+ Davon zu unterscheiden ist der technische Stromlieferantenwechsel: Er ist seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich; das ist ein Beispielwert. Diese technische Frist beendet deinen laufenden Vertrag nicht früher und ersetzt keine Kündigung ([Bundesnetzagentur, Q1](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html)). Deine vertragliche Kündigungsfrist bleibt deshalb bestehen; sie steht in deinem Vertrag und wird durch den technischen Wechsel nicht verkürzt. Lass dir den bestätigten Lieferbeginn vom neuen Anbieter schriftlich nennen.
 
 ### Was passiert mit meinem alten Bonus, wenn ich kündige?
 Das ist ein wichtiger Punkt. Viele Boni werden erst nach Ende der Mindestlaufzeit ausgezahlt oder mit der initialen Jahresrechnung verrechnet. Wenn du vorher kündigst, verfällt der Anspruch oft. Achte darauf, dass deine [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) und die Bonusbedingungen zusammenpassen. Kündige erst, wenn der Bonus sicher verdient ist.

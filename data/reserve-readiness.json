@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 1,
   "pool_size": 12,
   "generated_at": "2026-11-21T12:04:42Z",
   "candidates": [
@@ -23,20 +23,10 @@
     },
     {
       "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "1b2e3abcab392fa226eab877f52139daa214972437435bc7695879240222f5c1",
-      "flesch": 65.8,
       "measured_at": "2026-11-21T12:00:37Z",
-      "score": 0.93,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-21-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",

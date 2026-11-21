@@ -18,8 +18,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 2b51d48e7a9cce04b92315b99c2645ea54d9ece25944951078a2abd85ad2d064
-    geprueft_am: 2026-11-13
+    sha256: e8bd7380d01a4985cf6d751d098efd19604849f35d40178572607321a7fff911
+    geprueft_am: 2026-11-21
 kurzantwort: "Vergleiche die Zinsen für deinen Anlagebetrag und deine Anlagedauer. Gilt ein höherer Satz nur für einige Monate, rechne den Rest mit dem Anschlusszins. Prüfe außerdem, welche Bank die Einlagen hält."
 
 social_posted: true

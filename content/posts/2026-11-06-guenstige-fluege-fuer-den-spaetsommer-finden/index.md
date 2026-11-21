@@ -25,8 +25,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 54bfaff8e93f5560b86cf70bfdf3c350101edd40b2fe1a7e236ea4c5c71bdecb
-    geprueft_am: 2026-11-13
+    sha256: 9d9c7ebd9010b4127ef23d1afbaec05f331e9ab0c626f406ac1c9514d72e5b0b
+    geprueft_am: 2026-11-21
 faktencheck: 2026-11-07
 kurzantwort: "Buche deinen Flug 14 – 21 Tage vor dem Abflug, wähle mittwochs oder donnerstags und setze Preis‑Alerts auf Vergleichsportalen wie Skyscanner – das spart im Schnitt 18 % gegenüber den Spitzenpreisen im Spätsommer."
 affiliate_exempt: true

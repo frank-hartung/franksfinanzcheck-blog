@@ -63,6 +63,11 @@ TODAY = NOW.date()
 # Schritte in Anzeigereihenfolge + Report, aus dem der Befund zu lesen ist.
 STEPS = {
     "automation": {"report": "", "label": "Automation durch Branch-Schutz blockiert"},
+    # Pflicht-Check-Frist (20.11.2026, C18/#316-Nachtrag): Der dokumentierte
+    # Dauerzustand der Pflicht-Check-Erklärung läuft am 31.12.2026 aus. Die
+    # Wochen-Wache (`pflichtcheck_guard.py --frist-report`) macht den Ablauf
+    # sichtbar, bevor er jeden PR hart trifft – kein Netz, nur der Vertrag.
+    "pflichtcheck": {"report": "", "label": "Pflicht-Check-Frist (Dauerzustand)"},
     "build":   {"report": "",                    "label": "Hugo-Build (Grundlage CWV)"},
     "decay":   {"report": "DECAY-REPORT.md",      "label": "Content-Decay-Radar"},
     "cwv":     {"report": "CWV-REPORT.md",        "label": "Core-Web-Vitals"},
@@ -103,6 +108,11 @@ ACTIONABLE_AMBER = {
     # kann, optimiert nach Gefühl. funnel_gap = Quelle fehlt/veraltet,
     # chain_gap = CTA/Event/Gateway-Vertrag verletzt. Beide sind handlungsbedürftig.
     "funnel_gap", "chain_gap",
+    # Pflicht-Check-Frist (20.11.2026): eine ablaufende/abgelaufene Frist des
+    # dokumentierten Dauerzustands ist eine Menschen-Entscheidung (verlängern
+    # oder den Pflicht-Check aktivieren) – genau die Sorte Wartungsfall mit
+    # Vorlauf, die #206 handlungswürdig macht (s. Token-Lebenszyklus).
+    "dauerzustand_frist",
 }
 # Amber-Befunde, die NUR Info sind (Bild-Feinschliff, Stil, Datenlage).
 INFO_AMBER = {

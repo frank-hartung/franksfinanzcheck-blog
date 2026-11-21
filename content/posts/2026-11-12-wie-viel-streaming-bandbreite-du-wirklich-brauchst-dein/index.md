@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: cf5369124c0fe68f972c8c08377292d6535d15df3ebfaa5fe5e83d23d0ced017
-    geprueft_am: 2026-11-13
+    sha256: 27ec7b53c6969709de0e7d4535baca3403016bb731081e34d608936497031c2d
+    geprueft_am: 2026-11-21
 quellen:
   - id: "Q1"
     titel: "Netflix-Stream hängt – was tun?"
