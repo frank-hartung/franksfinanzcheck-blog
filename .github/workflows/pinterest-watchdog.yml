@@ -23,7 +23,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: pinterest-watchdog
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

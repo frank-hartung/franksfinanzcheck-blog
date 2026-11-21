@@ -61,7 +61,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: zeit-rechtschreibung
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

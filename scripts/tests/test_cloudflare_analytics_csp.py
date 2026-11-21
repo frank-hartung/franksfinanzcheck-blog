@@ -93,33 +93,51 @@ def _manual_aktiv() -> bool:
 class CspDecktDenBeaconTest(unittest.TestCase):
     """Die eine Regel: Wer den Beacon lädt, erlaubt seine Domain."""
 
-    def test_bei_inaktiver_manueller_einbindung_wird_nichts_geladen(self):
+    def test_der_beacon_ist_erlaubt_obwohl_das_partial_schweigt(self):
+        """Der am 21.11.2026 belegte Betriebszustand.
+
+        Das Partial rendert ohne `mode="manual"` + Token KEIN Skript – und
+        trotzdem stand der Beacon im ausgelieferten HTML und wurde von der
+        CSP geblockt. Der Ursprung ist keine Repo-Quelle, sondern Cloudflares
+        automatische Injektion an der Edge (Dashboard-Einstellung). Ein Repo
+        kann diesen Zustand weder herstellen noch abstellen – es kann ihn nur
+        ERLAUBEN. Genau das ist hier festgehalten: Bleibt die Injektion aktiv,
+        ist die CSP die einzige Stelle, an der das Repo den Browserfehler
+        verhindern kann.
+
+        Das ist bewusst keine „unnötige Angriffsfläche": Die Domain ist
+        dieselbe Organisation, die den Beacon ohnehin ins HTML schreibt;
+        ein CSP-Verbot verhindert nicht die Auslieferung, sondern nur die
+        Ausführung – und erzeugt auf jeder Seite einen Konsolenfehler.
+        """
         if _manual_aktiv():
-            self.skipTest("manuelle Einbindung ist aktiv – die CSP-Regel unten "
-                          "greift dann und muss grün sein")
-        # Der ruhige Zustand: kein Beacon im gebauten HTML, also keine
-        # CSP-Verletzung. Genau das stellt das Partial über seine Bedingung
-        # sicher.
+            self.skipTest("manuelle Einbindung aktiv – test_wenn_geladen… prüft sie")
         text = PARTIAL.read_text(encoding="utf-8")
         self.assertIn('eq $cfMode "manual"', text,
                       "das Partial rendert ohne mode=manual – dann lädt es "
                       "den Beacon immer und die CSP-Regel wird zwingend")
-        self.assertNotIn(BEACON_DOMAIN, _csp_direktive("script-src"),
-                         "CSP erlaubt den Beacon, obwohl er nicht geladen wird – "
-                         "das ist eine unnötige Angriffsfläche")
+        self.assertIn(BEACON_DOMAIN, _csp_direktive("script-src"),
+                      "Der Beacon wird an der Edge injiziert (belegt am "
+                      "21.11.2026: er stand im ausgelieferten HTML, obwohl das "
+                      "Partial nichts rendert). Fehlt die Domain in script-src, "
+                      "blockt der Browser ihn auf JEDER Seite.")
+        self.assertIn(BEACON_DOMAIN.split("static.")[-1], _csp_direktive("connect-src"),
+                      "Der Beacon sendet seine Messung per fetch/beacon an "
+                      "cloudflareinsights.com – ohne connect-src-Freigabe "
+                      "scheitert die Übertragung lautlos.")
 
-    def test_wenn_geladen_dann_in_der_csp_erlaubt(self):
-        """Der Kern: manual + Token gesetzt ⇒ script-src MUSS die Domain tragen."""
-        if _manual_aktiv():
-            self.assertIn(BEACON_DOMAIN, _csp_direktive("script-src"),
-                          "Der Beacon wird ausgeliefert, aber die CSP verbietet "
-                          "ihn – der Browser blockt ihn (Layout-Audit-Befund "
-                          "vom 21.11.2026). Ergänze die Domain in "
-                          "static/_headers (script-src UND connect-src) und in "
-                          "cloudflare/edge-schutz.md.")
-            self.assertIn(BEACON_DOMAIN, _csp_direktive("connect-src"))
-        else:
-            self.assertNotIn(BEACON_DOMAIN, _csp_direktive("script-src"))
+    def test_wenn_das_partial_rendert_dann_ist_die_csp_gedeckt(self):
+        """Kernregel, beide Richtungen – auch für den manuellen Weg B.
+
+        Rendert das Partial (mode=manual + Token), MUSS die CSP die Domain
+        tragen. Rendert es nicht, ist die Domain trotzdem erlaubt, weil die
+        Edge-Injektion unabhängig davon stattfindet (siehe Test darüber).
+        """
+        csp_script = _csp_direktive("script-src")
+        self.assertEqual(_manual_aktiv(),
+                         bool(re.search(r"^\s*mode\s*=\s*\"manual\"",
+                                        HUGO.read_text(encoding="utf-8"), re.M)))
+        self.assertIn(BEACON_DOMAIN, csp_script)
 
     def test_turnstile_bleibt_erlaubt(self):
         """Gegenprobe: Die Reparatur darf den Pflicht-Dienst nicht verlieren."""

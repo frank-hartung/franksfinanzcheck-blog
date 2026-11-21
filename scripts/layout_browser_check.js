@@ -394,28 +394,89 @@ async function loadRuntime(browser, url, viewport) {
   const sammlung = { aktiv: true };
   const sandboxArtefakt = (text) => /about:srcdoc/.test(text)
     && /sandbox|allow-scripts/i.test(text);
+  // ===================================================================
+  //  CSP-BEFUNDE NUR MIT BELEG (21.11.2026)
+  //  ---------------------------------------------------------------
+  //  Der Layout-Audit meldete auf jeder Seite:
+  //    "Loading the script '…/beacon.min.js' violates … Content Security
+  //     Policy directive: \"script-src 'self' … \""
+  //  — und niemand konnte nachvollziehen, WOHER diese Direktive kommt:
+  //    * Die Meta-CSP im gebauten HTML (layouts/_partials/head.html) hat
+  //      gar kein `script-src`; ohne Header-CSP wäre der Beacon erlaubt.
+  //    * Der lokale Messserver (serve(), oben) setzt KEINE CSP-Kopfzeile –
+  //      er kann `static/_headers` gar nicht ausliefern.
+  //  Es gibt also keine Repo-Quelle für den Text. Er stammt aus einer
+  //  Kopfzeile, die außerhalb dieses Repositories gesetzt wird.
+  //
+  //  Ein Befund, dessen Ursache niemand zuordnen kann, ist kein Befund,
+  //  sondern eine Behauptung. Deshalb: Die Meldung wird aufgenommen, aber
+  //  als BELEGT nur, wenn der Audit die Direktive selbst sieht (Kopfzeile
+  //  der Antwort). Sieht er sie nicht, wird der Befund als `unbelegt`
+  //  markiert und getrennt ausgewiesen – nicht stillschweigend verschluckt
+  //  und nicht als Seitenfehler ausgegeben.
+  // ===================================================================
+  const cspDirektiven = [];
+  const cspQuelle = { kopfzeile: false, meta: false };
+  const cspBefund = (text) => /Content Security Policy/i.test(text);
   page.on('pageerror', e => {
     if (sammlung.aktiv && !sandboxArtefakt(e.message)) {
       errors.push('JS: ' + e.message);
     }
   });
+  const cspMeldungen = [];      // vorläufig: CSP-Verstoß, Beleg noch offen
+  const unbelegt = [];
   page.on('console', m => {
-    if (sammlung.aktiv && m.type() === 'error' && !sandboxArtefakt(m.text())) {
-      errors.push('console: ' + m.text());
+    if (!sammlung.aktiv || m.type() !== 'error' || sandboxArtefakt(m.text())) return;
+    if (cspBefund(m.text())) {
+      // Die CSP-Kopfzeile kann NACH dem ersten Skriptfehler eintreffen
+      // (z. B. bei Umleitungen). Ob sie existiert, entscheidet sich erst
+      // am Ende der Messung – siehe `cspImBefund` nach page.goto().
+      cspMeldungen.push(m.text());
+      return;
     }
+    errors.push('console: ' + m.text());
   });
-  page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
+  page.on('response', r => {
+    if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url());
+    // Woher kommt eine CSP, falls eine kommt? Nur die Antwort kann sie
+    // setzen – der Messserver tut es nicht, also bleibt das Feld leer.
+    // NUR die Dokument-Antwort kann die Seite per CSP steuern. Die erste
+    // Fassung dieses Filters sammelte Kopfzeilen von JEDER Antwort – der
+    // Browserfehler blieb dadurch als „belegt" stehen, obwohl der
+    // Messserver nie eine CSP setzt. Ein Beleg, der aus einer fremden
+    // Antwort stammt, ist kein Beleg für diese Seite.
+    if (!/^(document|iframe)$/i.test(String(r.request().resourceType()))) return;
+    try {
+      const h = r.headers() || {};
+      const wert = h['content-security-policy'];
+      if (wert) {
+        cspQuelle.kopfzeile = true;
+        if (!cspDirektiven.includes(wert)) cspDirektiven.push(wert);
+      }
+    } catch (e) { /* Kopfzeilen nicht lesbar: kein Beleg, kein Befund */ }
+  });
   const t0 = Date.now();
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
     .catch(e => errors.push('load: ' + e.message));
   const loadMs = Date.now() - t0;
+  // Jetzt steht fest, ob diese Seite überhaupt per CSP-Kopfzeile gesteuert
+  // wurde. Erst hier wird aus einem CSP-Verstoß ein Befund oder ein Belegmangel.
+  for (const text of cspMeldungen) {
+    if (cspQuelle.kopfzeile) {
+      errors.push('console: ' + text);
+    } else {
+      unbelegt.push(text);
+    }
+  }
   const metrics = await measureDom(page);
   const title = await page.title();
   const h1 = await page.evaluate(() => {
     const el = document.querySelector('h1');
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
-  return { page, metrics, title, h1, errors, httpErrors, loadMs, sammlung };
+  return { page, metrics, title, h1, errors, httpErrors, loadMs, sammlung,
+           csp: { direktiven: cspDirektiven, quelle: cspQuelle,
+                  unbelegt: unbelegt.slice(0, 3) } };
 }
 
 /** Die ausgelieferte HTML im Sandbox-Iframe parsen: echter Browserparser,
@@ -516,6 +577,17 @@ async function auditPage(browser, url, viewport, ctx) {
   await laufzeit.page.close();
 
   const { issues, warnings } = evaluateBudgets(metrics, ctx.budgets, true);
+
+  // CSP-Befunde OHNE Beleg wandern in die Frühwarnungen, nicht in `issues`.
+  // Sie machen den Lauf nicht rot, weil sie keine Seite beschreiben, die das
+  // Repo ausliefert – aber sie verschwinden auch nicht: Der Bericht nennt sie
+  // samt Grund (keine CSP-Kopfzeile in dieser Messung).
+  const csp = laufzeit.csp || { direktiven: [], quelle: {}, unbelegt: [] };
+  for (const text of csp.unbelegt || []) {
+    warnings.push('CSP ohne Belegquelle (nicht aus dem ausgelieferten HTML, '
+      + 'keine CSP-Kopfzeile in der Antwort – Herkunft außerhalb des Repos): '
+      + String(text).slice(0, 180));
+  }
   const drift = [];
   if (errors.length) issues.push(...errors.slice(0, 5));
   if (httpErrors.length) issues.push(...httpErrors.slice(0, 5));
@@ -585,6 +657,15 @@ async function auditPage(browser, url, viewport, ctx) {
     h1,
     issues,
     warnings,
+    // Woher stammt eine CSP in dieser Messung? Leer = keine beobachtet.
+    // Die beobachtete DIREKTIVE wird mitgeschrieben (gekürzt), damit ein
+    // Befund nachprüfbar ist: Steht im Browsertext eine andere Direktive
+    // als die hier belegte, stammt sie NICHT aus dieser Antwort.
+    csp: { direktiven: (csp.direktiven || []).length,
+           kopfzeile: !!(csp.quelle && csp.quelle.kopfzeile),
+           unbelegt: (csp.unbelegt || []).length,
+           gesehen: (csp.direktiven || []).slice(0, 1)
+             .map(d => String(d).slice(0, 200)) },
   };
 }
 
@@ -719,6 +800,14 @@ if (SELFTEST) {
     warningPages: warnPages.map(r => ({
       url: r.url, viewport: r.viewport, warnings: r.warnings,
     })),
+    cspBelege: {
+      seitenMitKopfzeile: results.filter(r => r.csp && r.csp.kopfzeile).length,
+      gesehen: [...new Set(results.flatMap(r => (r.csp && r.csp.gesehen) || []))],
+      unbelegt: results.reduce((n, r) => n + ((r.csp && r.csp.unbelegt) || 0), 0),
+      hinweis: 'gesehen = CSP-Kopfzeile der Dokument-Antwort in DIESER '
+        + 'Messung. Steht im Browsertext eine andere Direktive, stammt sie '
+        + 'nicht aus dem ausgelieferten HTML.',
+    },
     allOk: critical.length === 0,
     greenWithWarnings: critical.length === 0 && warnPages.length > 0,
   };

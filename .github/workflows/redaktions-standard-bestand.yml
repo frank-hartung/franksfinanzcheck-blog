@@ -26,7 +26,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: redaktions-standard-bestand
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:

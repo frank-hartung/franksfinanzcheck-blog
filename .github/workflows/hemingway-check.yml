@@ -32,7 +32,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: hemingway-check
+  group: main-schreiber
   cancel-in-progress: false
 
 jobs:
