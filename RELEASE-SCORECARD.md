@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-11-21 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-11-21 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -19,7 +19,7 @@
 
 | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung |
 |---|---|---|---|---|---|---|---|
-| ❌ blockiert | ✅ bestanden | ❌ blockiert | ❌ blockiert | ❌ blockiert | ✅ bestanden | ❌ blockiert | ❌ blockiert |
+| ❌ blockiert | ✅ bestanden | ❌ blockiert | ❌ blockiert | ❌ blockiert | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
 
 ## Live-Bestand (Artikel für Artikel)
 
@@ -37,7 +37,7 @@
 | `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-04 | **blockiert** |
 | `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-01 | **blockiert** |
 | `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-12-14 | **freigabe-reif** |
-| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | Prüfung offen (hoch) | ausstehend | 2026-11-19 (überfällig) | **blockiert** |
+| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2027-01-05 | **freigabe-reif** |
 | `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-04 | **blockiert** |
 | `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-22 | **blockiert** |
 | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-04 | **blockiert** |
@@ -47,7 +47,7 @@
 | `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **blockiert** |
 | `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-12 | **freigabe-reif** |
 | `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` | ❌ blockiert | ✅ bestanden | ❌ blockiert | ❌ blockiert | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-04 | **blockiert** |
-| `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ✅ bestanden | ❌ blockiert | Prüfung offen (hoch) | ausstehend | 2027-01-03 | **blockiert** |
+| `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ✅ bestanden | ❌ blockiert | geprüft (hoch, freigegeben) | vorhanden | 2027-01-05 | **blockiert** |
 | `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | ❌ blockiert | ✅ bestanden | ❌ blockiert | ❌ blockiert | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-05 | **blockiert** |
 | `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-12-07 | **blockiert** |
 | `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-05 | **blockiert** |
@@ -127,20 +127,15 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 | **T5-lesbarkeit** | technik | blockiert | Maschine (deterministisch) | 5 |
 | **A4-profi-check** | affiliate | blockiert | Maschine (deterministisch) | 2 |
 | **RD2-einzigartigkeit** | redundanz | blockiert | Mensch (Herausgeber/Redaktion) | 2 |
-| **F3-pruefdatum** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 1 |
-| **M2-siegel-bindung** | freigabe | blockiert | Mensch (Herausgeber/Redaktion) | 1 |
-| **N1-naechste-pruefung** | revision | blockiert | Maschine (deterministisch) | 1 |
 | **T1-zeichenlaenge** | technik | blockiert | Maschine (deterministisch) | 1 |
 | **T6-textverstaendnis** | technik | blockiert | Maschine (deterministisch) | 1 |
 
 - **F4-fachbefund** – Schließweg: scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures) · betroffen: `2026-08-10-dsl-wechselbonus-sichern`, `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`, `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden`, `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`, `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden`, `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` …
 - **RD2-einzigartigkeit** – Schließweg: scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures) · betroffen: `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`, `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen`
-- **F3-pruefdatum** – Schließweg: scripts/editorial_review_gate.py (E09) · betroffen: `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst`
-- **M2-siegel-bindung** – Schließweg: scripts/editorial_review_gate.py content_fingerprint (E17) · betroffen: `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen`
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**311** offene Befunde auf **84** Seiten (live: 203 auf 56 Artikeln) · ältester **22 Tage** · Frist 14 Tage · über der Frist: **126**.
+**304** offene Befunde auf **83** Seiten (live: 201 auf 56 Artikeln) · ältester **22 Tage** · Frist 14 Tage · über der Frist: **119**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -148,9 +143,9 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-⚠️ **252 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
+⚠️ **253 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
 
-🔴 **Eskalation:** 126 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
+🔴 **Eskalation:** 119 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
 
 ✅ **F1 (Faktenalter) ist nicht die Ursache:** Die Deckung trägt den Bestand; rot ist der Inhalt, nicht der Takt.
 
@@ -172,7 +167,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
-## Blockierende Funde (59 Artikel)
+## Blockierende Funde (58 Artikel)
 
 ### `2026-08-10-dsl-wechselbonus-sichern` (blockiert, Risikoklasse standard)
 
@@ -197,7 +192,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 ### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` (blockiert, Risikoklasse standard)
 
-- **F4-fachbefund** [faktenalter]: 47f855cb4f0fe1e5c65f (luecke): Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.; 6b0aa3429d97e8c74ed8 (luecke): Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).; 7f66ec82ee1a3f095b0c (praezision): Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“, ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten fehlt.; 84c991c5d152b14a2675 (luecke): Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.; a70e7adc97c58317ccc1 (luecke): Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.
+- **F4-fachbefund** [faktenalter]: 6b0aa3429d97e8c74ed8 (luecke): Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).; 84c991c5d152b14a2675 (luecke): Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.; a70e7adc97c58317ccc1 (luecke): Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.
 - **RD2-einzigartigkeit** [redundanz]: U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen (z. B. „bis zum 30 november beim versicherer eingehen“) – ab 5 ist es Dopplung, Passage umschreiben
 
 ### `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` (blockiert, Risikoklasse standard)
@@ -211,11 +206,6 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 ### `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` (blockiert, Risikoklasse erhoeht)
 
 - **F4-fachbefund** [faktenalter]: 1dbeb2f8c51e78d11d49 (luecke): Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.; 33e736ac6afe996b491a (luecke): Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.; 96b7b7768d402884810c (luecke): Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.; a25bb6bbcb25ba8b0e22 (luecke): Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.; f94f8ba1e4342e67e45a (luecke): Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.
-
-### `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` (blockiert, Risikoklasse hoch)
-
-- **F3-pruefdatum** [faktenalter]: E09: Prüfung ist älter als 45 Tage
-- **N1-naechste-pruefung** [revision]: E10: nächster Review-Termin ist überfällig
 
 ### `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` (blockiert, Risikoklasse standard)
 
@@ -249,14 +239,13 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 - **A4-profi-check** [affiliate]: A4: FAQPage-Schema fehlt
 - **F4-fachbefund** [faktenalter]: 0b4755213f0c38321710 (luecke): Behauptung 'kein üblicher Wechselgewinn' ohne Daten; 3e0c5fa74179e97866b8 (luecke): Preisangabe 9,99 € monatlich ohne Quelle; ae90ebae2842ff9f97f1 (praezision): Aussage über Downloadwert vs Gesprächsqualität ohne Beleg; b2611d9120121d0ad785 (praezision): Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg; fcb8168c18bd423c5180 (praezision): Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg
-- **T5-lesbarkeit** [technik]: Flesch 53.6 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
+- **T5-lesbarkeit** [technik]: Flesch 53.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
 
 ### `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` (blockiert, Risikoklasse hoch)
 
-- **M2-siegel-bindung** [freigabe]: E17: Text/Quellen wurden nach der Freigabe verändert
 - **RD2-einzigartigkeit** [redundanz]: U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit (z. B. „bis zum 30 november beim versicherer eingehen“) – ab 5 ist es Dopplung, Passage umschreiben
 - **T1-zeichenlaenge** [technik]: Zeichenlänge zu-kurz/zu-lang (check_length.py)
-- **T5-lesbarkeit** [technik]: Flesch 52.3 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
+- **T5-lesbarkeit** [technik]: Flesch 51.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
 
 ### `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` (blockiert, Risikoklasse erhoeht)
 
