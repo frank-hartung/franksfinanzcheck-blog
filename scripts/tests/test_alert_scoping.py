@@ -621,6 +621,13 @@ class VerhaltensSimulation(unittest.TestCase):
                                          "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)",
                                          "E2E-Tests (Playwright)", "Deploy auf GitHub Pages",
                                          "Blog-Gesundheits-Check (täglich)",
+                                         # 21.11.2026 (#1244–#1246): Der
+                                         # Commit-/Push-Rat braucht den
+                                         # echten Kanal der vier Vorgänge.
+                                         "FrankAutoOps-Report",
+                                         # Gegenprobe: „Selbsttest" bleibt
+                                         # Code-Regression (nicht commit-push).
+                                         "Qualitäts-Gate (Build + interne Links)",
                                          "Offsite-Backup",
                                          "Sicherheits-Wache",
                                          "Affiliate-Integritäts-Wache (täglich)",

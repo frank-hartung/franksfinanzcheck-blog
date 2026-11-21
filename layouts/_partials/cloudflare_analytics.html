@@ -22,8 +22,23 @@
      Die manuelle Einbindung erfordert, dass die Website-ID + Token in hugo.toml
      gesetzt sind. Ohne diese Werte wird das Skript nicht geladen.
 
+     CSP-VERTRAG (hochgezogen am 21.11.2026, vorher nur in einem Kommentar
+     außerhalb dieses Partials):
+     `static/_headers` setzt `script-src 'self' 'unsafe-inline'
+     https://challenges.cloudflare.com` – `static.cloudflareinsights.com`
+     steht NICHT darin. Wird der Beacon trotzdem geladen, blockiert der
+     Browser ihn („violates the following Content Security Policy
+     directive"), und genau das ist passiert: Das Layout-Audit fand das
+     Skript im gebauten HTML von `franksfinanzcheck.de` und meldete auf
+     JEDER betroffenen Seite einen Konsolenfehler.
+     Wer diesen Weg wieder einschaltet, ergänzt ZUERST
+     `https://static.cloudflareinsights.com` bei `script-src` und
+     `connect-src` in `static/_headers` (und in `cloudflare/edge-schutz.md`,
+     Abschnitt A1, sonst driftet die Edge-Kante vom Repo).
+     Gemessen: `python3 -m unittest scripts.tests.test_cloudflare_analytics_csp`.
+
      Quelle: https://developers.cloudflare.com/analytics/
-     Stand: 26.10.2026
+     Stand: 21.11.2026
      ============================================================ */ -}}
 {{- /* Weg B: Manuelle Einbindung über hugo.toml + Partial.
        Wird NUR geladen, wenn website UND token gesetzt sind.

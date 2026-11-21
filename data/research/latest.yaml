@@ -1,5 +1,5 @@
-generated_at: '2026-11-20T12:10:10Z'
-day: '2026-11-20'
+generated_at: '2026-11-21T11:45:45Z'
+day: '2026-11-21'
 mode: deterministic
 teams:
   trending:
@@ -252,60 +252,66 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: '30-Tage-Konsumverzicht-Challenge: So sparst du ohne Verzicht auf Dauer'
-    pillar: frugalismus
-    signal: niche_hook
-    source: 'topics:30-Tage-Konsumverzicht-Challenge: So sparst du ohne Verzicht auf
-      Dauer'
-    score: 0.55
-    keywords:
-    - Konsumverzicht
-    - Spar-Challenge
-    - Weniger konsumieren
-  - topic: 'Private Unfallversicherung: Für wen sie sich wirklich lohnt'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Private Unfallversicherung: Für wen sie sich wirklich lohnt'
-    score: 0.55
-    keywords:
-    - Unfallversicherung
-    - Private Unfallversicherung
-    - Absicherung
-  - topic: Reise- und Unfallversicherungen im Vergleich
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Reise- und Unfallversicherungen im Vergleich
-    score: 0.55
-    keywords:
-    - Reiseversicherung
-    - Unfallversicherung
-    - Vergleich
-  - topic: 'Riester-Rente: Lohnt sie sich 2026 noch?'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Riester-Rente: Lohnt sie sich 2026 noch?'
-    score: 0.55
-    keywords: []
-  - topic: Stromfresser im Haushalt entlarven
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Stromfresser im Haushalt entlarven
-    score: 0.55
-    keywords:
-    - Stromfresser finden
-    - Strom sparen Tipps
-    - Energiekosten senken
-    - Standby Kosten
-  - topic: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
     score: 0.55
     keywords:
-    - WLAN verbessern
-    - DSL Hacks
-    - Schnelles Internet zuhause
-    - Mesh Netzwerk
+    - günstiges Handy-Abonnement
+    - Tarifvergleich
+    - Mobilfunk
+  - topic: 'Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte mit
+      Wärmepumpe'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte
+      mit Wärmepumpe'
+    score: 0.55
+    keywords:
+    - Dynamische Stromtarife Vor Nachteile
+    - Wärmepumpenstrom Vergleich
+    - Tibber Alternative
+    - Stromvertrag Smart Meter
+  - topic: Energieeffizienz zu Hause verbessern
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Energieeffizienz zu Hause verbessern
+    score: 0.55
+    keywords:
+    - Energie
+    - Effizienz
+    - Zuhause
+  - topic: Günstige Flüge für den Spätsommer finden
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Günstige Flüge für den Spätsommer finden
+    score: 0.55
+    keywords:
+    - Flugtickets günstig
+    - Flugvergleich
+    - Reisebudget sparen
+  - topic: Internet-Tarife im Vergleich
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Internet-Tarife im Vergleich
+    score: 0.55
+    keywords:
+    - Internet
+    - Tarif
+    - Vergleich
+  - topic: 'Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
+      0'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
+      0'
+    score: 0.55
+    keywords:
+    - Zweitwagenregelung
+    - Zweitwagen günstig versichern
+    - Schadenfreiheitsklasse übertragen
+    - SF-Klasse retten
 live_web:
   enabled: false
   findings: []

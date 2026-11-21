@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -277,10 +278,47 @@ def akte_bauen(befunde: list[dict], live: dict[str, dict], zustand: dict) -> str
 
 
 def _schreiben(text: str, zustand: dict) -> None:
-    AKTE_PATH.write_text(text, encoding="utf-8")
-    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    STATE_PATH.write_text(json.dumps(zustand, ensure_ascii=False, indent=2) + "\n",
-                          encoding="utf-8")
+    """Schreibt Akte und Zustand – IDEMPOTENT auf Bytes.
+
+    ANLASS (21.11.2026): Seit die Akte ein abgeleitetes Register ist
+    (`scripts/abgeleitete_register.py`), ruft der Commit-Pfad sie bei JEDEM
+    Deploy-Lauf auf. Vorher stempelte jeder Aufruf einen neuen
+    `erzeugt`-Zeitstempel – auch wenn sich fachlich nichts geändert hatte.
+    `deploy.yml` erkennt Gate-Heilungen an `git status --short` und committet
+    sie; ein reiner Zeitstempel hätte damit jeden Lauf einen Commit und
+    einen Rebuild erzeugt (Endlosschleife). Deshalb: gleicher Inhalt →
+    gleicher Zeitstempel, gleiche Bytes → kein Schreibvorgang.
+
+    Der Zeitstempel ist ausdrücklich KEINE fachliche Änderung (`wache()`
+    blendet ihn beim Vergleich aus) – diese Zusage hält der Schreiber jetzt
+    auch selbst ein.
+    """
+    # 1) Zeitstempel erben, wenn fachlich alles gleich ist. Die Projektion
+    #    selbst bleibt unberührt (kein verstecktes Feld in der Akte).
+    try:
+        alt = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+        if isinstance(alt, dict) and alt.get("erzeugt"):
+            ohne = {k: v for k, v in alt.items() if k != "erzeugt"}
+            neu = {k: v for k, v in zustand.items() if k != "erzeugt"}
+            if ohne == neu:
+                zustand["erzeugt"] = alt["erzeugt"]
+    except (OSError, ValueError, TypeError):
+        pass
+
+    # 2) Nur schreiben, was sich auf BYTES unterscheidet. `deploy.yml`
+    #    committet, was `git status --short` sieht – ein unnötiger
+    #    Schreibvorgang wäre dort ein Commit ohne Änderung.
+    def _ersetze(pfad: Path, inhalt: str) -> None:
+        try:
+            if pfad.read_text(encoding="utf-8") == inhalt:
+                return
+        except OSError:
+            pass
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        pfad.write_text(inhalt, encoding="utf-8")
+
+    _ersetze(AKTE_PATH, text)
+    _ersetze(STATE_PATH, json.dumps(zustand, ensure_ascii=False, indent=2) + "\n")
 
 
 def projektion(stichtag: dt.date) -> tuple[str, dict]:
@@ -310,7 +348,8 @@ def wache() -> dict:
     und Änderungen am Markdown werden dagegen auch bei gleicher Anzahl erkannt.
     """
     stand = ledger.wache()
-    frisch = {"akte_offen": None, "akte_stand": None, "veraltet": True}
+    frisch = {"akte_offen": None, "akte_stand": None, "veraltet": True,
+              "veraltet_grund": "Akte/Zustand fehlt oder ist unlesbar"}
     try:
         alt = json.loads(STATE_PATH.read_text(encoding="utf-8"))
         if not isinstance(alt, dict):
@@ -327,9 +366,92 @@ def wache() -> dict:
     text, erwartet = projektion(stichtag)
     alt_ohne_zeit = {k: v for k, v in alt.items() if k != "erzeugt"}
     erwartet_ohne_zeit = {k: v for k, v in erwartet.items() if k != "erzeugt"}
-    frisch["veraltet"] = alt_ohne_zeit != erwartet_ohne_zeit or dokument != text
+    gruende = beschreibe_abweichung(alt_ohne_zeit, erwartet_ohne_zeit,
+                                    dokument, text)
+    frisch["veraltet"] = bool(gruende)
+    if gruende:
+        frisch["veraltet_grund"] = " · ".join(gruende)
     stand.update(frisch)
     return stand
+
+
+def beschreibe_abweichung(alt: dict, erwartet: dict,
+                          dokument: str, text: str) -> list[str]:
+    """Nennt die Ursache der Abweichung – nicht nur „stimmt nicht".
+
+    ANLASS (21.11.2026, Issue #1266/#1267/#1271): Die Nachlauf-Wache meldete
+    „BEFUND-AKTE.md oder Zustand stimmt nicht mit dem Ledger überein
+    (Akte: 202 offen, Ledger: 202)" – mit ZWEI GLEICHEN Zahlen. Der Satz war
+    für den Leser widersprüchlich und für die Reparatur wertlos: Er nannte
+    die Anzahl statt der Ursache. Tatsächlich wichen Kennzahlen ab, die die
+    Meldung nie nannte (`ueberholt`, `aeltester_tage`, `je_seite`) oder es
+    war allein der Markdown-Text. Hier steht beides getrennt und benannt.
+    """
+    gruende: list[str] = []
+    # ALLE Kennzahlen zählen – auch `befunde`. Der Vergleich blendet nur den
+    # Zeitstempel aus (er ist keine fachliche Änderung), nichts sonst: Ein
+    # anderer Befund bei GLEICHER Anzahl ist Drift, und genau diese Lage hat
+    # der Test `test_gleiche_anzahl_anderer_befund_oder_fassung` festgenagelt.
+    abweichend = sorted(k for k in set(alt) | set(erwartet)
+                        if k != "erzeugt" and alt.get(k) != erwartet.get(k))
+    if abweichend:
+        paare = ", ".join(f"{k}: Akte {_kurz(alt.get(k))} ≠ Quelle "
+                          f"{_kurz(erwartet.get(k))}" for k in abweichend[:6])
+        mehr = f" (+{len(abweichend) - 6} weitere)" if len(abweichend) > 6 else ""
+        gruende.append(f"Zustand weicht ab – {paare}{mehr}")
+    if dokument != text:
+        gruende.append("BEFUND-AKTE.md weicht vom erzeugten Text ab")
+    return gruende
+
+
+def _kurz(wert: object) -> str:
+    """Kurze, unterscheidbare Darstellung eines Kennzahlwerts für Log/Issue.
+
+    Bei Listen und Objekten zählt nicht nur die Länge, sondern ein kurzer
+    Inhalts-Hash: Zwei Befundlisten mit gleich vielen Einträgen können
+    verschiedene Befunde tragen – „[3 Einträge]“ gegen „[3 Einträge]“ wäre
+    genau die nichtssagende Meldung, die dieses Modul abschafft.
+    """
+    if isinstance(wert, (dict, list)):
+        roh = json.dumps(wert, ensure_ascii=False, sort_keys=True,
+                         default=str).encode("utf-8")
+        return (f"[{len(wert)} Einträge, Inhalt "
+                f"{hashlib.sha256(roh).hexdigest()[:8]}]")
+    return str(wert)
+
+
+def pruefen() -> int:
+    """Schreibfreier Drift-Test (Vertrag der abgeleiteten Register).
+
+    Interface für `scripts/abgeleitete_register.py`: Exit 0 = Akte folgt ihrer
+    Quelle, Exit 1 = Drift (mit benannter Ursache), Exit 2 = nicht prüfbar.
+
+    ANLASS (21.11.2026, #1251/#1252): Die Befund-Akte ist eine 162 KB große
+    ABLEITUNG aus Queue + Entscheidungen – stand aber NICHT im Verzeichnis der
+    abgeleiteten Register. Damit fehlte ihr der Nachzug-Pfad, den
+    `data/fachpruefung_register.yaml` seit dem 09.11.2026 hat: Jeder Commit,
+    der die Quelle änderte, ohne die Akte nachzuziehen, machte sie still alt –
+    und die Nachlauf-Wache fand es erst Stunden später auf `main` (#1229,
+    #1251, #1252, #1266, #1267, #1271). Hier wird die Klasse an der Wurzel
+    geschlossen: Der Selbsttest ist die Sabotage-Probe, `--check` ist das
+    Urteil, `--schreiben` der Nachzug – genau das Dreigespann, das
+    `abgeleitete_register.py` erwartet.
+    """
+    try:
+        stand = wache()
+    except Exception as exc:                      # noqa: BLE001 – nie grün raten
+        # Ein Fehler hier heißt „nicht prüfbar", nicht „in Ordnung": Die
+        # Aufrufer (Register-Nachzug, Nachlauf-Wache) unterscheiden das.
+        print(f"Befund-Akte nicht prüfbar ({type(exc).__name__}: {exc})")
+        return 2
+    if stand.get("veraltet"):
+        print("🛑 BEFUND-AKTE.md ist veraltet – "
+              f"{stand.get('veraltet_grund') or 'Abweichung zur Quelle'}. "
+              "Heilung: python3 scripts/faktenfrische_befund_akte.py --schreiben")
+        return 1
+    print(f"✅ Befund-Akte folgt ihrer Quelle ({stand.get('akte_offen')} offene "
+          f"Befunde, Stichtag {stand.get('akte_stand')}).")
+    return 0
 
 
 def selftest() -> int:
@@ -380,12 +502,17 @@ def main() -> int:
                         help="BEFUND-AKTE.md und Zustand neu erzeugen")
     parser.add_argument("--wache", action="store_true",
                         help="Exit 1, wenn ein Befund keinen Schließweg hat")
+    parser.add_argument("--check", action="store_true",
+                        help="Exit 1, wenn Akte/Zustand nicht zur Quelle passen "
+                             "(schreibfrei – für den Register-Nachzug)")
     parser.add_argument("--json", action="store_true", help="Zustand auf stdout")
     parser.add_argument("--selftest", action="store_true")
     args = parser.parse_args()
     try:
         if args.selftest:
             return selftest()
+        if args.check:
+            return pruefen()
         if args.wache:
             stand = wache()
             if args.json:

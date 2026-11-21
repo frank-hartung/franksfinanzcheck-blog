@@ -46,6 +46,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 
@@ -112,17 +113,26 @@ def pruefe_register(root: str) -> tuple[list[dict], list[dict]]:
 
 
 def pruefe_akte(root: str) -> tuple[list[dict], list[dict]]:
-    """Befund-Akte: Arbeitsliste und Ledger müssen denselben Stand zeigen."""
+    """Befund-Akte: Arbeitsliste und Ledger müssen denselben Stand zeigen.
+
+    EIN URTEIL, ZWEI LESER (21.11.2026, #1229/#1251/#1252/#1266/#1267/#1271):
+    Der Text kam vorher aus `wache()` und nannte nur die Anzahl offener
+    Befunde. Standen dort zweimal dieselben Zahlen, las sich die Meldung wie
+    ein Widerspruch („Akte: 202 offen, Ledger: 202“) und verschwieg den
+    wahren Grund: eine abweichende Kennzahl (`ueberholt`, `aeltester_tage`,
+    `je_seite`) oder ein abweichender Markdown-Text. Jetzt entscheidet der
+    Schreiber selbst (`--check`, dieselbe Instanz, die auch der Register-
+    Nachzug und der Test fragen) und nennt die Ursache im Klartext.
+    """
     import faktenfrische_befund_akte as akte
-    stand = akte.wache()
-    if not stand.get("veraltet"):
+    puffer = io.StringIO()
+    with contextlib.redirect_stdout(puffer):
+        rc = akte.pruefen()
+    if rc == 0:
         return [], []
-    return [{"bereich": "akte",
-             "text": (f"BEFUND-AKTE.md oder Zustand stimmt nicht mit dem Ledger überein "
-                      f"(Akte: {stand.get('akte_offen')} offen, Ledger: "
-                      f"{stand.get('offen')}) – `python3 scripts/faktenfrische_"
-                      f"befund_akte.py --schreiben`"),
-             "datei": "BEFUND-AKTE.md"}], []
+    meldung = (puffer.getvalue().strip().splitlines() or
+               ["Befund-Akte weicht von ihrer Quelle ab"])
+    return [{"bereich": "akte", "text": meldung[0], "datei": "BEFUND-AKTE.md"}], []
 
 
 def pruefe_winkel(root: str, meta: dict | None = None,
@@ -253,6 +263,11 @@ def _schreiben(bericht: dict, root: str = ROOT) -> None:
 
 LABEL = "nachlauf-wache"
 
+# Fingerabdruck im Meldungstitel: „🩺 Nachlauf-Wache: Befund auf main (<fp>)“.
+# Er ist die Identität der Meldung – Dedupe, Nachführen und Überholt-Erklären
+# lesen ihn aus dem Titel (der Body trägt ihn zusätzlich als Klartext).
+_TITEL_FP = re.compile(r"\(([0-9a-f]{16})\)")
+
 
 def _gh(args: list[str]) -> str:
     """Ruft `gh` auf (GitHub-CLI ist im Runner vorhanden und authentifiziert)."""
@@ -314,6 +329,17 @@ def issues_schliessen(bericht: dict, runner=None, *,
     Kein Schließen bei Teilprüfung (`--nur`) oder Werkzeugfehler: nur ein
     vollständiger Lauf ohne Befunde und ohne Werkzeugausfall beweist, dass
     der gemeldete Zustand auf `main` behoben ist (#1229).
+
+    WARUM DAS ALLEIN NICHT REICHT (21.11.2026, #1229·#1251·#1252):
+    Jeder neue Befund hat einen NEUEN Fingerabdruck (#1266 → #1267 → #1271 …).
+    Der grüne Lauf schloss zwar alle offenen – aber sobald `main` wieder einen
+    Befund trug, blieb die vorherige Meldung offen stehen, weil die Wache zu
+    diesem Zeitpunkt nicht mehr grün war. Fünf „🩺 Nachlauf-Wache“-Issues für
+    EINEN Gegenstand waren die Folge.
+    Deshalb pflegt `main` zusätzlich `issue_nachfuehren()` unten: Ein neuer
+    Befundstand schließt die überholten Geschwister (mit Verweis auf den
+    neueren Stand) und hängt sich an die offene Meldung an, statt eine
+    weitere Nummer zu eröffnen.
     """
     if not vollstaendig or not bericht.get("gruen"):
         return []
@@ -321,7 +347,7 @@ def issues_schliessen(bericht: dict, runner=None, *,
         return []
     runner = runner or _gh
     roh = runner(["issue", "list", "--label", LABEL, "--state", "open",
-                  "--limit", "20", "--json", "number"])
+                  "--limit", "100", "--json", "number"])
     try:
         offene = json.loads(roh or "[]")
     except ValueError:
@@ -340,6 +366,75 @@ def issues_schliessen(bericht: dict, runner=None, *,
         ])
         geschlossen.append(nr)
     return geschlossen
+
+
+def offene_nachlauf_issues(runner=None) -> list[dict]:
+    """Alle offenen Meldungen der Nachlauf-Wache (Nummer, Titel, Fingerabdruck)."""
+    runner = runner or _gh
+    roh = runner(["issue", "list", "--label", LABEL, "--state", "open",
+                  "--limit", "100", "--json", "number,title"])
+    try:
+        eintraege = json.loads(roh or "[]")
+    except ValueError:
+        return []
+    ergebnis = []
+    for eintrag in eintraege:
+        if not isinstance(eintrag, dict):
+            continue
+        nr = eintrag.get("number")
+        if not isinstance(nr, int):
+            continue
+        titel = str(eintrag.get("title") or "")
+        m = _TITEL_FP.search(titel)
+        ergebnis.append({"number": nr, "title": titel,
+                         "fingerabdruck": m.group(1) if m else ""})
+    return ergebnis
+
+
+def issue_nachfuehren(bericht: dict, runner=None) -> dict:
+    """Hält die Meldungsmenge deckungsgleich mit dem aktuellen Befundstand.
+
+    DIE KLASSE (21.11.2026, #1229/#1251/#1252/#1266/#1267/#1271):
+    „Gleichartige Alarme bündeln“ war nicht umgesetzt – jede Befundänderung
+    erzeugte eine neue Nummer, und weil das Schließen an einen GRÜNEN Lauf
+    gebunden ist, blieben die alten Nummern offen. Ergebnis: fünf offene
+    Meldungen für einen Gegenstand, teils mit längst erledigten Teilbefunden.
+
+    Regeln (bewusst konservativ, sie löschen nichts):
+      1. Ein offenes Issue, dessen Fingerabdruck dem aktuellen Befundstand
+         entspricht, IST die Meldung – keine neue Nummer.
+      2. Offene Issues mit ANDEREM Fingerabdruck sind überholt. Sie werden
+         geschlossen und im Kommentar ausdrücklich auf den neueren Stand
+         verwiesen (kein „behoben“ – die Wahrheit bleibt erhalten).
+      3. Ist der Lauf grün, schließt `issues_schliessen()` alle.
+    Rückgabe: {"titel": …, "ueberholt": [nummern], "gefunden": nummer|None}.
+    """
+    fp = str(bericht.get("fingerabdruck") or "")
+    ergebnis: dict = {"titel": None, "ueberholt": [], "gefunden": None}
+    if not bericht.get("befunde") or not fp:
+        return ergebnis
+    runner = runner or _gh
+    offene = offene_nachlauf_issues(runner)
+    for eintrag in offene:
+        if eintrag["fingerabdruck"] == fp:
+            ergebnis["gefunden"] = eintrag["number"]
+    for eintrag in offene:
+        if eintrag["fingerabdruck"] == fp:
+            continue
+        runner(["issue", "close", str(eintrag["number"]), "--reason", "not planned",
+                "--comment",
+                f"Überholt: Der Befundstand auf `main` hat sich geändert "
+                f"(jetzt `{fp}`, {len(bericht['befunde'])} Befund(e)). Diese "
+                "Meldung ist damit keine gültige Lagebeschreibung mehr; der "
+                "aktuelle Stand steht in der neuesten Meldung der Nachlauf-"
+                "Wache. Nichts wird gelöscht – der Verlauf bleibt nachlesbar."])
+        ergebnis["ueberholt"].append(eintrag["number"])
+    if ergebnis["gefunden"] is None:
+        titel = f"🩺 Nachlauf-Wache: Befund auf main ({fp})"
+        runner(["issue", "create", "--title", titel, "--label", LABEL,
+                "--body", _issue_koerper(bericht)])
+        ergebnis["titel"] = titel
+    return ergebnis
 
 
 def _text(bericht: dict) -> str:
@@ -460,6 +555,58 @@ def selbsttest() -> int:
              issues_schliessen(dritter, runner=_fake_gh, vollstaendig=True) == [1229]
              and any(c[:3] == ["issue", "close", "1229"] for c in aufrufe))
 
+        # K10 (21.11.2026, #1229·#1251·#1252): Bündeln statt anhäufen.
+        # Ein neuer Befundstand schließt die überholten Geschwister und
+        # eröffnet GENAU EINE Meldung; derselbe Stand eröffnet keine zweite.
+        befund = {"stand": "2026-11-21T12:00:00Z", "gruen": False,
+                  "befunde": [{"bereich": "metadaten", "text": "M1: Probe",
+                               "datei": "content/x/index.md"}],
+                  "werkzeugfehler": [], "fingerabdruck": "aaaa1111bbbb2222",
+                  "neu": True, "bisher_gemeldet": ""}
+        aufrufe.clear()
+
+        def _fake_gh_bestand(cmd: list[str]) -> str:
+            aufrufe.append(cmd)
+            if cmd[:2] == ["issue", "list"]:
+                return json.dumps([
+                    {"number": 1229, "title": "🩺 Nachlauf-Wache: Befund auf main (16ef9eee5ac652cc)"},
+                    {"number": 1251, "title": "🩺 Nachlauf-Wache: Befund auf main (ba0ec9a183e48a34)"},
+                ])
+            return ""
+
+        pflege = issue_nachfuehren(befund, runner=_fake_gh_bestand)
+        fest("K10a überholte Meldungen gebündelt",
+             pflege["ueberholt"] == [1229, 1251] and pflege["titel"])
+        fest("K10b genau eine neue Meldung",
+             len([c for c in aufrufe if c[:2] == ["issue", "create"]]) == 1)
+        fest("K10c Überholt-Kommentar sagt nicht „behoben“",
+             all("behoben" not in " ".join(c).lower()
+                 for c in aufrufe if c[:2] == ["issue", "close"]))
+
+        aufrufe.clear()
+
+        def _fake_gh_aktuell(cmd: list[str]) -> str:
+            aufrufe.append(cmd)
+            if cmd[:2] == ["issue", "list"]:
+                return json.dumps([
+                    {"number": 1290,
+                     "title": "🩺 Nachlauf-Wache: Befund auf main (aaaa1111bbbb2222)"}])
+            return ""
+
+        zweite = issue_nachfuehren(befund, runner=_fake_gh_aktuell)
+        fest("K10d gleicher Stand → keine zweite Nummer",
+             zweite["gefunden"] == 1290 and zweite["titel"] is None
+             and not [c for c in aufrufe if c[:2] == ["issue", "create"]])
+
+        # K11: grüner Lauf schließt ALLE offenen (auch mehr als eine Nummer).
+        aufrufe.clear()
+        gruen = {"stand": "2026-11-21T13:00:00Z", "gruen": True, "befunde": [],
+                 "werkzeugfehler": [], "fingerabdruck": ""}
+        geschlossen = issues_schliessen(gruen, runner=_fake_gh_bestand,
+                                        vollstaendig=True)
+        fest("K11 grüner Lauf schließt alle offenen",
+             geschlossen == [1229, 1251])
+
         # C15: Der Selbsttest schreibt nie in den echten Baum
         echt = os.path.join(ROOT, STATE_REL)
         fest("K8 schreibfrei", not os.path.exists(echt)
@@ -509,12 +656,20 @@ def main(argv: list[str] | None = None) -> int:
                     liste = ", ".join(f"#{n}" for n in geschlossen)
                     print(f"::notice::Nachlauf-Wache grün – geschlossen: {liste}")
             else:
-                titel = issue_oeffnen(bericht)
-                if titel:
-                    print(f"::notice::Nachlauf-Wache: Issue geöffnet – {titel}")
-                elif bericht["befunde"]:
+                # Bündeln statt anhäufen (21.11.2026): offene Meldungen mit
+                # anderem Fingerabdruck werden überholt-geschlossen, der
+                # aktuelle Stand landet in EINER Meldung.
+                pflege = issue_nachfuehren(bericht)
+                if pflege["titel"]:
+                    print(f"::notice::Nachlauf-Wache: Issue geöffnet – "
+                          f"{pflege['titel']}")
+                elif pflege["gefunden"] is not None:
                     print("::notice::Nachlauf-Wache: Befund bereits gemeldet – kein "
                           "zweites Issue.")
+                if pflege["ueberholt"]:
+                    liste = ", ".join(f"#{n}" for n in pflege["ueberholt"])
+                    print(f"::notice::Nachlauf-Wache: überholte Meldung(en) "
+                          f"geschlossen: {liste}")
         except Exception as fehler:                  # noqa: BLE001
             print(f"::warning::Nachlauf-Wache: Issue-Pflege fehlgeschlagen ({fehler})")
     if bericht["werkzeugfehler"]:

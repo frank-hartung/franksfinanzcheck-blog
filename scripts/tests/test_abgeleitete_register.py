@@ -102,5 +102,88 @@ class EinhaengungTest(unittest.TestCase):
                         "die Ableitung im selben Lauf wieder alt")
 
 
+class BefundAkteRegisterTest(unittest.TestCase):
+    """WF-B16A/#1229 (21.11.2026): Die Befund-Akte ist eine Ableitung.
+
+    ANLASS: Fünf offene „🩺 Nachlauf-Wache"-Meldungen innerhalb von fünf Tagen
+    (#1229, #1251, #1252, #1266, #1267, #1271) – jedes Mal „BEFUND-AKTE.md
+    oder Zustand stimmt nicht mit dem Ledger überein". Die Akte hatte keinen
+    Nachzug am Erzeuger, weil sie in diesem Verzeichnis fehlte. Diese Tests
+    halten die Einhängung fest, damit die Klasse nicht beim nächsten Register
+    von vorn beginnt.
+    """
+
+    def test_akte_ist_registriert(self):
+        pfade = {r.pfad for r in ar.REGISTER}
+        self.assertIn("BEFUND-AKTE.md", pfade,
+                      "Die Befund-Akte ist wieder aus dem Verzeichnis "
+                      "abgeleiteter Register verschwunden – dann läuft sie "
+                      "ihrer Quelle wieder hinterher (#1229)")
+
+    def test_akte_nennt_schreiber_und_unterbefehle(self):
+        reg = next(r for r in ar.REGISTER if r.pfad == "BEFUND-AKTE.md")
+        self.assertEqual(reg.skript, "scripts/faktenfrische_befund_akte.py")
+        self.assertEqual(reg.check, "--check")
+        self.assertEqual(reg.fix, "--schreiben",
+                         "Der Nachzug muss über --schreiben laufen, den "
+                         "einzigen erlaubten Schreiber")
+
+    def test_schreiber_bietet_check_und_schreiben(self):
+        """Das Interface, das `abgeleitete_register.py` aufruft, muss da sein."""
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import faktenfrische_befund_akte as akte
+        self.assertTrue(callable(getattr(akte, "pruefen", None)),
+                        "pruefen() fehlt – --check wäre blind")
+        self.assertTrue(callable(getattr(akte, "erstellen", None)),
+                        "--schreiben-Implementierung fehlt")
+
+    def test_akte_folgt_im_selben_commit(self):
+        """Der Nachzug am Erzeuger (git_sync.sh) darf nicht verschwinden."""
+        sync = (ROOT / "scripts" / "git_sync.sh").read_text(encoding="utf-8")
+        self.assertIn("faktenfrische_akte_nachziehen", sync)
+        self.assertGreaterEqual(
+            sync.count("faktenfrische_akte_nachziehen "), 2,
+            "Der Haken muss in BEIDEN Modi stehen (Vollbedienung und "
+            "--push-only) – sonst bleibt die Lücke für fremde Workflows offen")
+        for pfad in ("BEFUND-AKTE.md", "data/faktenfrische_befunde_state.json"):
+            self.assertIn(pfad, sync)
+
+
+class SchreiberIdempotenzTest(unittest.TestCase):
+    """Der Nachzug im Commit-Pfad darf keinen Leerlauf-Commit erzeugen.
+
+    `deploy.yml` committet jede Änderung, die `git status --short` sieht, und
+    der strukturelle Gate-Rebuild hängt daran. Ein Schreiber, der bei jedem
+    Aufruf einen neuen Zeitstempel stempelt, hätte damit eine Endlosschleife
+    aus Commit → Rebuild → Commit erzeugt.
+    """
+
+    def test_zweiter_lauf_aendert_keine_bytes(self):
+        import datetime as dt
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import faktenfrische_befund_akte as akte
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "data").mkdir()
+            md, state = root / "BEFUND-AKTE.md", root / "data/state.json"
+            text, zustand = "Akte\n", {"erzeugt": "2026-11-21T00:00:00Z",
+                                       "offen": 1, "stichtag": "2026-11-21"}
+            with patch.object(akte, "AKTE_PATH", md), \
+                 patch.object(akte, "STATE_PATH", state):
+                akte._schreiben(text, dict(zustand))
+                erste = state.read_text(encoding="utf-8")
+                # Zweiter Lauf mit neuem Zeitstempel im Eingangswert:
+                akte._schreiben(text, dict(zustand,
+                                           erzeugt="2026-11-22T09:09:09Z"))
+                self.assertEqual(state.read_text(encoding="utf-8"), erste,
+                                 "Der Schreiber stempelt erneut – das wäre im "
+                                 "Commit-Pfad ein Commit ohne Änderung")
+                self.assertEqual(md.read_text(encoding="utf-8"), text)
+
+
 if __name__ == "__main__":
     unittest.main()

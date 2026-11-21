@@ -351,30 +351,19 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
 
         rest_zeile = zeile[einzug:]
         # Sequenz-Eintrag: `- key: wert` oder `- wert`
-        #
-        # BEFUND 21.11.2026 (Falschbefund auf main, seit 19.11. rot)
-        # ---------------------------------------------
-        # Hier wurde das `- ` ENTFERNT und die Zeile danach wie ein
-        # Mapping-Schlüssel gezählt. Für
-        #     quellen:
-        #     - id: Q1
-        #     - id: Q3
-        # sah das aus wie drei Angaben desselben Schlüssels `id` auf
-        # oberster Ebene – gemeldet als F3-BLOCKER („Hugo bricht den Bau
-        # daran ab"). Das war falsch: Es sind drei getrennte Mappings einer
-        # Liste. Die Datei baut, PyYAML parst sie strikt ohne Duplikat, und
-        # der Test `gegenprobe_eintrag_gegen_den_parser` zeigt es.
-        # Folge des Fehlers: Die Frontmatter-Vorprüfung von
-        # `.github/actions/hugo-build` brach JEDEN Bau ab, die Entity-Wache
-        # kam über „Site bauen" nicht hinaus.
-        #
-        # Die Doppelt-Prüfung gilt deshalb nur für Schlüssel, die WIRKLICH
-        # auf oberster Ebene eines Mappings stehen (`einzug == 0` und kein
-        # Sequenz-Eintrag). Der `gesehen`-Zähler wird jetzt ausschließlich
-        # dort gefüllt, wo er ausgewertet wird; vorher sammelte er auch
-        # Listeneinträge und Tiefen-Schlüssel, was dieselbe Verwechslung
-        # auf jeder Ebene erlaubte.
-        ist_sequenz = rest_zeile.startswith("- ") or rest_zeile == "-"
+        # WF-1291 (21.11.2026): `sequenz` wird gemerkt, BEVOR der Eintrags-
+        # marker abgeschnitten wird. Vorher stand `rest_zeile` danach immer
+        # ohne `- ` da – die Doppelt-Prüfung unten (`einzug == 0 and not
+        # rest_zeile.startswith("-")`) war damit für JEDEN Top-Level-Eintrag
+        # einer Liste wahr. Ein `quellen:`-Block mit den Schlüsseln
+        # `id`/`titel`/`url` je Eintrag wurde deshalb als „Schlüssel `id`
+        # steht doppelt“ gemeldet: ein BLOCKER auf gültigem YAML, obwohl
+        # jeder Parser und Hugo die Datei fehlerfrei lesen. Der Fehlalarm
+        # stand seit 20.11.2026 auf `main` (Issue #1285/#1287) und hätte
+        # jeden Artikel mit Quellenliste als unbaubar gebrandmarkt.
+        # `- key: wert` eröffnet ein NEUES Mapping je Eintrag – gleiche
+        # Schlüssel in verschiedenen Einträgen sind YAML-korrekt.
+        sequenz = rest_zeile.startswith("- ") or rest_zeile == "-"
         if rest_zeile.startswith("- "):
             rest_zeile = rest_zeile[2:]
         elif rest_zeile == "-":
@@ -393,7 +382,7 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             continue                      # `key:` ohne Leerzeichen ist kein Mapping
         wert = wert.lstrip(" ")
 
-        if einzug == 0 and not ist_sequenz:
+        if einzug == 0 and not sequenz:
             if key in gesehen:
                 # WF-990: BLOCKER, nicht HINWEIS. Hugo bricht an einem
                 # doppelten Mapping-Schlüssel den ganzen Bau ab – PyYAML
@@ -932,6 +921,38 @@ def run_selftest() -> int:
     # 14) YAML-1.1-Wahrheitswert als Text.
     faelle.append(("yes als Titel", _GUT.replace(
         'title: "Strom sparen im Alltag"', "title: yes"), ["F5"]))
+    # 14b) WF-1291 (21.11.2026): Gleich benannte Schlüssel in VERSCHIEDENEN
+    #      Sequenz-Einträgen sind gültiges YAML. Der Scanner hat den
+    #      Eintragsmarker zu früh abgeschnitten und daraus einen BLOCKER
+    #      „Schlüssel `id` steht doppelt“ gemacht – auf einer Datei, die
+    #      PyYAML und Hugo fehlerfrei lesen (Issue #1285/#1287).
+    faelle.append(("gleiche Schlüssel in mehreren Sequenz-Einträgen",
+                   _GUT.replace(
+                       'quellen:\n  - titel: "Bundesnetzagentur"\n'
+                       '    url: "https://example.org/a?b=1"',
+                       'quellen:\n  - id: "Q1"\n    titel: "Bundesnetzagentur"\n'
+                       '    url: "https://example.org/a?b=1"\n'
+                       '  - id: "Q2"\n    titel: "Verbraucherzentrale"\n'
+                       '    url: "https://example.org/b?c=2"\n'
+                       '  - id: "Q3"\n    titel: "Gesetze im Internet"\n'
+                       '    url: "https://example.org/c"'), []))
+    # 14c) Gegenprobe: Derselbe Schlüssel ZWEIMAL auf oberster Ebene bleibt
+    #      ein Blocker – die Reparatur darf die echte Erkennung nicht
+    #      abschalten (sonst wäre der Fehlalarm gegen einen Blindfleck
+    #      getauscht).
+    faelle.append(("gleicher Schlüssel doppelt auf oberster Ebene",
+                   _GUT.replace("draft: false", "draft: false\ndraft: true"),
+                   ["F3"]))
+    # 14d) Auch ein eingebetteter (`- ` auf eigener Zeile) Eintrag mit
+    #      Wiederholung im NÄCHSTEN Eintrag bleibt sauber.
+    faelle.append(("Block-Sequenz mit wiederholten Schlüsseln",
+                   _GUT.replace(
+                       'quellen:\n  - titel: "Bundesnetzagentur"\n'
+                       '    url: "https://example.org/a?b=1"',
+                       'quellen:\n  -\n    titel: "Bundesnetzagentur"\n'
+                       '    url: "https://example.org/a?b=1"\n'
+                       '  -\n    titel: "Verbraucherzentrale"\n'
+                       '    url: "https://example.org/b"'), []))
     # 15) Datum, das Hugo nicht lesen kann.
     faelle.append(("Datum als Text", _GUT.replace(
         "date: 2026-10-14T14:57:58Z", "date: 14.10.2026"), ["F4"]))
