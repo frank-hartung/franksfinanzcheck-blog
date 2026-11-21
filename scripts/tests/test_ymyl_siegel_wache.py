@@ -131,3 +131,39 @@ class SiegelwacheTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+try:  # PyYAML ist in der CI-Pflichtliste; lokal darf der Test sauber skippen.
+    import yaml as _yaml
+except ImportError:  # pragma: no cover
+    _yaml = None
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+@unittest.skipUnless(_yaml is not None, "PyYAML fehlt")
+class SiegelpruefungNichtVerdeckbarTest(unittest.TestCase):
+    """Die Fachprüfung darf nicht hinter einem Metadaten-Befund verschwinden.
+
+    21.11.2026: Der Lauf war rot, weil ein Metadaten-Test anschlug (M1:
+    Kfz-Titel 64 statt max. 60 Zeichen). Dadurch wurde die Siegelprüfung
+    übersprungen – und #1309 (`be4f30a1`) konnte das Prüfprotokoll beider
+    Hochrisiko-Artikel verändern, ohne dass der PR es meldete. Erst der
+    Deploy fand es. `ymyl_siegel_wache.py --base` hätte es gefunden.
+    """
+
+    def test_beide_siegelpruefungen_laufen_auch_nach_roten_tests(self):
+        workflow = ROOT / ".github" / "workflows" / "ymyl-siegelwache.yml"
+        daten = _yaml.safe_load(workflow.read_text(encoding="utf-8"))
+        schritte = {s.get("name"): s for s in daten["jobs"]["siegel"]["steps"]
+                    if s.get("name")}
+        for name, ereignis in (
+                ("Bestehende Siegel und Rückzüge im PR prüfen", "pull_request"),
+                ("Bestehende Siegel aller Posts prüfen", "!= 'pull_request'")):
+            with self.subTest(schritt=name):
+                self.assertIn(name, schritte, "Siegelprüfung fehlt im Workflow")
+                bedingung = str(schritte[name].get("if", ""))
+                self.assertIn("always()", bedingung,
+                              "Ohne always() verdeckt ein roter Test-Schritt die "
+                              "Fachprüfung – genau so blieb #1309 unbemerkt")
+                self.assertIn(ereignis, bedingung)
