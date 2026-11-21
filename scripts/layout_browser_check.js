@@ -639,6 +639,10 @@ async function measureDom(page) {
 async function loadRuntime(browser, url, viewport, ctx) {
   const page = await browser.newPage();
   await page.setViewport(viewport);
+  // Kein HTTP-Cache: Ein Dokument aus dem Cache kann ohne seine Kopfzeilen
+  // zurückkommen. Genau diese Kopfzeilen sind hier der Beleg – der Audit muss
+  // sie vom Messserver sehen, nicht aus einem Zwischenspeicher erraten.
+  try { await page.setCacheEnabled(false); } catch (e) { /* alt genug: egal */ }
   const eigeneHerkunft = ctx.herkunft || new URL(url).origin;
   const gesendet = ctx.csp || '';
   const errors = [];
@@ -738,7 +742,13 @@ async function loadRuntime(browser, url, viewport, ctx) {
   }))];
   const cspQuelle = {
     kopfzeile: cspBeobachtet.length > 0,
+    beobachtet: cspBeobachtet.length,
     eigene: traegtEigene,
+    // Warum die eigene CSP (nicht) wiedergefunden wurde – für den Bericht.
+    // Ohne diesen Grund wäre „0 von 14" eine Zahl ohne Beleg.
+    grund: !cspBeobachtet.length ? 'keine-kopfzeile'
+      : traegtEigene ? 'eigene'
+      : (fremdeCsp.length ? 'fremd' : 'abweichend'),
     fremd: fremdeCsp.length > 0 || (eigeneCsp.length > 0 && !traegtEigene),
     fremdherkunft,
     herkunft: endUrl,
@@ -978,6 +988,7 @@ async function auditPage(browser, url, viewport, ctx) {
            eigene: !!(csp.quelle && csp.quelle.eigene),
            fremd: !!(csp.quelle && csp.quelle.fremd),
            fremdherkunft: (csp.quelle && csp.quelle.fremdherkunft) || [],
+           grund: (csp.quelle && csp.quelle.grund) || 'unbekannt',
            gesendet: ctx.cspDigest || '',
            unbelegt: (csp.unbelegt || []).length,
            gesehen: (csp.direktiven || []).slice(0, 1)
@@ -1168,9 +1179,15 @@ if (SELFTEST) {
     },
     cspBelege: {
       gesendet: cspDigest,
+      gruende: results.reduce((n, r) => {
+        const g = (r.csp && r.csp.grund) || 'unbekannt';
+        n[g] = (n[g] || 0) + 1;
+        return n;
+      }, {}),
       quelle: 'static/_headers, Regel /* (EINE Quelle; frame-ancestors '
         + 'wird separat geprüft, weil sie nur als Kopfzeile wirkt)',
       seitenMitKopfzeile: results.filter(r => r.csp && r.csp.kopfzeile).length,
+      seitenGemessen: results.length,
       eigeneImDokument: results.filter(r => r.csp && r.csp.eigene).length,
       fremd: results.reduce((n, r) => n + (r.csp && r.csp.fremd ? 1 : 0), 0),
       fremdherkunft: [...new Set(results.flatMap(

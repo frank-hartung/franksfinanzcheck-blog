@@ -127,7 +127,9 @@ def summary_notice(dom: dict, browser: dict) -> str:
     if csp:
         if csp.get("gesendet"):
             parts.append("CSP-Beleg: eigene CSP aus static/_headers ausgeliefert "
-                         f"(sha256:{csp['gesendet']}), im Dokument "
+                         f"(sha256:{csp['gesendet']}), Kopfzeile auf "
+                         f"{csp.get('seitenMitKopfzeile', 0)} von "
+                         f"{csp.get('seitenGemessen', 0)} Seiten, im Dokument "
                          f"wiedergefunden: {csp.get('eigeneImDokument', 0)}, "
                          f"Fremd-CSP: {csp.get('fremd', 0)}")
         elif csp.get("gesehen"):
