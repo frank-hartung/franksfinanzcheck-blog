@@ -138,7 +138,7 @@ Es dauert drei Stunden, kostet dich aber am wenigsten; das ist ein Modellwert.
 
 Du willst jetzt starten und deine [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)? Dann folge diesem Plan. So behältst du den Überblick und triffst kluge Entscheidungen für dein Budget.
 
-1. **Bestandsaufnahme machen:** Gehe durch jeden Raum. Schreibe auf, wie alt deine Großgeräte sind. Suche nach dem Typenschild und google den Verbrauch, falls du kein Messgerät hast.  
+1. **Bestandsaufnahme machen:** Gehe durch jeden Raum. Schreibe auf, wie alt deine Großgeräte sind. Suche nach dem Typenschild und Google den Verbrauch, falls du kein Messgerät hast.  
    Der Kühlschrank ist rund um die Uhr in Betrieb; das ist ein Rechenbeispiel. Er hat Priorität. Danach folgen Trockner und Waschmaschine.  
 2. **Vergleichsrechnung aufstellen:** Nutze meine Modellrechnung von oben. Setze deine eigenen Zahlen ein. Sei ehrlich zu dir selbst. Wenn sich ein Gerät erst nach 20 Jahren rechnet, behalte das alte Modell, solange es läuft.  
 3. **Angebote prüfen:** Suche gezielt nach Auslaufmodellen mit guter Effizienzklasse. Oft gibt es Vorjahresmodelle viel günstiger, obwohl die Technik fast identisch ist.  
