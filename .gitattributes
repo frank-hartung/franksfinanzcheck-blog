@@ -181,3 +181,4 @@ scripts/wachen_vertrag.py merge=binary
 # sondern eine redaktionelle Rechts- und Nachweishistorie. Änderungen müssen
 # im PR als Text sichtbar und fachlich reviewbar bleiben (#1028).
 /RECHT-UPDATE-REPORT.md diff linguist-generated=false
+data/code_schutz_belege.jsonl merge=binary

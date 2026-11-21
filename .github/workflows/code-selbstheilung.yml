@@ -1,0 +1,298 @@
+# ============================================================
+#  CODE-SELBSTHEILUNG · Heilungs-PR (#709, 12.10.2026)
+#  ------------------------------------------------------------
+#  WARUM DIESER LAUF EXISTIERT
+#  PR #709 brachte sechs `py/incomplete-url-substring-sanitization`-Fundstellen
+#  auf `main`. Die Sicherheits-Wache wurde rot und die Fundstellen erfolgten
+#  von Hand (CODE-SCANNING-SUCHRADAR-HEILUNG-PREMIUM-2026-10-12.md). Ein
+#  Befund, der nur von Hand heilt, ist jeder Tageslauf eine neue Chance, dass
+#  er wieder auftaucht. PR #709 war der induktive Beweisprovider für genau die
+#  Klasse, die diesen Workflow braucht.
+#
+#  Dieser Workflow schließt den Regelkreis H-02-konform in fünf Schichten:
+#    1. EICHPROBE (Exit 3 bei blindem Prüfer – kein Urteil, kein Schreiben)
+#    2. HEILUNG   (`--heilen`, AST-genau, reine Python-Fundstellen,
+#                 Host-exakt statt Teilzeichenkette)
+#    3. NACHMESSUNG (`scripts/url_substring_guard.py`: 0 py-Fundstellen
+#                   nach Transform = GEHEILT, sonst TEILGEHEILT/OFFEN)
+#    4. BELEGKETTE (`data/code_schutz_belege.jsonl`, SHA-256 ab GENESIS)
+#    5. BEREITSTELLUNG als geprüfter PR (`automation/code-selbstheilung-*`
+#       über `scripts/git_sync.sh`) – kein blinder Direkt-Merge auf main
+#       (Audit H-02).
+#
+#  H-02-Grenze: Dieser Workflow merget NIE blind auf `main`. Er öffnet
+#  oder aktualisiert einen begebbaren Heilungs-PR mit der Belegkette und
+#  der Prüfbefunde. Blind-Merge wäre ein Audit-Verstoß.
+# ============================================================
+name: Code-Selbstheilung · Heilungs-PR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/code_selbstheilung.py"
+      - "scripts/tests/test_code_selbstheilung.py"
+      - "scripts/url_substring_guard.py"
+      - "scripts/url_host.py"
+      - "data/code_schutz_vertrag.json"
+      - "data/code_schutz_belege.jsonl"
+      - ".gitattributes"
+      - ".github/workflows/code-selbstheilung.yml"
+      - ".github/workflows/sicherheits-wache.yml"
+      - ".github/workflows/alert-on-failure.yml"
+  pull_request:
+    paths:
+      - "scripts/code_selbstheilung.py"
+      - "scripts/tests/test_code_selbstheilung.py"
+      - "scripts/url_substring_guard.py"
+      - "scripts/url_host.py"
+      - "data/code_schutz_vertrag.json"
+      - "data/code_schutz_belege.jsonl"
+      - ".gitattributes"
+      - ".github/workflows/code-selbstheilung.yml"
+      - ".github/workflows/sicherheits-wache.yml"
+      - ".github/workflows/alert-on-failure.yml"
+  schedule:
+    - cron: "38 6 * * *"   # täglich 06:38 UTC – nach der Abhängigkeits-Selbstheilung (06:18)
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "heilen (PR vorbereiten) oder pruefen (nur messen)"
+        required: false
+        default: "heilen"
+        type: choice
+        options:
+          - heilen
+          - pruefen
+  workflow_run:
+    workflows:
+      - "Sicherheits-Wache"
+    types:
+      - completed
+
+concurrency:
+  group: "code-selbstheilung-${{ github.ref }}"
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  vertraege:
+    name: Eichprobe, Verdrahtung und Vertragstests (offline)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Heiler selbsttesten – Eichprobe und Sabotageproben
+        run: python3 scripts/code_selbstheilung.py --selftest
+
+      - name: Verdrahtungs-Wache – Vertrag, Belegkette, Tore prüfen
+        run: python3 scripts/code_selbstheilung.py --wache
+
+      - name: Vertragstests der Code-Selbstheilung
+        run: python3 -m unittest scripts.tests.test_code_selbstheilung -v
+
+  selbstheilung:
+    name: Bestand auditieren, heilen, nachmessen und PR bereitstellen
+    needs: vertraege
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' ||
+       github.event_name == 'workflow_dispatch' ||
+       (github.event_name == 'workflow_run' &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.conclusion == 'failure'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Code auditieren und selbstheilen (neutraler Exit)
+        id: messung
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          MODUS: ${{ inputs.modus || 'heilen' }}
+        run: |
+          set -uo pipefail
+          BERICHT_JSON="$RUNNER_TEMP/code_selbstheilung.json"
+          BERICHT_MD="$RUNNER_TEMP/code_selbstheilung.md"
+          code=0
+          if [ "$MODUS" = "pruefen" ]; then
+            python3 scripts/code_selbstheilung.py --pruefen \
+              --json --md "$BERICHT_MD" > "$BERICHT_JSON" || code=$?
+          else
+            python3 scripts/code_selbstheilung.py --heilen \
+              --json --md "$BERICHT_MD" > "$BERICHT_JSON" || code=$?
+          fi
+          cat "$BERICHT_MD" >> "$GITHUB_STEP_SUMMARY"
+          klasse="$(jq -r '.klasse // "UNBEKANNT"' "$BERICHT_JSON" 2>/dev/null || echo UNBEKANNT)"
+          befund_id="$(jq -r '.befund_id // "unbekannt"' "$BERICHT_JSON" 2>/dev/null || echo unbekannt)"
+          anzahl_dateien="$(jq -r '(.geaenderte_dateien // []) | length' "$BERICHT_JSON" 2>/dev/null || echo 0)"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "klasse=$klasse" >> "$GITHUB_OUTPUT"
+          echo "befund_id=$befund_id" >> "$GITHUB_OUTPUT"
+          echo "anzahl_dateien=$anzahl_dateien" >> "$GITHUB_OUTPUT"
+
+      - name: Geprüften Selbstheilungs-PR öffnen oder aktualisieren (Audit H-02)
+        id: pr
+        if: >-
+          !cancelled() &&
+          steps.messung.outcome != 'skipped' &&
+          steps.messung.outputs.anzahl_dateien != '0' &&
+          (steps.messung.outputs.klasse == 'GEHEILT' || steps.messung.outputs.klasse == 'TEILGEHEILT')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BEFUND_ID: ${{ steps.messung.outputs.befund_id }}
+          KLASSE: ${{ steps.messung.outputs.klasse }}
+          BASIS_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          BERICHT_JSON="$RUNNER_TEMP/code_selbstheilung.json"
+          BERICHT_MD="$RUNNER_TEMP/code_selbstheilung.md"
+          PRAEFIX="automation/code-selbstheilung-${BEFUND_ID}"
+
+          # Idempotenz über Tage: Liegt für genau diese Befund-ID bereits ein
+          # offener PR vor, wird kein zweiter Zeitstempel-Commit erzeugt.
+          OFFENER_PR="$(gh pr list --state open --base main --limit 30 \
+            --json number,headRefName,url \
+            --jq "[.[] | select(.headRefName | startswith(\"$PRAEFIX\"))][0].url // \"\"")"
+          if [ -n "$OFFENER_PR" ]; then
+            echo "Offener Heilungs-PR für Befund $BEFUND_ID existiert bereits: $OFFENER_PR"
+            echo "pr_url=$OFFENER_PR" >> "$GITHUB_OUTPUT"
+            git checkout -- .
+            exit 0
+          fi
+
+          KURZ_SHA="$(printf '%s' "$BASIS_SHA" | cut -c1-7)"
+          BRANCH="${PRAEFIX}-${KURZ_SHA}"
+          mapfile -t PFADE < <(jq -r '.geaenderte_dateien[]' "$BERICHT_JSON")
+          # Belegkette gehört in den PR – sie ist die Beweisführung.
+          PFADE+=( "data/code_schutz_belege.jsonl" )
+          if [ "${#PFADE[@]}" -eq 0 ]; then
+            echo "Keine geänderten Dateien gemeldet – kein PR."
+            git checkout -- .
+            exit 0
+          fi
+
+          git checkout -B "$BRANCH"
+          GIT_USER="Code-Selbstheilung" \
+          GIT_MAIL="code-selbstheilung@users.noreply.github.com" \
+          BRANCH="$BRANCH" bash scripts/git_sync.sh \
+            "fix(security): automatische URL-Substring-Selbstheilung (${BEFUND_ID})" \
+            "${PFADE[@]}"
+
+          PR_BODY="$RUNNER_TEMP/code_pr_body.md"
+          {
+            cat "$BERICHT_MD"
+            echo ""
+            echo "---"
+            echo "**Sicherheits-Vertrag (Audit H-02):** Dieser PR wurde mit"
+            echo "\`scripts/code_selbstheilung.py --heilen\` erzeugt, gegen den eigenen"
+            echo "\`url_substring_guard.py\` nachgemessen und in \`data/code_schutz_belege.jsonl\`"
+            echo "verkettet belegt. Bitte Diff & Herkunft prüfen und regulär mergen."
+          } > "$PR_BODY"
+
+          PR_URL="$(gh pr create --base main --head "$BRANCH" \
+            --title "fix(security): URL-Substring-Selbstheilung (${BEFUND_ID})" \
+            --body-file "$PR_BODY")"
+          echo "Geprüfter Selbstheilungs-PR erstellt: $PR_URL"
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Ampel und Endurteil auswerten (nie Scheingrün bei offenem Befund)
+        if: ${{ !cancelled() && steps.messung.outcome != 'skipped' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          LAUF_ID: ${{ github.run_id }}
+          MESS_CODE: ${{ steps.messung.outputs.code }}
+          KLASSE: ${{ steps.messung.outputs.klasse }}
+          PR_URL: ${{ steps.pr.outputs.pr_url }}
+        run: |
+          set -euo pipefail
+          ZEIT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          case "$KLASSE:$MESS_CODE" in
+            SICHER:0)
+              SCHLUSS=success
+              TITEL="Code-Selbstheilung: Bestand befundfrei belegt"
+              TEXT="Alle URL-substring-Fundstellen sind nachgemessen und belegt."
+              EXIT_ZIEL=0
+              ;;
+            GEHEILT:0)
+              SCHLUSS=action_required
+              TITEL="Code-Selbstheilung: Geprüfter Heilungs-PR liegt bereit"
+              TEXT="Die Selbstheilung hat alle offenen URL-substring-Fundstellen behoben und nachgemessen. Merge des Heilungs-PRs (Audit H-02) schließt den Befund auf main: ${PR_URL:-siehe Lauf-Zusammenfassung}"
+              echo "::warning title=Heilungs-PR bereit::$TEXT"
+              EXIT_ZIEL=0
+              ;;
+            TEILGEHEILT:1)
+              SCHLUSS=action_required
+              TITEL="Code-Selbstheilung: Teilheilung – Befund benötigt Betreiber-Entscheidung"
+              TEXT="Die Selbstheilung hat die heilbaren Fundstellen behoben, Teile verbleiben. Merge des Heilungs-PRs schließt alle heilbaren Befunde auf main: ${PR_URL:-siehe Lauf-Zusammenfassung}"
+              echo "::warning title=Teilheilung::$TEXT"
+              EXIT_ZIEL=0
+              ;;
+            OFFEN:1)
+              SCHLUSS=action_required
+              TITEL="Code-Selbstheilung: Offener Befund benötigt Betreiber-Entscheidung"
+              TEXT="Mindestens eine URL-substring-Fundstelle hat noch keinen monotonen Patch (oder ist nicht transformabel)."
+              echo "::warning title=URL-Substring-Befund offen::$TEXT"
+              EXIT_ZIEL=0
+              ;;
+            *:3)
+              SCHLUSS=failure
+              TITEL="Code-Selbstheilung: Messgerät nicht eichfähig (Exit 3)"
+              TEXT="Die Eichprobe zu Vorfall #709 ist gescheitert – kein Urteil und kein Schreibzugriff."
+              echo "::error title=Messgerät nicht eichfähig::$TEXT"
+              EXIT_ZIEL=1
+              ;;
+            *)
+              SCHLUSS=failure
+              TITEL="Code-Selbstheilung: Nicht belegbar oder Rollback (Exit $MESS_CODE)"
+              TEXT="Vertrag, Belegkette oder Nachmessung sind fehlgeschlagen; eventuelle Änderungen wurden atomar zurückgerollt."
+              echo "::error title=Code-Selbstheilung fehlgeschlagen::$TEXT"
+              EXIT_ZIEL=1
+              ;;
+          esac
+
+          jq -n \
+            --arg name "Code-Selbstheilung · Heilungs-PR" \
+            --arg sha "$SHA" \
+            --arg conclusion "$SCHLUSS" \
+            --arg completed_at "$ZEIT" \
+            --arg details_url "https://github.com/$REPO/actions/runs/$LAUF_ID" \
+            --arg title "$TITEL" \
+            --arg summary "$TEXT" \
+            '{
+              name: $name,
+              head_sha: $sha,
+              status: "completed",
+              conclusion: $conclusion,
+              completed_at: $completed_at,
+              details_url: $details_url,
+              output: { title: $title, summary: $summary }
+            }' | gh api "repos/$REPO/check-runs" --method POST --input - >/dev/null
+          exit "$EXIT_ZIEL"

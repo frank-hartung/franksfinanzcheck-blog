@@ -169,7 +169,7 @@ Ein hoher Strompreis und ein hoher Geräteverbrauch sind zwei verschiedene Frage
 
 **Für deinen nächsten Check:** Rechne den Eigenverbrauch des Steuergeräts auch in Zeiten ohne geschaltete Last mit. Eine Steckdose, die ganzjährig läuft, spart nicht automatisch bei einem selten genutzten Gerät.
 
-**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Stand‑by‑Kosten prüfen](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [Stromfresser im Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Gaspreiserhöhung Sonderkündigungsrecht](../../posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/) · [Kaffeemaschine Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/)
+**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Stand‑by‑Kosten prüfen](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [Stromfresser im Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Gaspreiserhöhung Sonderkündigungsrecht](../../posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/) · [Kaffeemaschine Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/) · [Energieeffiziente Geräte](../../posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/)
 
 ## Häufige Fragen
 
