@@ -524,10 +524,15 @@ function runSelftest() {
   const cspZeilen = String(csp || '').split(';').map(t => t.trim());
   const scriptSrc = cspZeilen.find(t => /^script-src\b/.test(t)) || '';
   const connectSrc = cspZeilen.find(t => /^connect-src\b/.test(t)) || '';
+  // Exakte Mengen-Zugehörigkeit statt Teilstring-Suche: „enthält die URL"
+  // wäre keine Prüfung der Direktive (CodeQL js/incomplete-url-substring-
+  // sanitization, 21.11.2026).
+  const scriptQuellen = new Set(scriptSrc.split(/\s+/).filter(Boolean));
+  const connectQuellen = new Set(connectSrc.split(/\s+/).filter(Boolean));
   pruefe('CSP nennt Beacon-Skript-Domain',
-    scriptSrc.split(/\s+/).includes('https://static.cloudflareinsights.com'), true);
+    scriptQuellen.has('https://static.cloudflareinsights.com'), true);
   pruefe('CSP nennt Beacon-Messdomain',
-    connectSrc.split(/\s+/).includes('https://cloudflareinsights.com'), true);
+    connectQuellen.has('https://cloudflareinsights.com'), true);
   pruefe('_headers ohne CSP ergibt null',
     cspAusHeaders('/*\n  X-Test: 1\n\n/images/*\n  Cache-Control: max-age=1\n'), null);
   pruefe('CSP in Kommentarzeile zählt nicht',
