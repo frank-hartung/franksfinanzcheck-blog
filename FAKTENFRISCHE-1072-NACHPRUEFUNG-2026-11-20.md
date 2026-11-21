@@ -167,3 +167,38 @@ jede Textänderung an einer gebundenen Aussage öffnet den Befund sofort wieder.
 Der Heizöl-Entwurf bleibt unveröffentlicht. Für den Pflicht-Check selbst gilt
 weiterhin der dokumentierte Dauerzustand: Die Aktivierung des Status-Checks auf
 `main` ist ein separater Admin-Schritt und wurde **nicht** ausgeführt.
+
+---
+
+## 6. PR-Checks: was grün ist und was nicht (21.11.2026)
+
+**Grün:** `Integritäts-Siegel` (das eigentliche PR-Gate, 3m11s), `entity`,
+`beweis`, `lesehilfen`, `navigation`, `syntax`, `Gate (Frontmatter, ohne
+Build)`, `Quellen, Stand, Einheit und Methodik`, `CodeQL (python/js)`,
+`Abhängigkeiten`, `Klartext-`, `URL-` und `ReDoS`-Wache.
+
+**Vier rot — keine davon durch diesen Vorgang:**
+
+| Check | Ursache | Wer entscheidet |
+|---|---|---|
+| `YMYL-Siegelprüfung` | `test_metadaten_wache`: M1-Titel 64 > 60 Zeichen | Frank (Freigabe-Hash) |
+| `Playwright-Suite` | derselbe M1-Titel im Schritt „Metadaten-Wache" | Frank |
+| `ReDoS-Wache` | `test_gsc_abdeckung`: bestehender Inlink-Befund | Redaktion |
+| `layout-audit` | Cloudflare-Beacon gegen `_headers`-CSP | separat zu klären |
+
+**Zum M1-Titel:** Er steht seit `60dc4d4` (19.11.2026, PR #1276, „freigegebene
+Neufassung veröffentlichen", Autor Frank Hartung) im Bestand. `inhalt_sha256`
+versiegelt ihn. Eine Änderung durch mich würde seine Freigabe entwerten —
+deshalb **nicht** angefasst, sondern gemeldet. Kürzungsvorschlag (58 Zeichen):
+„Kfz-Versicherung vergleichen: Was zählt außer dem Beitrag?"
+
+**Zum `layout-audit`:** Der Befund ist ein Browser-Konsolenfehler gegen
+`static.cloudflareinsights.com/beacon.min.js`, geblockt von der CSP in
+`static/_headers`. Gegenprüfung: Im gebauten HTML steht **kein** Beacon
+(`grep` über 131 Seiten: 0 Treffer); `layouts/_partials/cloudflare_analytics.html`
+rendert nur bei gesetzter `website`+`token`, beide sind in `hugo.toml`
+auskommentiert. Das Skript kommt von der Cloudflare-Edge (Weg A), nicht aus dem
+Repo. Der Audit lief am 19.11. auf `main` noch grün, seither wurde an `layouts/`
+nichts geändert. **Die Ursache liegt außerhalb dieses Diffs** und wurde nicht
+angefasst; ein CSP-Eintrag für die Analytics-Domain wäre ein eigener,
+abgestimmter Schritt.
