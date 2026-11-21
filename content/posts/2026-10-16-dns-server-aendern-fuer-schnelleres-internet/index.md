@@ -46,6 +46,8 @@ affiliate_exempt_reason: "Ein DNS-Test prüft die Namensauflösung und benötigt
 
 Du hast gerade einen Film gestartet. Das Bild lädt stockend. Die Seite braucht ewig für den Aufbau. Der Ärger liegt dann selten am Tarif deines Anbieters.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Oft ist ein kleiner Baustein im Hintergrund mit im Spiel: der DNS-Server. Er übersetzt Webnamen in technische Adressen. Antwortet er langsam, wirkt das Surfen zäh. Ein Wechsel kann sich dann lohnen – deine Leitung wird dadurch aber nicht schneller.
 
 Du musst dafür keine neue Hardware kaufen. Hier zeige ich dir den Weg. Du lernst, warum der Wechsel hilft und wo seine Grenzen liegen. Ich erkläre dir den sicheren Umstieg. Zudem erfährst du, welche Fehler du vermeiden solltest.

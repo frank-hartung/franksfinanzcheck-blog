@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026.jpg"
   alt: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b3824c17d50f95f96ef4330621d5de3ffdb70b4a0d21c1ce84823b5c844310ff
+    geprueft_am: 2026-11-21
 faktencheck: 2026-11-21
 ---
 

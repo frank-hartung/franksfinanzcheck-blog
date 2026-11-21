@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-11-21-heizperiode-beginn-2026-warum-der-gas-check-im-oktober.jpg"
   alt: "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: d74f86544f43c354a3bcce782f7ebfd7a85def723d7b45ab12a3fe51a3fce722
+    geprueft_am: 2026-11-21
 faktenfrische_aliases:
   - "2026-11-20-heizperiode-beginn-2026-warum-der-gas-check-im-oktober"
 ---
