@@ -1,0 +1,38 @@
+{
+  "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
+  "titel": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
+  "erzeugt": "2026-11-22 12:49 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+    "alter_tage": 40,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 5
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
+    "destatis.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "6cce20d90b8f6baf69ccdc9a08e2dbc0d177d0ee7ea623b21ffaeb074738ae44",
+  "text_sha256": "e776e9d51f8451d045a40214bc26de72c288cda80eb5aa2f4e5e982a85f8b272",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
+}
