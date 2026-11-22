@@ -31,8 +31,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 19e20db64a76e70949d6cca66b6e1be9f69e340cafdacf280e44d6456b8424e7
-    geprueft_am: 2026-11-21
+    sha256: a914aff26b50e99b82b489333e2897a6491ece299fcfbbc4a4163a64925cc53d
+    geprueft_am: 2026-11-22
 faktencheck: 2026-11-17
 faktenfrische_aliases:
   - "2026-11-17-vorrat-planen-leicht-gemacht-so-sparst-du-beim"

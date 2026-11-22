@@ -29,9 +29,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 292146da2c8a6c435cf695ceca99deaa09727fc085c02847cdba781622d5c1f7
-    geprueft_am: 2026-11-21
-
+    sha256: 30e2831985ef25663f818c0edf79b0e9f7e55c6174ec3ade9e85d113350e93c9
+    geprueft_am: 2026-11-22
 faktenfrische_aliases:
   - "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen"
 ---
