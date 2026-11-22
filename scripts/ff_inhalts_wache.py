@@ -40,8 +40,28 @@ def _front_and_body(text):
 
 
 def _field(front, key):
-    m = re.search(rf'^{key}: "(.*)"$', front, re.M)
-    return m.group(1) if m else ""
+    """Liest einen Frontmatter-Skalar – auch ohne Anführungszeichen.
+
+    BEFUND 22.11.2026 (Regression `test_live_wache_ist_gruen`): Diese Funktion
+    verlangte doppelte Anführungszeichen (`^key: "(.*)"$`). Der gültige
+    YAML-Skalar `pillar: versicherungen` wurde dadurch zu `""`. Folge: Die
+    Siegel-Ausnahme in `_has_template_links` fiel STILL aus, und ein
+    fassungsgebundener YAML-Artikel (kfz, `inhalt_sha256` gesetzt) wurde als
+    „kein Rechner-Link“ gemeldet, obwohl `weiterrechnen_box.html` den Link im
+    gerenderten HTML liefert. Ein Parser, der eine gültige Schreibweise nicht
+    kennt, erfindet einen Befund – deshalb liest die Wache jetzt alle drei
+    YAML-Formen (doppelt, einfach, nackt) und schneidet Kommentare ab.
+    """
+    m = re.search(rf'^{re.escape(key)}:[ \t]*(.*)$', front, re.M)
+    if not m:
+        return ""
+    roh = m.group(1).strip()
+    if not roh:
+        return ""
+    if roh[0] in ('"', "'"):
+        ende = roh.find(roh[0], 1)
+        return roh[1:ende] if ende != -1 else ""
+    return roh.split(" #", 1)[0].strip()
 
 
 def _is_live(front):

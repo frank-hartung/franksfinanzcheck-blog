@@ -58,11 +58,13 @@ Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sich
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Preisgarantie Gas 2026: Gaspreisgarantie 2026: Gaspreisgarantie: So startest du
+## Preisgarantie Gas 2026: So startest du
 
 Lege die letzte Gasrechnung neben den Vertrag. Notiere den Verbrauch in kWh, den Preis je kWh und den festen Preis im Jahr. Mehr brauchst du für den ersten Vergleich nicht. Mit diesen drei Werten erkennst du rasch, ob ein Angebot wirklich zu deinem Haushalt passt.
 
-Sieh dir erst den Preis ohne Bonus an. Prüfe danach die Frist zum Kündigen und die Laufzeit. Lies auch nach, was der Preis-Schutz abdeckt. Ein gutes Angebot bleibt klar, wenn du den Bonus weglässt. Es passt zu deinem Verbrauch und lässt dir genug Zeit für den nächsten Check.
+Sieh dir erst den Preis ohne Bonus an. Prüfe danach die Frist zum Kündigen und die Laufzeit. Lies auch nach, was der Preis-Schutz abdeckt.
+
+Ein gutes Angebot bleibt klar, wenn du den Bonus weglässt. Es passt zu deinem Verbrauch und lässt dir genug Zeit für den nächsten Check.
 
 Mach ein Foto vom Zählerstand, wenn du wechselst. Speichere das Angebot und die Bestätigung. Dann kannst du später Preis, Start und Abschlag leicht prüfen. Das spart Rückfragen, falls ein Wert nicht zu deinen Papieren passt.
 
@@ -86,7 +88,7 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
- Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf; das ist ein Beispielwert.
+Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf. Das ist ein Beispielwert.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
 
@@ -195,11 +197,13 @@ Mach vor dem Abschluss Screenshots oder speichere die Papiere. Abweichungen klä
 
 Für den Abschluss brauchst du meist Zählernummer oder Marktlokations-ID, bisherigen Lieferanten und Kundennummer. Beim normalen Wechsel übernimmt der neue Anbieter oft die Kündigung und den Datenaustausch.
 
-Ausnahmen: Bei sehr knapper Frist, bei einer Sonderkündigung wegen Preiserhöhung oder bei Umzug kümmerst du dich besser selbst um die Kündigung.
+Ausnahmen: Bei sehr knapper Frist kümmerst du dich besser selbst um die Kündigung. Das gilt auch bei einer Sonderkündigung wegen Preiserhöhung oder bei einem Umzug.
 
 Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Nach der [Bundesnetzagentur zu Vertragsarten](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html) bleibt die Versorgung beim Wechsel über das Netz gesichert. Kommt der neue Lieferant zu spät, greift je nach Fall die Grund- oder Ersatzversorgung; ihre Preise können abweichen.
 
-Kommt ein Preisschreiben, prüfst du vier Punkte: Ab wann gilt der neue Preis, warum er steigt, welche Teile betroffen sind und wie lange deine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) läuft. Bei einer Preisänderung müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+Kommt ein Preisschreiben, prüfst du vier Punkte: ab wann der neue Preis gilt, warum er steigt, welche Tarifteile betroffen sind und wie lange deine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) läuft. Lies die Frist in deinem Vertrag nach, nicht im Werbeschreiben.
+
+Bei einer Preisänderung müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
 
 ## Wie du die mögliche Ersparnis berechnest?
 
@@ -230,7 +234,7 @@ Prüfe die Bestätigung:
 - Ist der Abschlag plausibel?
 - Wurde der alte Vertrag beendet?
 
-Setze zwei Termine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin; das ist eine Modellannahme. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
+Setze zwei Termine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin. Das ist eine Modellannahme. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Starte den Vergleich erst, wenn der Jahresverbrauch vor dir liegt: [**Gastarife vergleichen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
@@ -242,7 +246,7 @@ Rechnen lohnt vorher: Der 24-Monats-Effektivpreis rechnet Grundpreis, Arbeitspre
 
 Der Abschluss ist nicht das Ende des Vergleichs. Lies die Bestätigung am selben Tag. Stimmen Tarifname, Preis, Bonus, Lieferbeginn und Garantie nicht mit deinem gespeicherten Angebot überein, frage sofort nach.
 
-Bei online oder telefonisch geschlossenen Verträgen gilt für Verbraucher in der Regel ein 14-tägiges Widerrufsrecht. Frist und Belehrung stehen in den Papieren. Widerruf und Kündigung sind nicht dasselbe: Der Widerruf löst den neuen Vertrag, die Kündigung beendet einen laufenden Vertrag nach dessen Regeln.
+Bei online oder telefonisch geschlossenen Verträgen gilt für Verbraucher in der Regel ein 14-tägiges Widerrufsrecht. Frist und Belehrung stehen in den Papieren. Widerruf und Kündigung sind nicht dasselbe. Der Widerruf löst den neuen Vertrag, die Kündigung beendet einen laufenden Vertrag nach dessen Regeln.
 
 Prüfe außerdem den Abschlag. Er sollte sich aus Verbrauch und Jahreskosten nachvollziehen lassen. Ein extrem niedriger Abschlag ist kein Rabatt. Bitte um Korrektur, bevor sich eine große Nachzahlung aufbaut.
 
