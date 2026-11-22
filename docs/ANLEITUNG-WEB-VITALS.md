@@ -94,6 +94,21 @@ kaputt?** Die Antwort steht im Artefakt `web-vitals-woche`
 | `2` | Störung: API, Netz, kein Ziel messbar | Messweg reparieren – **nicht** die Seite |
 | leer | Schritt hat kein Urteil abgegeben | fail-closed: Bericht und Job-Protokoll prüfen |
 
+Seit 22.11.2026 nennt die Wache die Ursache ihres Exit 2 selbst – im
+Bericht, im JSON (`diagnose`), im Verlauf und in der Annotation des Laufs
+(`🧭 …`). Damit ist „nicht messbar“ nicht mehr gleich „Seite schlecht“:
+
+| Klasse | Bedeutung | Nächster Schritt |
+|---|---|---|
+| `DROSSELUNG` | HTTP 429 (PSI-Kontingent / fehlender Schlüssel) | `PSI_API_KEY` als Secret hinterlegen bzw. Kontingent prüfen |
+| `NETZ` | Timeout / Verbindungsfehler | Lauf wiederholen, Runner-/Netzlage prüfen |
+| `API` | anderer HTTP-Fehler | Antwortcode und Zielliste prüfen |
+| `KEINE_FELDDATEN` | API antwortet, CrUX hat keine Daten (zu wenig Traffic) | Reichweite/Zielliste prüfen – **kein Performance-Tuning** |
+| `TEILWEISE` | einige Ziele gestört, andere gemessen | nur die gestörten Ziele prüfen |
+
+Der Exit-Code bleibt unverändert fail-closed: Ohne Felddaten gibt es kein
+grünes Urteil. Die Klasse sagt nur, **wen** der Befund adressiert.
+
 Seit 04.11.2026 (#1026) gilt das auch für den Rand:
 
 - **Transiente Antworten** (408/425/429/5xx) werden bis zu dreimal

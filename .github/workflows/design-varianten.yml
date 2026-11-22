@@ -209,10 +209,21 @@ jobs:
         run: node e2e/variant-metrics.mjs --variante "${SCHRITT_TIER_A_ZIEL}"
 
       - name: Bewertung gegen die Budgets
+        # Befund und Beleg an EINE Stelle (22.11.2026, #1248): Der Gate-Text
+        # ging bisher nur in den Schritt-Log. Die Lauf-Zusammenfassung zeigte
+        # den Messvergleich, aber nicht, WELCHES Budget gerissen war – und das
+        # Alerting-Issue nannte folgerichtig nur „Schritt fehlgeschlagen“.
+        # Jetzt wird der Gate-Text gesichert, in die Zusammenfassung gehoben
+        # und als Artefakt mitgegeben.
         run: |
+          set -uo pipefail
+          mkdir -p .cache/design-varianten
           python3 scripts/design_variant_lab.py --vergleich
           python3 scripts/design_variant_gate.py --json > .cache/design-varianten/gate.json || true
-          python3 scripts/design_variant_gate.py
+          rc=0
+          python3 scripts/design_variant_gate.py > .cache/design-varianten/gate.txt 2>&1 || rc=$?
+          cat .cache/design-varianten/gate.txt
+          exit "$rc"
 
       - name: Zusammenfassung in den Lauf schreiben
         if: always()
@@ -225,6 +236,14 @@ jobs:
             else
               echo "_Kein Report erzeugt._"
             fi
+            if [ -f .cache/design-varianten/gate.txt ]; then
+              echo
+              echo "## Budget-Urteil"
+              echo
+              echo '```'
+              cat .cache/design-varianten/gate.txt
+              echo '```'
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Messdaten als Artifact
@@ -234,6 +253,8 @@ jobs:
           name: design-varianten-messung
           path: |
             DESIGN-VARIANTEN-REPORT.md
+            .cache/design-varianten/gate.json
+            .cache/design-varianten/gate.txt
             .cache/design-varianten/**/messung.json
             .cache/design-varianten/**/lhci/**
           retention-days: 30

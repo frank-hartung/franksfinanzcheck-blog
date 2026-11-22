@@ -40,6 +40,7 @@ import yaml
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of, join_article  # Naht-SSOT
+from post_utils import titel_kuerzen  # noqa: E402  (M1-Obergrenze, SSOT)
 import llm_client
 # AGC-AUTOPILOT (08.09.2026): optionaler Kontext aus der Blog-Automatik
 # (Brand Brain + geroutete Tages-Recherche + Kampagnen-CTA). Der Import DARF
@@ -963,6 +964,9 @@ def parse_article(raw, topic, angle_name):
     title = re.sub(r"\s+-\s+", " – ", title)
     title = re.sub(r"\s*:\s*–\s*|\s*–\s*:\s*", ": ", title)
     title = re.sub(r"\s+", " ", title).strip(" :-–—") or topic
+    # M1: Die Obergrenze gilt für JEDEN Titel, egal ob aus TITLE:, H1-Fallback
+    # oder Themenvorgabe. Letzte Stelle vor Frontmatter/Slug/Cover.
+    title = titel_kuerzen(title) or topic
     desc = _MARKER_RX.sub("", desc).strip() or topic
     desc = desc[:155]
     # Code-Fences entfernen, falls die KI welche setzt

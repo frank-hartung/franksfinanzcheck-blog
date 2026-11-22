@@ -100,6 +100,33 @@ class CspBrauchtEinenBelegTest(unittest.TestCase):
             "Genau document|iframe sind die Typen, die eine Seite per CSP "
             "steuern – ein Skript-/Bild-Response ist es nicht")
 
+    def test_fremdes_iframe_ist_kein_beleg(self):
+        """Die iframe-Lehre vom 22.11.2026.
+
+        Turnstile & Co. liefern eigene CSP-Kopfzeilen. Zählte der Audit die
+        als Beleg, wurde aus jedem „unbelegt" wieder ein roter Befund.
+        #1307 hat dieselbe Einsicht als `req.frame() === page.mainFrame()`
+        umgesetzt – dieser Test hält sie am Platz.
+        """
+        self.assertIn("page.mainFrame()", self.text,
+                      "Der Beleg muss auf den Hauptrahmen eingegrenzt sein")
+        self.assertIn("req.frame() === page.mainFrame()", self.text)
+
+    def test_alias_weiterleitung_wird_nicht_gemessen(self):
+        """Die drei „neuesten" Verzeichnisse waren Weiterleitungsseiten.
+
+        Der Browser folgte `<meta http-equiv="refresh">` auf die Live-Seite;
+        deren Cloudflare-Beacon und Edge-CSP erschienen danach als Befund
+        unter der localhost-URL (22.11.2026). #1307 filtert sie über
+        `neuesteArtikel`/`istWeiterleitungPfad`.
+        """
+        self.assertIn("neuesteArtikel", self.text,
+                      "Weiterleitungsseiten müssen aus dem Artikel-Sample fallen")
+        self.assertIn("istWeiterleitungPfad", self.text,
+                      "Auch Risiko-Seiten dürfen keine Weiterleitung sein")
+        self.assertIn("weiterleitungen", self.text,
+                      "Der Ausschluss muss im Bericht sichtbar bleiben")
+
     def test_beleg_wird_nach_dem_laden_ausgewertet(self):
         """Die Kopfzeile kann nach dem ersten Skriptfehler eintreffen.
 

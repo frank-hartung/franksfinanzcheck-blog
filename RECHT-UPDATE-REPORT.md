@@ -11,6 +11,57 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Nachtrag 2026-11-22 · Unabhängiges Screening der KI-VO-Frist (#1028, #1234)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` · **Status: unverändert offen.**
+Dieser Eintrag bestätigt die rechtliche Einordnung des Nachtrags vom
+12.11.2026 anhand öffentlich zugänglicher Sekundärquellen. Er ist **keine
+Rechtsberatung**, ersetzt keinen Anbieternachweis und löst keinen
+Abschlussaufruf aus.
+
+### Geprüfte Aussagen
+
+| Aussage | Ergebnis 22.11.2026 |
+|---|---|
+| Art. 50 KI-VO gilt seit 02.08.2026 | bestätigt |
+| Übergangsfrist bis 02.12.2026 aus Art. 111 Abs. 4, eingefügt durch die Änderungs-VO (EU) 2026/1744 | bestätigt |
+| Die Frist betrifft **Anbieter** und die maschinenlesbare Markierung von Systemen, die vor dem 02.08.2026 in Verkehr gebracht wurden | bestätigt |
+| Betreiberpflichten (Art. 50 Abs. 4: Deepfakes, Texte zu Angelegenheiten öffentlichen Interesses) gelten seit 02.08.2026 und haben **keine** Übergangsfrist | bestätigt |
+| Bei substanzieller menschlicher Prüfung und übernommener redaktioneller Verantwortung kann für Texte die Ausnahme greifen | bestätigt; Einzelfallprüfung bleibt nötig |
+| Der Transparency Code of Practice ist freiwillig und begründet keine Pflicht | bestätigt |
+
+### Was daraus für diesen Blog folgt
+
+* Der 02.12.2026 ist **kein** Stichtag, an dem redaktionell geprüfte
+  Ratgebertexte allein wegen KI-Unterstützung sichtbar gekennzeichnet
+  werden müssten. Maßgeblich ist die Betreiberpflicht nach Art. 50 Abs. 4
+  und die tatsächliche Rolle je System.
+* KI-generierte **Cover** sind nur dann kennzeichnungspflichtig, wenn sie
+  wie echte Aufnahmen wirken (Deepfake). Die deklarierte Herkunft
+  (`ai_generated`, `cover.ki_pruefung`) bleibt als Provenienz sinnvoll –
+  sie ist aber kein Anbieternachweis.
+* Die Behauptung „eigenes Markup ersetzt den Anbieternachweis“ bleibt
+  richtig. Systeminventar, Bildherkunft und Betreiberfreigabe stehen
+  weiterhin aus; #1028 bleibt bis dahin offen.
+
+### Quellen (Sekundär, abgerufen 22.11.2026)
+
+* Europäische Kommission, FAQ zu den Transparenzpflichten nach Art. 50:
+  <https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act>
+* Europäische Kommission, Code of Practice on Transparency of AI-generated
+  Content: <https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content>
+* Überblick mit Datumstabelle und Verweis auf die Leitlinien C(2026) 5054:
+  <https://www.digital-agentur.ai/ki-kennzeichnungspflicht/>
+* Einordnung der Betreiberpflicht und der Ausnahme:
+  <https://kevinwelter.com/en/blog/ki-kennzeichnungspflicht>
+
+**Nächster Schritt:** Fachliche bzw. juristische Freigabe der Einordnung,
+Vervollständigung der Belege und Live-Abnahme nach
+`docs/KI-TRANSPARENZ-ABNAHME.md` §5. Erst danach darf der Fristen-Workflow
+mit `erledigt=ki-vo-kennzeichnung-bestand` laufen.
+
+---
+
 ## Nachtrag 2026-11-12 · Rollen, Ausspielwege und gesicherter Fristabschluss (#1028)
 
 **Frist-ID:** `ki-vo-kennzeichnung-bestand` · **Status: offen.** Dieser
