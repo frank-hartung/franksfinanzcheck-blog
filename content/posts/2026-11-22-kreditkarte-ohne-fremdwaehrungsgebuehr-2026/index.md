@@ -25,6 +25,13 @@ cover:
   image: "images/covers/2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026.jpg"
   alt: "Kreditkarte: Ohne Fremdwährungsgebühr 2026"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 794179bf230014222cd21e17515c69134aa27d7e29d430074f125d9a3f04a9a5
+    geprueft_am: 2026-11-22
+
 ---
 
 Du stehst am Flughafen, das Gate ruft, das Handy piept.  
