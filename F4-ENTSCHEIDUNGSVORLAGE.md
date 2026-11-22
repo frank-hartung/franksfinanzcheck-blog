@@ -869,7 +869,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
 
-- Datei-SHA256 (heute): `aa990000768a2d37814618d846ef649b9abf891edd6de069d3b63d792959ae61`
+- Datei-SHA256 (heute): `641e31c35aeff7d4445c7494f9122d3e5874e441f7c0f0b62d309e201b01f8f8`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
