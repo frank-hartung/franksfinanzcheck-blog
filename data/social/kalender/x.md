@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 21.11.2026 21:55 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.11.2026 14:26 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,10 +13,6 @@
 ## Kommende Beiträge
 
 ### So, 22. November 2026
-- **08:45** ⏳ Flugverspätung: Wann kommt eine Entschädigung infrage? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
-- **13:15** ⏳ Router Standort: So findest du einen guten Platz – WLAN — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
 - **19:15** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 ### Mo, 23. November 2026
@@ -110,6 +106,13 @@
   https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/
 - **19:15** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
+### So, 06. Dezember 2026
+- **08:45** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **13:15** ⏳ DSL-Tarif für dein Zuhause: Das passende Angebot finden — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/
+- **19:15** ⏳ Finanzielle Freiheit: Wie du eine Sparroutine aufbaust — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
 
 ## Zuletzt veröffentlicht
 
