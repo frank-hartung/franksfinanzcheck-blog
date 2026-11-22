@@ -131,13 +131,33 @@ class AutomationPremiumAuditTests(TestCase):
         self.assertEqual("downstream-report-marker", evidence[0]["signal"])
 
     def test_alle_repository_continue_on_error_schritte_besitzen_signal(self):
+        """Jeder `continue-on-error`-Schritt muss ein Signal tragen.
+
+        Die Zahl 115 stand hier bis zum 22.11.2026 als `assertEqual` – eine
+        eingefrorene Momentaufnahme. Sie brach bei JEDER legitimen
+        Workflow-Änderung (an diesem Tag: seo-weekly bekam zwei neue
+        Wachen-Schritte, 115 → 117), obwohl die eigentliche Zusage
+        unverändert erfüllt war. Ein Test, der bei jeder Erweiterung rot
+        wird, erzieht dazu, ihn zuerst anzupassen – und dann prüft er
+        nichts mehr.
+
+        Geprüft wird jetzt die Zusage, nicht die Zahl:
+          1. kein unklassifizierter Schritt (der Kern),
+          2. jede Fallback-Signal-Zählung ist auch zugeordnet,
+          3. die Zahl ist plausibel (nicht null – sonst wäre die Wache blind).
+        """
         rows = [audit.audit_file(path)
                 for path in sorted(audit.WORKFLOWS.glob("*.yml"))]
         report = audit.build_report(rows)
-        self.assertEqual(115, report["continue_on_error_total"])
-        self.assertEqual([], report["continue_on_error_unclassified"])
+        self.assertEqual([], report["continue_on_error_unclassified"],
+                         "ein continue-on-error-Schritt ohne Signal ist ein "
+                         "stiller Ausfall")
         self.assertEqual(
-            115, sum(report["continue_on_error_fallback_signal_counts"].values()))
+            report["continue_on_error_total"],
+            sum(report["continue_on_error_fallback_signal_counts"].values()),
+            "die Signale decken nicht jeden Schritt")
+        self.assertGreater(report["continue_on_error_total"], 0,
+                           "die Wache hat nichts gemessen")
 
     def test_prioritaeten_berichten_den_gemessenen_stand(self):
         row = {

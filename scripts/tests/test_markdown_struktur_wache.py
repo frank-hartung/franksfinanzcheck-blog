@@ -196,11 +196,22 @@ class BestandTest(unittest.TestCase):
     """Gegenprobe am echten Bestand."""
 
     def test_bestand_hat_keine_neuen_funde(self) -> None:
+        """Gegenprobe am echten Bestand – mit Stichtag.
+
+        `heute` MUSS an `vergleiche` gehen: Ohne Datum greift die Befristung
+        aus #1263 nicht, und die eine bewusst zurückgestellte Stelle wird als
+        „neu" gemeldet. Genau das ist im CI rot geworden (22.11.2026) – der
+        Test hat die Klinke geprüft, aber ohne den Parameter, der sie
+        steuert. Hier steht deshalb derselbe Stichtag wie in der Erhebung.
+        """
         stand, dateien = m.erhebe(heute=HEUTE)
         self.assertGreater(dateien, 100, "zu wenige Inhaltsdateien")
-        ergebnis = m.vergleiche(stand, m.lade_baseline())
+        ergebnis = m.vergleiche(stand, m.lade_baseline(), HEUTE)
         self.assertEqual([], ergebnis["neu"],
                          f"neue Markdown-Struktur-Funde: {ergebnis['neu']}")
+        self.assertEqual([], ergebnis["ablauf"],
+                         "die Befristung ist abgelaufen – die Stelle muss "
+                         "jetzt geheilt oder neu verhandelt werden")
 
     def test_alle_fuenf_reparierten_stellen_bleiben_repariert(self) -> None:
         """#1263 nennt sechs Dateien; fünf sind geheilt und dürfen es bleiben."""
