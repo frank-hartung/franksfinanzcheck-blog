@@ -1,5 +1,5 @@
 ---
-title: "Wie viel Bandbreite brauchst du fürs Streaming?"
+title: "Streaming-Bandbreite: Wie viel brauchst du wirklich?"
 description: "Wie viel Bandbreite braucht dein Haushalt fürs Streaming? Addiere gleichzeitige Streams und teste die Verbindung am Fernseher, nicht nur am Router."
 date: 2026-11-13T00:30:17Z
 draft: false
@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Streaming Bandbreite", "Internetgeschwindigkeit", "Streaming ruckelt", "Wie viel Streaming‑Bandbreite", "Bandbreite", "Wie viel Bandbreite brauchst du fürs Streaming"]
-pin_title: "Wie viel Bandbreite brauchst du fürs Streaming?"
+pin_title: "Streaming-Bandbreite: Wie viel brauchst du wirklich?"
 pin_description: "*Werbung | Wie viel Bandbreite braucht dein Haushalt fürs Streaming? Addiere gleichzeitige Streams und teste die Verbindung am Fernseher, nicht nur am Router. Teste einen einzelnen Stream und anschließend die typische gleichzeitige Nutzung im Haushalt. So erkennst du, ob erst die Summe der Anwendungen zum Engpass wird."
 ai_generated: true
 ai_provider: "Content-Engine v2"
@@ -22,14 +22,14 @@ redaktionelle_pruefung:
 inspiration: "Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst"
 cover:
   image: "images/covers/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein.jpg"
-  alt: "Wie viel Bandbreite brauchst du fürs Streaming?"
+  alt: "Streaming-Bandbreite: Wie viel brauchst du wirklich?"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 27ec7b53c6969709de0e7d4535baca3403016bb731081e34d608936497031c2d
-    geprueft_am: 2026-11-21
+    sha256: 61ac52a9a8ad7e3c12794c9d15d6b62f01807292b8293a37755b7d85eba4e3c1
+    geprueft_am: 2026-11-22
 quellen:
   - id: "Q1"
     titel: "Netflix-Stream hängt – was tun?"
