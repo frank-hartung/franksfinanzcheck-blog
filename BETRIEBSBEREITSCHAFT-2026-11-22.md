@@ -37,10 +37,10 @@ extended, Node 22, Chromium 153, keine Netzmessung gegen die Produktion).
 | 8 | `test_kein_kritisches_live_paar_im_bestand`: 5 gemeinsame 5-Gramme (`sparen-im-herbst` ↔ `kfz-versicherung`), Klasse **kritisch (live↔live)** | Beide Artikel formulierten dieselbe Kfz-Kündigungsregel (31.12. / ein Monat / 30.11.) im selben Wortlaut | Der **ungesiegelte** Herbst-Artikel ist umformuliert (kfz bleibt als YMYL-Text unberührt): „Läuft dein Kfz-Vertrag zum 31. Dezember aus und gilt eine Kündigungsfrist von einem Monat, muss dein Schreiben spätestens am 30. November zugehen. Endet der Vertrag zu einem anderen Datum, verschiebt sich auch der Termin." → **0 gemeinsame 5-Gramme** |
 | 9 | Folgekosten der Umformulierung: die Fassungsbindung von **fünf** Faktenfrische-Entscheidungen am Herbst-Artikel (`47f855cb…`, `7f66ec82…`, `6b0aa34…`, `84c991c…`, `a70e7ad…`) hätte sich lautlos gelöst | Entscheidungen sind textgebunden; der Hash wechselte `692d9701…` → `cddc3cdf…` | **Folgeentscheidungen über den dokumentierten Schließweg** (`faktenfrische_befund_ledger.py --entscheiden`, Anfügeprotokoll, Vorgängerverweis), jede mit eigenem Prüfnachweis am heutigen Volltext; Registerrunde `2026-11-22` dokumentiert Anlass und Prüfung. **Keine** Handänderung an Hashes, **keine** Lockerung der Verbotsliste |
 
-**Bewusst nicht im selben Zug geheilt:** Das Duplikat-Paar ist inzwischen
-geheilt (Zeilen 8/9). Die Umformulierung liegt ausschließlich im **ungesiegelten**
-Herbst-Artikel; der versiegelte kfz-Beitrag bleibt byte-gleich, sein Siegel
-also unangetastet.
+**Bewusst nicht angefasst:** der **versiegelte** kfz-Beitrag. Die
+Umformulierung liegt ausschließlich im ungesiegelten Herbst-Artikel; der
+YMYL-Text ist byte-gleich geblieben, sein Siegel also weder gebrochen noch
+neu gesetzt.
 
 **Weiterhin offen (Redaktion, nicht Werkzeug):**
 
