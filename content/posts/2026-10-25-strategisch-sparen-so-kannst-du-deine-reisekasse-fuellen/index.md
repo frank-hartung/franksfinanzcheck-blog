@@ -203,7 +203,7 @@ Rechne: Kosten der Reise minus Geld, das schon da ist. Teile den Rest durch die 
 
 ### Sind Cashback‑Apps sicher für meine Daten?
 
- Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten; das ist ein Modellwert. Du kannst Auskunft verlangen und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Prüfe auch, wie du dein Konto schließen und deine Daten löschen lassen kannst.
+Das lässt sich nicht pauschal zusagen. Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten. Du kannst Auskunft verlangen und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Prüfe auch, wie du dein Konto schließen und deine Daten löschen lassen kannst.
 
 ### Muss ich jedes Jahr meine Versicherung wechseln?
 

@@ -6,7 +6,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-22** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**201 offene Live-Befunde auf 56 Artikeln.** Für **120** gibt es frühere Entscheidungen zu diesem Befund;
+**198 offene Live-Befunde auf 55 Artikeln.** Für **117** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **81** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -212,7 +212,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Datei-SHA256 (heute): `ce46f818fe18a896a81ebc80dc877b1479edcd8614925cfc8b329c54781ddbd3`
+- Datei-SHA256 (heute): `671f9ddb6dbe8d2188055f3e31cee64ed3e001f562baa42333d219beef14ae69`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -313,51 +313,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 > Die Verbrauchszahl ist als Annahme gekennzeichnet: „Bei angenommenen 18.000 kWh im Jahr ergibt ein Cent Unterschied je kWh rechnerisch 180 € im Jahr.“ Der Artikel behauptet keinen typischen Haushaltsverbrauch mehr; die Zahl ist Rechenannahme im Beispiel.
 
 - Heute in Zeile 42: 18.000 kWh – **ohne** Kennzeichnung
-
-## `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`
-
-- Datei-SHA256 (heute): `bfab6e93434f95fb9bafe7b75b8be5fcef1f178314174715df0d3ea6cd795031`
-- Offene Live-Befunde: **3**
-
-| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
-|---|---|---|---|---|
-| `6b0aa3429d97e8c74ed8` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 14,9 % · 8 % in Zeile 52 gekennzeichnet · 12 % in Zeile 9 gekennzeichnet | Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bere… |
-| `84c991c5d152b14a2675` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 1.300 € · 500 € in Zeile 108 ohne Kennzeichnung | Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung al… |
-| `a70e7adc97c58317ccc1` | luecke | 2026-11-05 · 1. Entscheidung | 50 € in Zeile 76 gekennzeichnet · 80 € in Zeile 76 gekennzeichnet | Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quell… |
-
-### `6b0aa3429d97e8c74ed8`
-
-**Befund:** Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).
-
-**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
-
-> Heutiger Text geprueft: die Belegung '8-12 % Energie' ist entfernt; der Heiztipp nennt nur noch die Wirkung je nach Anlage und Gebaeude ohne Versprechen. Befund gegenueber heutigem Text gegenstandslos.
-
-- Im heutigen Text nicht mehr vorhanden: 14,9 %
-- Heute in Zeile 52: 8 % – gekennzeichnet („beispielrechnung“)
-- Heute in Zeile 9: 12 % – gekennzeichnet („beispielrechnung“)
-
-### `84c991c5d152b14a2675`
-
-**Befund:** Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.
-
-**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
-
-> Heutiger Text geprueft: die pauschale Gesamteinsparung 500-1.300 Euro ist entfernt; heute enthaelt der Artikel keine Gesamt-Einsparaussage mehr. Befund gegenueber heutigem Text gegenstandslos.
-
-- Im heutigen Text nicht mehr vorhanden: 1.300 €
-- Heute in Zeile 108: 500 € – **ohne** Kennzeichnung
-
-### `a70e7adc97c58317ccc1`
-
-**Befund:** Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.
-
-**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
-
-> Heutiger Text geprueft: der Anspruch '50-80 Euro durch saisonale Lebensmittel' ist entfernt; heute enthaelt der Artikel keine saisonale Einspar-Zahl mehr. Befund gegenueber heutigem Text gegenstandslos.
-
-- Heute in Zeile 76: 50 € – gekennzeichnet („annahme“)
-- Heute in Zeile 76: 80 € – gekennzeichnet („annahme“)
 
 ## `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`
 
@@ -861,7 +816,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
 
-- Datei-SHA256 (heute): `556a89ef70cce4e4aeeb77e13f2d19213d6c7d9b0b53c4d7f306f4eb1e0b12b4`
+- Datei-SHA256 (heute): `1b8f2f415f94b10cd33bc3ce901fb33b8d76ecec2fae3f05ad0a2e534ae97d71`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -914,7 +869,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
 
-- Datei-SHA256 (heute): `f6f1b1d7f66a30667270310af0613bad2fb1872ec5c6de357711ee3cec2025c6`
+- Datei-SHA256 (heute): `aa990000768a2d37814618d846ef649b9abf891edd6de069d3b63d792959ae61`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2484,7 +2439,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `16e6720319cb21931ce63fd53358d2cabb03d8a91031e51ce91fec318e946637`
+- Datei-SHA256 (heute): `cada25153fb81ea777d4b10b4a743a7740bb515dde95e163e7895b32246a331d`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2658,9 +2613,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9fbacd9942c2dfa1447
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden da30cbb5fbc8c801daf0 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden db8a69f08dc0020adebd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e834f4702e87194affe7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b0aa3429d97e8c74ed8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84c991c5d152b14a2675 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden a70e7adc97c58317ccc1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 29eea3c457afaba3d7bd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8a0df5531569ec042ec4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bda1b543db068b3e00ff --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

@@ -67,6 +67,38 @@ class FormulaAndLiveTests(unittest.TestCase):
         self.assertEqual(ff.run_checks(), [])
 
 
+class FrontmatterSkalarTests(unittest.TestCase):
+    """Der Skalar-Leser der Wache kennt alle gültigen YAML-Schreibweisen.
+
+    Regression 22.11.2026: `_field` verlangte doppelte Anführungszeichen.
+    `pillar: versicherungen` (gültiges YAML, im Bestand real vorhanden) wurde
+    zu `""`; die Siegel-Ausnahme fiel still aus und ein fassungsgebundener
+    Artikel wurde als „kein Rechner-Link“ gemeldet. Der Test hält alle drei
+    Schreibweisen fest – und beweist die Gegenprobe (fehlender Schlüssel).
+    """
+
+    def test_doppelte_anfuehrungszeichen(self):
+        self.assertEqual(ff._field('pillar: "internet-dsl"', "pillar"), "internet-dsl")
+
+    def test_einfache_anfuehrungszeichen(self):
+        self.assertEqual(ff._field("pillar: 'konto-karten'", "pillar"), "konto-karten")
+
+    def test_nackter_skalar_ist_gueltiges_yaml(self):
+        self.assertEqual(ff._field("pillar: versicherungen", "pillar"), "versicherungen")
+
+    def test_kommentar_wird_abgeschnitten(self):
+        self.assertEqual(ff._field("pillar: versicherungen # Altbestand", "pillar"),
+                         "versicherungen")
+
+    def test_fehlender_schluessel_bleibt_leer(self):
+        self.assertEqual(ff._field("title: X", "pillar"), "")
+
+    def test_siegel_ausnahme_greift_bei_nacktem_pillar(self):
+        front = ("pillar: versicherungen\n"
+                 'redaktionelle_pruefung:\n  inhalt_sha256: "' + ("a" * 64) + '"')
+        self.assertTrue(ff._has_template_links(front))
+
+
 class AbbildungenTests(unittest.TestCase):
     def test_slugs_ohne_pyyaml(self):
         slugs = abb.load_slugs()
