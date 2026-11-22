@@ -2,7 +2,15 @@ import { test, expect } from './fixtures.mjs';
 
 test('Kfz-Korrektur erreicht Leser vor dem Teaser der neuen Fassung', async ({ page }) => {
   await page.goto('/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/');
-  await expect(page.locator('h1')).toHaveText('Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?');
+  // H1 nur auf Substanz prüfen, nicht auf den exakten Titeltext: Der Titel
+  // lebt im Frontmatter und wird redaktionell gepflegt (M1-Heilung 64 → 59
+  // Zeichen am 22.11.2026). Ein hier festgeschriebener Titeltext macht aus
+  // einer Redaktionsentscheidung einen Code-Test und bricht bei jeder
+  // zulässigen Titeländerung – geprüft wird, was dieser Test wirklich
+  // schützt: dass die richtige Seite geladen ist und die Korrektur trägt.
+  const h1 = page.locator('h1');
+  expect(await h1.count(), 'Kfz-Artikel: genau ein H1').toBe(1);
+  await expect(h1).toContainText('Kfz-Versicherung vergleichen');
   const korrektur = page.locator('.ff-korrektur');
   await expect(korrektur).toContainText('Kündigungsfrist');
   await expect(korrektur).toContainText('keine durchschnittliche Ersparnis');

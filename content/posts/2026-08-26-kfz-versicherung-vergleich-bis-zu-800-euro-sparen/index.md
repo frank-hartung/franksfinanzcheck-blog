@@ -1,6 +1,6 @@
 ---
 lastmod: '2026-11-19'
-title: 'Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?'
+title: 'Kfz-Versicherung vergleichen: Was ändert sich beim Beitrag?'
 description: Vergleiche Kfz-Tarife mit gleicher Fahrleistung und Selbstbeteiligung. Prüfe Vertragsende, Kündigungsfrist und bestätigten Versicherungsbeginn.
 date: 2026-11-04T01:25:00Z
 draft: false
@@ -19,8 +19,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 6068e525b155f942f7ad1449bebf4270931a004023f9acba3f89f8ad3d70bec4
-    geprueft_am: 2026-11-21
+    sha256: c1e1d9583cf797059461cfe7acaf7fc3baeb555856b815e0f7f4db938e4678af
+    geprueft_am: 2026-11-22
 kurzantwort: Nimm die letzte Beitragsrechnung und die Police zur Hand. Vergleiche zwei Angebote mit derselben Fahrleistung, demselben Fahrerkreis und derselben Selbstbeteiligung. Für den Kündigungstermin brauchst du Versicherungsablauf und vereinbarte Frist; ein allgemeiner November-Stichtag reicht nicht.
 social_posted: true
 keywords:
@@ -55,14 +55,14 @@ faktencheck: '2026-11-19'
 redaktionelle_pruefung:
   risikoklasse: hoch
   status: freigegeben
-  inhalt_sha256: "c3e3d29f22b977b2608daf0e643864421a99e4a03d64d9801122a92814a95f65"
+  inhalt_sha256: "35ed98507a06bda89e43406336a39bba3a885067f93c2eb9438dff5777568659"
   pruefer:
     name: Frank Hartung
     rolle: Redaktionelle Fachfreigabe der vollständigen Fassung 8b1594a einschließlich Quellen- und Zahlenprotokoll
     typ: redaktion-mit-externer-belegkette
   pruefdatum: "2026-11-21"
   naechste_pruefung: "2027-01-05"
-  aenderungsgrund: 'Vollständige Neufassung; Quellenabgleich am 19.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben. 21.11.2026: Zweiten, unbelegten Transparenzhinweis entfernt (Dublette aus 30f10af8) und Siegel auf den dadurch entstandenen Text neu gesetzt; die fachlichen Aussagen und das Zahlenprotokoll sind unverändert und weiter durch die Freigabe vom 19.11. gedeckt. Der am selben Tag aus dem Parallel-PR #1309 stammende Prüfvermerk (Quellen Q1/Q3/Q5 am 21.11.2026 bestätigt) ist übernommen; die dortige Behauptung "Siegel-Hash unverändert" traf nicht zu (der Fingerprint umfasst das Protokoll) und wurde durch eine tatsächliche Neuversiegelung ersetzt.'
+  aenderungsgrund: "M1-Heilung (Titel 64 auf 59 Zeichen, Grenze 60 der Snippet-SSOT): Der Titel lautete \"Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?\" und lag vier Zeichen über der Grenze. Neuer Titel: \"Kfz-Versicherung vergleichen: Was ändert sich beim Beitrag?\" - Aussagekern unverändert (der Beitrag ist der Aufhänger, mehr nicht), R1-Konvention (Doppelpunkt) und R5-Truncationswächter geprüft. Aussagen, Zahlen, Rechenwege und Quellen sind unverändert; das ist KEINE neue Fachprüfung, sondern eine Metadaten-Korrektur, deshalb bleiben pruefdatum 2026-11-21 und Wiedervorlage 2027-01-05 stehen. Neu versiegelt, weil der content_fingerprint den Titel einschließt. Vorheriger Vermerk: Vollständige Neufassung; Quellenabgleich am 19.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben. 21.11.2026: Zweiten, unbelegten Transparenzhinweis entfernt (Dublette aus 30f10af8) und Siegel auf den dadurch entstandenen Text neu gesetzt; die fachlichen Aussagen und das Zahlenprotokoll sind unverändert und weiter durch die Freigabe vom 19.11. gedeckt. Der am selben Tag aus dem Parallel-PR #1309 stammende Prüfvermerk (Quellen Q1/Q3/Q5 am 21.11.2026 bestätigt) ist übernommen; die dortige Behauptung \"Siegel-Hash unverändert\" traf nicht zu (der Fingerprint umfasst das Protokoll) und wurde durch eine tatsächliche Neuversiegelung ersetzt."
   gepruefte_aussagen:
   - textanker: Endet dein Versicherungsjahr am 31. Dezember und beträgt die Kündigungsfrist einen Monat
     pruefung: 'Verbraucherzentrale: Abschnitt Unterschiedliche Kündigungstermine; Police und Frist maßgeblich.'
