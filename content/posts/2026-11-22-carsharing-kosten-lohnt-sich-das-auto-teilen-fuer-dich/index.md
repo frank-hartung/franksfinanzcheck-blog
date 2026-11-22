@@ -29,7 +29,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 58bb408ae0bdb600035071f3c374f6577d0109cfbdc0b95ed05b091a20b13a65
+    sha256: 2a8220672cea08b4c1da5b9c04209ed605f6071e55e2cbe6a3e5ab2afb3270c7
     geprueft_am: 2026-11-22
 faktenfrische_aliases:
   - "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich"

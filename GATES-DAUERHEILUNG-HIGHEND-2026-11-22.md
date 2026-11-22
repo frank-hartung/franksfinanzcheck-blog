@@ -23,7 +23,7 @@ die Übergabe nicht nannte, weil sie niemand sehen konnte:
   `deploy.yml` den Befund mit `|| echo` schluckt.
 
 Ehrlich dazugesagt: Vier weitere Bestandstests sind rot – **bitgleich auch auf
-`origin/main`** und von keinem Workflow aufgerufen (Abschnitt 7). Sie gehören in
+`origin/main`** und von keinem Workflow aufgerufen (Abschnitt 8). Sie gehören in
 die Redaktion, nicht in dieses PR; der Nachweis und die Reihenfolge stehen dort.
 
 ---
@@ -63,6 +63,32 @@ Der lesbare Weg sind die **Annotationen** der Check-Runs
 ---
 
 ## 2. Heilung A – Titel, Siegel und die ganze Verdrahtung (M1)
+
+> **Stand nach dem Rebase (22.11.2026, 12:2x): Diese Heilung ist vom Bestand
+> überstimmt und wurde zurückgenommen.** Während der Arbeit hat `main` denselben
+> M1-Befund selbst geheilt – PR **#1315**, Commit `dccdf19` „M1-Heilung: kfz-Titel
+> auf 59 Zeichen", Siegel `35ed9850…`. Hauspolitik ist „Bestand gewinnt"
+> (`GIT_SYNC_BESTAND_POLICY`, #590), also steht jetzt **der Titel aus #1315** im
+> Baum: `Kfz-Versicherung vergleichen: Was ändert sich beim Beitrag?` (59 Zeichen).
+> Zurückgenommen wurden dafür: eigener Titel, eigenes Siegel, eigener Eintrag in
+> `data/editorial_review_history.jsonl` (nur der **eigene**, überstimmte – die
+> append-only-Kette des Bestands blieb bitgleich), eigene Cover-Bytes, eigene
+> H1-Erwartung in `e2e/archivredaktion.spec.mjs`.
+>
+> **Zwei Dinge bleiben aus dieser Heilung, und sie sind der Punkt:**
+> 1. #1315 hat die E2E-Assertion **robuster** gemacht als ich: Der Test prüft jetzt
+>    `h1.count() === 1` und Substanz, nicht mehr den exakten Titeltext – mit
+>    Begründung im Kommentar („macht aus einer Redaktionsentscheidung einen
+>    Code-Test"). Meine Fassung hätte bei jeder zulässigen Titeländerung erneut
+>    gebrochen. Der Bestand war hier besser; übernommen.
+> 2. Die **Kette** (Titel → Siegelweg → Cover → Beleg → Register) ist dieselbe, die
+>    #1315 gegangen ist – und genau sie hat die Beleg-Drift aus Abschnitt 4
+>    erzeugt. Der Befund ist also nicht „mein Titel", sondern „jede Titelheilung
+>    dieser Art lässt Belege altern". Das ist mit `beleg_veraltet` jetzt messbar.
+>
+> Der Rest dieses Abschnitts dokumentiert den **gegangenen Weg** und seine
+> Messungen, wie sie zum Zeitpunkt der Ausführung waren – als Nachweis, dass die
+> Klasse verstanden und nicht geraten ist.
 
 **Ursache:** `content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md`
 trug in Zeile 3 den Titel
@@ -110,7 +136,7 @@ Vergangenheit), `aenderungsgrund` um den Nachtrag vom 22.11.2026 ergänzt,
 | `data/covers_manifest.json`, `data/fcp_images.json` | Generator | ✅ |
 | `static/llms.txt:99` | `abgeleitete_register.py --fix` (**nie** von Hand) | ✅ |
 | `data/fachpruefung_register.yaml`, `BEFUND-AKTE.md` | `abgeleitete_register.py --fix` | ✅ |
-| `data/social/kalender/*.ics\|*.md`, `static/kalender/*` | `scripts/social_calendar.py --build` am Ende jedes Autopilot-Laufs – die Kalender ziehen den Titel **selbst** nach (Plan referenziert per Slug) | ✅ selbstheilend, Abschnitt 8 |
+| `data/social/kalender/*.ics\|*.md`, `static/kalender/*` | `scripts/social_calendar.py --build` am Ende jedes Autopilot-Laufs – die Kalender ziehen den Titel **selbst** nach (Plan referenziert per Slug) | ✅ selbstheilend, Abschnitt 9 |
 | `docs/kfz-artikelfassung-2026-11-19.md:3`, `docs/kfz-fachrevision-2026-11-19.md:11`, `FAKTENFRISCHE-1072-NACHPRUEFUNG-2026-11-20.md:199` | zeitgebundene Belege: bleiben **unverändert** (ein Prüfprotokoll vom 19.11. darf nicht den Titel vom 22.11. zitieren) | ✅ bewusst |
 
 **Messung vorher / nachher:**
@@ -229,6 +255,40 @@ der Vorfassung stehen. `--pruefen` verglich bisher nur **Pixel**, `--heilen` zog
 nur die Klasse `ohne_beleg` nach. Ergebnis: 13 Herkunftserklärungen im
 Live-Bestand, die eine Datei beschreiben, die es so nicht mehr gibt – und **kein**
 Prüfer, der es merkt.
+
+**Warum die Bytes sich überhaupt ändern – gemessen, nicht vermutet.** Das
+Werkzeug nennt sich selbst „deterministisch" (`generate_covers.py:392`,
+`_herkunft_markieren()`), und die **Pixel** sind es. Die **Bytes** sind es nicht:
+
+```
+sha256(static/images/covers/2026-11-12-…-streaming….jpg)
+  Fassung im Commit:            7cf26fbea52c9e33…
+  1. Neurender (gleicher Titel): 29f9a52bd4023317…
+  2. Neurender (gleicher Titel): bcbb76058d0c25b3…
+```
+
+Drei Renders, drei Hashes – ohne dass sich Titel, Design oder Inhalt geändert
+hätten. Ursache ist eine Zeile:
+
+```python
+# scripts/ki_bild_markierung.py:90
+zeit = datum or dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+```
+
+`generate_covers.py` ruft `paket_bauen(...)` **ohne** `datum` auf, also landet die
+Render-Uhrzeit im XMP-Herkunftspaket der JPG. Jeder Lauf – ob `check_covers --fix`
+im Deploy, `content-engine-v2 --heilen` oder eine manuelle Titelheilung – erzeugt
+damit neue Bytes und lässt jeden `sha256`-Beleg altern. **Das ist der eigentliche
+Motor der Drift-Klasse**, und er läuft unabhängig von Redaktion.
+
+Bewusst **nicht** in diesem PR geändert: Die Zeile zu fixieren (z. B. `datum` =
+Veröffentlichungsdatum des Beitrags statt Render-Uhrzeit) ändert die Semantik des
+KI-Herkunftsnachweises für **alle** 144 Cover und berührt den Vertrag von
+`ki_provenienz_gate.py` (M1–M4). Das ist ein eigener Auftrag mit eigener Abnahme –
+hier steht stattdessen die Wache, die den Effekt sichtbar und heilbar macht.
+Empfehlung für den Folgeauftrag: `datum` aus dem Beitrags-Frontmatter durchreichen
+und `generate_covers.py --selftest` um eine Byte-Idempotenz-Probe erweitern
+(zweimal rendern → gleicher Hash). Bis dahin gilt: nach jedem Render `--heilen`.
 
 **Heilung als Regel im Prüfer** (`scripts/ki_cover_herkunft.py`, Klasse
 `beleg_veraltet`):
@@ -363,7 +423,75 @@ selbst, denn ein Fragetitel ohne Anhang trägt kein „Y" in sich.
 
 ---
 
-## 6. Was bereits geheilt war – und warum das hier steht
+## 6. Heilung E – vier stale Cover und die Reihenfolge im Deploy
+
+**Befund, erst in der Endabnahme sichtbar geworden:** `check_covers.py` →
+`144 Covers | Probleme: 0 | Stale: 4`, **Exit 1** – am liegenden Stand und
+**bitgleich auf `origin/main`** (Nachweis im `git worktree` von `origin/main`,
+dieselben vier Zeilen):
+
+```
+❌ STALE 2026-10-14-heizperiode…:  Cover zeigt 'Gasrechnung senken: Heizperiode vorbereiten im Spätsommer',
+                                   Frontmatter 'Heizperiode vorbereiten im Spätsommer'
+❌ STALE 2026-10-26-gastarife…:    Cover zeigt 'Gasvergleich: Kosten, Fristen und Verbrauch prüfen',
+                                   Frontmatter 'Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen'
+❌ STALE 2026-10-28-dsl…:          Cover zeigt 'DSL Vergleich: Was kostet der Anschluss',
+                                   Frontmatter 'Internet-Flats vergleichen: Was kostet der Anschluss'
+❌ STALE 2026-11-06-guenstige-fluege…: Cover zeigt 'Flugtickets günstig: Günstige Flüge für den Spätsommer',
+                                   Frontmatter 'Günstige Flüge für den Spätsommer finden'
+```
+
+Das ist kein Schönheitsfehler: Auf dem Cover steht ein **anderer Titel** als auf
+der Seite, die es bewirbt – sichtbar in Suchmaschine, Social-Kanal und LCP-Bild.
+
+**Ursache ist eine Reihenfolge, nicht ein Renderer.** `deploy.yml` heilt in dieser
+Order:
+
+| Zeile | Schritt | Wirkung auf den Titel |
+| --- | --- | --- |
+| 556 | `cadence_guard.py --fix` | kann Titel fassen |
+| 559 | `check_titles.py --fix` | kann Titel fassen (R2–R4) |
+| **562** | **`check_covers.py --fix`** | **rendert Cover aus dem Titel von jetzt** |
+| 567 | `keyword_optimizer.py --fix` | **schreibt Titel danach um** |
+| 569 | `keyword_gate.py --fix` | **schreibt Titel danach um** |
+| 610 | `metadaten_wache.py --fix` | schreibt Description/Zeitstempel danach |
+
+Wer nach Zeile 562 einen Titel ändert, lässt das Cover altern – und im selben Lauf
+rendert nichts mehr nach. Die vier Befunde tragen genau die Handschrift der
+Keyword-Schreiber (Cover = keyword-optimierte Fassung, Frontmatter = spätere,
+gekürzte Fassung). Ein Deckungsgleichheits-Test fehlt: Kein Prüfer vergleicht
+„Titel-Schreiber" mit „Cover-Renderer" auf Reihenfolge.
+
+**Heilung:** `check_covers.py --fix` (haus-sanktioniert, idempotent) →
+4 Cover neu gerendert, danach `ki_cover_herkunft.py --heilen` → **4 Belege auf die
+Bytes der Datei erneuert** (ohne die Klasse aus Abschnitt 4 wären hier vier neue
+stille Driften entstanden), danach `abgeleitete_register.py --fix`.
+
+Gegenprobe auf einer Kopie des Bestands (`/tmp`, nicht im Arbeitsbaum): `--fix`
+heilt die vier Befunde **stabil** – Nachmessung `Stale: 0`, also kein
+Heilungs-Kreislauf, sondern einmalige Altlast.
+
+```
+vorher:  ❌ Cover-Check: 144 Covers | Stale: 4   (Exit 1)
+nachher: ✅ Cover-Check: 144 Covers | Probleme: 0 | Stale: 0 | Brand: 0 | Text: 0
+         ✅ ki_cover_herkunft --healen: 144 gemessen · 4 erneuert · 0 hart · 0 Schreibfehler
+         ✅ Metadaten-Wache 145 | 0 · Frontmatter 174 | 0 | 0 · YMYL 138 | 0
+         ✅ abgeleitete_register --check: aktuell (3 geprüft)
+```
+
+**Offen (Folgeauftrag, bewusst nicht hier):** Die **Reihenfolge** in `deploy.yml`
+ist nicht umgestellt. Ein `--fix`-Lauf heilt den Stand, aber derselbe Mechanismus
+kann beim nächsten Keyword-Eingriff wieder vier Cover altern lassen. Dauerhaft wäre
+entweder (a) das Cover-Gate **hinter** alle Titel-Schreiber zu ziehen, oder (b) in
+`keyword_optimizer.py`/`keyword_gate.py` nach einer Titeländerung das Cover
+nachzurendern – plus (c) einen Reihenfolge-Vertrag in `governance_contract.py`,
+damit niemand die Order unbemerkt wieder umstellt. (a) ist die kleinste Änderung,
+berührt aber den Deploy-Ablauf selbst und gehört deshalb in einen eigenen PR mit
+eigenem Nachweis.
+
+---
+
+## 7. Was bereits geheilt war – und warum das hier steht
 
 Ehrliche Bestandsaufnahme, damit niemand dieselbe Arbeit doppelt macht:
 
@@ -387,7 +515,7 @@ Das wäre in diesem Haus auch gar nicht möglich, ohne dass
 
 ---
 
-## 7. Nebenbefund – vier rote Bestandstests, die kein Workflow ruft
+## 8. Nebenbefund – vier rote Bestandstests, die kein Workflow ruft
 
 Für diesen Auftrag wurde **nicht** nur die Check-Matrix des PR nachgefahren,
 sondern die volle Unittest-Fläche: alle **312** Module in `scripts/tests/`
@@ -437,7 +565,7 @@ Links) liegen deshalb unbemerkt auf `main`.
 
 ---
 
-## 8. Offen, bewusst – mit Begründung
+## 9. Offen, bewusst – mit Begründung
 
 1. **Kalender-Artefakte – Korrektur einer eigenen Fehleinschätzung.** Die erste
    Messung dieses Auftrags notierte: `data/social/kalender/mastodon.ics:417`,
@@ -464,7 +592,7 @@ Links) liegen deshalb unbemerkt auf `main`.
    liegen, bis der Heiler selbst lernt, den Kopf aus `keywords[0]`/`inspiration`
    zu nehmen – eigener Auftrag, weil er den Bestand berührt und einen
    Idempotenz-/Sabotage-Selbsttest verlangt.
-3. **Vier rote Bestandstests ohne Aufrufer** – Abschnitt 7. Vorhanden auf `main`,
+3. **Vier rote Bestandstests ohne Aufrufer** – Abschnitt 8. Vorhanden auf `main`,
    redaktionell zu heilen, danach zu verdrahten. Nicht in diesem PR.
 4. **Historische Protokoll-Doks** mit altem Titel bleiben unverändert
    (Begründung in Abschnitt 2): Ein Prüfbericht ist ein zeitgebundener Beleg – wer
@@ -472,7 +600,7 @@ Links) liegen deshalb unbemerkt auf `main`.
 
 ---
 
-## 9. Nachweis – alle Gates am liegenden Stand gemessen
+## 10. Nachweis – alle Gates am liegenden Stand gemessen
 
 Vollständige Batterie, jede Prüfung einzeln mit Exit-Code (nicht „ein Skript lief
 durch"):
@@ -511,17 +639,33 @@ durch"):
 `selftest_runner.py` (Entdeckung aller Wachen, uhrfest, schreibfrei) lief zuvor
 grün: **291 Wachen · 582 Proben · 444,3 s**.
 
-**Basis:** Alle Messungen oben sind **nach** dem Rebase auf `origin/main`
-(`25f6f89`, Stand 22.11. 11:0x) wiederholt worden – `main` war während der Arbeit
-weitergelaufen (PR #1307 gemergt, zwei Automationsläufe, neue Layout-/CSP-Skripte
-inkl. `scripts/tests/test_ymyl_siegel_wache.py`). Überlappung mit diesem Branch:
-genau eine Datei (`.github/workflows/code-selbstheilung.yml`, dort hat `main`
-dieselbe W1-Heilung selbst eingespielt – eigene Fassung zurückgenommen,
-Abschnitt 6). Der Rebase lief konfliktfrei.
+**Basis – zwei Rebases, weil `main` während der Arbeit zweimal weiterlief.**
+Gemessen wurde jeweils **nach** dem Angleichen, nicht davor:
+
+1. **Rebase auf `25f6f89`** (PR #1307 gemergt, zwei Automationsläufe, neue
+   Layout-/CSP-Skripte inkl. `scripts/tests/test_ymyl_siegel_wache.py`).
+   Überlappung: genau eine Datei – `.github/workflows/code-selbstheilung.yml`,
+   dort hatte `main` dieselbe W1-Heilung selbst eingespielt. Eigene Fassung
+   zurückgenommen (Abschnitt 7). Dieser Rebase lief konfliktfrei.
+2. **Rebase auf `c873f7b`** (218 Dateien neu auf `main`, darunter PR **#1315**
+   „M1-Heilung: kfz-Titel auf 59 Zeichen" – dieselbe Heilung A, anderer Titel).
+   **20 Konflikte**, alle nach Hauspolitik „Bestand gewinnt"
+   (`GIT_SYNC_BESTAND_POLICY`, #590) auf `origin/main` aufgelöst: Kfz-Artikel,
+   Kfz-Cover (15 Dateien), `e2e/archivredaktion.spec.mjs`, `covers_manifest.json`,
+   `fcp_images.json`, `static/llms.txt`. Der eigene, dadurch überstimmte
+   Siegel-Eintrag wurde aus `data/editorial_review_history.jsonl` zurückgenommen –
+   **nur der eigene**: die append-only-Kette des Bestands blieb bitgleich
+   (`diff` gegen `origin/main` leer). Abgleitete Artefakte danach neu erzeugt
+   (`generate_covers --slug …`, `ki_cover_herkunft --heilen`,
+   `abgeleitete_register --fix`), nicht von Hand geflickt.
+
+Was von Heilung A nach dem zweiten Rebase übrig ist und warum, steht in
+Abschnitt 2 (Kasten). Alle übrigen Heilungen (B, C, D, E) sind von `main`
+unberührt und stehen vollständig in diesem Branch.
 
 **Unittest-Vollfläche:** 312 Module, 16 Batches – 13 Batches grün, 3 Batches mit
 insgesamt **4** Fehlschlägen, alle vier auf `origin/main` bitgleich reproduziert
-(Abschnitt 7). Kein neuer roter Test durch diesen Branch.
+(Abschnitt 8). Kein neuer roter Test durch diesen Branch.
 
 **Merge-Weg:** Dieses Repository verbietet Merge-Commits
 (`allow_merge_commit: false`) – ein `gh pr merge --merge` wird von GitHub
@@ -533,17 +677,18 @@ diesem Auftrag unabhängig vom Schreiber (Abschnitt 3).
 
 ---
 
-## 10. Geänderte Dateien (Kern)
+## 11. Geänderte Dateien (Kern)
+
+Stand **nach** dem zweiten Rebase (Delta gegen `origin/main` `c873f7b`), also ohne
+die von `main` überstimmte Heilung A:
 
 | Datei | Änderung |
 | --- | --- |
-| `content/posts/2026-08-26-kfz-versicherung…/index.md` | Titel 64→58 Zeichen, `aenderungsgrund`-Nachtrag, neues Siegel |
 | `content/posts/2026-11-12-wie-viel-streaming-bandbreite…/index.md` | Titel 47→52 Zeichen auf Hauskonvention (R1), `cover.alt`, `aenderungsgrund`-Nachtrag; unversiegelter Entwurf |
-| `data/editorial_review_history.jsonl` | append-only Siegel-Eintrag |
-| `e2e/archivredaktion.spec.mjs` | H1-Erwartung + Kommentar |
-| `static/images/covers/**` (30), `data/covers_manifest.json`, `data/fcp_images.json`, `data/lcp_images.json` | deterministisch nachgerendert (beide Titel) |
-| `static/llms.txt`, `data/fachpruefung_register.yaml`, `BEFUND-AKTE.md` | via `abgeleitete_register.py --fix` |
-| 12 weitere Artikel-`index.md` | `cover.ki_pruefung` auf die Bytes der Datei erneuert (Beleg-Drift) |
+| 14 weitere Artikel-`index.md` | `cover.ki_pruefung` auf die Bytes der Datei erneuert (Beleg-Drift: 13 Altlasten + 1 nach R1-Render + 4 nach Stale-Render, teils dieselben Dateien) |
+| `static/images/covers/**` (19 Dateien) | neu gerendert: Streaming-Slug (15) + 4 stale Cover |
+| `data/covers_manifest.json`, `data/fcp_images.json` | Ableitung aus den Rendern |
+| `static/llms.txt` | via `abgeleitete_register.py --fix` (1 Zeile: neuer Streaming-Titel) |
 | `.github/workflows/skript-syntax.yml` | `schedule` (Backstop) + `workflow_dispatch` |
 | `scripts/trigger_wache.py` | `relevante_workflows()`, `pruefe(root, bezug=…)`, `bericht(…, bezug=…)`, `--bezogen-auf`, Selbsttest-Block 6 |
 | `scripts/git_sync.sh` | `trigger_notbremse()` + Einbau in staged- und push-Pfad + Kopf-Doku |
