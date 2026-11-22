@@ -106,6 +106,44 @@ def vorlage_kopfzeilen(text: str | None = None) -> list[tuple[str, str]]:
             for m in TABELLE.finditer(a1)]
 
 
+def dashboard_text(kopfzeilen: list[tuple[str, str]] | None = None) -> str:
+    """Kopierfertige Dashboard-Anleitung aus der EINEN Quelle (A1-Tabelle).
+
+    WARUM DAS EXISTIERT (21.11.2026): Die Transform Rule lebt im
+    Cloudflare-Dashboard und liegt außerhalb dieses Repositories. Genau dort
+    fehlten zwei Dinge: der zweite Host (www) und die beiden Beacon-Domains.
+    Statt einer zweiten, driftenden Textkopie in einem Dokument erzeugt dieses
+    Werkzeug die Anleitung aus derselben Tabelle, die `--apply` setzt. Beide
+    Hosts stehen im Filter, weil www sonst ohne HSTS, nosniff und CSP
+    ausgeliefert würde – eine Domain, zwei Sicherheitsniveaus.
+    """
+    kopfzeilen = kopfzeilen if kopfzeilen is not None else vorlage_kopfzeilen()
+    zeilen = [
+        "Cloudflare-Dashboard → Zone franksfinanzcheck.de →",
+        "Rules → Transform Rules → Modify Response Header → Create rule",
+        "",
+        f"Name: {REGEL}",
+        "",
+        "Filter: Custom filter expression",
+        f"  {AUSDRUCK}",
+        "",
+        "Then → Set static:",
+    ]
+    for name, wert in kopfzeilen:
+        zeilen.append(f"  {name}: {wert}")
+    zeilen += [
+        "",
+        "Pflicht: BEIDE Hosts im Filter. Fehlt www, liefert www keine",
+        "Sicherheits-Header (HSTS, nosniff, X-Frame-Options, CSP).",
+        "",
+        "Prüfen:",
+        "  python3 scripts/blog_header_gate.py --live   # beide Hosts, erste Antwort",
+        "  python3 scripts/cloudflare_edge_freigabe.py --pruefen  # Regel + SSL + DNS",
+        "  python3 scripts/blog_header_gate.py --offline          # Repo ↔ Edge-Vorlage",
+    ]
+    return "\n".join(zeilen)
+
+
 def regel_koerper(kopfzeilen: list[tuple[str, str]]) -> dict:
     return {
         "action": "rewrite",
@@ -600,7 +638,18 @@ def selftest() -> int:
     assert vorlage_kopfzeilen(gemischt) == [("X-Test", "wert")], vorlage_kopfzeilen(gemischt)
     faelle += 1
 
-    # 7. B7-Datenschutz-Transformation (C15-sauber im Temp-Verzeichnis, idempotent).
+    # 7. Dashboard-Anleitung: beide Hosts und alle Vorlagen-Kopfzeilen.
+    #    Die Anleitung wird aus derselben Tabelle erzeugt wie --apply; eine
+    #    zweite Textkopie im Runbook kann deshalb nicht mehr driften.
+    anleitung = dashboard_text(kopfzeilen)
+    for host in HOSTS:
+        assert f'http.host eq "{host}"' in anleitung, f"Host fehlt im Dashboard-Text: {host}"
+    for name, wert in kopfzeilen:
+        assert f"{name}: {wert}" in anleitung, f"Kopfzeile fehlt im Dashboard-Text: {name}"
+    assert "BEIDE Hosts" in anleitung
+    faelle += 1
+
+    # 8. B7-Datenschutz-Transformation (C15-sauber im Temp-Verzeichnis, idempotent).
     if DATENSCHUTZ.is_file():
         original = DATENSCHUTZ.read_text(encoding="utf-8")
         with tempfile.TemporaryDirectory() as tmp:
@@ -617,7 +666,7 @@ def selftest() -> int:
 
     print(f"✅ SELBSTTEST OK — {faelle} Fälle grün (Vorlage {VORLAGE.name}: "
           f"{len(kopfzeilen)} Kopfzeilen = 0 Wachen-Befunde, SSL-Downgrade-Sperre, "
-          f"Regel-Vollprüfung, B7-Automatik).")
+          f"Regel-Vollprüfung, Dashboard-Anleitung mit beiden Hosts, B7-Automatik).")
     return 0
 
 
@@ -636,10 +685,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--b7-apply", action="store_true",
                         help="stellt content/datenschutz/index.md idempotent auf Proxy (B7) um")
     parser.add_argument("--zone", default=os.environ.get("CLOUDFLARE_ZONE", "franksfinanzcheck.de"))
+    parser.add_argument("--dashboard", action="store_true",
+                        help="kopierfertige Dashboard-Anleitung ausgeben (ohne Token/Netz)")
     args = parser.parse_args(argv)
 
     if args.selftest:
         return selftest()
+    if args.dashboard:
+        print(dashboard_text())
+        return 0
     if args.b7_check or args.b7_apply:
         try:
             code, bericht = b7_kommando(DATENSCHUTZ, schreiben=bool(args.b7_apply))

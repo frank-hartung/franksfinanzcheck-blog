@@ -238,6 +238,48 @@ class HTTPFehlerSindKeineSeitenmessung(unittest.TestCase):
         self.assertNotIn("GIFT_DEBUG", json.dumps(daten) + bericht)
 
 
+class ZweiteDomain(unittest.TestCase):
+    """Die Transform Rule filtert auf zwei Hosts – also werden beide gemessen.
+
+    WARUM DAS EIN EIGENER TEST IST (21.11.2026): Vorher prüfte die Wache nur
+    `franksfinanzcheck.de`. „Beide Domains" war damit eine Behauptung im
+    Dokument, kein Messergebnis. www antwortet üblicherweise mit 301; würde
+    die Messung folgen, sähe sie die Hauptdomain ein zweites Mal.
+    """
+
+    def test_www_ist_eigenes_ziel_und_erste_hoffnung(self):
+        www = "https://www.franksfinanzcheck.de/"
+        self.assertIn(www, gate.ZIELE, "www muss gemessen werden, nicht nur im Text stehen")
+        self.assertIn(www, gate.ERSTE_HOFFNUNG,
+                      "www muss als erste Antwort gemessen werden (kein Folgen)")
+
+    def test_www_301_ist_eine_messung_und_kein_fehler(self):
+        www = "https://www.franksfinanzcheck.de/"
+
+        def holen(url, weg):
+            return (301, {**PROXY, **GUT, "location": gate.ZIELE[0]})
+
+        code, bericht, daten = gate.netz_pruefen(
+            holen=holen, pausen=(), schlaf=lambda _: None, ziele=[www])
+        self.assertEqual(code, gate.EXIT_OK, bericht)
+        self.assertEqual(daten["klasse"], gate.KLASSE_OK)
+        self.assertIn("nicht verfolgt", bericht)
+
+    def test_fehlender_header_auf_www_ist_ein_eigener_befund(self):
+        www = "https://www.franksfinanzcheck.de/"
+
+        def holen(url, weg):
+            kopf = {**PROXY, **GUT, "location": gate.ZIELE[0]}
+            kopf.pop("x-frame-options")
+            return (301, kopf)
+
+        code, bericht, daten = gate.netz_pruefen(
+            holen=holen, pausen=(), schlaf=lambda _: None, ziele=[www])
+        self.assertEqual(code, gate.EXIT_BEFUND)
+        self.assertTrue(any(www in f and "x-frame-options" in f.lower()
+                            for f in daten["fehlend"]), daten["fehlend"])
+
+
 class TeilweiseGemessen(unittest.TestCase):
     """Ein Ziel sauber, ein Ziel tot: kein Alarm, aber kein Freibrief."""
 
@@ -246,8 +288,11 @@ class TeilweiseGemessen(unittest.TestCase):
             if url == gate.ZIELE[0]:
                 return (200, {**PROXY, **GUT})
             raise OSError("Name or service not known")
+        # Beide Ziele der ersten Messung: ein sauberer Host, ein toter.
+        # (Die dritte Domain – www – hat einen eigenen Test.)
         code, bericht, daten = gate.netz_pruefen(holen=holen, pausen=(),
-                                                 schlaf=lambda _: None)
+                                                 schlaf=lambda _: None,
+                                                 ziele=gate.ZIELE[:2])
         self.assertEqual(code, gate.EXIT_OK)
         self.assertEqual(daten["klasse"], gate.KLASSE_TEILWEISE)
         self.assertEqual(daten["nicht_gemessen"], [gate.ZIELE[1]])
@@ -258,7 +303,8 @@ class TeilweiseGemessen(unittest.TestCase):
                 return (200, {**PROXY, **GUT})
             raise OSError("Name or service not known")
         _, bericht, _ = gate.netz_pruefen(holen=holen, pausen=(),
-                                          schlaf=lambda _: None)
+                                          schlaf=lambda _: None,
+                                          ziele=gate.ZIELE[:2])
         self.assertIn(gate.ZIELE[1], bericht)
 
     def test_ein_gemessener_befund_sticht_die_stoerung(self):
@@ -267,7 +313,8 @@ class TeilweiseGemessen(unittest.TestCase):
                 return (200, {**PROXY, "x-content-type-options": "nosniff"})
             raise OSError("Connection reset by peer")
         code, _, daten = gate.netz_pruefen(holen=holen, pausen=(),
-                                           schlaf=lambda _: None)
+                                           schlaf=lambda _: None,
+                                           ziele=gate.ZIELE[:2])
         self.assertEqual(code, gate.EXIT_BEFUND)
         self.assertEqual(daten["klasse"], gate.KLASSE_BEFUND)
         self.assertEqual(daten["gemessen"], 1)

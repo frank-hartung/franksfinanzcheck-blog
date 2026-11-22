@@ -120,17 +120,38 @@ def summary_notice(dom: dict, browser: dict) -> str:
     # Beleglage zur CSP (21.11.2026): Ein CSP-Befund ist nur dann ein
     # Seitenbefund, wenn diese Messung die Direktive gesehen hat. Ohne diese
     # Zeile wäre im Nachhinein nicht prüfbar, worüber gestritten wird.
+    # HERMETIK (21.11.2026): Der Audit misst nur den lokalen Bau und liefert
+    # die CSP aus static/_headers selbst aus. Damit ist im Bericht
+    # unterscheidbar, ob eine CSP aus dem Repository stammt oder von außen kam.
     csp = (browser or {}).get("cspBelege") or {}
     if csp:
-        if csp.get("gesehen"):
+        if csp.get("gesendet"):
+            parts.append("CSP-Beleg: eigene CSP aus static/_headers ausgeliefert "
+                         f"(sha256:{csp['gesendet']}), Kopfzeile auf "
+                         f"{csp.get('seitenMitKopfzeile', 0)} von "
+                         f"{csp.get('seitenGemessen', 0)} Seiten, im Dokument "
+                         f"wiedergefunden: {csp.get('eigeneImDokument', 0)}, "
+                         f"Fremd-CSP: {csp.get('fremd', 0)}")
+        elif csp.get("gesehen"):
             parts.append("CSP-Beleg: Dokument-Antwort führt "
                          + "; ".join(csp["gesehen"])[:160])
         else:
-            parts.append("CSP-Beleg: keine CSP-Kopfzeile in dieser Messung "
-                         "(Herkunft außerhalb des Repos)")
+            parts.append("CSP-Beleg: keine CSP-Kopfzeile in dieser Messung")
+        if csp.get("fremdherkunft"):
+            parts.append("Fremd-CSP von " + ", ".join(csp["fremdherkunft"])[:120]
+                         + " → Frühwarnung, kein Seitenbefund")
         if csp.get("unbelegt"):
             parts.append(f"{csp['unbelegt']} CSP-Meldung(en) ohne Belegquelle "
                          "→ Frühwarnung, nicht Befund")
+    herm = (browser or {}).get("hermetik") or {}
+    if herm:
+        parts.append(
+            "Messung hermetisch: "
+            f"{len(herm.get('fremdnavigationenBlockiert') or [])} Fremd-Navigation(en) "
+            f"blockiert, {len(herm.get('herkunftsverletzungen') or [])} "
+            f"Herkunftsverletzung(en), "
+            f"{len(herm.get('weiterleitungenAusgelassen') or [])} "
+            "Weiterleitungsseite(n) ausgelassen")
     if not parts:
         return "Layout-Audit: keine Zahlen gefunden (kein Bau/kein Bericht?)."
     return " · ".join(parts)

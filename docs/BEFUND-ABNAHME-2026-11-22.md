@@ -249,8 +249,7 @@ Betreiberfreigabe nach `docs/KI-TRANSPARENZ-ABNAHME.md` §5.
 | `scripts/tests/test_lesbarkeit_diff_wache.py` | neu: Regressionstests |
 | `.github/workflows/lesbarkeit-live-diff.yml` | neu: PR-Trigger für das Gate |
 | `RECHT-UPDATE-REPORT.md` | Screening-Vermerk 22.11.2026 |
-| `scripts/layout_browser_check.js` | Alias-Seiten aus dem Sample, fremder Ursprung als Hinweis, CSP-Beleg nur Hauptrahmen |
-| `scripts/tests/test_layout_audit_csp_beleg.py` | Regressionstests für Alias- und iframe-Beleg |
+| `scripts/tests/test_layout_audit_csp_beleg.py` | Regressionstests für Alias-Weiterleitung und iframe-Beleg |
 | `scripts/post_utils.py` | `titel_kuerzen()`: M1-Obergrenze an Wort- und Sinngrenze |
 | `scripts/generate_drafts.py` | Titel wird beim Parsen gekürzt (wie die Description) |
 | `scripts/ki_shared.py` | Titel-Schnitt an der letzten Writer-Grenze |
@@ -309,11 +308,14 @@ Die Ursache lag im Messinstrument, nicht im Bau:
    CSP-Beleg – auch die eines fremden iframes (Turnstile). Damit wurde aus
    einem „unbelegten" Hinweis wieder ein harter Befund.
 
-Behoben: Alias-Seiten fallen aus dem Sample (Startseite, Artikel und
-Risiko-Seiten), der Hauptrahmen muss auf dem geprüften Ursprung bleiben
-(sonst nur Hinweis, kein Befund), und CSP-Belege stammen ausschließlich aus
-der Antwort des Hauptrahmens. `scripts/tests/test_layout_audit_csp_beleg.py`
-hält beides fest.
+Behoben ist das auf `main` mit #1307 („Layout-Audit: Hermetik + Repo-CSP
+statt Fehlbefund aus der Produktion"): Weiterleitungsseiten fallen aus dem
+Artikel- und Risiko-Sample, die Messung bricht Hauptnavigationen auf fremde
+Ursprünge ab, und die CSP wird gegen die Repo-Vorlage geprüft. Dieser PR
+liefert dazu die Regressionsseite: zwei Tests in
+`scripts/tests/test_layout_audit_csp_beleg.py`, die (a) fremde iframes als
+CSP-Beleg ausschließen und (b) verlangen, dass Weiterleitungsseiten nicht
+als Artikelprobe gemessen werden.
 
 **Offener Betriebspunkt (nicht im Repo lösbar):** Die Edge-Transform-Rule
 in Cloudflare liefert weiterhin die alte CSP ohne
