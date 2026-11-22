@@ -186,20 +186,40 @@ class GatewayTest(unittest.TestCase):
 
 
 class CliTest(unittest.TestCase):
+    """Aufrufe des ECHTEN Skripts – und deshalb hinter der Ledger-Sandbox.
+
+    WARUM DIE SANDBOX (22.11.2026, im CI rot geworden): `click_chain_guard`
+    schreibt bei JEDEM Lauf eine Zeile ins Beweis-Ledger `data/audit/` –
+    auch dann, wenn ihn ein Test aufruft. Ein Testlauf, der das echte
+    Ledger anfasst, ist ein FABRIZIERTER BEWEIS: `data/audit/` ist
+    append-only bewacht (history_guard H6, Governance C27). Genau das
+    meldete der Schritt „Beweis-Ledger muss nach den Tests unberührt sein"
+    im PR-Lauf – und die Isolationswache `test_audit_ledger_isolation`
+    blieb grün, weil sie meine Tests nicht kannte.
+
+    Die ersten Fassungen dieser Tests hatten den Fehler: Sie liefen
+    einfach `subprocess.run(…)` und hinterließen vier Zeilen
+    `module: click_chain_guard` im Ledger. `beweis_ledger_unangetastet`
+    lenkt `data/audit/` in eine Sandbox um und beweist anschließend, dass
+    im echten Verzeichnis nichts entstanden ist.
+    """
+
+    def _lauf(self, *args: str) -> subprocess.CompletedProcess:
+        from repo_isolation import beweis_ledger_unangetastet
+        with beweis_ledger_unangetastet("click_chain_guard_test"):
+            return subprocess.run(
+                [sys.executable, str(ROOT / "scripts" / "click_chain_guard.py"),
+                 *args],
+                capture_output=True, text=True, cwd=ROOT)
+
     def test_selftest_gruen(self) -> None:
-        lauf = subprocess.run([sys.executable,
-                               str(ROOT / "scripts" / "click_chain_guard.py"),
-                               "--selftest"],
-                              capture_output=True, text=True, cwd=ROOT)
+        lauf = self._lauf("--selftest")
         self.assertEqual(0, lauf.returncode, lauf.stdout + lauf.stderr)
 
     def test_ohne_build_wird_nicht_gemessen_statt_gruen(self) -> None:
         """Kein Build heißt NICHT GEMESSEN – nie GRÜN (C2)."""
         with tempfile.TemporaryDirectory() as td:
-            lauf = subprocess.run(
-                [sys.executable, str(ROOT / "scripts" / "click_chain_guard.py"),
-                 "--public", os.path.join(td, "gibt-es-nicht")],
-                capture_output=True, text=True, cwd=ROOT)
+            lauf = self._lauf("--public", os.path.join(td, "gibt-es-nicht"))
         self.assertIn("NICHT GEMESSEN", lauf.stdout)
         self.assertNotIn("GREEN", lauf.stdout,
                          "ohne Messung darf nie GRÜN stehen (C2)")
@@ -213,10 +233,7 @@ class CliTest(unittest.TestCase):
         hinter „nicht gemessen" verschwinden.
         """
         with tempfile.TemporaryDirectory() as td:
-            lauf = subprocess.run(
-                [sys.executable, str(ROOT / "scripts" / "click_chain_guard.py"),
-                 "--public", td],
-                capture_output=True, text=True, cwd=ROOT)
+            lauf = self._lauf("--public", td)
         self.assertIn("AMBER", lauf.stdout)
         self.assertIn("kein /go/-Verzeichnis im Build", lauf.stdout)
 
