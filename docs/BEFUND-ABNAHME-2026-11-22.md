@@ -251,6 +251,11 @@ Betreiberfreigabe nach `docs/KI-TRANSPARENZ-ABNAHME.md` §5.
 | `RECHT-UPDATE-REPORT.md` | Screening-Vermerk 22.11.2026 |
 | `scripts/layout_browser_check.js` | Alias-Seiten aus dem Sample, fremder Ursprung als Hinweis, CSP-Beleg nur Hauptrahmen |
 | `scripts/tests/test_layout_audit_csp_beleg.py` | Regressionstests für Alias- und iframe-Beleg |
+| `scripts/post_utils.py` | `titel_kuerzen()`: M1-Obergrenze an Wort- und Sinngrenze |
+| `scripts/generate_drafts.py` | Titel wird beim Parsen gekürzt (wie die Description) |
+| `scripts/ki_shared.py` | Titel-Schnitt an der letzten Writer-Grenze |
+| `scripts/editorial_review_gate.py` | `--seal` verweigert Titel über 60 Zeichen |
+| `scripts/tests/test_titel_kuerzen.py` | neu: Regressionstests für Titelgrenze und Siegel |
 
 ---
 
@@ -316,3 +321,42 @@ in Cloudflare liefert weiterhin die alte CSP ohne
 `cloudflare/edge-schutz.md` (A1) sie seit dem 21.11. führen. Solange die
 Regel im Dashboard nicht nachgezogen ist, blockiert der Browser den
 Beacon der Web-Analytics – die Messung selbst bleibt davon unberührt.
+
+
+---
+
+## 12. Nachtrag 22.11.2026 – 64-Zeichen-Titel blockierte die YMYL-Wache
+
+Der Automationslauf um 08:45 schrieb diesen Artikel live und versiegelte ihn:
+
+```
+content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+title: 'Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?'
+```
+
+64 Zeichen – Regel M1 erlaubt 60. Der Metadaten-Regressionstest der
+YMYL-Siegelwache fällt seitdem auf `main` und damit auf jedem PR. Der Prompt
+bat um „max. 60 Zeichen“, die Description wurde im Parser gekürzt
+(`desc[:155]`), der Titel nicht; auch `engine_generate.save_article` kappt,
+aber dieser Pfad lief daran vorbei.
+
+**Dauerhaft geschlossen (Schreibgrenzen):**
+
+1. `post_utils.titel_kuerzen()` kürzt an der sinnvollsten Grenze – erst
+   Untertitel weglassen („Kfz-Versicherung vergleichen“), sonst Wortgrenze
+   und hängende Funktionswörter entfernen. Aus dem Schadensfall werden
+   28 Zeichen statt eines Torsos „… außer dem“.
+2. `generate_drafts.parse_article` wendet die Grenze auf jeden Titel an –
+   unabhängig davon, ob er aus `TITLE:`, dem H1-Fallback oder der
+   Themenvorgabe stammt.
+3. `ki_shared.build_frontmatter` schneidet den Titel an derselben Stelle wie
+   die Description (letzte Writer-Grenze).
+4. `editorial_review_gate --seal` **verweigert** Titel über 60 Zeichen. Ein
+   versiegelter Titel steckt im Fingerabdruck und ist nur über eine neue
+   redaktionelle Freigabe heilbar – dieselbe Logik wie bei der Description
+   (#1069). Damit kann kein Automat mehr einen unheilbaren Befund siegeln.
+
+**Offener redaktioneller Punkt (nicht automatisch lösbar):** Der bereits
+versiegelte Altfall behält seinen 64-Zeichen-Titel, bis Frank Hartung ihn
+kürzt und die Fassung neu freigibt (`--seal`). Bis dahin bleibt der
+YMYL-Check rot – das ist der Preis der Signatur, nicht ein Defekt der Wache.

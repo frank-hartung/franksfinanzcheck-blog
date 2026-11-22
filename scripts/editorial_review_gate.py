@@ -696,6 +696,23 @@ def meta_befunde_description(fm: dict) -> list[str]:
     return befunde
 
 
+def titel_befund(fm: dict) -> str | None:
+    """M1 am Siegel: Ein überlanger Titel ist nicht versiegelbar.
+
+    ANLASS (22.11.2026): Ein 64-Zeichen-Titel wurde samt Freigabe live
+    versiegelt; danach war er nur noch über eine neue redaktionelle
+    Freigabe heilbar (der Titel steckt im Fingerabdruck). Dieselbe Logik
+    wie bei der Description (#1069): Was das Meta-Gate reißt, darf nicht
+    ins Siegel – sonst meldet die Wache den Befund für immer.
+    """
+    import metadaten_wache  # lazily: kein Zyklus, Zahl bleibt SSOT-nah
+    titel = str(fm.get("title") or "").strip()
+    if len(titel) > metadaten_wache.TITLE_MAX:
+        return (f"Titel {len(titel)} Zeichen (max. "
+                f"{metadaten_wache.TITLE_MAX}): {titel!r}")
+    return None
+
+
 def seal(path: Path | str, *, today: dt.date | None = None) -> dict:
     """Versiegelt nur eine vollständig ausgefüllte Freigabe; kein Auto-Approve."""
     path = Path(path)
@@ -705,6 +722,12 @@ def seal(path: Path | str, *, today: dt.date | None = None) -> dict:
     if blockers:
         details = "; ".join(f"{f['code']} {f['detail']}" for f in blockers)
         raise ParseError(f"Freigabe unvollständig; Siegel verweigert: {details}")
+    titelproblem = titel_befund(fm)
+    if titelproblem:
+        raise ParseError(
+            "Siegel verweigert: " + titelproblem + " – das Snippet-Fenster "
+            "(M1) schließen, DANN siegeln. Ein versiegelter Titel ist nur "
+            "über eine neue redaktionelle Freigabe heilbar.")
     meta = meta_befunde_description(fm)
     if meta:
         raise ParseError(

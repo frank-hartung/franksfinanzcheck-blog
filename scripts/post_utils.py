@@ -92,6 +92,48 @@ def _cut_at_word(s, max_len):
     return _clean_tail(cut[:sp])
 
 
+_TITEL_STOPP = {"und", "oder", "der", "die", "das", "den", "dem", "des",
+                "ein", "eine", "einen", "einem", "eines", "für", "mit", "von",
+                "im", "in", "zu", "am", "an", "bei", "auf", "als", "ist",
+                "sind", "wird", "werden", "sich", "außer", "beim", "zum",
+                "zur", "über", "unter", "wie", "was"}
+
+
+def titel_kuerzen(titel, max_len=60):
+    """Titel auf die M1-Obergrenze bringen – an der sinnvollsten Grenze.
+
+    ANLASS (22.11.2026): Der Automationslauf schrieb
+    „Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?“
+    (64 Zeichen) live und versiegelte ihn. Prompt bat um 60, Description
+    wurde gekürzt, der Titel nicht. `safe_title_cut` schneidet an der
+    Wortgrenze und ließ „… außer dem“ stehen – syntaktisch ein Torso.
+
+    Reihenfolge:
+      1. Passt → unverändert.
+      2. Untertitel nach „:“ / „ – “ weglassen, wenn der Hauptteil allein
+         mindestens 20 Zeichen trägt (der Keyword-Kopf bleibt intakt).
+      3. Sonst Wortgrenzen-Schnitt und hängende Funktionswörter entfernen.
+
+    Rückgabe: nie leer, nie länger als max_len, nie mitten im Wort.
+    """
+    import re as _re
+    t = _re.sub(r"\s+", " ", str(titel or "")).strip()
+    if len(t) <= max_len:
+        return t
+    m = _re.match(r"^(.{20,%d}?)\s*[:–—]\s+\S.*$" % max_len, t)
+    if m:
+        return m.group(1).strip(" :-–—")
+    schnitt = t.rfind(" ", 0, max_len + 1)
+    kurz = (t[:schnitt] if schnitt >= 20 else t[:max_len]).rstrip(_DANGLING_END)
+    for _ in range(4):
+        teile = kurz.rsplit(" ", 1)
+        if len(teile) == 2 and teile[1].lower() in _TITEL_STOPP:
+            kurz = teile[0].rstrip(_DANGLING_END)
+        else:
+            break
+    return (kurz or t[:max_len]).strip()
+
+
 def safe_title_cut(title, max_len=60):
     """Sichere Titel-Kürzung (Wortgrenze, nie mitten im Wort).
 
