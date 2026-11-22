@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-22T14:31:51Z",
+  "generated_at": "2026-11-22T15:27:40Z",
   "modus": "kandidaten",
-  "commit": "081d0f691963b28dcc7ae0560e8ad734bf0241fa",
+  "commit": "dba3f172d71210832ae265518e62923317ab3d8e",
   "kapazitaet": {
     "stichtag": "2026-11-22",
     "basis": "2026-11-22",
@@ -2310,7 +2310,7 @@
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
-      "sha256": "89b5f863a9a69eed21d4cf25b69862a00a196a70be38a2a502fff54cb3e50666",
+      "sha256": "a2427e66b5b93dc938df0daeed7487d7febbfc123461b2db3060dfd48b990cd5",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2324,7 +2324,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
