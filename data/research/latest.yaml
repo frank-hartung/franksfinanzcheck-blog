@@ -1,5 +1,5 @@
-generated_at: '2026-11-21T11:45:45Z'
-day: '2026-11-21'
+generated_at: '2026-11-22T11:58:40Z'
+day: '2026-11-22'
 mode: deterministic
 teams:
   trending:
@@ -252,66 +252,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
+  - topic: 'Handytarife vergleichen: So findest du den günstigsten Tarif'
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
+    source: 'topics:Handytarife vergleichen: So findest du den günstigsten Tarif'
     score: 0.55
     keywords:
-    - günstiges Handy-Abonnement
-    - Tarifvergleich
-    - Mobilfunk
-  - topic: 'Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte mit
-      Wärmepumpe'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte
-      mit Wärmepumpe'
-    score: 0.55
-    keywords:
-    - Dynamische Stromtarife Vor Nachteile
-    - Wärmepumpenstrom Vergleich
-    - Tibber Alternative
-    - Stromvertrag Smart Meter
-  - topic: Energieeffizienz zu Hause verbessern
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Energieeffizienz zu Hause verbessern
-    score: 0.55
-    keywords:
-    - Energie
-    - Effizienz
-    - Zuhause
-  - topic: Günstige Flüge für den Spätsommer finden
+    - Handytarif vergleichen
+    - Handyvertrag wechseln
+    - Günstiger Handytarif
+  - topic: 'Interrail und Bahncard: Günstig mit dem Zug durch Europa'
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Günstige Flüge für den Spätsommer finden
+    source: 'topics:Interrail und Bahncard: Günstig mit dem Zug durch Europa'
     score: 0.55
     keywords:
-    - Flugtickets günstig
-    - Flugvergleich
-    - Reisebudget sparen
-  - topic: Internet-Tarife im Vergleich
-    pillar: internet-dsl
+    - Interrail
+    - Bahncard sparen
+    - Zugreise Europa günstig
+  - topic: Last-Minute Urlaubsangebote sichern
+    pillar: mietwagen
     signal: niche_hook
-    source: topics:Internet-Tarife im Vergleich
+    source: topics:Last-Minute Urlaubsangebote sichern
     score: 0.55
     keywords:
-    - Internet
-    - Tarif
-    - Vergleich
-  - topic: 'Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
-      0'
+    - Last Minute Urlaub
+    - Reiseangebote günstig
+    - Sommerurlaub Schnäppchen
+  - topic: Reise- und Unfallversicherungen im Vergleich
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
-      0'
+    source: topics:Reise- und Unfallversicherungen im Vergleich
     score: 0.55
     keywords:
-    - Zweitwagenregelung
-    - Zweitwagen günstig versichern
-    - Schadenfreiheitsklasse übertragen
-    - SF-Klasse retten
+    - Reiseversicherung
+    - Unfallversicherung
+    - Vergleich
+  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    score: 0.55
+    keywords:
+    - Schufa Eintrag löschen
+    - Negativeintrag entfernen
+    - Bonität verbessern
+  - topic: 'Versicherungen im Vergleich: Was du wissen musst'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Versicherungen im Vergleich: Was du wissen musst'
+    score: 0.55
+    keywords:
+    - Versicherungen
+    - Vergleich
+    - Wissenswertes
 live_web:
   enabled: false
   findings: []

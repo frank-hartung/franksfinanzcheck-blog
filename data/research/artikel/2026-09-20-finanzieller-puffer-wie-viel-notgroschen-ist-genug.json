@@ -1,0 +1,38 @@
+{
+  "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+  "titel": "Finanzieller Puffer: Der Rechenweg in fünf Minuten",
+  "erzeugt": "2026-11-22 12:49 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+    "alter_tage": 40,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 5
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
+    "destatis.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "aeefc57de60f9d77546d07e406ce577cd0fcd360fedaeacb333e8a8c6c24e62a",
+  "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
+}

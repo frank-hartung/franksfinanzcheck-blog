@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-22T11:47:09Z",
+  "generated_at": "2026-11-22T12:50:38Z",
   "modus": "kandidaten",
-  "commit": "41bcb4e58dd27a8efacedea5aa3fb66e7b2a979f",
+  "commit": "adccff91a68a6357f4f6ca14440cc92175f9991b",
   "kapazitaet": {
     "stichtag": "2026-11-22",
     "basis": "2026-11-22",
@@ -717,7 +717,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b",
+      "sha256": "52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -731,7 +731,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -828,7 +828,7 @@
       ]
     },
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-      "sha256": "564e0246236678151b8618a67e5e905d0b011c8fc71d69a89ef65983f0cfbd4f",
+      "sha256": "d41a70e7b48dc9551c6c50359a7e4c2ef557e390b3e59e40776045927b1f3a5a",
       "urteil": "blockiert",
       "risikoklasse": "hoch",
       "dimensionen": {

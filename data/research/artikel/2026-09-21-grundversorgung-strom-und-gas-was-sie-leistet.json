@@ -1,0 +1,39 @@
+{
+  "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
+  "titel": "Grundversorgung Strom und Gas: Was sie leistet und kostet",
+  "erzeugt": "2026-11-22 12:49 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+    "alter_tage": 40,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 5
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "a42c98f246b53bee50b96012deb1d31e52544395ba03c1577990c4469d724ae2",
+  "text_sha256": "f7e828d26c9b52d013cf2d3e62e8375f7e109e0121fc0b35a24caa2f0038bf56",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
+}

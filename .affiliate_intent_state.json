@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-21 11:58:12 UTC",
+ "generated_at": "2026-11-22 12:12:16 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 144,
- "checked_links": 317,
+ "checked_articles": 145,
+ "checked_links": 320,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -21,7 +21,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet",
-   "line": 139,
+   "line": 141,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -32,7 +32,7 @@
   {
    "code": "IW2",
    "slug": "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026",
-   "line": 129,
+   "line": 131,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
