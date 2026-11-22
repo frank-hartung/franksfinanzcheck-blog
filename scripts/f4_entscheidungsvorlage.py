@@ -24,6 +24,26 @@ DAS DOKUMENT ENTSCHEIDET NICHTS
   Es schreibt in keinen Ledger und schließt keinen Befund. Es macht nur
   sichtbar, was zu entscheiden ist.
 
+WARUM DIE AUSSAGE GEBUNDEN WIRD UND NICHT DIE DATEI (22.11.2026)
+  Bis hierhin trug jeder Artikelblock einen SHA-256 über die ROHE Datei. Ein
+  `lastmod`, ein Provenienz-Nachtrag am Cover, eine aufgefrischte Quellenliste,
+  eine Typografie-Heilung des Betriebs (`fix_spaces`/`fix_linebreaks`) oder –
+  der eigentliche Auslöser – ein neuer Commit auf `main` machte die Vorlage
+  damit „veraltet“, obwohl sich **keine Aussage** geändert hatte.
+
+  Der CI prüft den MERGE-Stand (`refs/pull/N/merge`), nicht den Branch. Lagen
+  zwei redaktionell geänderte Artikel auf `main`, kippte `test_dossier_ist_aktuell`
+  in `Code-Regression` UND `Uhr-Probe` – ein Dossier, das einen fremden Commit
+  als eigenen Befund meldet. Genau der Fehler, den dieses Skript verhindern soll,
+  nur mit umgekehrtem Vorzeichen.
+
+  Gebunden wird deshalb an dieselbe Fläche wie die Faktenfrische-Entscheidungen:
+  `ledger.text_hash()` in der Projektion `betrieb-v4` (Titel, Beschreibung,
+  Kurzantwort, Aussage-Body; ohne Quellen, Betriebsflächen und Zwischenraum).
+  Was eine Aussage trägt – Silben, Ziffern, Überschriften, Linkziele –, ändert
+  den Wert sofort; Typografie, Cover und Metadaten nicht. Das ist die Frage,
+  die das Dossier stellt: „Steht die beanstandete Aussage heute noch so da?“
+
 Nutzung:
   python3 scripts/f4_entscheidungsvorlage.py             # schreiben
   python3 scripts/f4_entscheidungsvorlage.py --check     # Exit 1 = veraltet
@@ -36,7 +56,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import re
 import sys
@@ -44,6 +63,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+
+# Dieselbe Projektion, die der Ledger für Entscheidungen verwendet.
+PROJEKTION = "betrieb-v4"
 
 ZIEL = ROOT / "F4-ENTSCHEIDUNGSVORLAGE.md"
 POSTS = ROOT / "content" / "posts"
@@ -67,8 +89,20 @@ def prosa(text: str) -> str:
     return teile[2] if len(teile) >= 3 else text
 
 
-def datei_hash(pfad: Path) -> str:
-    return hashlib.sha256(pfad.read_bytes()).hexdigest()
+def aussage_hash(fassungen: dict, slug: str) -> str | None:
+    """Aussage-Hash des Artikels (Projektion `betrieb-v4`) – nicht die Datei-Bytes.
+
+    Dieselbe Fläche, an die `faktenfrische_befund_ledger.py --entscheiden`
+    bindet: Titel, Beschreibung, Kurzantwort und Aussage-Body. Damit ändert
+    sich der Wert genau dann, wenn sich eine Aussage ändert – und nicht,
+    wenn ein fremder Lauf ein Cover, ein `lastmod`, eine Quelle oder einen
+    Zeilenumbruch anfasst (Begründung im Modul-Docstring).
+    """
+    eintrag = fassungen.get(slug)
+    if not isinstance(eintrag, dict):
+        return None
+    wert = eintrag.get("text")
+    return str(wert) if wert else None
 
 
 def bezugsdatum() -> dt.date:
@@ -199,6 +233,11 @@ def baue(stichtag: dt.date) -> str:
              "(`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die "
              "Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.")
     z.append("")
+    z.append("**Bindung: Aussage statt Bytes.** Der Hash je Artikel ist "
+             f"`text_hash()` in der Projektion `{PROJEKTION}` – dieselbe Fläche wie "
+             "die Faktenfrische-Entscheidungen. Typografie, Cover, `lastmod` und "
+             "Quellenpflege öffnen hier nichts; eine geänderte Aussage sofort.")
+    z.append("")
     z.append(f"**{len(offen)} offene Live-Befunde auf {len(seiten)} Artikeln.** Für "
              f"**{len(alt)}** gibt es frühere Entscheidungen zu diesem Befund;")
     z.append(f"die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. "
@@ -226,12 +265,14 @@ def baue(stichtag: dt.date) -> str:
                            key=lambda b: b["id"])
         z.append(f"## `{slug}`")
         z.append("")
-        if pfad.exists():
-            z.append(f"- Datei-SHA256 (heute): `{datei_hash(pfad)}`")
-            body = prosa(pfad.read_text(encoding="utf-8"))
+        heutiger_hash = aussage_hash(fassungen, slug)
+        if heutiger_hash:
+            z.append(f"- Aussage-Hash (Projektion `{PROJEKTION}`, heute): "
+                     f"`{heutiger_hash}`")
         else:
-            z.append("- Datei-SHA256 (heute): **Datei fehlt**")
-            body = ""
+            z.append("- Aussage-Hash (heute): **nicht ermittelbar** – der Artikel "
+                     "steht nicht im geprüften Bestand")
+        body = prosa(pfad.read_text(encoding="utf-8")) if pfad.exists() else ""
         z.append(f"- Offene Live-Befunde: **{len(eintraege)}**")
         z.append("")
         z.append("| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |")
