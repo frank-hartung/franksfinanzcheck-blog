@@ -766,6 +766,25 @@ jobs:
             //  Gilt für E2E-Tests (Playwright): Snippet-Gate, Metadaten-Wache,
             //  Linktext-Wache, H1-Wache – lauter Messschritte am Bestand.
             // ================================================================
+            // ================================================================
+            //  WF-0032 / #1152 (22.11.2026): Web-Vitals-Feldmessung.
+            //  Drei Wochen hintereinander (02./09./16.11.) stand in der
+            //  Meldung der allgemeine Rat: „API-Key abgelaufen", „GitHub-
+            //  Ausfall", „neu starten". Die Annotationen desselben Laufs
+            //  sagten etwas anderes: „Feldmessung nicht durchführbar (Exit 2)"
+            //  UND „Laborlauf ohne verwertbares Ergebnis (Exit 2)" – zwei
+            //  voneinander unabhängige Messungen (Python/urllib bzw. Chromium)
+            //  fielen im selben Lauf gleichzeitig aus. Eine abgelaufene
+            //  Kennung kann das nicht erklären, ein Qualitätsbefund auch
+            //  nicht: Exit 2 heißt „kein Urteil", nicht „schlechte Werte".
+            //  Der Rat muss deshalb die Transport-Ebene nennen – und die
+            //  Unterscheidung, die die Meldung bisher verschwieg: Werte
+            //  reißen Schwellen (Exit 1) oder es wurde gar nicht gemessen
+            //  (Exit 2). Nur Letzteres ist ein Betriebsausfall.
+            // ================================================================
+            const istWebVitals = wfName === 'Web-Vitals-Feldmessung (wöchentlich)';
+            const webVitalsNichtGemessen = istWebVitals && failedStepNames.some(
+              s => /Urteil \(Felddaten entscheiden/.test(String(s)));
             const istE2E = wfName === 'E2E-Tests (Playwright)';
             const messGateFailed = istE2E && failedStepNames.some(s =>
               /Snippet-Gate|Metadaten-Wache|Linktext-Wache|H1-Wache/i.test(String(s)));
@@ -848,6 +867,10 @@ jobs:
               // Code-Regression, unabhängig vom Kanal.
               : layoutBauFailed ? 'layout-bau'
               : istLayoutAi ? 'layout-audit'
+              // #1152: Eine Messung, die kein Urteil abgab, ist ein anderer
+              // Vorgang als eine, deren Werte zu schlecht waren. Eigener
+              // Name, damit der Rat in offenen Meldungen neu geschrieben wird.
+              : webVitalsNichtGemessen ? 'web-vitals-messung'
               : 'allgemein';
             const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
@@ -1210,6 +1233,14 @@ jobs:
                             '1. **Einordnung: Befund der Layout-Prüfung, kein Bauausfall.** Der Bau ist grün; rot sind Befunde am erzeugten HTML (kaputte interne Links, fehlende Cover-Varianten, Alt-Texte, Meta/H1, DOM-Budget, Chunker-Vertrag).',
                             '2. **Nachfahren:** `LAYOUT-REPORT.md` in der Job-Zusammenfassung, Zahlen in `.cache/layout/dom-audit.json`. Jede Zeile nennt Seite und Metrik.',
                             '3. **Heilen oder begründen:** Inhalt/Struktur reparieren – oder, wenn eine Grenze wirklich zu eng ist, sie in `scripts/dom_audit.py` (eine Quelle) mit Messung anpassen. Runbook: `docs/LAYOUT-AUTOMATISIERUNG.md`. Der nächste grüne Lauf schließt die Meldung.'
+                          ]
+                      : runbookKlasse === 'web-vitals-messung'
+                        ? [
+                            '1. **Einordnung: Es wurde NICHT gemessen – das ist keine Aussage über die Seite.** Der Lauf endete mit „Feldmessung nicht durchführbar“ (Exit 2). Exit 1 („Werte reißen die Google-Schwelle“) wäre ein Befund über die Seite; Exit 2 ist eine Störung des Messwegs. Ein Neustart hilft nur, wenn die Störung vorüber war.',
+                            '2. **Die Klasse steht seit 22.11.2026 in der Meldung selbst** (Feld-Wache, #1152): `DROSSELUNG`, `NETZ`, `API`, `TEILWEISE` oder `KEINE_FELDDATEN`. Die ersten drei sind Messweg, `KEINE_FELDDATEN` heißt zu wenig Traffic im 28-Tage-Fenster. Nur `DROSSELUNG` hat mit `PSI_API_KEY` zu tun – ein allgemeines „API-Key abgelaufen“ trifft hier NICHT zu, die Feldmessung nutzt keinen KI-Schlüssel.',
+                            '3. **Der stärkste Zusatzhinweis:** Fällt der Laborlauf (Chromium/Lighthouse) im selben Lauf ebenfalls mit Exit 2 aus, teilen sich beide Messungen denselben Grund – Netz, DNS oder TLS des Runners. Zwei unabhängige Werkzeuge scheitern nicht gleichzeitig an derselben Seite.',
+                            '4. **Nachfahren (kein Schlüssel nötig):** `python3 scripts/cwv_feld_wache.py --schreiben` zeigt je Zielseite den konkreten Fehler (z. B. `URLError – TLS/SSL connection has been closed`) und die Diagnose-Klasse. Ist die Live-Seite aus dem Runner nicht erreichbar, prüfen: Deploy-Lauf jener Woche, `hugo.toml` → `baseURL`, DNS des Domain-Providers, Zertifikat der Pages-Domain.',
+                            '5. **Kein Performance-Tuning auf Verdacht:** Bei Exit 2 gibt es keinen Grund, Ladezeiten zu optimieren – es liegt keine Messung vor, die das begründen könnte. C2 bleibt: Die Wache gibt ohne Felddaten bewusst kein Grün, und diese Meldung schließt sich erst mit einem Lauf, in dem Felddaten wirklich vorliegen.'
                           ]
                       : runbookKlasse === 'selbsttest'
                         ? [

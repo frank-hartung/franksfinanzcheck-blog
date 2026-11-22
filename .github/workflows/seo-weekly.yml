@@ -343,6 +343,46 @@ jobs:
             echo "✅ Affiliate-Fixes gepusht"
           fi
 
+      - name: Markdown-Struktur – geklebte Überschriften im Bestand (Issue #1263)
+        # ANLASS 17.11.2026: Sechs Live-Artikel trugen eine FAQ-Frage am Ende
+        # des vorigen Absatzes (`… dauerhaft.### Was kostet ein Kontowechsel?`).
+        # Markdown rendert das als Fließtext – aber `extend_head.html` splittet
+        # das FAQPage-Schema an der ZEICHENKETTE `### `, nicht an Zeilen-
+        # anfängen. Die Frage stand damit im JSON-LD und nicht auf der Seite:
+        # strukturierte Daten, die etwas anderes behaupten als das Dokument.
+        # Keine Wache deckte das ab (struktur_guard prüft Länge/Zerfaserung,
+        # einen Markdown-Lint gab es nicht). Fünf der sechs Stellen sind
+        # repariert; die sechste steht befristet und namentlich im Code
+        # (Ausnahme bis 31.01.2027, danach Befund). Sperrklinke wie bei
+        # struktur_guard: Bekanntes bleibt still, Neues ist Exit 1.
+        # Meldend, nie schreibend – einen Absatz zu trennen ist Redaktion.
+        id: markdown_struktur
+        continue-on-error: true
+        run: |
+          python3 scripts/markdown_struktur_wache.py --selftest
+          python3 scripts/markdown_struktur_wache.py --md >> "$GITHUB_STEP_SUMMARY" || true
+          python3 scripts/markdown_struktur_wache.py | tee /tmp/markdown_struktur_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Titel-Klinke – Titel-Befunde an Bestandsartikeln (Issue #1304)
+        # ANLASS 22.11.2026: Ein Titel mit 64 Zeichen stand seit dem 20.11.
+        # im Bestand. `metadaten_wache.py` (M1) und `check_titles.py` (R1)
+        # sahen ihn BEIDE – aber beide melden nur (C34: ein Befund stoppt
+        # die Auslieferung nicht). Der Fund erschien damit jeden Tag erneut
+        # und niemand musste ihn je schließen. Genau diese Lücke schließt
+        # die Klinke: `data/titel_baseline.json` friert den bekannten Stand
+        # ein (bekannt = still), ein NEUER oder VERSCHLECHERTER Befund ist
+        # Exit 1. Geheiltes rastet ein, ein Rückfall ist danach ein Fund.
+        # Meldend, nie schreibend an Artikeln – der Titel bleibt
+        # Redaktionssache (ein versiegelter Artikel wird nicht umbenannt).
+        id: titel_klinke
+        continue-on-error: true
+        run: |
+          python3 scripts/titel_klinke.py --selftest
+          python3 scripts/titel_klinke.py --md >> "$GITHUB_STEP_SUMMARY" || true
+          python3 scripts/titel_klinke.py | tee /tmp/titel_klinke_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: Struktur-Wache – Zerfaserung des Bestands (Issue #476)
         # ANLASS 30.09.2026: Ein Live-Artikel lief in das harte „zu lang“-
         # Kriterium des Bestand-Gates – nicht weil er zu viel Inhalt hatte,

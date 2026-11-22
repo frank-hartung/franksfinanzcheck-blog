@@ -1,0 +1,22 @@
+{
+  "stand": "2026-11-22",
+  "hinweis": "Sperrklinke: nur abwärts. Erzeugt von scripts/markdown_struktur_wache.py --seed.",
+  "dateien": {
+    "content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md": [
+      {
+        "datei": "content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md",
+        "zeile": 191,
+        "spalte": 270,
+        "regel": "M1",
+        "text": "Überschrift klebt am Text davor: „…nichts mehr im Weg.### Was ist der Unter…“ – Markdown rendert sie als Fließtext (kein Anker, kein Inhaltsverzeichnis)."
+      },
+      {
+        "datei": "content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md",
+        "zeile": 191,
+        "spalte": 1,
+        "regel": "M3",
+        "text": "FAQ-Frage steht mitten in einer Textzeile – sie landet im FAQPage-Schema (Split an der Zeichenkette „### “), ist auf der Seite aber keine Überschrift. Schema und Seite sagen dann nicht dasselbe."
+      }
+    ]
+  }
+}

@@ -191,6 +191,37 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertTrue((REPO / "scripts" / "selftest_runner.py").is_file(),
                         "der im Rat genannte Runner muss existieren")
 
+    def test_wf_0032_1152_web_vitals_messung_hat_eigenes_runbook(self):
+        # WF-0032 / #1152 (22.11.2026): Drei Wochen hintereinander
+        # (02./09./16.11.) riet die Meldung „API-Key abgelaufen, GitHub-
+        # Ausfall, neu starten“. Die Annotationen desselben Laufs sagten:
+        # „Feldmessung nicht durchführbar (Exit 2)“ UND „Laborlauf ohne
+        # verwertbares Ergebnis (Exit 2)“. Zwei voneinander unabhängige
+        # Messungen (Python/urllib und Chromium) fielen im selben Lauf aus –
+        # das kann keine abgelaufene Kennung erklären, und ein
+        # Qualitätsbefund ist es auch nicht: Exit 2 heißt „kein Urteil“.
+        # Der Rat muss daher (a) Exit 1 von Exit 2 unterscheiden, (b) den
+        # gleichzeitigen Laborausfall als Netz-/TLS-Hinweis lesen und
+        # (c) das Secret nur bei HTTP 429 nennen.
+        self.assertIn("const istWebVitals = wfName === 'Web-Vitals-Feldmessung (wöchentlich)';",
+                      self.code)
+        m = re.search(r"const runbookKlasse = (.*?);", self.code, re.S)
+        self.assertIsNotNone(m)
+        klassen = re.findall(r"'([a-z-]+)'", m.group(1))
+        self.assertIn("web-vitals-messung", klassen)
+        self.assertEqual(klassen[-1], "allgemein",
+                         "Der Rückfall „allgemein“ muss die letzte Klasse sein")
+        self.assertLess(klassen.index("web-vitals-messung"), klassen.index("allgemein"))
+        # Der Rat nennt die echte Unterscheidung und den echten Nachfahrweg.
+        self.assertIn("Exit 2 ist eine Störung des Messwegs", self.code)
+        self.assertIn("Zwei unabhängige Werkzeuge scheitern nicht gleichzeitig", self.code)
+        self.assertIn("python3 scripts/cwv_feld_wache.py --schreiben", self.code)
+        self.assertIn("keinen KI-Schlüssel", self.code)
+        self.assertIn("KEINE_FELDDATEN", self.code)
+        self.assertIn("Kein Performance-Tuning auf Verdacht", self.code)
+        # Und die im Rat genannten Werkzeuge existieren wirklich.
+        self.assertTrue((REPO / "scripts" / "cwv_feld_wache.py").is_file())
+
     def test_wf_7b6b_925_messgate_hat_eigenes_runbook(self):
         # WF-7B6B / #925 (29.10.2026): Der nächtliche E2E-Lauf wurde rot im
         # Schritt „Snippet-Gate – Snippetfenster und Rangfolge" (Description

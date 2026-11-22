@@ -557,13 +557,61 @@ class VerschachtelterDoppelterSchluesselTest(unittest.TestCase):
             yaml_modul="ohne") if "steht doppelt" in b["meldung"]]
         self.assertTrue(doppelt, "Scanner verliert das Duplikat im Listen-Eintrag")
 
-    @unittest.skipUnless(HAT_YAML, "Flow-Mappings liest nur der Parser")
+    # 23.11.2026: Das `skipUnless(HAT_YAML)` stand hier zu Recht, als der
+    # Scanner Flow-Mappings noch NICHT lesen konnte – ein Test, der ohne
+    # Parser nichts prüft, wäre ein grüner Trugschluss gewesen. Inzwischen
+    # kann ihn der Scanner (mit `python3 -E -s` nachgemessen: BLOCKER,
+    # Zeile 3, Spalte 11), und damit war der Skip eine LÜCKE: Ausgerechnet
+    # im e2e-Job – der VOR jedem `pip install` läuft und deshalb kein
+    # PyYAML hat – wurde die wichtigste Flow-Prüfung übersprungen. Jetzt
+    # läuft der Fall in BEIDEN Modi; die Meldung darf sich unterscheiden
+    # (Scanner oder Parser), der Befund nicht.
     def test_duplikat_im_flow_mapping(self) -> None:
-        """Bekannte Grenze des Scanners – hier als Parser-Beleg festgehalten."""
+        """Flow-Mapping-Duplikat – mit UND ohne PyYAML ein BLOCKER.
+
+        `meta: {a: "1", a: "2"}` ist der Fall, den Hugo beim Bau abbricht.
+        Ohne PyYAML prüft hier der Scanner; mit PyYAML prüft der Parser
+        (und der Scanner meldet nicht doppelt – die Dedupe hält es bei
+        einer Meldung).
+        """
         text = SAUBER.replace("draft: false", 'draft: false\nmeta: {a: "1", a: "2"}')
         doppelt = [b for b in pruefe(text) if "steht doppelt" in b["meldung"]]
         self.assertTrue(doppelt, "Flow-Mapping-Duplikat bleibt unentdeckt")
         self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
+        self.assertEqual(1, len(doppelt),
+                         "ein Duplikat, nicht zwei Meldungen (Dedupe)")
+
+    def test_flow_duplikat_auch_ohne_parser(self) -> None:
+        """#1313: Der Scanner muss das Flow-Duplikat ALLEIN finden.
+
+        Das ist der Kern des Falls: Der e2e-Job prüft VOR jedem
+        `pip install`. Mit `yaml=False` läuft nur Schicht 1 – und genau
+        die muss den BLOCKER liefern. Nachgemessen mit `python3 -S`:
+        vor dieser Heilung `[]`, Hugo bricht aber ab.
+        """
+        text = SAUBER.replace("draft: false", 'draft: false\nmeta: {a: "1", a: "2"}')
+        befunde, _tief = w.pruefe_datei(Path("x.md"), text, yaml=False)
+        treffer = [b for b in befunde if "Flow-Mapping" in b["meldung"]]
+        self.assertEqual(1, len(treffer), f"Scanner blind: {befunde}")
+        self.assertEqual(w.BLOCKER, treffer[0]["schwere"])
+        self.assertIn("`a`", treffer[0]["meldung"])
+
+    def test_flow_ohne_duplikat_bleibt_still(self) -> None:
+        """Kein Fehlalarm: Komma im Wert, Liste, Quote-Schlüssel."""
+        for wert in ('{a: "x, y", b: 2}', "{a: [1, 2], b: 3}",
+                     '{"a b": 1, "c d": 2}'):
+            self.assertEqual(
+                [], w._flow_doppelte_schluessel(wert),
+                f"Fehlalarm bei {wert}")
+
+    def test_flow_duplikat_wird_nicht_doppelt_gemeldet(self) -> None:
+        """Mit Parser meldet der Scanner nicht zusätzlich (Dedupe)."""
+        if not HAT_YAML:
+            self.skipTest("ohne Parser gibt es nur den Scanner")
+        text = SAUBER.replace("draft: false", 'draft: false\nmeta: {a: "1", a: "2"}')
+        doppelt = [b for b in pruefe(text) if "steht doppelt" in b["meldung"]
+                   or "Flow-Mapping" in b["meldung"]]
+        self.assertEqual(1, len(doppelt), f"doppelt gemeldet: {doppelt}")
 
     def test_top_level_duplikat_bleibt_erkannt(self) -> None:
         """Die Verschärfung darf den WF-990-Fall nicht verlieren."""
