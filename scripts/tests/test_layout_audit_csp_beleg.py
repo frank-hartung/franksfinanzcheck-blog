@@ -108,6 +108,20 @@ class CspBrauchtEinenBelegTest(unittest.TestCase):
             "Genau document|iframe sind die Typen, die eine Seite per CSP "
             "steuern – ein Skript-/Bild-Response ist es nicht")
 
+    def test_fremdes_iframe_ist_kein_beleg(self):
+        """Die dritte Fassung – nach dem CI-Lauf vom 22.11.2026.
+
+        Turnstile & Co. liefern eigene CSP-Kopfzeilen. Zählte der Audit die
+        als Beleg, wurde aus jedem „unbelegt\" wieder ein roter Befund,
+        obwohl der Messserver weiterhin keine CSP sendet. Belegt ist nur die
+        Antwort des Hauptrahmens.
+        """
+        self.assertIn("page.mainFrame()", self.text,
+                      "Der Beleg muss auf den Hauptrahmen eingegrenzt sein")
+        self.assertRegex(
+            self.text, r"r\.frame\(\) !== page\.mainFrame\(\)",
+            "Eine iframe-Antwort darf die CSP der Seite nicht belegen")
+
     def test_beleg_wird_nach_dem_laden_ausgewertet(self):
         """Die Kopfzeile kann nach dem ersten Skriptfehler eintreffen.
 

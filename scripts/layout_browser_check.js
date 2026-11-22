@@ -446,6 +446,15 @@ async function loadRuntime(browser, url, viewport) {
     // Messserver nie eine CSP setzt. Ein Beleg, der aus einer fremden
     // Antwort stammt, ist kein Beleg für diese Seite.
     if (!/^(document|iframe)$/i.test(String(r.request().resourceType()))) return;
+    // ZWEITE LEKTION (22.11.2026): Auch eine iframe-Antwort ist eine fremde
+    // Antwort. Cloudflare Turnstile & Co. liefern eigene CSP-Kopfzeilen; die
+    // gelten für DAS IFRAME, nicht für die gemessene Seite. Wurden sie als
+    // Beleg gezählt, kippte jede „unbelegt"-Einstufung wieder in einen roten
+    // Befund – obwohl der Messserver weiterhin keine CSP sendet. Belegt ist
+    // nur die Antwort des Hauptrahmens.
+    try {
+      if (typeof r.frame === 'function' && r.frame() !== page.mainFrame()) return;
+    } catch (e) { return; /* Rahmen nicht bestimmbar: kein Beleg */ }
     try {
       const h = r.headers() || {};
       const wert = h['content-security-policy'];
