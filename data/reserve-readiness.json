@@ -1,15 +1,15 @@
 {
   "target": 6,
   "ready": 2,
-  "pool_size": 12,
-  "generated_at": "2026-11-22T12:19:01Z",
+  "pool_size": 11,
+  "generated_at": "2026-11-22T17:20:35Z",
   "candidates": [
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
       "ready": true,
       "sha256": "22f892be9e82233e0a7a9db7cd9e3060b2ef65a8068bc87bd780fc823a678e1c",
       "flesch": 63.6,
-      "measured_at": "2026-11-22T12:14:25Z",
+      "measured_at": "2026-11-22T17:17:15Z",
       "score": 0.946,
       "parts": {
         "spelling": 0.8,
@@ -26,7 +26,7 @@
       "ready": true,
       "sha256": "fad86da0000fc425d261dd2bfc12b17a1852955c6924c6138de909f3b7ce0fd8",
       "flesch": 65.8,
-      "measured_at": "2026-11-22T12:14:55Z",
+      "measured_at": "2026-11-22T17:17:46Z",
       "score": 0.93,
       "parts": {
         "spelling": 0.8,
@@ -43,7 +43,7 @@
       "ready": false,
       "sha256": "64a615a00291abb5bdebac5fa33c617737257935e9d055d1fe18a472dd6a51f6",
       "flesch": 69.8,
-      "measured_at": "2026-11-22T12:15:23Z",
+      "measured_at": "2026-11-22T17:18:13Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -67,7 +67,7 @@
       "ready": false,
       "sha256": "80a49fcfabbe9d6d0a6a44ac1db240c4d7ce767b6066db9bfae1572c7267c961",
       "flesch": 73.3,
-      "measured_at": "2026-11-22T12:15:51Z",
+      "measured_at": "2026-11-22T17:18:42Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
         "🛑 2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -90,7 +90,7 @@
       "ready": false,
       "sha256": "1b842057c9b2a78a9e488fc0750c9c6991c38ee6d622eb9fbb046ff2278a38af",
       "flesch": 63.8,
-      "measured_at": "2026-11-22T12:16:18Z",
+      "measured_at": "2026-11-22T17:19:09Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -114,7 +114,7 @@
       "ready": false,
       "sha256": "ab96c70319519c71375976bd0198d2fe05bd69e14bb8ab7c9f86822ac81d3096",
       "flesch": 62.4,
-      "measured_at": "2026-11-22T12:16:44Z",
+      "measured_at": "2026-11-22T17:19:35Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -134,11 +134,54 @@
       }
     },
     {
+      "slug": "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+      "ready": false,
+      "sha256": "bb38e330ad4c0df108292bd2e61597d7ca1049e4bb87e879c84d4cfec42fe129",
+      "flesch": 67.5,
+      "measured_at": "2026-11-22T17:19:36Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 773 Wörter / 5930 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "details": [
+        "Umfang: 773 Wörter / 5930 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+      ],
+      "score": 0.855,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.52,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+      "ready": false,
+      "sha256": "b4ab35534712449b194e25ac12993e2f67ac0116d15428718304252d7b4675fd",
+      "flesch": 60.0,
+      "measured_at": "2026-11-22T17:19:38Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
+      "details": [
+        "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
+        "Umfang: 1239 Wörter / 9199 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+      ],
+      "score": 0.918,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.56,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
       "slug": "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
       "ready": false,
       "sha256": "247abd808bd8c395c0c703ed601e3382f4b84356707b383207fa130696e2f762",
       "flesch": 71.2,
-      "measured_at": "2026-11-22T12:17:13Z",
+      "measured_at": "2026-11-22T17:20:07Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -158,34 +201,11 @@
       }
     },
     {
-      "slug": "2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-      "ready": false,
-      "sha256": "90b2381a988c62917773c55bac0e7fee097f2cf2464f5066a16f989e2faac124",
-      "flesch": 63.6,
-      "measured_at": "2026-11-22T12:17:39Z",
-      "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
-      "details": [
-        "🛑 2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.984,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
       "sha256": "cf5676c9f2c6aa0f0b7417f5ed3aad6838084d9a55820c1146231e4e100b98cd",
       "flesch": 61.3,
-      "measured_at": "2026-11-22T12:17:40Z",
+      "measured_at": "2026-11-22T17:20:08Z",
       "reason": "Reserve-Qualitäts-Gate: Umfang: 709 Wörter / 5112 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
         "Umfang: 709 Wörter / 5112 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
@@ -206,9 +226,9 @@
     {
       "slug": "2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "ready": false,
-      "sha256": "ae6565b606105d6b15aab6bcc8389d335ff6c34d223aa686783566af9867e727",
-      "flesch": 68.4,
-      "measured_at": "2026-11-22T12:18:07Z",
+      "sha256": "48e2337ac29a4896103476915fe5ef371d49ff718460a8634b8a47d6164c8ecf",
+      "flesch": 68.5,
+      "measured_at": "2026-11-22T17:20:35Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
         "🛑 2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -225,58 +245,67 @@
         "affiliate": 1.0,
         "readability": 1.0
       }
-    },
-    {
-      "slug": "2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
-      "ready": false,
-      "sha256": "bb370f37d5bcae3bdcadb72f6a19084c68a875098f7e945f7f076ce44ea374d6",
-      "flesch": 69.8,
-      "measured_at": "2026-11-22T12:18:35Z",
-      "reason": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
-      "details": [
-        "🛑 2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa452f879ea8f2da (luecke): Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt.",
-        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.948,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
-      "ready": false,
-      "sha256": "ac0b661a31a272c1514b3d4de43fc8508c35ee29620166135ed64365595bd388",
-      "flesch": 67.0,
-      "measured_at": "2026-11-22T12:19:01Z",
-      "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-      "details": [
-        "🛑 2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.972,
-      "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
     }
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "45018798061",
+    "run_id": "45044341506",
     "run_attempt": "1"
-  }
+  },
+  "geschont": [
+    {
+      "slug": "2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "faktenfrische.py"
+      ],
+      "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "check_length.py"
+      ],
+      "warum": "Der Längen-Floor wird von der Kette gehoben; ein kurzer Entwurf heißt meist nur: Der Gratis-Provider war im Cooldown (Realfall #594)."
+    },
+    {
+      "slug": "2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "faktenfrische.py"
+      ],
+      "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "faktenfrische.py"
+      ],
+      "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "faktenfrische.py"
+      ],
+      "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "check_length.py"
+      ],
+      "warum": "Kurzer Vorstufen-Entwurf wird von check_length.py verlängert."
+    }
+  ]
 }
