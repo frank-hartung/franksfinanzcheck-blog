@@ -1,23 +1,17 @@
 {
- "stand": "2026-11-21T13:43:33Z",
+ "stand": "2026-11-22T13:36:59Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 2,
+ "dateien": 1,
  "gepruefte_dateien": 149,
- "woerter": 281747,
- "erkannte_befunde": 3,
+ "woerter": 281635,
+ "erkannte_befunde": 2,
  "befunde": 2,
  "hart": 0,
- "gefixt": 1,
+ "gefixt": 0,
  "geparkt": [],
  "dateien_liste": [
   {
-   "pfad": "content/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/index.md",
-   "erkannte_befunde": 1,
-   "befunde": 0,
-   "woerter": 2026
-  },
-  {
-   "pfad": "content/posts/2026-11-21-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
+   "pfad": "content/posts/2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
    "erkannte_befunde": 2,
    "befunde": 2,
    "woerter": 3656
