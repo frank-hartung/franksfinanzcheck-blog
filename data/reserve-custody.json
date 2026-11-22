@@ -278,6 +278,13 @@
     "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
+  "kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+    "seit": "2026-11-22",
+    "slug": "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+    "titel": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
+    "zuletzt_im_pool": "2026-11-22",
+    "zustand": "pool"
+  },
   "kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
     "reaktiviert": 1,
     "reaktiviert_mit": [
@@ -288,6 +295,13 @@
     "titel": "Kleine Energiespar‑Tricks: Deine Kosten sofort senken",
     "zuletzt_im_pool": "2026-10-19",
     "zuletzt_reaktiviert": "2026-10-07",
+    "zustand": "pool"
+  },
+  "kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
+    "seit": "2026-11-22",
+    "slug": "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+    "titel": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
+    "zuletzt_im_pool": "2026-11-22",
     "zustand": "pool"
   },
   "last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
@@ -363,7 +377,7 @@
     "slug": "2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten",
     "titel": "Strompreis 2026: Herbst-Check für deine Stromkosten",
     "zuletzt_im_pool": "2026-11-22",
-    "zustand": "pool"
+    "zustand": "ausgemustert"
   },
   "urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
     "reaktiviert": 1,
@@ -434,7 +448,7 @@
     "slug": "2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
     "titel": "Gebrauchte Möbel: Woran erkennst du gute Qualität?",
     "zuletzt_im_pool": "2026-11-22",
-    "zustand": "pool"
+    "zustand": "ausgemustert"
   },
   "wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
     "reaktiviert": 1,
@@ -467,7 +481,7 @@
     "slug": "2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
     "titel": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
     "zuletzt_im_pool": "2026-11-22",
-    "zustand": "pool"
+    "zustand": "ausgemustert"
   },
   "wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
     "seit": "2026-09-26",

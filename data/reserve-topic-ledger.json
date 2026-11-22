@@ -45,10 +45,10 @@
   "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich": {
     "abgleich_fehler": 1,
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 37 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ein DSL-Vertrag bindet dich meist für zwei Jahre.; Profi-Gate: nur 719 Wörter / 5378 ",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-12",
-    "sperre_bis": "2026-10-15"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-23"
   },
   "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen": {
     "abgleich_fehler": 2,
@@ -93,18 +93,18 @@
     "sperre_bis": "2027-04-05"
   },
   "DSL-Anbieter wechseln: Wie du den besten Tarif findest": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 2,
-    "letzter_versuch": "2026-10-05",
-    "sperre_bis": "2026-10-06"
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 784 Wörter / 5981 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 53.2 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-25"
   },
   "DSL-Tarife im Vergleich: Die günstigsten Anbieter": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 777 Wörter / 5975 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 53.5 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-25",
-    "sperre_bis": "2026-10-28"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-23"
   },
   "DSL-Tarife im Vergleich: Welcher ist der beste?": {
     "fehler": 1,
@@ -114,35 +114,35 @@
     "sperre_bis": "2026-10-29"
   },
   "DSL-Tarife mit hoher Geschwindigkeit vergleichen": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: Lesbarkeit: Flesch 59.9 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze und alltägliche Wörter statt langer Komposita; RS5: 16 Zahlenbehauptung(en)",
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 596 Wörter / 4763 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 51.8 < 60 (hartes Publish-Kriterium ",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-25",
-    "sperre_bis": "2026-10-28"
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-25"
   },
   "Dein Online-Banking und Kontomanagement optimieren": {
     "abgleich_fehler": 2,
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 721 Wörter / 5792 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 49.2 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 716 Wörter / 5495 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 54.1 < 60 (hartes Publish-Kriterium ",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-23",
-    "sperre_bis": "2026-10-26"
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-25"
   },
   "Die Vorteile von Online-Konten und wie du sie nutzt": {
     "abgleich_fehler": 2,
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 620 Wörter / 4794 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 48.5 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GROQ); leere Antwort (GEMINI); Profi-Gate: nur 870 Wörter / 6615 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 53.1 < 60 (har",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-23",
-    "sperre_bis": "2026-10-26"
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-25"
   },
   "Die besten Apps für das Sparen von Geld": {
     "abgleich_fehler": 2,
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 18 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Faustregel:** Deine fixen Kosten sollten idealerweise nicht mehr als 50 Prozent dei",
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 611 Wörter / 4756 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 55.9 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-23",
-    "sperre_bis": "2026-10-26"
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-25"
   },
   "Die besten DSL-Tarife für Zuhause und unterwegs": {
     "fehler": 1,
@@ -153,10 +153,10 @@
   },
   "Die besten Tarife für ein günstiges Handy-Abonnement": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: Lesbarkeit: Flesch 53.6 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze und alltägliche Wörter statt langer Komposita; RS5: 12 Zahlenbehauptung(en)",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-25",
-    "sperre_bis": "2026-10-28"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-23"
   },
   "Die verschiedenen Arten von Reiseversicherungen im Vergleich": {
     "abgleich_fehler": 1,
@@ -409,6 +409,13 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-10-01"
   },
+  "Haustier im Alltag: Diese laufenden Ausgaben kommen dazu": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 770 Wörter / 6025 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 53.5 < 60 (hartes Publish-Kriterium ",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-25"
+  },
   "Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am lukrativsten ist": {
     "fehler": 0,
     "grund": "produziert: heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
@@ -468,6 +475,14 @@
     "letzter_versuch": "2026-11-12",
     "sperre_bis": "2026-11-15"
   },
+  "Kleidertausch im Freundeskreis: So funktioniert die Runde": {
+    "fehler": 0,
+    "grund": "produziert: kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-22",
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2027-05-21"
+  },
   "Kleidung secondhand: Woran du gute Stücke erkennst": {
     "fehler": 0,
     "grund": "produziert: secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
@@ -485,10 +500,11 @@
   },
   "Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "Artefakt fehlt (konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 625 Wörter / 4750 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 52.7 < 60 (hartes Publish-Kriterium ",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-05"
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2026-11-25"
   },
   "Kontowechselservice nutzen: So zieht dein Gehalt automatisch um": {
     "fehler": 1,
@@ -797,11 +813,12 @@
     "letzter_versuch": "2026-10-02"
   },
   "Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026 wirklich 0 % verlangt": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 857 Wörter / 6659 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 50.6 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
+    "fehler": 0,
+    "grund": "produziert: kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-12",
-    "sperre_bis": "2026-10-15"
+    "letzter_erfolg": "2026-11-22",
+    "letzter_versuch": "2026-11-22",
+    "sperre_bis": "2027-05-21"
   },
   "Vorratsplanung im Haushalt: So kaufst du seltener und günstiger ein": {
     "fehler": 0,

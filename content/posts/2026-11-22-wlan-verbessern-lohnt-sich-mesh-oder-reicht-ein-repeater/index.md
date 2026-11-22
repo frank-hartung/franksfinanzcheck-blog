@@ -4,7 +4,8 @@ description: "WLAN verbessern: Teste die Funkverbindung dort, wo ein Repeater st
 kurzantwort: WLAN-Repeater sind günstig in der Anschaffung, halbieren aber oft die verfügbare Bandbreite durch ihre Bauweise. Mesh-WLAN bietet ein nahtloses Funknetz ohne Verbindungsabbrüche beim Raumwechsel, kostet aber in der Anschaffung mehr.
 date: 2026-11-22T11:51:18Z
 draft: true
-reserve: true
+reserve_blocked: "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)"
+reserve_blocked_at: 2026-11-22T16:52:04Z
 tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
