@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-22T16:30:26Z",
+  "generated_at": "2026-11-22T17:25:03Z",
   "modus": "kandidaten",
-  "commit": "bc1e0221b7b417267272d02ff397d6db4116cda1",
+  "commit": "fa3e8d0a774097639efdff773c41908d8c4a4709",
   "kapazitaet": {
     "stichtag": "2026-11-22",
     "basis": "2026-11-22",
@@ -362,7 +362,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -430,7 +430,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
@@ -765,7 +765,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-04",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "A4-profi-check",
@@ -839,7 +839,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "A4-profi-check",
@@ -2058,7 +2058,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2270,7 +2270,7 @@
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
-      "sha256": "a2427e66b5b93dc938df0daeed7487d7febbfc123461b2db3060dfd48b990cd5",
+      "sha256": "20f3a1e64a300946302bec935835a771f4090076e144e2fdaf096458380050b5",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2284,7 +2284,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
