@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T15:51:54.927474+02:00",
+ "stand": "2026-11-22T15:47:23.137427+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -92,16 +92,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Unnötige Versicherungen kündigen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Urlaub",
    "eigener_rang": 0,
    "vorher": 0,
@@ -113,6 +103,16 @@
   },
   {
    "anfrage": "Urlaub Mietwagen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Urlaub sparen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -203,6 +203,16 @@
   },
   {
    "anfrage": "Versicherungsarten",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Versicherungssumme berechnen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
