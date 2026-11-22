@@ -222,6 +222,31 @@ class ProdScopingAlarm(unittest.TestCase):
         # Und die im Rat genannten Werkzeuge existieren wirklich.
         self.assertTrue((REPO / "scripts" / "cwv_feld_wache.py").is_file())
 
+    def test_wf_d0c9_1248_design_budget_hat_eigenes_runbook(self):
+        # WF-D0C9 / #1248 (22.11.2026): Die Meldung riet zu API-Schlüsseln,
+        # GitHub-Ausfall und Neustart. Rot war „Bewertung gegen die Budgets“ –
+        # ein Vergleich gemessener Werte (DOM, Kontrast, TBT, LCP, CLS) gegen
+        # das Regelwerk. Kein Schlüssel ist im Spiel, und ein Neustart misst
+        # dieselben Bytes noch einmal.
+        self.assertIn("const istDesignVarianten = wfName === 'Design-Varianten';",
+                      self.code)
+        m = re.search(r"const runbookKlasse = (.*?);", self.code, re.S)
+        self.assertIsNotNone(m)
+        klassen = re.findall(r"'([a-z-]+)'", m.group(1))
+        self.assertIn("design-budget", klassen)
+        self.assertEqual(klassen[-1], "allgemein",
+                         "Der Rückfall „allgemein“ muss die letzte Klasse sein")
+        self.assertLess(klassen.index("design-budget"), klassen.index("allgemein"))
+        # Der Rat nennt die Quelle des Soll-Werts und den lokalen Nachfahrweg.
+        self.assertIn("BUDGETS_*", self.code)
+        self.assertIn("design_variant_gate.py", self.code)
+        self.assertIn("kein Betriebsausfall", self.code)
+        # Die LCP-Falle (ungedrosselt vs. gedrosselt) muss erklärt sein,
+        # sonst optimiert jemand auf einen Wert, der nie geprüft wird.
+        self.assertIn("Playwright misst auf localhost ungedrosselt", self.code)
+        for datei in ("scripts/design_variant_gate.py", "scripts/design_variant_lab.py"):
+            self.assertTrue((REPO / datei).is_file(), f"{datei} fehlt")
+
     def test_wf_7b6b_925_messgate_hat_eigenes_runbook(self):
         # WF-7B6B / #925 (29.10.2026): Der nächtliche E2E-Lauf wurde rot im
         # Schritt „Snippet-Gate – Snippetfenster und Rangfolge" (Description

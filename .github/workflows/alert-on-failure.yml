@@ -782,6 +782,19 @@ jobs:
             //  reißen Schwellen (Exit 1) oder es wurde gar nicht gemessen
             //  (Exit 2). Nur Letzteres ist ein Betriebsausfall.
             // ================================================================
+            // ================================================================
+            //  WF-D0C9 / #1248 (22.11.2026): Design-Varianten. Die Meldung
+            //  riet „API-Key abgelaufen / GitHub-Ausfall / neu starten“.
+            //  Rot war aber „Bewertung gegen die Budgets“: ein Vergleich
+            //  gemessener Werte (DOM, Kontrast, TBT, LCP, CLS) gegen das
+            //  Regelwerk. Kein Schlüssel, kein Modell, kein Netz – und ein
+            //  Neustart misst dieselben Bytes noch einmal. Der Rat muss
+            //  deshalb das gerissene Budget nennen (seit heute steht der
+            //  Gate-Text in der Job-Zusammenfassung, #1248).
+            // ================================================================
+            const istDesignVarianten = wfName === 'Design-Varianten';
+            const designBudgetGerissen = istDesignVarianten && failedStepNames.some(
+              s => /Bewertung gegen die Budgets/.test(String(s)));
             const istWebVitals = wfName === 'Web-Vitals-Feldmessung (wöchentlich)';
             const webVitalsNichtGemessen = istWebVitals && failedStepNames.some(
               s => /Urteil \(Felddaten entscheiden/.test(String(s)));
@@ -871,6 +884,9 @@ jobs:
               // Vorgang als eine, deren Werte zu schlecht waren. Eigener
               // Name, damit der Rat in offenen Meldungen neu geschrieben wird.
               : webVitalsNichtGemessen ? 'web-vitals-messung'
+              // #1248: Ein Budget, das reißt, ist eine Messaussage über das
+              // gebaute HTML – kein Betriebsausfall.
+              : designBudgetGerissen ? 'design-budget'
               : 'allgemein';
             const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
@@ -1233,6 +1249,14 @@ jobs:
                             '1. **Einordnung: Befund der Layout-Prüfung, kein Bauausfall.** Der Bau ist grün; rot sind Befunde am erzeugten HTML (kaputte interne Links, fehlende Cover-Varianten, Alt-Texte, Meta/H1, DOM-Budget, Chunker-Vertrag).',
                             '2. **Nachfahren:** `LAYOUT-REPORT.md` in der Job-Zusammenfassung, Zahlen in `.cache/layout/dom-audit.json`. Jede Zeile nennt Seite und Metrik.',
                             '3. **Heilen oder begründen:** Inhalt/Struktur reparieren – oder, wenn eine Grenze wirklich zu eng ist, sie in `scripts/dom_audit.py` (eine Quelle) mit Messung anpassen. Runbook: `docs/LAYOUT-AUTOMATISIERUNG.md`. Der nächste grüne Lauf schließt die Meldung.'
+                          ]
+                      : runbookKlasse === 'design-budget'
+                        ? [
+                            '1. **Einordnung: Ein Budget ist gerissen – das ist ein Befund am gebauten HTML, kein Betriebsausfall.** Der Bau war grün; rot ist der Vergleich gemessener Werte gegen das Regelwerk (DOM-Knoten, Kontrast, Tap-Ziele, TBT, LCP, CLS, Lighthouse-Scores). Ein Neustart misst dieselben Bytes noch einmal und liefert dasselbe Ergebnis.',
+                            '2. **Welches Budget?** Seit #1248 steht der Gate-Text in der Job-Zusammenfassung des Laufs (Abschnitt „Budget-Urteil“) und als `data/cache/design-varianten/gate.txt` im Artefakt. Jede Zeile nennt Variante, Regel, Ist-Wert und Soll-Wert.',
+                            '3. **Nachfahren:** `python3 scripts/design_variant_lab.py --vergleich` zeigt Basis gegen Varianten. `python3 scripts/design_variant_gate.py` prüft lokal gegen dieselben Budgets – ohne Netz und ohne Schlüssel, deshalb ist das Ergebnis aussagekräftig.',
+                            '4. **Zwei richtige Reaktionen:** (a) das HTML/CSS reparieren, das den Wert verursacht – der Befund nennt die Variante; (b) wenn die Grenze wirklich zu eng ist, sie EINE Quelle (`scripts/design_variant_gate.py`, `BUDGETS_*`) mit Messung anpassen, nie die Messung selbst.',
+                            '5. **Wichtig bei LCP:** Playwright misst auf localhost ungedrosselt, Lighthouse mit Drosselung. Deshalb prüft das Gate den Playwright-LCP absichtlich NICHT gegen die Google-Schwelle (2500 ms) – der Wert steht nur als Delta im Report. Ein „LCP zu gut“ ist daher kein Fehler.'
                           ]
                       : runbookKlasse === 'web-vitals-messung'
                         ? [
