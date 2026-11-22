@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-22T12:17:45Z",
+  "generated_at": "2026-11-22T12:50:38Z",
   "modus": "kandidaten",
-  "commit": "dccdf1960c4b598c5a1db4c55233c20a29c204f9",
+  "commit": "adccff91a68a6357f4f6ca14440cc92175f9991b",
   "kapazitaet": {
     "stichtag": "2026-11-22",
     "basis": "2026-11-22",
@@ -717,7 +717,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b",
+      "sha256": "52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -731,7 +731,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -842,7 +842,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "RD2-einzigartigkeit",
