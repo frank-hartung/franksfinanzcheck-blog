@@ -5,18 +5,4 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
-BEGIN:VEVENT
-UID:reddit:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tas
- se-kaffee:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261122T132646Z
-DTSTART:20261122T131500Z
-DTEND:20261122T133000Z
-SUMMARY:Reddit: Kaffeemaschine: Was kostet eine Tasse wirklich? (nutzen)
-DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: nutzen\nKanal: Red
- dit\nArtikel: https://franksfinanzcheck.de/posts/2026-11-10-kaffeemas
- chine-stromverbrauch-was-kostet-die-tasse-kaffee/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-strom
- verbrauch-was-kostet-die-tasse-kaffee/
-STATUS:TENTATIVE
-END:VEVENT
 END:VCALENDAR

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 22.11.2026 14:26 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.11.2026 22:06 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -16,7 +16,7 @@
 - **07:45** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 ### Di, 24. November 2026
-- **07:45** ⏳ Wie viel Bandbreite brauchst du fürs Streaming? — _nutzen_ · Launch  
+- **07:45** ⏳ Streaming-Bandbreite: Wie viel brauchst du wirklich? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
 ### Mi, 25. November 2026
 - **07:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  

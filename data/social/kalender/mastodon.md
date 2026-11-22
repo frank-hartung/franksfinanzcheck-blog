@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 22.11.2026 14:26 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.11.2026 22:06 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -38,8 +38,8 @@
 - **11:30** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
 ### Fr, 04. Dezember 2026
-- **07:30** ⏳ Notgroschen: Die Wahrheit über das finanzielle Polster — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/
+- **07:30** ⏳ Tagesgeld vergleichen: Was bleibt nach dem Aktionszins? — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
 - **11:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
 

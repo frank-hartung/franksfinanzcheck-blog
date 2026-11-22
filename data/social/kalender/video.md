@@ -1,6 +1,6 @@
 # 🎬 Veröffentlichungskalender – Reels · Shorts · Video
 
-> Automatisch aktualisiert: 22.11.2026 14:26 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.11.2026 22:06 (Europe/Berlin)  
 > Aktive Ziel-Plattformen: YouTube Shorts, Instagram Reels  
 > Zum Abonnieren: `video.ics`
 
@@ -22,7 +22,7 @@
 
 ## Zuletzt produziert
 
-- ✅  · Wie viel Bandbreite brauchst du fürs Streaming?
+- ✅  · Streaming-Bandbreite: Wie viel brauchst du wirklich?
 - ✅  · Ökostromanbieter wechseln: Tarif, Herkunft und Preis prüfen
 - ✅  · Kfz-Versicherung vergleichen: Was ändert sich beim Beitrag?
 - ✅  · Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich

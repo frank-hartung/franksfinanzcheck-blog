@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 22.11.2026 14:26 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.11.2026 22:06 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,9 +12,7 @@
 
 ## Kommende Beiträge
 
-### So, 22. November 2026
-- **14:15** ⚪ Kaffeemaschine: Was kostet eine Tasse wirklich? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
+_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
 
 ## Zuletzt veröffentlicht
 
