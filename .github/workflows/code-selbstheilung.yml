@@ -40,6 +40,10 @@ on:
       - ".github/workflows/code-selbstheilung.yml"
       - ".github/workflows/sicherheits-wache.yml"
       - ".github/workflows/alert-on-failure.yml"
+      # Trigger-Wache W1 (22.11.2026): Der Lauf ruft `scripts/git_sync.sh`
+      # auf. Fehlte die Datei in BEIDEN Filtern, änderte man den einzigen
+      # PR-Auslieferungsweg, ohne dass dieser Lauf es prüfte.
+      - "scripts/git_sync.sh"
   pull_request:
     paths:
       - "scripts/code_selbstheilung.py"
@@ -52,6 +56,10 @@ on:
       - ".github/workflows/code-selbstheilung.yml"
       - ".github/workflows/sicherheits-wache.yml"
       - ".github/workflows/alert-on-failure.yml"
+      # Trigger-Wache W1 (22.11.2026): Der Lauf ruft `scripts/git_sync.sh`
+      # auf. Fehlte die Datei in BEIDEN Filtern, änderte man den einzigen
+      # PR-Auslieferungsweg, ohne dass dieser Lauf es prüfte.
+      - "scripts/git_sync.sh"
   schedule:
     - cron: "38 6 * * *"   # täglich 06:38 UTC – nach der Abhängigkeits-Selbstheilung (06:18)
   workflow_dispatch:
