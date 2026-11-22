@@ -359,14 +359,39 @@ class EchteResolveShell(unittest.TestCase):
 class AnnotationsVertrag972(unittest.TestCase):
     """Lauf 42044923993 (05.11.2026) als Regression, ohne Netz nachgebaut.
 
-    Zehn fehlende Pflicht-Header auf zwei Zielen füllten das Fehler-Budget des
+    Zehn fehlende Pflicht-Header (zwei Ziele × fünf) füllten das Fehler-Budget des
     Auswerte-Schritts genau aus. Die elfte Zeile mit der Proxy-Diagnose und
     dem nächsten Schritt war im Check-Run nicht mehr da – obwohl die Meldung
     #972 ausdrücklich auf „die Header-Annotation“ verwies. Geprüft wird hier
     die gesendete Fassade, nicht nur der Bericht im Artefakt.
     """
 
+    # Vollständiger Pflichtsatz für EIN Ziel. Seit 21.11.2026 misst die Wache
+    # drei Ziele (www ist dazugekommen); damit die Zahl der Befunde hier
+    # weiterhin exakt das Melde-Budget trifft, bleibt ein Ziel vollständig und
+    # zwei Ziele bleiben ohne Header – 2 × 5 = 10, unabhängig von der Zahl
+    # weiterer Ziele.
+    GUTE_KOPFZEILEN = {
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-security-policy": (
+            "default-src 'self'; script-src 'self' 'unsafe-inline' "
+            "https://challenges.cloudflare.com https://static.cloudflareinsights.com; "
+            "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; "
+            "form-action 'self' https://abos.franksfinanzcheck.de; "
+            "frame-src https://challenges.cloudflare.com; "
+            "connect-src 'self' https://cloudflareinsights.com"),
+    }
+
     def _f01_befund_mit_zehn_fehlern(self):
+        def holen(url, _weg):
+            kopf = {"cf-ray": "9a1b2c3d4e5f6a7b-FRA"}
+            if url not in header.ZIELE[:2]:
+                kopf.update(self.GUTE_KOPFZEILEN)
+            return (200, kopf)
+
         with tempfile.TemporaryDirectory() as tmp:
             wurzel = Path(tmp)
             datenschutz = wurzel / "content" / "datenschutz" / "index.md"
@@ -375,8 +400,7 @@ class AnnotationsVertrag972(unittest.TestCase):
                                    encoding="utf-8")
             with patch.object(header, "WURZEL", wurzel):
                 code, bericht, daten = header.netz_pruefen(
-                    holen=lambda *_: (200, {"cf-ray": "9a1b2c3d4e5f6a7b-FRA"}),
-                    pausen=(), schlaf=lambda _: None)
+                    holen=holen, pausen=(), schlaf=lambda _: None)
         self.assertEqual(code, 1)
         self.assertEqual(len(daten["fehlend"]), 10)
         daten["bericht"] = bericht

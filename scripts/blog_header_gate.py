@@ -138,6 +138,12 @@ CSP_SOLL = [
 ]
 CSP_SOLL_FRAME_SRC = "frame-src https://challenges.cloudflare.com"
 CSP_SOLL_FORM_ACTION = "form-action 'self' https://abos.franksfinanzcheck.de"
+# BEACON-FREIGABE (21.11.2026): Cloudflare injiziert Web Analytics an der Edge.
+# Fehlt eine der beiden Domains, blockiert der Browser den Beacon – genau der
+# Zustand, der den Layout-Audit am 21.11. falsch rot gemacht hat. Die Regel im
+# Dashboard (beide Hosts!) muss beide Domains führen.
+CSP_SOLL_BEACON_SCRIPT = "https://static.cloudflareinsights.com"
+CSP_SOLL_BEACON_CONNECT = "https://cloudflareinsights.com"
 
 # Für die Menschen: empfohlen, nicht erzwungen.
 OPTIONAL = {
@@ -148,7 +154,14 @@ OPTIONAL = {
 
 # Wo wird geprüft? Startseite und eine Inhaltsseite – Content-Type und Pfad
 # unterscheiden sich, die Header dürfen das nicht.
-ZIELE = ["https://franksfinanzcheck.de/", "https://franksfinanzcheck.de/methodik/"]
+# ZWEITE DOMAIN (21.11.2026): Die Transform Rule aus cloudflare/edge-schutz.md
+# filtert auf BEIDE Hosts. Ohne eigene www-Messung wäre „beide Domains" nur
+# eine Behauptung. www antwortet üblicherweise mit 301 – deshalb wird dort die
+# ERSTE Antwort geprüft und die Weiterleitung NICHT verfolgt (sonst sähe man
+# nur die Kopfzeilen der Hauptdomain).
+ZIELE = ["https://franksfinanzcheck.de/", "https://franksfinanzcheck.de/methodik/",
+         "https://www.franksfinanzcheck.de/"]
+ERSTE_HOFFNUNG = frozenset({"https://www.franksfinanzcheck.de/"})
 
 MIN_HSTS_JAHR = 31_536_000
 
@@ -163,15 +176,33 @@ ZEITLIMIT = 20.0
 PROXY_SPUREN = ("cf-ray", "cf-cache-status", "cf-ray-id")
 
 
+class _OhneWeiterleitung(urllib.request.HTTPRedirectHandler):
+    """Erste Antwort messen, nicht das Ziel.
+
+    Für www ist genau die 301-Antwort die Messung: Dort müssen HSTS, nosniff
+    und die CSP schon stehen. Würde urllib folgen, prüfte die Wache die
+    Hauptdomain ein zweites Mal – und die zweite Domain bliebe ungeprüft.
+    """
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+_OPENER_FOLGEN = urllib.request.build_opener()
+_OPENER_OHNE = urllib.request.build_opener(_OhneWeiterleitung())
+
+
 def kopfzeilen_holen(url: str, weg: str = "HEAD", *,
                      timeout: float = ZEITLIMIT) -> tuple[int, dict[str, str]]:
-    """HTTP-Anfrage; folgt Weiterleitungen und sammelt die letzten Kopfzeilen."""
+    """HTTP-Anfrage; folgt Weiterleitungen – außer bei den Zielen in
+    `ERSTE_HOFFNUNG` (dort ist die erste Antwort die Messung)."""
     anfrage = urllib.request.Request(url, method=weg, headers={
         "user-agent": "franksfinanzcheck-header-wache/1.0 (+https://franksfinanzcheck.de/)",
         "accept": "text/html",
     })
+    opener = _OPENER_FOLGEN if url not in ERSTE_HOFFNUNG else _OPENER_OHNE
     try:
-        with urllib.request.urlopen(anfrage, timeout=timeout) as antwort:
+        with opener.open(anfrage, timeout=timeout) as antwort:
             return antwort.status, {k.lower(): v for k, v in antwort.headers.items()}
     except urllib.error.HTTPError as fehler:
         return fehler.code, {k.lower(): v for k, v in (fehler.headers or {}).items()}
@@ -222,6 +253,18 @@ def befunde_fuer(kopf: dict[str, str]) -> tuple[list[str], list[str], list[str]]
         if CSP_SOLL_FORM_ACTION not in csp:
             warnungen.append("CSP ohne `form-action 'self' https://abos.franksfinanzcheck.de` — "
                              "das Anmeldeformular wird dann vom Browser blockiert.")
+        if CSP_SOLL_BEACON_SCRIPT not in csp:
+            fehlend.append(
+                "CSP erlaubt `https://static.cloudflareinsights.com` nicht — "
+                "Cloudflare injiziert den Web-Analytics-Beacon an der Edge; "
+                "ohne diese Freigabe blockiert der Browser ihn. Die Regel aus "
+                "cloudflare/edge-schutz.md (A1, beide Hosts) auf den neuen "
+                "Stand bringen.")
+        if CSP_SOLL_BEACON_CONNECT not in csp:
+            fehlend.append(
+                "CSP erlaubt `https://cloudflareinsights.com` bei `connect-src` "
+                "nicht — der Beacon kann seine Messung dann nicht senden "
+                "(dieselbe Regel, dieselben zwei Hosts).")
         if re.search(r"script-src[^;]*'unsafe-eval'", csp):
             fehlend.append("CSP erlaubt `'unsafe-eval'` — Skripte dürfen dann Code aus "
                            "Daten erzeugen; das gehört nicht in diese Seite.")
@@ -257,6 +300,16 @@ def ziel_messen(url: str, *, holen=kopfzeilen_holen, pausen=PAUSEN,
                 protokoll.append(f"Versuch {nr + 1} · HEAD: HTTP {status} "
                                  "– per GET nachgefragt")
                 continue
+            if 300 <= status < 400 and url in ERSTE_HOFFNUNG:
+                # www: Die Weiterleitung IST die Antwort, deren Kopfzeilen
+                # gelten. Kein Folgen, kein Fehlalarm.
+                return {
+                    "url": url, "status": status, "weg": weg, "kopf": kopf,
+                    "klasse": "GEMESSEN", "versuche": nr + 1, "protokoll": protokoll,
+                    "fehler": "", "proxy": proxy_lage(kopf),
+                    "hinweis": f"HTTP {status} – erste Antwort gemessen, "
+                               "Weiterleitung nicht verfolgt",
+                }
             if not 200 <= status < 300:
                 # Eine Fehler-/Challenge-Seite ist kein Nachweis für die
                 # Sicherheits-Header der Website (#809). Auch GET-5xx/429
@@ -293,8 +346,13 @@ def naechster_schritt(klasse: str, proxy: str) -> str:
                     "kann die Regel nicht wirken.")
         if proxy == PROXY_AKTIV:
             return ("cloudflare/edge-schutz.md → Abschnitt A1: die Regel "
-                    "`FF Sicherheits-Header` prüfen (alle acht Kopfzeilen, Filter "
-                    "auf beide Hosts). Der Proxy ist aktiv, die Regel ist also "
+                    "`FF Sicherheits-Header` prüfen — alle acht Kopfzeilen, "
+                    "Filter auf BEIDE Hosts (franksfinanzcheck.de und "
+                    "www.franksfinanzcheck.de) und die beiden "
+                    "Beacon-Domains (static.cloudflareinsights.com bei "
+                    "script-src, cloudflareinsights.com bei connect-src). "
+                    "Kopierfertig: python3 scripts/cloudflare_edge_freigabe.py "
+                    "--dashboard. Der Proxy ist aktiv, die Regel ist also "
                     "unvollständig oder überschrieben.")
         return ("cloudflare/edge-schutz.md → Abschnitt A1 abgleichen; die "
                 "Zusammenfassung nennt die fehlenden Kopfzeilen einzeln.")
@@ -503,6 +561,9 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
         m["vorhanden"] = vorhanden
         zeilen.append(f"## {m['url']} (HTTP {m['status']}, via {m['weg']}, "
                       f"Versuch {m['versuche']})")
+        if m.get("hinweis"):
+            zeilen.append("")
+            zeilen.append(f"ℹ️ {m['hinweis']}.")
         zeilen.append("")
         for z in vorhanden:
             zeilen.append(f"- ✅ `{z}`")
@@ -661,9 +722,14 @@ GUTE_KOPFZEILEN = {
     "x-content-type-options": "nosniff",
     "x-frame-options": "DENY",
     "referrer-policy": "strict-origin-when-cross-origin",
-    "content-security-policy": ("default-src 'self'; object-src 'none'; base-uri 'self'; "
+    "content-security-policy": ("default-src 'self'; "
+                                "script-src 'self' 'unsafe-inline' "
+                                "https://challenges.cloudflare.com "
+                                "https://static.cloudflareinsights.com; "
+                                "object-src 'none'; base-uri 'self'; "
                                 "frame-ancestors 'none'; "
                                 "frame-src https://challenges.cloudflare.com; "
+                                "connect-src 'self' https://cloudflareinsights.com; "
                                 "form-action 'self' https://abos.franksfinanzcheck.de"),
 }
 
@@ -749,11 +815,26 @@ def selftest() -> int:
     faelle += 1
 
     # Gegenprobe 6: fehlendes form-action / frame-src nur Warnung, kein Fehler.
+    #    Die Beacon-Domains sind gesetzt – sonst wäre die Probe kein Test der
+    #    Warnungen mehr, sondern ein Test der (neuen) Beacon-Pflicht.
     f, w, _ = befunde_fuer({**gut, "content-security-policy":
                             "default-src 'self'; object-src 'none'; base-uri 'self'; "
+                            "script-src 'self' https://static.cloudflareinsights.com; "
+                            "connect-src 'self' https://cloudflareinsights.com; "
                             "frame-ancestors 'none'"})
     assert not f and any("frame-src" in x for x in w), "frame-src-Hinweis fehlt"
     assert any("form-action" in x for x in w), "form-action-Hinweis fehlt"
+    faelle += 1
+
+    # Gegenprobe 7: die beiden Beacon-Domains fehlen (der Live-Zustand vom
+    #    21.11.2026). Genau dieser Zustand macht den Edge-Stand zum Befund:
+    #    Cloudflare injiziert den Beacon, die CSP blockiert ihn.
+    ohne_beacon = gut["content-security-policy"].replace(
+        " https://static.cloudflareinsights.com", "").replace(
+        " https://cloudflareinsights.com", "")
+    f, _, _ = befunde_fuer({**gut, "content-security-policy": ohne_beacon})
+    assert any("cloudflareinsights" in x for x in f), \
+        f"Fehlende Beacon-Freigabe nicht erkannt: {f}"
     faelle += 1
 
     # Positiv: Optionale Header werden nicht als Fehler geführt.
@@ -856,7 +937,7 @@ def selftest() -> int:
             return (200, {**PROXY_KENNUNG, **gut})
         raise OSError("Name or service not known")
     code, bericht, daten = netz_pruefen(holen=teilweise, pausen=(),
-                                        schlaf=lambda _: None)
+                                        schlaf=lambda _: None, ziele=ZIELE[:2])
     assert code == EXIT_OK, f"Ein sauber gemessener Host darf nicht alarmieren:\n{bericht}"
     assert daten["klasse"] == KLASSE_TEILWEISE, daten["klasse"]
     assert daten["nicht_gemessen"] == [ZIELE[1]]
@@ -870,12 +951,21 @@ def selftest() -> int:
             return (200, {**PROXY_KENNUNG, "x-content-type-options": "nosniff"})
         raise OSError("Connection reset by peer")
     code, bericht, daten = netz_pruefen(holen=befund_und_stoerung, pausen=(),
-                                        schlaf=lambda _: None)
+                                        schlaf=lambda _: None, ziele=ZIELE[:2])
     assert code == EXIT_BEFUND, f"Ein gemessener Befund muss rot sein:\n{bericht}"
     assert daten["klasse"] == KLASSE_BEFUND, daten["klasse"]
     assert daten["gemessen"] == 1
     assert any(ZIELE[0] in f for f in daten["fehlend"])
     assert daten["nicht_gemessen"] == [ZIELE[1]]
+    faelle += 1
+
+    # Fall 14b: www antwortet mit 301. Die ERSTE Antwort ist die Messung –
+    # kein Folgen, kein Fehlalarm, und die zweite Domain bleibt geprüft.
+    def www_antwort(url, weg):
+        return (301, {**PROXY_KENNUNG, **gut, "location": ZIELE[0]})
+    m = ziel_messen(ZIELE[2], holen=www_antwort, pausen=())
+    assert m["klasse"] == "GEMESSEN", m
+    assert "nicht verfolgt" in m.get("hinweis", ""), m
     faelle += 1
 
     # Fall 15: Diagnose „Proxy fehlt“ – die Zone liegt nicht hinter
@@ -948,6 +1038,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Prüft die Sicherheits-Header der Seite (F-01).")
     parser.add_argument("--selftest", action="store_true", help="prüft die Prüfung (ohne Netz)")
     parser.add_argument("--offline", action="store_true", help="nur Repo-Stand prüfen")
+    parser.add_argument("--live", action="store_true",
+                        help="live messen (Standard; beide Hosts, www als erste Antwort)")
     parser.add_argument("--json", action="store_true", help="Befunde als JSON")
     parser.add_argument("--report", metavar="PFAD",
                         help="schreibt den Markdown-Bericht zusätzlich in diese Datei")

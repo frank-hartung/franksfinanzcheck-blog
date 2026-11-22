@@ -37,10 +37,34 @@ Modify Response Header → Create rule**
 | `Cross-Origin-Resource-Policy` | `same-origin` |
 | `Content-Security-Policy` | `default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://abos.franksfinanzcheck.de https://stats.franksfinanzcheck.de https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://abos.franksfinanzcheck.de; object-src 'none'` |
 
+**Beide Domains sind Pflicht — nicht „nice to have".** Der Filter muss
+`franksfinanzcheck.de` **und** `www.franksfinanzcheck.de` enthalten. Fehlt
+`www`, liefert diese eine Domain keine Sicherheits-Header: kein HSTS, kein
+`nosniff`, kein Clickjacking-Schutz, keine CSP. Eine Zone, zwei
+Sicherheitsniveaus — und niemand sieht es, weil der Browser bei fehlenden
+Kopfzeilen nicht warnt. Die exakte Zeile (aus derselben Tabelle erzeugt, die
+`--apply` schreibt):
+
+```
+(http.host eq "franksfinanzcheck.de" or http.host eq "www.franksfinanzcheck.de")
+```
+
+Kopierfertig für das Dashboard — inklusive aller acht Werte, ohne
+Textdoppelung:
+
+```bash
+python3 scripts/cloudflare_edge_freigabe.py --dashboard
+```
+
 **Warum die CSP so aussieht:** `'unsafe-inline'` bei `script-src` ist noch
 nötig (Inline-Skripte für Theme und Service-Worker-Registrierung). Auch damit
 ist die Regel ein Fortschritt: **fremde** Skripte, Frames und Formularziele sind
-ausgeschlossen. Der nächste Ausbauschritt steht in Schritt 4.
+ausgeschlossen. Die beiden Beacon-Domains (`static.cloudflareinsights.com` bei
+`script-src`, `cloudflareinsights.com` bei `connect-src`) sind seit 21.11.2026
+Pflicht: Cloudflare injiziert Web Analytics an der Edge; ohne die Freigabe
+blockiert der Browser den Beacon. Genau dieser Zustand war live messbar und
+hat den Layout-Audit falsch rot gemacht — siehe
+[`CSP-HERMETIK-HIGHEND-2026-11-21.md`](../CSP-HERMETIK-HIGHEND-2026-11-21.md).
 
 **Dieselben acht Kopfzeilen stehen seit 27.10.2026 auch in
 `static/_headers`** — für den Fall, dass der Blog auf Cloudflare Pages oder
@@ -63,7 +87,10 @@ Cloudflare als Empfänger der Zugriffsdaten und stimmt damit überein, was
 tatsächlich passiert.
 
 **Prüfen:** `curl -sI https://franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'`
-→ fünf Zeilen. Automatisch mit Gegenproben: `npm run header:check`.
+→ fünf Zeilen. Dasselbe für `https://www.franksfinanzcheck.de/` — dort ist
+die **erste** Antwort die Messung (meist ein 301), nicht das Ziel der
+Weiterleitung. Automatisch mit Gegenproben: `npm run header:check` (ohne Netz)
+und `npm run header:check:live` (beide Hosts, siehe unten).
 **Ein Befehl für die ganze Regel (seit 19.10.2026, gehärtet 24.10.2026 für WF-E813 / #815):**
 `npm run edge:freigabe` misst DNS-Proxy, SSL-Modus (`Full (strict)` bevorzugt,
 `Full` zulässig, niemals `Flexible`) und genau diese acht Kopfzeilen samt
@@ -77,7 +104,10 @@ Datenschutzerklärung (Runbook B7). `npm run edge:b7` prüft diesen Textstand
 jederzeit separat; ein offener B7 blockiert den finalen Live-Abschluss.
 
 **Live-Messung mit Klassifikation:** `npm run header:check:live` (bzw. der
-tägliche Job „Live-Messung“ der Sicherheits-Wache). Die Wache liefert vier
+tägliche Job „Live-Messung“ der Sicherheits-Wache). Seit 21.11.2026 misst sie
+**drei Ziele**: Startseite, Inhaltsseite und `www` (erste Antwort, ohne
+Weiterleitungs-Folge). Fehlt auf `www` eine Kopfzeile, ist das ein eigener
+BEFUND — nicht ein stiller Nebeneffekt der Hauptdomain. Die Wache liefert vier
 Klassen statt „rot oder grün“ — `BEFUND` (gemessen und mangelhaft, Exit 1),
 `STOERUNG` (nicht messbar, Exit 2, **kein** Sicherheitsbefund), `TEILWEISE`
 (ein Ziel gemessen, eines nicht) und `OK`. Transiente Netzfehler heilt sie

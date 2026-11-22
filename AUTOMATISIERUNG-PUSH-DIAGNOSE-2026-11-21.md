@@ -520,3 +520,29 @@ jetzt.
 
 **Nicht behauptet:** dass der Befund damit verschwindet. Er ist jetzt
 beweisbar zugeordnet, und `static/_headers` ist für die Produktion korrekt.
+
+### 7.6 Korrektur: Die CSP kam nicht aus der Runner-Umgebung
+
+Der Abschnitt 7.5 hat die Herkunft **falsch** zugeordnet. Er lautete: „Die CSP
+dieser Messung stammt aus der Runner-Umgebung". Das war eine Ausschlussfolgerung,
+kein Beleg — und sie war falsch. Der Beweis kam aus den Daten des Repos selbst:
+
+| Schritt | Beleg |
+|---|---|
+| Sample-Auswahl | `buildSampleUrls` nahm `sort().slice(-3)` — die **lexikografisch** letzten Verzeichnisse unter `posts/`, nicht die neuesten Artikel. |
+| Diese drei | `zahnzusatzversicherung-lohnt-sich`, `zinseszinseffekt-formel-erklaert` — beide aus `static/posts/` (251 Altlasten aus `scripts/weiterleitungen.py`). |
+| Ihr Inhalt | `<meta name="ff-weiterleitung">` + `<meta http-equiv="refresh" content="0; url=https://franksfinanzcheck.de/pillar/…">`. |
+| Was der Browser tat | Er folgte dem Refresh. Der Audit maß die **Produktion** — im selben Tab, während die Meldung weiterhin `http://127.0.0.1:…` nannte. |
+| Woher CSP + Beacon kamen | Aus der Edge-Regel vor `franksfinanzcheck.de`. Die beobachtete CSP war exakt der Stand **vor** `65029c7b1` (ohne `static.cloudflareinsights.com`) — also die noch nicht aktualisierte Dashboard-Regel. |
+
+Damit ist die Kette vollständig belegt: **keine Runner-Injektion, sondern eine
+Meta-Refresh-Seite, die den Messbrowser in die Produktion schickt.** Die CSP
+selbst ist echt und gehört zur Edge — sie ist nur nicht die des Repositories
+und war zum Messzeitpunkt veraltet.
+
+Die dauerhafte Heilung steht in
+[`CSP-HERMETIK-HIGHEND-2026-11-21.md`](CSP-HERMETIK-HIGHEND-2026-11-21.md):
+hermetische Messung (keine Fremd-Herkunft), CSP aus `static/_headers`,
+Weiterleitungsseiten sind keine Artikelprobe, Nachweis im Bericht. Der Satz aus
+7.5 („liegt außerhalb dieses Repositories und braucht einen eigenen Auftrag")
+ist damit zurückgezogen: Die Ursache lag **im** Repository.

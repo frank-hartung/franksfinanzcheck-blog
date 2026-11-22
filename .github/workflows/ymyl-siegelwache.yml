@@ -35,11 +35,18 @@ jobs:
       - name: Siegel- und Schreibschutz testen
         run: |
           python3 -m unittest scripts.tests.test_ymyl_siegel_wache scripts.tests.test_ymyl_write_contract scripts.tests.test_metadaten_wache scripts.tests.test_editorial_review_gate
+      # WARUM `always()` (21.11.2026): Der Lauf war rot, weil ein
+      # Metadaten-Test (M1: Kfz-Titel 64 statt max. 60 Zeichen) scheiterte –
+      # und damit wurde diese Siegelprüfung NIE ausgeführt. Genau in diesem
+      # Zustand hat #1309 (`be4f30a1`) das Prüfprotokoll beider Hochrisiko-
+      # Artikel verändert und den Siegel-Hash stehen gelassen. Die Fachprüfung
+      # darf nicht von einem Metadaten-Befund verdeckt werden: beide Schritte
+      # laufen jetzt unabhängig voneinander.
       - name: Bestehende Siegel und Rückzüge im PR prüfen
-        if: github.event_name == 'pull_request'
+        if: always() && github.event_name == 'pull_request'
         env:
           PR_BASE: ${{ github.event.pull_request.base.sha }}
         run: python3 scripts/ymyl_siegel_wache.py --base "$PR_BASE"
       - name: Bestehende Siegel aller Posts prüfen
-        if: github.event_name != 'pull_request'
+        if: always() && github.event_name != 'pull_request'
         run: python3 scripts/ymyl_siegel_wache.py
