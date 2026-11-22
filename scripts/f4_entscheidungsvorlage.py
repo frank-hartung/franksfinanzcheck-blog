@@ -24,25 +24,33 @@ DAS DOKUMENT ENTSCHEIDET NICHTS
   Es schreibt in keinen Ledger und schließt keinen Befund. Es macht nur
   sichtbar, was zu entscheiden ist.
 
-WARUM DIE AUSSAGE GEBUNDEN WIRD UND NICHT DIE DATEI (22.11.2026)
-  Bis hierhin trug jeder Artikelblock einen SHA-256 über die ROHE Datei. Ein
-  `lastmod`, ein Provenienz-Nachtrag am Cover, eine aufgefrischte Quellenliste,
-  eine Typografie-Heilung des Betriebs (`fix_spaces`/`fix_linebreaks`) oder –
-  der eigentliche Auslöser – ein neuer Commit auf `main` machte die Vorlage
-  damit „veraltet“, obwohl sich **keine Aussage** geändert hatte.
+WARUM HIER KEIN DATEI-HASH STEHT (22.11.2026)
+  Bis heute trug jeder Artikelblock einen SHA-256 über die ROHE Datei. Damit
+  war die Vorlage „veraltet", sobald irgendein fremder Lauf Bytes bewegte:
+  ein `lastmod`, eine Provenienz-Zeile am Cover, eine aufgefrischte
+  Quellenliste, eine Typografie-Heilung (`fix_spaces`/`fix_linebreaks`) –
+  und vor allem jeder neue Commit auf `main`. Der CI prüft den MERGE-Stand
+  (`refs/pull/N/merge`), also Branch plus aktuelles `main`; ein Bot-Commit
+  genügte, um `test_dossier_ist_aktuell` in `Code-Regression` UND `Uhr-Probe`
+  rot zu färben, ohne dass sich eine Aussage bewegt hatte.
 
-  Der CI prüft den MERGE-Stand (`refs/pull/N/merge`), nicht den Branch. Lagen
-  zwei redaktionell geänderte Artikel auf `main`, kippte `test_dossier_ist_aktuell`
-  in `Code-Regression` UND `Uhr-Probe` – ein Dossier, das einen fremden Commit
-  als eigenen Befund meldet. Genau der Fehler, den dieses Skript verhindern soll,
-  nur mit umgekehrtem Vorzeichen.
+  Zwischenschritt war der Aussage-Hash (`text_hash()`, Projektion
+  `betrieb-v4`) – stabil gegen Typografie und Metadaten, aber weiterhin
+  abhängig vom Merge-Stand: Sobald `main` eine Aussage ändert, die mit
+  keinem offenen Befund zu tun hat, galt das Dossier als veraltet.
 
-  Gebunden wird deshalb an dieselbe Fläche wie die Faktenfrische-Entscheidungen:
-  `ledger.text_hash()` in der Projektion `betrieb-v4` (Titel, Beschreibung,
-  Kurzantwort, Aussage-Body; ohne Quellen, Betriebsflächen und Zwischenraum).
-  Was eine Aussage trägt – Silben, Ziffern, Überschriften, Linkziele –, ändert
-  den Wert sofort; Typografie, Cover und Metadaten nicht. Das ist die Frage,
-  die das Dossier stellt: „Steht die beanstandete Aussage heute noch so da?“
+  Deshalb trägt das Dokument jetzt **gar keinen Hash** mehr. Es ist ein
+  Arbeitsdokument für eine menschliche Entscheidung, kein Register:
+  Die Fassungsbindung gehört zum Ledger (`geprueft_fassung` in
+  `data/faktenfrische_entscheidungen.yaml`, geschrieben von
+  `--entscheiden`). Was F4 aktuell halten MUSS, steht ohnehin im Text und
+  wird aus dem heutigen Artikel erzeugt: welche Befunde offen sind und ob
+  die beanstandeten Werte heute noch im Text stehen (Spalte „Betroffene
+  Werte heute"). Ändert sich daran etwas, wird `--check` sofort rot.
+
+  Grenze, bewusst: Eine reine Stiländerung an einem Artikel, die keinen
+  beanstandeten Wert berührt, lässt `--check` grün. Das ist die Regel,
+  nicht die Ausnahme – der Befund ist dann inhaltlich unverändert.
 
 Nutzung:
   python3 scripts/f4_entscheidungsvorlage.py             # schreiben
@@ -64,9 +72,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-# Dieselbe Projektion, die der Ledger für Entscheidungen verwendet.
-PROJEKTION = "betrieb-v4"
-
 ZIEL = ROOT / "F4-ENTSCHEIDUNGSVORLAGE.md"
 POSTS = ROOT / "content" / "posts"
 ENTSCHEIDUNGEN = ROOT / "data" / "faktenfrische_entscheidungen.yaml"
@@ -87,22 +92,6 @@ def prosa(text: str) -> str:
     """Artikelkörper ohne Frontmatter (für den Werteabgleich)."""
     teile = text.split("---", 2)
     return teile[2] if len(teile) >= 3 else text
-
-
-def aussage_hash(fassungen: dict, slug: str) -> str | None:
-    """Aussage-Hash des Artikels (Projektion `betrieb-v4`) – nicht die Datei-Bytes.
-
-    Dieselbe Fläche, an die `faktenfrische_befund_ledger.py --entscheiden`
-    bindet: Titel, Beschreibung, Kurzantwort und Aussage-Body. Damit ändert
-    sich der Wert genau dann, wenn sich eine Aussage ändert – und nicht,
-    wenn ein fremder Lauf ein Cover, ein `lastmod`, eine Quelle oder einen
-    Zeilenumbruch anfasst (Begründung im Modul-Docstring).
-    """
-    eintrag = fassungen.get(slug)
-    if not isinstance(eintrag, dict):
-        return None
-    wert = eintrag.get("text")
-    return str(wert) if wert else None
 
 
 def bezugsdatum() -> dt.date:
@@ -233,10 +222,10 @@ def baue(stichtag: dt.date) -> str:
              "(`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die "
              "Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.")
     z.append("")
-    z.append("**Bindung: Aussage statt Bytes.** Der Hash je Artikel ist "
-             f"`text_hash()` in der Projektion `{PROJEKTION}` – dieselbe Fläche wie "
-             "die Faktenfrische-Entscheidungen. Typografie, Cover, `lastmod` und "
-             "Quellenpflege öffnen hier nichts; eine geänderte Aussage sofort.")
+    z.append("**Keine Prüfsummen im Dokument.** Maßgeblich ist, welche Befunde "
+             "offen sind und ob die beanstandeten Werte heute noch im Text stehen; "
+             "die Fassungsbindung führt der Ledger (`geprueft_fassung`). So altert "
+             "die Vorlage nicht an fremden Commits.")
     z.append("")
     z.append(f"**{len(offen)} offene Live-Befunde auf {len(seiten)} Artikeln.** Für "
              f"**{len(alt)}** gibt es frühere Entscheidungen zu diesem Befund;")
@@ -265,13 +254,6 @@ def baue(stichtag: dt.date) -> str:
                            key=lambda b: b["id"])
         z.append(f"## `{slug}`")
         z.append("")
-        heutiger_hash = aussage_hash(fassungen, slug)
-        if heutiger_hash:
-            z.append(f"- Aussage-Hash (Projektion `{PROJEKTION}`, heute): "
-                     f"`{heutiger_hash}`")
-        else:
-            z.append("- Aussage-Hash (heute): **nicht ermittelbar** – der Artikel "
-                     "steht nicht im geprüften Bestand")
         body = prosa(pfad.read_text(encoding="utf-8")) if pfad.exists() else ""
         z.append(f"- Offene Live-Befunde: **{len(eintraege)}**")
         z.append("")

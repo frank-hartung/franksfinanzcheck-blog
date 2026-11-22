@@ -6,7 +6,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-22** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**Bindung: Aussage statt Bytes.** Der Hash je Artikel ist `text_hash()` in der Projektion `betrieb-v4` – dieselbe Fläche wie die Faktenfrische-Entscheidungen. Typografie, Cover, `lastmod` und Quellenpflege öffnen hier nichts; eine geänderte Aussage sofort.
+**Keine Prüfsummen im Dokument.** Maßgeblich ist, welche Befunde offen sind und ob die beanstandeten Werte heute noch im Text stehen; die Fassungsbindung führt der Ledger (`geprueft_fassung`). So altert die Vorlage nicht an fremden Commits.
 
 **198 offene Live-Befunde auf 55 Artikeln.** Für **117** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **81** Befunde haben keine frühere aktive Entscheidung.
@@ -101,7 +101,6 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## `2026-08-10-dsl-wechselbonus-sichern`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `af037ea121477d0853771b4407f1b204786c99c9c600b99cd094677e10402ae1`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -129,7 +128,6 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `991809c39c5d2e1eda861a12217fbba6307ecd518389bd7ad5c07f36cbc64396`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -170,7 +168,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `0330d7e6b58dd159eea14117c2c5175be908d71c450a928351602f3c8c581dce`
 - Offene Live-Befunde: **4**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -214,7 +211,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `0f9b8fe44bb74eed1cab6a5da7a3e9c496f18b7a081b023debb62a2601d0ec76`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -255,7 +251,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `9c287fa13663c71b431e6e443fb04090072f66e01b86dc84ea0e3ab9255cf1c3`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -318,7 +313,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `0a7e7319cf393202d7ca47252ff6b77a07342de861e672f7c93240865ffdd258`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -354,7 +348,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `074285a4a5c3578685dfde052d3684021876edc7839af7830fa77adde05e5e41`
 - Offene Live-Befunde: **4**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -398,7 +391,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `f8090ef6665b48bcba4c084acbaadc3555064c3712d1e39c48a9640a3c605c71`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -463,7 +455,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `6ef697b5e46950e0f513a27a36c5f82ffb72de48f4e6fab2c1a6ddbbb4ee3979`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -489,7 +480,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `700ec9ff794af080c1c21185aa4311903f843c4a51030d8adb7acc7a25739a10`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -553,7 +543,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `7b2a89e09d88b31147f45a960353b4aa5b6b2a9fe4a27bcfc074b9e3bb6e72d1`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -579,7 +568,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `2e10d77851a9c97d7a675b9d25f7f6969dff5b37c7109ab5a2a747d789e64424`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -643,7 +631,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `e50b3a1b4a15dd408657a29aa70bbc3a6fff7baf41735788df6c17f52ef0411e`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -711,7 +698,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `81f2fce9567a8f4a8c97c866b18fdc607b96b8c4974038036d63bd7399c551cc`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -755,7 +741,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `e9878de04359da89189478285d4cbf49a5fadbfe4ebdf9cf6aff603be9c8d825`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -818,7 +803,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `429762da21f7e37326cc5673517c9c92e513c2c1638bb9c7bde71335c7558fa4`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -871,7 +855,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `fa70beeb9209074ec3961a4f66463a1b5f442cf431ee855a82a586f3744513c7`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -888,7 +871,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `2f342fc96481ad8e82fa6eca6514fe188e201de34ad3bdf942fced7f9115b752`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -951,7 +933,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `dde45fc8842b53ce0f96ee67b2aa8c4abdfa0f2dfcba0e7083a55d8bd08ba97d`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1004,7 +985,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `4e0c10a93fccd3d00b5f3cb13d8694db632c54a648cfa6819eb5b641fb426806`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1030,7 +1010,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `bca163366137431bf7874d8b59f6ad56b2c60ce3184d3becb9b83420fd95a232`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1083,7 +1062,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `c69ef05539acd2995f5fa0a215b67d131aa76e276ec7745ed41a9a0f872973c0`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1147,7 +1125,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `58118f84a313440cbb58eb4cf6f563bd2c793f3c752b352b9a4cfacb6bba88d0`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1178,7 +1155,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `4125c5b92b1776895df866aa9c4f3f206401a4fa4eeda9565416cd3640219835`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1219,7 +1195,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `b6c79be1eef1666aad1723c3a0592a07b1bd31a7362a10885764df8ca56519e1`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1260,7 +1235,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `72bb94e4c8308afca74e27766a594dfe0793398317bc26d14d5d845f6588c600`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1301,7 +1275,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `c8e33490955f3ad917870a075af72c942ea1788a73fca10388d60d2dacb7a4e5`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1327,7 +1300,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `0d28faa8b096de9d17c47e2471493572725bdb85311b422f8a3c81b249892cef`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1369,7 +1341,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `3e21690903133257542de4d8f753dd90bba147a628d3bc3811073863a5394eef`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1401,7 +1372,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `2f4500c8506b2e142428be0a33ea0f3e9ebfce983741bb299293a5993b963e9d`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1442,7 +1412,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `81f3587301a0bc3014e1f844d2dda5b82c955afd8d9822107e3e7894fac347c7`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1505,7 +1474,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `6ccb55de94355f3861008f986306063bbdc6475374adc0f41aa5a18b5d1dbac4`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1568,7 +1536,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `56f6c7a1f9d2d5b51bfb828ee75cad803834965dda6fae042058da874d87ebea`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1634,7 +1601,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `4f7ebfd60206173a0f4c7fc4309445f5d67668616d0b9d2e38a5cdbd2ac05f97`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1697,7 +1663,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `512f3bcfccfa8fe39f770de51e9d6c2aa53b28b01d6d5c9d1061921c430f670a`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1760,7 +1725,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `f46f0b25b6a9e7aa9dc403470bf3014d6fe4f0c93f84c95a10b3380a4c3d07ec`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1796,7 +1760,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `dea52e38cc7db83504d8253af50110d9e1cf9c0989eeb5bce894c7f51683fe20`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1839,7 +1802,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `e78c67b69084f33ed410690ec87cf612457af52df4e6f9436bdfeb4833117e85`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1874,7 +1836,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `d43bc7bd1deb8f838a6d3313d5a240d4ae9bda88d3f3af69581ebf8a71144784`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1915,7 +1876,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `7142bf841f8c55a1b38800cc62d76213bafac9123aceca32686d1fdb5bcda042`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1941,7 +1901,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `638345d553eb8cde1e63f0674606ea01b95ba34a096485b96e38837370bf96fa`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2004,7 +1963,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `4a82aa3b12aa80181024d3903025fba2e93ec0a1fcefc6bf554863216a521269`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2021,7 +1979,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `2cab8182fc6de491690f7d7c175d13c8a36b2be5e034768bbf37ce8648b08a09`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2047,7 +2004,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `afd12ffaf12b9d5f4934868b62d15711741caeb34475824a94d0422c4c6db79c`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2082,7 +2038,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `106fcd4214bcd182e583fa9f078179f4bd1bfa0f1855391b1fb09e374301be7e`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2108,7 +2063,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `81977c492154a7a7fbccaac226717fadcc7d55dbeb107931e134528e68c1a2cb`
 - Offene Live-Befunde: **4**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2152,7 +2106,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `f55d37434ac94a4de51305957d8c091aacb371fb3902ad964328d093e3aba206`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2208,7 +2161,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `a65a210dfbe2da417b9b2762cfc9ab72034a1dadf71ec8dfbb323fc00b70e038`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2271,7 +2223,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `35f772ff83f645ebb14efc8e7f317de323b84294fb32916bb8a9a469702cbdba`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2325,7 +2276,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `3773bbca0da56a990e96f7a5034f725b4b2f669611fd2ed2fe045101cbd15bc8`
 - Offene Live-Befunde: **4**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2370,7 +2320,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `83f60cf3eb15e70ac30a82a5506283ed7c0b4bd499632b344ce62e81b5d2c604`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2405,7 +2354,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `89b17547ba6e352dc363a63dc0c01f260b04413636eb4c294efe3ee5e6237e7a`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2441,7 +2389,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `2bf89c6fd3cef9f169ab8b254d63950370ff7014cb132fe5800df5a38ce4296f`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2484,7 +2431,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `64d3bbc35c813f24708d625f42036516c759a20d18be9f138acb2abe7661f2d0`
 - Offene Live-Befunde: **4**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2528,7 +2474,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
 
-- Aussage-Hash (Projektion `betrieb-v4`, heute): `2af9c0a50b4a175e473adf15bc21ade581623c4c47fab8d02bc3770560d63c42`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |

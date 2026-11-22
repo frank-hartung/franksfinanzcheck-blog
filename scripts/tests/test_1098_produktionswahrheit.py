@@ -257,54 +257,44 @@ class Entscheidungsvorlage(unittest.TestCase):
                          "F4-ENTSCHEIDUNGSVORLAGE.md ist veraltet – "
                          "python3 scripts/f4_entscheidungsvorlage.py")
 
-    def test_dossier_bindet_die_aussage_statt_der_datei(self):
-        """Der Hash je Artikel ist der Aussage-Hash, keine Byte-Prüfsumme.
+    def test_dossier_traegt_keine_pruefsummen(self):
+        """Kein Datei- und kein Aussage-Hash im Dossier – beide altern am Merge-Stand.
 
-        22.11.2026: Die Vorlage trug einen SHA-256 über die ROHE Datei. Der CI
-        prüft den MERGE-Stand; zwei redaktionell geänderte Artikel auf `main`
-        machten `test_dossier_ist_aktuell` in `Code-Regression` UND `Uhr-Probe`
-        rot, ohne dass sich eine Aussage bewegt hatte. Gebunden wird deshalb an
-        dieselbe Fläche wie die Entscheidungen (`text_hash`, `betrieb-v4`).
+        22.11.2026: Der SHA-256 über die ROHE Datei machte die Vorlage bei jedem
+        fremden Byte rot (Cover, `lastmod`, Typografie – und jeder neue Commit auf
+        `main`, weil der CI den MERGE-Stand prüft). Der Zwischenschritt
+        „Aussage-Hash" war stabiler, kippte aber weiter, sobald `main` eine
+        Aussage änderte, die mit keinem offenen Befund zu tun hat. Frische
+        entsteht jetzt aus dem Inhalt: welche Befunde offen sind und ob die
+        beanstandeten Werte heute im Text stehen. Die Fassungsbindung führt der
+        Ledger (`geprueft_fassung`).
         """
-        fassungen, _ = ledger.bestand_identitaeten()
-        seiten = sorted({b["slug"] for b in self.befunde})
-        self.assertTrue(seiten, "Ohne offene Live-Befunde prüft der Test nichts.")
-        for slug in seiten:
-            with self.subTest(slug=slug):
-                erwartet = fassungen[slug]["text"]
-                self.assertIn(f"- Aussage-Hash (Projektion `{self.vorlage.PROJEKTION}`,"
-                              f" heute): `{erwartet}`", self.text,
-                              "Artikelblock bindet nicht den Aussage-Hash.")
-        self.assertNotIn("Datei-SHA256", self.text,
-                         "Byte-Prüfsumme zurück im Dossier – sie altert mit jedem "
-                         "fremden Commit (Typografie, Cover, lastmod, Merge-Stand).")
+        for veraltet in ("Datei-SHA256", "Aussage-Hash"):
+            self.assertNotIn(veraltet, self.text,
+                             f"{veraltet} zurück im Dossier – es altert mit dem "
+                             "Merge-Stand statt mit der Aussage.")
+        self.assertIn("Keine Prüfsummen im Dokument", self.text,
+                      "Die Vorlage muss ihre Bindung selbst erklären.")
 
-    def test_betriebsaenderung_oeffnet_das_dossier_nicht(self):
-        """Typografie und Metadaten ändern die Aussage nicht – also auch nicht F4.
+    def test_frische_haengt_am_wert_nicht_an_der_formatierung(self):
+        """Das Frischekriterium ist die Textlage der beanstandeten Werte.
 
-        Gegenprobe zum obigen Test: Hier wird eine echte Datei verändert
-        (doppelte Leerzeichen, zusätzliche Leerzeilen, `lastmod`). Die Bytes
-        differieren messbar, der Aussage-Hash bleibt gleich – genau die
-        Eigenschaft, die den CI-Lauf vom 22.11.2026 gekippt hat.
+        Formatierung darf nichts öffnen: `fix_spaces`/`fix_linebreaks` und
+        Zeilenumbrüche ändern keine Aussage. Kommt ein beanstandeter Wert
+        hinzu, muss die Vorlage dagegen neu erzeugt werden.
         """
-        import hashlib
-        fassungen, _ = ledger.bestand_identitaeten()
-        slug = sorted({b["slug"] for b in self.befunde})[0]
-        quelle = self.vorlage.POSTS / slug / "index.md"
-        roh = quelle.read_text(encoding="utf-8")
-        mutiert = roh.replace("\n\n", "\n\n\n", 2).replace("## ", "##  ", 1)
-        mutiert = re.sub(r"(?m)^lastmod:.*$", "lastmod: 2099-01-01", mutiert, count=1)
-        self.assertNotEqual(hashlib.sha256(roh.encode()).hexdigest(),
-                            hashlib.sha256(mutiert.encode()).hexdigest(),
-                            "Die Probe muss die Bytes wirklich verändern.")
-        with tempfile.TemporaryDirectory() as tmp:
-            pfad = Path(tmp) / "index.md"
-            pfad.write_text(mutiert, encoding="utf-8")
-            artikel = ff.lade_artikel(str(pfad))
-        self.assertIsNotNone(artikel, "Mutierter Artikel nicht lesbar.")
-        self.assertEqual(ledger.text_hash(artikel), fassungen[slug]["text"],
-                         "Reine Betriebsänderung verschiebt den Aussage-Hash – dann "
-                         "wäre die Bindung wertlos.")
+        beanstandung = ("Angaben zu möglichen Einsparungen (150 €–400 €) sind "
+                        "ohne Quellenangabe.")
+        klar = "Ein Absatz ohne die Zahlen.\n\nEin zweiter Absatz."
+        laut = ("Ein  Absatz   ohne  die Zahlen.\n\n\nEin zweiter\nAbsatz.")
+        self.assertEqual(self.vorlage.lage(klar, beanstandung),
+                         self.vorlage.lage(laut, beanstandung),
+                         "Formatierung verschiebt die Textlage – dann wäre die "
+                         "Vorlage wieder an Bytes gebunden.")
+        mit_wert = klar + "\n\nDas spart 150 €–400 € im Jahr."
+        self.assertNotEqual(self.vorlage.lage(klar, beanstandung),
+                            self.vorlage.lage(mit_wert, beanstandung),
+                            "Ein zurückgekehrter Wert öffnet das Dossier nicht.")
 
     def test_vorlage_ist_uhrfest(self):
         """Zweimal erzeugt = zweimal gleich, und ohne Uhr im Text.
