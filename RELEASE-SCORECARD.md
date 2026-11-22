@@ -153,14 +153,14 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 | Kennzahl | Wert |
 |---|---|
-| Seiten im Bestand (Posts + Ratgeber) | 146 |
+| Seiten im Bestand (Posts + Ratgeber) | 145 |
 | Fällig heute / überfällig | 6 / 0 |
-| Bedarf | 3,50 Prüfungen/Tag (24,5/Woche) |
+| Bedarf | 3,49 Prüfungen/Tag (24,4/Woche) |
 | Angebot | 10,00/Tag (Budget 10 × 1,00 Läufe/Tag) |
-| **Deckung** | **286 %** |
+| **Deckung** | **287 %** |
 | Rückstand abgebaut | in 0 Tagen (Frist 7 Tage) |
 | Nächste Frist | `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` am 2026-11-27 (in 5 Tagen) |
-| Empfohlenes Budget | 10 je Lauf (Limit 19) |
+| Empfohlenes Budget | 10 je Lauf (Limit 21) |
 | Spitzentag (#1039) | ✅ mitgemessen (55 Bündeltage, kein Befund) |
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
@@ -460,7 +460,6 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim` | standard | nicht erforderlich | frisch geprüft vor 5 Tagen (Intervall 90 Tage) | 2027-02-15 |
 | `2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste` | standard | nicht erforderlich | frisch geprüft vor 9 Tagen (Intervall 90 Tage) | 2027-02-11 |
 | `2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` | standard | nicht erforderlich | frisch geprüft vor 5 Tagen (Intervall 90 Tage) | 2027-02-15 |
-| `2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater` | standard | nicht erforderlich | frisch geprüft vor 5 Tagen (Intervall 90 Tage) | 2027-02-15 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 
