@@ -360,3 +360,19 @@ aber dieser Pfad lief daran vorbei.
 versiegelte Altfall behält seinen 64-Zeichen-Titel, bis Frank Hartung ihn
 kürzt und die Fassung neu freigibt (`--seal`). Bis dahin bleibt der
 YMYL-Check rot – das ist der Preis der Signatur, nicht ein Defekt der Wache.
+
+**Vorbereitete Heilung für Frank (2 Minuten):** Titel auf 57 Zeichen kürzen
+und die Fassung neu siegeln – die Aussage bleibt identisch:
+
+```bash
+# 1) Titel in content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md
+#    title: 'Kfz-Versicherung vergleichen: Was ändert sich am Beitrag?'
+# 2) aenderungsgrund um „Titel auf Snippet-Fenster (60 Zeichen) gekürzt" ergänzen
+python3 scripts/editorial_review_gate.py --seal --file content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md
+python3 scripts/metadaten_wache.py
+python3 scripts/ymyl_siegel_wache.py
+```
+
+Erst danach werden „Metadaten-Wache – Quelle“ (im E2E-Lauf) und die
+YMYL-Siegelprüfung auf `main` grün. Beide sind heute rot – nicht wegen
+dieses PRs, sondern wegen genau dieses Titels.
