@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-21T23:26:52Z",
+  "generated_at": "2026-11-22T07:00:17Z",
   "modus": "kandidaten",
-  "commit": "230e55c600127a7776f0a60de45ea069eab82f4e",
+  "commit": "4728b962a3eb5614d253d46ddf6c8167765b2ba8",
   "kapazitaet": {
-    "stichtag": "2026-11-21",
-    "basis": "2026-11-21",
+    "stichtag": "2026-11-22",
+    "basis": "2026-11-22",
     "projiziert": false,
     "artikel": 144,
     "faellig": 4,
@@ -14,7 +14,7 @@
     "naechste_frist": {
       "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
       "frist": "2026-11-27",
-      "restlaufzeit": 6
+      "restlaufzeit": 5
     },
     "budget": 10,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-21",
+      "bis": "2027-03-22",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -206,9 +206,9 @@
     "ueberholt": 253,
     "ohne_fassung": 13,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 22,
+    "aeltester_tage": 23,
     "frist_tage": 14,
-    "ueber_frist": 119,
+    "ueber_frist": 137,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
