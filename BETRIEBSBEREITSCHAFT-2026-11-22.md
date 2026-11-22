@@ -10,8 +10,9 @@ extended, Node 22, Chromium 153, keine Netzmessung gegen die Produktion).
 > E2E-Tests** ausgeliefert. Der Deploy schrieb seit 18 Stunden einen roten
 > **Siegel**-Job, weil genau **ein** Metadaten-Befund offen war; er ist behoben
 > (#1315) und main ist nachgezogen. Die PR-Regressionssuite stand auf **5 roten
-> Tests**; **4 sind geheilt**, **1** bleibt eine redaktionelle Entscheidung und
-> ist unten belegt. Die Auslieferung selbst war nie kaputt – nur ihr Nachweis.
+> Tests**; **alle fünf sind geheilt**, der Bestand ist auch in der
+> Einzigartigkeitsprüfung **kritisch-frei** (`Kritisch (live↔live): 0`). Die
+> Auslieferung selbst war nie kaputt – nur ihr Nachweis.
 >
 > **Produktionsnachweis:** Lauf
 > [45019893624](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/45019893624)
@@ -33,17 +34,16 @@ extended, Node 22, Chromium 153, keine Netzmessung gegen die Produktion).
 | 5 | `test_reisekasse_…`: die Präzisierung „Das lässt sich nicht pauschal zusagen." fehlte im Datenschutz-Abschnitt | Der Automationslauf `5e8233e` (22.11., 08:45) hat den Artikel **neu angelegt** und dabei den Satz verloren; außerdem ein Streich-Leerzeichen und ein sinnfreier Zusatz („das ist ein Modellwert") in der DSGVO-Passage | Satz wiederhergestellt, Passage sprachlich bereinigt – die Haltung („keine Pauschalaussage") ist wieder belegt |
 | 6 | Tagesgeld: zwei KI-Füllsätze („Genau das ist der Hebel: Tagesgeldkonto." / „Darum geht es hier konkret: Tagesgeldkonto.") | Textgenerator-Artefakt ohne Aussage | entfernt; Abschnitt beginnt wieder mit einer inhaltlichen Aussage |
 | 7 | Drift der abgeleiteten Register (F4-Vorlage, BEFUND-AKTE, Fachprüfungs-Register) | Register binden Datei-Hashes; jede Inhaltskorrektur entwertet sie | mit den dafür gebauten Werkzeugen nachgezogen (`abgeleitete_register.py --fix`, `f4_entscheidungsvorlage.py`) – **nicht** von Hand |
+| 8 | `test_kein_kritisches_live_paar_im_bestand`: 5 gemeinsame 5-Gramme (`sparen-im-herbst` ↔ `kfz-versicherung`), Klasse **kritisch (live↔live)** | Beide Artikel formulierten dieselbe Kfz-Kündigungsregel (31.12. / ein Monat / 30.11.) im selben Wortlaut | Der **ungesiegelte** Herbst-Artikel ist umformuliert (kfz bleibt als YMYL-Text unberührt): „Läuft dein Kfz-Vertrag zum 31. Dezember aus und gilt eine Kündigungsfrist von einem Monat, muss dein Schreiben spätestens am 30. November zugehen. Endet der Vertrag zu einem anderen Datum, verschiebt sich auch der Termin." → **0 gemeinsame 5-Gramme** |
+| 9 | Folgekosten der Umformulierung: die Fassungsbindung von **fünf** Faktenfrische-Entscheidungen am Herbst-Artikel (`47f855cb…`, `7f66ec82…`, `6b0aa34…`, `84c991c…`, `a70e7ad…`) hätte sich lautlos gelöst | Entscheidungen sind textgebunden; der Hash wechselte `692d9701…` → `cddc3cdf…` | **Folgeentscheidungen über den dokumentierten Schließweg** (`faktenfrische_befund_ledger.py --entscheiden`, Anfügeprotokoll, Vorgängerverweis), jede mit eigenem Prüfnachweis am heutigen Volltext; Registerrunde `2026-11-22` dokumentiert Anlass und Prüfung. **Keine** Handänderung an Hashes, **keine** Lockerung der Verbotsliste |
 
-**Bewusst nicht geheilt:**
+**Bewusst nicht im selben Zug geheilt:** Das Duplikat-Paar ist inzwischen
+geheilt (Zeilen 8/9). Die Umformulierung liegt ausschließlich im **ungesiegelten**
+Herbst-Artikel; der versiegelte kfz-Beitrag bleibt byte-gleich, sein Siegel
+also unangetastet.
 
-* **Ein kritischen Duplikat-Paar** (`sparen-im-herbst` ↔ `kfz-versicherung`):
-  fünf gemeinsame 5-Gramme zur Kfz-Kündigung. Die Passage wurde umformuliert –
-  damit wurde aber die **Fassungsbindung zweier dokumentierter
-  Faktenfrische-Entscheidungen** (`47f855cb…`, `7f66ec82…`, Status *behoben*)
-  ungültig. Eine Umbindung ohne redaktionelle Prüfung wäre eine gefälschte
-  Freigabe; die Änderung wurde deshalb **zurückgenommen**. Der Befund bleibt
-  offen (Issue #1289) und braucht eine Textentscheidung an einem der beiden
-  Artikel (der kfz-Artikel trägt ein YMYL-Siegel).
+**Weiterhin offen (Redaktion, nicht Werkzeug):**
+
 * **Sechs Artikel unter Flesch 60** (u. a. Tagesgeld 54,3): Der deterministische
   Heiler erreicht die Schwelle dort nicht und schreibt fail-closed nichts
   (`lesbarkeit_heiler.py` → „Text bleibt unangetastet"). Das ist Redaktion
@@ -96,8 +96,12 @@ der Grenze, an der ein Eingriff den Nutzen rechtfertigt.
 `python3 -m unittest discover -s scripts/tests`
 
 * **vorher:** 5 rote Tests (Metadaten M1, FF3, Flesch, Reisekasse, Duplikat)
-* **nachher:** 4 geheilt, **1 offen** – das Duplikat-Paar aus Abschnitt 1
-  (redaktionelle Entscheidung).
+* **nachher:** **5 von 5 geheilt**, Bestand grün (`6346 Tests`).
+* Zusatzbelege: `check_uniqueness.py` → `Kritisch (live↔live): 0`,
+  `Interne Überlappungen: 85`, `Nicht-Live-Paare: 2` (blockieren den Bestand
+  nicht, vor Veröffentlichung umschreiben); offene Faktenfrische-Befunde
+  **301** (vorher 304 – zwei durch die Textänderung planmäßig geöffnet, fünf
+  nach Prüfung entschieden).
 
 ---
 
@@ -106,19 +110,15 @@ der Grenze, an der ein Eingriff den Nutzen rechtfertigt.
 1. **Release-Scorecard 29/90** (Issue #1193): 59 Live-Artikel blockieren an
    `F4-fachbefund` (Faktenalter) – die Wiedervorlagen sind redaktionell, kein
    Werkzeugdefekt. Der Deploy hängt **nicht** daran.
-2. **Duplikat-Paar** (Issue #1289, s. o.): eine Passage in
-   `2026-08-14-sparen-im-herbst…` **oder** im versiegelten
-   `2026-08-26-kfz-versicherung…` neu formulieren, danach Fassung neu
-   entscheiden/versiegeln.
-3. **Auslieferungs-SLO misst 403** (Issue #1279): `publication_check.py` ruft
+2. **Auslieferungs-SLO misst 403** (Issue #1279): `publication_check.py` ruft
    `https://franksfinanzcheck.de/sitemap.xml` mit einem Nicht-Browser-UA ab;
    Cloudflare antwortet 403. Die Folge ist eine **falsche Diagnose** („CDN"),
    obwohl die Quelle stimmt. Nötig ist eine WAF-Ausnahme für den Messweg
    (Cloudflare-Dashboard, `cloudflare/edge-schutz.md`) **oder** ein
    akzeptierter Beleg-Weg; beides ist Zugangs-/Entscheidungssache.
-4. **10 Cornerstone-Kandidaten** (P3, `python3 scripts/cornerstone_wache.py --kandidaten`):
+3. **10 Cornerstone-Kandidaten** (P3, `python3 scripts/cornerstone_wache.py --kandidaten`):
    markieren, welche Artikel eine Themenwelt tragen.
-5. **Fünf offene Dependabot-PRs** (#1296–#1299): reguläre Wartung.
+4. **Fünf offene Dependabot-PRs** (#1296–#1299): reguläre Wartung.
 
 ---
 
