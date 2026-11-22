@@ -1593,6 +1593,26 @@ history:
     #WLAN #Internet #DSL #Handytarif'
   ref: '117651076043563430'
   ai: false
+- posted_at: '2026-11-22T23:27:00.422280+01:00'
+  channel: mastodon
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  title: 'Wohngebäudeversicherung Vergleich: Worauf du achten musst'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117662445287551543
+  ok: true
+  text: '💶 Wohngebäudeversicherung Vergleich: Worauf du achten musst
+
+
+    Eine gute Wohngebäudeversicherung schützt nicht nur gegen Feuer, Leitungswasser,
+    Sturm und Hagel.
+
+
+    https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Wohngebaeude #Versicherung #Photovoltaik #Energiekosten'
+  ref: '117662445287551543'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1618,4 +1638,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-22T22:06:36.170955+01:00'
+updated_at: '2026-11-22T23:27:13.407597+01:00'

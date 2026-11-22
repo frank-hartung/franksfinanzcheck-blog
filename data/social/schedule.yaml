@@ -1,5 +1,5 @@
 version: 1
-generated_at: '2026-11-22T22:06:35.005256+01:00'
+generated_at: '2026-11-22T23:27:00.422280+01:00'
 horizon_days: 14
 timezone: Europe/Berlin
 items:
@@ -523,12 +523,13 @@ items:
   angle: zahl
   kind: evergreen
   pillar: versicherungen
-  date: '2026-11-23'
-  time: 07:30
-  scheduled_at: '2026-11-23T07:30:00+01:00'
-  status: planned
-  attempts: 0
+  date: '2026-11-22'
+  time: '23:27'
+  scheduled_at: '2026-11-22T23:27:00.422280+01:00'
+  status: published
+  attempts: 1
   reason: ''
+  recovered_at: '2026-11-22T23:27:00.422280+01:00'
 - id: mastodon:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:zahl:2026-11-23
   channel: mastodon
   slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
