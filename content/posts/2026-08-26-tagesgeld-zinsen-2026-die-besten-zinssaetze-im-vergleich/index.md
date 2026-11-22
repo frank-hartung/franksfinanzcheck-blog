@@ -53,6 +53,12 @@ Tagesgeldkonto im Check: Zwei Banken werben mit unterschiedlichen Tagesgeldzinse
 
 ## Wofür brauchst du das Geld?
 
+
+Genau das ist der Hebel: Tagesgeldkonto.
+
+
+Darum geht es hier konkret: Tagesgeldkonto.
+
 Trenne deine Rücklage für unerwartete Ausgaben von Geld, dessen Verwendung bereits feststeht. Die nächste Jahresrechnung für die Versicherung ist beispielsweise keine Überraschung. Für einen [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) zählt vor allem, dass du ohne Verkauf von Wertpapieren und ohne langfristige Bindung an ihn herankommst. Wie viel Rücklage zu deinem Haushalt passt, schätzt du mit dem [Notgroschen-Rechner](../../werkzeuge/notgroschen-rechner/) ab.
 
 Tagesgeld eignet sich nicht zum Bezahlen an der Kasse. In der Regel überweist du zuerst auf das vereinbarte Referenzkonto. „Täglich verfügbar“ bedeutet nicht, dass eine Überweisung jederzeit sofort gutgeschrieben ist. Halte auf dem Girokonto genug für unmittelbar fällige Abbuchungen bereit.
