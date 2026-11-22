@@ -24,6 +24,34 @@ DAS DOKUMENT ENTSCHEIDET NICHTS
   Es schreibt in keinen Ledger und schließt keinen Befund. Es macht nur
   sichtbar, was zu entscheiden ist.
 
+WARUM HIER KEIN DATEI-HASH STEHT (22.11.2026)
+  Bis heute trug jeder Artikelblock einen SHA-256 über die ROHE Datei. Damit
+  war die Vorlage „veraltet", sobald irgendein fremder Lauf Bytes bewegte:
+  ein `lastmod`, eine Provenienz-Zeile am Cover, eine aufgefrischte
+  Quellenliste, eine Typografie-Heilung (`fix_spaces`/`fix_linebreaks`) –
+  und vor allem jeder neue Commit auf `main`. Der CI prüft den MERGE-Stand
+  (`refs/pull/N/merge`), also Branch plus aktuelles `main`; ein Bot-Commit
+  genügte, um `test_dossier_ist_aktuell` in `Code-Regression` UND `Uhr-Probe`
+  rot zu färben, ohne dass sich eine Aussage bewegt hatte.
+
+  Zwischenschritt war der Aussage-Hash (`text_hash()`, Projektion
+  `betrieb-v4`) – stabil gegen Typografie und Metadaten, aber weiterhin
+  abhängig vom Merge-Stand: Sobald `main` eine Aussage ändert, die mit
+  keinem offenen Befund zu tun hat, galt das Dossier als veraltet.
+
+  Deshalb trägt das Dokument jetzt **gar keinen Hash** mehr. Es ist ein
+  Arbeitsdokument für eine menschliche Entscheidung, kein Register:
+  Die Fassungsbindung gehört zum Ledger (`geprueft_fassung` in
+  `data/faktenfrische_entscheidungen.yaml`, geschrieben von
+  `--entscheiden`). Was F4 aktuell halten MUSS, steht ohnehin im Text und
+  wird aus dem heutigen Artikel erzeugt: welche Befunde offen sind und ob
+  die beanstandeten Werte heute noch im Text stehen (Spalte „Betroffene
+  Werte heute"). Ändert sich daran etwas, wird `--check` sofort rot.
+
+  Grenze, bewusst: Eine reine Stiländerung an einem Artikel, die keinen
+  beanstandeten Wert berührt, lässt `--check` grün. Das ist die Regel,
+  nicht die Ausnahme – der Befund ist dann inhaltlich unverändert.
+
 Nutzung:
   python3 scripts/f4_entscheidungsvorlage.py             # schreiben
   python3 scripts/f4_entscheidungsvorlage.py --check     # Exit 1 = veraltet
@@ -36,7 +64,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import json
 import re
 import sys
@@ -65,10 +92,6 @@ def prosa(text: str) -> str:
     """Artikelkörper ohne Frontmatter (für den Werteabgleich)."""
     teile = text.split("---", 2)
     return teile[2] if len(teile) >= 3 else text
-
-
-def datei_hash(pfad: Path) -> str:
-    return hashlib.sha256(pfad.read_bytes()).hexdigest()
 
 
 def bezugsdatum() -> dt.date:
@@ -199,6 +222,11 @@ def baue(stichtag: dt.date) -> str:
              "(`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die "
              "Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.")
     z.append("")
+    z.append("**Keine Prüfsummen im Dokument.** Maßgeblich ist, welche Befunde "
+             "offen sind und ob die beanstandeten Werte heute noch im Text stehen; "
+             "die Fassungsbindung führt der Ledger (`geprueft_fassung`). So altert "
+             "die Vorlage nicht an fremden Commits.")
+    z.append("")
     z.append(f"**{len(offen)} offene Live-Befunde auf {len(seiten)} Artikeln.** Für "
              f"**{len(alt)}** gibt es frühere Entscheidungen zu diesem Befund;")
     z.append(f"die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. "
@@ -226,12 +254,7 @@ def baue(stichtag: dt.date) -> str:
                            key=lambda b: b["id"])
         z.append(f"## `{slug}`")
         z.append("")
-        if pfad.exists():
-            z.append(f"- Datei-SHA256 (heute): `{datei_hash(pfad)}`")
-            body = prosa(pfad.read_text(encoding="utf-8"))
-        else:
-            z.append("- Datei-SHA256 (heute): **Datei fehlt**")
-            body = ""
+        body = prosa(pfad.read_text(encoding="utf-8")) if pfad.exists() else ""
         z.append(f"- Offene Live-Befunde: **{len(eintraege)}**")
         z.append("")
         z.append("| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |")
