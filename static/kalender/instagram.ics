@@ -6,56 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:instagram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-w
- issen-musst:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261122T104500Z
-DTEND:20261122T110000Z
-SUMMARY:Instagram: Geschenkkarte: Was du beim Kauf und Aufladen wissen
-  musst (nutzen)
+UID:instagram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-
+ sparst:nutzen:2026-11-22@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261122T174500Z
+DTEND:20261122T180000Z
+SUMMARY:Instagram: Secondhand-Kleidung kaufen: So prüfst du Stoff\, Nä
+ hte (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-
- beim-kauf-und-aufladen-wissen-musst/
-URL:https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du
- -beim-kauf-und-aufladen-wissen-musst/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-de
- in-geld-zurueck:nutzen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261124T104500Z
-DTEND:20261124T110000Z
-SUMMARY:Instagram: Flugverspätung: Wann kommt eine Entschädigung infra
- ge? (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entsc
- haedigung-so-holst-du-dein-geld-zurueck/
-URL:https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-ents
- chaedigung-so-holst-du-dein-geld-zurueck/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-ro
- uter-standort:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261126T104500Z
-DTEND:20261126T110000Z
-SUMMARY:Instagram: Router Standort: So findest du einen guten Platz – 
- WLAN (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-
- findest-du-den-besten-router-standort/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
- -findest-du-den-besten-router-standort/
+ : https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-s
+ o-erkennst-du-qualitaet-sparst/
+URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
+ so-erkennst-du-qualitaet-sparst/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-al
- ten-rahmen:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261128T104500Z
-DTEND:20261128T110000Z
+ ten-rahmen:nutzen:2026-11-24@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261124T104500Z
+DTEND:20261124T110000Z
 SUMMARY:Instagram: Fenster abdichten: So stoppst du Zugluft an alten R
  ahmen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -67,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-bra
- uchst-dein:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261129T104500Z
-DTEND:20261129T110000Z
+ uchst-dein:nutzen:2026-11-26@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261126T104500Z
+DTEND:20261126T110000Z
 SUMMARY:Instagram: Wie viel Bandbreite brauchst du fürs Streaming? (nu
  tzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -81,26 +51,26 @@ URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-
- sparst:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261201T104500Z
-DTEND:20261201T110000Z
-SUMMARY:Instagram: Secondhand-Kleidung kaufen: So prüfst du Stoff\, Nä
- hte (nutzen)
+UID:instagram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-w
+ issen-musst:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261128T104500Z
+DTEND:20261128T110000Z
+SUMMARY:Instagram: Geschenkkarte: Was du beim Kauf und Aufladen wissen
+  musst (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-s
- o-erkennst-du-qualitaet-sparst/
-URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
- so-erkennst-du-qualitaet-sparst/
+ : https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-
+ beim-kauf-und-aufladen-wissen-musst/
+URL:https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du
+ -beim-kauf-und-aufladen-wissen-musst/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-
- tasse-kaffee:nutzen:2026-12-03@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261203T104500Z
-DTEND:20261203T110000Z
+ tasse-kaffee:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261129T104500Z
+DTEND:20261129T110000Z
 SUMMARY:Instagram: Kaffeemaschine: Was kostet eine Tasse wirklich? (nu
  tzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -112,10 +82,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloecher
- n-in-der-wohnung:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261121T205554Z
-DTSTART:20261205T104500Z
-DTEND:20261205T110000Z
+ n-in-der-wohnung:nutzen:2026-12-01@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261201T104500Z
+DTEND:20261201T110000Z
 SUMMARY:Instagram: Mesh-WLAN nachrüsten: Wann lohnt sich die Investiti
  on? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -123,6 +93,51 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
  -schluss-mit-funkloechern-in-der-wohnung/
 URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
  n-schluss-mit-funkloechern-in-der-wohnung/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fix
+ kosten:nutzen:2026-12-03@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261203T104500Z
+DTEND:20261203T110000Z
+SUMMARY:Instagram: Energieeffiziente Geräte: So sinken deine Fixkosten
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ger
+ aete-so-sinken-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ge
+ raete-so-sinken-deine-fixkosten/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-05@fr
+ anksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261205T104500Z
+DTEND:20261205T110000Z
+SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
+ tvertrag (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
+ ern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-h
+ eizkosten:nutzen:2026-12-06@franksfinanzcheck.de
+DTSTAMP:20261122T132646Z
+DTSTART:20261206T104500Z
+DTEND:20261206T110000Z
+SUMMARY:Instagram: Gas-Anbieter wechseln: Strategien gegen hohe Heizko
+ sten (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln
+ -strategien-gegen-hohe-heizkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechsel
+ n-strategien-gegen-hohe-heizkosten/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
