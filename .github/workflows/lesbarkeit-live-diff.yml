@@ -1,0 +1,69 @@
+# ============================================================
+#  LESBARKEIT – LIVE-ÄNDERUNGEN (PR-Gate)
+#  ------------------------------------------------------------
+#  WARUM ES DIESEN LAUF GIBT (22.11.2026, Befund #1247)
+#
+#  Das Publish-Gate prüft die Lesbarkeit nur für Artikel, die an
+#  diesem Tag LIVE gehen (`publish_gate.todays_live_candidates()`).
+#  Wird ein bereits veröffentlichter Artikel später überarbeitet,
+#  prüft niemand mehr den Flesch-Wert – die Wochen-Wache meldet den
+#  Schaden erst, wenn er live ist.
+#
+#  Das ist keine Theorie: Drei Live-Artikel wurden am 19.11.2026 neu
+#  gefasst und liegen seither unter dem Boden 60 (51,5 / 53,8 / 54,0).
+#
+#  Diese Wache prüft VOR dem Merge genau die Artikel, die der PR
+#  anfasst. Sie blockiert:
+#    · neue Live-Artikel unter Flesch 60,
+#    · eine Verschlechterung eines Live-Artikels unter den Boden.
+#  Sie blockiert NICHT:
+#    · Entwürfe (nicht live),
+#    · Altbestand unter dem Boden, der nicht schlechter wird –
+#      sonst würde jede Routinemeldung an alter Schuld scheitern.
+#
+#  Schwelle und Messung kommen aus `readability_check` (R6, eine Zahl).
+# ============================================================
+name: Lesbarkeit (Live-Änderungen)
+
+on:
+  pull_request:
+    paths:
+      - "content/posts/**"
+      - "scripts/lesbarkeit_diff_wache.py"
+      - "scripts/readability_check.py"
+      - "scripts/tests/test_lesbarkeit_diff_wache.py"
+      - ".github/workflows/lesbarkeit-live-diff.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lesbarkeit-live-diff-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  diff:
+    name: Geänderte Live-Artikel gegen Flesch-Boden
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken (mit Historie für den Diff)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Selbsttest (ein Gate, das nicht läuft, ist keins)
+        run: python3 scripts/lesbarkeit_diff_wache.py --selbsttest
+
+      - name: Regressionstests
+        run: python3 -m unittest scripts.tests.test_lesbarkeit_diff_wache
+
+      - name: Geänderte Live-Artikel prüfen
+        env:
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+        run: python3 scripts/lesbarkeit_diff_wache.py --basis "origin/${GITHUB_BASE_REF}"

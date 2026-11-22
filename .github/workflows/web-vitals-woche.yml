@@ -229,6 +229,13 @@ jobs:
           FELD="${SCHRITT_FELD_EXIT:-}"
           LABOR="${SCHRITT_LABOR_EXIT:-}"
 
+          # Seit 22.11.2026 klassifiziert die Feld-Wache ihr Exit 2 selbst
+          # (DROSSELUNG / NETZ / API / KEINE_FELDDATEN / TEILWEISE, #1152).
+          # Die Klasse gehört in die Annotation: „keine Felddaten" verlangt
+          # einen anderen Menschen als „API drosselt" – und beide verlangen
+          # ausdrücklich KEIN Performance-Tuning der Seite.
+          DIAGNOSE="$(grep -m1 '🧭' feld-fehler.txt 2>/dev/null | sed 's/^[[:space:]]*//' || true)"
+
           # Labor: Diagnose. Jede Abweichung wird als Warnung sichtbar, macht
           # den Lauf aber nicht rot – ein Lauf über CDN ist kein Freibrief.
           if [ -z "$LABOR" ] || [ "$LABOR" = "2" ]; then
@@ -253,11 +260,11 @@ jobs:
               exit 1
               ;;
             2)
-              echo "::error::Feldmessung nicht durchführbar – ungeprüft ist nicht sauber (Exit 2)."
+              echo "::error::Feldmessung nicht durchführbar – ungeprüft ist nicht sauber (Exit 2). ${DIAGNOSE}"
               exit 1
               ;;
             *)
-              echo "::error::Feldmessung hat kein Urteil abgegeben (Exit '${FELD:-—}') – fail-closed, siehe feld-fehler.txt."
+              echo "::error::Feldmessung hat kein Urteil abgegeben (Exit '${FELD:-—}') – fail-closed. ${DIAGNOSE}"
               exit 1
               ;;
           esac

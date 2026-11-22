@@ -280,6 +280,68 @@ def api_schluessel() -> str | None:
     return wert or None
 
 
+def diagnostiziere(punkte: list[dict], stoerungen: list[str],
+                   hat_schluessel: bool) -> dict | None:
+    """Exit 2 hat fünf verschiedene Ursachen – und nur eine ist ein Defekt.
+
+    WARUM (22.11.2026, #1152): Der Wochenlauf stand drei Mal hintereinander
+    auf Exit 2. Gemeldet wurde „Feldmessung nicht durchführbar"; gelesen
+    wurde daraus „die Seiten sind zu langsam". Beides ist nicht dasselbe.
+    Diese Funktion trennt die Fälle AM MESSWEG, ohne das Urteil zu ändern
+    (C2: ungeprüft bleibt ungeprüft):
+
+      DROSSELUNG     – HTTP 429: PSI-Kontingent/Schlüssel (Betreiber)
+      NETZ           – Zeitüberschreitung/Verbindung: Messweg (Technik)
+      API            – andere HTTP-Antwort: Messweg (Technik)
+      TEILWEISE      – einige Seiten gemessen, andere gestört
+      KEINE_FELDDATEN– alle Antworten da, aber CrUX hat keine Daten:
+                       zu wenig Traffic im 28-Tage-Fenster. Das ist KEIN
+                       Seitenbefund und KEIN Grund für Performance-Tuning.
+
+    Rückgabe: None (kein Exit-2-Fall) oder ein Dict mit klasse, text,
+    naechster_schritt. Der Exit-Code bleibt unangetastet.
+    """
+    gemessen = [p for p in punkte if p.get("urteil") != "UNGEPRUEFT"]
+    if not stoerungen and gemessen:
+        return None
+
+    ist_429 = any(re.search(r"\b429\b|Too Many Requests", s, re.I) for s in stoerungen)
+    ist_netz = any(re.search(r"Timeout|URLError|Connection|timed out|EOF",
+                             s, re.I) for s in stoerungen)
+    if ist_429:
+        klasse = "DROSSELUNG"
+        text = (diagnose_hinweis(stoerungen, hat_schluessel)
+                or "PageSpeed Insights drosselt die Abrufe (HTTP 429).")
+        schritt = ("PSI_API_KEY als GitHub-Secret hinterlegen bzw. das "
+                   "Google-Cloud-Kontingent prüfen – nicht die Seite optimieren.")
+    elif stoerungen and ist_netz:
+        klasse = "NETZ"
+        text = ("Der Messweg erreichte PageSpeed Insights nicht "
+                "(Zeitüberschreitung/Verbindung).")
+        schritt = ("Netz-/Runner-Lage prüfen und den Lauf wiederholen – "
+                   "kein Seitenbefund.")
+    elif stoerungen and gemessen:
+        klasse = "TEILWEISE"
+        text = (f"{len(stoerungen)} Ziel(e) gestört, {len(gemessen)} von "
+                f"{len(punkte)} Seiten mit Felddaten bewertet.")
+        schritt = ("Gestörte Ziele einzeln prüfen; das Urteil gilt nur für "
+                   "die gemessenen Seiten.")
+    elif stoerungen:
+        klasse = "API"
+        text = "PageSpeed Insights antwortete mit einem Fehler (kein 429)."
+        schritt = "Antwortcode und Zielliste prüfen; kein Seitenbefund."
+    elif punkte and not gemessen:
+        klasse = "KEINE_FELDDATEN"
+        text = ("Alle Ziele antworteten, aber CrUX liefert für keines "
+                "Felddaten (zu wenig Traffic im 28-Tage-Fenster).")
+        schritt = ("Kein Performance-Problem der Seite. Handlung: Reichweite/"
+                   "Zielliste prüfen oder die Datenlage als offen führen – "
+                   "ein grünes Urteil gibt es ohne Felddaten nicht.")
+    else:
+        return None
+    return {"klasse": klasse, "text": text, "naechster_schritt": schritt}
+
+
 def diagnose_hinweis(stoerungen: list[str], hat_schluessel: bool) -> str | None:
     """Klartext-Ursache bei PSI-Drosselung (HTTP 429, #1152) – ändert nie den Exit-Code (C2)."""
     if not stoerungen:
@@ -304,7 +366,8 @@ def diagnose_hinweis(stoerungen: list[str], hat_schluessel: bool) -> str | None:
 #  Bericht
 # --------------------------------------------------------------------------
 
-def bericht(punkte: list[dict], strategie: str, datum: str, urteil: str) -> str:
+def bericht(punkte: list[dict], strategie: str, datum: str, urteil: str,
+            diagnose: dict | None = None) -> str:
     zeilen = [
         "# Core Web Vitals – Felddaten",
         "",
@@ -314,6 +377,17 @@ def bericht(punkte: list[dict], strategie: str, datum: str, urteil: str) -> str:
         "> Metrik stammt von der API (`category`), nicht aus einer eigenen",
         "> Schwelle. Keine Felddaten = UNGEPRÜFT, nie GRÜN.",
         "",
+    ]
+    if diagnose:
+        # Die Ursache gehört in den Bericht, nicht nur in den Exit-Code:
+        # „keine Felddaten" und „API kaputt" verlangen verschiedene Menschen.
+        zeilen += [
+            f"**Diagnose:** `{diagnose['klasse']}` – {diagnose['text']}",
+            "",
+            f"**Nächster Schritt:** {diagnose['naechster_schritt']}",
+            "",
+        ]
+    zeilen += [
         "| Seite | Urteil | LCP | INP | CLS | Labor (P / A11y / BP / SEO) |",
         "|---|---|---|---|---|---|",
     ]
@@ -345,16 +419,20 @@ def bericht(punkte: list[dict], strategie: str, datum: str, urteil: str) -> str:
     return "\n".join(zeilen) + "\n"
 
 
-def schreibe(punkte: list[dict], strategie: str, datum: str, urteil: str) -> None:
+def schreibe(punkte: list[dict], strategie: str, datum: str, urteil: str,
+             diagnose: dict | None = None) -> None:
     for ziel in (BEFUND_JSON, BEFUND_MD, VERLAUF):
         ziel.parent.mkdir(parents=True, exist_ok=True)
     BEFUND_JSON.write_text(
         json.dumps({"datum": datum, "strategie": strategie, "urteil": urteil,
-                    "seiten": punkte}, ensure_ascii=False, indent=2) + "\n",
+                    "diagnose": diagnose, "seiten": punkte},
+                   ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8")
-    BEFUND_MD.write_text(bericht(punkte, strategie, datum, urteil), encoding="utf-8")
+    BEFUND_MD.write_text(bericht(punkte, strategie, datum, urteil, diagnose),
+                         encoding="utf-8")
     with VERLAUF.open("a", encoding="utf-8") as f:
         f.write(json.dumps({"datum": datum, "strategie": strategie, "urteil": urteil,
+                            "diagnose": (diagnose or {}).get("klasse"),
                             "seiten": {p["pfad"]: p["urteil"] for p in punkte}},
                            ensure_ascii=False, sort_keys=True) + "\n")
 
@@ -445,6 +523,23 @@ def selftest() -> int:
     muss("trotz gesetztem" in h_mit, "429 mit Key muss Kontingent nennen")
     muss(diagnose_hinweis(["/: TimeoutError – timed out"], False) is None,
          "Nicht-429 darf keinen falschen Kontingent-Hinweis ausgeben")
+
+    # 10. #1152: Exit 2 hat EINE benannte Ursache – und die richtige Handlung.
+    d_leer = diagnostiziere([{"pfad": "/", "urteil": "UNGEPRUEFT"}], [], False)
+    muss(d_leer is not None and d_leer["klasse"] == "KEINE_FELDDATEN",
+         f"fehlende Felddaten müssen als KEINE_FELDDATEN gelten: {d_leer}")
+    muss("Kein Performance-Problem" in (d_leer or {}).get("naechster_schritt", ""),
+         "KEINE_FELDDATEN muss Performance-Tuning ausdrücklich ausschließen")
+    d_429 = diagnostiziere([], ["/: HTTPError – HTTP Error 429: Too Many Requests"], False)
+    muss((d_429 or {}).get("klasse") == "DROSSELUNG", f"429 falsch klassifiziert: {d_429}")
+    d_netz = diagnostiziere([], ["/: URLError – timed out"], False)
+    muss((d_netz or {}).get("klasse") == "NETZ", f"Netzfehler falsch klassifiziert: {d_netz}")
+    d_teil = diagnostiziere([{"pfad": "/", "urteil": "GUT"}],
+                            ["/x: HTTPError – HTTP Error 500"], True)
+    muss((d_teil or {}).get("klasse") == "TEILWEISE",
+         f"Teilmessung falsch klassifiziert: {d_teil}")
+    muss(diagnostiziere([{"pfad": "/", "urteil": "GUT"}], [], True) is None,
+         "grüne Messung darf keine Exit-2-Diagnose tragen")
 
     # 9. Transiente Antworten werden begrenzt wiederholt, 404 nicht.
     import io as _io
@@ -575,23 +670,29 @@ def main(argv: list[str] | None = None) -> int:
     punkte, stoerungen = messe(ziele, args.basis, args.strategie, schluessel,
                               args.fixture)
     hinweis = diagnose_hinweis(stoerungen, bool(schluessel))
+    diagnose = diagnostiziere(punkte, stoerungen, bool(schluessel))
 
     if not punkte:
         print("🛑 Keine Seite messbar – das ist eine Störung, kein Befund.", file=sys.stderr)
         for s in stoerungen:
             print("  ·", s, file=sys.stderr)
+        if diagnose:
+            print(f"  🧭 {diagnose['klasse']}: {diagnose['text']}", file=sys.stderr)
+            print(f"     Nächster Schritt: {diagnose['naechster_schritt']}", file=sys.stderr)
         if hinweis:
             print(f"  💡 {hinweis}", file=sys.stderr)
         return 2
 
     urteil, anzahl = gesamturteil(punkte)
-    text = bericht(punkte, args.strategie, datum, urteil)
+    text = bericht(punkte, args.strategie, datum, urteil, diagnose)
     if args.schreiben:
-        schreibe(punkte, args.strategie, datum, urteil)
+        schreibe(punkte, args.strategie, datum, urteil, diagnose)
 
     if args.json:
         payload = {"datum": datum, "strategie": args.strategie, "urteil": urteil,
                    "geprueft": anzahl, "seiten": punkte, "stoerungen": stoerungen}
+        if diagnose:
+            payload["diagnose"] = diagnose
         if hinweis:
             payload["hinweis"] = hinweis
         print(json.dumps(payload, ensure_ascii=False, indent=2))
@@ -599,6 +700,9 @@ def main(argv: list[str] | None = None) -> int:
         print(text, end="")
         for s in stoerungen:
             print(f"⚠️  Störung: {s}")
+        if diagnose:
+            print(f"🧭 Diagnose: {diagnose['klasse']} – {diagnose['text']}")
+            print(f"   Nächster Schritt: {diagnose['naechster_schritt']}")
         if hinweis:
             print(f"💡 {hinweis}")
 

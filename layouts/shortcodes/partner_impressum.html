@@ -53,7 +53,12 @@
   <p class="ff-partner-impressum__meta">
     Quelle: Tarifcheck-Partnerprogramm.
     Wenn der Rahmen leer bleibt oder Text fehlt,
-    <a href="{{ $src }}" rel="noopener noreferrer nofollow" target="_blank">Partner-Kennzeichnung direkt öffnen (Partnerseite)</a>.
+    {{- /* data-ff-partner-dokument: Dieses Ziel ist ein PFLICHT-Dokument der
+           Anbieterkennzeichnung, kein Affiliate-CTA. Die Klick-Ketten-Wache
+           prüft seit 22.11.2026 jede gebaute Seite; ohne diese ausdrückliche
+           Marke würde sie den Rechtstext als „rohen Partnerlink\" melden.
+           Nur diese Marke hebt die CTA-Regel auf – nicht die Domain. */ -}}
+    <a href="{{ $src }}" rel="noopener noreferrer nofollow" target="_blank" data-ff-partner-dokument="tarifcheck">Partner-Kennzeichnung direkt öffnen (Partnerseite)</a>.
     Beim Laden oder Öffnen werden technische Zugriffsdaten an den Partner übermittelt.
     <a href="{{ $hinweis }}">Datenschutzhinweis</a>
   </p>
