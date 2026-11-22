@@ -479,6 +479,27 @@ nachher: ✅ Cover-Check: 144 Covers | Probleme: 0 | Stale: 0 | Brand: 0 | Text:
          ✅ abgeleitete_register --check: aktuell (3 geprüft)
 ```
 
+**Nachweis am lebenden Bestand – dieselbe Drift, eine Stunde später, von `main`
+selbst erzeugt.** Während dieses Auftrags lief auf `main` die Automatik
+`9630dea fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung`: Sie
+renderte genau diese vier Cover neu (der Bestand heilt also dieselbe Altlast),
+**zog aber die Herkunftserklärungen nicht nach**. Gemessen gegen
+`origin/main` (`628da3a`), Beleg aus dem Frontmatter kontra `sha256sum` der Datei:
+
+```
+2026-10-14-heizperiode…       ❌ DRIFT  Beleg d3b680d4c355c298…  ≠ Datei 48d123c31320ee52…
+2026-10-26-gastarife…         ❌ DRIFT  Beleg aa541ca37624840b…  ≠ Datei 8490720471255c4b…
+2026-10-28-dsl…               ❌ DRIFT  Beleg 1f8d2a2399961e32…  ≠ Datei 04fd4783ebca6833…
+2026-11-06-guenstige-fluege…  ❌ DRIFT  Beleg 9d9c7ebd9010b412…  ≠ Datei 8ac2238f73764a10…
+```
+
+Vier neue stille Driften, erzeugt von einem **grünen** Lauf – und kein Prüfer im
+Bestand hätte sie gemeldet, weil `--pruefen` vor dieser Änderung nur Pixel maß.
+Genau dafür existiert die Klasse `beleg_veraltet` aus Abschnitt 4: Sie macht den
+Effekt sichtbar, und `--heilen` zieht ihn in einem Zug nach (hier: 4 Belege
+erneuert). Nach dem Rebase auf `628da3a` sind die Cover-Bytes die des Bestands und
+die Belege darauf erneuert – kein eigener Render steht mehr gegen `main`.
+
 **Offen (Folgeauftrag, bewusst nicht hier):** Die **Reihenfolge** in `deploy.yml`
 ist nicht umgestellt. Ein `--fix`-Lauf heilt den Stand, aber derselbe Mechanismus
 kann beim nächsten Keyword-Eingriff wieder vier Cover altern lassen. Dauerhaft wäre

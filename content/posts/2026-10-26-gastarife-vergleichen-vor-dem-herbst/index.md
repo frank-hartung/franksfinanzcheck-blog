@@ -27,7 +27,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 785b82542f1023167c99cab6cdcfdf1fb18f876e56d940fa51adc0d8c8d33913
+    sha256: 8490720471255c4bc1d18ce817f3b53980a2e442cb2b1efba21e736a40544f45
     geprueft_am: 2026-11-22
 quellen:
   - id: "Q1"
