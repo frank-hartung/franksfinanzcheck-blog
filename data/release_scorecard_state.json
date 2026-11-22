@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-22T15:27:40Z",
+  "generated_at": "2026-11-22T16:30:26Z",
   "modus": "kandidaten",
-  "commit": "dba3f172d71210832ae265518e62923317ab3d8e",
+  "commit": "bc1e0221b7b417267272d02ff397d6db4116cda1",
   "kapazitaet": {
     "stichtag": "2026-11-22",
     "basis": "2026-11-22",
@@ -65,7 +65,6 @@
         "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
         "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
         "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
         "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
         "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
@@ -117,7 +116,7 @@
         "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 56
+      "anzahl": 55
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -126,7 +125,6 @@
       "entscheidung": "auto",
       "quelle": "scripts/check_length.py (Status unter-/ueber-optimum)",
       "artikel": [
-        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
         "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
         "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
         "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
@@ -134,7 +132,7 @@
         "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
         "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen"
       ],
-      "anzahl": 7
+      "anzahl": 6
     },
     {
       "check": "T5-lesbarkeit",
@@ -143,13 +141,12 @@
       "entscheidung": "auto",
       "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
       "artikel": [
-        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
         "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
         "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
         "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle"
       ],
-      "anzahl": 5
+      "anzahl": 4
     },
     {
       "check": "A4-profi-check",
@@ -160,18 +157,6 @@
       "artikel": [
         "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
         "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich"
-      ],
-      "anzahl": 2
-    },
-    {
-      "check": "RD2-einzigartigkeit",
-      "dimension": "redundanz",
-      "wirkung": "blockiert",
-      "entscheidung": "human",
-      "quelle": "scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures)",
-      "artikel": [
-        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-        "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
       ],
       "anzahl": 2
     },
@@ -199,23 +184,22 @@
     }
   ],
   "befundlage": {
-    "offen": 304,
-    "seiten": 83,
-    "live_befunde": 201,
-    "live_seiten": 56,
+    "offen": 301,
+    "seiten": 82,
+    "live_befunde": 198,
+    "live_seiten": 55,
     "ueberholt": 253,
-    "ohne_fassung": 13,
+    "ohne_fassung": 10,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 23,
     "frist_tage": 14,
-    "ueber_frist": 137,
+    "ueber_frist": 134,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
       "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": 4,
       "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
       "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": 5,
-      "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 3,
       "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": 3,
       "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": 4,
       "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": 5,
@@ -364,11 +348,11 @@
       ]
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "ce46f818fe18a896a81ebc80dc877b1479edcd8614925cfc8b329c54781ddbd3",
+      "sha256": "671f9ddb6dbe8d2188055f3e31cee64ed3e001f562baa42333d219beef14ae69",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "blockiert",
         "affiliate": "bestanden",
@@ -378,19 +362,13 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
           "dimension": "faktenalter",
           "wirkung": "blockiert",
           "detail": "30caa57be394afb62947 (luecke): Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.; 32a3ea879f2cf126b3a7 (luecke): Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.; c583efe1ce02df3ca2d7 (luecke):"
-        },
-        {
-          "check": "T5-lesbarkeit",
-          "dimension": "technik",
-          "wirkung": "blockiert",
-          "detail": "Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
         }
       ]
     },
@@ -438,39 +416,27 @@
       "checks": []
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
-      "sha256": "bfab6e93434f95fb9bafe7b75b8be5fcef1f178314174715df0d3ea6cd795031",
-      "urteil": "blockiert",
+      "sha256": "856185970a1492ebc2bcbf1c7c88d7aaea66243da946e87d8cc47ccfd328a5dd",
+      "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
-        {
-          "check": "F4-fachbefund",
-          "dimension": "faktenalter",
-          "wirkung": "blockiert",
-          "detail": "6b0aa3429d97e8c74ed8 (luecke): Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).; 84c991c5d152b14a2675 (luecke): Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell "
-        },
-        {
-          "check": "RD2-einzigartigkeit",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen (z. B. „bis zum 30 november beim versicherer eingehen“) – ab 5 ist es Dopplung, Passage umschreiben"
-        },
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge ueber-optimum (18530 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge ueber-optimum (18602 Zeichen, Optimum 12.000–18.000)"
         }
       ]
     },
@@ -785,7 +751,7 @@
       "checks": []
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
-      "sha256": "556a89ef70cce4e4aeeb77e13f2d19213d6c7d9b0b53c4d7f306f4eb1e0b12b4",
+      "sha256": "1b8f2f415f94b10cd33bc3ce901fb33b8d76ecec2fae3f05ad0a2e534ae97d71",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -799,7 +765,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-04",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "A4-profi-check",
@@ -817,7 +783,7 @@
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge unter-optimum (10927 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge unter-optimum (11048 Zeichen, Optimum 12.000–18.000)"
         },
         {
           "check": "T5-lesbarkeit",
@@ -836,7 +802,7 @@
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "bestanden",
         "revision": "bestanden"
@@ -844,12 +810,6 @@
       "naechste_pruefung": "2027-01-05",
       "siegel_drift": "unverändert",
       "checks": [
-        {
-          "check": "RD2-einzigartigkeit",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit (z. B. „bis zum 30 november beim versicherer eingehen“) – ab 5 ist es Dopplung, Passage umschreiben"
-        },
         {
           "check": "T1-zeichenlaenge",
           "dimension": "technik",
@@ -865,7 +825,7 @@
       ]
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
-      "sha256": "f6f1b1d7f66a30667270310af0613bad2fb1872ec5c6de357711ee3cec2025c6",
+      "sha256": "641e31c35aeff7d4445c7494f9122d3e5874e441f7c0f0b62d309e201b01f8f8",
       "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -879,7 +839,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "A4-profi-check",
@@ -897,13 +857,13 @@
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge unter-optimum (11251 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge unter-optimum (11504 Zeichen, Optimum 12.000–18.000)"
         },
         {
           "check": "T5-lesbarkeit",
           "dimension": "technik",
           "wirkung": "blockiert",
-          "detail": "Flesch 54.0 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+          "detail": "Flesch 54.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
         }
       ]
     },
@@ -2084,7 +2044,7 @@
       ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "16e6720319cb21931ce63fd53358d2cabb03d8a91031e51ce91fec318e946637",
+      "sha256": "cada25153fb81ea777d4b10b4a743a7740bb515dde95e163e7895b32246a331d",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2098,7 +2058,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2324,7 +2284,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
