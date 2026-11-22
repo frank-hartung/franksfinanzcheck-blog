@@ -66,6 +66,11 @@ Befund, der den Bau tötet, darf kein Hinweis sein.
   F2  PARSER      Der eingesetzte Parser (YAML/TOML/JSON) nimmt den Block
                   an. YAML wird – wenn PyYAML vorhanden ist – wirklich
                   geparst; sonst greift F3 (siehe „Zwei Schichten").
+                  Der YAML-Parse ist STRIKT: doppelte Mapping-Schlüssel
+                  sind kein still gegebener letzter Wert, sondern ein
+                  Bau-Tod (siehe _strict_loader). F3 fängt den Fall nur
+                  am Top-Level – der Parser fängt ihn überall, auch tief
+                  verschachtelt.
   F3  PLAIN-SKALAR  Die Klasse vom 26.10.2026, ohne Parser erkennbar:
                   `: ` im unquotierten Wert, Wert endet auf `:`,
                   unbalancierte Anführungszeichen, nicht geschlossene
@@ -523,15 +528,76 @@ def _yaml_modul():
     return yaml
 
 
+def _strict_loader(yaml):
+    """Strikter SafeLoader – doppelte Mapping-Schlüssel sind ein Bau-Tod.
+
+    Vorgang WF-990/#1313 (21.11.2026): Hugo bricht bei einem doppelten
+    Mapping-Schlüssel den ganzen Bau mit „mapping key already defined"
+    ab; `yaml.safe_load` nimmt den letzten Wert still und tut, als gäbe es
+    die doppelte Zeile nicht. Die F3-Prüfung des Scanners fängt den Fall
+    nur am Top-Level (Top-Level-Einrückung, ohne Listen) – ein doppelter
+    Schlüssel in einer verschachtelten Abbildung oder in einem Listen-
+    Eintrag blieb unsichtbar. Dieser Loader zählt jeden Mapping-Schlüssel
+    je Ebene: Der Parser wirft beim ersten doppelten Schlüssel, und die
+    Fehlerklasse trägt Schlüssel, Zeile und Spalte des zweiten
+    Vorkommens sowie die 1-basierte Zeile des ersten – der Befund nennt
+    beide exakt.
+
+    Ohne PyYAML ist der Loader undefinierbar (F3 bleibt das einzige Tor,
+    wie bei F2/F3 ohne Parser).
+    """
+
+    class DuplicateKeyError(yaml.YAMLError):
+        """Doppelter Mapping-Schlüssel, mit Zeile des zweiten Vorkommens."""
+
+        def __init__(self, key, mark, first_line):
+            super().__init__(f"doppelter Schlüssel: {key!r}")
+            self.doppelter_schluessel = key
+            self.mark = mark
+            self.first_line = first_line
+
+    class _StrictLoader(yaml.SafeLoader):
+        def construct_mapping(self, node, deep=False):
+            first_seen = {}
+            for key_node, _value_node in node.value:
+                key = self.construct_object(key_node, deep=deep)
+                if key in first_seen:
+                    raise DuplicateKeyError(
+                        key, key_node.start_mark, first_seen[key].line)
+                first_seen[key] = key_node.start_mark
+            return super().construct_mapping(node, deep)
+
+    return _StrictLoader, DuplicateKeyError
+
+
 def tiefenpruefung_yaml(fm: str, startzeile: int, pfad: str,
                         yaml=None) -> tuple[list[Befund], bool]:
-    """Vollständiger YAML-Parse. Ohne PyYAML: (keine Befunde, False)."""
+    """Vollständiger YAML-Parse. Ohne PyYAML: (keine Befunde, False).
+
+    Der Parse ist STRIKT (siehe `_strict_loader`): ein doppelter
+    Mapping-Schlüssel ist ein Befund – nicht der still gegebene letzte
+    Wert. Der Scanner (F3) sieht den Top-Level-Fall; der Parser sieht
+    den aller Ebenen. Doppelmeldungen am gleichen gemeldeten Ort werden
+    beim Zusammenführen in `pruefe_datei` geordnet.
+    """
     yaml = yaml or _yaml_modul()
     if yaml is None:
         return [], False
+    strict, duplicate_error = _strict_loader(yaml)
     befunde: list[Befund] = []
     try:
-        daten = yaml.safe_load(fm)
+        daten = yaml.load(fm, Loader=strict)
+    except duplicate_error as exc:
+        mark = exc.mark
+        zeile = startzeile + (mark.line if mark is not None else 0)
+        spalte = (mark.column + 1) if mark is not None else 1
+        befunde.append(Befund(
+            "F2", BLOCKER, pfad, zeile, spalte,
+            f"Schlüssel `{exc.doppelter_schluessel}` steht doppelt "
+            f"(zuerst Zeile {startzeile + exc.first_line}). Hugo bricht "
+            f"den Bau daran ab (mapping key already defined); PyYAML "
+            f"würde still den letzten Wert nehmen und den ersten verschweigen."))
+        return befunde, True
     except yaml.YAMLError as exc:
         mark = getattr(exc, "problem_mark", None)
         zeile = startzeile + (mark.line if mark is not None else 0)
@@ -639,6 +705,14 @@ def pruefe_datei(pfad: Path, text: str, *, anzeige: str | None = None,
     if art == "yaml":
         befunde.extend(scanne_yaml(fm, start, anzeige))
         tiefbefunde, tief = tiefenpruefung_yaml(fm, start, anzeige, yaml=yaml)
+        # Doppeltgemeldet = nicht doppelt gefunden: der Scanner (F3) meldet
+        # den Top-Level-Fall exakt; der strikte Parser fängt auch alles
+        # weitere. Fehlt am gleichen Ort nichts, wäre es doppelt gemeldet.
+        scanner_doppelt = {b["zeile"] for b in befunde
+                           if b["regel"] == "F3" and "steht doppelt" in b["meldung"]}
+        tiefbefunde = [b for b in tiefbefunde
+                       if not (b["regel"] == "F2" and "steht doppelt" in b["meldung"]
+                              and b["zeile"] in scanner_doppelt)]
         befunde.extend(tiefbefunde)
     elif art == "toml":
         befunde.extend(tiefenpruefung_toml(fm, start, anzeige))

@@ -353,6 +353,73 @@ class GeruestTest(unittest.TestCase):
                               if b["schwere"] == w.BLOCKER])
 
 
+class StrikterLoaderTest(unittest.TestCase):
+    """WF-990/#1313 (22.11.2026): Der gemeinsame Loader ist STRENG.
+
+    `yaml.safe_load` nimmt bei einem doppelten Mapping-Schlüssel still den
+    letzten Wert und tut, als gäbe es die doppelte Zeile nicht – der Bau
+    bricht trotzdem ab (Hugo-go-yaml, „mapping key already defined").
+    Der Scanner (F3) fängt den Top-Level-Fall, der strikte Parse der
+    Tiefenprüfung fängt JEDEN Fall, auch verschachtelt – und damit ist die
+    einzelne ungueltige Zeile ein Befund statt eines stillen Bau-Todes.
+    """
+
+    DUPPELT = ("---\n"
+               'title: "Fixkosten"\n'
+               'aenderungsgrund: "Erstentwurf"\n'
+               'pruefdatum: "2026-11-21"\n'
+               'naechste_pruefung: "2027-01-05"\n'
+               'aenderungsgrund: "Casing-Fix / doppelter Schlüssel"\n'
+               "---\n"
+               "\n"
+               "Body.\n")
+
+    EINGESPIELTES_DOPPELT = ("---\n"
+                            'title: "T"\n'
+                            'redaktionelle_pruefung:\n'
+                            '  status: "freigegeben"\n'
+                            '  status: "blockiert"\n'
+                            "---\n"
+                            "\n"
+                            "Body.\n")
+
+    EIN_FELD = ("---\n"
+                'title: "Ein Feld"\n'
+                "---\n"
+                "\n"
+                "Body.\n")
+
+    def test_doppteler_aenderungsgrund_wird_als_blocker_gezeigt(self) -> None:
+        befunde, _ = w.pruefe_datei(Path("x.md"), self.DUPPELT,
+                                    anzeige="x.md", yaml=w._yaml_modul())
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertTrue(doppelt, "doppelter `aenderungsgrund` bleibt unentdeckt")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"],
+                         "ein Duplikat ist ein Bau-Tod – Blocker, kein Hinweis")
+
+    @unittest.skipUnless(HAT_YAML, "ohne PyYAML keine Gegenprobe möglich")
+    def test_geschachtelter_doppelter_schluessel_wird_gezeigt(self) -> None:
+        befunde, _ = w.pruefe_datei(Path("x.md"), self.EINGESPIELTES_DOPPELT,
+                                    anzeige="x.md", yaml=w._yaml_modul())
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertTrue(doppelt,
+                        "geschachtelter doppelter Schluessel bleibt unsichtbar")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
+
+    def test_eine_datei_mit_einem_feld_bleibt_gruen(self) -> None:
+        befunde, _ = w.pruefe_datei(Path("x.md"), self.EIN_FELD,
+                                    anzeige="x.md", yaml=w._yaml_modul())
+        self.assertEqual([], befunde,
+                         f"saubere Datei mit einem Feld erzeugt Befunde: {befunde}")
+
+    def test_bestand_hat_keine_doppelten_schluessel_mehr(self) -> None:
+        befunde, dateien, _ = w.run(["content"])
+        self.assertGreater(dateien, 50)
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertEqual([], doppelt,
+                         "Doppelte Schlüssel im Bestand: " + str(doppelt[:3]))
+
+
 class BestandTest(unittest.TestCase):
     """Der ausgelieferte Bestand muss blockerfrei sein."""
 
