@@ -2,7 +2,7 @@
 
 **Auftrag:** „Der gesamte Blog soll schnellstmöglich betriebsbereit sein – auf dem
 Niveau einer Profi-Agentur." **Stand dieses Berichts:** gebauter Stand
-`dccdf19` + die Heilungen dieses Vorgangs, gemessen **lokal** (Hugo 0.168.0
+`628da3a` (main, 22.11.) + die Heilungen dieses Vorgangs, gemessen **lokal** (Hugo 0.168.0
 extended, Node 22, Chromium 153, keine Netzmessung gegen die Produktion).
 
 > **Kurzfassung:** Die Seite baut vollständig, ist technisch sauber und wird
@@ -57,9 +57,9 @@ extended, Node 22, Chromium 153, keine Netzmessung gegen die Produktion).
 
 | Seite | Performance | A11y | Best Practices | SEO | LCP | CLS | TBT |
 |---|---|---|---|---|---|---|---|
-| `/` | **100** | 100 | 100 | 100 | 1,3 s | **0** | 0 ms |
-| Artikel (Gas-Anbieterwechsel) | **98** | 100 | 100 | 100 | 2,2 s | **0** | 0 ms |
-| Werkzeug (Notgroschen-Rechner) | **99** | 100 | 100 | 100 | 1,3 s | **0** | 30 ms |
+| `/` | **100** | 100 | 100 | 100 | 1,3 s | **0** | 30 ms |
+| Artikel (Gas-Anbieterwechsel) | **98** | 100 | 100 | 100 | 2,2 s | **0** | 50 ms |
+| Werkzeug (Notgroschen-Rechner) | **99** | 100 | 100 | 100 | 1,2 s | **0** | 60 ms |
 
 Restpotenzial (nicht angefasst, bewusst): `premium/ff-voice.js` ist nicht
 minifiziert (≈ 23 KiB Ersparnis), ungenutztes CSS ≈ 34 KiB, Cache-Lebensdauern
