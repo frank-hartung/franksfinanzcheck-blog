@@ -11,10 +11,20 @@ Befunde wurden deshalb zurückgestellt.
 gemessen – nicht umgangen, sondern an der Ursache geheilt. Eine einzige
 redaktionelle Zahl (Titel 64 Zeichen gegen die Grenze 60) war die gemeinsame
 Ursache von **drei** der sechs roten Gates; eine Trigger-Vertrags-Drift im
-gemeinsamen Schreibweg die vierte. Zusätzlich ist eine **unerkannte Drift-Klasse**
-in der Cover-Herkunft aufgetaucht (13 Belege beschrieben nicht die Bytes der
-Datei) und wurde als messbare Regel im Prüfer verankert, damit sie nicht erneut
-still durchläuft.
+gemeinsamen Schreibweg die vierte. Darüber hinaus wurden zwei Defekte geheilt, die
+die Übergabe nicht nannte, weil sie niemand sehen konnte:
+
+- **Heilung C** – eine unerkannte Drift-Klasse in der Cover-Herkunft: 13
+  Belege im Live-Bestand beschrieben die Bytes einer Vorfassung. Als messbare
+  Regel (`beleg_veraltet`) im Prüfer verankert, damit sie nicht erneut still
+  durchläuft.
+- **Heilung D** – das Titel-Gate stand bei **Exit 1** (R1), weil der Heiler
+  `ensure_colon_title()` Fragetitel ohne Anhang unverändert zurückgibt, während
+  `deploy.yml` den Befund mit `|| echo` schluckt.
+
+Ehrlich dazugesagt: Vier weitere Bestandstests sind rot – **bitgleich auch auf
+`origin/main`** und von keinem Workflow aufgerufen (Abschnitt 7). Sie gehören in
+die Redaktion, nicht in dieses PR; der Nachweis und die Reihenfolge stehen dort.
 
 ---
 
@@ -100,7 +110,7 @@ Vergangenheit), `aenderungsgrund` um den Nachtrag vom 22.11.2026 ergänzt,
 | `data/covers_manifest.json`, `data/fcp_images.json` | Generator | ✅ |
 | `static/llms.txt:99` | `abgeleitete_register.py --fix` (**nie** von Hand) | ✅ |
 | `data/fachpruefung_register.yaml`, `BEFUND-AKTE.md` | `abgeleitete_register.py --fix` | ✅ |
-| `data/social/kalender/mastodon.ics:417`, `static/kalender/mastodon.ics:417`, `data/social/kalender/video.md:27` | **kein maschineller Schreiber** – Handarbeit, offen | ⚠️ Abschnitt 6 |
+| `data/social/kalender/*.ics\|*.md`, `static/kalender/*` | `scripts/social_calendar.py --build` am Ende jedes Autopilot-Laufs – die Kalender ziehen den Titel **selbst** nach (Plan referenziert per Slug) | ✅ selbstheilend, Abschnitt 8 |
 | `docs/kfz-artikelfassung-2026-11-19.md:3`, `docs/kfz-fachrevision-2026-11-19.md:11`, `FAKTENFRISCHE-1072-NACHPRUEFUNG-2026-11-20.md:199` | zeitgebundene Belege: bleiben **unverändert** (ein Prüfprotokoll vom 19.11. darf nicht den Titel vom 22.11. zitieren) | ✅ bewusst |
 
 **Messung vorher / nachher:**
@@ -248,7 +258,112 @@ Prüfer, der es merkt.
 
 ---
 
-## 5. Was bereits geheilt war – und warum das hier steht
+## 5. Heilung D – Titel-Gate R1: der Fixer versprach Heilung und lief ins Leere
+
+**Befund am liegenden Stand** (identisch auf `main`): `check_titles.py` →
+`144 Titel | Verstöße: 1`, **Exit 1**.
+
+```
+❌ [R1] 2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein:
+   Titel 47 Zeichen ohne Doppelpunkt (Konvention „Hauptkeyword: Untertitel",
+   Cover-Umbruch bricht sonst semantisch kaputt)
+```
+
+**Warum es niemand sah:** `deploy.yml:559` ruft `check_titles.py --fix` auf – mit
+`|| echo "⚠ Titel-Gate – Funde im Log"`. Der Schritt bleibt grün, der Befund bleibt
+liegen. Und `--fix` heilt R1 hier **nicht**, obwohl die Doku es verspricht
+(`check_titles.py:377`: „R1 … wird über `pinterest_seo_healer.ensure_colon_title`
+geheilt"):
+
+```python
+# ensure_colon_title(), Zweig „X? Y" → „Y: X?"
+if "?" in t:
+    head, tail = t.split("?", 1)   # tail ist LEER – das Fragezeichen steht am Ende
+    ...
+    if len(head) >= 12:
+        return f"{head}?"          # ← gibt den Titel UNVERÄNDERT zurück
+```
+
+Ein reiner Fragetitel ohne Anhang hat kein „Y", das zum Kopf werden könnte: Die
+Funktion gibt ihn unverändert zurück, `fix_title()` übernimmt das unverändert,
+`check_title()` meldet R1 weiter – Runde für Runde, ohne dass etwas passiert.
+Messbar gemacht statt behauptet:
+
+```
+fix_title('Wie viel Bandbreite brauchst du fürs Streaming?')
+  → 'Wie viel Bandbreite brauchst du fürs Streaming?'   (47 Zeichen, kein Doppelpunkt)
+```
+
+**Heilung – redaktionell, nicht mechanisch.** Der Regex-Rückfall in `fix_title()`
+hätte `„Wie viel Bandbreite: Brauchst du fürs Streaming?"` erzeugt: grammatisch
+kaputt, keyword-schwach, und auf dem Cover umgebrochen schlechter als vorher. Der
+Artikel trägt seine eigene Vorgabe bereits im Frontmatter
+(`inspiration: "Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst"`)
+und in der ersten H2 (`„Wie viel Streaming‑Bandbreite brauchst du wirklich?"`):
+
+```
+vorher (47, ohne Doppelpunkt): Wie viel Bandbreite brauchst du fürs Streaming?
+nachher (52, Hauskonvention):  Streaming-Bandbreite: Wie viel brauchst du wirklich?
+```
+
+Grenzen vor dem Schreiben geprüft: `TITLE_MIN/MAX = 30, 60`
+(`pinterest_seo_healer.py:53`), M1 ≤ 60, R2 verlangt genau dieses
+Bindestrich-Kompositum (`Streaming-Bandbreite`, nicht `Streaming Bandbreite`),
+keine Titel-Kollision im Bestand, Hauptkeyword = `keywords[0]`.
+
+**Governance:** Der Artikel ist **unversiegelt** –
+`redaktionelle_pruefung.status: "ausstehend"`, `risikoklasse: "standard"`,
+`engine_level: "draft"`, `automatic_write_protected()` → `False`. Es gab also keine
+Freigabe zu brechen (anders als bei Heilung A); `--fix` hätte hier schreiben
+dürfen, konnte aber nicht. Bewusst **nicht** angefasst:
+
+- `pin_title` – eigenes Pinterest-Feld mit eigener Regel (H6: vorhanden und ≤ 100
+  Zeichen; 47 passen). Es weicht in 37 von 138 Artikeln vom `title` ab – es ist
+  keine Kopie, sondern Kanalkopie.
+- `keywords` – die Frage ist ein realer Long-Tail-Suchbegriff und bleibt stehen.
+- `description` – unverändert innerhalb 155 Zeichen / 985 px (`serp_limits.py`).
+
+`cover.alt` wurde mitgezogen, weil das Cover den Titel rendert und der Alt-Text
+das Bild beschreiben muss.
+
+**Kette (dieselbe Bauart wie Heilung A):** Titel → `generate_covers.py --slug …`
+(15 Bilddateien, `covers_manifest.json`, LCP-/FCP-Manifeste) →
+`ki_cover_herkunft.py --heilen` → `abgeleitete_register.py --fix`
+(`static/llms.txt`, Fachprüfungs-Register, Befund-Akte).
+
+Dabei greift die neue Klasse aus Abschnitt 4 zum **ersten Mal im Ernstfall**:
+
+```
+🔧 Cover-Herkunft: 1 Beleg(e) nachgezogen (davon 1 auf die Bytes der Datei erneuert)
+   – die Pixelmessung war für genau diese Cover bereits grün.
+   144 Cover gemessen · 0 harte Befunde · 0 Schreibfehler
+```
+
+Ohne `beleg_veraltet` wäre genau hier wieder eine Herkunftserklärung auf der
+Vorfassung stehen geblieben – dieselbe stille Drift, nur eine Datei kleiner.
+
+```
+vorher:  ❌ Titel-Check: 144 Titel | Verstöße: 1   (Exit 1)
+nachher: ✅ Titel-Check: 144 Titel | Verstöße: 0   (Exit 0)
+         ✅ Cover-Check: 144 Covers | Probleme: 0 | Stale: 0 | Brand: 0 | Text: 0
+         ✅ Metadaten-Wache: 145 Dateien | Befunde: 0
+         ✅ Frontmatter-Wache: 174 | Blocker: 0 | Hinweise: 0
+         ✅ YMYL-Siegelwache: 138 Artikel · 0 Befunde
+         ✅ editorial_review_gate --published --strict: 0 blockiert
+```
+
+**Was offen bleibt (Ehrlichkeit statt Grünmalerei):** Geheilt ist der Einzelfall,
+nicht der Fixer. Ein nächster Fragetitel über 45 Zeichen ohne Anhang läuft wieder
+ins Leere. Die dauerhafte Lösung ändert `ensure_colon_title()` für den gesamten
+Bestand und braucht deshalb Idempotenz-Nachweis plus Sabotage-Selbsttest
+(Hausart: `run_selftest()` in `check_titles.py:509` prüft bereits, dass die
+R1-Heilung keine Artefakte erzeugt) – eigener Auftrag. Inhaltlich müsste der Kopf
+dann aus `keywords[0]` oder der `inspiration`-Zeile kommen, nicht aus dem Titel
+selbst, denn ein Fragetitel ohne Anhang trägt kein „Y" in sich.
+
+---
+
+## 6. Was bereits geheilt war – und warum das hier steht
 
 Ehrliche Bestandsaufnahme, damit niemand dieselbe Arbeit doppelt macht:
 
@@ -272,27 +387,92 @@ Das wäre in diesem Haus auch gar nicht möglich, ohne dass
 
 ---
 
-## 6. Offen, bewusst – mit Begründung
+## 7. Nebenbefund – vier rote Bestandstests, die kein Workflow ruft
 
-1. **Kalender-Artefakte tragen noch den alten Kfz-Titel**
-   (`data/social/kalender/mastodon.ics:417`, `static/kalender/mastodon.ics:417`,
-   `data/social/kalender/video.md:27`). Es gibt **keinen maschinellen Schreiber**
-   dafür; `social-autopilot.yml` ist der einzige `.ics`-Bezug. Eine Handänderung
-   wäre ein Einzel-Fix ohne Wache – genau die Klasse, die dieser Auftrag abschafft.
-   Empfehlung: Generator + Register-Eintrag in `abgeleitete_register.py`
-   (dafür gibt es mit `generate_llms_txt.py` ein Vorbild). Nicht in diesem PR,
-   weil ein neuer Generator eigener Vertrag, Selbsttest und Verdrahtung braucht.
-2. **`check_titles.py` meldet 1 Verstoß (R1)** –
-   `2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein`
-   (47 Zeichen ohne Doppelpunkt). Nicht blockierend: `deploy.yml:559` ruft
-   `--fix` auf, und der Bestand war bei `5e8233e` bereits rot, bevor dieser
-   Auftrag begann. R1 ist eine Konventionsregel (Cover-Umbruch), kein M1-Blocker.
-3. **Historische Protokoll-Doks** mit altem Titel bleiben unverändert
-   (Begründung in Abschnitt 2): Ein Prüfbericht ist ein zeitgebundener Beleg.
+Für diesen Auftrag wurde **nicht** nur die Check-Matrix des PR nachgefahren,
+sondern die volle Unittest-Fläche: alle **312** Module in `scripts/tests/`
+(`python -m unittest` in 16 Batches; `discover` scheitert am fehlenden
+`__init__.py`, und die CI ruft Module grundsätzlich namentlich auf).
+
+Dabei fielen vier Tests auf, die **auf `origin/main` (`25f6f89`) exakt gleich rot
+sind**. Der Nachweis wurde geführt, nicht vermutet: dieselben Module in einem
+`git worktree` von `origin/main` gestartet – dieselben Assertionen, dieselben
+Werte. Dieser Branch fügt also **keinen** neuen roten Test hinzu.
+
+| Roter Test | Befund | Auf `main`? |
+| --- | --- | --- |
+| `test_einzigartigkeit_1027` · `test_gas_artikel_flesch_ueber_publish_schwelle` | `2026-08-12-preisgarantie-gas…`: Flesch **59.9** < Publish-Schwelle 60.0 (R6) | ✅ identisch rot |
+| `test_einzigartigkeit_bestand` · `test_kein_kritisches_live_paar_im_bestand` | `2026-08-14-sparen-im-herbst…` ↔ `2026-08-26-kfz-versicherung…`: **5** gemeinsame 7-Wort-Phrasen | ✅ identisch rot |
+| `test_faktenfrische_763` · `test_reisekasse_praezisierungen_und_recherche_bleiben_erhalten` | Rechtssatz „Das lässt sich nicht pauschal zusagen." fehlt im Artikel (0 != 1) | ✅ identisch rot |
+| `test_inhalts_register` · `test_live_wache_ist_gruen` | FF3: drei Live-Artikel ohne Pillar-/Rechner-Link (`handytarif`, `kfz`, `tagesgeld`) | ✅ identisch rot |
+
+**Warum sie kein Gate rot machen:** Alle vier Module haben **null** Aufrufe in
+`.github/workflows/` und `package.json`. `scripts/ff_inhalts_wache.py` hat im
+gesamten Repository **keinen einzigen Aufrufer** außer sich selbst und steht auch
+nicht in der `selftest_runner`-Entdeckung (291 Wachen). Wer kein `run:` in einem
+Workflow hat, läuft nie.
+
+Das ist dieselbe Klasse wie Abschnitt 1, Lehre 3 – nur eine Stufe stiller: Dort
+maß ein Gate zu selten, hier **hängt die Wache an gar keinem Gate**. Vier echte
+Inhaltsbefunde (haarscharf verfehlte Lesbarkeits-Schwelle, kritische
+Live-Überlappung der #1027-Familie, fehlender Rechtssatz, drei fehlende interne
+Links) liegen deshalb unbemerkt auf `main`.
+
+**Bewusst nicht in diesem PR geheilt – mit Begründung:**
+
+1. Alle vier Befunde sind **redaktionell** (Satz ergänzen, Passage eigenständig
+   formulieren, interne Links setzen, Lesbarkeit heben) und treffen **versiegelte
+   Live-Artikel**: Jede Körperänderung bricht deren Freigabe und verlangt den
+   vollen Siegelweg aus Abschnitt 2 – pro Artikel, nicht pauschal.
+2. Die Wachen jetzt zu verdrahten, **ohne** die Befunde zu heilen, würde vier neue
+   rote Gates erzeugen. Das ist das Gegenteil des Auftrags.
+3. Empfohlene Reihenfolge: (a) Befunde redaktionell heilen und neu versiegeln,
+   (b) Wachen neben das bestehende Diff-Tor in `link-check.yml:213` hängen
+   (`bestand_einzigartigkeit_gate.py` läuft dort bereits), (c) `ff_inhalts_wache.py`
+   in die `selftest_runner`-Entdeckung aufnehmen, damit sie nie wieder ohne
+   Aufrufer altert.
+4. Das Diff-Tor selbst ist grün: `bestand_einzigartigkeit_gate.py --basis <PR-Basis>`
+   misst nur **neu** erzeugte Dopplungen – Altlasten zählen weder als Fund noch als
+   Freispruch (V4-Messung). Dieser PR erzeugt keine.
 
 ---
 
-## 7. Nachweis – alle Gates am liegenden Stand gemessen
+## 8. Offen, bewusst – mit Begründung
+
+1. **Kalender-Artefakte – Korrektur einer eigenen Fehleinschätzung.** Die erste
+   Messung dieses Auftrags notierte: `data/social/kalender/mastodon.ics:417`,
+   `static/kalender/mastodon.ics:417` und `data/social/kalender/video.md:27`
+   tragen noch den alten Kfz-Titel und hätten **keinen maschinellen Schreiber**.
+   Das war falsch, und der Beweis steht hier: `scripts/social_calendar.py --build`
+   erzeugt alle Kalender (`<kanal>.md`, `<kanal>.ics`, `UEBERSICHT.md`,
+   `README.md`, `static/kalender/index.html`) aus `data/social/schedule.yaml` +
+   `state.yaml` + `channels.yaml` und läuft laut eigener Kopf-Doku „automatisch am
+   Ende jedes Autopilot-Laufs (`social-autopilot.yml`)". Der Plan referenziert
+   Beiträge per **Slug**, nicht per Titel – die Artefakte ziehen den Titel also
+   selbst nach. Nachweis: ein Probelauf von `--build` ließ den alten Titel in
+   **allen** Kalenderdateien verschwinden (`grep -c` → keine Treffer).
+   Der Probelauf wurde trotzdem **zurückgenommen**
+   (`git checkout -- data/social/kalender static/kalender`): Die Kalender sind
+   *rollierend* (Fenster relativ zum heutigen Tag), der Bau schrieb 35 Dateien mit
+   3515 Einfügungen / 3179 Löschungen. Das wäre zeitabhängiger Ballast in einem PR
+   gewesen, den der nächste Autopilot-Lauf ohnehin überschreibt. Regel daraus:
+   Kalender-Artefakte nie von Hand pflegen – sie sind Ableitung, nicht Quelle.
+2. **Titel-Gate R1** – in Abschnitt 5 geheilt (Einzelfall redaktionell,
+   `check_titles.py` jetzt Exit 0). Offen bleibt der **Fixer**:
+   `ensure_colon_title()` gibt Fragetitel ohne Anhang unverändert zurück, obwohl
+   die Doku Heilung verspricht. Der nächste Titel dieser Klasse bleibt wieder
+   liegen, bis der Heiler selbst lernt, den Kopf aus `keywords[0]`/`inspiration`
+   zu nehmen – eigener Auftrag, weil er den Bestand berührt und einen
+   Idempotenz-/Sabotage-Selbsttest verlangt.
+3. **Vier rote Bestandstests ohne Aufrufer** – Abschnitt 7. Vorhanden auf `main`,
+   redaktionell zu heilen, danach zu verdrahten. Nicht in diesem PR.
+4. **Historische Protokoll-Doks** mit altem Titel bleiben unverändert
+   (Begründung in Abschnitt 2): Ein Prüfbericht ist ein zeitgebundener Beleg – wer
+   ihn nachträglich auf den neuen Titel biegt, fälscht das Datum der Prüfung.
+
+---
+
+## 9. Nachweis – alle Gates am liegenden Stand gemessen
 
 Vollständige Batterie, jede Prüfung einzeln mit Exit-Code (nicht „ein Skript lief
 durch"):
@@ -322,10 +502,26 @@ durch"):
 == Deploy-Siegel-Pfad ==
   ✅ ki_cover_herkunft --selftest  ✅ ki_bild_markierung --selftest / --gate
   ✅ editorial_review_gate --published --strict
+== Titel-/Cover-Gate (nach Heilung D) ==
+  ✅ check_titles → 144 Titel | Verstöße: 0 (vorher 1, Exit 1)
+  ✅ check_covers → 144 Covers | Probleme 0 | Stale 0 | Brand 0 | Text 0
+  ✅ casing_guard  ✅ ki_cover_herkunft --heilen → 144 gemessen, 0 hart
 ```
 
 `selftest_runner.py` (Entdeckung aller Wachen, uhrfest, schreibfrei) lief zuvor
 grün: **291 Wachen · 582 Proben · 444,3 s**.
+
+**Basis:** Alle Messungen oben sind **nach** dem Rebase auf `origin/main`
+(`25f6f89`, Stand 22.11. 11:0x) wiederholt worden – `main` war während der Arbeit
+weitergelaufen (PR #1307 gemergt, zwei Automationsläufe, neue Layout-/CSP-Skripte
+inkl. `scripts/tests/test_ymyl_siegel_wache.py`). Überlappung mit diesem Branch:
+genau eine Datei (`.github/workflows/code-selbstheilung.yml`, dort hat `main`
+dieselbe W1-Heilung selbst eingespielt – eigene Fassung zurückgenommen,
+Abschnitt 6). Der Rebase lief konfliktfrei.
+
+**Unittest-Vollfläche:** 312 Module, 16 Batches – 13 Batches grün, 3 Batches mit
+insgesamt **4** Fehlschlägen, alle vier auf `origin/main` bitgleich reproduziert
+(Abschnitt 7). Kein neuer roter Test durch diesen Branch.
 
 **Merge-Weg:** Dieses Repository verbietet Merge-Commits
 (`allow_merge_commit: false`) – ein `gh pr merge --merge` wird von GitHub
@@ -337,14 +533,15 @@ diesem Auftrag unabhängig vom Schreiber (Abschnitt 3).
 
 ---
 
-## 8. Geänderte Dateien (Kern)
+## 10. Geänderte Dateien (Kern)
 
 | Datei | Änderung |
 | --- | --- |
 | `content/posts/2026-08-26-kfz-versicherung…/index.md` | Titel 64→58 Zeichen, `aenderungsgrund`-Nachtrag, neues Siegel |
+| `content/posts/2026-11-12-wie-viel-streaming-bandbreite…/index.md` | Titel 47→52 Zeichen auf Hauskonvention (R1), `cover.alt`, `aenderungsgrund`-Nachtrag; unversiegelter Entwurf |
 | `data/editorial_review_history.jsonl` | append-only Siegel-Eintrag |
 | `e2e/archivredaktion.spec.mjs` | H1-Erwartung + Kommentar |
-| `static/images/covers/**` (15), `data/covers_manifest.json`, `data/fcp_images.json` | deterministisch nachgerendert |
+| `static/images/covers/**` (30), `data/covers_manifest.json`, `data/fcp_images.json`, `data/lcp_images.json` | deterministisch nachgerendert (beide Titel) |
 | `static/llms.txt`, `data/fachpruefung_register.yaml`, `BEFUND-AKTE.md` | via `abgeleitete_register.py --fix` |
 | 12 weitere Artikel-`index.md` | `cover.ki_pruefung` auf die Bytes der Datei erneuert (Beleg-Drift) |
 | `.github/workflows/skript-syntax.yml` | `schedule` (Backstop) + `workflow_dispatch` |
