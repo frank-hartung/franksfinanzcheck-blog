@@ -29,7 +29,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: c23efc15938608b087e13098745bcfc16f8c465e737ea45a7cba7e9fe6520d69
+    sha256: adea41cdfa1c60aec074a7e7109b383d1b84bb79bdb0c41e48ef983c41f9a61c
     geprueft_am: 2026-11-22
 faktenfrische_aliases:
   - "2026-11-20-heizperiode-beginn-2026-warum-der-gas-check-im-oktober"

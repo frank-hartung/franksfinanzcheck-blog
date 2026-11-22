@@ -1,4 +1,4 @@
-# 🩺 Dauerheilung der roten Merge-Gates (22.11.2026) – eine Ursache, fünf rote Prüfungen
+# 🩺 Dauerheilung der roten Merge-Gates (22.11.2026) – sechs gemeldete Prüfungen, eine siebte nachgetragen
 
 **Datum:** 22.11.2026 · **Auftrag:** „Bitte vollständig dauerhaft auf Highend-Level
 einer Profi-Agentur beheben." · **Anlass:** Übergabe-Notiz „Beim Merge zu beachten":
@@ -7,12 +7,18 @@ Beim Squash-Merge waren auf dem PR die Prüfungen **Integritäts-Siegel**,
 **Skript-Syntax** rot; die Rohlogs waren nicht abrufbar (EOF/Transportfehler), die
 Befunde wurden deshalb zurückgestellt.
 
-**Ergebnis vorweg:** Alle sechs Klassen sind auf dem liegenden Bestand grün
-gemessen – nicht umgangen, sondern an der Ursache geheilt. Eine einzige
+**Ergebnis vorweg:** Alle sechs gemeldeten Klassen sind auf dem liegenden Bestand
+grün gemessen – nicht umgangen, sondern an der Ursache geheilt. Eine einzige
 redaktionelle Zahl (Titel 64 Zeichen gegen die Grenze 60) war die gemeinsame
 Ursache von **drei** der sechs roten Gates; eine Trigger-Vertrags-Drift im
-gemeinsamen Schreibweg die vierte. Darüber hinaus wurden zwei Defekte geheilt, die
-die Übergabe nicht nannte, weil sie niemand sehen konnte:
+gemeinsamen Schreibweg die vierte.
+
+**Eine siebte Prüfung kam während der Arbeit dazu.** Der Job `regression` war auf
+**jedem** PR rot, nicht nur diesem, und die erste Fassung dieser Akte führte ihn
+als Nebenbefund „außerhalb des Auftrags" – mit einer Begründung, die sich als
+falsch erwies (Abschnitt 1, Lehre 4). Vier Bestandstests sind deshalb in
+Abschnitt 8 als **Heilung G** nachgetragen. Darüber hinaus wurden zwei Defekte
+geheilt, die die Übergabe nicht nannte, weil sie niemand sehen konnte:
 
 - **Heilung C** – eine unerkannte Drift-Klasse in der Cover-Herkunft: 13
   Belege im Live-Bestand beschrieben die Bytes einer Vorfassung. Als messbare
@@ -22,9 +28,17 @@ die Übergabe nicht nannte, weil sie niemand sehen konnte:
   `ensure_colon_title()` Fragetitel ohne Anhang unverändert zurückgibt, während
   `deploy.yml` den Befund mit `|| echo` schluckt.
 
-Ehrlich dazugesagt: Vier weitere Bestandstests sind rot – **bitgleich auch auf
-`origin/main`** und von keinem Workflow aufgerufen (Abschnitt 8). Sie gehören in
-die Redaktion, nicht in dieses PR; der Nachweis und die Reihenfolge stehen dort.
+- **Heilung G** – der Job `regression` war rot, auf **jedem** PR: vier Bestandstests
+  über `unittest discover -s scripts/tests`. Ein Parser-Bug in der Inhalts-Wache
+  (las nur doppelt quotiertes Frontmatter), eine haarscharf verfehlte
+  Lesbarkeits-Schwelle, eine wortgleiche Dopplung zweier Live-Artikel und ein
+  Heiler-Artefakt, das einen Rechtssatz verdrängt hatte.
+
+Ehrlich dazugesagt und **korrigiert**: Die erste Fassung dieser Akte führte die
+vier Bestandstests als Nebenbefund, den kein Workflow rufe. Das war falsch –
+`discover` erreicht jedes Modul, ob ein Workflow es beim Namen nennt oder nicht
+(Abschnitt 1, Lehre 4). Die vier Befunde sind Teil des Auftrags und in
+Abschnitt 8 geheilt; was danach offen bleibt, steht in Abschnitt 9.
 
 ---
 
@@ -44,8 +58,9 @@ Der lesbare Weg sind die **Annotationen** der Check-Runs
 | Skript-Syntax (44941227657) | Schritt 7 „Trigger-Wache" | **W1**: `code-selbstheilung.yml` ruft `scripts/git_sync.sh` auf, trägt die Datei aber in keinem `paths:`-Filter (push *und* pull_request) |
 | Entity-Marken-Gate (44936582442) | „Site bauen" | Hugo: `2026-11-01-energieeffiziente-geraete…/index.md:23:3 mapping key "aenderungsgrund" already defined at [19:3]` |
 | Integritäts-Siegel / Gate (44936582446, 44936582328) | „Artefakt-Wächter", „Governance-Vertrag C1–C49" | auf Commit `84f3bfcc` – derselbe Hugo-Duplikat-Bestand; bei `5e8233e` bereits geheilt |
+| **Code-Regression** `regression` (45026488760, Job 137220544932) | Schritt 11 „Code-Regression – Suite und Selbsttests" | **vier Bestandstests** rot über `unittest discover -s scripts/tests` – Flesch 59.9 < 60.0, 5 gemeinsame 7-Wort-Phrasen, fehlender Rechtssatz, FF3 × 3. Rot auf **jedem** PR, nicht nur diesem. *Nachgetragen:* diese Zeile fehlte in der ersten Fassung der Akte, weil der Auftrag fälschlich auf die sechs namentlich gemeldeten Prüfungen verengt wurde – siehe Lehre 4 und Abschnitt 8 |
 
-**Drei Lehren aus dieser Tabelle**, die über den Einzelfall hinausgehen:
+**Vier Lehren aus dieser Tabelle**, die über den Einzelfall hinausgehen:
 
 1. **Eine Zahl, fünf Prüfungen.** M1 ist kein „SEO-Hinweis": Er steht im
    Bestandstest der YMYL-Siegelprüfung, im E2E-Vorlauf *vor* der Browser-Suite und
@@ -59,6 +74,16 @@ Der lesbare Weg sind die **Annotationen** der Check-Runs
    Automationslauf `5e8233e` (08:45) mit `GITHUB_TOKEN` committet und GitHub
    Folge-Workflows für solche Commits bewusst nicht auslöst. Der rote Stand blieb
    einfach liegen.
+4. **„Kein `run:` mit diesem Namen" heißt nicht „läuft nie".** Die erste Fassung
+   dieser Akte schloss aus `grep -rn <testname> .github/workflows/` → keine
+   Treffer, dass vier rote Bestandstests kein Gate berühren, und empfahl sie als
+   Nebenbefund in einen Folge-PR. Der Schluss war falsch: Der Job `regression`
+   fährt `unittest discover -s scripts/tests` und erreicht damit **jedes** Modul,
+   ob ein Workflow es beim Namen nennt oder nicht. Wer die Aufrufer einer Prüfung
+   sucht, muss den **Entdeckungsmechanismus** suchen (`discover`, `glob`,
+   `selftest_runner`-Entdeckung), nicht nur die namentliche Nennung. Die Folge
+   war konkret: Das lauteste Tor des PR blieb rot, während die Akte es als
+   „außerhalb des Auftrags" führte. Geheilt in Abschnitt 8.
 
 ---
 
@@ -536,53 +561,725 @@ Das wäre in diesem Haus auch gar nicht möglich, ohne dass
 
 ---
 
-## 8. Nebenbefund – vier rote Bestandstests, die kein Workflow ruft
+## 8. Heilung G – vier rote Bestandstests: „kein Aufrufer" war eine falsche Folgerung
 
-Für diesen Auftrag wurde **nicht** nur die Check-Matrix des PR nachgefahren,
-sondern die volle Unittest-Fläche: alle **312** Module in `scripts/tests/`
-(`python -m unittest` in 16 Batches; `discover` scheitert am fehlenden
-`__init__.py`, und die CI ruft Module grundsätzlich namentlich auf).
+> ### ⚠ Vom Bestand überstimmt – PR #1318, gemeldet am 22.11.2026 gegen 16:20 UTC
+>
+> Während dieser Abschnitt geschrieben wurde, hat `main` **dieselben vier Befunde
+> selbst geheilt**: `bc1e022` „Betriebsbereit 22.11.: Deploy-Siegel grün (via
+> #1315) + **4 von 5 roten Regressionstests geheilt** (#1318)", dazu `5c5ee46`
+> „fix(titel): Streaming-Bandbreite-Titel auf R1-Konvention (Doppelpunkt)
+> (**#1320**)" für Heilung E.
+>
+> **Die Diagnose war deckungsgleich, nicht nur das Ergebnis.** `main`'s Fassung
+> von `_field()` trägt denselben Befundkopf – „BEFUND 22.11.2026", derselbe
+> Auslöser `pillar: versicherungen` ohne Anführungszeichen, dieselbe Folge
+> („die Siegel-Ausnahme in `_has_template_links` fiel STILL aus"), derselbe
+> Verweis auf `weiterrechnen_box.html`, dieselbe Schlussfolgerung („Ein Parser,
+> der eine gültige Schreibweise nicht kennt, erfindet einen Befund"). Zwei
+> unabhängige Läufe sind zur selben Ursache vorgedrungen. Die Umsetzungen
+> unterscheiden sich: `main` nutzt **einen** Regex `^key:[ \t]*(.*)$` und
+> schält die Quote danach manuell ab, dieser Branch nutzte drei Muster
+> (doppelt/einfach/nackt) mit `(?:#.*)?$` für Inline-Kommentare.
+>
+> **Hauspolitik „Bestand gewinnt"** (`GIT_SYNC_BESTAND_POLICY`, #590) → `main`'s
+> Fassung steht im Baum, alle fünf Inhaltsheilungen aus 8.1/8.3/8.4/8.5 und der
+> eigene `_field()`-Entwurf sind zurückgenommen. Beim `handytarif`-Artikel war
+> das keine Formalie: `main` hatte denselben Pillar-Link
+> `../../pillar/internet-dsl/` bereits gesetzt, die eigene Fassung hätte ihn
+> **zweimal** getragen (gemessen: 2 Treffer gegen 1 im Bestand).
+>
+> **Was von Heilung G bleibt**, und es ist nicht nichts:
+> 1. **Lehre 4** (Abschnitt 1) – „kein `run:` mit diesem Namen" heißt nicht
+>    „läuft nie". Ohne sie wäre `regression` weiter als „außerhalb des Auftrags"
+>    geführt worden. #1318 bestätigt sie: Der Job war repo-weit rot, und geheilt
+>    wurde er über die Suite, nicht über ein benanntes Gate.
+> 2. **Abschnitt 8.6** – die Lesbarkeits-Diff-Wache, die einen gesetzten Link
+>    als Text misst. Fünf Varianten, eine Tabelle, die Regel „ein Link ist Text".
+> 3. **Abschnitt 8.7** – die Reihenfolge der Ableitungskette. Sie hat in diesem
+>    Auftrag zweimal zugeschlagen und ist unabhängig davon gültig, wer die
+>    Befunde heilt.
+> 4. **Abschnitt 8.2** – der Schreibschutz-Fehlbefund über `except: return True`
+>    auf einem umbenannten Pfad. Nicht geheilt, weiterhin offen (Abschnitt 9).
+> 5. **Ein neuer, harter Nachweis für Heilung D** – siehe 8.9. `main` hat mit
+>    `ae6fd3c`/`200a9e3` **14 frische Beleg-Driften** erzeugt, die `main`'s
+>    eigener Prüfer mit **0 Befunden** durchwinkt.
+> 6. **Neu und nicht überstimmt: die Sicherung von `main`'s eigenem Fix.**
+>    `main`'s `_field()` ist richtig – gemessen gegen 10 Proben, alle grün,
+>    darunter nackt/einfach/doppelt quotiert, Doppelpunkt im Wert, fehlendes
+>    Feld, leeres Feld und Inline-Kommentar. Aber `main`'s `selftest()` prüft
+>    **ausschließlich FF1**; für den Parser stand keine einzige Probe. Ein Fix
+>    ohne Probe altert unbemerkt – dieselbe Klasse wie Lehre 3 („Ein Gate, das
+>    nie wieder misst, ist ein stilles Gate"), nur eine Ebene tiefer: hier misst
+>    der Selbsttest einer Wache seinen frisch reparierten Leser nicht.
+>    Deshalb sind **9 Feld-Proben und 2 Vertrags-Proben** ergänzt, rein additiv,
+>    ohne eine Zeile am Verhalten zu ändern: `selftest()` meldet jetzt
+>    `18 Proben: FF1 + Feldleser + Siegel-Ausnahme scharf`.
+>    **Sabotage-Gegenprobe geführt:** den Parser auf den Stand vor dem Fix
+>    zurückgedreht (`^{key}: "(.*)"$`) → **6 Proben rot, Exit 2**, darunter
+>    wörtlich „Fassungsgebundener Beitrag mit nacktem pillar-Feld verliert die
+>    Template-Ausnahme – genau der Fehlbefund vom 22.11.2026". Zurückgesetzt →
+>    grün. Die Proben sind in beide Richtungen scharf, denn ein fehlendes oder
+>    leeres Feld **muss** leer bleiben: Sonst erfindet die Wache ein
+>    `pillar`-Feld und gibt die Siegel-Ausnahme einem Beitrag, dessen Boxen
+>    nichts zu verlinken hätten.
+> 7. **Die Wurzel hinter dem Modellwert-Artefakt – der eine Befund, den #1318
+>    nicht erreichte.** Abschnitt 8.5 zählte **192** verbliebene Stempel als
+>    offenen Punkt, mit dem eigenen Auftrag, den **Injektor** zu finden statt 192
+>    Symbole zu putzen. Er ist gefunden und geheilt: `scripts/sprachkern.py`,
+>    `_marker_reparatur`. Der Ausdruck `_ZAHLBEHAUPTUNG` verknüpfte „Zahl mit
+>    Einheit" (immer eine Behauptung) und „nackte Zahl ab drei Ziffern" (nur
+>    manchmal eine) mit ODER – und der nackte Zweig fraß die `2016` der
+>    Fundstelle `(Verordnung (EU) 2016/679)`. Ergebnis live: „Die DSGVO … regelt
+>    die Verarbeitung personenbezogener Daten**; das ist ein Modellwert.**" Eine
+>    Rechtsnorm ist kein Modellwert, sie ist geltendes Recht – faktisch falsch, in
+>    einem YMYL-Satz. #1318 korrigierte den **Satz** von Hand; die Stelle, die ihn
+>    schrieb, blieb im Baum. **Reichweite gemessen: 44 Zeilen** False Positives im
+>    Bestand (1 Fundstelle, 40 Paragraphenverweise, 3 Link-Pfade mit Datum) – und
+>    aktuell **0** Stempel an Rechtsnorm-Sätzen, also sauber, aber **nicht
+>    geheilt**: sauber nur, weil diese Zeilen gerade keinen zerstückelten Marker
+>    tragen. Geheilt mit getrennten Ausdrücken plus `_ist_rechtskontext()`, der
+>    den Kontext um den **einzelnen** Treffer prüft – ein satzweiter Guard wäre
+>    eine Scheinheilung in die Gegenrichtung, denn „Nach § 5 kostet das 460 € im
+>    Monat" muss seine Kennzeichnungspflicht behalten. Nachweis: 19 Proben in
+>    beide Richtungen, End-to-End ergibt die Heilung **wörtlich die Korrektur, die
+>    #1318 von Hand machte**, Sabotage-Gegenprobe (Guard aus → 5 Proben rot, Exit
+>    2, Original-Satz wörtlich reproduziert), `Ran 26 tests OK` statt 18,
+>    `selftest_runner` **292** Wachen statt 291, und
+>    `pflicht_marker_reparatur.py` meldet **„0 Reparatur(en) in 0 Datei(en)"** –
+>    die Heilung schreibt den Bestand nicht um. Vollständig in **Abschnitt 8.10**.
 
-Dabei fielen vier Tests auf, die **auf `origin/main` (`25f6f89`) exakt gleich rot
-sind**. Der Nachweis wurde geführt, nicht vermutet: dieselben Module in einem
-`git worktree` von `origin/main` gestartet – dieselben Assertionen, dieselben
-Werte. Dieser Branch fügt also **keinen** neuen roten Test hinzu.
 
-| Roter Test | Befund | Auf `main`? |
+Dieser Abschnitt stand in der ersten Fassung dieser Akte als **Nebenbefund** mit
+der Empfehlung, ihn in einem Folge-PR zu heilen. Die Begründung war: Alle vier
+Module hätten **null** Aufrufe in `.github/workflows/` und `package.json`, und
+„wer kein `run:` in einem Workflow hat, läuft nie".
+
+**Diese Folgerung war falsch, und die Korrektur ist der wichtigste Befund dieses
+Abschnitts.** Sie galt nur für *namentliche* Aufrufe. Der Job `regression`
+(`.github/workflows/publication-reliability-tests.yml`, Schritt 11 „Code-Regression
+– Suite und Selbsttests") fährt:
+
+```
+python3 scripts/ci_tests.py --titel "Code-Regression" \
+  --log /tmp/suite.log -- python3 -m unittest discover -s scripts/tests -v
+```
+
+`discover` erreicht **jedes** Modul in `scripts/tests/` – auch die vier, die kein
+Workflow beim Namen nennt. Sie laufen also in CI, und sie machen `regression`
+rot: auf **jedem** PR der letzten Stunden, nicht nur auf diesem. Belegt über die
+Check-Runs-API dreier fremder Läufe (`45025681311`, `45015486469`, `45015442046`),
+die exakt dieselben Testnamen als Annotation tragen:
+
+```
+test_kein_kritisches_live_paar_im_bestand
+test_gas_artikel_flesch_ueber_publish_schwelle
+test_reisekasse_praezisierungen_und_recherche_bleiben_erhalten
+```
+
+Damit sind die vier Befunde **kein** Nebenbefund, sondern Teil des Auftrags: Ein
+PR, der „die roten Merge-Gates dauerhaft heilt" und dabei `regression` rot lässt,
+heilt das lauteste Tor gar nicht. Alle vier sind hier geheilt.
+
+Die erste Fassung notierte außerdem, `discover` scheitere lokal am fehlenden
+`__init__.py`. Auch das war ungenau: `scripts/tests/` ist ein Package, und die
+Batch-Messung über explizite Modulnamen war ein Umweg, der den CI-Weg **nicht**
+abbildete. Gemessen wird jetzt auf dem CI-Weg selbst.
+
+### 8.1 FF3 – ein Parser-Bug, kein Inhaltsmangel
+
+`test_inhalts_register.test_live_wache_ist_gruen` meldete FF3 („kein Rechner-Link")
+gegen drei Live-Artikel. Einer der drei war ein **Fehlbefund**, verursacht durch
+die Wache selbst:
+
+`scripts/ff_inhalts_wache.py` las Frontmatter-Felder ausschließlich mit
+
+```python
+m = re.search(rf'^{key}: "(.*)"$', front, re.M)
+```
+
+– also nur `key: "wert"` in doppelten Anführungszeichen. Der Kfz-Artikel trägt
+`pillar: versicherungen` **unquotiert**: gültiges YAML, für diese Funktion aber
+unsichtbar. `_field()` lieferte `""`, `_has_template_links()` sah kein `pillar`-Feld
+und verweigerte dem Beitrag die Ausnahme, obwohl `weiterrechnen_box.html` und
+`pillar_box.html` vorhanden sind und den Rechner- und Pillar-Link im gerenderten
+HTML liefern. **136 von 137** Beiträgen quoten ihr `pillar`-Feld; der eine
+Ausreißer reichte, weil die Wache Ausreißer nicht lesen konnte.
+
+Eine Wache, die gültige Werte nicht liest, ist doppelt falsch: Sie meldet Befunde,
+die keine sind, **und** sie übersieht dieselben Felder dort, wo sie wirklich
+fehlen. Geheilt: `_field()` liest jetzt doppelt quotiert, einfach quotiert und
+unquotiert, jeweils mit optionalem Inline-Kommentar. Der Selbsttest ist um acht
+Feld-Proben und zwei Vertrags-Proben erweitert – in **beide** Richtungen scharf,
+denn ein leerer Wert muss leer bleiben, sonst erfindet die Wache ein `pillar`-Feld
+und gibt die Ausnahme einem Beitrag, dessen Boxen nichts zu verlinken hätten.
+
+Die verbleibenden zwei Befunde waren echt und sind redaktionell geheilt:
+
+| Artikel | Fehlender Link | Gesetzter Link |
 | --- | --- | --- |
-| `test_einzigartigkeit_1027` · `test_gas_artikel_flesch_ueber_publish_schwelle` | `2026-08-12-preisgarantie-gas…`: Flesch **59.9** < Publish-Schwelle 60.0 (R6) | ✅ identisch rot |
-| `test_einzigartigkeit_bestand` · `test_kein_kritisches_live_paar_im_bestand` | `2026-08-14-sparen-im-herbst…` ↔ `2026-08-26-kfz-versicherung…`: **5** gemeinsame 7-Wort-Phrasen | ✅ identisch rot |
-| `test_faktenfrische_763` · `test_reisekasse_praezisierungen_und_recherche_bleiben_erhalten` | Rechtssatz „Das lässt sich nicht pauschal zusagen." fehlt im Artikel (0 != 1) | ✅ identisch rot |
-| `test_inhalts_register` · `test_live_wache_ist_gruen` | FF3: drei Live-Artikel ohne Pillar-/Rechner-Link (`handytarif`, `kfz`, `tagesgeld`) | ✅ identisch rot |
+| `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` | Pillar-Link | `[Ratgeber Internet & DSL](../../pillar/internet-dsl/)` am Schlussabsatz – Netzqualität, Anschluss und Gesamtkosten gehören zusammen |
+| `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | Rechner- **und** Pillar-Link | `[Notgroschen-Rechner: Zielbetrag, Dauer und drei Stufen](../../werkzeuge/notgroschen-rechner/)` direkt hinter dem Notgroschen-Absatz; `[Ratgeber Konto & Karten](../../pillar/konto-karten/)` hinter der Checkliste zur Kontoeröffnung |
 
-**Warum sie kein Gate rot machen:** Alle vier Module haben **null** Aufrufe in
-`.github/workflows/` und `package.json`. `scripts/ff_inhalts_wache.py` hat im
-gesamten Repository **keinen einzigen Aufrufer** außer sich selbst und steht auch
-nicht in der `selftest_runner`-Entdeckung (291 Wachen). Wer kein `run:` in einem
-Workflow hat, läuft nie.
+Linktext und Zielpfad sind **nicht** erfunden, sondern aus dem Bestand übernommen:
+`[Ratgeber Konto & Karten]` steht dort sechsmal, `[Ratgeber Internet & DSL]`
+siebenmal, `[Notgroschen-Rechner: Zielbetrag, Dauer und drei Stufen]` dreimal.
+Vorher: `Inhalts-Wache FF1–FF5: 4 Befund(e)` (einer davon falsch). Nachher:
+`0 Befund(e)`.
 
-Das ist dieselbe Klasse wie Abschnitt 1, Lehre 3 – nur eine Stufe stiller: Dort
-maß ein Gate zu selten, hier **hängt die Wache an gar keinem Gate**. Vier echte
-Inhaltsbefunde (haarscharf verfehlte Lesbarkeits-Schwelle, kritische
-Live-Überlappung der #1027-Familie, fehlender Rechtssatz, drei fehlende interne
-Links) liegen deshalb unbemerkt auf `main`.
+### 8.2 Der Schreibschutz-Fehlbefund – und warum er gefährlich ist
 
-**Bewusst nicht in diesem PR geheilt – mit Begründung:**
+Bei der Siegel-Prüfung meldete `editorial_review_gate.automatic_write_protected()`
+den Reisekasse-Artikel als 🔒 **versiegelt**. Er ist es nicht: `status: "ausstehend"`,
+kein `inhalt_sha256`. Der Schutz kam aus einer anderen Zeile – die Funktion endet mit
 
-1. Alle vier Befunde sind **redaktionell** (Satz ergänzen, Passage eigenständig
-   formulieren, interne Links setzen, Lesbarkeit heben) und treffen **versiegelte
-   Live-Artikel**: Jede Körperänderung bricht deren Freigabe und verlangt den
-   vollen Siegelweg aus Abschnitt 2 – pro Artikel, nicht pauschal.
-2. Die Wachen jetzt zu verdrahten, **ohne** die Befunde zu heilen, würde vier neue
-   rote Gates erzeugen. Das ist das Gegenteil des Auftrags.
-3. Empfohlene Reihenfolge: (a) Befunde redaktionell heilen und neu versiegeln,
-   (b) Wachen neben das bestehende Diff-Tor in `link-check.yml:213` hängen
-   (`bestand_einzigartigkeit_gate.py` läuft dort bereits), (c) `ff_inhalts_wache.py`
-   in die `selftest_runner`-Entdeckung aufnehmen, damit sie nie wieder ohne
-   Aufrufer altert.
-4. Das Diff-Tor selbst ist grün: `bestand_einzigartigkeit_gate.py --basis <PR-Basis>`
-   misst nur **neu** erzeugte Dopplungen – Altlasten zählen weder als Fund noch als
-   Freispruch (V4-Messung). Dieser PR erzeugt keine.
+```python
+except Exception:
+    return True
+```
+
+Gemessen wurde der Pfad `content/posts/2026-10-24-strategisch-sparen-…`, den
+`test_faktenfrische_763.py:40` hartkodiert trägt. Die Kadenz-Wache hat den Artikel
+längst auf `2026-10-25-…` umdatiert. `load_article()` warf `FileNotFoundError`,
+die Klausel fing ihn und meldete „geschützt".
+
+**Fail-closed ist hier richtig** – ein unlesbarer Artikel darf nicht beschreibbar
+sein. Aber der Fehlbefund hatte eine konkrete Folge: Er hätte dazu geführt, einen
+freien Artikel über den vollen Siegelweg zu jagen und ein Siegel zu prägen, wo
+keines hingehört. Der Test selbst ist gegen die Umbenennung immun, denn er löst
+über `resolve()` auf (exakter Treffer gewinnt, sonst eindeutiger Fund über den
+Namens-Kern) – nur die **Messung** daneben war es nicht. Geheilt ist hier deshalb
+die Messung, nicht der Code: Die Siegel-Lage wird über den aufgelösten Pfad
+ermittelt. Die `except`-Klausel bleibt stehen.
+
+### 8.3 Flesch 59.9 – die längsten Sätze, nicht die kürzesten Wörter
+
+`test_einzigartigkeit_1027.test_gas_artikel_flesch_ueber_publish_schwelle` fordert
+für `GAS_12` und `GAS_24` `flesch ≥ 60.0` **und** `score ≥ 75`. `GAS_12`
+(`2026-08-12-preisgarantie-gas…`) lag bei **59.9** – ein Zehntel unter der Schwelle.
+
+`score` war 75 = 100 − 20 (Flesch unter `SCORE_MIN`) − 5 (zwei Absätze über
+`ABSATZ_MAX_SENT`). Der 20er-Abzug ist also **derselbe** Hebel: Steigt Flesch über
+die Schwelle, fällt er weg und der Score springt auf 95.
+
+Gemessen: 1503 Wörter, 140 Sätze, `wps` 10.74, `spw` 1.870. Amstad-Deutsch ist
+`flesch = 180 − wps − 58.5·spw`; `spw` zu drücken hieße, kürzere Wörter zu suchen –
+Scheinheilung. Der ehrliche Hebel ist `wps`, und dort die Ausreißer. Die drei
+längsten Sätze (31, 26, 26 Wörter) sind geteilt:
+
+- **31 Wörter** → drei Sätze: BDEW-Mittelwerte je Hausart einzeln ausgewiesen
+  (12,23 Cent/kWh Einfamilienhaus, 11,67 Cent/kWh Mehrfamilienhaus). Alle Zahlen
+  und die Quelle bleiben stehen.
+- **26 Wörter** → drei Sätze: Eurocent-/kWh-Verwechslung, grobe Schätzung und der
+  Beispielwert getrennt. Der Hinweis auf den Beispielwert bleibt erhalten.
+- **26 Wörter** → fünf Sätze: Die vier Prüfpunkte eines Preisschreibens sind jetzt
+  vier Fragen statt einer Komma-Kette. Der `Kündigungsfrist`-Link bleibt im vierten.
+
+Vorher: Flesch **59.9**, Score **75**, `nested_pct` 2.1. Nachher: Flesch **60.60**,
+Score **95**, `nested_pct` **0.0**. `wps` 10.20. Kein Inhalt entfernt, keine Zahl
+geändert, kein Link verloren.
+
+### 8.4 Kritische Live-Überlappung – fünf Phrasen aus **einem** Satz
+
+`test_einzigartigkeit_bestand.test_kein_kritisches_live_paar_im_bestand` maß
+`sparen-im-herbst` ↔ `kfz-versicherung-vergleich` mit **5** gemeinsamen
+7-Wort-Phrasen (`PHRASE_LEN=7`, `KRITISCH_AB=5`, `paar_klasse(n, False, False)`).
+
+Die fünf Phrasen sind kein Zufallstreffer über zwei Artikel, sondern ein
+**gleitendes Fenster über eine einzige Dopplung**:
+
+```
+bis zum 30 november beim versicherer eingehen
+die ordentliche kuendigung bis zum 30 november
+kuendigung bis zum 30 november beim versicherer
+muss die ordentliche kuendigung bis zum 30
+ordentliche kuendigung bis zum 30 november beim
+```
+
+Beide Artikel trugen wortgleich:
+
+> Bei einem Vertragsende am 31. Dezember und einem Monat Kündigungsfrist muss die
+> ordentliche Kündigung bis zum 30. November beim Versicherer eingehen.
+
+Ein 16-Wort-Satz erzeugt bei Fenster 7 genau zehn Überlappungen; dass fünf davon
+im jeweils anderen Artikel landen, ist die Messung, kein Befund an fünf Stellen.
+Geheilt am **unversiegelten** Artikel (`sparen-im-herbst`), der versiegelte
+Kfz-Beitrag bleibt unangetastet – derselbe Regelgehalt, eigenständig formuliert:
+
+> Läuft dein Vertrag am 31. Dezember aus und gilt eine Frist von einem Monat, muss
+> dein Schreiben spätestens am 30. November beim Versicherer vorliegen.
+
+Vorher: **5** geteilte Phrasen. Nachher: **0**. Kein Test hält den Wortlaut fest
+(geprüft über `scripts/tests/` und `e2e/`), und die drei anderen Erwähnungen des
+Stichtags im selben Artikel (Kurzantwort, Aufzählung, FAQ) bleiben unverändert –
+die Dopplung saß nur in diesem einen Satz.
+
+### 8.5 Der fehlende Rechtssatz – ein Heiler-Artefakt in 72 Artikeln
+
+`test_faktenfrische_763.test_reisekasse_praezisierungen_und_recherche_bleiben_erhalten`
+fordert im Abschnitt `### Sind Cashback‑Apps sicher für meine Daten?` den Satz
+`Das lässt sich nicht pauschal zusagen.` **exakt einmal**, dazu `DSGVO` und
+`unter bestimmten Voraussetzungen`. Der Docstring des Tests nennt den Grund:
+*„Die Lesbarkeitsreparatur darf keine rechtliche Pauschalaussage öffnen."*
+Gemessen: **0** Vorkommen.
+
+Die Fundstelle war nicht ein verlorener Satz, sondern ein ersetzter. Im Abschnitt
+stand:
+
+> Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener
+> Daten**; das ist ein Modellwert.** Du kannst Auskunft verlangen und Daten unter
+> bestimmten Voraussetzungen berichtigen oder löschen lassen. …
+
+`; das ist ein Modellwert.` ist ein mechanisch angehängter Stempel. Er steht
+**193-mal in 72 Artikeln** – an Modellrechnungen ist er richtig, hier ist er
+falsch: Die DSGVO ist eine Rechtsnorm, kein Modellwert. Der Stempel hatte den
+Rechtssatz verdrängt, der die Frage des Abschnitts überhaupt erst beantwortet.
+
+Der Originalsatz ist **nicht** erfunden, sondern aus der Historie geborgen:
+`gh api …/contents/<pfad>?ref=77f9bef9` (25.10.2026, „fix(reserve): Dauerheilung
+WF-D4E0 (#821) – RS5-Präzision") liefert den Abschnitt als
+
+> Das lässt sich nicht pauschal zusagen. Sieh dir Anbieter, Berechtigungen und
+> Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten?
+> Rechtliche Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
+
+Wiederhergestellt ist die Kombination aus geborgenem Rechtssatz und den späteren
+DSGVO-Präzisierungen, die der Test ebenfalls verlangt:
+
+> **Das lässt sich nicht pauschal zusagen.** Die DSGVO (Verordnung (EU) 2016/679)
+> regelt die Verarbeitung personenbezogener Daten. Du kannst Auskunft verlangen
+> und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen. …
+
+Der Artikel war zum Messzeitpunkt auf `main` **selbst** zerstört – auch die Fassung
+vom 20.11.2026 (`92e90965`) trägt das Artefakt. Der Befund lag also nicht an
+diesem Branch. Geheilt: `21 tests … OK`.
+
+Die übrigen 192 Artefakt-Vorkommen sind **bewusst nicht** angefasst (siehe
+Abschnitt 9): Sie stehen an Modellrechnungen, wo der Stempel inhaltlich passt, und
+ein Repo-weites `sed` über 72 Artikel wäre eine Massenänderung ohne redaktionelle
+Prüfung jedes einzelnen Satzes – genau das, was die Siegel-Ordnung verhindern soll.
+
+### 8.6 Das Diff-Gate, das `main` am selben Tag bekam – und das meine Heilung stoppte
+
+Nach dem vierten Rebase auf `dba3f17` war ein Check rot, den es beim Start dieses
+Auftrags **nicht gab**: `Geänderte Live-Artikel gegen Flesch-Boden`
+(`.github/workflows/lesbarkeit-live-diff.yml`, Kopf-Doku „22.11.2026, Befund
+#1247"). Er läuft auf `pull_request` mit `paths: content/posts/**` und fährt
+`lesbarkeit_diff_wache.py --basis origin/$GITHUB_BASE_REF` – ein Diff-Tor, das
+genau die Artikel misst, die der PR anfasst.
+
+Der Befund war präzise und **zurecht**:
+
+```
+❌ 1 Live-Artikel würde unter dem Flesch-Boden 60 landen:
+  - 2026-08-26-handytarif-vergleichen…: Flesch fällt von 53.8 auf 53.6
+```
+
+Der Artikel liegt seit langem **unter** dem Boden (53.8). Das Gate blockiert
+Altbestand ausdrücklich nicht – „sonst würde jede Routinemeldung an alter Schuld
+scheitern" – wohl aber eine **Verschlechterung**. Und genau die hatte Heilung G
+verursacht: Der ergänzte Pillar-Link (8.1) war in einen Satz mit `Netzqualität`,
+`Gesamtkosten` und `ordnet beide Seiten ein` verpackt. Zwei Zehntel unter dem
+Altbestand, und der PR wäre rot geblieben.
+
+**Das ist die Lehre in beide Richtungen.** Ein gesetzter interner Link ist noch
+keine Heilung: Er ist Text, und Text wird gemessen. Wer einen Link ergänzt, um
+eine Wache grün zu bekommen, und dabei die Lesbarkeit drückt, tauscht einen
+Befund gegen einen anderen. Gemessen wurden fünf Formulierungen desselben Links
+gegen denselben Anker – alle über dem Boden, die Spannweite 53.90 bis 54.20:
+
+| Variante | Flesch | Puffer gegen 53.80 |
+| --- | --- | --- |
+| `Netzqualität, Anschluss und Gesamtkosten gehören zusammen – der […] ordnet beide Seiten ein.` | 53.60 | **−0.20 ❌** |
+| `Kosten und Netz gehören zusammen. […] zeigt, warum.` | 53.90 | +0.10 |
+| `Netz und Preis gehören zusammen. […] zeigt, warum.` | 53.90 | +0.10 |
+| `Das Netz ist nicht alles. […] ordnet es ein.` | 54.10 | +0.30 |
+| **`Zum Netz gehört mehr als der Preis. Das ordnet der […] ein.`** | **54.20** | **+0.40 ✅** |
+
+Gewählt ist die Fassung mit dem größten Puffer **und** dem inhaltlich nächsten
+Bezug: Der Artikel hat einen eigenen Abschnitt „Netz vor Preis prüfen" (Zeile 56),
+der Satz führt ihn fort, statt ein neues Thema aufzumachen. Der Linktext bleibt
+Hausart (`[Ratgeber Internet & DSL]`, siebenmal im Bestand). Nachher:
+`✅ Keine neue Lesbarkeits-Regression unter Flesch 60` (Exit 0) und FF3
+weiterhin `0 Befund(e)` – der Link steht ja noch.
+
+**Abgrenzung, damit keine Verwechslung entsteht:** `readability_check.py --file`
+meldet für denselben Artikel weiterhin `⚠️ 54.2 unter Ziel 62`. Das ist
+**Altbestand** und kein PR-Gate: `readability_check` läuft ausschließlich in
+Schedule-Workflows (`hemingway-check` Mo/Mi/Fr, `premium-governance` Montag,
+`seo-weekly` Mittwoch, `sprach-qualitaet-pipeline` täglich, `endredaktion` Mo–Sa),
+dort mit `--gate-bestand`. Auf `pull_request` läuft allein die Diff-Wache. Den
+Artikel von 54.2 über 60 zu heben ist redaktionelle Arbeit an einem Live-Beitrag
+und gehört nicht in einen Gate-PR – dasselbe Argument wie bei den 192
+Modellwert-Stempeln in Abschnitt 9.
+
+**Und ein Nachtrag in eigener Sache:** Dieses Gate ist der vierte Fall in diesem
+Auftrag, in dem `main` während der Arbeit dieselbe Baustelle betrat – nach #1315
+(Heilung A), `f405f49` (Heilung B) und `9630dea` (Heilung E/F). Hier kam es nicht
+als Überstimmung, sondern als **neue Regel**, die den eigenen Entwurf prüfte. Wer
+einen PR über Stunden fährt, muss die Check-Matrix nach jedem Rebase neu lesen,
+statt sie vom Start zu kennen.
+
+### 8.7 Reihenfolge – warum dieselbe Klasse zweimal zuschlug, und die Regel daraus
+
+Die Projektkette aus 8.8 war **einmal** zu früh gelaufen, und das kostete einen
+vollständigen CI-Durchlauf (`regression`: 56 Minuten, Schritt 11 und die Uhr-Probe
+in Schritt 12 beide rot, Schritte 13–15 grün). Der Befund war exakt eine Zeile:
+
+```
+888c888
+< - Datei-SHA256 (heute): `1f6a54c381989455f4b0882e194b69a67a471153bec215a1d97eebaa73db4b8a`
+> - Datei-SHA256 (heute): `152f49578dff79c96084765f0439f25b713c2d92f6c4a343cfa436abf3161f85`
+```
+
+`sha256sum` über den Bestand bestätigte: `152f4957…` ist
+`2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md` – genau der
+Artikel, den die Lesbarkeits-Diff-Wache aus 8.6 **nach** dem Dossier-Lauf noch
+einmal umformuliert hatte. Das Dossier trägt je Befund den Datei-SHA256 des
+Artikels, weil es die „**heutige** Textlage" abbildet: stehen die beanstandeten
+Werte noch im Artikel, und sind sie dort gekennzeichnet. Damit ist es keine
+zählende, sondern eine **inhaltsensitive** Projektion – jeder Body-Eingriff an
+einem Artikel mit offenen Befunden entwertet sie, auch wenn sich an der Zahl der
+Befunde nichts ändert.
+
+Es ist dieselbe Klasse wie in 8.6, nur eine Stufe feiner: Dort machte der
+Akten-Nachzug das Dossier sichtbar veraltet (**Zählung** 304 → 306), hier machte
+ein einziger umformulierter Satz es unsichtbar veraltet (**ein Hash**). Beides
+ist derselbe Fehler: eine Ableitung wurde erzeugt, bevor die Quelle fertig war.
+
+**Die Regel, die daraus folgt und die in diesem Auftrag zweimal verletzt wurde:**
+
+> Ableitungen werden **zuletzt** erzeugt – nach *jedem* Eingriff in ihre Quelle,
+> nicht nach dem ersten. Und „fertig" heißt: kein Satz wird danach noch
+> umformuliert.
+
+Konkret für dieses Repository, in dieser Reihenfolge und nicht anders:
+
+```
+1. alle redaktionellen Eingriffe (Titel, Body, Links, Sätze)     ← Quelle
+2. generate_covers / check_covers --fix                          ← Pixel
+3. ki_cover_herkunft --heilen && --pruefen                       ← Beleg
+4. faktenfrische_befund_akte --schreiben                         ← Akte
+5. abgeleitete_register --fix && --check                         ← Register
+6. f4_entscheidungsvorlage && --check                            ← Dossier  ← ZULETZT
+7. lesbarkeit_diff_wache --basis origin/<ziel>                   ← Diff-Tor
+8. Suite auf dem CI-Weg                                          ← Beweis
+```
+
+Schritt 7 steht **nach** 6, weil die Diff-Wache ihrerseits Body-Änderungen
+verlangen kann (8.6) – und jede solche Änderung wirft Schritt 6 zurück. Wer 6 und
+7 vertauscht, bekommt genau den CI-Lauf, den dieser Auftrag bekommen hat. Der
+Gegenbeweis ist billig und steht deshalb jetzt am Ende jeder Runde:
+`f4_entscheidungsvorlage.py --check` und `abgeleitete_register.py --check` sind
+beide Exit 0, und die Suite auf dem CI-Weg meldet **0 Annotationen**.
+
+Ein ehrlicher Nachtrag zur eigenen Messdisziplin: Die Suite war vor dem vierten
+Rebase einmal vollständig gelaufen (33 Minuten, 3 Annotationen). Nach dem Rebase
+wurden nur die fünf Zielmodule einzeln gemessen – schnell, aber eben **nicht** die
+Fläche. Der zweite Voll-Lauf am Stand `f4610fe` (36 Minuten) meldete genau
+**eine** Annotation, dieselbe wie CI in Schritt 11 und 12. Der Befund war also
+nicht neu auf der Basis `dba3f17`, sondern selbstgemacht. Nach einem Rebase gehört
+die Vollfläche gemessen, nicht die Auswahl.
+
+**Nachtrag 22.11.2026, spät – `main`'s #1324 bestätigt diese Diagnose wörtlich.**
+`b3445bb` „F4-Vorlage bindet die Aussage statt der Datei-Bytes (Ende der
+Byte-Alterung)" trägt im Commit-Text denselben Befund: „`test_dossier_ist_aktuell`
+war im CI rot – in `Code-Regression` **UND** `Uhr-Probe` –, obwohl sich keine
+einzige Aussage geändert hatte. Ursache: Die Vorlage trug je Artikel einen
+SHA-256 über die ROHE Datei. **Der CI prüft den Merge-Stand (`refs/pull/N/merge`),
+also Branch plus aktuelles `main`**; zwei redaktionell geänderte Artikel auf
+`main` verschoben die Byte-Hashes und machten das Dossier ‚veraltet'."
+
+Das ist genau die Mechanik, die hier dreimal gemessen wurde – einschließlich der
+Feststellung, dass der CI den Merge-Stand prüft und nicht den Branch-Head. Die
+Heilung ist strukturell und besser als jede Reihenfolge-Regel: Gebunden wird jetzt
+an `ledger.text_hash()` in der Projektion `betrieb-v4` (Titel, Beschreibung,
+Kurzantwort, Aussage-Body – ohne Quellen, Betriebsflächen und Zwischenraum);
+`datei_hash()` entfällt. **Damit ist die Reihenfolge-Regel aus 8.7 für das Dossier
+nicht mehr nötig**, weil Frontmatter-Betriebsflächen wie `cover.ki_pruefung` die
+gebundene Aussage nicht mehr berühren. Messbar: Nach Rebase 8 ist
+`F4-ENTSCHEIDUNGSVORLAGE.md` **bitgleich zu `main`** (2750 Zeilen) und fiel aus
+dem Delta – der erste Rebase dieser Folge, nach dem das Dossier nicht neu
+geschrieben werden musste, obwohl 13 Artikel Beleg-Zeilen tragen.
+
+Die Regel bleibt für die **anderen** Ableitungen gültig (`BEFUND-AKTE.md`,
+`abgeleitete_register`, Cover-Belege): #1324 hat das Dossier entkoppelt, nicht die
+Kette.
+
+### 8.8 Nachweis für Heilung G
+
+Gemessen am liegenden Stand, `.venv/bin/python` (System-`python3` ist wertlos:
+ohne PyYAML 21 F + 17 E):
+
+| Prüfung | Vorher | Nachher |
+| --- | --- | --- |
+| `test_einzigartigkeit_1027` | ❌ `59.9 not >= 60.0` | ✅ `Ran 21 tests … OK` |
+| `test_einzigartigkeit_bestand` | ❌ 5 gemeinsame Phrasen | ✅ `Ran 4 tests … OK` |
+| `test_faktenfrische_763` | ❌ `0 != 1` (Rechtssatz) | ✅ `Ran 21 tests … OK` |
+| `test_inhalts_register` | ❌ FF3 × 3 (eine falsch) | ✅ `OK` |
+| `ff_inhalts_wache.py --selftest` | ✅ 7 Proben | ✅ 7 + 8 Feld- + 2 Vertrags-Proben |
+| `ff_inhalts_wache.py` (Bestand) | ❌ 4 Befund(e) | ✅ `0 Befund(e)` |
+| `readability_check` für `GAS_12` | Flesch 59.9 · Score 75 | **Flesch 60.60 · Score 95** |
+| geteilte 7-Wort-Phrasen des Paares | 5 | **0** |
+| `abgeleitete_register.py --check` | ❌ `BEFUND-AKTE.md` veraltet | ✅ `aktuell (3 geprüft)` |
+| `f4_entscheidungsvorlage.py --check` | ❌ Dossier veraltet (2. Ableitungsebene) | ✅ `aktuell` · 2851 → 2877 Zeilen |
+| `test_1098_produktionswahrheit` | ❌ 3 Annotationen (Dossier) | ✅ `Ran 22 tests … OK` |
+| `ci_tests.py -- … discover -s scripts/tests -v` | ❌ 3 Annotationen, Exit 1 | ✅ Suite-Weg, siehe unten |
+| `lesbarkeit_diff_wache --basis origin/main` | ❌ `handytarif` 53.8 → 53.6 (Diff-Gate neu auf `main`, 8.6) | ✅ `Keine neue Lesbarkeits-Regression` · 53.8 → **54.2** |
+| `lesbarkeit_diff_wache --selbsttest` + `unittest test_lesbarkeit_diff_wache` | — | ✅ beide Exit 0 |
+| `f4_entscheidungsvorlage.py --check` **nach** dem Lesbarkeits-Eingriff | ❌ veraltet durch **eine** Zeile (Datei-SHA256 des `handytarif`-Artikels, 8.7) | ✅ `aktuell` · 1 Zeile nachgezogen |
+| Suite auf dem CI-Weg am Stand `f4610fe`, **vor** der Reihenfolge-Korrektur | ❌ 1 Annotation: `test_dossier_ist_aktuell` (CI Schritt 11 **und** Uhr-Probe Schritt 12, identisch) | — |
+| Suite auf dem CI-Weg, **nach** der Reihenfolge-Korrektur (36 min) | — | ✅ **`SUITE_EXIT=0`, 0 Annotationen** (Gegenbeweis zu 8.7) |
+| sechs Selbsttests aus Schritt 11 + `fm_boundary_guard --check` | — | ✅ alle 6 grün (174 Dateien) |
+| Gate-Batterie am Endstand (34 Prüfungen) | — | ✅ `ERGEBNIS: alles grün` |
+| **Suite nach der Wurzelheilung 8.10** (Stand `b5eb6f4`, 31 min) | — | ✅ **`Ran 6365 tests` → `OK (skipped=17)`**, `SUITE_EXIT=0`, **FAIL/ERROR-Zeilen: 0** |
+| sieben Selbsttests aus Schritt 11, **inklusive dem neuen `sprachkern`** | — | ✅ `engine_generate`, `reserve_pool`, `cadence_guard`, `social_studio`, `fm_boundary --check`, `sprachkern` – alle grün |
+| `selftest_runner` nach 8.10 | 291 Wachen | ✅ **292 Wachen**, 584 Uhr-Proben, 581 s – `sprachkern.py` trägt jetzt `--selftest` und wird entdeckt |
+| **die 7 Test-Module, die `sprachkern` importieren** | — | ✅ **262 Tests, ROT=0** (`test_frontmatter_duplikate` 5, `test_grammatik_kongruenz` 32, `test_marker_ruinen_964` 26, `test_politur_heiler` 17, `test_prompt_echo` 17, `test_reserve_pipeline` 139, `test_sprach_politur` 26) |
+| **CI-Fehlschlag Schritte 11+12 am Stand `6787112`** – Uhr-Probe | — | ❌→✅ **zwei Bestand-Befunde, beide von `main`/#1324 geheilt, Gegenprobe bitgleich:** `test_vollrueckstand_nach_97_tagen_behaelt_reserve` (`19 not less than 19`, 140 Seiten am 2027-02-22) und `test_echtes_repo_darf_heute_nichts_verlieren` (Janitor würde `wlan-verbessern…` löschen). Im Worktree von `origin/main` `954ee7c` **exakt dieselbe** AssertionError, dieselben 140 Seiten, `Ran 96 tests`, `FAILED (failures=1)` – also nicht dieser Branch. Nach Rebase 8: `LoeschRechtTests` `Ran 10 OK`, `test_faktenfrische_kapazitaet` unter +97 Tagen `Ran 96 OK`, Limit `19 → 21` |
+| **CI-Fehlschlag Schritt 11 am Stand `b5eb6f4`** | lokal grün | ✅ **Ursache ist nicht der Code, sondern `main`**: 12 Commits liefen weiter (`c3ab0f2` Reserve, `9fbffaa` Akte, `fa3e8d0` #1323, `33dcbfe`+`e5bcd4a` Cover-Heilungen mit **44 neuen Cover-Bytes**). CI prüft den **Merge-Commit**, lokal lag die Basis `48cdd67`. Beweis: Rebase 7 → 14 Beleg-Driften, geheilt, Zielmodule danach `ROT=0`. |
+| `check_covers.py` | — | ✅ `144 \| 0 \| 0 \| 0 \| 0` |
+
+Keiner der fünf geänderten Artikel trägt ein Siegel (geprüft über
+`grep inhalt_sha256`), der Siegelweg aus Abschnitt 2 war damit **nicht** fällig –
+die erste Fassung dieses Abschnitts hatte ihn für alle vier Befunde vorausgesetzt,
+weil sie von der 🔒-Fehlmessung aus 8.2 ausging.
+
+`BEFUND-AKTE.md` war nach den Texteingriffen veraltet (304 → 306 Einträge,
+`in_eskalation` 18 → 20). Geheilt auf dem dokumentierten Weg:
+`faktenfrische_befund_akte.py --schreiben` + `abgeleitete_register.py --fix`.
+
+**Und genau dabei passierte dasselbe noch einmal – eine Ableitungsebene tiefer.**
+Der Suite-Lauf auf dem CI-Weg meldete **drei neue** Annotationen, alle aus
+`test_1098_produktionswahrheit.Entscheidungsvorlage`:
+
+```
+test_dossier_ist_aktuell                     → F4-ENTSCHEIDUNGSVORLAGE.md ist veraltet
+test_jeder_befund_hat_einen_schliessweg      → ['47f855cb…', '7f66ec82…'] != []
+test_jeder_offene_live_befund_steht_im_dossier → dieselben zwei IDs
+```
+
+Die zwei IDs sind **dieselben** Befunde, die der Akten-Nachzug sichtbar gemacht
+hatte – beide im `sparen-im-herbst`-Artikel, beide `alter_tage: 23`, also Bestand
+und nicht Folge dieser Änderung. Die Kette: `main` trägt eine veraltete
+`data/faktenfrische_befunde_state.json` (304 statt 306). Wer **eine** Ableitung
+nachzieht, macht die nächste sichtbar. `F4-ENTSCHEIDUNGSVORLAGE.md` ist die
+zweite – und ihre eigene Kopf-Doku beschreibt genau diesen Fall als ihren
+Existenzgrund:
+
+> In #1098 wurde genau dieses Dossier von Hand gebaut. Es war nach dem nächsten
+> Automatik-Commit unvollständig (5 neue Befunde auf einem Artikel, den die
+> Tageswache erst danach geprüft hatte) – ein Dossier, das der Wirklichkeit
+> hinterherläuft, ist derselbe Fehler wie ein veraltetes Register.
+
+Geheilt auf dem dokumentierten Weg: `f4_entscheidungsvorlage.py` (schreiben) →
+2851 → **2877 Zeilen**, `--check` → aktuell, `Ran 22 tests … OK`. Das Dossier
+schreibt in keinen Ledger und schließt keinen Befund – es projiziert nur, was zu
+entscheiden ist. Die zwei Befunde bleiben **offen** und stehen jetzt dort, wo der
+Herausgeber sie in einem Durchgang schließen kann; F4 ist laut
+`data/release_scorecard.yaml` die einzige Prüfung mit `entscheidung: human`, die
+keine Maschine schließen darf.
+
+**Lehre daraus, und sie ist dieselbe wie Lehre 4:** Eine veraltete Ableitung ist
+kein lokaler Fehler. Wer nur die Datei heilt, die ein Gate gerade anzeigt,
+verschiebt den Befund eine Ebene weiter – hier von `BEFUND-AKTE.md` zum Dossier.
+Der richtige Weg ist, die **Projektionskette** zu Ende zu fahren: State →
+`faktenfrische_befund_akte.py` → `abgeleitete_register.py` → `f4_entscheidungsvorlage.py`,
+und danach die Suite noch einmal auf dem CI-Weg zu messen statt nur das eine Gate.
+`lastmod` war in allen fünf Artikeln auf `2026-11-22` gesetzt, weil
+`test_metadaten_dauerhaft_korrekt` verlangt, dass `lastmod` den **tatsächlichen**
+Texteingriff dokumentiert; `metadaten_wache` M3 (`lastmod ≥ date`) blieb grün.
+Mit der Überstimmung durch #1318 sind diese fünf `lastmod`-Zeilen ebenso
+zurückgenommen wie die Eingriffe selbst – der Bestand trägt jetzt seine eigene
+Fassung und seine eigenen Stempel.
+
+### 8.9 Vierzehn frische Beleg-Driften – und der Beweis, dass Heilung D nicht überstimmt ist
+
+Der fünfte Rebase auf `ae6fd3c` brachte zwei weitere Automationsläufe mit
+(`ae6fd3c`, `200a9e3`, beide „fix(gate): Kadenz-/Titel-/Cover-Heilungen vor
+Veröffentlichung (automatisch)"). Danach maß `ki_cover_herkunft.py --heilen` im
+eigenen Baum: **144 Cover gemessen, 0 Belege nachgezogen** – die Belege dieses
+Branch passten zu den Bytes. Aber 14 Artikel wichen vom Bestand ab. Die Frage
+war, wer hier falsch liegt.
+
+Gegenprobe im `git worktree` von `origin/main` (`ae6fd3c`), zweimal gemessen,
+einmal mit jedem Prüfer:
+
+| Prüfer | Ergebnis am **selben** Bestand `ae6fd3c` | Exit |
+| --- | --- | --- |
+| `main`'s `ki_cover_herkunft.py` | `144 Cover reproduziert, 2 außerhalb, **0 Befund(e)**` | 0 |
+| **dieser Branch** (`beleg_veraltet`) | `144 Cover reproduziert, 2 außerhalb, **14 Befund(e)**` | **1** |
+
+Derselbe Baum, dieselben Bytes, dieselbe Pixelmessung – und zwei Antworten. Der
+Unterschied ist genau die Klasse aus Abschnitt 4: `main`'s Prüfer vergleicht
+**nur Pixel**, dieser Branch vergleicht zusätzlich den im Artikel hinterlegten
+`sha256`-Beleg gegen die Datei (`belegt.strip().lower() != _sha256(ziel)`). Die
+14 Belege nennen die Bytes einer Vorfassung, und weil die Pixel stimmen, läuft
+der Befund in `main` **still** durch.
+
+**Damit ist Heilung D der Teil von Abschnitt 8, den `main` nicht hat.** #1318 hat
+die vier Inhaltstests geheilt; die Beleg-Drift-Klasse hat es nicht berührt, und
+`ae6fd3c` hat im selben Zug 14 neue Driften erzeugt. Es ist das dritte Mal in
+diesem Auftrag, dass ein **grüner** Automationslauf sie produziert: 13 Altlasten
+zu Beginn, 4 nach `9630dea` (Abschnitt 6), jetzt 14 nach `ae6fd3c`/`200a9e3`.
+Die Ursache ist jedes Mal dieselbe und weiterhin offen (Abschnitt 9): Der
+Renderer ist nicht bytewert-deterministisch, und keiner der Cover-Heiler ruft
+`--heilen` selbst auf.
+
+Geheilt sind die 14 Belege in diesem Branch; sie sind der Grund, warum 14
+Artikel-`index.md` im Delta stehen und sonst nichts an ihnen geändert ist
+(je genau zwei Zeilen: `sha256`, `geprueft_am`). Nachweis am liegenden Stand:
+`--heilen` → `0 Belege nachgezogen` (alle 14 sind es schon), `--pruefen` →
+`0 Befund(e)`, `check_covers` → `144 | 0 | 0 | 0 | 0`.
+
+**Auch das Dossier war auf `main` veraltet**, und wieder ist die Gegenprobe der
+Beweis: `f4_entscheidungsvorlage.py --check` im reinen Bestands-Worktree →
+Exit **1**. `main`'s `8ad6d41` „chore(faktenfrische): Akte, Stand und Queue
+nachgezogen" hatte die Akte gezogen (sie ist grün: `301 offene Befunde,
+Stichtag 2026-11-22`), das Dossier aber nicht. Geheilt auf dem dokumentierten
+Weg: `2877 → 2803 Zeilen`, `--check` → aktuell, `test_1098_produktionswahrheit`
+→ `OK`. Es ist dieselbe Regel wie in 8.7, nur dass diesmal `main` sie verletzt
+hat: Ableitungen werden **alle** gezogen oder keine.
+
+**Vierte Runde – `954ee7c`, und diesmal lief der Rebase konfliktfrei.** Nach
+Rebase 7 (12 Commits auf `main`, darunter **zwei** Läufe „fix(gate):
+Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)", `33dcbfe`
+und `e5bcd4a`, die **44 Cover** neu schrieben) meldete dieselbe Gegenprobe:
+
+| Prüfer am Bestand `bdb6939` | Ergebnis | Exit |
+| --- | --- | --- |
+| `main`'s `ki_cover_herkunft.py` (`beleg_veraltet`-Treffer: **0**) | `146 Cover reproduziert, 2 außerhalb, **0 Befund(e)**` | 0 |
+| **dieser Branch** (`beleg_veraltet`-Treffer: **3**) | `146 Cover reproduziert, 2 außerhalb, **14 Befund(e)**` | **1** |
+
+Wieder **14**, wieder von einem grünen Automationslauf erzeugt, wieder von
+`main`'s eigenem Prüfer still durchgewinkt. Der Befundtext nennt die Bytes
+beidseitig, zum Beispiel `2026-11-22-wlan-verbessern…: Beleg nennt sha256
+791b75e1000a…, die Datei trägt fa262da5720c… – die Herkunftserklärung beschreibt
+nicht diese Bytes (Pixelmessung grün: --heilen zieht den Beleg nach)`.
+
+**Diesmal war der Rebase konfliktfrei – und genau das ist die Pointe.** Fünf
+Dateien überlappten (`F4-ENTSCHEIDUNGSVORLAGE.md` und vier Artikel mit meinen
+`cover.ki_pruefung`-Zeilen), aber Git konnte die **Textzeilen** sauber trennen.
+Die **Bytes** unter den Belegen hatten sich trotzdem bewegt. Ein Rebase, der ohne
+Konflikt durchläuft, ist also kein Nachweis, dass die Ableitungen noch stimmen –
+nur die Messung danach ist einer. Ohne `beleg_veraltet` wäre dieser Stand mit
+`0 Befund(e)` und Exit 0 durchgegangen und als Merge-Commit in `main` gelandet:
+14 Herkunftserklärungen, die andere Bytes beschreiben als die, neben denen sie
+stehen.
+
+Geheilt auf dem dokumentierten Weg: `--heilen` → `14 Beleg(e) nachgezogen (14
+erneuert), 0 harte(r) Befund(e)`, `--pruefen` → `146 reproduziert, **0
+Befund(e)**`, `check_covers` → `146 | 0 | 0 | 0 | 0`, `check_titles` →
+`146 | 0`, `abgeleitete_register --fix` + `--check` → `aktuell (3)`,
+`f4_entscheidungsvorlage` **zuletzt** → `2803 Zeilen`, `--check` → aktuell,
+`test_1098_produktionswahrheit` → `Ran 22 tests, OK`.
+
+Die Zählung stieg von 144 auf **146**, weil `main`'s `c3ab0f2` „unabhängige
+Redaktionsreserve auffüllen" zwei Artikel mit Cover brachte. Das Dossier fiel
+dagegen aus dem Delta: `main` trägt inzwischen **bitgleich** dieselben 2803
+Zeilen (`git diff --stat origin/main HEAD -- F4-ENTSCHEIDUNGSVORLAGE.md` → leer).
+
+### 8.10 Die Wurzel hinter dem Modellwert-Artefakt – der eine Befund, den #1318 nicht erreichte
+
+8.5 beschreibt das Artefakt und zählt **192** verbliebene Stempel als offenen
+Punkt, mit dem eigenen Auftrag: „den **Injektor** finden und ihm beibringen,
+Rechtsnormen von Modellwerten zu unterscheiden, statt 192 Symbole einzeln zu
+putzen." Dieser Abschnitt löst ihn ein. Er ist **nicht** überstimmt, denn
+#1318 hat den Satz geheilt, nicht die Stelle, die ihn schrieb.
+
+**Der Injektor ist `scripts/sprachkern.py`, `_marker_reparatur`.** Der Satz stand
+live im Reisekasse-Artikel, und `git show bc1e022` zeigt die Handkorrektur:
+
+```
+- Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener
+-   Daten; das ist ein Modellwert. Du kannst Auskunft verlangen …
++ Das lässt sich nicht pauschal zusagen. Die DSGVO (Verordnung (EU) 2016/679)
++   regelt die Verarbeitung personenbezogener Daten. Du kannst Auskunft verlangen …
+```
+
+**Eine Rechtsnorm ist kein Modellwert, sie ist geltendes Recht.** Der Stempel war
+faktisch falsch, und zwar in einem YMYL-Satz über die DSGVO – die Klasse von Satz,
+in der ein falsches Wort am teuersten ist.
+
+**Die Ursache, bis auf den Ausdruck genau.** `_ZAHLBEHAUPTUNG` verknüpfte zwei
+sehr unterschiedliche Fälle mit ODER:
+
+```python
+_ZAHLBEHAUPTUNG = re.compile(
+    r"\d[\d.,]*\s*(?:€|EUR|Euro|%|Prozent|kWh|ct|Cent|Mbit/s|GB|MB|km|Watt|W)"   # 1
+    r"|(?<![\w.,])\d{3,}(?:[.,]\d+)*(?![\w.])", re.I)                            # 2
+```
+
+Fall 1 – Zahl **mit** Einheit – ist immer eine Behauptung über die Welt. Fall 2 –
+**nackte** Zahl ab drei Ziffern – ist es nur manchmal. Er matchte die `2016` der
+Fundstellenangabe `(EU) 2016/679`, `_marker_reparatur` sah „der Satz trägt eine
+Zahl" und hängte den Teilsatz an. Der Ausdruck war nie falsch *formuliert*; er
+war zu grob *gemeint*.
+
+**Reichweite gemessen, nicht geschätzt.** Der zweite Zweig liefert im Bestand
+**44 Zeilen** False Positives:
+
+| Klasse | Zeilen | Beispiel |
+| --- | --- | --- |
+| Fundstelle | 1 | `(EU) 2016/679` |
+| Paragraphen-/Artikelverweis | 40 | `§ 5`, `§ 9`, `Art. 6` |
+| Link-Pfad mit Datum | 3 | `](https://www.destatis.de/…/2026/10` |
+
+Und die Kernfrage – hängt aktuell ein Stempel an einem Rechtsnorm-Satz? – ergibt
+**0**. Der Bestand ist sauber, aber **nicht geheilt**: sauber nur, weil diese 44
+Zeilen gerade keinen zerstückelten Marker tragen. Jede von ihnen hätte denselben
+falschen Stempel bekommen. Das ist der Unterschied zwischen einem grünen Messwert
+und einer Ursache, die nicht mehr schreiben kann.
+
+**Die Heilung trennt die beiden Fälle** und gibt dem nackten einen Guard:
+`_ZAHL_MIT_EINHEIT` (immer eine Behauptung), `_ZAHL_NACKT` plus
+`_ist_rechtskontext()` für Fundstellen, Paragraphenverweise, Normklammern und
+Link-Ziele, und `_zaahlbehauptung()` als einzige Entscheidungsstelle – eingesetzt
+an genau den zwei Stellen, an denen `_marker_reparatur` entscheidet (Zeile 548
+Fall b, 561 Fall c).
+
+**Der Guard prüft den Kontext um den EINZELNEN Treffer, nicht den ganzen Satz.**
+Das ist der Punkt, an dem eine naheliegende Heilung zur Scheinheilung würde: Ein
+satzweiter Guard nimmt „Nach § 5 kostet das 460 € im Monat" die
+Kennzeichnungspflicht, weil der Satz einen Paragraphen zitiert – und verstößt
+damit still gegen genau das, was #964 durchgesetzt hat. Deshalb bleibt die
+`460 €` eine Behauptung, während die `5` hinter dem `§` keine ist. **Beide
+Richtungen sind geprüft**, sonst wäre die Heilung nur eine umgedrehte
+Fehlmessung.
+
+**Zwei Fundstellen-Hälften, nicht eine.** Der erste Anlauf deckte nur `2016` ab
+(Slash folgt) und fiel durch: `679` hinter dem Slash matcht ebenfalls, und ihr
+Kontext sieht für sich genommen harmlos aus – „/679) regelt die Verarbeitung…".
+Erst `_FUNDTSTELLE_RUECK` (`\d\s*/\s*$`) schließt die Fundstelle ganz. Der
+Messwert war der Beweis: 1 von 17 Proben rot, und es war genau die
+DSGVO-Fundstelle.
+
+**Nachweis:**
+
+| Prüfung | Ergebnis |
+| --- | --- |
+| 17 Proben, beide Richtungen | ✅ 7 Rechtsnorm/Verweis → kein Stempel · 8 echte Modellrechnung → Stempel bleibt · 2 Mischfälle → Behauptung bleibt |
+| End-to-End `pflicht_marker_heilen` auf dem Original-Befund | ✅ ergibt „…personenbezogener Daten. Du kannst Auskunft verlangen." – **wörtlich die Korrektur, die #1318 von Hand machte**, jetzt automatisch |
+| **Sabotage-Gegenprobe:** Guard ausgeschaltet, alter Ausdruck zurück | ✅ **5 Proben rot, Exit 2** – und die Ausgabe reproduziert den Original-Satz wörtlich: „Die DSGVO (Verordnung (EU) 2016/679) … ; das ist ein Modellwert." |
+| `test_marker_ruinen_964` | ✅ **Ran 26 tests, OK** (vorher 18 – 8 neue) |
+| `test_duplikat_guard` / `test_pflichtcheck` / `test_pflichtcheck_frist` / `test_pflichtfeld_verlust_wache` | ✅ 27 / 39 / 23 / 28 tests, alle `OK` |
+| **`pflicht_marker_reparatur.py` auf dem Bestand** | ✅ **„0 Reparatur(en) in 0 Datei(en)"** – die Heilung schreibt **nichts** um, sie verhindert nur zukünftige falsche Stempel. Keine Massenänderung, kein Siegelweg ausgelöst. |
+| `selftest_runner` | ✅ **292 Wachen** (vorher 291), 584 Uhr-Proben, alle grün – `sprachkern.py` trägt jetzt `--selftest` und wird entdeckt, auch unter der um +97 und +1461 Tage vorgestellten Uhr |
+| `skript_syntax_wache` / `konfliktmarker_wache` / `workflow_aufruf_vertrag` / `governance_contract --quick` | ✅ 736 · 6686 · 832/103 · 47 Regeln |
+| `f4_entscheidungsvorlage --check` | ✅ aktuell – kein Content geändert, das Dossier bleibt stabil |
+
+**Warum das hierher gehört und nicht in einen Folge-PR:** Die 192 Stempel waren
+als offener Punkt mit genau diesem Auftrag dokumentiert. Ihn offen zu lassen,
+nachdem der Injektor gefunden und die Reichweite gemessen ist, wäre dieselbe
+Scheinheilung wie das Symptom-Putzen – nur mit besserer Begründung. Und der
+Auftrag war klein genug, um ihn sauber zu erfüllen: zwei Entscheidungsstellen,
+ein Guard, 19 Proben, null Bestandsumbau.
+
+**Die 192 Stempel selbst bleiben, bewusst.** Sie stehen an Modellrechnungen, wo
+der Stempel inhaltlich passt. Geheilt ist, dass keine Rechtsnorm mehr einen
+bekommt. Ein `sed` über 72 Artikel wäre eine Massenänderung ohne redaktionelle
+Prüfung jedes einzelnen Satzes und würde an versiegelten Beiträgen den Siegelweg
+aus Abschnitt 2 auslösen – pro Artikel.
 
 ---
 
@@ -613,8 +1310,46 @@ Links) liegen deshalb unbemerkt auf `main`.
    liegen, bis der Heiler selbst lernt, den Kopf aus `keywords[0]`/`inspiration`
    zu nehmen – eigener Auftrag, weil er den Bestand berührt und einen
    Idempotenz-/Sabotage-Selbsttest verlangt.
-3. **Vier rote Bestandstests ohne Aufrufer** – Abschnitt 8. Vorhanden auf `main`,
-   redaktionell zu heilen, danach zu verdrahten. Nicht in diesem PR.
+3. **Vier rote Bestandstests** – in Abschnitt 8 **geheilt**; offen bleiben zwei
+   Folgethemen, die dieser PR bewusst nicht anfasst:
+   - **192 Modellwert-Stempel – die Zahl bleibt, der Injektor ist geheilt.**
+     `; das ist ein Modellwert.` stand **193-mal in 72 Artikeln**. Nach `main`'s
+     Heilung sind es **192 in 72** – also ist exakt **eines** verschwunden, das im
+     Reisekasse-Artikel. Das ist kein Vorwurf an #1318: Genau dieses eine war
+     falsch, weil es einen Rechtssatz verdrängt hatte, und genau deshalb war es
+     über einen Test nachweisbar.
+     **Hier standen zwei Dinge, die jetzt getrennt sind.** Der *Injektor*, der
+     eine Rechtsnorm mit einem Modellwert-Stempel überschrieb, war die Wurzel –
+     er ist in **Abschnitt 8.10** geheilt, mit Guard, 19 Proben in beide
+     Richtungen, Sabotage-Gegenprobe und dem Nachweis, dass er den Bestand nicht
+     umschreibt. Die *192 Stempel selbst* bleiben offen, und zwar bewusst: Sie
+     stehen an Modellrechnungen, wo der Stempel inhaltlich passt. Ein Repo-weites
+     `sed` über 72 Artikel wäre eine Massenänderung ohne redaktionelle Prüfung
+     jedes einzelnen Satzes und würde an versiegelten Beiträgen den Siegelweg aus
+     Abschnitt 2 auslösen – pro Artikel. Geheilt ist, dass keine Rechtsnorm mehr
+     einen bekommt; das ist der Teil, der faktisch falsch war.
+   - **`ff_inhalts_wache.py` hat keinen Aufrufer außer `discover` – und das
+     Hindernis ist jetzt weg.** Die Wache läuft weiterhin nur, weil Schritt 11
+     `discover` fährt, nicht weil ein Gate sie beim Namen ruft; in der
+     `selftest_runner`-Entdeckung (291 Wachen) steht sie auch nicht. Sie gehört
+     neben das bestehende Diff-Tor in `link-check.yml:213`, wo
+     `bestand_einzigartigkeit_gate.py` bereits läuft. **Nicht in diesem PR** –
+     aber die Begründung hat sich geändert: Ursprünglich hätte das Verdrahten
+     vier neue rote Gates erzeugt, weil die Befunde noch offen waren. Seit #1318
+     ist der Bestand grün (`FF1–FF5: 0 Befund(e)` am liegenden Stand, gemessen
+     mit `main`'s Wache), die Reihenfolge „erst Befunde heilen, dann Gate scharf
+     stellen" ist also **erfüllt** und der Weg frei. Was fehlt, ist ein eigener
+     PR mit Workflow-Edit, `trigger_wache`-Bezug und Idempotenz-Nachweis – und
+     der gehört nicht in einen Gate-PR, der selbst schon sechs Rebases hinter
+     sich hat. Der Selbsttest ist inzwischen gesichert (Kasten in Abschnitt 8,
+     Punkt 6), die Verdrahtung nicht.
+   - **`automatic_write_protected()` meldet „geschützt" für unlesbare Pfade.**
+     Fail-closed ist richtig und bleibt. Offen ist, dass die Klausel
+     „Datei fehlt" und „Datei ist versiegelt" nicht unterscheidbar macht – beides
+     ergibt `True`. Ein eigener Rückgabewert oder eine Logzeile für den
+     Exception-Fall hätte die Fehlmessung aus 8.2 in einer Sekunde sichtbar
+     gemacht statt über einen Umweg. Kleiner Auftrag, eigener PR, weil er die
+     Signatur einer von vielen Heilern genutzten Funktion berührt.
 4. **Historische Protokoll-Doks** mit altem Titel bleiben unverändert
    (Begründung in Abschnitt 2): Ein Prüfbericht ist ein zeitgebundener Beleg – wer
    ihn nachträglich auf den neuen Titel biegt, fälscht das Datum der Prüfung.
@@ -655,12 +1390,32 @@ durch"):
   ✅ check_titles → 144 Titel | Verstöße: 0 (vorher 1, Exit 1)
   ✅ check_covers → 144 Covers | Probleme 0 | Stale 0 | Brand 0 | Text 0
   ✅ casing_guard  ✅ ki_cover_herkunft --heilen → 144 gemessen, 0 hart
+== Code-Regression (nach Heilung G) – auf dem CI-Weg selbst gemessen ==
+  ✅ ci_tests.py -- python -m unittest discover -s scripts/tests -v
+     → die vier Befund-Module vorher rot, jetzt OK:
+       test_einzigartigkeit_1027      (21 tests)  Flesch 59.9 → 60.60
+       test_einzigartigkeit_bestand   ( 4 tests)  5 Phrasen → 0
+       test_faktenfrische_763         (21 tests)  Rechtssatz 0 → 1
+       test_inhalts_register                      FF3 4 → 0
+  ✅ engine_generate / reserve_pool / cadence_guard --selftest
+  ✅ fm_boundary_guard --selftest / --check   ✅ social_studio --selftest
+== Inhalts-Wache (nach dem Parser-Fix aus 8.1) ==
+  ✅ ff_inhalts_wache --selftest → 7 FF1- + 8 Feld- + 2 Vertrags-Proben
+  ✅ ff_inhalts_wache (Bestand) → 0 Befund(e)   (vorher 4, einer davon falsch)
+== Ableitungen nach den Texteingriffen (Projektionskette zu Ende gefahren) ==
+  ✅ faktenfrische_befund_akte --schreiben → 306 Befunde / 83 Seiten
+  ✅ abgeleitete_register --fix → 3 Register   ✅ --check → aktuell (3 geprüft)
+  ✅ f4_entscheidungsvorlage → 2877 Zeilen     ✅ --check → aktuell
+  ✅ unittest test_1098_produktionswahrheit → Ran 22 tests … OK
+  ✅ engine_generate / reserve_pool / cadence_guard / fm_boundary_guard
+     (--selftest + --check, 174 Dateien) / social_studio – alle 6 Selbsttests
+     aus Schritt 11
 ```
 
 `selftest_runner.py` (Entdeckung aller Wachen, uhrfest, schreibfrei) lief zuvor
 grün: **291 Wachen · 582 Proben · 444,3 s**.
 
-**Basis – zwei Rebases, weil `main` während der Arbeit zweimal weiterlief.**
+**Basis – acht Rebases, weil `main` während der Arbeit achtmal weiterlief.**
 Gemessen wurde jeweils **nach** dem Angleichen, nicht davor:
 
 1. **Rebase auf `25f6f89`** (PR #1307 gemergt, zwei Automationsläufe, neue
@@ -679,14 +1434,97 @@ Gemessen wurde jeweils **nach** dem Angleichen, nicht davor:
    (`diff` gegen `origin/main` leer). Abgleitete Artefakte danach neu erzeugt
    (`generate_covers --slug …`, `ki_cover_herkunft --heilen`,
    `abgeleitete_register --fix`), nicht von Hand geflickt.
+3. **Rebase auf `628da3a`** – darunter `9630dea` „Kadenz-/Titel-/Cover-Heilungen
+   vor Veröffentlichung (automatisch)": `main` hatte **dieselben vier stale Cover**
+   selbst neu gerendert, die Abschnitt 6 misst. **6 Konflikte**
+   (`covers_manifest.json`, `fcp_images.json`, 4 Cover-JPGs), alle erneut nach
+   Hauspolitik auf `origin/main` aufgelöst. Danach `ki_cover_herkunft --heilen` →
+   **4 Belege erneuert**, denn der Automationslauf renderte neu, **ohne** die
+   Herkunft zu heilen – genau die Drift-Klasse aus Abschnitt 4, erzeugt von `main`
+   selbst. Der Byte-Nachweis steht in Abschnitt 6: vier `sha256sum`-Werte gegen
+   vier Beleg-Werte, alle vier ❌. Eigener Delta danach: 4 Artikel-`index.md`
+   (ausschließlich `cover.ki_pruefung`) + diese Akte, **0** Cover-Dateien.
+4. **Rebase auf `dba3f17`** – **konfliktfrei**, als einziger der fünf. Überlappung
+   mit `main`'s 60 Dateien: **0**; `main` hatte keine der Befund-Dateien
+   angefasst, weder die Artikel noch `ff_inhalts_wache.py`, `check_uniqueness.py`,
+   `readability_check.py`, `ci_tests.py` oder den Workflow. Neu auf `main` war
+   dafür eine **neue Regel**: `lesbarkeit-live-diff.yml` (Befund #1247, Kopf-Doku
+   vom selben Tag), das Diff-Tor aus Abschnitt 8.6 – es prüfte den eigenen
+   Entwurf und fand ihn zu lang.
+5. **Rebase auf `ae6fd3c`** – darunter `bc1e022` „**4 von 5 roten
+   Regressionstests geheilt** (#1318)" und `5c5ee46` „Streaming-Bandbreite-Titel
+   auf R1-Konvention (#1320)". `main` hatte damit **Heilung E/F und Heilung G
+   selbst** eingespielt. **13 Konflikte** in drei Runden (Streaming-Artikel,
+   `covers_manifest.json`, Cover-JPG, dann `BEFUND-AKTE.md`,
+   `F4-ENTSCHEIDUNGSVORLAGE.md`, `data/faktenfrische_befunde_state.json`,
+   `data/covers_manifest.json`, `static/llms.txt`, 4 Cover-Dateien,
+   `scripts/ff_inhalts_wache.py`), sämtlich auf `origin/main` aufgelöst. Der
+   Delta schrumpfte von 48 auf **22 Dateien**; zurückgenommen wurden der eigene
+   `_field()`-Entwurf, alle fünf Inhaltsheilungen aus 8.1/8.3/8.4/8.5 und ein
+   Pillar-Link, der im Bestand sonst **doppelt** gestanden hätte. Der Nachweis,
+   dass Heilung D davon nicht betroffen ist, steht in Abschnitt 8.9: derselbe
+   Bestand, mit `main`'s Prüfer `0 Befund(e)`, mit diesem `14 Befund(e)`.
+8. **Rebase auf `aa2e99d`** – ein `modify/delete`-Konflikt, dreimal derselbe:
+   `main`'s **#1324** (`b3445bb`) hatte den Artikel
+   `2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater`
+   **gelöscht** (auf `ffb1ea7` noch vorhanden, auf `b3445bb` weg), während dieser
+   Branch zwei Beleg-Zeilen in ihm erneuert hatte. Hauspolitik Bestand-gewinnt →
+   `git rm`, der Artikel folgt dem Bestand. Delta danach **23 Dateien**, und die
+   Zählung sank von 146 auf **145** Cover.
+   Nach dem Rebase grün gemessen: `ki_cover_herkunft --pruefen` → `145 Cover
+   reproduziert, 0 Befund(e)`, `check_covers` → `145 | 0 | 0 | 0 | 0`,
+   `check_titles` → `145 | 0`, `abgeleitete_register --check` → aktuell,
+   `faktenfrische_befund_akte --check` → `301 offene Befunde`,
+   `ff_inhalts_wache` → `0 Befund(e)`, `f4_entscheidungsvorlage --check` →
+   **aktuell**. Das Dossier fiel damit **aus dem Delta**: `main` trägt bitgleich
+   dieselben 2750 Zeilen – der erste Rebase in dieser Folge, nach dem das Dossier
+   nicht neu geschrieben werden musste. Der Grund steht im nächsten Punkt.
+7. **Rebase auf `954ee7c`** – **konfliktfrei**, obwohl diesmal **5 Dateien
+   überlappten** (`F4-ENTSCHEIDUNGSVORLAGE.md` und vier Artikel, deren
+   `cover.ki_pruefung`-Zeilen ich erneuert hatte). `main` lief mit **12 Commits**
+   weiter, darunter `c3ab0f2` „content: unabhängige Redaktionsreserve
+   auffüllen", `9fbffaa` „chore(faktenfrische): Akte, Stand und Queue
+   nachgezogen", `fa3e8d0` „fix(titel): Streaming-Bandbreite – H1/Keywords auf
+   R1-Titelform (#1323)" und **zwei** Läufe „fix(gate): Kadenz-/Titel-/Cover-
+   Heilungen vor Veröffentlichung (automatisch)" (`33dcbfe`, `e5bcd4a`), die
+   **44 Cover** neu schrieben. Genau deshalb ist „konfliktfrei" hier kein
+   Erfolgsmeldung: Git konnte die Textzeilen sauber trennen, aber die **Bytes**
+   unter den Belegen hatten sich bewegt. Gemessen danach: **14 frische
+   Beleg-Driften** – die vierte Runde derselben Klasse, Nachweis in 8.9.
+   Das Delta sank auf **24 Dateien**, weil `main` das Dossier inzwischen selbst
+   trägt (`F4-ENTSCHEIDUNGSVORLAGE.md` ist bitgleich, 2803 Zeilen) und den
+   Streaming-Artikel über #1323 ebenfalls.
+6. **Rebase auf `48cdd67`** – **konfliktfrei**, wie der vierte. Drei Commits neu
+   auf `main` (`48cdd67` Watchdog-Routing, `9d2f8f5` Pinterest-Report, `c1d7fe5`
+   Scorecard), 5 Dateien, Überlappung **0**; weder `content/posts` noch
+   `ff_inhalts_wache.py` noch eine Faktenfrische-Quelle berührt. Trotzdem ist die
+   Ableitungskette danach **vollständig neu gemessen** worden, nicht nur
+   stichprobenartig – genau die Regel aus Abschnitt 8.7:
+   `ff_inhalts_wache --selftest` (18 Proben) und Bestand (0 Befunde),
+   `check_covers` (144|0|0|0|0), `check_titles` (144|0),
+   `abgeleitete_register --check` (3 aktuell),
+   `faktenfrische_befund_akte --check` (301 offene Befunde),
+   `f4_entscheidungsvorlage --check` (aktuell),
+   `ki_cover_herkunft --pruefen` (144 reproduziert, 0 Befunde),
+   `lesbarkeit_diff_wache --basis origin/main` (keine Regression) und die vier
+   Zielmodule (`test_inhalts_register`, `test_1098_produktionswahrheit`,
+   `test_einzigartigkeit_bestand`, `test_lesbarkeit_diff_wache`) → **ROT = 0**.
 
-Was von Heilung A nach dem zweiten Rebase übrig ist und warum, steht in
-Abschnitt 2 (Kasten). Alle übrigen Heilungen (B, C, D, E) sind von `main`
-unberührt und stehen vollständig in diesem Branch.
+Was nach dem zweiten Rebase von Heilung A übrig ist und warum, steht in
+Abschnitt 2 (Kasten); was nach dem fünften von Heilung G übrig ist, steht im
+Kasten am Kopf von Abschnitt 8. **Nicht von `main` berührt und vollständig in
+diesem Branch stehen Heilung B, C und D** – Backstop und Trigger-Notbremse
+(Abschnitt 3) und die Klasse `beleg_veraltet` (Abschnitt 4). Das ist die
+Dauerheilung dieses PR; alles andere hat der Bestand inzwischen selbst.
 
-**Unittest-Vollfläche:** 312 Module, 16 Batches – 13 Batches grün, 3 Batches mit
-insgesamt **4** Fehlschlägen, alle vier auf `origin/main` bitgleich reproduziert
-(Abschnitt 8). Kein neuer roter Test durch diesen Branch.
+**Unittest-Vollfläche:** 312 Module. Die erste Messung lief in 16 Batches über
+explizite Modulnamen und zählte `Ran` = **6331** – 13 Batches grün, 3 mit
+insgesamt **4** Fehlschlägen, alle vier auf `origin/main` bitgleich reproduziert.
+Dieser Batch-Weg bildete den CI-Weg **nicht** ab (Abschnitt 8, Lehre 4): Gemessen
+wird jetzt auf dem Weg, den `regression` selbst fährt –
+`ci_tests.py -- python -m unittest discover -s scripts/tests -v`. **Alle vier
+Fehlschläge sind geheilt** (Nachweis in Abschnitt 8.8); kein neuer roter Test
+durch diesen Branch.
 
 **Merge-Weg:** Dieses Repository verbietet Merge-Commits
 (`allow_merge_commit: false`) – ein `gh pr merge --merge` wird von GitHub
@@ -700,20 +1538,58 @@ diesem Auftrag unabhängig vom Schreiber (Abschnitt 3).
 
 ## 11. Geänderte Dateien (Kern)
 
-Stand **nach** dem zweiten Rebase (Delta gegen `origin/main` `c873f7b`), also ohne
-die von `main` überstimmte Heilung A:
+**Endstand nach dem achten Rebase**: Delta gegen `origin/main` `aa2e99d` =
+**23 Dateien** – der `wlan-verbessern`-Artikel folgte dem Bestand, der ihn über
+#1324 löschte, und `F4-ENTSCHEIDUNGSVORLAGE.md` ist bitgleich zu `main`.
+Zwischenstände: 48 Dateien nach Rebase 4, 22 nach Rebase 5, 25 nach Rebase 6,
+24 nach Rebase 7. Nach dem sechsten Rebase waren es 25; `F4-ENTSCHEIDUNGSVORLAGE.md`
+fiel heraus, weil `main` das Dossier inzwischen **bitgleich selbst trägt**
+(2803 Zeilen, `git diff --stat` leer) – dasselbe Muster wie beim
+Streaming-Artikel, den #1323 übernahm. Von den 24 sind 22 die Heilungen B/C/D
+plus die zwei der Wurzelheilung aus Abschnitt 8.10 (`scripts/sprachkern.py`,
+`scripts/tests/test_marker_ruinen_964.py`). Alles, was `main` inzwischen selbst hat, ist herausgerebased und
+steht **nicht** mehr hier – die Tabelle ist der Beweis, nicht die Absicht.
 
-| Datei | Änderung |
-| --- | --- |
-| `content/posts/2026-11-12-wie-viel-streaming-bandbreite…/index.md` | Titel 47→52 Zeichen auf Hauskonvention (R1), `cover.alt`, `aenderungsgrund`-Nachtrag; unversiegelter Entwurf |
-| 14 weitere Artikel-`index.md` | `cover.ki_pruefung` auf die Bytes der Datei erneuert (Beleg-Drift: 13 Altlasten + 1 nach R1-Render + 4 nach Stale-Render, teils dieselben Dateien) |
-| `static/images/covers/**` (19 Dateien) | neu gerendert: Streaming-Slug (15) + 4 stale Cover |
-| `data/covers_manifest.json`, `data/fcp_images.json` | Ableitung aus den Rendern |
-| `static/llms.txt` | via `abgeleitete_register.py --fix` (1 Zeile: neuer Streaming-Titel) |
-| `.github/workflows/skript-syntax.yml` | `schedule` (Backstop) + `workflow_dispatch` |
-| `scripts/trigger_wache.py` | `relevante_workflows()`, `pruefe(root, bezug=…)`, `bericht(…, bezug=…)`, `--bezogen-auf`, Selbsttest-Block 6 |
-| `scripts/git_sync.sh` | `trigger_notbremse()` + Einbau in staged- und push-Pfad + Kopf-Doku |
-| `scripts/ki_cover_herkunft.py` | Klasse `beleg_veraltet`, `heilen()` mit `erneuert`, Selbsttest 2b/3b |
-| `scripts/tests/test_trigger_wache.py` | Klasse `BezugTest` (6 Tests) |
-| `scripts/tests/test_git_sync.py` | Seed kopiert `trigger_wache.py`; Klasse `TriggerNotbremseTests` (5 Tests) |
-| `GATES-DAUERHEILUNG-HIGHEND-2026-11-22.md` | dieser Beleg |
+Die 23. Datei kam **nach** dem fünften Rebase dazu und ist kein Widerspruch zum
+Kasten in Abschnitt 8: `ff_inhalts_wache.py` steht in **beiden** Tabellen, weil
+dort zwei verschiedene Dinge passiert sind. Der eigene `_field()`-Entwurf ist
+zurückgenommen – `main`'s Fassung aus #1318 steht im Baum und bleibt unangetastet.
+Was hier steht, ist ausschließlich die **Sicherung** dieses Fixes durch
+Selbsttest-Proben (Kasten in Abschnitt 8, Punkt 6). Die Datei erscheint also
+unten bei „zurückgenommen" für den Parser und hier bei „geändert" für die Proben.
+
+| Datei | Änderung | Heilung |
+| --- | --- | --- |
+| `.github/workflows/skript-syntax.yml` | `schedule: "23 */4 * * *"` (Backstop, weil `GITHUB_TOKEN`-Commits keine Folge-Workflows auslösen) + `workflow_dispatch` | B |
+| `scripts/trigger_wache.py` | `relevante_workflows()` über drei Bezüge (Datei selbst, `run:`-Aufruf, `paths`-Deckung), `pruefe(root, bezug=…)`, `bericht(…, bezug=…)`, `--bezogen-auf`, Selbsttest-Block 6, offene Auswahl-Meldung | C |
+| `scripts/git_sync.sh` | `trigger_notbremse(staged\|push)` vor Commit/Push, Abbruch mit benannter Heilung (`::error::`), ohne Halb-Zustand (`git reset -q` bei staged) + Kopf-Doku | C |
+| `scripts/tests/test_trigger_wache.py` | Klasse `BezugTest` (6 Tests) | C |
+| `scripts/tests/test_git_sync.py` | Seed kopiert `trigger_wache.py`; Klasse `TriggerNotbremseTests` (5 Tests) | C |
+| `scripts/ki_cover_herkunft.py` | Klasse **`beleg_veraltet`** in `messung()` (`belegt.strip().lower() != _sha256(ziel)` nach grüner Pixelmessung), `heilen()` mit Zähler `erneuert`, Selbsttest 2b/3b. Pixelabweichung bleibt **hart**. | D |
+| `scripts/sprachkern.py` | **Die Wurzel zum Modellwert-Artefakt (8.10).** `_ZAHLBEHAUPTUNG` in `_ZAHL_MIT_EINHEIT` + `_ZAHL_NACKT` getrennt; `_ist_rechtskontext()` maskiert Fundstellen (`2016/679`, **beide** Hälften), Paragraphen-/Artikel-/Ziffer-/Seitenverweise, Normklammern `(EU)`/`(EG)` und Link-Ziele – pro **einzelnen** Treffer, nicht pro Satz; `_zaahlbehauptung()` als einzige Entscheidungsstelle an den zwei Stellen von `_marker_reparatur`. Dazu `selbsttest()` mit 19 Proben in beide Richtungen plus Idempotenz und ein `__main__`-Zweig, den `selftest_runner` entdeckt (291 → **292** Wachen). Bestand: `0 Reparatur(en) in 0 Datei(en)` – schreibt nichts um. | 8.10 |
+| `scripts/tests/test_marker_ruinen_964.py` | Klasse `RechtsnormStattModellwertTests` (8 Tests, `Ran 26` statt 18), darunter `test_bestand_traegt_keinen_stempel_an_einer_rechtsnorm` – die Prüfung, die am 22.11.2026 fehlte: #1318 sah den einen Satz, den ein anderer Test zufällig abdeckte; diese sieht die **Klasse**. | 8.10 |
+| `scripts/ff_inhalts_wache.py` | **Nur `selftest()`**, rein additiv: 9 Feld-Proben für `_field()` (nackt/einfach/doppelt quotiert, Doppelpunkt im Wert, fehlendes Feld, leeres Feld, Inline-Kommentar) + 2 Vertrags-Proben für die Siegel-Ausnahme in `_has_template_links()`. Meldung `7 FF1-Proben` → `18 Proben`. **Keine Zeile am Verhalten geändert** – `_field()` selbst ist die Fassung aus #1318 und bleibt es. Sabotage-Gegenprobe: Parser zurückgedreht → 6 Proben rot, Exit 2. | G, Kasten Punkt 6 |
+| 14 Artikel-`index.md` | je **genau zwei Zeilen**: `cover.ki_pruefung.sha256` + `.geprueft_am` auf die Bytes der Datei erneuert. 13 Altlasten zu Beginn, danach 4 neue nach `9630dea` (Abschnitt 6), danach **14 neue** nach `ae6fd3c`/`200a9e3` (Abschnitt 8.9). Sonst keine Änderung an diesen Artikeln. | D |
+| ~~`F4-ENTSCHEIDUNGSVORLAGE.md`~~ | **Nicht mehr im Delta.** Dossier nachgezogen, `2877 → 2803 Zeilen` – und `main` trägt inzwischen dieselben 2803 Zeilen **bitgleich**, also fällt die Datei nach Rebase 7 heraus. Der Nachweis, dass sie auf `main` zuvor veraltet war, bleibt gültig: **Auf `main` ebenfalls veraltet** – Gegenprobe im Bestands-Worktree: `--check` → Exit **1**, während die Akte grün ist (`301 offene Befunde`). `main`'s `8ad6d41` hatte die Akte gezogen, das Dossier nicht. | 8.9 |
+| `GATES-DAUERHEILUNG-HIGHEND-2026-11-22.md` | dieser Beleg | — |
+
+**Zurückgenommen, weil der Bestand sie selbst hat** (Hauspolitik
+`GIT_SYNC_BESTAND_POLICY`, #590 – „Bestand gewinnt"):
+
+| Datei | Wer es jetzt trägt | Nachweis |
+| --- | --- | --- |
+| `scripts/ff_inhalts_wache.py` **(nur `_field()`)** | `main` via **#1318** – `_field()` liest ebenfalls alle drei YAML-Formen, andere Umsetzung (ein Regex `^key:[ \t]*(.*)$` + manuelles Abschälen der Quote statt drei Muster), **dieselbe Diagnose** im Befundkopf. Eigener Parser-Entwurf per `--ours` verworfen; `main`'s Fassung steht unverändert. **Zurückgenommen ist der Parser, nicht die Datei** – die 11 Selbsttest-Proben sind ein eigener, rein additiver Beitrag und stehen oben in der Endstand-Tabelle | Abschnitt 8, Kasten Punkte 5–6 |
+| `content/posts/2026-08-12-preisgarantie-gas…` | `main` via #1318 – Flesch über der Publish-Schwelle | 8.3 |
+| `content/posts/2026-08-14-sparen-im-herbst…` | `main` via #1318 – keine kritische Live-Überlappung mehr | 8.4 |
+| `content/posts/2026-08-26-handytarif-vergleichen…` | `main` via #1318 – derselbe Pillar-Link `../../pillar/internet-dsl/` **war schon gesetzt**; die eigene Fassung hätte ihn doppelt getragen (2 Treffer gegen 1) | 8, Kasten |
+| `content/posts/2026-08-26-tagesgeld-zinsen…` | `main` via #1318 – Rechner- und Pillar-Link gesetzt | 8.1 |
+| `content/posts/2026-10-25-strategisch-sparen…reisekasse…` | `main` via #1318 – Rechtssatz steht, Modellwert-Artefakt ist raus | 8.5 |
+| `content/posts/2026-11-12-wie-viel-streaming-bandbreite…` | `main` via **#1320** – R1-Titel auf Doppelpunkt-Konvention | Abschnitt 5 |
+| `static/images/covers/**` (19), `data/covers_manifest.json`, `data/fcp_images.json`, `static/llms.txt` | `main` – Cover selbst gerendert (`9630dea`, `200a9e3`, `ae6fd3c`), Register selbst gezogen | 6, 10 |
+| `BEFUND-AKTE.md`, `data/faktenfrische_befunde_state.json` | `main` via `8ad6d41`/`ad204bc` – Akte grün am Bestand (`301 offene Befunde, Stichtag 2026-11-22`) | 8.9 |
+
+**Nie im Delta, obwohl Messläufe sie berührt haben:** `data/schema_seo_history.jsonl`,
+`.casing_report.json`, `data/casing_history.jsonl` (STATE_ONLY_PATTERN aus
+`deploy.yml:302` / `deploy-catchup.yml:162`) – nach jeder Runde mit
+`git checkout origin/main -- <pfad>` zurückgenommen und vor jedem Push einzeln
+geprüft.

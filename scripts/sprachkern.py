@@ -388,9 +388,86 @@ _MONATE = (r"(?:Januar|Februar|März|April|Mai|Juni|Juli|August|September|"
 _SAETZE_UNABHAENGIG = re.compile(rf"{_ABKUERZUNG_PUNKT}\.$")
 _MONATE_RX = re.compile(_MONATE)
 _SATZENDE = re.compile(r"[.!?](?=\s|$)")
-_ZAHLBEHAUPTUNG = re.compile(
-    r"\d[\d.,]*\s*(?:€|EUR|Euro|%|Prozent|kWh|ct|Cent|Mbit/s|GB|MB|km|Watt|W)"
-    r"|(?<![\w.,])\d{3,}(?:[.,]\d+)*(?![\w.])", re.I)
+# ZAHLENBEHAUPTUNG vs. NACKTE ZAHL (BEFUND 22.11.2026, Wurzel zum Modellwert-
+# Artefakt). Der alte Ausdruck war eine ODER-Verknüpfung zweier sehr
+# unterschiedlicher Fälle:
+#
+#   1. Zahl MIT Einheit („460 €“, „18.000 kWh“) – das ist immer eine
+#      Behauptung über die Welt und muss gekennzeichnet werden.
+#   2. NACKTE Zahl ab drei Ziffern – das ist nur MANCHMAL eine Behauptung.
+#
+# Fall 2 fraß Fundstellen und Pfad-Segmente. Im Reisekasse-Artikel stand:
+#
+#   „Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung
+#    personenbezogener Daten; das ist ein Modellwert.“
+#
+# `_ZAHLBEHAUPTUNG` matchte die `2016` der Fundstellenangabe, `_marker_reparatur`
+# sah „der Satz trägt eine Zahl“ und hängte den Stempel an. Eine Rechtsnorm ist
+# aber kein Modellwert, sie ist geltendes Recht – der Stempel war faktisch
+# falsch, und zwar in einem YMYL-Satz über die DSGVO.
+#
+# PR #1318 hat den SATZ geheilt. Die Ursache stand weiter im Baum: gemessen
+# 44 Zeilen Exposition im Bestand (1 Fundstelle `(EU) 2016/679`,
+# 40 Paragraphenverweise `§ 5`/`§ 9`, 3 Link-Pfade mit Datum). Der Bestand war
+# nur deshalb sauber, weil diese Marker gerade nicht zerstückelt waren – jede
+# dieser Zeilen hätte denselben falschen Stempel bekommen.
+#
+# Deshalb sind die Fälle jetzt getrennt, und der nackte bekommt einen
+# Rechtskontext-Guard. Wichtig ist die Richtung in BEIDEN Fällen: Der Guard darf
+# keine echte Modellrechnung wegnehmen, sonst wäre die Kennzeichnungspflicht
+# ausgehebelt – das wäre eine Scheinheilung in die Gegenrichtung. Darum prüft
+# `_ist_rechtskontext` den Kontext UM DEN EINZELNEN TREFFER, nicht den ganzen
+# Satz: „Nach § 5 kostet das 460 €“ behält seine Behauptung, weil die `460`
+# eine Einheit trägt und weil der Paragraph nur die `5` deckt.
+_ZAHL_MIT_EINHEIT = re.compile(
+    r"\d[\d.,]*\s*(?:€|EUR|Euro|%|Prozent|kWh|ct|Cent|Mbit/s|GB|MB|km|Watt|W)", re.I)
+_ZAHL_NACKT = re.compile(r"(?<![\w.,])\d{3,}(?:[.,]\d+)*(?![\w.])", re.I)
+# Vereint, für Aufrufer die nur „steht da eine Zahl“ wissen wollen.
+_ZAHLBEHAUPTUNG = re.compile(rf"(?:{_ZAHL_MIT_EINHEIT.pattern})|(?:{_ZAHL_NACKT.pattern})", re.I)
+
+# Kontexte, in denen eine nackte Zahl KEINE Behauptung über die Welt ist,
+# sondern ein Verweis auf eine Stelle in einem anderen Text.
+_RECHTSVERWEIS = re.compile(r"(?:§|Art\.|Abs\.|Nr\.|Ziff\.|S\.)\s*$", re.I)
+_NORMKLAMMER = re.compile(r"\(\s*(?:EU|EG|VO|RL)\s*\)\s*$", re.I)
+_FUNDTSTELLE = re.compile(r"^\s*/\s*\d")            # 2016/679, 2026/10
+# Eine Fundstelle hat ZWEI Hälften, und beide tragen Ziffern: `2016` VOR dem
+# Slash und `679` dahinter. Nur die vordere zu decken reicht nicht – die
+# hintere Zahl steht in einem Kontext, der für sich genommen harmlos aussieht
+# („/679) regelt die Verarbeitung…“), und genau sie war es, die den falschen
+# Stempel an die DSGVO-Zeile brachte. Darum dieselbe Prüfung rückwärts.
+_FUNDTSTELLE_RUECK = re.compile(r"\d\s*/\s*$")       # …2016/ → die 679 danach
+_LINKZIEL = re.compile(r"\]\([^)]*$")                 # [Text](…  – noch offen
+
+
+def _ist_rechtskontext(satz: str, m: "re.Match[str]") -> bool:
+    """Liegt der nackte Zahl-Treffer in einem Verweis statt in einer Behauptung?
+
+    Geprüft wird der Text VOR und NACH dem Treffer, nicht der ganze Satz – ein
+    Satz darf gleichzeitig einen Paragraphen zitieren und eine Zahl behaupten.
+    """
+    vor, nach = satz[:m.start()], satz[m.end():]
+    if _FUNDTSTELLE.match(nach):                 # (EU) 2016/679 · /2026/10/…
+        return True
+    if _FUNDTSTELLE_RUECK.search(vor):           # …2016/ → die 679 dahinter
+        return True
+    if _RECHTSVERWEIS.search(vor):               # § 5 · Art. 6 · Abs. 2
+        return True
+    if _NORMKLAMMER.search(vor):                 # (Verordnung (EU) 2016 …
+        return True
+    return bool(_LINKZIEL.search(vor))           # [Ratgeber](/2026/10/…)
+
+
+def _zaahlbehauptung(satz: str) -> bool:
+    """Trägt der Satz eine ZAHLENBEHAUPTUNG – nicht bloß eine nackte Zahl?
+
+    Eine Zahl mit Einheit ist immer eine Behauptung. Eine nackte Zahl ist es
+    nur, wenn sie nicht in einem Rechts- oder Link-Verweis steht.
+    """
+    if _ZAHL_MIT_EINHEIT.search(satz):
+        return True
+    return any(not _ist_rechtskontext(satz, m) for m in _ZAHL_NACKT.finditer(satz))
+
+
 # Kopula am Satzende („… ist eine Modellannahme.“) – dort ist die
 # Kennzeichnung bereits korrekt als Prädikativ eingebaut.
 _KOPULA_ENDE = re.compile(
@@ -465,14 +542,18 @@ def _marker_reparatur(zeile: str, treffer: re.Match, nomen: str) -> str:
     if glue and rest.startswith(".") and not rest.startswith(".."):
         return f"{vor[:glue.start()]}{glue.group(1)}.{rest[1:]}"
     # (b) Marker beschließt einen Satz, obwohl Text folgt.
-    #     Trägt der Satz eine Zahl, wird sie als Teilsatz ans Satzende gehängt
-    #     („… 460 €; das ist ein Beispielwert. Rechne …“).
+    #     Trägt der Satz eine ZAHLENBEHAUPTUNG, wird sie als Teilsatz ans
+    #     Satzende gehängt („… 460 €; das ist ein Beispielwert. Rechne …“).
     #     Trägt er keine, kennzeichnet der Marker nichts und fällt ersatzlos
     #     weg – ein angehängter Füllsatz wäre genau die Maschinen-Prosa, die
     #     #964 abstellt.
+    #     „Behauptung" heißt hier nicht „irgendeine Zahl": Eine Rechtsnorm-
+    #     Fundstelle oder ein Paragraphenverweis trägt Ziffern, behauptet aber
+    #     nichts über die Welt. Genau dieser Unterschied ist der Befund vom
+    #     22.11.2026 – siehe `_zaahlbehauptung`.
     if rest.startswith(".") and rest[1:].strip():
         satz = vor[_satzanfang_vor(vor, len(vor)):]
-        if _ZAHLBEHAUPTUNG.search(satz):
+        if _zaahlbehauptung(satz):
             return f"{vor.rstrip()}; {_praedikativ(nomen)}{rest}"
         return f"{vor.rstrip()}{rest}"
     # (c) Marker mitten im Satz: als Teilsatz ans Satzende hängen.
@@ -485,7 +566,7 @@ def _marker_reparatur(zeile: str, treffer: re.Match, nomen: str) -> str:
         return f"{zusammen.rstrip()}{trenner} {_praedikativ(nomen)}."
     satz = zusammen[anfang:satzende]
     rumpf = zusammen[:satzende].rstrip().rstrip(",;:")
-    if _ZAHLBEHAUPTUNG.search(satz) and not _KOPULA_ENDE.search(satz):
+    if _zaahlbehauptung(satz) and not _KOPULA_ENDE.search(satz):
         return f"{rumpf}; {_praedikativ(nomen)}{zusammen[satzende:]}"
     return f"{rumpf}{zusammen[satzende:]}"
 
@@ -615,3 +696,95 @@ def rebuild(a: dict, new_body: str, new_description: str | None = None) -> str:
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+
+
+# --------------------------------------------------------------------------
+# SELBSTTEST
+# --------------------------------------------------------------------------
+# BEFUND 22.11.2026 (Wurzel zum Modellwert-Artefakt). Der Satz stand live:
+#
+#   „Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung
+#    personenbezogener Daten; das ist ein Modellwert.“
+#
+# Eine Rechtsnorm ist kein Modellwert, sie ist geltendes Recht – der Stempel war
+# faktisch falsch, in einem YMYL-Satz. Ursache: `_ZAHLBEHAUPTUNG` las die `2016`
+# der Fundstellenangabe als Zahlenbehauptung, und `_marker_reparatur` hängte
+# daraufhin den Teilsatz an. PR #1318 hat den Satz von Hand korrigiert; die
+# Ursache blieb im Baum, mit gemessenen 44 Zeilen Exposition im Bestand
+# (1 Fundstelle, 40 Paragraphenverweise, 3 Link-Pfade mit Datum). Der Bestand
+# war nur deshalb sauber, weil diese Marker gerade nicht zerstückelt waren.
+#
+# Die Proben sind bewusst in BEIDE Richtungen scharf. Nur die Rechtsnorm-Seite zu
+# prüfen wäre eine Scheinheilung in die Gegenrichtung: Ein Guard, der zu grob
+# maskiert, nimmt echten Modellrechnungen ihre Kennzeichnungspflicht – und das
+# ist derselbe Verstoß gegen #964, nur stiller.
+_RECHTSNORM_PROBEN = [
+    # (Satz, Erwartung, warum)
+    ("Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten",
+     False, "DER Befund: Fundstelle einer Verordnung"),
+    ("Nach § 5 Abs. 2 UWG ist diese Werbung unzulässig", False, "Paragraphenverweis"),
+    ("Art. 6 DSGVO erlaubt die Verarbeitung nur mit Rechtsgrundlage", False, "Artikelverweis"),
+    ("Siehe Ziff. 12 des Vertrags", False, "Ziffer-Verweis"),
+    ("Vergleiche S. 240 des Berichts", False, "Seitenverweis"),
+    ("Das Aktenzeichen lautet 2016/679", False, "nackte Fundstelle"),
+    ("Die Zahlen stehen in der [Pressemeldung](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10)",
+     False, "Link-Ziel mit Datumpfad"),
+    # Gegenrichtung: diese MÜSSEN gekennzeichnet bleiben.
+    ("Ein Haus braucht 18.000 kWh im Jahr", True, "nackte Zahl, echte Behauptung"),
+    ("Nach 24 Monaten kostet der Tarif 460 €", True, "Zahl mit Einheit"),
+    ("Der Preis liegt bei ca. 11 Cent je kWh", True, "Einheit Cent"),
+    ("Die Ersparnis beträgt 12 Prozent", True, "Prozent"),
+    ("Rund 1500 Nutzer haben teilgenommen", True, "nackte Zahl ohne Verweis"),
+    ("Der Tarif bietet 500 GB Datenvolumen", True, "Einheit GB"),
+    # Der entscheidende Mischfall: Ein Satz darf gleichzeitig einen Paragraphen
+    # zitieren und eine Zahl behaupten. Ein Guard, der den ganzen Satz maskiert,
+    # würde hier die Kennzeichnung verlieren – deshalb wird der Kontext um den
+    # EINZELNEN Treffer geprüft, nicht der Satz.
+    ("Nach § 5 kostet das 460 € im Monat", True, "Paragraph UND echte Behauptung"),
+    ("Gemäß Art. 15 DSGVO fallen dafür 25 Euro an", True, "Artikel UND echte Behauptung"),
+]
+
+# End-to-End: die zerstückelte Form, die den Stempel überhaupt erst auslöste.
+_RECHTSNORM_HEILUNG = [
+    ("Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener "
+     "Daten als Modellwert. Du kannst Auskunft verlangen.",
+     False, "Rechtsnorm bekommt keinen Stempel – die Heilung, die #1318 von Hand machte"),
+    ("Ein Haus braucht 18.000 kWh im Jahr als Modellwert. Rechne selbst nach.",
+     True, "echte Modellrechnung behält ihre Kennzeichnung"),
+]
+
+
+def selbsttest() -> int:
+    """Beweist die Wurzelheilung des Modellwert-Artefakts in beide Richtungen."""
+    bad = 0
+    for satz, expect, warum in _RECHTSNORM_PROBEN:
+        got = _zaahlbehauptung(satz)
+        if got != expect:
+            bad += 1
+            print(f"  ✗ Zahlenbehauptung falsch entschieden ({warum}): "
+                  f"{got} statt {expect} – {satz[:70]}")
+    for roh, expect_stempel, warum in _RECHTSNORM_HEILUNG:
+        neu, _eingriffe = pflicht_marker_heilen(roh)
+        got = "; das ist ein Modellwert." in neu or "; das ist eine Modellannahme." in neu
+        if got != expect_stempel:
+            bad += 1
+            print(f"  ✗ Heilung falsch ({warum}): Stempel={got}, erwartet {expect_stempel}")
+            print(f"      → {neu[:96]}")
+    # Idempotenz: zweimal heilen darf nichts weiter ändern.
+    for roh, _e, _w in _RECHTSNORM_HEILUNG:
+        einmal, _ = pflicht_marker_heilen(roh)
+        zweimal, n2 = pflicht_marker_heilen(einmal)
+        if zweimal != einmal or n2:
+            bad += 1
+            print(f"  ✗ Heilung nicht idempotent ({n2} Eingriff(e) im zweiten Lauf)")
+    if bad:
+        print(f"🛑 Sprachkern-Selbsttest: {bad} Probe(n) falsch")
+        return 2
+    n = len(_RECHTSNORM_PROBEN) + len(_RECHTSNORM_HEILUNG) * 2
+    print(f"✅ Sprachkern-Selbsttest bestanden ({n} Proben: Rechtsnorm vs. "
+          f"Modellwert in beide Richtungen + Idempotenz)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(selbsttest() if "--selftest" in sys.argv else 0)

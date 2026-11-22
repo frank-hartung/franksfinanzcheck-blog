@@ -157,10 +157,56 @@ def selftest():
         if got != expect:
             bad += 1
             print(f"  ✗ Probe fehlgeschlagen (erwartet {expect}): {sample}")
+
+    # FELDER LESEN (22.11.2026): Der Parser-Fix in `_field` ist die Ursache
+    # eines Fehlbefunds an einem versiegelten Artikel gewesen – `pillar:
+    # versicherungen` ohne Anführungszeichen wurde zu `""`, die Siegel-Ausnahme
+    # in `_has_template_links` fiel still aus, und FF3 meldete „kein
+    # Rechner-Link" gegen einen Beitrag, dessen weiterrechnen_box.html den Link
+    # längst renderte. Der Fix selbst steht; was fehlte, ist seine Sicherung:
+    # Ohne Probe altert er unbemerkt, und genau das ist die Lehre aus dem
+    # Befund. Eine Wache, die gültige Werte nicht liest, ist doppelt falsch –
+    # sie meldet Befunde, die keine sind, und übersieht dieselben Felder dort,
+    # wo sie wirklich fehlen.
+    #
+    # Die Proben sind in BEIDE Richtungen scharf: Ein fehlendes oder leeres Feld
+    # muss leer bleiben, sonst erfindet die Wache ein `pillar`-Feld und gibt die
+    # Siegel-Ausnahme einem Beitrag, dessen Boxen nichts zu verlinken hätten.
+    feld_proben = [
+        ('pillar: "versicherungen"', "pillar", "versicherungen"),   # doppelt quotiert
+        ("pillar: versicherungen", "pillar", "versicherungen"),     # nackt – der Befund
+        ("pillar: 'konto-karten'", "pillar", "konto-karten"),       # einfach quotiert
+        ('title: "Tagesgeld vergleichen: Was bleibt?"', "title",
+         "Tagesgeld vergleichen: Was bleibt?"),                     # Doppelpunkt im Wert
+        ("title: Tagesgeld vergleichen", "title", "Tagesgeld vergleichen"),
+        ("draft: true", "pillar", ""),                              # Feld fehlt
+        ("pillar:", "pillar", ""),                                  # Feld leer
+        ('pillar: "wert"  # Kommentar', "pillar", "wert"),          # Inline-Kommentar
+        ("pillar: wert # Kommentar", "pillar", "wert"),             # nackt + Kommentar
+    ]
+    for front, key, expect in feld_proben:
+        got = _field(front, key)
+        if got != expect:
+            bad += 1
+            print(f"  ✗ Feld-Probe fehlgeschlagen: {front!r} → {got!r}, erwartet {expect!r}")
+
+    # Der Vertrag hinter dem Befund: Die Siegel-Ausnahme hängt an `_field`.
+    sig = 'redaktionelle_pruefung:\n  inhalt_sha256: "' + ("a" * 64) + '"'
+    if not _has_template_links("pillar: versicherungen\ndraft: false\n" + sig):
+        bad += 1
+        print("  ✗ Fassungsgebundener Beitrag mit nacktem pillar-Feld verliert die "
+              "Template-Ausnahme – genau der Fehlbefund vom 22.11.2026.")
+    if _has_template_links("draft: false\n" + sig):
+        bad += 1
+        print("  ✗ Beitrag OHNE pillar-Feld bekommt die Template-Ausnahme – "
+              "die Boxen hätten nichts zu verlinken.")
+
     if bad:
         print(f"🛑 Inhalts-Wache-Selbsttest: {bad} Probe(n) falsch")
         return 2
-    print("✅ Inhalts-Wache-Selbsttest bestanden (FF1-Proben scharf)")
+    n_proben = len(cases) + len(feld_proben) + 2
+    print(f"✅ Inhalts-Wache-Selbsttest bestanden "
+          f"({n_proben} Proben: FF1 + Feldleser + Siegel-Ausnahme scharf)")
     return 0
 
 

@@ -30,7 +30,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 7a958a48c6504cfed95e47cecbb0fbe2478e73e812411dd7b5b66a25fd5b579e
+    sha256: 321bf56602699e2d5924734b91adc0fa0eaaef4a31c1eeda46562dedfc1aaa27
     geprueft_am: 2026-11-22
 faktencheck: 2026-11-12
 kurzantwort: "Deine nächtliche Grundlast zeigt am Zähler genau, welche Geräte auch im Schlaf Strom ziehen. Wer den Stand abends und morgens an mehreren Tagen vergleicht, findet teure Dauerläufer und senkt seine laufenden Kosten ohne Verzicht."
