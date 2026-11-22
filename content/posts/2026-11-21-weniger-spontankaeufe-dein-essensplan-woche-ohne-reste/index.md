@@ -77,8 +77,8 @@ Setze an vollen Arbeitstagen auf schnelle Gerichte aus einer Pfanne oder vom Ble
 
 1. **Vorräte zuerst prüfen:** Schau vor dem Schreiben in Kühlschrank, Eisfach und Regal. Was ist schon offen oder muss bald weg? Diese Dinge bilden den Start deiner neuen Woche.
 2. **Kalender kurz abgleichen:** An welchen Tagen isst du im Büro, kommst spät heim oder triffst Freunde? Plane nur die Essen ein, die du wirklich selbst zu Hause kochst.
-3. **Zutaten klug teilen:** Such dir Gerichte aus, die frische Reste gemeinsam nutzen. Kaufst du einen großen Kopf Kohl oder frischen Quark, verplane die zweite Hälfte direkt zwei Tage später (Modellannahme).
-4. **Reste-Tag frei halten:** Lass einen Abend in der Woche bewusst offen für Übriggebliebenes aus der Pfanne, eine schnelle Suppe oder Brotzeit. Dieser Puffer nimmt sofort jeden Stress aus dem Plan.
+3. **Zutaten klug teilen:** Such dir Gerichte aus, die frische Reste gemeinsam nutzen. Kaufst du einen großen Kopf Kohl oder frischen Quark, verplane die zweite Hälfte direkt zwei Tage später (Annahme).
+4. **Reste‑Tag frei halten:** Lass einen Abend in der Woche bewusst offen für Übriggebliebenes aus der Pfanne, eine schnelle Suppe oder Brotzeit. Dieser Puffer nimmt sofort jeden Stress aus dem Plan.
 5. **Liste nach Gängen ordnen:** Schreib nur fehlende Dinge auf – sortiert wie in deinem Markt: erst Obst und Gemüse, dann Kühlung, dann Vorrat und Tiefkühlfach. So läufst du keinen Gang zweimal.
 
 | Schritt | Häufiger Fehler | Bessere Lösung im Alltag |
@@ -89,7 +89,7 @@ Setze an vollen Arbeitstagen auf schnelle Gerichte aus einer Pfanne oder vom Ble
 | Woche | Alle Tage eng ohne Pause füllen | Einen festen Abend für Reste frei lassen |
 | Im Laden | Hungrig nach der Arbeit einkaufen | Satt und mit klarer Liste einmal losgehen |
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+> 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 ## Welche Gerichte verhindern Reste in deiner Küche?
 
@@ -107,14 +107,14 @@ Mit dem Trick „Einmal kochen, zweimal anders essen“ kommt nie Langeweile auf
 
 Kleine Käufe zwischendurch fallen einzeln kaum auf. Ein Snack beim Bäcker hier, eine volle Tüte nach Feierabend dort – erst über das Jahr zeigt sich die echte Summe. Schauen wir uns dazu eine ehrliche Modellrechnung für einen Haushalt mit zwei Personen an. Alle Zahlen sind klare Annahmen für dieses Beispiel:
 
-- **Annahme 1 (ungeplante Käufe):** Ohne Plan gibt es pro Woche zwei schnelle Stopps nach der Arbeit mit je 12 € für spontane Extras – das sind 24 € pro Woche (Modellannahme).
-- **Annahme 2 (Reste im Müll):** Dazu landen jede Woche vergessene Frischewaren im Wert von 6 € in der Tonne (Modellannahme).
+- **Annahme 1 (ungeplante Käufe):** Ohne Plan gibt es pro Woche zwei schnelle Stopps nach der Arbeit mit je 12 € für spontane Extras – das sind 24 € pro Woche (Annahme).
+- **Annahme 2 (Reste im Müll):** Dazu landen jede Woche vergessene Frischewaren im Wert von 6 € in der Tonne (Annahme).
 - **Annahme 3 (Umsetzung im Alltag):** Mit einem festen **Essensplan Woche** und einem klaren Einkauf sinken diese vermeidbaren Kosten um zwei Drittel (Modellwert).
 
 **Formel und Rechenweg (Modellrechnung):**
-1. Extras und Müll ohne Plan: 24 € + 6 € = 30 € pro Woche (Modellrechnung).
+1. Extras und Müll ohne Plan: 24 € + 6 € = 30 € pro Woche (Modellrechnung).
 2. Gesparter Anteil pro Woche (zwei Drittel): 30 € × 2 ÷ 3 = 20 € im jeweiligen Zeitraum (Modellrechnung).
-3. **Probe aufs ganze Jahr:** 20 € × 52 Wochen = 1.040 € im Jahr, also rund 86,67 € pro Monat (Modellrechnung; 1.040 € ÷ 12 = 86,67 €).
+3. **Probe aufs ganze Jahr:** 20 € × 52 Wochen = 1.040 € im Jahr, also etwa 86,67 € pro Monat (Modellrechnung; 1.040 € ÷ 12 = 86,67 €).
 
 *Ergebnis der Beispielrechnung:* Schon weniger Stopps im Laden und das Aufbrauchen bezahlter Ware sparen in diesem Beispiel über tausend Euro im Jahr – ganz [ohne Verzicht](../../posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/) auf gutes Essen.
 
@@ -124,23 +124,22 @@ Selbst mit einem guten Zettel in der Hand gibt es im Laden typische Fallen. Ganz
 
 Ein großes Netz Orangen oder der riesige Eimer Joghurt hat am Schild zwar den kleineren Preis pro Kilo. Kippt dir zu Hause aber ein Drittel davon um, war der kleine Becher zum normalen Preis am Ende doch günstiger. Nutze große Packungen deshalb vor allem bei Ware, die lange hält: Haferflocken, Nudeln, Reis, Tomaten in der Dose oder Gemüse für das Eisfach.
 
-Eine zweite Falle ist die fehlende Reserve für richtig volle Tage. Manchmal dauert ein Termin länger oder du bist abends einfach müde. Liegt für genau diesen Moment kein schnelles Not-Essen im Schrank, gewinnt oft der teure Lieferdienst. Halte dir darum immer zwei einfache Retter auf Vorrat – zum Beispiel Nudeln mit Pesto und Erbsen aus dem Eisfach oder eine Portion eigene Suppe auf Eis.
+Eine zweite Falle ist die fehlende Reserve für richtig volle Tage. Manchmal dauert ein Termin länger oder du bist abends einfach müde. Liegt für genau diesen Moment kein schnelles Not‑Essen im Schrank, gewinnt oft der teure Lieferdienst. Halte dir darum immer zwei einfache Retter auf Vorrat – zum Beispiel Nudeln mit Pesto und Erbsen aus dem Eisfach oder eine Portion eigene Suppe auf Eis.
 
-Hänge deinen Plan außerdem gut sichtbar auf. Eine Liste tief in einer selten genutzten App auf dem Handy gerät im Trubel schnell in Vergessenheit. Ein Zettel mit Magnet direkt am Kühlschrank erinnert dich morgens sofort daran, ein Fach aus [dem Frost](../../posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/) zu legen oder abends zuerst den reifen Salat zu machen.
+Hänge deinen Plan außerdem gut sichtbar auf. Eine Liste tief in einer selten genutzten App auf dem Handy gerät im Trubel schnell in Vergessenheit. Ein Zettel mit Magnet direkt am Kühlschrank erinnert dich morgens sofort daran, ein Fach aus [dem Frost](../../posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/) zu leeren oder abends zuerst den reifen Salat zu machen.
 
-## Dein 4K-Pfad für entspanntes Einkaufen und volle Kontrolle
+## Dein 4K‑Pfad für entspanntes Einkaufen und volle Kontrolle
 
 Mit unserem klaren Pfad in vier Schritten wird deine Planung schnell zur festen Routine im Alltag und passt perfekt zum Blick auf die übrigen Verträge.
 
-1. **Kosten sehen:** Hebe einen Monat lang alle Bons aus Supermarkt, Bäckerei und Lieferdienst auf, damit du deine wahren Ausgaben beim Essen schwarz auf weiß kennst (Modellannahme).
+1. **Kosten sehen:** Hebe einen Monat lang alle Bons aus Supermarkt, Bäckerei und Lieferdienst auf, damit du deine wahren Ausgaben beim Essen schwarz auf weiß kennst (Annahme).
 2. **Konditionen rechnen:** Schau im Laden immer auf den Preis pro Kilo statt auf rote Schilder, und prüfe genauso nüchtern deine festen Verträge für Strom, Internet oder Konto.
-3. **Kündigungsfenster sichern:** Streiche alte Kochboxen oder Liefer-Abos rechtzeitig, wenn sie nicht mehr zu deinem echten Alltag passen.
-4. **Kurs halten:** Nimm dir einmal pro Woche kurz Zeit für Schrank-Blick und Liste und sammle dir nach und nach eine feste Auswahl an einfachen Lieblingsessen.
+3. **Kündigungsfenster sichern:** Streiche alte Kochboxen oder Liefer‑Abos rechtzeitig, wenn sie nicht mehr zu deinem echten Alltag passen.
+4. **Kurs halten:** Nimm dir einmal pro Woche kurz Zeit für Schrank‑Blick und Liste und sammle dir nach und nach eine feste Auswahl an einfachen Lieblingsessen.
 
 **Für deinen nächsten Check:** Plane eine Mahlzeit ein, deren Zutaten sich verschieben lassen. Wenn ein Termin dazwischenkommt, kannst du frische Lebensmittel zuerst aufbrauchen.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
-**Lesetipp:** [Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/): Wann [Bevorraten sich rechnet](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) **Lesetipp:** [Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/): Wann [Bevorraten sich rechnet](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/)
 
 ## Häufige Fragen
 

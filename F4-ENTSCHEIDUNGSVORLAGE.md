@@ -4,7 +4,7 @@
 Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt.
 Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
-**Bezugsstand: 2026-11-21** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
+**Bezugsstand: 2026-11-22** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
 **201 offene Live-Befunde auf 56 Artikeln.** Für **120** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **81** Befunde haben keine frühere aktive Entscheidung.
@@ -861,13 +861,13 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
 
-- Datei-SHA256 (heute): `4aa28b480adaff6946aa6a1cd0e1e9833ef9a4c03f105822d967e31f81ba4975`
+- Datei-SHA256 (heute): `556a89ef70cce4e4aeeb77e13f2d19213d6c7d9b0b53c4d7f306f4eb1e0b12b4`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `0b4755213f0c38321710` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Behauptung 'kein üblicher Wechselgewinn' ohne Daten |
-| `3e0c5fa74179e97866b8` | luecke | **neu** | 9,99 € in Zeile 25 gekennzeichnet | Preisangabe 9,99 € monatlich ohne Quelle |
+| `3e0c5fa74179e97866b8` | luecke | **neu** | 9,99 € in Zeile 23 gekennzeichnet | Preisangabe 9,99 € monatlich ohne Quelle |
 | `ae90ebae2842ff9f97f1` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Aussage über Downloadwert vs Gesprächsqualität ohne Beleg |
 | `b2611d9120121d0ad785` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg |
 | `fcb8168c18bd423c5180` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg |
@@ -886,7 +886,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 25: 9,99 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 23: 9,99 € – gekennzeichnet („modellrechnung“)
 
 ### `ae90ebae2842ff9f97f1`
 
@@ -914,7 +914,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
 
-- Datei-SHA256 (heute): `4cc118b6303e1b1ab4a031cdca515e1dab2fb706a74b4a984d08269bd467f6a3`
+- Datei-SHA256 (heute): `f6f1b1d7f66a30667270310af0613bad2fb1872ec5c6de357711ee3cec2025c6`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |

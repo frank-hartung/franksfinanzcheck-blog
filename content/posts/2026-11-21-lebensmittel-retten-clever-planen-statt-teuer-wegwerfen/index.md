@@ -25,6 +25,13 @@ cover:
   image: "images/covers/2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen.jpg"
   alt: "Lebensmittel retten: Clever planen statt teuer wegwerfen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 292146da2c8a6c435cf695ceca99deaa09727fc085c02847cdba781622d5c1f7
+    geprueft_am: 2026-11-21
+
 ---
 
 Lebensmittel retten im Check: Du öffnest den Kühlschrank. Ganz hinten liegt ein welker Salatkopf. Daneben steht ein Joghurt. Das Datum ist bereits seit mehreren Tagen überschritten.
