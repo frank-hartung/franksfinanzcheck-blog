@@ -433,3 +433,6 @@
 {"ts": "2026-11-22T16:28:04Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 12}
 {"ts": "2026-11-22T17:21:20Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-22T17:21:20Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 12}
+{"ts": "2026-11-22T17:58:58Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater", "rules": ["B2", "B3", "B5"]}
+{"ts": "2026-11-22T17:58:59Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-22T17:58:59Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 13}

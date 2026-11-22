@@ -25,6 +25,13 @@ cover:
   image: "images/covers/2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch.jpg"
   alt: "Kleidertausch: So klappt dein Tausch"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ddac4611dca44b6a55f9921f96591602ace1c04f92dc7094fbb53992edafde3c
+    geprueft_am: 2026-11-22
+
 ---
 
 Kleidertausch ist mehr als ein Trend. Du bringst alte Stücke mit, nimmst neue Favoriten nach Hause und sparst Geld. Der Abend wird zum Mini‑Markt, an dem jeder etwas Passendes findet. So entsteht ein **Kleiderkreislauf im Freundeskreis**, der nachhaltig wirkt.  
