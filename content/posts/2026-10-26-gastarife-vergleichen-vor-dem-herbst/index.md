@@ -27,8 +27,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: aa541ca37624840b58b566e3492262e4faaec8b55000026639ffa6d2be05c15d
-    geprueft_am: 2026-11-21
+    sha256: 518b7a03ca0db5ce8d7d1a3ddfa81a08051885e2a24aebc16b28511634be6548
+    geprueft_am: 2026-11-22
 quellen:
   - id: "Q1"
     titel: "Strom- und Gaspreise: Preisänderungen und Abschläge"

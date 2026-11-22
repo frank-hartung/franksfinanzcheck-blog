@@ -23,8 +23,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: d3b680d4c355c298629a53dd975a2754611c37fbf71b44c40f0d0e0f3a801cb4
-    geprueft_am: 2026-11-21
+    sha256: a961cd4de25a80c5230406a6e9ce7d25075779d72f233f2827e7827486a9a960
+    geprueft_am: 2026-11-22
 pin_title: "Heizperiode vorbereiten im Spätsommer"
 pin_description: "*Werbung | Noch vor der Heizperiode lohnt ein Probelauf. Prüfe, ob Thermostate reagieren und welche Auffälligkeiten du an Verwaltung oder Fachbetrieb melden solltest. Prüfe nach dem ersten Probelauf auch die nächste Abrechnung. Höhere Raumtemperaturen und gestiegene Tarife beeinflussen den Betrag auf unterschiedliche Weise."
 quellen:

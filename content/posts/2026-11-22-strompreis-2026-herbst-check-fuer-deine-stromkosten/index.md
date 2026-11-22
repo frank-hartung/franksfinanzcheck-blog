@@ -29,8 +29,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: ed2d31e93b8fb4214f199500596548bbc297cd42d8edb5602b0fdc52c2338f98
-    geprueft_am: 2026-11-21
+    sha256: 7f9117e5db3537fae6970526c6ad4ecdf13f2aafe48891761c4bdb9eca22f967
+    geprueft_am: 2026-11-22
 faktencheck: 2026-11-09
 kurzantwort: "Ob sich ein Stromtarifwechsel im Herbst lohnt, entscheidet nicht eine unsichere Preisprognose, sondern der Vergleich deiner aktuellen Jahresabrechnung mit verfügbaren Wahltarifen. Prüfe Arbeitspreis, Grundpreis, Laufzeit und den Umfang einer eingeschränkten Preisgarantie, bevor deine Kündigungsfrist abläuft."
 faktenfrische_aliases:

@@ -29,8 +29,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: ecfb129d0cae74f1a6552d4de2e79ce94629099057d197f59dc46b1878039e39
-    geprueft_am: 2026-11-21
+    sha256: f4cb6d3b81c2caa8bce652803b2c9128d883d9df978807113119b6882ff69e63
+    geprueft_am: 2026-11-22
 faktenfrische_aliases:
   - "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich"
   - "2026-11-19-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich"

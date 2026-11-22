@@ -92,6 +92,12 @@ class GitSyncTestBase(unittest.TestCase):
         (seed / "scripts").mkdir()
         shutil.copy2(REPO_ROOT / "scripts" / "konfliktmarker_wache.py",
                      seed / "scripts" / "konfliktmarker_wache.py")
+        # 22.11.2026: Die Trigger-Notbremse braucht ihre Wache im synthetischen
+        # Repo – sonst wäre sie in jedem Test still übersprungen (eine
+        # Notbremse, die nie greift, ist kein Test). Beide Skripte sind stdlib-
+        # rein und laufen damit ohne requirements im Wegwerf-Baum.
+        shutil.copy2(REPO_ROOT / "scripts" / "trigger_wache.py",
+                     seed / "scripts" / "trigger_wache.py")
         self._commit(seed, "README.md", "# Start\n", "init")
         subprocess.run(["git", "-C", str(seed), "push", "-q", "origin", "main"], check=True)
 
@@ -204,6 +210,104 @@ class HappyPathTests(GitSyncTestBase):
         res = self.run_sync(["chore: leer", "gibt-es-nicht.md"])
         self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
         self.assertIn("nichts zu committen", res.stdout)
+
+
+class TriggerNotbremseTests(GitSyncTestBase):
+    """NOTBREMSE 22.11.2026 – kein Commit/Push mit gebrochenem Trigger-Vertrag.
+
+    BEFUND: `code-selbstheilung.yml` rief `scripts/git_sync.sh` auf, ohne die
+    Datei in den `paths`-Listen zu nennen (Skript-Syntax rot auf `main`,
+    Run 44941227657). Der nächste main-Commit kam per `GITHUB_TOKEN`
+    (Automationslauf 5e8233e) – Token-Pushes lösen keine Folgeläufe aus, also
+    maß niemand den liegenden Stand, und der Befund wartete über einen Tag.
+
+    Diese Tests halten die Bremse in beide Richtungen scharf: Sie feuert bei
+    der EIGENEN Drift (kein Push, kein Commit, klare Meldung) und schweigt bei
+    fremder Altlast (ein roter Bestand nimmt keinen Lauf als Geisel – dieselbe
+    Grenze wie die Syntax-Notbremse #864).
+    """
+
+    AUFRUF = "scripts/konfliktmarker_wache.py"   # liegt im Seed-Repo
+
+    def _workflow(self, pfade: list[str]) -> str:
+        """Workflow, der `AUFRUF` aufruft und `pfade` filtert."""
+        liste = "\n".join(f'      - "{p}"' for p in pfade)
+        return (
+            "name: Probe\n"
+            "on:\n"
+            "  push:\n"
+            "    branches: [main]\n"
+            "    paths:\n"
+            f"{liste}\n"
+            "jobs:\n"
+            "  probe:\n"
+            "    runs-on: ubuntu-24.04\n"
+            "    steps:\n"
+            "      - name: Prüfen\n"
+            "        run: |\n"
+            f"          python3 {self.AUFRUF} --selftest\n"
+        )
+
+    def _schreiben(self, repo, pfad: str, inhalt: str) -> Path:
+        ziel = Path(repo) / pfad
+        ziel.parent.mkdir(parents=True, exist_ok=True)
+        ziel.write_text(inhalt, encoding="utf-8")
+        return ziel
+
+    def test_vollmodus_lehnt_eigene_trigger_drift_ab(self):
+        """W1 im eigenen Commit: kein Commit, kein Push, benannte Heilung."""
+        pfad = ".github/workflows/probe.yml"
+        self._schreiben(self.bot_b, pfad, self._workflow(["scripts/trigger_wache.py"]))
+        vorher = self.origin_log()
+        res = self.run_sync(["fix: Workflow mit Trigger-Drift", pfad])
+        self.assertNotEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Trigger-Notbremse", res.stdout + res.stderr)
+        self.assertIn("BEIDE paths-Listen", res.stdout + res.stderr,
+                      "die Meldung muss die Heilung nennen, nicht nur das Verbot")
+        self.assertEqual(self.origin_log(), vorher, "trotz Bremse wurde gepusht")
+        self.assertNotIn(pfad, self.origin_files())
+
+    def test_vollmodus_laesst_gedeckten_filter_durch(self):
+        """Gegenprobe: derselbe Workflow mit Deckung geht durch."""
+        pfad = ".github/workflows/probe.yml"
+        self._schreiben(self.bot_b, pfad, self._workflow([self.AUFRUF]))
+        res = self.run_sync(["fix: Workflow mit Deckung", pfad])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn(pfad, self.origin_files())
+
+    def test_push_only_lehnt_trigger_drift_ab(self):
+        """Auch der Fremd-Modus (Commit kam aus dem Workflow) ist geschirmt."""
+        pfad = ".github/workflows/probe.yml"
+        self._commit(self.bot_b, pfad, self._workflow(["scripts/trigger_wache.py"]),
+                     "B: Workflow mit Trigger-Drift")
+        vorher = self.origin_log()
+        res = self.run_sync(["--push-only"])
+        self.assertNotEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Trigger-Vertrag verletzt", res.stdout + res.stderr)
+        self.assertEqual(self.origin_log(), vorher, "trotz Bremse wurde gepusht")
+
+    def test_fremde_altlast_blockiert_den_eigenen_commit_nicht(self):
+        """Der Bestand ist rot, die eigene Änderung sauber → der Lauf geht durch."""
+        self._commit(self.bot_a, ".github/workflows/altlast.yml",
+                     self._workflow(["scripts/trigger_wache.py"]), "A: Drift-Altlast")
+        subprocess.run(["git", "-C", str(self.bot_a), "push", "-q", "origin", "main"],
+                       check=True)
+        subprocess.run(["git", "-C", str(self.bot_b), "pull", "-q", "--ff-only"],
+                       check=True)
+        # Der rote Workflow liegt jetzt im Arbeitsbaum von B – gemessen wird
+        # trotzdem nur, was B selbst anfasst.
+        self.assertTrue((self.bot_b / ".github" / "workflows" / "altlast.yml").is_file())
+        self._schreiben(self.bot_b, "scripts/neu.py", "print('sauber')\n")
+        res = self.run_sync(["fix: saubere Skriptänderung", "scripts/neu.py"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("scripts/neu.py", self.origin_files())
+
+    def test_inhalts_commit_bleibt_schnell_und_unberuehrt(self):
+        """Ohne Prüfer-/Workflow-Pfad läuft die Bremse gar nicht erst an."""
+        self._schreiben(self.bot_b, "content/posts/x.md", "---\ntitle: X\n---\nText\n")
+        res = self.run_sync(["content: neuer Beitrag", "content/posts/x.md"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertNotIn("Trigger-Wache", res.stdout)
 
 
 class RaceUndKonfliktTests(GitSyncTestBase):
