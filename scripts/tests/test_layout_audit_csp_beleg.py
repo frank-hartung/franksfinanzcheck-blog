@@ -122,6 +122,23 @@ class CspBrauchtEinenBelegTest(unittest.TestCase):
             self.text, r"r\.frame\(\) !== page\.mainFrame\(\)",
             "Eine iframe-Antwort darf die CSP der Seite nicht belegen")
 
+    def test_alias_weiterleitung_wird_nicht_gemessen(self):
+        """Die vierte Fassung – der eigentliche Grund des Dauerfehlers.
+
+        Die drei „neuesten" Verzeichnisse unter `public/posts/` waren
+        Hugo-Aliase (`<meta http-equiv="refresh">`). Der Browser folgte der
+        Weiterleitung auf die Live-Seite; deren Cloudflare-Beacon und
+        Edge-CSP erschienen danach als Befund unter der localhost-URL.
+        """
+        self.assertIn("istAliasDatei", self.text,
+                      "Alias-Seiten müssen aus dem Sample fallen")
+        self.assertIn("http-equiv", self.text)
+        self.assertIn("fremderUrsprung", self.text,
+                      "Endet der Hauptrahmen fremd, darf die Messung nicht "
+                      "als Seitenbefund gelten")
+        self.assertIn("Weiterleitung auf", self.text,
+                      "Der Ausschluss muss im Bericht sichtbar bleiben")
+
     def test_beleg_wird_nach_dem_laden_ausgewertet(self):
         """Die Kopfzeile kann nach dem ersten Skriptfehler eintreffen.
 

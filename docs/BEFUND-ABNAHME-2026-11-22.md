@@ -249,6 +249,8 @@ Betreiberfreigabe nach `docs/KI-TRANSPARENZ-ABNAHME.md` §5.
 | `scripts/tests/test_lesbarkeit_diff_wache.py` | neu: Regressionstests |
 | `.github/workflows/lesbarkeit-live-diff.yml` | neu: PR-Trigger für das Gate |
 | `RECHT-UPDATE-REPORT.md` | Screening-Vermerk 22.11.2026 |
+| `scripts/layout_browser_check.js` | Alias-Seiten aus dem Sample, fremder Ursprung als Hinweis, CSP-Beleg nur Hauptrahmen |
+| `scripts/tests/test_layout_audit_csp_beleg.py` | Regressionstests für Alias- und iframe-Beleg |
 
 ---
 
@@ -274,3 +276,43 @@ python3 scripts/design_variant_gate.py
 **Grenze dieses Nachweises:** Alle Läufe sind lokal und lesend. Sie
 ersetzen weder einen grünen geplanten CI-Lauf auf `main` noch eine
 Live-Abnahme oder eine rechtliche Freigabe.
+
+---
+
+## 11. Nachtrag 22.11.2026 – warum der Layout-Audit dauerhaft rot war
+
+Der `layout-audit`-Check war seit dem 21.11. auf **jedem** PR und auf `main`
+rot – mit einer Meldung, die scheinbar die Seite beschuldigte:
+
+```
+console: Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/…'
+violates the following Content Security Policy directive:
+"script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com"
+```
+
+Die Ursache lag im Messinstrument, nicht im Bau:
+
+1. Die drei „neuesten" Verzeichnisse unter `public/posts/` waren
+   **Hugo-Aliase** (`layouts/alias.html` → `<meta http-equiv="refresh">`).
+   Der Browser folgte der Weiterleitung auf `https://franksfinanzcheck.de`
+   und maß anschließend die **Live-Seite** – inklusive Cloudflare-Beacon,
+   Edge-CSP und Fingerprint –, berichtete sie aber unter der
+   `127.0.0.1`-URL. Die dortige CSP kennt
+   `static.cloudflareinsights.com` nicht; der Konsolenfehler war also echt,
+   gehörte aber nicht zu der Seite, die im Befund stand.
+2. Zusätzlich zählte der Audit jede `document|iframe`-Antwort als
+   CSP-Beleg – auch die eines fremden iframes (Turnstile). Damit wurde aus
+   einem „unbelegten" Hinweis wieder ein harter Befund.
+
+Behoben: Alias-Seiten fallen aus dem Sample (Startseite, Artikel und
+Risiko-Seiten), der Hauptrahmen muss auf dem geprüften Ursprung bleiben
+(sonst nur Hinweis, kein Befund), und CSP-Belege stammen ausschließlich aus
+der Antwort des Hauptrahmens. `scripts/tests/test_layout_audit_csp_beleg.py`
+hält beides fest.
+
+**Offener Betriebspunkt (nicht im Repo lösbar):** Die Edge-Transform-Rule
+in Cloudflare liefert weiterhin die alte CSP ohne
+`static.cloudflareinsights.com`, obwohl `static/_headers` und
+`cloudflare/edge-schutz.md` (A1) sie seit dem 21.11. führen. Solange die
+Regel im Dashboard nicht nachgezogen ist, blockiert der Browser den
+Beacon der Web-Analytics – die Messung selbst bleibt davon unberührt.

@@ -477,6 +477,35 @@ async function loadRuntime(browser, url, viewport) {
       unbelegt.push(text);
     }
   }
+  // ===================================================================
+  //  NIE DIE FREMDE SEITE MESSEN (22.11.2026)
+  //  ---------------------------------------------------------------
+  //  Hugo-Aliase werden als `public/posts/<alter-slug>/index.html` mit
+  //  `<meta http-equiv="refresh">` gebaut. Der Audit sampelt die drei
+  //  neuesten Verzeichnisse – stand dort ein Alias, folgte der Browser
+  //  der Weiterleitung auf `https://franksfinanzcheck.de` und meldete
+  //  anschließend die KONSOLE DER LIVE-SEITE unter der localhost-URL:
+  //  Cloudflare-Beacon, Edge-CSP, Fingerprint. Das war kein Befund über
+  //  den Bau, sondern eine Messung der falschen Seite.
+  //  Regel: Endet der Hauptrahmen auf einem fremden Ursprung, werden
+  //  weder Konsole noch CSP als Befund gewertet – nur ein Hinweis.
+  // ===================================================================
+  let endUrl = url;
+  let fremderUrsprung = false;
+  try {
+    endUrl = page.url();
+    fremderUrsprung = new URL(endUrl).origin !== new URL(url).origin;
+  } catch (e) { fremderUrsprung = false; }
+  const fremdHinweis = fremderUrsprung
+    ? `Weiterleitung auf ${endUrl} – fremde Seite, nicht gewertet`
+    : null;
+  if (fremderUrsprung) {
+    errors.length = 0;
+    httpErrors.length = 0;
+    cspMeldungen.length = 0;
+    unbelegt.length = 0;
+  }
+
   const metrics = await measureDom(page);
   const title = await page.title();
   const h1 = await page.evaluate(() => {
@@ -484,6 +513,7 @@ async function loadRuntime(browser, url, viewport) {
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
   return { page, metrics, title, h1, errors, httpErrors, loadMs, sammlung,
+           endUrl, fremderUrsprung, fremdHinweis,
            csp: { direktiven: cspDirektiven, quelle: cspQuelle,
                   unbelegt: unbelegt.slice(0, 3) } };
 }
@@ -592,6 +622,9 @@ async function auditPage(browser, url, viewport, ctx) {
   // Repo ausliefert – aber sie verschwinden auch nicht: Der Bericht nennt sie
   // samt Grund (keine CSP-Kopfzeile in dieser Messung).
   const csp = laufzeit.csp || { direktiven: [], quelle: {}, unbelegt: [] };
+  if (laufzeit.fremderUrsprung && laufzeit.fremdHinweis) {
+    warnings.push(laufzeit.fremdHinweis);
+  }
   for (const text of csp.unbelegt || []) {
     warnings.push('CSP ohne Belegquelle (nicht aus dem ausgelieferten HTML, '
       + 'keine CSP-Kopfzeile in der Antwort – Herkunft außerhalb des Repos): '
@@ -680,8 +713,19 @@ async function auditPage(browser, url, viewport, ctx) {
 
 /** Sample: Startseite + 3 neueste Artikel + die statisch schwersten Seiten. */
 function buildSampleUrls(domAudit, basisUrl) {
+  // Alias-Seiten sind KEINE Artikel: Hugo baut für jeden Alias ein
+  // `index.html` mit `<meta http-equiv="refresh">` auf die Ziel-URL. Würde
+  // der Audit sie messen, folgte der Browser der Weiterleitung und die
+  // Live-Seite landete unter der localhost-URL im Bericht (22.11.2026).
+  const istAliasDatei = (datei) => {
+    try { return /http-equiv=["']refresh["']/i.test(fs.readFileSync(datei, 'utf8')); }
+    catch (e) { return true; }
+  };
+  const istAlias = (dir) =>
+    istAliasDatei(path.join(BASE, 'posts', dir, 'index.html'));
   const slugs = fs.readdirSync(path.join(BASE, 'posts'))
     .filter(d => fs.existsSync(path.join(BASE, 'posts', d, 'index.html')))
+    .filter(d => !istAlias(d))
     .sort().slice(-3).reverse();
   const urls = [basisUrl + '/'];
   const seen = new Set(['/']);
@@ -706,6 +750,9 @@ function buildSampleUrls(domAudit, basisUrl) {
   for (const r of risk) {
     const rel = typeof r.rel === 'string' ? r.rel : '';
     if (!PFAD_SICHER.test(rel) || /\.\./.test(rel)) continue;
+    // Auch Risiko-Seiten dürfen keine Alias-Weiterleitung sein.
+    const datei = fileForUrl(rel);
+    if (datei && istAliasDatei(datei)) continue;
     urls.push(`${basisUrl}${rel}`);
   }
   return { urls, slugs, risk: risk.map(r => r.rel) };
