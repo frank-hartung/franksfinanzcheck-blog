@@ -127,8 +127,15 @@ die am Ende des vorigen Absatzes kleben (`[^\s#]#{2,4}`). Markdown rendert sie
 als Fließtext, aber `extend_head.html` splittet das FAQPage-Schema an der
 Zeichenkette `### ` — die Frage stand im JSON-LD und nicht auf der Seite.
 
-Eine zurückgestellte Stelle steht **befristet** in der Sperrklinke
-(bis 31.01.2027), danach entsteht automatisch ein neuer Befund.
+**Stand 23.11.2026: Die Ausnahmeliste ist LEER** — und das ist ein
+Ergebnis, kein Rückzug. `main` hat die einzige zurückgestellte Stelle
+(Gasabschlag) in #1329 (`371835702`) geheilt; `erhebe()` findet im
+Bestand 0 Funde. Eine Ausnahme, die einen nicht mehr existierenden Befund
+schützt, wäre ab dem 31.01.2027 rot geworden, ohne dass jemand etwas
+geändert hat — genau die Zeitbombe, gegen die das Verfallsdatum gedacht
+war. Der **Mechanismus** bleibt geprüft (Selbsttest mit eigener,
+markierter Probe; `BefristungTest` prüft vor/nach Ablauf, die
+Datei-Bindung und dass kein Zustand leckt).
 
 **Belegt.** Selbsttest 22 Proben; 153 Dateien, 0 neue Funde. Code-Blöcke,
 Hashtags, Fragmente und `C#` klagen nicht an.
@@ -209,6 +216,38 @@ Hugo und Netz). Budgets 54/52/28/1100, Limits 60/58/32/1400, Runtime 1350.
 (`.cache/layout/dom-audit.json`, `.cache/design-varianten/…`) und nicht
 aufgepumpt wurden — „reparieren, nicht aufpumpen". Wo die Messung fehlt, ist
 das Ergebnis NICHT GEMESSEN, nicht GRÜN.
+
+---
+
+## C · Die Klassen-Wache: „Eine Abfrage darf nicht schreiben" (neu)
+
+Der `regression`-Job war rot, und die Ursache war kein Testfehler:
+`markdown_struktur_wache.py --json` **schrieb** die Baseline – auf null
+Einträge, weil der Bestand sauber war. Der nächste Test fand `{}`.
+
+**Dieselbe Zeile stand an zwei Stellen** (`markdown_struktur_wache.py` und
+`titel_klinke.py`). Beide einzeln zu heilen hätte den nächsten Kopierer
+nicht aufgehalten. `scripts/lese_wache.py` prüft deshalb die Regel:
+
+| Prüfung | Was sie tut |
+|---|---|
+| statisch | findet Schreibaufrufe in Blöcken ohne Ausnahme für `maschinenformat` (erkennt `not maschinenformat`, die Variable `schreibend`, den `--seed`-Zweig samt Vorlauf) |
+| dynamisch | führt `--json` wirklich aus und vergleicht die Prüfsummen der Daten-Dateien |
+
+**Belegt in beide Richtungen:** Gegen den alten Code meldet sie genau den
+Fehler (1 Befund), gegen die Heilung 0. 10/10 Tests, Selbsttest 5 Proben,
+Bestand 0 Befunde. Eingehängt vor der Uhr-Probe.
+
+**Ein Fehlschluss, den die Wache selbst aufgedeckt hat:** Mein erster Wurf
+sprach `_schreibe_baseline(stand, args.dry_run)` frei, weil `dry_run` in
+der Zeile stand. Das ist falsch — im `--json`-Lauf ist `dry_run` **False**,
+die Anwesenheit des Arguments sagt nichts über das Schreiben. Der Fall
+steht jetzt als Test (`test_dry_run_argument_allein_schuetzt_nicht`).
+
+**Was das kostet, wenn es unbemerkt bleibt:** Wer eine Sperrklinke beim
+Lesen schreibt, kann nicht zweimal messen – die zweite Messung sieht die
+erste. Deshalb ist „Abfrage schreibt nicht" keine Stilfrage, sondern die
+Voraussetzung dafür, dass Messungen etwas bedeuten.
 
 ---
 
@@ -316,6 +355,8 @@ jetzt samt Korrektur im Code, damit sie nicht wiederkommt.
 | E2E-Textanker | 11/11 · Selbsttest 7 Proben · Bestand 0 Befunde |
 | E2E-Textanker ReDoS | 40.000 Wiederholungen in 0,007 s |
 | Trigger-Wache | 105 Workflows · 0 Befund |
+| **Lese-Wache** | **10/10 Tests · Selbsttest 5 Proben · Bestand 0 Befunde** |
+| Markdown-Struktur | 32/32 Tests · Selbsttest 22 Proben |
 | **Lokale Vollsuite** | **6499 Tests · 1 Fehler (Umgebung: `public/index.xml` fehlt ohne Hugo-Build)** |
 | Design-Gate | 11 Gruppen |
 | Layout-Audit | Selbsttest |
