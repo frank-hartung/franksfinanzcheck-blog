@@ -76,13 +76,24 @@ class SSOTVertragTests(unittest.TestCase):
         durchgesetzt.
         """
         import datetime as dt
-        # Ohne Datum: die Form ist sauber, egal wie spät es ist.
-        self.assertEqual([], [f for f in rs.ssot_pruefen(self.ssot)
-                             if "geprueft_am" in f])
-        # Mit Datum: die Frist greift (die Zähne bleiben scharf).
+        import os
+        from unittest import mock
+        # Unter der ECHTEN Uhr: die Frist greift (die Zähne bleiben scharf).
         spaet = dt.date.today() + dt.timedelta(days=rs.MATRIX_HALTBARKEIT_TAGE + 1)
-        self.assertTrue(any("geprueft_am" in f
-                            for f in rs.ssot_pruefen(self.ssot, spaet)))
+        umgebung = {k: v for k, v in os.environ.items() if k != "FFC_FREMD_UHR"}
+        with mock.patch.dict("os.environ", umgebung, clear=True):
+            self.assertTrue(any("geprueft_am" in f
+                                for f in rs.ssot_pruefen(self.ssot, spaet)),
+                            "unter der echten Uhr muss die Frist greifen")
+        # Unter der FREMD-Uhr (Uhr-Probe): kein Fehlalarm. Wer den echten
+        # Bestand unter einer vorgestellten Uhr prüft, würde eine frisch
+        # geprüfte Matrix als „fällig" melden – genau der Fehler, der den
+        # Governance-Selbsttest am 23.11.2026 rot gemacht hat.
+        with mock.patch.dict("os.environ",
+                             {"FFC_FREMD_UHR": "2028-01-01T00:00:00Z"}):
+            self.assertEqual([], [f for f in rs.ssot_pruefen(self.ssot, spaet)
+                                  if "geprueft_am" in f],
+                             "unter der Fremd-Uhr ist die Frist abgemeldet")
 
     def test_zukunftsdatum_ist_ein_tippfehler(self):
         kaputt = dict(self.ssot)

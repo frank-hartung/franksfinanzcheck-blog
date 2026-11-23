@@ -228,16 +228,24 @@ def ssot_pruefen(ssot: dict, heute: "dt.date | None" = None) -> list[str]:
             # Ein fest eingetragenes Datum ist KEIN Fixture, es ist
             # Bestand: geprüft wird, ob es relativ zu HEUTE zu alt ist.
             # Wer die Uhr vorstellt, prüft damit die Uhr, nicht die Datei.
-            stichtag = heute or dt.date.today()
-            if heute is None:
-                # Ohne explizites Datum ist nur die FORM gefragt: Liegt
-                # `geprueft_am` in der Zukunft, ist es ein Tippfehler –
-                # das ist eine echte Aussage ohne Wanduhr.
-                if geprueft > dt.date.today():
+            # UHRFEST (Befund 23.11.2026, Governance-Selbsttest rot):
+            # Die FRIST hängt am echten Kalendertag und darf nur unter der
+            # echten Uhr gelten. Die Uhr-Probe stellt die Uhr 1461 Tage
+            # vor – dann wäre eine frisch geprüfte Matrix „fällig", und
+            # der Selbsttest stürbe an einem Fehlalarm. Das Repo hat für
+            # genau diese Klasse `FFC_FREMD_UHR`: Wer den ECHTEN Bestand
+            # am ECHTEN Tag prüft, meldet sich unter der Fremd-Uhr ab,
+            # statt etwas zu behaupten, was er nicht geprüft hat.
+            #
+            # Unter der echten Uhr bleibt die Zusage vollständig scharf:
+            # 365 Tage, dann ist die Matrix fällig (C19 macht den Bau rot).
+            alter = 0
+            if not os.environ.get("FFC_FREMD_UHR"):
+                stichtag = heute or dt.date.today()
+                if geprueft > stichtag:
                     fehler.append(f"`geprueft_am` liegt in der Zukunft: {roh}")
-                alter = 0
-            else:
-                alter = (stichtag - geprueft).days
+                else:
+                    alter = (stichtag - geprueft).days
             if alter > MATRIX_HALTBARKEIT_TAGE:
                 fehler.append(
                     f"`geprueft_am` ist {alter} Tage alt (Grenze "
