@@ -129,6 +129,96 @@ class KannibalisierungMapTests(unittest.TestCase):
         missing = [s for s in slugs if s not in ids]
         self.assertEqual(missing, [])
 
+    # --- Abdeckungs-Wache (23.11.2026) -------------------------------------
+    # Hintergrund: Vier WLAN-Beiträge gingen live, ohne dass die Map eine Rolle
+    # für sie hatte; der fünfte (Entwurf 09.11.) war ein zweiter Text auf
+    # dieselbe Frage. Die Map war ein Stand-Foto, kein Gate. Diese zwei Tests
+    # machen sie zum Gate – ohne PyYAML-Abhängigkeit (Regex, wie oben).
+
+    @staticmethod
+    def _map():
+        with open(os.path.join(BLOG_DIR, "data", "kannibalisierung_map.yaml"), encoding="utf-8") as fh:
+            text = fh.read()
+        pflicht_ab = re.search(r'^\s*pflicht_ab:\s*"([^"]+)"', text, re.M)
+        cluster, aktuell = {}, None
+        for zeile in text.splitlines():
+            m = re.match(r'\s*- id:\s*"?(K\d+[^"\s]*)"?', zeile)
+            if m:
+                aktuell = m.group(1)
+                cluster.setdefault(aktuell, set())
+                continue
+            m = re.match(r'\s*-\s*slug:\s*"([^"]+)"', zeile)
+            if m and aktuell:
+                cluster[aktuell].add(m.group(1))
+        vollstaendig = []
+        block = text.split("vollstaendige_pillars:", 1)
+        if len(block) == 2:
+            for treffer in re.finditer(r'- pillar:\s*"([^"]+)"\s*\n\s*cluster:\s*\[([^\]]*)\]',
+                                       block[1]):
+                ids = re.findall(r'"([^"]+)"', treffer.group(2))
+                vollstaendig.append((treffer.group(1), ids))
+        ausnahmen = []
+        block2 = text.split("ausnahmen:", 1)
+        if len(block2) == 2:
+            for treffer in re.finditer(r'- pillar:\s*"([^"]+)"\s*\n\s*grund:\s*"([^"]*)"\s*\n\s*pruefung:\s*"([^"]+)"',
+                                       block2[1]):
+                ausnahmen.append({"pillar": treffer.group(1), "grund": treffer.group(2),
+                                  "pruefung": treffer.group(3)})
+        return (pflicht_ab.group(1) if pflicht_ab else None), cluster, vollstaendig, ausnahmen
+
+    @staticmethod
+    def _beitraege():
+        """slug -> {draft, date, pillar} aus dem Frontmatter (ohne PyYAML)."""
+        ergebnis = {}
+        for pfad in glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")):
+            with open(pfad, encoding="utf-8") as fh:
+                kopf = fh.read(4000)
+            if not kopf.startswith("---"):
+                continue
+            def feld(name):
+                m = re.search(r'^%s:\s*"?([^"\n]+)"?\s*$' % name, kopf, re.M)
+                return m.group(1).strip() if m else ""
+            if not feld("draft") or not feld("date"):
+                continue  # Sektionsseiten und Sonderfälle
+            ergebnis[os.path.basename(os.path.dirname(pfad))] = {
+                "draft": feld("draft") == "true",
+                "date": feld("date"),
+                "pillar": feld("pillar"),
+            }
+        return ergebnis
+
+    def test_neue_live_beitraege_haben_rolle(self):
+        pflicht_ab, cluster, _, ausnahmen = self._map()
+        self.assertTrue(pflicht_ab, "abdeckung.pflicht_ab fehlt in data/kannibalisierung_map.yaml")
+        befreit = {a["pillar"] for a in ausnahmen}
+        mapped = set().union(*cluster.values()) if cluster else set()
+        ohne_rolle = sorted(
+            slug for slug, b in self._beitraege().items()
+            if not b["draft"] and b["date"] >= pflicht_ab
+            and b["pillar"] not in befreit and slug not in mapped
+        )
+        self.assertEqual(ohne_rolle, [], f"Live seit {pflicht_ab} ohne Rolle in der Map: {ohne_rolle}")
+
+    def test_ausnahmen_sind_begruendet(self):
+        _, _, _, ausnahmen = self._map()
+        beitraege = self._beitraege()
+        pillar = {b["pillar"] for b in beitraege.values()}
+        for a in ausnahmen:
+            self.assertIn(a["pillar"], pillar, f"Ausnahme nennt unbekannten Pillar: {a['pillar']}")
+            self.assertGreater(len(a["grund"]), 15, f"Ausnahme ohne belastbaren Grund: {a['pillar']}")
+            self.assertRegex(a["pruefung"], r"^\d{4}-\d{2}-\d{2}$",
+                             f"Ausnahme ohne Prüfdatum: {a['pillar']}")
+
+    def test_vollstaendige_pillars_sind_abgedeckt(self):
+        _, cluster, vollstaendig, _ = self._map()
+        self.assertTrue(vollstaendig, "abdeckung.vollstaendige_pillars fehlt in data/kannibalisierung_map.yaml")
+        beitraege = self._beitraege()
+        for pillar, ids in vollstaendig:
+            gemappt = set().union(*(cluster.get(i, set()) for i in ids)) if ids else set()
+            fehlend = sorted(slug for slug, b in beitraege.items()
+                             if b["pillar"] == pillar and not b["draft"] and slug not in gemappt)
+            self.assertEqual(fehlend, [], f"Pillar {pillar} gilt als vollständig kuratiert, aber ohne Rolle: {fehlend}")
+
 
 if __name__ == "__main__":
     unittest.main()

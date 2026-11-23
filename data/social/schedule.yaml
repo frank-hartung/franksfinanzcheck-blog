@@ -380,18 +380,6 @@ items:
   status: blocked
   attempts: 1
   reason: Artikel nicht mehr im Bestand
-- id: mastodon:2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check:nutzen:2026-11-13
-  channel: mastodon
-  slug: 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check
-  angle: nutzen
-  kind: launch
-  pillar: internet-dsl
-  date: '2026-11-13'
-  time: 07:30
-  scheduled_at: '2026-11-13T07:30:00+01:00'
-  status: blocked
-  attempts: 1
-  reason: Artikel nicht mehr im Bestand
 - id: mastodon:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem:nutzen:2026-11-13
   channel: mastodon
   slug: 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem

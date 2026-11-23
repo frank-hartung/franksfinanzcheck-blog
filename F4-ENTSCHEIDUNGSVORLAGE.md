@@ -1268,7 +1268,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 |---|---|---|---|---|
 | `25d6b9a720f981e8e9df` | praezision | **neu** | nicht mehr im Text: 0,4 % | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steige… |
 | `3693b612533c24dcd1ea` | luecke | **neu** | nicht mehr im Text: 12,2 % | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +1… |
-| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 105 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
+| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 107 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
 
 ### `25d6b9a720f981e8e9df`
 
@@ -1292,7 +1292,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 105: 2,8 % – **ohne** Kennzeichnung
+- Heute in Zeile 107: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 

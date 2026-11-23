@@ -1,13 +1,14 @@
 {
-  "erzeugt": "2026-11-23T13:39:18Z",
+  "erzeugt": "2026-11-23T14:52:07Z",
   "stichtag": "2026-11-23",
-  "offen": 259,
-  "seiten": 72,
+  "offen": 256,
+  "seiten": 71,
   "live_seiten": 45,
   "live_befunde": 156,
   "ueberholt": 219,
   "ohne_fassung": 5,
   "seite_fehlt": 0,
+  "entfallen": 3,
   "nicht_entscheidbar": 0,
   "aeltester_tage": 24,
   "frist_tage": 14,
@@ -73,7 +74,6 @@
     "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": 5,
     "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": 5,
     "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif": 5,
-    "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": 3,
     "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten": 4,
     "2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher": 5,
     "2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt": 5,
@@ -1272,39 +1272,6 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check",
-      "id": "6d89862b38c33c827817",
-      "typ": "praezision",
-      "text": "Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 13,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check",
-      "id": "72bbf29e4ef70a71ad06",
-      "typ": "luecke",
-      "text": "Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten der Aufsichtsbehörde dargestellt.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 13,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check",
-      "id": "f0103f4c6a777aaa4845",
-      "typ": "luecke",
-      "text": "Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung und zum Verbraucherschutz bei Minderleistung unerwähnt.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 13,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
       "slug": "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
       "id": "2140cb752c4069ae86a0",
       "typ": "luecke",
@@ -2386,6 +2353,39 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "id": "29eea3c457afaba3d7bd",
+      "typ": "luecke",
+      "text": "Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme.",
+      "beleg": "",
+      "alter_tage": 3,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "id": "8a0df5531569ec042ec4",
+      "typ": "praezision",
+      "text": "Ein freier Standplatz steigert den Empfang um bis zu 40 %.",
+      "beleg": "",
+      "alter_tage": 3,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "id": "bda1b543db068b3e00ff",
+      "typ": "luecke",
+      "text": "Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 3,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
       "id": "91894b9b1535765acdca",
       "typ": "luecke",
@@ -2667,39 +2667,6 @@
       "text": "Keine Quelle für die Aussage, dass viele Banken Neukunden‑Zinsgarantien für drei bis sechs Monate bieten.",
       "beleg": "",
       "alter_tage": 4,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
-      "id": "29eea3c457afaba3d7bd",
-      "typ": "luecke",
-      "text": "Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme.",
-      "beleg": "",
-      "alter_tage": 3,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
-      "id": "8a0df5531569ec042ec4",
-      "typ": "praezision",
-      "text": "Ein freier Standplatz steigert den Empfang um bis zu 40 %.",
-      "beleg": "",
-      "alter_tage": 3,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
-      "id": "bda1b543db068b3e00ff",
-      "typ": "luecke",
-      "text": "Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 3,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
