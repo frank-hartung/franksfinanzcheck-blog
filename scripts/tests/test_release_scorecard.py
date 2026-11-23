@@ -56,10 +56,21 @@ class SSOTVertragTests(unittest.TestCase):
 
         Ein Jahr nach der Prüfung MUSS die Wache anschlagen – sonst wäre
         `geprueft_am` eine Zeile, die niemanden je erreicht.
+
+        UHRFEST: Unter der Fremd-Uhr der Uhr-Probe ist die Frist bewusst
+        abgemeldet (siehe `test_matrix_pruefung_ist_uhrfest`). Dieser Test
+        prüft die Frist und muss sie deshalb unter der ECHTEN Uhr prüfen –
+        sonst wäre er unter der Uhr-Probe rot, obwohl der Code stimmt.
+        Der Vorfall vom 23.11.2026: genau dieser Test fiel im CI, weil er
+        die Abmeldung nicht berücksichtigte.
         """
+        import os
+        from unittest import mock
+        umgebung = {k: v for k, v in os.environ.items() if k != "FFC_FREMD_UHR"}
         frisch = rs.dt.date.fromisoformat(str(self.ssot["geprueft_am"]))
         spaeter = frisch + rs.dt.timedelta(days=rs.MATRIX_HALTBARKEIT_TAGE + 1)
-        fehler = rs.ssot_pruefen(self.ssot, spaeter)
+        with mock.patch.dict("os.environ", umgebung, clear=True):
+            fehler = rs.ssot_pruefen(self.ssot, spaeter)
         self.assertTrue(any("geprueft_am" in f for f in fehler),
                         "nach einem Jahr muss die Matrix fällig sein")
 
@@ -96,9 +107,13 @@ class SSOTVertragTests(unittest.TestCase):
                              "unter der Fremd-Uhr ist die Frist abgemeldet")
 
     def test_zukunftsdatum_ist_ein_tippfehler(self):
+        import os
+        from unittest import mock
+        umgebung = {k: v for k, v in os.environ.items() if k != "FFC_FREMD_UHR"}
         kaputt = dict(self.ssot)
         kaputt["geprueft_am"] = "2099-01-01"
-        self.assertTrue(any("Zukunft" in f for f in rs.ssot_pruefen(kaputt)))
+        with mock.patch.dict("os.environ", umgebung, clear=True):
+            self.assertTrue(any("Zukunft" in f for f in rs.ssot_pruefen(kaputt)))
 
     def test_matrix_ohne_datum_ist_ein_fehler(self):
         ohne = {k: v for k, v in self.ssot.items() if k != "geprueft_am"}
