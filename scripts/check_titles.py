@@ -560,10 +560,22 @@ def main():
     fixed = 0
     for p in posts:
         issues = check_title(p["title"])
-        from editorial_review_gate import automatic_write_protected
-        protected = fix and automatic_write_protected(p["file"])
+        # Grund mitlesen, nicht nur die Entscheidung (23.11.2026): Die
+        # Vorprüfung ist konservativ und meldet auch für einen FEHLENDEN oder
+        # unlesbaren Pfad „geschützt". Darüber „YMYL: Titel bleibt versiegelt"
+        # zu drucken war eine falsche Aussage über einen Rechtszustand – sie
+        # beruhigte, wo nichts geprüft wurde (C33). Die Entscheidung bleibt
+        # unverändert; nur die Begründung ist jetzt wahr.
+        from editorial_review_gate import (automatic_write_protected_grund,
+                                           schutz_meldung)
+        geschuetzt, schutzgrund = automatic_write_protected_grund(p["file"])
+        protected = fix and geschuetzt
         if issues and protected:
-            print(f"YMYL: Titel bleibt versiegelt: {p['file']}")
+            if schutzgrund == "siegel" or schutzgrund.startswith("status:"):
+                print(f"YMYL: Titel bleibt versiegelt: {p['file']}")
+            else:
+                print(f"🛑 Titel nicht prüfbar – {schutz_meldung(schutzgrund)}: "
+                      f"{p['file']}")
         if issues and fix and not protected:
             new_title = fix_title(p["title"])
             if new_title != p["title"]:
