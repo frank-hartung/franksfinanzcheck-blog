@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T14:40:02Z",
-  "modus": "kandidaten",
-  "commit": "15a793c244d30aaedb80e5e3d3dbfc5f8c95b29e",
+  "generated_at": "2026-11-23T15:55:20Z",
+  "modus": "live",
+  "commit": "ae3bdedaf192fa0e67d8d7aa81b5ff9a956299e2",
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
     "projiziert": false,
     "artikel": 145,
-    "faellig": 6,
+    "faellig": 7,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+      "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
       "frist": "2026-11-27",
       "restlaufzeit": 4
     },
@@ -84,6 +84,9 @@
         "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
         "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
         "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
+        "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+        "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
+        "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
         "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
         "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
         "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
@@ -106,7 +109,7 @@
         "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 45
+      "anzahl": 48
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -148,10 +151,10 @@
     }
   ],
   "befundlage": {
-    "offen": 259,
-    "seiten": 72,
-    "live_befunde": 156,
-    "live_seiten": 45,
+    "offen": 262,
+    "seiten": 74,
+    "live_befunde": 162,
+    "live_seiten": 48,
     "ueberholt": 219,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
@@ -183,6 +186,9 @@
       "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
       "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
       "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": 5,
+      "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": 3,
+      "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": 2,
+      "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": 1,
       "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": 5,
       "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": 3,
       "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
@@ -374,7 +380,7 @@
       ]
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-      "sha256": "3386f0362724bb8e9c530687fd896b7670946aad190e439c40d22f4012fde958",
+      "sha256": "2b27e53be8b6a462ca337520adba5eb65b9da6dc202bf01558e25850769c21ed",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -610,7 +616,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b",
+      "sha256": "52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1038,7 +1044,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "T5-lesbarkeit",
@@ -1167,22 +1173,29 @@
       ]
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
-      "sha256": "880f6b14cba41292bf71f297e7abb3d218cf33cad11642ef00342ce5b94aafd2",
-      "urteil": "freigabe-reif",
+      "sha256": "3b3b2ca4f2d6330e875868df5abc1ecec6ce25040907156d64f3c09995db5b1c",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-27",
+      "naechste_pruefung": "2027-01-07",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "3eab428a91b1b16b7df8 (luecke): Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Pufferhöhe die zentrale Rechengröße darstellt.; 7da9383cbc6a45e1a3ac (praezision): Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die Validität der Kalkulationsbasis zu stützen.; da7852bcca29"
+        }
+      ]
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
       "sha256": "3541382f26ce0a2cc0a5afa78360de3291e0691eb3431ffac8343f8325fedcaa",
@@ -1221,43 +1234,57 @@
       "checks": []
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
-      "sha256": "c125077d14e765974ce246fe2a2c8f145c07dc1ed7341ba4acd77852a7a8eb6d",
-      "urteil": "freigabe-reif",
+      "sha256": "3ba30929a4a70a734aa0906c1234ca293a3f2fded5b8eb5e00a84fdb6eea773a",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-27",
+      "naechste_pruefung": "2027-01-07",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "68afba3e6a16a364ce45 (praezision): Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'.; dc5ff05c5dda79d01373 (luecke): Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet."
+        }
+      ]
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
-      "sha256": "454acf736196a11bbedf04df9ad55142f92cef304c259fb0c80d7661fd4c4254",
-      "urteil": "freigabe-reif",
+      "sha256": "87588acd022fb7724e0b108267d1a41469b02a4d0517ae03fbaf462412e4c48c",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-27",
+      "naechste_pruefung": "2027-01-07",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "5c096f87730532352820 (luecke): Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall."
+        }
+      ]
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
-      "sha256": "c2c74ac20e3532166bb00cd48ba06ba90056bf464a8b3e96f86b485e441bfb6b",
+      "sha256": "1a10d28b2299b364768d5e2d0517ff28b970f33fa6c2f56e75d67c4417b66ecf",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1270,7 +1297,7 @@
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-27",
+      "naechste_pruefung": "2027-01-07",
       "siegel_drift": "unverändert",
       "checks": []
     },
@@ -1460,7 +1487,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
@@ -1478,7 +1505,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2125,7 +2152,7 @@
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
-      "sha256": "20f3a1e64a300946302bec935835a771f4090076e144e2fdaf096458380050b5",
+      "sha256": "0d16e4c79d4edfa5c43af9a4af828c5782d65d568ab57e866a6119ba3686f236",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2168,7 +2195,7 @@
       "checks": []
     },
     "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
-      "sha256": "ceba603d27990fb83748353217c6cf3276b7ac0b522ebed2054fd5e17587e2c3",
+      "sha256": "a4ff54353971f6a6086f5ab7404616a476735adb566515135f35641965e36661",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2240,7 +2267,7 @@
       "checks": []
     },
     "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
-      "sha256": "e94a72112e7a202dc76bbae09641f9c8236d01d7b44eca32a11c9991a179b174",
+      "sha256": "a04444cd459619fb74817f9d91134abadc96a0aaca8fb3d44d461f2280e3d1dd",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
