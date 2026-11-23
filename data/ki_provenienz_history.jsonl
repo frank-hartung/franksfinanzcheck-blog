@@ -2,3 +2,4 @@
 {"eingriffe": 1, "eskalationen": 1, "funde": 0, "revision": "178da0b", "schritt": "wache", "ungeklaert": 12, "zeit": "2026-11-19T12:44:25Z"}
 {"art": "llms", "datei": "static/llms.txt", "revision": "87c1ff4", "schritt": "heilen", "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)", "zeit": "2026-11-23T16:32:47Z"}
 {"eingriffe": 1, "eskalationen": 0, "funde": 0, "revision": "48da9e8", "schritt": "wache", "ungeklaert": 0, "zeit": "2026-11-23T16:32:49Z"}
+{"art": "llms", "datei": "static/llms.txt", "revision": "87c1ff46f", "schritt": "heilen", "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)", "zeit": "2026-11-23T16:53:11Z"}

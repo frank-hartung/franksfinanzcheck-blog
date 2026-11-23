@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Ein sonniger Nachmittag, du sitzt am Küchentisch und blickst auf deine Stromrechnung. Die Zahlen springen dir ins Auge, das Abschlagssystem wirkt undurchsichtig und im Herbst kommt die Nachzahlung wie ein unangekündigter Besucher. Du überlegst, ob du die Energie selbst erzeugen könntest, um die monatlichen Belastungen zu reduzieren. Genau hier setzt die Photovoltaik an: Sie verspricht Eigenverbrauch und Unabhängigkeit – aber lohnt sie sich wirklich im Jahr 2026?
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Grundlagen: Was Photovoltaik eigentlich bedeutet  
 
 Photovoltaik wandelt Sonnenlicht in elektrischen Strom um. Die Solarmodule bestehen aus Halbleitern, die bei Lichteinfall Elektronen freisetzen. Der erzeugte Gleichstrom wird über einen Wechselrichter in haushaltsüblichen Wechselstrom umgewandelt.  

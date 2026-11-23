@@ -459,3 +459,6 @@
 {"ts": "2026-11-23T14:37:18Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 11}
 {"ts": "2026-11-23T15:04:18Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-23T15:04:18Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 11}
+{"ts": "2026-11-23T16:55:20Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026", "rules": ["B3", "B8"]}
+{"ts": "2026-11-23T16:55:21Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-23T16:55:21Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 12}
