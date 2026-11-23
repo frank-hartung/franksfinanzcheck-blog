@@ -487,6 +487,134 @@ def _befund_zu_text(beanstandung: str | None,
     return kandidaten[0] if len(kandidaten) == 1 else None
 
 
+def _hash_im_text(block: dict, kandidaten: list[str]) -> str | None:
+    """Welche der Kandidaten-Fassungen nennt der Block selbst?
+
+    Ein Entscheid sagt in seiner Begründung oft selbst, welche Fassung er
+    geprüft hat („Fassung vorher 692d9701, heute cddc3cdf"). Dieser Zeuge
+    ist belastbarer als jede Positionsannahme: Er stammt vom Verfasser.
+    Verglichen wird auf Präfix-Ebene (die Akte kürzt Hashes auf 8–12
+    Zeichen ab).
+    """
+    text = str(block.get("begruendung") or "").lower()
+    if not text:
+        return None
+    for kandidat in kandidaten:
+        for laenge in (12, 10, 8):
+            if kandidat[:laenge].lower() in text:
+                return kandidat
+    return None
+
+
+def _verklebte_bloecke_loesen(
+        segmente: list[tuple[int, list[dict]]],
+) -> list[dict]:
+    """Verklebte Einträge (fehlender `- `-Trenner) wieder lesbar machen.
+
+    Befund vom 23.11.2026: In `data/faktenfrische_entscheidungen.yaml`
+    fehlte bei drei Einträgen der Listen-Trenner. `yaml.compose()` sieht dann
+    EINEN Eintrag mit wiederholten Schlüsseln und zerlegt ihn an jeder
+    Wiederholung:
+
+      [0] Kopf: slug, befund_id, befund_fassung, geprueft_fassung=<A>
+      [1] Fortsetzung mit geprueft_fassung=<B>, Person, Begründung, Datum
+      [2] zweiter Entscheid: Person, Begründung, Kette – aber OHNE Fassung
+
+    Getrennt behandelt ist [0] ein „Fragment" (würde verworfen und <A>
+    verloren) und [2] ein Block ohne Fassung (Kettenprüfung scheitert,
+    der Heiler rollt zurück). In `main` nachgemessen: `'geschrieben':
+    False`, Fassung <A> als „Fragment" verworfen – die Scorecard fiel aus.
+
+    WELCHE FASSUNG GEHÖRT WEM? Nicht per Position (die ist nach dem
+    Verkleben nicht mehr verlässlich), sondern über den TEXTZEUGEN: Der
+    Entscheid, der seine Fassung im Klartext nennt („heute cddc3cdf"),
+    bekommt genau diese. Der andere bekommt die übrige. Gibt es keinen
+    Zeugen, bleibt alles, wie es ist (fail-closed, keine Vermutung).
+
+    Rückgabe: Liste der Zusammenführungen (für den Bericht).
+    """
+    bericht: list[dict] = []
+    for pos, (zeile, segs) in enumerate(segmente):
+        if len(segs) < 2:
+            continue
+        kopfe = [i for i, b in enumerate(segs)
+                 if (b.get("slug") or b.get("befund_id"))
+                 and b.get("geprueft_fassung")
+                 and not str(b.get("entschieden_von") or "").strip()
+                 and not str(b.get("begruendung") or "").strip()]
+        ohne_fassung = [i for i, b in enumerate(segs)
+                        if not b.get("geprueft_fassung")
+                        and str(b.get("entschieden_von") or "").strip()
+                        and str(b.get("begruendung") or "").strip()]
+        if len(kopfe) != 1 or len(ohne_fassung) != 1:
+            continue                     # nichts zu lösen oder mehrdeutig
+        kopf, alt = segs[kopfe[0]], segs[ohne_fassung[0]]
+        kandidaten = [b["geprueft_fassung"] for i, b in enumerate(segs)
+                      if i != kopfe[0] and b.get("geprueft_fassung")]
+        kandidaten.insert(0, kopf["geprueft_fassung"])
+        # Der Zeuge entscheidet: welche Fassung nennt der fassungslose
+        # Entscheid selbst?
+        bezeugt = _hash_im_text(alt, kandidaten)
+        if bezeugt is None:
+            continue                     # kein Zeuge -> nicht raten
+        # Die Fortsetzung ist der Block, der Person/Begründung/KEINE
+        # Vorgängerangabe trägt (der jüngere Entscheid) und eine Fassung hat.
+        # Er muss NICHT eine andere Fassung als der Zeuge haben: Nennen beide
+        # Entscheidungen dieselbe Fassung (möglich, wenn zwischen ihnen nur
+        # die Begründung geschärft wurde), wäre „!= Zeuge" eine falsche Hürde
+        # und der Heiler würde die Heilung stillschweigend verweigern.
+        fortsetzung = next(
+            (b for i, b in enumerate(segs)
+             if i != kopfe[0] and b.get("geprueft_fassung")
+             and not str(b.get("vorgaenger_geprueft_fassung") or "").strip()),
+            None)
+        if fortsetzung is None:
+            continue
+        # Die ÜBRIGE Fassung ist die, die der Zeuge NICHT nennt. Sie gehört
+        # dann dem anderen Entscheid. Nennt der Zeuge die Fassung der
+        # Fortsetzung selbst, bleibt nur die Kopf-Fassung als Gegenstück –
+        # dann prüfte der Zeuge dasselbe wie die Fortsetzung und die
+        # Kopf-Fassung gehört ihm nicht.
+        alle = list(dict.fromkeys(
+            [x["geprueft_fassung"] for x in segs if x.get("geprueft_fassung")]))
+        uebrig_kandidaten = [x for x in alle if x != bezeugt]
+        uebrig = uebrig_kandidaten[0] if uebrig_kandidaten else fortsetzung["geprueft_fassung"]
+        jung = dict(fortsetzung)
+        for feld in ("slug", "befund_ursprung_slug", "befund_id",
+                     "befund_fassung"):
+            if kopf.get(feld):
+                jung[feld] = kopf[feld]
+        jung.setdefault("befund_fassung", "legacy-unbekannt")
+        jung["geprueft_fassung"] = uebrig
+        aelter = dict(alt)
+        for feld in ("slug", "befund_ursprung_slug", "befund_id",
+                     "befund_fassung"):
+            if kopf.get(feld):
+                aelter[feld] = kopf[feld]
+        aelter.setdefault("befund_fassung", "legacy-unbekannt")
+        aelter["geprueft_fassung"] = bezeugt
+        # Reihenfolge: das ältere Datum zuerst, damit die Kette läuft.
+        if str(aelter.get("entschieden_am") or "") <= str(jung.get("entschieden_am") or ""):
+            reihenfolge = [aelter, jung]
+        else:
+            reihenfolge = [jung, aelter]
+        # Der jüngere Entscheid nennt den älteren als Vorgänger, sofern er
+        # keinen eigenen (belegten) hat.
+        for i, b in enumerate(reihenfolge):
+            if i > 0 and not b.get("vorgaenger_geprueft_fassung"):
+                b["vorgaenger_geprueft_fassung"] = reihenfolge[0]["geprueft_fassung"]
+        segmente[pos] = (zeile, reihenfolge)
+        bericht.append({
+            "befund_id": aelter.get("befund_id"),
+            "bezeugt": bezeugt[:12],
+            "uebrig": uebrig[:12],
+            "entschieden_am": aelter.get("entschieden_am"),
+            "grund": "Kopf und Entscheid waren ohne `- ` verklebt – Fassungen "
+                     "über den Textzeugen zugeordnet, chronologisch sortiert",
+        })
+    return bericht
+
+
 def struktur_reparieren(path: Path = ENTSCHEIDUNGEN, *,
                         queue_path: Path = QUEUE,
                         apply: bool = False) -> dict:
@@ -514,6 +642,7 @@ def struktur_reparieren(path: Path = ENTSCHEIDUNGEN, *,
         raise LedgerFehler(f"{path.name} nicht lesbar: {exc}") from exc
     segmente = _entscheidungs_segmente(path)
     index = _befund_index(queue_path)
+    zusammengefuehrt = _verklebte_bloecke_loesen(segmente)
     vorher_bloecke = [dict(block) for _z, segs in segmente for block in segs]
     neu: list[dict] = []
     ergaenzt: list[dict] = []
@@ -584,6 +713,15 @@ def struktur_reparieren(path: Path = ENTSCHEIDUNGEN, *,
                     vorheriger.get("geprueft_fassung")
                 block["folgeentscheidung"] = True
                 block["kette_ergaenzt"] = True
+            # KETTENREGEL (seit #1098): Jeder Eintrag, der seinen Vorgänger
+            # nennt, MUSS `folgeentscheidung: true` tragen – sonst gilt die
+            # Akte als ungültig. Nach dem Auflösen verklebter Blöcke fehlt das
+            # Flag häufig, weil es im Nachbarsegment stand. Gesetzt wird es
+            # nur, wenn der Vorgänger belegt ist (Kette oben) – kein Raten.
+            if (block.get("vorgaenger_geprueft_fassung")
+                    and block.get("folgeentscheidung") is not True):
+                block["folgeentscheidung"] = True
+                block["kette_ergaenzt"] = True
             if nummer > 0:
                 # Reihenfolge der Beweisfelder vereinheitlichen (Kette zuerst).
                 kopf = {k: block.pop(k) for k in
@@ -603,6 +741,7 @@ def struktur_reparieren(path: Path = ENTSCHEIDUNGEN, *,
                "strukturfehler": sum(1 for _, s in segmente if len(s) > 1),
                "getrennt": len(ergaenzt), "ergaenzt": ergaenzt,
                "unzuordenbar": offen, "verworfen": verworfen,
+               "zusammengefuehrt": zusammengefuehrt,
                "geschrieben": False}
     if offen:
         bericht["fehler"] = ("Blöcke ohne eindeutigen Zeugen – nicht "

@@ -116,7 +116,7 @@ gebaut), nennt **Datei, Zeile, Spalte** und heilt auf Wunsch:
 ```bash
 python3 scripts/frontmatter_wache.py            # prüfen (Exit 0/1/2)
 python3 scripts/frontmatter_wache.py --fix      # zitiert die betroffenen Werte
-python3 scripts/frontmatter_wache.py --selftest # Sabotage-Proben (21 Fälle)
+python3 scripts/frontmatter_wache.py --selftest # Sabotage-Proben (28 Fälle)
 ```
 
 `--fix` ändert **nur** das Zitat, nie den Text: Der Wert wird als

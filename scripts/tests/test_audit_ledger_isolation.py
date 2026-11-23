@@ -362,6 +362,220 @@ class WacheGegenNeueLeckstellen(unittest.TestCase):
                 f"beweis_ledger_unangetastet(…)` aus scripts/repo_isolation.py.")
         self.assertEqual([], funde, "\n".join(funde))
 
+    # ------------------------------------------------------------------ #
+    #  SUBPROZESS-LÜCKE (22.11.2026, im PR-Lauf rot geworden)
+    #  Die statische Prüfung oben sieht nur FUNKTIONS-Aufrufe. Ein Test, der
+    #  `subprocess.run([sys.executable, "scripts/click_chain_guard.py", …])`
+    #  schreibt, rief keinen dieser Einstiege auf – und lief unbeanstandet
+    #  durch, während vier Zeilen `module: click_chain_guard` im echten
+    #  Ledger landeten. Der CI-Schritt „Beweis-Ledger muss nach den Tests
+    #  unberührt sein" hat es gefunden, diese Wache nicht.
+    #  Die Lehre: Der Engpass endet nicht an der Prozessgrenze. Wer ein
+    #  Skript startet, das `log_event` aufruft, braucht dieselbe Sandbox.
+    # ------------------------------------------------------------------ #
+
+    @staticmethod
+    def _ledger_schreiber() -> set[str]:
+        """Skripte, die `log_event` selbst aufrufen (nicht nur importieren).
+
+        Erhoben am Quelltext, nicht gepflegt: Ein neues Skript mit
+        Ledger-Schreibzugriff ist automatisch Teil der Prüfung.
+        """
+        treffer = set()
+        for pfad in sorted(SCRIPTS.glob("*.py")):
+            text = pfad.read_text(encoding="utf-8", errors="ignore")
+            if "log_event" not in text:
+                continue
+            try:
+                baum = ast.parse(text)
+            except SyntaxError:
+                continue     # Syntaxfehler meldet die Syntax-Wache, nicht diese
+            for knoten in ast.walk(baum):
+                if not isinstance(knoten, ast.Call):
+                    continue
+                ziel = knoten.func
+                if ((isinstance(ziel, ast.Name) and ziel.id == "log_event")
+                        or (isinstance(ziel, ast.Attribute)
+                            and ziel.attr == "log_event")):
+                    treffer.add(pfad.name)
+                    break
+        return treffer
+
+    @staticmethod
+    def _gestartete_skripte(quelltext: str) -> set[str]:
+        """Skripte, die dieser Test als PROZESS startet – nicht bloß erwähnt.
+
+        Die Unterscheidung ist der ganze Punkt: `test_check_length` liest den
+        Quelltext von `release_scorecard.py`, um ihn statisch zu prüfen – das
+        startet nichts und darf nicht als Leck gelten. Nur ein
+        subprocess-Aufruf (oder os.system) zählt. Deshalb wird der
+        Methodenrumpf nach Aufrufen abgesucht und geprüft, ob darin ein
+        Skriptname vorkommt.
+        """
+        # EIN Muster für Vor- und Hauptprüfung. Die erste Fassung hatte hier
+        # ein engeres Muster als unten – `scripts/x.py` passte nicht, `namen`
+        # blieb leer, und die Funktion brach mit `return set()` ab, BEVOR sie
+        # einen einzigen Aufruf ansah. Ergebnis: eine Wache, die alles
+        # durchwinkt. Die Zähne-Probe hat es aufgedeckt.
+        PFAD = r"""["']((?:[A-Za-z0-9_.\-]+/)*[A-Za-z0-9_\-]+\.py)["']"""
+        namen = {m.rsplit("/", 1)[-1] for m in re.findall(PFAD, quelltext)}
+        if not namen:
+            return set()
+        gestartet = set()
+        try:
+            baum = ast.parse(textwrap.dedent(quelltext))
+        except SyntaxError:
+            return namen          # unparsebar: lieber prüfen als übersehen
+        for knoten in ast.walk(baum):
+            if not isinstance(knoten, ast.Call):
+                continue
+            ziel = knoten.func
+            name = (ziel.attr if isinstance(ziel, ast.Attribute)
+                    else getattr(ziel, "id", ""))
+            if name not in {"run", "call", "check_call", "check_output",
+                            "Popen", "system", "run_script"}:
+                continue
+            # Argumente des Aufrufs als Text – nur dort darf ein Skriptname
+            # stehen. Über ast.unparse statt get_source_segment: Die Quelle
+            # kommt hier dedentet und ohne Originaldatei an, da liefert
+            # get_source_segment nichts (genau daran ist die erste Fassung
+            # gescheitert – die Zähne-Probe hat es gefunden).
+            for arg in list(knoten.args) + [k.value for k in knoten.keywords]:
+                segment = ast.unparse(arg)
+                # Pfad-Anteil erlaubt: "scripts/x.py" – die erste Fassung
+                # verlangte den Dateinamen direkt am String-Anfang und sah
+                # deshalb KEINEN einzigen echten Aufruf. Die Zähne-Probe
+                # (`test_die_subprozess_wache_erkennt_einen_neuen_lecker`)
+                # hat genau das aufgedeckt – ohne sie wäre die Prüfung eine
+                # grüne Attrappe gewesen.
+                for pfad in re.findall(PFAD, segment):
+                    gestartet.add(pfad.rsplit("/", 1)[-1])
+        return gestartet
+
+    @staticmethod
+    def _selbsttest_im_aufruf(quelltext: str) -> bool:
+        """Startet dieser Test das Skript mit `--selftest`?
+
+        Ein Selbsttest MUSS ohne Sandbox auskommen: Er ist der Beweis, dass
+        die Wache eigenständig läuft (`selftest_runner` startet ihn genauso).
+        Die Skripte isolieren sich in diesem Modus selbst – `publication_release`
+        patcht `log_event` in seinem `--selftest`-Zweig, `click_chain_guard`
+        schreibt nur im vollen Lauf. Geprüft wird das nicht geglaubt, sondern
+        in `test_selbsttests_schreiben_nicht_ins_buch` am echten Prozess.
+        """
+        return "--selftest" in quelltext
+
+    _HILFEN_CACHE: dict[str, dict[str, str]] = {}
+
+    @classmethod
+    def _hilfsmethoden(cls, quelltext: str) -> dict[str, str]:
+        """{methodenname: quelltext} aller Funktionen der Datei.
+
+        Nötig, weil Tests den Prozessstart oft in eine Hilfsmethode legen
+        (`self._lauf(...)`). Die erste Fassung dieser Wache sah nur den
+        Testrumpf – und blieb grün, als die Sandbox aus der Hilfsmethode
+        entfernt wurde. Ohne Auflösung ist die Wache eine Attrappe.
+        """
+        # EINMAL pro Datei parsen, dann aus dem Cache: Ohne diesen Griff
+        # parst die Wache dieselbe Datei für jeden ihrer ~6400 Tests neu –
+        # der Lauf lief in den Timeout (900 s), statt in Sekunden.
+        treffer = cls._HILFEN_CACHE.get(quelltext)
+        if treffer is not None:
+            return treffer
+        methoden: dict[str, str] = {}
+        try:
+            baum = ast.parse(quelltext)
+        except SyntaxError:
+            cls._HILFEN_CACHE[quelltext] = methoden
+            return methoden
+        for knoten in ast.walk(baum):
+            if isinstance(knoten, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                ausschnitt = ast.get_source_segment(quelltext, knoten) or ""
+                methoden[knoten.name] = ausschnitt
+        cls._HILFEN_CACHE[quelltext] = methoden
+        return methoden
+
+    def test_jeder_skriptstart_im_test_ist_isoliert(self):
+        """Ein Test, der ein Ledger-schreibendes Skript im VOLLEN Lauf startet,
+        braucht die Sandbox – sonst fabriziert er Beweise (C27)."""
+        schreiber = self._ledger_schreiber()
+        self.assertIn("click_chain_guard.py", schreiber,
+                      "Testaufbau: der bekannte Schreiber fehlt in der Erhebung")
+        funde = []
+        for datei, zeile, name, quelltext, ganz in self._testmethoden():
+            hilfen = self._hilfsmethoden(ganz)
+            # Der Test zählt als betroffen, wenn ER oder eine von ihm
+            # gerufene Hilfsmethode ein Schreiber-Skript startet.
+            geprueft = dict(hilfen)
+            geprueft[name] = quelltext
+            beruehrt = set()
+            for methode, rumpf in geprueft.items():
+                treffer = self._gestartete_skripte(rumpf) & schreiber
+                if not treffer:
+                    continue
+                if methode != name and not re.search(
+                        r"self\.\s*" + re.escape(methode) + r"\s*\(", quelltext):
+                    continue      # Hilfsmethode, die dieser Test nicht ruft
+                beruehrt |= treffer
+            if not beruehrt:
+                continue
+            if self._nutzt_sandbox(quelltext) or self._selbsttest_im_aufruf(quelltext):
+                continue
+            # Sandbox in der gerufenen Hilfsmethode zählt ebenfalls.
+            if self._nutzt_sandbox(ganz) and any(
+                    self._nutzt_sandbox(geprueft.get(m, ""))
+                    for m in geprueft if m != name):
+                continue
+            funde.append(
+                f"{datei}:{zeile} {name}() startet {', '.join(sorted(beruehrt))} "
+                f"als Prozess ohne Sandbox – das Skript schreibt im vollen Lauf "
+                f"eine Zeile ins Beweis-Ledger data/audit/ (C27). Heilung: "
+                f"`with beweis_ledger_unangetastet(…)` um den Aufruf, oder den "
+                f"Selbsttest des Skripts starten (`--selftest`).")
+        self.assertEqual([], funde, "\n".join(funde))
+
+    def test_selbsttests_schreiben_nicht_ins_buch(self):
+        """Der Freibrief `--selftest` wird gemessen, nicht geglaubt.
+
+        Zwei Skripte, die im vollen Lauf ins Ledger schreiben, werden hier
+        als Prozess gestartet – und das echte Verzeichnis davor/danach
+        verglichen. Wäre einer davon im Selbsttest nicht isoliert, fiele es
+        hier auf, statt in einem roten PR-Lauf Wochen später.
+        """
+        vorher = iso.fingerabdruck()
+        for skript in ("publication_release.py", "click_chain_guard.py"):
+            lauf = subprocess.run(
+                [sys.executable, str(SCRIPTS / skript), "--selftest"],
+                capture_output=True, text=True, timeout=600, cwd=str(ROOT))
+            self.assertEqual(0, lauf.returncode,
+                             f"{skript} --selftest rot:\n{(lauf.stdout or '')[-1500:]}")
+        nachher = iso.fingerabdruck()
+        self.assertEqual(vorher, nachher,
+                         f"Ein Selbsttest hat ins Beweis-Ledger geschrieben: "
+                         f"{iso.ledger_abweichung(vorher)}")
+
+    def test_die_subprozess_wache_erkennt_einen_neuen_lecker(self):
+        """Schein-Sicherheits-Probe: Auch diese Prüfung braucht Zähne."""
+        quelle_uniso = textwrap.dedent("""\
+            import subprocess, sys
+            def test_schreibt(self):
+                subprocess.run([sys.executable, "scripts/click_chain_guard.py"])
+            """)
+        quelle_iso = textwrap.dedent("""\
+            import subprocess, sys
+            from repo_isolation import beweis_ledger_unangetastet
+            def test_schreibt(self):
+                with beweis_ledger_unangetastet("probe"):
+                    subprocess.run([sys.executable,
+                                    "scripts/click_chain_guard.py"])
+            """)
+        schreiber = self._ledger_schreiber()
+        self.assertTrue(self._gestartete_skripte(quelle_uniso) & schreiber,
+                        "die Wache erkennt den Lecker nicht")
+        # … und die Sandbox befreit ihn (sonst wäre sie unbenutzbar).
+        self.assertTrue(self._gestartete_skripte(quelle_iso) & schreiber)
+        self.assertTrue(self._nutzt_sandbox(quelle_iso))
+
     def test_die_wache_erkennt_einen_neuen_lecker(self):
         """Schein-Sicherheits-Probe: ohne Zähne ist die Wache ein grünes
         Häkchen."""

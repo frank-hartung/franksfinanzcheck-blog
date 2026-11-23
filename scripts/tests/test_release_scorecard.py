@@ -36,6 +36,89 @@ class SSOTVertragTests(unittest.TestCase):
             self.assertIn(dim, self.ssot["dimensionen"], f"Dimension {dim} fehlt")
             self.assertTrue(self.ssot["dimensionen"][dim].get("titel"))
 
+    # ------------------------------------------------------------------
+    #  Haltbarkeit der Mensch/Maschine-Matrix (jährliche Klärung)
+    # ------------------------------------------------------------------
+    def test_matrix_hat_ein_pruefdatum(self):
+        """Die Zuordnung Mensch/Maschine ist selbst eine Entscheidung –
+        und Entscheidungen veralten. Ohne Datum bleibt eine überholte
+        Zuordnung jahrelang stehen, ohne dass sie jemandem auffällt."""
+        self.assertIn("geprueft_am", self.ssot,
+                      "die Matrix braucht ein Prüfdatum (jährliche Klärung)")
+        rs.dt.date.fromisoformat(str(self.ssot["geprueft_am"]))  # ISO oder Fehler
+
+    def test_matrix_ist_heute_nicht_faellig(self):
+        self.assertEqual([], rs.ssot_pruefen(self.ssot),
+                         "die Matrix ist heute fällig – prüfen und Datum setzen")
+
+    def test_matrix_wird_in_einem_jahr_faellig(self):
+        """Die Zähne: Das Datum darf kein Dekor sein.
+
+        Ein Jahr nach der Prüfung MUSS die Wache anschlagen – sonst wäre
+        `geprueft_am` eine Zeile, die niemanden je erreicht.
+
+        UHRFEST: Unter der Fremd-Uhr der Uhr-Probe ist die Frist bewusst
+        abgemeldet (siehe `test_matrix_pruefung_ist_uhrfest`). Dieser Test
+        prüft die Frist und muss sie deshalb unter der ECHTEN Uhr prüfen –
+        sonst wäre er unter der Uhr-Probe rot, obwohl der Code stimmt.
+        Der Vorfall vom 23.11.2026: genau dieser Test fiel im CI, weil er
+        die Abmeldung nicht berücksichtigte.
+        """
+        import os
+        from unittest import mock
+        umgebung = {k: v for k, v in os.environ.items() if k != "FFC_FREMD_UHR"}
+        frisch = rs.dt.date.fromisoformat(str(self.ssot["geprueft_am"]))
+        spaeter = frisch + rs.dt.timedelta(days=rs.MATRIX_HALTBARKEIT_TAGE + 1)
+        with mock.patch.dict("os.environ", umgebung, clear=True):
+            fehler = rs.ssot_pruefen(self.ssot, spaeter)
+        self.assertTrue(any("geprueft_am" in f for f in fehler),
+                        "nach einem Jahr muss die Matrix fällig sein")
+
+    def test_matrix_pruefung_ist_uhrfest(self):
+        """Die Prüfung darf NICHT von der Wanduhr abhängen.
+
+        Der Vorfall: Mit `dt.date.today()` starb der Governance-Selbsttest
+        an der Uhr-Probe, die die Uhr 1461 Tage vorstellt – die Matrix wäre
+        „fällig" gewesen, und ein fest eingetragenes Bestandsdatum hätte
+        den Selbsttest getötet. Ein Fixture muss relativ zum Testdatum
+        liegen; ein BESTANDSdatum ist kein Fixture. Ohne explizites Datum
+        prüft `ssot_pruefen` nur die Form – dann kann die Uhr es nicht
+        brechen, und die Frist wird im Produktionslauf (C19) weiter
+        durchgesetzt.
+        """
+        import datetime as dt
+        import os
+        from unittest import mock
+        # Unter der ECHTEN Uhr: die Frist greift (die Zähne bleiben scharf).
+        spaet = dt.date.today() + dt.timedelta(days=rs.MATRIX_HALTBARKEIT_TAGE + 1)
+        umgebung = {k: v for k, v in os.environ.items() if k != "FFC_FREMD_UHR"}
+        with mock.patch.dict("os.environ", umgebung, clear=True):
+            self.assertTrue(any("geprueft_am" in f
+                                for f in rs.ssot_pruefen(self.ssot, spaet)),
+                            "unter der echten Uhr muss die Frist greifen")
+        # Unter der FREMD-Uhr (Uhr-Probe): kein Fehlalarm. Wer den echten
+        # Bestand unter einer vorgestellten Uhr prüft, würde eine frisch
+        # geprüfte Matrix als „fällig" melden – genau der Fehler, der den
+        # Governance-Selbsttest am 23.11.2026 rot gemacht hat.
+        with mock.patch.dict("os.environ",
+                             {"FFC_FREMD_UHR": "2028-01-01T00:00:00Z"}):
+            self.assertEqual([], [f for f in rs.ssot_pruefen(self.ssot, spaet)
+                                  if "geprueft_am" in f],
+                             "unter der Fremd-Uhr ist die Frist abgemeldet")
+
+    def test_zukunftsdatum_ist_ein_tippfehler(self):
+        import os
+        from unittest import mock
+        umgebung = {k: v for k, v in os.environ.items() if k != "FFC_FREMD_UHR"}
+        kaputt = dict(self.ssot)
+        kaputt["geprueft_am"] = "2099-01-01"
+        with mock.patch.dict("os.environ", umgebung, clear=True):
+            self.assertTrue(any("Zukunft" in f for f in rs.ssot_pruefen(kaputt)))
+
+    def test_matrix_ohne_datum_ist_ein_fehler(self):
+        ohne = {k: v for k, v in self.ssot.items() if k != "geprueft_am"}
+        self.assertTrue(any("geprueft_am" in f for f in rs.ssot_pruefen(ohne)))
+
     def test_check_ids_eindeutig_und_valide(self):
         gesehen = set()
         for check in self.ssot["checks"]:

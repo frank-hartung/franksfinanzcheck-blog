@@ -1,0 +1,586 @@
+{
+  "stand": "2026-11-23",
+  "hinweis": "Sperrklinke: nur abwärts. Erzeugt von scripts/titel_klinke.py --seed.",
+  "schwellen": {
+    "T1_max_zeichen": 60,
+    "T3_max_zeichen_ohne_doppelpunkt": 45
+  },
+  "artikel": {
+    "content/pillar/frugalismus/index.md": {
+      "titel": "Haushaltsbudget & Frugalismus: Ratgeber für Notgroschen",
+      "schwere": 0
+    },
+    "content/pillar/internet-dsl/index.md": {
+      "titel": "Internet, DSL & Mobilfunk: Ratgeber für schnelles Netz",
+      "schwere": 0
+    },
+    "content/pillar/konto-karten/index.md": {
+      "titel": "Konto & Karten: Ratgeber für gebührenfreie Finanzen",
+      "schwere": 0
+    },
+    "content/pillar/mietwagen/index.md": {
+      "titel": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
+      "schwere": 0
+    },
+    "content/pillar/strom-sparen/index.md": {
+      "titel": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
+      "schwere": 0
+    },
+    "content/pillar/versicherungen/index.md": {
+      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+      "schwere": 0
+    },
+    "content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md": {
+      "titel": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
+      "schwere": 0
+    },
+    "content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md": {
+      "titel": "Sicher heizen: Welche Kosten sind geschützt",
+      "schwere": 0
+    },
+    "content/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.md": {
+      "titel": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
+      "schwere": 0
+    },
+    "content/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/index.md": {
+      "titel": "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen",
+      "schwere": 0
+    },
+    "content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md": {
+      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+      "schwere": 0
+    },
+    "content/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/index.md": {
+      "titel": "Gasrechnung senken: Welche Fehler lassen sich vor",
+      "schwere": 0
+    },
+    "content/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/index.md": {
+      "titel": "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis",
+      "schwere": 0
+    },
+    "content/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/index.md": {
+      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
+      "schwere": 0
+    },
+    "content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md": {
+      "titel": "WLAN verbessern: So bringst du stabilen Speed in jede Ecke",
+      "schwere": 0
+    },
+    "content/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/index.md": {
+      "titel": "Abos und Verträge: Der stille Posten im Haushaltsplan",
+      "schwere": 0
+    },
+    "content/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/index.md": {
+      "titel": "Kostenloses Girokonto: Ein Konto ohne Gebühren finden",
+      "schwere": 0
+    },
+    "content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md": {
+      "titel": "Privathaftpflicht: Warum so wichtig und was sie kostet",
+      "schwere": 0
+    },
+    "content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md": {
+      "titel": "Wohngebäudeversicherung Vergleich: Worauf du achten musst",
+      "schwere": 0
+    },
+    "content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md": {
+      "titel": "DSL-Vergleich: So findest du den günstigsten Internettarif",
+      "schwere": 0
+    },
+    "content/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md": {
+      "titel": "Energiediebe stoppen: So kannst du Stromfresser finden",
+      "schwere": 0
+    },
+    "content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md": {
+      "titel": "DSL-Tarif für dein Zuhause: Das passende Angebot finden",
+      "schwere": 0
+    },
+    "content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md": {
+      "titel": "Haushaltsbuch führen: App, Excel oder Stift im Vergleich",
+      "schwere": 0
+    },
+    "content/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/index.md": {
+      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
+      "schwere": 0
+    },
+    "content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md": {
+      "titel": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
+      "schwere": 0
+    },
+    "content/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/index.md": {
+      "titel": "Preisgarantie Gas: So prüfst du das Schreiben",
+      "schwere": 0
+    },
+    "content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md": {
+      "titel": "DNS-Server wechseln: Datenschutz, Filter und Einrichtung",
+      "schwere": 0
+    },
+    "content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md": {
+      "titel": "Handytarife vergleichen: Welches Angebot passt zu dir?",
+      "schwere": 0
+    },
+    "content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md": {
+      "titel": "Kfz-Versicherung vergleichen: Was ändert sich beim Beitrag?",
+      "schwere": 0
+    },
+    "content/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/index.md": {
+      "titel": "Tagesgeld vergleichen: Was bleibt nach dem Aktionszins?",
+      "schwere": 0
+    },
+    "content/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/index.md": {
+      "titel": "Warmwasser sparen: Was kostet dich eine Dusche?",
+      "schwere": 0
+    },
+    "content/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/index.md": {
+      "titel": "Lastschrift und Dauerauftrag: Was du prüfen solltest",
+      "schwere": 0
+    },
+    "content/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/index.md": {
+      "titel": "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt",
+      "schwere": 0
+    },
+    "content/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/index.md": {
+      "titel": "Störung beim Internetanbieter: So sicherst du deine Rechte",
+      "schwere": 0
+    },
+    "content/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/index.md": {
+      "titel": "September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/index.md": {
+      "titel": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/index.md": {
+      "titel": "DNS-Hack testen: Antwortzeit statt gefühltem Tempo",
+      "schwere": 0
+    },
+    "content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md": {
+      "titel": "Finanzielle Freiheit: Wie du eine Sparroutine aufbaust",
+      "schwere": 0
+    },
+    "content/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/index.md": {
+      "titel": "Umzug mit Internet: Anschluss und Rufnummer mitnehmen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/index.md": {
+      "titel": "Frugalismus für Einsteiger: Mit kleinen Schritten sparen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/index.md": {
+      "titel": "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick",
+      "schwere": 0
+    },
+    "content/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/index.md": {
+      "titel": "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
+      "schwere": 0
+    },
+    "content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md": {
+      "titel": "Notgroschen: Die Wahrheit über das finanzielle Polster",
+      "schwere": 0
+    },
+    "content/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/index.md": {
+      "titel": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/index.md": {
+      "titel": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
+      "schwere": 0
+    },
+    "content/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/index.md": {
+      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+      "schwere": 0
+    },
+    "content/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/index.md": {
+      "titel": "Standby-Verbrauch messen: Was kostet – Stromfresser",
+      "schwere": 0
+    },
+    "content/posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
+      "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/index.md": {
+      "titel": "Finanzieller Puffer: Der Rechenweg in fünf Minuten",
+      "schwere": 0
+    },
+    "content/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/index.md": {
+      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/index.md": {
+      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+      "schwere": 0
+    },
+    "content/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/index.md": {
+      "titel": "Grundversorgung Strom und Gas: Was sie leistet und kostet",
+      "schwere": 0
+    },
+    "content/posts/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen/index.md": {
+      "titel": "Ratenkredit Vergleich 2026: Zinsen, Kosten & Fallen",
+      "schwere": 0
+    },
+    "content/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/index.md": {
+      "titel": "Tierkrankenversicherung für Hund & Katze: Kosten realistisch",
+      "schwere": 0
+    },
+    "content/posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/index.md": {
+      "titel": "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten",
+      "schwere": 0
+    },
+    "content/posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/index.md": {
+      "titel": "Zahnzusatzversicherung 2026: Tarife & Erstattung",
+      "schwere": 0
+    },
+    "content/posts/2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag/index.md": {
+      "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+      "schwere": 0
+    },
+    "content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md": {
+      "titel": "Einlagensicherung: Wie viel Guthaben geschützt ist",
+      "schwere": 0
+    },
+    "content/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
+      "titel": "DSL-Tarif prüfen: Effektivpreis statt Lockpreis",
+      "schwere": 0
+    },
+    "content/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/index.md": {
+      "titel": "DSL Hacks: Was passt zu deiner Wohnung? – Schnelles",
+      "schwere": 0
+    },
+    "content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md": {
+      "titel": "Zählerstand ablesen und melden: Schätzwerte vermeiden",
+      "schwere": 0
+    },
+    "content/posts/2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
+      "titel": "Girocard, Debitkarte oder Maestro: Welche Karte passt?",
+      "schwere": 0
+    },
+    "content/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/index.md": {
+      "titel": "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet",
+      "schwere": 0
+    },
+    "content/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md": {
+      "titel": "Last Minute Urlaub: So findest du echte Reiseschnäppchen",
+      "schwere": 0
+    },
+    "content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md": {
+      "titel": "Gasabschlag berechnen: So prüfst du den monatlichen Betrag",
+      "schwere": 0
+    },
+    "content/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/index.md": {
+      "titel": "Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich",
+      "schwere": 0
+    },
+    "content/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/index.md": {
+      "titel": "Weihnachten Budget planen: Geschenke und Feiertage",
+      "schwere": 0
+    },
+    "content/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/index.md": {
+      "titel": "Büroausstattung steuerlich clever absetzen: So geht's",
+      "schwere": 0
+    },
+    "content/posts/2026-10-05-die-50-30-20-regel-einfach-erklaert/index.md": {
+      "titel": "50-30-20-Regel: Was tun, wenn die Miete kaum Spielraum",
+      "schwere": 0
+    },
+    "content/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/index.md": {
+      "titel": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
+      "schwere": 0
+    },
+    "content/posts/2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
+      "titel": "Google-Regeln für Ratgeber: Erfahrung und Quellen",
+      "schwere": 0
+    },
+    "content/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/index.md": {
+      "titel": "Sieben Gewohnheiten: Für den Umgang mit deinem Geld",
+      "schwere": 0
+    },
+    "content/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/index.md": {
+      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
+      "schwere": 0
+    },
+    "content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md": {
+      "titel": "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet",
+      "schwere": 0
+    },
+    "content/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/index.md": {
+      "titel": "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer",
+      "schwere": 0
+    },
+    "content/posts/2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich/index.md": {
+      "titel": "Notgroschen aufbauen: Wie viel reicht wirklich?",
+      "schwere": 0
+    },
+    "content/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/index.md": {
+      "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
+      "schwere": 0
+    },
+    "content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md": {
+      "titel": "Smart Home: Spart die Automatisierung mehr Strom – Smarte",
+      "schwere": 0
+    },
+    "content/posts/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
+      "titel": "Energiepreise 2026: Strom- und Gasvertrag prüfen",
+      "schwere": 0
+    },
+    "content/posts/2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit/index.md": {
+      "titel": "7 Gewohnheiten für finanzielle Freiheit",
+      "schwere": 0
+    },
+    "content/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/index.md": {
+      "titel": "Balkonkraftwerk Förderung: So holst du dir Geld zurück",
+      "schwere": 0
+    },
+    "content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/index.md": {
+      "titel": "Energiekosten senken: Smarte Helfer für den Haushalt",
+      "schwere": 0
+    },
+    "content/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/index.md": {
+      "titel": "VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?",
+      "schwere": 0
+    },
+    "content/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/index.md": {
+      "titel": "Dein Weg zu geringeren Monatskosten: Schritt für Schritt",
+      "schwere": 0
+    },
+    "content/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/index.md": {
+      "titel": "Energieausweis: Was er für deine Fixkosten bedeutet",
+      "schwere": 0
+    },
+    "content/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/index.md": {
+      "titel": "Haushaltskosten reduzieren: So gewinnst du die Kontrolle",
+      "schwere": 0
+    },
+    "content/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/index.md": {
+      "titel": "Energie sparen: Welche kleinen Änderungen sich im Alltag",
+      "schwere": 0
+    },
+    "content/posts/2026-10-12-stromfresser-im-haushalt-entlarven/index.md": {
+      "titel": "Stromfresser im Haushalt entlarven",
+      "schwere": 0
+    },
+    "content/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/index.md": {
+      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
+      "schwere": 0
+    },
+    "content/posts/2026-10-14-heizperiode-vorbereiten-im-spaetsommer/index.md": {
+      "titel": "Heizperiode vorbereiten im Spätsommer",
+      "schwere": 0
+    },
+    "content/posts/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
+      "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
+      "schwere": 0
+    },
+    "content/posts/2026-10-16-dns-server-aendern-fuer-schnelleres-internet/index.md": {
+      "titel": "DNS-Server wechseln: Wird das Surfen wirklich schneller?",
+      "schwere": 0
+    },
+    "content/posts/2026-10-19-urlaubskasse-clever-aufbessern/index.md": {
+      "titel": "Urlaubskasse clever aufbessern",
+      "schwere": 0
+    },
+    "content/posts/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden/index.md": {
+      "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+      "schwere": 0
+    },
+    "content/posts/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen/index.md": {
+      "titel": "Stromanbieter wechseln: Tarife prüfen und Kosten senken",
+      "schwere": 0
+    },
+    "content/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/index.md": {
+      "titel": "Stromkosten senken: Clevere Haushaltsgeräte im Überblick",
+      "schwere": 0
+    },
+    "content/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/index.md": {
+      "titel": "Bankgebühren senken: 7 Schritte zum günstigeren Konto",
+      "schwere": 0
+    },
+    "content/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/index.md": {
+      "titel": "Energieeffizienz im Haushalt: 5 schnelle Spartricks",
+      "schwere": 0
+    },
+    "content/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/index.md": {
+      "titel": "ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung",
+      "schwere": 0
+    },
+    "content/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/index.md": {
+      "titel": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+      "schwere": 0
+    },
+    "content/posts/2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md": {
+      "titel": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
+      "schwere": 0
+    },
+    "content/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/index.md": {
+      "titel": "Frugalismus mit Familie: Gemeinsam über Ausgaben entscheiden",
+      "schwere": 0
+    },
+    "content/posts/2026-10-28-dsl-und-internet-flat-guenstig-sichern/index.md": {
+      "titel": "Internet-Flats vergleichen: Was kostet der Anschluss",
+      "schwere": 0
+    },
+    "content/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/index.md": {
+      "titel": "Flugvergleich im Winter: So findest du echte Billigflüge",
+      "schwere": 0
+    },
+    "content/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/index.md": {
+      "titel": "Ökostromanbieter wechseln: Tarif, Herkunft und Preis prüfen",
+      "schwere": 0
+    },
+    "content/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/index.md": {
+      "titel": "Gaspreiserhöhung in der Grundversorgung: Wann kannst",
+      "schwere": 0
+    },
+    "content/posts/2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden/index.md": {
+      "titel": "Kostenloses Girokonto ohne Gebühren finden",
+      "schwere": 0
+    },
+    "content/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/index.md": {
+      "titel": "Energieeffiziente Geräte: So sinken deine Fixkosten",
+      "schwere": 0
+    },
+    "content/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/index.md": {
+      "titel": "Flugverspätung: Wann kommt eine Entschädigung infrage?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-02-last-minute-urlaubsangebote-sichern/index.md": {
+      "titel": "Last-Minute Urlaubsangebote sichern",
+      "schwere": 0
+    },
+    "content/posts/2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md": {
+      "titel": "Günstigen Mietwagen für den Urlaub buchen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/index.md": {
+      "titel": "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang",
+      "schwere": 0
+    },
+    "content/posts/2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden/index.md": {
+      "titel": "Günstige Flüge für den Spätsommer finden",
+      "schwere": 0
+    },
+    "content/posts/2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif/index.md": {
+      "titel": "Handytarife vergleichen: Welche Leistungen nutzt",
+      "schwere": 0
+    },
+    "content/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/index.md": {
+      "titel": "WLAN verbessern: Mesh-System oder Repeater im Check?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/index.md": {
+      "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/index.md": {
+      "titel": "Kaffeemaschine: Was kostet eine Tasse wirklich?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/index.md": {
+      "titel": "Router Standort: So findest du einen guten Platz – WLAN",
+      "schwere": 0
+    },
+    "content/posts/2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten/index.md": {
+      "titel": "Kreditkarte ohne Jahresgebühr: Kosten richtig vergleichen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/index.md": {
+      "titel": "Streaming-Bandbreite: Wie viel brauchst du wirklich?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/index.md": {
+      "titel": "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst",
+      "schwere": 0
+    },
+    "content/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/index.md": {
+      "titel": "Geschirrspüler voll beladen: Wasser und Strom sparen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/index.md": {
+      "titel": "Heizölpreise vergleichen: So planst du deine Bestellung",
+      "schwere": 0
+    },
+    "content/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/index.md": {
+      "titel": "Mesh-WLAN nachrüsten: Wann lohnt sich die Investition?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/index.md": {
+      "titel": "Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte",
+      "schwere": 0
+    },
+    "content/posts/2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher/index.md": {
+      "titel": "Tagesgeld und Zinsen: So parkst du dein Geld sicher",
+      "schwere": 0
+    },
+    "content/posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/index.md": {
+      "titel": "Die 50-30-20-Regel bringt Ordnung: Wohin mit dem Gehalt?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten/index.md": {
+      "titel": "E-Auto laden: So senkst du deine Stromkosten",
+      "schwere": 0
+    },
+    "content/posts/2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich/index.md": {
+      "titel": "Stabile Gaskosten: Lohnt sich eine Preisgarantie für dich?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/index.md": {
+      "titel": "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten",
+      "schwere": 0
+    },
+    "content/posts/2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung/index.md": {
+      "titel": "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung",
+      "schwere": 0
+    },
+    "content/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/index.md": {
+      "titel": "Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check/index.md": {
+      "titel": "Standby Kosten senken: Die fiesesten Stromfresser im Check",
+      "schwere": 0
+    },
+    "content/posts/2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026/index.md": {
+      "titel": "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich/index.md": {
+      "titel": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md": {
+      "titel": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich/index.md": {
+      "titel": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober/index.md": {
+      "titel": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen/index.md": {
+      "titel": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten/index.md": {
+      "titel": "Strompreis 2026: Herbst-Check für deine Stromkosten",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim/index.md": {
+      "titel": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste/index.md": {
+      "titel": "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet/index.md": {
+      "titel": "Gebrauchte Möbel: Woran erkennst du gute Qualität?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater/index.md": {
+      "titel": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
+      "schwere": 0
+    }
+  }
+}

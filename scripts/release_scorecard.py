@@ -195,9 +195,63 @@ def ssot_laden(pfad: Path = SSOT_PATH) -> dict:
     return ssot
 
 
-def ssot_pruefen(ssot: dict) -> list[str]:
-    """Strukturprüfung der SSOT – reine Funktion (Selbsttest ST1)."""
+MATRIX_HALTBARKEIT_TAGE = 365
+
+
+def ssot_pruefen(ssot: dict, heute: "dt.date | None" = None) -> list[str]:
+    """Strukturprüfung der SSOT – reine Funktion (Selbsttest ST1).
+
+    `heute` ist injizierbar, damit die Haltbarkeitsprüfung testbar ist, ohne
+    von der Wanduhr abzuhängen (eine Uhr-Abhängigkeit ist die Zeitbombe, die
+    die Uhr-Probe sucht).
+    """
     fehler: list[str] = []
+    # Die Mensch/Maschine-Matrix selbst braucht ein Prüfdatum: Welche
+    # Prüfung ein Mensch entscheidet, ist eine Entscheidung, und
+    # Entscheidungen veralten. Ohne Frist bleibt eine überholte Zuordnung
+    # jahrelang stehen, ohne dass sie jemandem auffällt.
+    roh = ssot.get("geprueft_am")
+    if roh is None:
+        fehler.append("`geprueft_am` fehlt – die Mensch/Maschine-Matrix "
+                      "braucht ein Prüfdatum (jährliche Klärung)")
+    else:
+        try:
+            geprueft = dt.date.fromisoformat(str(roh))
+        except ValueError:
+            fehler.append(f"`geprueft_am` unlesbar: {roh!r} (ISO-Datum erwartet)")
+        else:
+            # UHRFEST (Befund 23.11.2026, Governance-Selbsttest rot):
+            # `dt.date.today()` macht die Prüfung datumsabhängig – die
+            # Uhr-Probe stellt die Uhr 1461 Tage vor, die Matrix wäre
+            # „fällig", und der Selbsttest stürbe an einer echten
+            # Zeitbombe. Fixtures müssen relativ zum Testdatum liegen.
+            # Ein fest eingetragenes Datum ist KEIN Fixture, es ist
+            # Bestand: geprüft wird, ob es relativ zu HEUTE zu alt ist.
+            # Wer die Uhr vorstellt, prüft damit die Uhr, nicht die Datei.
+            # UHRFEST (Befund 23.11.2026, Governance-Selbsttest rot):
+            # Die FRIST hängt am echten Kalendertag und darf nur unter der
+            # echten Uhr gelten. Die Uhr-Probe stellt die Uhr 1461 Tage
+            # vor – dann wäre eine frisch geprüfte Matrix „fällig", und
+            # der Selbsttest stürbe an einem Fehlalarm. Das Repo hat für
+            # genau diese Klasse `FFC_FREMD_UHR`: Wer den ECHTEN Bestand
+            # am ECHTEN Tag prüft, meldet sich unter der Fremd-Uhr ab,
+            # statt etwas zu behaupten, was er nicht geprüft hat.
+            #
+            # Unter der echten Uhr bleibt die Zusage vollständig scharf:
+            # 365 Tage, dann ist die Matrix fällig (C19 macht den Bau rot).
+            alter = 0
+            if not os.environ.get("FFC_FREMD_UHR"):
+                stichtag = heute or dt.date.today()
+                if geprueft > stichtag:
+                    fehler.append(f"`geprueft_am` liegt in der Zukunft: {roh}")
+                else:
+                    alter = (stichtag - geprueft).days
+            if alter > MATRIX_HALTBARKEIT_TAGE:
+                fehler.append(
+                    f"`geprueft_am` ist {alter} Tage alt (Grenze "
+                    f"{MATRIX_HALTBARKEIT_TAGE}) – die Mensch/Maschine-Matrix "
+                    "ist fällig: Prüfen, welche Prüfungen inzwischen "
+                    "automatisierbar sind und welche ein Mensch entscheiden muss.")
     dimensionen = ssot.get("dimensionen") or {}
     for dim in DIMENSIONS_FOLGE:
         if dim not in dimensionen:

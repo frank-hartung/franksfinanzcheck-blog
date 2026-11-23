@@ -56,6 +56,13 @@ on:
       - "scripts/a11y_audit.py"
       - "scripts/tests/test_h1_wache.py"
       - "scripts/tests/test_a11y_audit.py"
+      # E2E-Textanker-Wache (23.11.2026): Sie vergleicht die Anker der Specs
+      # mit `content/**`, `data/**` und `layouts/**`. Ändert sich nur die
+      # Wache selbst, muss der Lauf trotzdem starten – sonst prüft sich eine
+      # geänderte Wache nie gegen den Bestand. Die Inhalts-Pfade und
+      # `e2e/**` stehen oben bereits im Filter.
+      - "scripts/e2e_textanker_wache.py"
+      - "scripts/tests/test_e2e_textanker_wache.py"
       # Snippet-Gate (Screaming-Frog-Spiegel, 27.10.2026): Grenzen (SSOT),
       # Messstelle, Quell-Wache und Tests. Eine Änderung nur an der Zahl
       # muss den Lauf auslösen, sonst altert die Grenze unbemerkt.
@@ -134,6 +141,18 @@ jobs:
         run: |
           python3 scripts/frontmatter_wache.py --selftest
           python3 scripts/frontmatter_wache.py
+
+      # WF-7D4A / #1329 (23.11.2026): Der Playwright-Job war auf JEDEM Branch
+      # rot – auch auf `main`. Ursache war kein Codefehler, sondern eine
+      # Redaktion: #1329 hat eine Passage geglättet („frei gewählte
+      # Modellannahmen" → „freie Modellwerte"), und ein E2E-Test hing am
+      # alten Wortlaut. Acht Minuten Browser-Setup für einen Satz, der nicht
+      # mehr existiert. Diese Wache prüft die Textanker der E2E-Tests gegen
+      # den Artikelbestand – nach fünf Sekunden, nicht nach acht Minuten.
+      - name: E2E-Textanker – Tests gegen den Artikelbestand
+        run: |
+          python3 scripts/e2e_textanker_wache.py --selftest
+          python3 scripts/e2e_textanker_wache.py
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo

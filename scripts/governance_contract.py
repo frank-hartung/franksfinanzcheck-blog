@@ -1499,7 +1499,11 @@ def c19_release_ssot(script_texts, root=BLOG_DIR):
         out.append((f"C19", f"{RELEASE_SSOT} unzulässig: {exc}"))
         ssot = None
     if ssot is not None:
-        fehler = rs.ssot_pruefen(ssot)
+        # Das Prüfdatum der Mensch/Maschine-Matrix wird gegen HEUTE gemessen –
+        # aber nur hier, im Produktionslauf. Der Selbsttest ruft
+        # `ssot_pruefen` ohne Datum und prüft damit die Form (uhrfest, sonst
+        # stirbt er an der vorgestellten Uhr der Uhr-Probe).
+        fehler = rs.ssot_pruefen(ssot, datetime.date.today())
         for f in fehler:
             out.append((f"C19", f"{RELEASE_SSOT}: {f}"))
         # Frage 3–6 brauchen einen Ort mit Antworten, nicht nur Checks.

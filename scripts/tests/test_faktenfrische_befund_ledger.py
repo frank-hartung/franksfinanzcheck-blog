@@ -253,6 +253,70 @@ class LedgerTests(unittest.TestCase):
             geladen[("a", self.entry["id"])]["vorgaenger_geprueft_fassung"],
             hash_a)
 
+    def test_verklebter_block_mit_kopf_wird_ein_entscheid(self):
+        """Befund vom 23.11.2026 (#1329): fehlender `- `-Trenner.
+
+        Der Writer schrieb zwei Entscheidungen aneinander. `yaml.compose()`
+        zerlegt den Eintrag dann in DREI Segmente: Kopf (slug, ID, beide
+        Fassungen), jüngerer Entscheid und den ÄLTEREN Entscheid ohne
+        Fassung. Getrennt behandelt wäre der Kopf ein „Fragment" (verworfen,
+        eine Fassung verloren) und der ältere Entscheid ungültig (keine
+        Fassung) – der Heiler rollte deshalb zurück und `main` war rot.
+
+        Geprüft wird: beide Fassungen überleben, die Kette läuft
+        chronologisch (älterer Entscheid nennt den dokumentierten Vorgänger,
+        jüngerer den älteren), und keine Begründung geht verloren.
+        """
+        a, b, c = (ledger.body_hash(x) for x in ("a", "b", "c"))
+        verklebt = (
+            "entscheidungen:\n"
+            "- slug: a\n"
+            "  befund_id: %s\n"
+            "  befund_fassung: %s\n"
+            "  geprueft_fassung: %s\n"
+            "  geprueft_fassung: %s\n"
+            "  typ: praezision\n"
+            "  beanstandung: Preis ohne Beleg\n"
+            "  entschieden_von: Redaktion\n"
+            "  entschieden_am: '2026-11-23'\n"
+            "  begruendung: Juengere Pruefung am heutigen Volltext des Artikels\n"
+            "  entschieden_von: Redaktion\n"
+            "  entschieden_am: '2026-11-22'\n"
+            "  begruendung: Aeltere Pruefung am damaligen Volltext des Artikels,\n"
+            "    geprueft wurde die Fassung %s; Vorgaenger war %s\n"
+        ) % (self.entry["id"], a, b, c, c, a)
+        self.decisions.write_text(verklebt, encoding="utf-8")
+        with self.assertRaises(ledger.LedgerFehler):
+            ledger.entscheidungen_laden(self.decisions)
+        bericht = ledger.struktur_reparieren(
+            self.decisions, queue_path=self.queue, apply=True)
+        self.assertTrue(bericht["geschrieben"], bericht)
+        self.assertEqual(1, len(bericht["zusammengefuehrt"]), bericht)
+        self.assertTrue(ledger.struktur_pruefen(self.decisions)["ok"])
+        geladen = ledger.entscheidungen_laden(self.decisions)
+        eintraege = geladen[("a", self.entry["id"])]
+        # Zuordnung über den TEXTZEUGEN, nicht über die Position: Der ältere
+        # Entscheid nennt c als seine Prüffassung – also bekommt er c. Der
+        # jüngere (vom 23.11.) behält die übrige Kopf-Fassung b und nennt c
+        # als Vorgänger. Beide Fassungen überleben als eigene Einträge.
+        self.assertEqual(eintraege["geprueft_fassung"], b, eintraege)
+        self.assertEqual(eintraege["vorgaenger_geprueft_fassung"], c, eintraege)
+        self.assertEqual(eintraege["entschieden_am"], "2026-11-23")
+        # Und die ältere, wiederhergestellte Fassung bleibt als eigener
+        # Listeneintrag lesbar (Anfügeprotokoll, nicht überschrieben).
+        roh = self.decisions.read_text(encoding="utf-8")
+        # Zwei eigenständige Listeneinträge (Anfügeprotokoll): der
+        # wiederhergestellte ältere und der jüngere. Gezählt wird der
+        # Listenmarker, nicht ein bestimmtes Feld – die Schlüsselreihenfolge
+        # im ersten Eintrag ist nicht garantiert.
+        import yaml as _yaml
+        self.assertEqual(2, len(_yaml.safe_load(roh)["entscheidungen"]), roh)
+        self.assertIn(a, roh)          # dessen Vorgänger (Kette)
+        self.assertIn(c, roh)          # seine (wiederhergestellte) Fassung
+        # Und die ältere Begründung ist nicht verloren gegangen.
+        self.assertIn("Aeltere Pruefung",
+                      self.decisions.read_text(encoding="utf-8"))
+
     def test_legacy_migration_verliert_keinen_befund(self):
         old = {"erzeugt": "2026-10-27", "laeufe": [{"slug": "a", "befunde": [self.finding]}]}
         entries = ledger.eintraege_aus_queue(old)

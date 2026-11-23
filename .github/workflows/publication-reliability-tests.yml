@@ -231,6 +231,14 @@ jobs:
           # an ihr vorbeiläuft. Der Exit-Code der Suite bleibt unverändert.
           python3 scripts/ci_tests.py --titel "Code-Regression" \
             --log /tmp/suite.log -- python3 -m unittest discover -s scripts/tests -v
+          # LESE-WACHE (23.11.2026): Der regression-Job war rot, weil
+          # `markdown_struktur_wache.py --json` die Baseline auf null
+          # schrieb. BEIDE Klinken hatten dieselbe Zeile. Die Suite fängt
+          # das nur, wenn die Reihenfolge passt – die Wache prüft es
+          # unabhängig davon: Eine Abfrage darf keine Datei verändern
+          # (statisch UND durch einen echten `--json`-Lauf).
+          python3 scripts/lese_wache.py --selftest
+          python3 scripts/lese_wache.py
           python3 scripts/engine_generate.py --selftest
           python3 scripts/reserve_pool.py --selftest
           python3 scripts/cadence_guard.py --selftest

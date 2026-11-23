@@ -287,6 +287,92 @@ def _zitat_ende(folge: list[str], quote: str) -> int | None:
     return None
 
 
+def _flow_doppelte_schluessel(wert: str) -> list[tuple[str, int]]:
+    """Doppelte Schlüssel in einem Flow-Mapping (`{a: 1, a: 2}`).
+
+    23.11.2026, #1313: Der Scanner prüfte Flow-Sammlungen bisher nur auf
+    GESCHLOSSENHEIT. Ein Duplikat darin sah nur der PyYAML-Parser – und
+    ausgerechnet der e2e-Job läuft VOR jedem `pip install`, hat also kein
+    PyYAML. Nachgemessen im echten System-Python (`python3 -S`): Hugo
+    bricht den Bau an `meta: {a: "1", a: "2"}` ab, die Wache meldete
+    nichts. Das ist die Lücke, die still zur Auf-Reifen-Kette führt.
+
+    Bewusst kein `yaml`: Der Scanner läuft ohne jede Abhängigkeit. Er
+    versteht nur die flache Form (Schlüssel auf oberster Ebene des
+    Flow-Mappings), weil tiefer verschachtelte Flow-Mappings im
+    Frontmatter dieses Repos nicht vorkommen – dafür bleibt der Parser
+    zuständig, und `_ist_duplikat` hält beide Meldungen bei einer.
+    """
+    if not wert.startswith("{"):
+        return []
+    # Nur der Inhalt INNERHALB der äußeren Klammern, ohne Quote-Inhalt.
+    tiefe, in_quote, i, ende = 0, "", 0, len(wert)
+    while i < ende:
+        z = wert[i]
+        if in_quote:
+            if z == "\\" and in_quote == '"':
+                i += 2
+                continue
+            if z == in_quote:
+                in_quote = ""
+        elif z in ('"', "'"):
+            in_quote = z
+        elif z == "{":
+            tiefe += 1
+        elif z == "}":
+            tiefe -= 1
+            if tiefe == 0:
+                ende = i
+                break
+        i += 1
+    innen = wert[1:ende]
+
+    # Auf oberster Ebene des Flow-Mappings in Schlüssel: Wert zerlegen.
+    teile: list[str] = []
+    tiefe, in_quote, puffer, i = 0, "", [], 0
+    while i < len(innen):
+        z = innen[i]
+        if in_quote:
+            puffer.append(z)
+            if z == "\\" and in_quote == '"' and i + 1 < len(innen):
+                puffer.append(innen[i + 1])
+                i += 2
+                continue
+            if z == in_quote:
+                in_quote = ""
+        elif z in ('"', "'"):
+            in_quote = z
+            puffer.append(z)
+        elif z in "[{":
+            tiefe += 1
+            puffer.append(z)
+        elif z in "]}":
+            tiefe -= 1
+            puffer.append(z)
+        elif z == "," and tiefe == 0:
+            teile.append("".join(puffer))
+            puffer = []
+        else:
+            puffer.append(z)
+        i += 1
+    if puffer:
+        teile.append("".join(puffer))
+
+    gesehen: dict[str, int] = {}
+    doppelt: list[tuple[str, int]] = []
+    for nummer, teil in enumerate(teile, 1):
+        if ":" not in teil:
+            continue
+        schluessel = teil.split(":", 1)[0].strip().strip("'\"")
+        if not schluessel:
+            continue
+        if schluessel in gesehen:
+            doppelt.append((schluessel, gesehen[schluessel]))
+        else:
+            gesehen[schluessel] = nummer
+    return doppelt
+
+
 def _flow_geschlossen(wert: str, klammer: str) -> bool:
     """Ist eine Flow-Sammlung (`[…]`, `{…}`) in diesem Wert geschlossen?"""
     gegen = {"[": "]", "{": "}"}[klammer]
@@ -512,6 +598,18 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
                     f"Flow-Sammlung in `{key}` ist nicht geschlossen – "
                     f"Hugo meldet „expected ',' or ']'\", wenn die Klammer "
                     f"nirgends zugemacht wird."))
+            else:
+                # #1313 (23.11.2026): Auch Duplikate INNERHALB einer
+                # Flow-Sammlung sind BLOCKER – bisher sah das nur der
+                # Parser, und der fehlt im e2e-Job (kein pip install).
+                for doppelter, erster in _flow_doppelte_schluessel(wert):
+                    befunde.append(Befund(
+                        "F3", BLOCKER, pfad, nr, spalte,
+                        f"Schlüssel `{doppelter}` steht doppelt im "
+                        f"Flow-Mapping von `{key}` (zuerst Position "
+                        f"{erster}). Hugo bricht den Bau daran ab "
+                        f"(mapping key already defined); PyYAML nimmt "
+                        f"still den letzten Wert."))
             continue
         if wert[0] == "*":
             name = re.match(r"\*([^\s,\]\}]+)", wert)

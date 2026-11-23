@@ -9,8 +9,11 @@ Leihgabe; hier liegen die Verträge:
   1. Die Wacht-Liste wird aus alert-on-failure.yml GELESEN, nicht abgetippt
      (Handkopien sind Befund C des Vorfalls), inkl. der YAML-1.1-Falle
      (`on:` wird von safe_load zu True).
-  2. Das Zähl-Urteil ist scharf: ungedeckter ROTER Lauf = sofort Befund,
-     >= 2 verlorene Ereignisse = Befund, Einzelverlust = Hinweis.
+  2. Das Zähl-Urteil misst den SCHADEN, nicht die Grundlast:
+     ungedeckter ROTER Lauf = sofort Befund (ohne Schwelle, auch als
+     Einzelfall), verlorene GRÜNE Läufe = Hinweis bis 5 % Quote. Die alte
+     Regel (">= 2 Verluste = Befund") stand vom 20.–23.11.2026 drei Tage
+     rot bei 2,1 % Verlust und NULL roten Verlusten – sie maß Rauschen.
   3. Der Workflow ist unabhängig vom beobachteten Kanal (cron, nie
      workflow_run) und meldet sich selbst (Issue bei Befund, Schließpfad
      bei Grün) – nach dem Muster der Gate-Eigenmeldung vom 18.09.2026.
@@ -99,12 +102,54 @@ class ZaehlUrteil(unittest.TestCase):
         self.assertEqual(erg["befunde"], [])
         self.assertEqual(len(erg["hinweise"]), 1)
 
-    def test_zwei_verluste_sind_befund(self):
+    def test_zwei_gruene_verluste_bleiben_hinweis(self):
+        """DER FALL VOM 20.–23.11.2026: Grüne Verluste sind kein Alarm.
+
+        Der Herzschlag stand drei Tage rot, weil zwei oder mehr verlorene
+        Ereignisse als Befund galten – unabhängig von ihrer Farbe. Alle acht
+        Verluste waren erfolgreiche Läufe (Newsletter-Lifecycle, Deploy).
+        Ein grüner Lauf hat nichts zu alarmieren; sein Ausbleiben beim
+        Schließpfad ist folgenlos. Ein Melder, der darauf anspringt, wird
+        weggeklickt – und der nächste ECHTE Befund mit ihm.
+        """
         f1 = dt.datetime(2026, 9, 18, 4, 58, tzinfo=dt.timezone.utc)
         f2 = dt.datetime(2026, 9, 18, 6, 0, tzinfo=dt.timezone.utc)
         erg = ah.abgleich([mk("A", "success", f1, "1"), mk("B", "success", f2, "2")],
                           [], JETZT)
-        self.assertTrue(any("2 von 2" in b for b in erg["befunde"]))
+        self.assertEqual(erg["befunde"], [])
+        self.assertTrue(any("GRÜNEN Ereignissen" in h for h in erg["hinweise"]))
+
+    def test_gruene_verlustquote_ueber_schwelle_ist_befund(self):
+        """Rauschen ist Rauschen, bis es strukturell wird.
+
+        Ab 5 % Verlustquote (bei mindestens 20 Ereignissen) ist ein
+        Defekt wahrscheinlicher als ein Flake – dann eskaliert es.
+        """
+        viele = [mk(f"W{i}", "success",
+                    dt.datetime(2026, 9, 18, 4, i % 60, tzinfo=dt.timezone.utc),
+                    str(i)) for i in range(20)]
+        erg = ah.abgleich(viele, [], JETZT)
+        self.assertTrue(any("GRÜNEN Ereignissen" in b for b in erg["befunde"]))
+
+    def test_quote_braucht_mindestmenge(self):
+        """1 von 1 sind 100 % – und genau derselbe Wert entsteht bei einem
+        einzigen Flake. Unter 20 Ereignissen darf die Quote nicht eskalieren.
+        """
+        f = dt.datetime(2026, 9, 18, 4, 58, tzinfo=dt.timezone.utc)
+        erg = ah.abgleich([mk("A", "success", f)], [], JETZT)
+        self.assertEqual(erg["befunde"], [])
+        self.assertTrue(any("Mindestmenge" in h for h in erg["hinweise"]))
+
+    def test_ein_roter_verlust_unter_vielen_gruenen_ist_befund(self):
+        """Die Zähne: Die Schwelle darf einen roten Verlust NICHT verstecken."""
+        viele = [mk(f"W{i}", "success",
+                    dt.datetime(2026, 9, 18, 4, i % 60, tzinfo=dt.timezone.utc),
+                    str(i)) for i in range(400)]
+        viele.append(mk("Gate", "failure",
+                        dt.datetime(2026, 9, 18, 6, 0, tzinfo=dt.timezone.utc),
+                        "rot"))
+        erg = ah.abgleich(viele, [], JETZT)
+        self.assertTrue(any("rote Läufe" in b for b in erg["befunde"]))
 
     def test_zuordnungstoleranz(self):
         f = dt.datetime(2026, 9, 18, 4, 0, tzinfo=dt.timezone.utc)
