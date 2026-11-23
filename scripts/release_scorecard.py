@@ -195,9 +195,39 @@ def ssot_laden(pfad: Path = SSOT_PATH) -> dict:
     return ssot
 
 
-def ssot_pruefen(ssot: dict) -> list[str]:
-    """Strukturprüfung der SSOT – reine Funktion (Selbsttest ST1)."""
+MATRIX_HALTBARKEIT_TAGE = 365
+
+
+def ssot_pruefen(ssot: dict, heute: "dt.date | None" = None) -> list[str]:
+    """Strukturprüfung der SSOT – reine Funktion (Selbsttest ST1).
+
+    `heute` ist injizierbar, damit die Haltbarkeitsprüfung testbar ist, ohne
+    von der Wanduhr abzuhängen (eine Uhr-Abhängigkeit ist die Zeitbombe, die
+    die Uhr-Probe sucht).
+    """
     fehler: list[str] = []
+    # Die Mensch/Maschine-Matrix selbst braucht ein Prüfdatum: Welche
+    # Prüfung ein Mensch entscheidet, ist eine Entscheidung, und
+    # Entscheidungen veralten. Ohne Frist bleibt eine überholte Zuordnung
+    # jahrelang stehen, ohne dass sie jemandem auffällt.
+    roh = ssot.get("geprueft_am")
+    if roh is None:
+        fehler.append("`geprueft_am` fehlt – die Mensch/Maschine-Matrix "
+                      "braucht ein Prüfdatum (jährliche Klärung)")
+    else:
+        try:
+            geprueft = dt.date.fromisoformat(str(roh))
+        except ValueError:
+            fehler.append(f"`geprueft_am` unlesbar: {roh!r} (ISO-Datum erwartet)")
+        else:
+            stichtag = heute or dt.date.today()
+            alter = (stichtag - geprueft).days
+            if alter > MATRIX_HALTBARKEIT_TAGE:
+                fehler.append(
+                    f"`geprueft_am` ist {alter} Tage alt (Grenze "
+                    f"{MATRIX_HALTBARKEIT_TAGE}) – die Mensch/Maschine-Matrix "
+                    "ist fällig: Prüfen, welche Prüfungen inzwischen "
+                    "automatisierbar sind und welche ein Mensch entscheiden muss.")
     dimensionen = ssot.get("dimensionen") or {}
     for dim in DIMENSIONS_FOLGE:
         if dim not in dimensionen:

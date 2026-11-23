@@ -36,6 +36,37 @@ class SSOTVertragTests(unittest.TestCase):
             self.assertIn(dim, self.ssot["dimensionen"], f"Dimension {dim} fehlt")
             self.assertTrue(self.ssot["dimensionen"][dim].get("titel"))
 
+    # ------------------------------------------------------------------
+    #  Haltbarkeit der Mensch/Maschine-Matrix (jährliche Klärung)
+    # ------------------------------------------------------------------
+    def test_matrix_hat_ein_pruefdatum(self):
+        """Die Zuordnung Mensch/Maschine ist selbst eine Entscheidung –
+        und Entscheidungen veralten. Ohne Datum bleibt eine überholte
+        Zuordnung jahrelang stehen, ohne dass sie jemandem auffällt."""
+        self.assertIn("geprueft_am", self.ssot,
+                      "die Matrix braucht ein Prüfdatum (jährliche Klärung)")
+        rs.dt.date.fromisoformat(str(self.ssot["geprueft_am"]))  # ISO oder Fehler
+
+    def test_matrix_ist_heute_nicht_faellig(self):
+        self.assertEqual([], rs.ssot_pruefen(self.ssot),
+                         "die Matrix ist heute fällig – prüfen und Datum setzen")
+
+    def test_matrix_wird_in_einem_jahr_faellig(self):
+        """Die Zähne: Das Datum darf kein Dekor sein.
+
+        Ein Jahr nach der Prüfung MUSS die Wache anschlagen – sonst wäre
+        `geprueft_am` eine Zeile, die niemanden je erreicht.
+        """
+        frisch = rs.dt.date.fromisoformat(str(self.ssot["geprueft_am"]))
+        spaeter = frisch + rs.dt.timedelta(days=rs.MATRIX_HALTBARKEIT_TAGE + 1)
+        fehler = rs.ssot_pruefen(self.ssot, spaeter)
+        self.assertTrue(any("geprueft_am" in f for f in fehler),
+                        "nach einem Jahr muss die Matrix fällig sein")
+
+    def test_matrix_ohne_datum_ist_ein_fehler(self):
+        ohne = {k: v for k, v in self.ssot.items() if k != "geprueft_am"}
+        self.assertTrue(any("geprueft_am" in f for f in rs.ssot_pruefen(ohne)))
+
     def test_check_ids_eindeutig_und_valide(self):
         gesehen = set()
         for check in self.ssot["checks"]:

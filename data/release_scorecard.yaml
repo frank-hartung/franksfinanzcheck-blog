@@ -29,6 +29,12 @@
 # ============================================================
 
 version: 1
+# Prüfdatum der Mensch/Maschine-Matrix. Die Verteilung (welche Prüfung ein
+# Mensch entscheidet, welche die Maschine) ist selbst eine Entscheidung –
+# und Entscheidungen veralten. Ohne Datum merkt niemand, dass eine Prüfung
+# seit zwei Jahren niemanden mehr gesehen hat. `ssot_pruefen` macht daraus
+# einen Fehler, sobald das Datum älter als ein Jahr ist (C19).
+geprueft_am: 2026-11-23
 
 # ------------------------------------------------------------
 #  Die acht Dimensionen der Scorecard (eine Zeile pro Artikel)
