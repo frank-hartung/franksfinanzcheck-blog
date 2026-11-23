@@ -84,6 +84,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "faktenfrische_queue.json"
 ENTSCHEIDUNGEN = ROOT / "data" / "faktenfrische_entscheidungen.yaml"
+ENTFERNT = ROOT / "data" / "faktenfrische_entfernt.yaml"
 DOSSIERS = ROOT / "data" / "research" / "artikel"
 AKTE = ROOT / "BEFUND-AKTE.md"
 
@@ -1490,20 +1491,47 @@ def fassung_status(entry: dict, fassungen: dict, stichtag: dt.date) -> dict:
             "heutige_fassung": aktuell.get("text") or ""}
 
 
+def entfernte_slugs(pfad: Path | None = None) -> set[str]:
+    """Beiträge, die bewusst aus dem Bestand entfernt wurden.
+
+    Ihre Befunde bleiben im Anfügeprotokoll, zählen aber nicht als offene
+    Arbeit: Ohne Text ist kein Befund mehr entscheidbar. Die Liste steht in
+    `data/faktenfrische_entfernt.yaml` (Slug, Datum, Grund, Entscheidung).
+    """
+    pfad = pfad or ENTFERNT
+    try:
+        daten = yaml.safe_load(pfad.read_text(encoding="utf-8")) or {}
+    except (OSError, ValueError):
+        return set()
+    if not isinstance(daten, dict):
+        return set()
+    return {str(e.get("slug")) for e in (daten.get("entfernt") or [])
+            if isinstance(e, dict) and e.get("slug")}
+
+
 def befunde_mit_status(queue_path: Path = QUEUE,
                        decisions_path: Path = ENTSCHEIDUNGEN,
                        fassungen: dict | None = None,
                        stichtag: dt.date | None = None,
-                       aliases: dict[str, str] | None = None) -> list[dict]:
-    """Offene Befunde, angereichert um Fassungsstand, Alter und Entscheidbarkeit."""
+                       aliases: dict[str, str] | None = None,
+                       entfernte_ausblenden: bool = True) -> list[dict]:
+    """Offene Befunde, angereichert um Fassungsstand, Alter und Entscheidbarkeit.
+
+    `entfernte_ausblenden` blendet Befunde bewusst entfernter Beiträge aus
+    (`data/faktenfrische_entfernt.yaml`). Die Akte setzt es auf False, weil sie
+    die Anzahl der entfallenen Befunde ausweisen muss.
+    """
     stichtag = stichtag or dt.date.today()
     if fassungen is None:
         fassungen, geladene_aliases = bestand_identitaeten()
         if aliases is None:
             aliases = geladene_aliases
     fassungen = _normalisiere_fassungen(fassungen)
+    ausblenden = entfernte_slugs() if entfernte_ausblenden else set()
     result = []
     for entry in offene_befunde(queue_path, decisions_path, fassungen, aliases):
+        if entry.get("slug") in ausblenden:
+            continue
         stand = fassung_status(entry, fassungen, stichtag)
         gesehen = _datum(entry.get("zuletzt_gesehen", ""))
         alter = (stichtag - gesehen).days if gesehen else None

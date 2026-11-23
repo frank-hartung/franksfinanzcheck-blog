@@ -1,4 +1,4 @@
-# Kannibalisierungs-Map (Stand 19.10.2026)
+# Kannibalisierungs-Map (Stand 23.11.2026)
 #
 # Zweck: Je Cluster ist festgelegt, welcher Beitrag welche Suchabsicht bedient.
 # Ein Beitrag = eine Rolle. Abgrenzung läuft über Titel, Description und Einleitung.
@@ -14,9 +14,36 @@
 #      und die Titel sich in den ersten 40 Zeichen unterscheiden.
 #
 # Status-Kürzel: umgesetzt | offen (Name nennt den Verantwortlichen)
+#
+# Hinweis zu "titel": Der Eintrag ist ein Stand-Foto (19.10.2026 bzw. Datum der
+# Rollenvergabe) und keine Quelle der Wahrheit. Verbindlich ist der Titel im
+# Frontmatter des Beitrags; R2/R4 werden am gebauten Beitrag geprüft.
 
-stand: "2026-10-19"
+stand: "2026-11-23"
 regeln_quelle: "data/kannibalisierung_map.yaml (dieses Dokument); Entscheidungen: data/entscheidungen.yaml"
+
+# Abdeckung (neu 23.11.2026)
+#  Jeder Live-Beitrag ab pflicht_ab braucht eine Rolle in dieser Map; sonst ist der
+#  Test scripts/tests/test_inhalts_register.py::KannibalisierungMapTests rot.
+#  vollstaendige_pillars: Themenwelten, die vollständig kuratiert sind – dort muss
+#  jeder Live-Beitrag des Pillars in einem der genannten Cluster stehen.
+abdeckung:
+  pflicht_ab: "2026-11-23"
+  vollstaendige_pillars:
+    - pillar: "internet-dsl"
+      cluster: ["K5-dsl-internet", "K6-dns"]
+  # Pillars ohne eigenen Cluster: hier gilt die Rollenpflicht noch nicht.
+  # Jede Ausnahme braucht Grund und Prüfdatum; der Test erzwingt beides.
+  ausnahmen:
+    - pillar: "strom-sparen"
+      grund: "kein Cluster vorhanden (32 Live-Beiträge am 23.11.2026); Kuratierung offen"
+      pruefung: "2026-12-15"
+    - pillar: "mietwagen"
+      grund: "kein Cluster vorhanden (8 Live-Beiträge am 23.11.2026)"
+      pruefung: "2026-12-15"
+    - pillar: "versicherungen"
+      grund: "kein Cluster vorhanden (4 Live-Beiträge am 23.11.2026)"
+      pruefung: "2026-12-15"
 
 cluster:
 
@@ -165,15 +192,65 @@ cluster:
         status_massnahme: "umgesetzt (Titel)"
       - slug: "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke"
         status: "live"
-        rolle: "WLAN-Empfang (Technik, nicht Tarif)"
+        rolle: "WLAN-Technik: Empfang und Sofortmaßnahmen"
         titel: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
         status_massnahme: "primär, keine Änderung"
       - slug: "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich"
         status: "live"
-        rolle: "Gerätewahl: Verstärker oder Mesh"
+        rolle: "WLAN-Technik: Gerätewahl Verstärker oder Mesh"
         titel: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
         status_massnahme: "umgesetzt (Keyword „WLAN verbessern“ entfernt)"
-    entscheidung: "Sechs Tarif-Rollen bleiben getrennt. WLAN bleibt eigene Rolle (Technik). Die Formel-Titel sind entfernt."
+      - slug: "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife"
+        status: "live"
+        rolle: "Mobilfunk: Tarifwahl nach Nutzung (Datenvolumen, Netz, Laufzeit)"
+        titel: "Handytarife vergleichen: Welches Angebot passt zu dir?"
+        status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live)"
+      - slug: "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte"
+        status: "live"
+        rolle: "Störung: Rechte bei Ausfall (Meldung, Frist, Minderung)"
+        titel: "Störung beim Internetanbieter: So sicherst du deine Rechte"
+        status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live)"
+      - slug: "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen"
+        status: "live"
+        rolle: "Umzug: Anschluss und Rufnummer mitnehmen"
+        titel: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
+        status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live)"
+      - slug: "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung"
+        status: "live"
+        rolle: "Mobilfunk: Kündigung, Laufzeitende, Rufnummernmitnahme"
+        titel: "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer"
+        status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live)"
+      - slug: "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle"
+        status: "live"
+        rolle: "Sicherheit im Heimnetz: Nutzen und Kosten eines VPN"
+        titel: "VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?"
+        status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live)"
+      - slug: "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort"
+        status: "live"
+        rolle: "WLAN-Technik: Router-Standort und Abdeckung"
+        titel: "Router Standort: So findest du einen guten Platz – WLAN"
+        status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live); Titel-Fragment „– WLAN“ offen (Befund 23.11.)"
+      - slug: "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
+        status: "live"
+        rolle: "Bandbreitenbedarf: Streaming, Homeoffice, Haushaltsgröße"
+        titel: "Streaming-Bandbreite: Wie viel brauchst du wirklich?"
+        status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live)"
+      - slug: "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
+        status: "live"
+        rolle: "WLAN-Technik: Mesh nachrüsten (Investitionsentscheidung, Kosten)"
+        titel: "Mesh-WLAN nachrüsten: Wann lohnt sich die Investition?"
+        status_massnahme: "neu 23.11.: Rolle ergänzt; abgegrenzt gegen 2026-09-27 (Gerätewahl), Titel differieren in den ersten 40 Zeichen"
+      - slug: "2026-10-28-dsl-und-internet-flat-guenstig-sichern"
+        status: "entwurf"
+        rolle: "Internet-Flat: Kosten pro Monat gegen Effektivpreis"
+        titel: "Internet-Flats vergleichen: Was kostet der Anschluss"
+        status_massnahme: "nicht veröffentlichen (R3): gleiche Suchabsicht wie 2026-08-19 und 2026-09-24; Entscheidung bei Frank Hartung"
+      - slug: "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif"
+        status: "entwurf"
+        rolle: "Mobilfunk: Leistungsumfang statt Preis (Abgrenzung nötig)"
+        titel: "Handytarife vergleichen: Welche Leistungen nutzt"
+        status_massnahme: "nicht veröffentlichen (R3): Kopf-Keyword „Handytarife vergleichen“ gehört 2026-08-26; ohne 301 keine Zusammenführung (R1)"
+    entscheidung: "K5 ist seit 23.11.2026 vollständig kuratiert: 19 Live-Beiträge, jeder mit eigener Rolle. WLAN ist eine eigene Rollenfolge (Empfang 2026-08-14, Router-Standort 2026-11-10, Gerätewahl 2026-09-27, Mesh nachrüsten 2026-11-13); Mobilfunk, Umzug, Störung, VPN und Bandbreite sind Randrollen desselben Clusters. Zwei Entwürfe bleiben ohne Rolle für die Veröffentlichung (R3)."
 
   - id: K6-dns
     primaerkeyword: "DNS-Server wechseln"

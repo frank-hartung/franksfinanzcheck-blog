@@ -112,6 +112,22 @@ der Grenze, an der ein Eingriff den Nutzen rechtfertigt.
 > (Prüf-Budget 19 → 21, Löschung des blockierten WLAN-Doppelentwurfs) sind in
 > `ENTSCHEIDUNG-BETREIBER-2026-11-23.md` gefallen – begründet, gemessen und mit
 > Rücknahmeweg. Die folgende Liste bleibt davon unberührt.
+>
+> **Nachtrag 23.11.2026, 14:00 UTC:** Die WLAN-Kill-Map ist entschieden und
+> umgesetzt – `ENTSCHEIDUNG-WLAN-MAP-2026-11-23.md`. Kurzfassung: Die
+> Kannibalisierungs-Map ist ab heute ein Gate (`scripts/tests/test_inhalts_register.py`),
+> `internet-dsl` ist vollständig kuratiert (19 Live-Beiträge, 0 ohne Rolle), der
+> Entwurf vom 09.11. ist gelöscht, drei Pillars sind befristet ausgenommen
+> (Prüfdatum 15.12.). Offen und dort terminiert: Titel-Regressionen bei vier
+> Live-Beiträgen, 54 Live-Beiträge ohne Rolle.
+
+> **Reparatur 23.11.2026 (Betrieb):** `main` war ab `566cd39` rot. Die Schließakte
+> hatte drei zusammengeklebte Entscheidungen und eine ungültige Kette – mit dem
+> dokumentierten Heiler repariert (0 Strukturfehler, 2 Fragmente verworfen,
+> 1 zuvor unlesbarer Eintrag gerettet). `scripts/frontmatter_wache.py` war
+> syntaktisch kaputt; das hat `#1339` auf `main` vollständig geheilt, diese
+> Änderung übernimmt die Fassung unverändert. Protokoll:
+> `ENTSCHEIDUNG-WLAN-MAP-2026-11-23.md`, Abschnitt 6.
 
 1. **Release-Scorecard 29/90** (Issue #1193): 59 Live-Artikel blockieren an
    `F4-fachbefund` (Faktenalter) – die Wiedervorlagen sind redaktionell, kein

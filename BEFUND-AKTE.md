@@ -2,15 +2,16 @@
 
 _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**259 offene Befunde auf 72 Seiten · davon 45 Live-Seiten mit 156 Befunden · ältester 24 Tage · Frist 14 Tage.**
+**256 offene Befunde auf 71 Seiten · davon 45 Live-Seiten mit 156 Befunden · ältester 24 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 259 |
-| Seiten betroffen | 72 (davon live: 45) |
+| Offene Befunde | 256 |
+| Seiten betroffen | 71 (davon live: 45) |
 | Text seit dem Befund geändert | 219 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
+| Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
 | Über der Frist (14 Tage) | 92 |
 | In Eskalation (21 Tage) | 10 |
 
@@ -32,7 +33,7 @@ _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 224 von 259 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 224 von 256 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -604,6 +605,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6f4b591e9cadb27adf4
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden cf60024b74a5e86b50c0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `29eea3c457afaba3d7bd` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme. | – |
+| `8a0df5531569ec042ec4` | praezision | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein freier Standplatz steigert den Empfang um bis zu 40 %. | – |
+| `bda1b543db068b3e00ff` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 29eea3c457afaba3d7bd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8a0df5531569ec042ec4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden bda1b543db068b3e00ff --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md`
@@ -680,22 +697,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4095501e717fb30d7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77520584b5afd8ebd7f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
-
-Datei: `content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `29eea3c457afaba3d7bd` | luecke | 3 T | Text unverändert seit dem Befund | Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten; das ist eine Modellannahme. | – |
-| `8a0df5531569ec042ec4` | praezision | 3 T | Text unverändert seit dem Befund | Ein freier Standplatz steigert den Empfang um bis zu 40 %. | – |
-| `bda1b543db068b3e00ff` | luecke | 3 T | Text unverändert seit dem Befund | Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss; das ist ein Modellwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 29eea3c457afaba3d7bd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8a0df5531569ec042ec4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden bda1b543db068b3e00ff --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · **LIVE** (blockiert) · Risikoklasse erhoeht · 4 Befund(e)
@@ -968,22 +969,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 49c1a762c2df16c52b7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 56c5b1f92a70c6ebeb0b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c6d20c93f94cee2ae5ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f6a30c4191c47f5cdf0a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `6d89862b38c33c827817` | praezision | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `72bbf29e4ef70a71ad06` | luecke | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten der Aufsichtsbehörde dargestellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `f0103f4c6a777aaa4845` | luecke | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung und zum Verbraucherschutz bei Minderleistung unerwähnt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6d89862b38c33c827817 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 72bbf29e4ef70a71ad06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden f0103f4c6a777aaa4845 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` · nicht im Live-Bestand · 5 Befund(e)
@@ -1276,6 +1261,22 @@ Seite: `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check`
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4232b77745f1559839a5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9c67474aa62927df4ee4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `6d89862b38c33c827817` | praezision | 13 T | Seite nicht lesbar – nicht entscheidbar | Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `72bbf29e4ef70a71ad06` | luecke | 13 T | Seite nicht lesbar – nicht entscheidbar | Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten der Aufsichtsbehörde dargestellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `f0103f4c6a777aaa4845` | luecke | 13 T | Seite nicht lesbar – nicht entscheidbar | Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung und zum Verbraucherschutz bei Minderleistung unerwähnt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6d89862b38c33c827817 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 72bbf29e4ef70a71ad06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f0103f4c6a777aaa4845 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

@@ -37,6 +37,7 @@ import argparse
 import datetime as dt
 import hashlib
 import json
+import yaml
 import sys
 from pathlib import Path
 
@@ -46,6 +47,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import faktenfrische_befund_ledger as ledger  # noqa: E402
 
 AKTE_PATH = ROOT / "BEFUND-AKTE.md"
+ENTFERNT_PATH = ROOT / "data" / "faktenfrische_entfernt.yaml"
 STATE_PATH = ROOT / "data" / "faktenfrische_befunde_state.json"
 QUEUE_PATH = ROOT / "data" / "faktenfrische_queue.json"
 DECISIONS_PATH = ROOT / "data" / "faktenfrische_entscheidungen.yaml"
@@ -96,16 +98,39 @@ def live_seiten() -> dict[str, dict]:
             for slug, a in artikel.items() if isinstance(a, dict)}
 
 
+def entfernte_slugs() -> set[str]:
+    """Slugs, die bewusst aus dem Bestand entfernt wurden (Entscheidung im Repo).
+
+    Ihre Befunde bleiben im Ledger; sie zählen aber nicht als offene Arbeit:
+    Ohne Text ist kein Befund mehr entscheidbar. Ohne diese Liste meldet die
+    Akte einen gelöschten Beitrag dauerhaft als „nicht entscheidbar".
+    """
+    try:
+        daten = yaml.safe_load(ENTFERNT_PATH.read_text(encoding="utf-8")) or {}
+    except (OSError, ValueError):
+        return set()
+    if not isinstance(daten, dict):
+        return set()
+    return {str(e.get("slug")) for e in (daten.get("entfernt") or [])
+            if isinstance(e, dict) and e.get("slug")}
+
+
 def _de_zahl(wert) -> str:
     return "–" if wert is None else str(wert)
 
 
 def zustand_bauen(befunde: list[dict], live: dict[str, dict], *,
                   frist_tage: int, eskalation_tage: int,
-                  stichtag: dt.date) -> dict:
+                  stichtag: dt.date, entfernt: set[str] | None = None) -> dict:
     """Reine Funktion: Befunde + Live-Sicht → Zustand (Siegel der Akte)."""
     def ist_live(b: dict) -> bool:
         return b["slug"] in live
+
+    entfallen = 0
+    if entfernt:
+        vorher = len(befunde)
+        befunde = [b for b in befunde if b["slug"] not in entfernt]
+        entfallen = vorher - len(befunde)
 
     offen = len(befunde)
     live_befunde = [b for b in befunde if ist_live(b)]
@@ -125,6 +150,7 @@ def zustand_bauen(befunde: list[dict], live: dict[str, dict], *,
         "ueberholt": sum(1 for b in befunde if b["fassung_status"] == "ueberholt"),
         "ohne_fassung": sum(1 for b in befunde if b["fassung_status"] == "ohne-fassung"),
         "seite_fehlt": sum(1 for b in befunde if b["fassung_status"] == "seite-fehlt"),
+        "entfallen": entfallen,
         "nicht_entscheidbar": sum(1 for b in befunde if not b.get("entscheidbar")),
         "aeltester_tage": aeltester,
         "frist_tage": frist_tage,
@@ -167,6 +193,9 @@ def akte_bauen(befunde: list[dict], live: dict[str, dict], zustand: dict) -> str
     add(f"| Text seit dem Befund geändert | {zustand['ueberholt']} |")
     add(f"| Altbestand ohne Fassungs-Hash | {zustand['ohne_fassung']} |")
     add(f"| Nicht entscheidbar (Seite fehlt) | {zustand['seite_fehlt']} |")
+    if zustand.get("entfallen"):
+        add(f"| Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) "
+            f"| {zustand['entfallen']} |")
     add(f"| Über der Frist ({zustand['frist_tage']} Tage) | "
         f"{zustand['ueber_frist']} |")
     add(f"| In Eskalation ({zustand['eskalation_tage']} Tage) | "
@@ -324,11 +353,12 @@ def _schreiben(text: str, zustand: dict) -> None:
 def projektion(stichtag: dt.date) -> tuple[str, dict]:
     """Eine gemeinsame, schreibfreie Projektion für Erzeugung und Prüfung."""
     cfg = _config()
-    befunde = ledger.befunde_mit_status(stichtag=stichtag)
+    befunde = ledger.befunde_mit_status(stichtag=stichtag,
+                                   entfernte_ausblenden=False)
     live = live_seiten()
     zustand = zustand_bauen(befunde, live, frist_tage=cfg["frist_tage"],
                             eskalation_tage=cfg["eskalation_tage"],
-                            stichtag=stichtag)
+                            stichtag=stichtag, entfernt=entfernte_slugs())
     zustand["akte"] = str(AKTE_PATH.relative_to(ROOT))
     zustand["regel"] = "scripts/faktenfrische_befund_ledger.py"
     return akte_bauen(befunde, live, zustand), zustand

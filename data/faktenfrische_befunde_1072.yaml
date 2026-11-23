@@ -1,9 +1,6 @@
 stand: '2026-11-23'
 issue: 1072
 lauf: 2026-11-23 11:05 UTC
-stand: '2026-11-22'
-issue: 1072
-lauf: 2026-11-22 14:14 UTC
 runden:
 - stand: '2026-11-05'
   lauf: 2026-11-05 12:43 UTC
@@ -67,24 +64,6 @@ runden:
     Anker und geprueft_fassung sind an die heutige Projektion `betrieb-v4`
     gebunden. Die Sperren gegen die alten Behauptungen bleiben unverändert scharf;
     eine Veröffentlichungsfreigabe ist damit nicht verbunden.
-- stand: '2026-11-23'
-  lauf: 2026-11-23 11:05 UTC
-  umfang: >-
-    Dritte Runde, zwei Befunde (47f855cb4f0fe1e5c65f, 7f66ec82ee1a3f095b0c) am
-    Sparen-im-Herbst-Artikel. Anlass ist eine redaktionelle Praezisierung im
-    selben Artikel (der Satz zum Kfz-Stichtag nennt jetzt ausdruecklich den
-    Zugang beim Versicherer statt nur den Eingang); dadurch wanderte der
-    Aussage-Hash der Projektion betrieb-v4 von 692d9701 ueber fce7841e auf 42d09ef3. Beide
-    Befunde waren bereits behoben und sind gegenueber dem heutigen Text
-    weiterhin gegenstandslos: die unbelegten Kfz-Wechsel-Spannen (150-400 Euro,
-    180-350 Euro) stehen nicht im Artikel, ebenso wenig die Behauptung, der
-    Herbst sei die lukrativste Spar-Saison, oder ein messbarer
-    Jahreszeiten-Vergleich. Die Bindung wurde ueber den dokumentierten
-    Schliessweg nachgezogen (faktenfrische_befund_ledger.py --entscheiden,
-    Folgeentscheidung, jeweils verkettet mit dem unmittelbaren Vorgaenger-Hash), nicht durch
-    Editieren der Entscheidungsdatei. Die verboten_behauptend-Sperren bleiben
-    unveraendert scharf; eine Veroeffentlichungsfreigabe ist damit nicht
-    verbunden.
 - stand: '2026-11-22'
   lauf: 2026-11-22 14:14 UTC
   umfang: >-
@@ -104,6 +83,24 @@ runden:
     offene Konflikt zwischen Register-Vertrag und Fassungsbinde-Invariante aufgelöst,
     ohne die Sperren zu lockern. Keine Veröffentlichungsfreigabe ist damit verbunden.
 
+- stand: '2026-11-23'
+  lauf: 2026-11-23 11:05 UTC
+  umfang: >-
+    Dritte Runde, zwei Befunde (47f855cb4f0fe1e5c65f, 7f66ec82ee1a3f095b0c) am
+    Sparen-im-Herbst-Artikel. Anlass ist eine redaktionelle Praezisierung im
+    selben Artikel (der Satz zum Kfz-Stichtag nennt jetzt ausdruecklich den
+    Zugang beim Versicherer statt nur den Eingang); dadurch wanderte der
+    Aussage-Hash der Projektion betrieb-v4 von 692d9701 ueber fce7841e auf 42d09ef3. Beide
+    Befunde waren bereits behoben und sind gegenueber dem heutigen Text
+    weiterhin gegenstandslos: die unbelegten Kfz-Wechsel-Spannen (150-400 Euro,
+    180-350 Euro) stehen nicht im Artikel, ebenso wenig die Behauptung, der
+    Herbst sei die lukrativste Spar-Saison, oder ein messbarer
+    Jahreszeiten-Vergleich. Die Bindung wurde ueber den dokumentierten
+    Schliessweg nachgezogen (faktenfrische_befund_ledger.py --entscheiden,
+    Folgeentscheidung, jeweils verkettet mit dem unmittelbaren Vorgaenger-Hash), nicht durch
+    Editieren der Entscheidungsdatei. Die verboten_behauptend-Sperren bleiben
+    unveraendert scharf; eine Veroeffentlichungsfreigabe ist damit nicht
+    verbunden.
 recherche:
   methode: Redaktionelle Prüfung jedes Befunds am jeweils dokumentierten Textstand;
   nachpruefung_2026_11_12: Zweite Runde für die Befunde, deren Anker der Umbau vom

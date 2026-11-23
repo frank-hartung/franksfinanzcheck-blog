@@ -47,7 +47,7 @@ faktencheck: 2026-11-20
 
 Teste denselben Anschluss per Kabel und per WLAN. Nur wenn du den Fehler eingrenzt, kannst du entscheiden, ob ein anderer Tarif überhaupt helfen würde.
 
-Die folgenden Schritte zeigen dir, wie du dein **[WLAN verbessern](../../posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/)** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz. Schon kleine Standortwechsel bringen oft überraschend viel.
+Die folgenden Schritte zeigen dir, wie du dein **WLAN verbessern** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz. Schon kleine Standortwechsel bringen oft überraschend viel.
 
 ---
 
