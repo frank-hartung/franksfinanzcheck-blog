@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T10:13:43Z",
+  "generated_at": "2026-11-23T10:49:35Z",
   "modus": "kandidaten",
-  "commit": "35c7f360373aa565f415d497a8ce2320303fe77c",
+  "commit": "8dfe3d997997e68c5f24937f999aa9f5c58ecdeb",
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
@@ -1253,7 +1253,7 @@
       ]
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "9743b62244f17f426d6cf17c686c25b95495f3243c7254d5ee023fd6b8f0299b",
+      "sha256": "2aca2d1896a29d7fc8d3b7d7194f0a646f5be6eafdc56007b104f5e40e630183",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1267,7 +1267,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1913,7 +1913,7 @@
       ]
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
-      "sha256": "669a643e0796e2a80f663f424812d8fcc97d5086b7c9e0a2c927e2b9ddab33fe",
+      "sha256": "a48f80782b35223ba899a74241d2e9b16b45d5d47c55c57d88ddcf861ea3d8cd",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1927,7 +1927,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2313,7 +2313,7 @@
       "checks": []
     },
     "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
-      "sha256": "c9762133cb78db2ce5d8ac59e608718b34f45bc51afa7501f9bd86a5207cd807",
+      "sha256": "ceba603d27990fb83748353217c6cf3276b7ac0b522ebed2054fd5e17587e2c3",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2385,7 +2385,7 @@
       "checks": []
     },
     "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
-      "sha256": "d06100787d1c3d96fdaac4c96dde26eaa0351e3d5c91e37cdc7032800e8c44b6",
+      "sha256": "e94a72112e7a202dc76bbae09641f9c8236d01d7b44eca32a11c9991a179b174",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2399,7 +2399,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     }
   }
