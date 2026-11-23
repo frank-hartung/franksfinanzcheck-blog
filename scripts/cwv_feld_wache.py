@@ -679,6 +679,18 @@ def main(argv: list[str] | None = None) -> int:
         if diagnose:
             print(f"  🧭 {diagnose['klasse']}: {diagnose['text']}", file=sys.stderr)
             print(f"     Nächster Schritt: {diagnose['naechster_schritt']}", file=sys.stderr)
+            # Die Klasse gehört in die ANNOTATION, nicht nur ins Log
+            # (Befund 23.11.2026): Drei Wochen lang meldete der rote Lauf
+            # „Feldmessung nicht durchführbar (Exit 2)" – ohne die Klasse.
+            # Das Log ist flüchtig (Aufbewahrung, Blob-Sperre, Sandbox ohne
+            # Zugriff); die Annotation ist über die Check-Runs-API lesbar.
+            # „KEINE_FELDDATEN" verlangt einen anderen Menschen als
+            # „DROSSELUNG", und beide verlangen ausdrücklich KEIN
+            # Performance-Tuning der Seite – der Satz muss beim Befund stehen.
+            if os.environ.get("GITHUB_ACTIONS"):
+                meldung = (f"Feldmessung: {diagnose['klasse']} – {diagnose['text']} "
+                           f"Nächster Schritt: {diagnose['naechster_schritt']}")
+                print("::error::" + meldung.replace("%", "%25").replace("\n", "%0A"))
         if hinweis:
             print(f"  💡 {hinweis}", file=sys.stderr)
         return 2

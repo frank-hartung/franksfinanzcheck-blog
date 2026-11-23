@@ -12,6 +12,7 @@ Der Vertrag in vier Sätzen (26.10.2026):
 from __future__ import annotations
 
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -163,6 +164,35 @@ class LaufTests(unittest.TestCase):
             code, _, err = self._lauf("--ziel", "/", "--datum", "2026-10-26")
         self.assertEqual(code, 2)
         self.assertIn("Störung", err)
+
+    def test_diagnoseklasse_steht_in_der_annotation(self):
+        """Ein roter Lauf muss sagen, WELCHER Mensch gebraucht wird.
+
+        Befund 23.11.2026: Drei Wochen hintereinander meldete der
+        web-vitals-Lauf „Feldmessung nicht durchführbar (Exit 2)" – ohne
+        die Klasse. Die 🧭-Diagnose stand nur auf stderr, und stderr ist
+        Log: flüchtig, blob-gesperrt, aus der Sandbox nicht lesbar. „NETZ"
+        verlangt einen anderen Menschen als „DROSSELUNG" oder
+        „KEINE_FELDDATEN", und nur eine der drei Klassen ist überhaupt
+        ein Seitenproblem. Die Klasse gehört in die Annotation.
+        """
+        with patch.object(wache, "hole", side_effect=urllib.error.URLError("kein Netz")), \
+             patch.dict("os.environ", {"GITHUB_ACTIONS": "true"}):
+            code, out, _ = self._lauf("--ziel", "/", "--datum", "2026-10-26")
+        self.assertEqual(code, 2)
+        self.assertIn("::error::", out, "ohne ::error:: entsteht keine Annotation")
+        self.assertIn("NETZ", out, "die Klasse muss in der Meldung stehen")
+        self.assertIn("Nächster Schritt", out,
+                      "die Klasse ohne Handlung lässt den Menschen raten")
+
+    def test_ohne_github_keine_annotationszeile(self):
+        """Lokal soll die Ausgabe nicht nach CI aussehen."""
+        umgebung = {k: v for k, v in os.environ.items() if k != "GITHUB_ACTIONS"}
+        with patch.object(wache, "hole", side_effect=urllib.error.URLError("kein Netz")), \
+             patch.dict("os.environ", umgebung, clear=True):
+            code, out, _ = self._lauf("--ziel", "/", "--datum", "2026-10-26")
+        self.assertEqual(code, 2)
+        self.assertNotIn("::error::", out)
 
     def test_der_schluessel_wird_nie_ausgegeben(self):
         with patch.dict("os.environ", {"PSI_API_KEY": "geheim-123"}), \
