@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-22T21:54:51Z",
+  "generated_at": "2026-11-23T02:59:35Z",
   "modus": "kandidaten",
-  "commit": "79d681667b5555a0f0e24aed91ed7e6f1aea5d0a",
+  "commit": "954351143bdc6bfc3f537ca8361d977a05ee9fbc",
   "kapazitaet": {
-    "stichtag": "2026-11-22",
-    "basis": "2026-11-22",
+    "stichtag": "2026-11-23",
+    "basis": "2026-11-23",
     "projiziert": false,
     "artikel": 145,
     "faellig": 6,
@@ -14,7 +14,7 @@
     "naechste_frist": {
       "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
       "frist": "2026-11-27",
-      "restlaufzeit": 5
+      "restlaufzeit": 4
     },
     "budget": 10,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-22",
+      "bis": "2027-03-23",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 10,
     "empfehlung_erreicht": true,
     "hartes_limit": 21,
-    "spitze_geprueft": 55
+    "spitze_geprueft": 54
   },
   "ursachen": [
     {
@@ -191,7 +191,7 @@
     "ueberholt": 253,
     "ohne_fassung": 10,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 23,
+    "aeltester_tage": 24,
     "frist_tage": 14,
     "ueber_frist": 134,
     "je_slug": {
@@ -2312,6 +2312,24 @@
       "siegel_drift": "unverändert",
       "checks": []
     },
+    "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
+      "sha256": "beed8bfeb6aa8cd49d16c7d76c91df3261deac7608654f0c70c301b391cf3a86",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-24",
+      "siegel_drift": "neu versiegelt",
+      "checks": []
+    },
     "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
       "sha256": "3aed2fa1264a153736d4ac473540f533354add8b6cce765e6fc5e8fec0703de4",
       "urteil": "freigabe-reif",
@@ -2364,6 +2382,24 @@
       },
       "naechste_pruefung": "2026-12-09",
       "siegel_drift": "unverändert",
+      "checks": []
+    },
+    "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
+      "sha256": "d06100787d1c3d96fdaac4c96dde26eaa0351e3d5c91e37cdc7032800e8c44b6",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-24",
+      "siegel_drift": "neu versiegelt",
       "checks": []
     }
   }
