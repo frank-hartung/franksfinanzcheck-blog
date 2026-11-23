@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
+title: "DSL Hacks: Was brauchst du wirklich?"
 description: "DSL Hacks: Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder…"
 date: 2026-09-28T01:05:48Z
 draft: false
@@ -54,7 +54,7 @@ Dieser Artikel hilft dir, die richtige Entscheidung für deine Wohnung oder dein
 💡 **Schnell‑Tipp von FranksFinanzcheck:** Bevor du Geld in Zusatztechnik steckst, prüfe, was dein Anschluss überhaupt liefert. Viele Haushalte zahlen für Tempo, das sie nie bekommen – ein Wechsel wirkt oft Wunder: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Das Wichtigste in Kürze
+## Das Wichtigste in Kürze – DSL Hacks
 
 - Ein **WLAN‑Verstärker (Repeater)** ist die günstige Lösung für **ein einzelnes** Funkloch.
 - **Mesh‑WLAN** ist die Komfortlösung für **mehrere Räume, Etagen oder viele Geräte**.
