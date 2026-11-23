@@ -24,6 +24,12 @@ in **drei** Schichten:
 
 **Belegt.**
 
+- **Der strict loader trennt die Fälle messbar.** Direkt am Objekt geprüft:
+  `a: 1\na: 2` wirft mit `_strenger_loader` einen `ConstructorError` **mit
+  Zeile 2, Spalte 1** — und `m: {k: 1, k: 2}` (Flow-Mapping, der Hugo-Fall)
+  ebenfalls, mit Zeile 1, Spalte 11. Gegenprobe mit `yaml.safe_load`:
+  `{'a': 2}` — **lautlos, letzter Wert gewinnt.** Das ist genau die Lücke
+  aus #1313, und sie ist zu.
 - 48/48 eigene Tests **und** 45/45 gegen die `main`-Testdatei (beide Richtungen).
 - `--selftest`: 28 Proben.
 - Vollscan: 175 Dateien, **0 Blocker**, 0 Hinweise.
@@ -213,6 +219,22 @@ Rechner-Ausgaben) sind frei, Markdown-Auszeichnung wird ignoriert.
 7 Proben (anschlagen UND still bleiben). Eingehängt vor dem Browser-Setup —
 ein fehlender Satz fällt nach fünf Sekunden auf, nicht nach acht Minuten.
 
+**Erster Wurf war nicht highend — und die Gates haben es gefangen.** Beides
+war mein Fehler, nicht geerbt:
+
+1. **CodeQL `py/redos`.** Der erste Regex war
+   `(["'])(?:(?!\1).)*\1` — Backreference in einer Wiederholung, die
+   klassische Exponentialfalle. Auf einer Zeile aus 40.000 Backslashes wäre
+   die Wache im CI in die Knie gegangen; ein Prüfer, der den Job aufhängt,
+   ist schlimmer als keiner. Ersetzt durch einen linearen Durchlauf
+   (`_anker_in_zeile`): **40.000 Wiederholungen in 0,007 s**, als Test
+   festgehalten (4 neue Tests, 11/11 grün).
+2. **Trigger-Wache.** Mein neuer CI-Schritt rief ein Skript auf, das im
+   `paths`-Filter von `e2e.yml` fehlte — der Lauf wäre bei einer Änderung
+   nur an der Wache **nicht** gestartet, hätte sie sich also nie gegen den
+   Bestand geprüft. Pfad ergänzt: 105 Workflows, **0 Befunde** (vorher 1);
+   `test_trigger_wache` 23/23.
+
 ### B · Ledger-Heiler (verklebte Entscheidungen)
 
 `_verklebte_bloecke_loesen()` setzt die Teile wieder zusammen, die ein
@@ -239,7 +261,10 @@ jetzt samt Korrektur im Code, damit sie nicht wiederkommt.
 | Release-Scorecard | 58/58 |
 | Fachbefund-Ledger | 21/21 |
 | Befund-Akte | 11/11 |
-| E2E-Textanker | 7/7 · Bestand 0 Befunde |
+| E2E-Textanker | 11/11 · Selbsttest 7 Proben · Bestand 0 Befunde |
+| E2E-Textanker ReDoS | 40.000 Wiederholungen in 0,007 s |
+| Trigger-Wache | 105 Workflows · 0 Befund |
+| **Lokale Vollsuite** | **6499 Tests · 1 Fehler (Umgebung: `public/index.xml` fehlt ohne Hugo-Build)** |
 | Design-Gate | 11 Gruppen |
 | Layout-Audit | Selbsttest |
 | Markdown-Struktur | 22 Proben |
@@ -249,7 +274,11 @@ jetzt samt Korrektur im Code, damit sie nicht wiederkommt.
 | Workflow-Aufruf-Vertrag | 837 Aufrufe · 0 Verstoß |
 | Wachen-Vertrag | 413 Skripte · 0 Fund |
 
-**Geerbtes Rot, das bleibt** (auf `main` identisch, nicht von diesem PR):
-`test_pr1205_heizoel_folgeentscheidungen_sind_belegt_wiederhergestellt` —
-ein eigener Doppelschlüssel in einer Test-Fixture; `test_feed_traegt_den_kanal_…`
-— braucht einen Hugo-Build.
+**Rot, das bleibt — und warum es kein Befund ist:**
+
+- `test_feed_traegt_den_kanal_auf_beiden_ebenen` — braucht
+  `public/index.xml`, das nur ein Hugo-Build erzeugt. In dieser Umgebung
+  gibt es kein Hugo; auf `main` identisch. **Einziger Fehler der
+  Vollsuite** (6499 Tests, 1328 s).
+- Der zuvor genannte `test_pr1205_heizoel_…` steht **nicht** mehr in der
+  Liste — er ist mit dem Ledger-Stand dieser Branch grün geworden.
