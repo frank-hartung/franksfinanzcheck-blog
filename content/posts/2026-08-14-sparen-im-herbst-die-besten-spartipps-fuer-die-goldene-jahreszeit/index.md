@@ -64,6 +64,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 ### 1. Den eigenen Kfz-Stichtag ermitteln
 
+Bei einem Vertragsende am 31. Dezember und einem Monat Kündigungsfrist muss die ordentliche Kündigung bis zum 30. November beim Versicherer vorliegen. Maßgeblich ist der Zugang, nicht der Tag des Absendens.
 Läuft dein Kfz-Vertrag zum 31. Dezember aus und gilt eine Kündigungsfrist von einem Monat, muss dein Schreiben spätestens am 30. November zugehen. Endet der Vertrag zu einem anderen Datum, verschiebt sich auch der Termin.
 
 Bei einem unterjährigen Vertrag ist dein persönlicher Ablauftermin maßgeblich. Ein Wechsel kann sich deshalb lohnen – wie viel du sparst, zeigt nur der Vergleich deiner eigenen Police bei gleicher Leistung.

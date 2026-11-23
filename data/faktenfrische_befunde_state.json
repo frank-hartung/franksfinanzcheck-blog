@@ -1,4 +1,10 @@
 {
+  "erzeugt": "2026-11-23T11:32:23Z",
+  "stichtag": "2026-11-23",
+  "offen": 304,
+  "seiten": 83,
+  "live_seiten": 56,
+  "live_befunde": 201,
   "erzeugt": "2026-11-23T01:59:47Z",
   "stichtag": "2026-11-23",
   "offen": 301,
@@ -12,6 +18,8 @@
   "aeltester_tage": 24,
   "frist_tage": 14,
   "eskalation_tage": 21,
+  "ueber_frist": 137,
+  "in_eskalation": 34,
   "ueber_frist": 134,
   "in_eskalation": 31,
   "je_seite": {
@@ -2887,6 +2895,39 @@
       "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
       "alter_tage": 2,
       "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "id": "6b0aa3429d97e8c74ed8",
+      "typ": "luecke",
+      "text": "Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 24,
+      "fassung_status": "ohne-fassung",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "id": "84c991c5d152b14a2675",
+      "typ": "luecke",
+      "text": "Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 24,
+      "fassung_status": "ohne-fassung",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "id": "a70e7adc97c58317ccc1",
+      "typ": "luecke",
+      "text": "Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 24,
+      "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
     },

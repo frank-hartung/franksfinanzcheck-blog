@@ -211,6 +211,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
+- Datei-SHA256 (heute): `8d5e010d305d44fef4bffc5483333f56243d779e23791c20096994fa243c041a`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -310,6 +311,51 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 > Die Verbrauchszahl ist als Annahme gekennzeichnet: „Bei angenommenen 18.000 kWh im Jahr ergibt ein Cent Unterschied je kWh rechnerisch 180 € im Jahr.“ Der Artikel behauptet keinen typischen Haushaltsverbrauch mehr; die Zahl ist Rechenannahme im Beispiel.
 
 - Heute in Zeile 42: 18.000 kWh – **ohne** Kennzeichnung
+
+## `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`
+
+- Datei-SHA256 (heute): `a9284504078a578d436399f84ac4a745c5b810aecca7a7075084fadfa5b10699`
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `6b0aa3429d97e8c74ed8` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 14,9 % · 8 % in Zeile 52 gekennzeichnet · 12 % in Zeile 9 gekennzeichnet | Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bere… |
+| `84c991c5d152b14a2675` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 1.300 € · 500 € in Zeile 108 ohne Kennzeichnung | Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung al… |
+| `a70e7adc97c58317ccc1` | luecke | 2026-11-05 · 1. Entscheidung | 50 € in Zeile 76 gekennzeichnet · 80 € in Zeile 76 gekennzeichnet | Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quell… |
+
+### `6b0aa3429d97e8c74ed8`
+
+**Befund:** Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: die Belegung '8-12 % Energie' ist entfernt; der Heiztipp nennt nur noch die Wirkung je nach Anlage und Gebaeude ohne Versprechen. Befund gegenueber heutigem Text gegenstandslos.
+
+- Im heutigen Text nicht mehr vorhanden: 14,9 %
+- Heute in Zeile 52: 8 % – gekennzeichnet („beispielrechnung“)
+- Heute in Zeile 9: 12 % – gekennzeichnet („beispielrechnung“)
+
+### `84c991c5d152b14a2675`
+
+**Befund:** Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: die pauschale Gesamteinsparung 500-1.300 Euro ist entfernt; heute enthaelt der Artikel keine Gesamt-Einsparaussage mehr. Befund gegenueber heutigem Text gegenstandslos.
+
+- Im heutigen Text nicht mehr vorhanden: 1.300 €
+- Heute in Zeile 108: 500 € – **ohne** Kennzeichnung
+
+### `a70e7adc97c58317ccc1`
+
+**Befund:** Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: der Anspruch '50-80 Euro durch saisonale Lebensmittel' ist entfernt; heute enthaelt der Artikel keine saisonale Einspar-Zahl mehr. Befund gegenueber heutigem Text gegenstandslos.
+
+- Heute in Zeile 76: 50 € – gekennzeichnet („annahme“)
+- Heute in Zeile 76: 80 € – gekennzeichnet („annahme“)
 
 ## `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`
 
@@ -803,6 +849,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
 
+- Datei-SHA256 (heute): `7c58465b199736c53a110a99afd92051343038a176d94c3849fde71876d062b1`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -855,6 +902,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
 
+- Datei-SHA256 (heute): `eaba92d69c9705d8c6da4ee9fd5cdc499294dd75f0e37a79ac918f9bb59f6f2d`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2389,6 +2437,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
+- Datei-SHA256 (heute): `3994d14f0866e33c8af61d04d8894cbd8275650aeab171efc550cd4f5045f1ab`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
