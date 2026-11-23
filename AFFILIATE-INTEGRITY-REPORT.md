@@ -1,10 +1,10 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-23 13:55:52 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-23 20:51:19 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
 **Geprüfte Live-Artikel:** 92 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 5
 
-**Build:** public/ aktuell (kein Rebuild nötig)
+**Build:** public/ veraltet → Hugo-Rebuild
 
 🎉 Alle CTA-Boxen sind strukturell intakt, jedes Linkziel ist in `scripts/check24_links.yaml` registriert, jeder Link erscheint tatsächlich im gebauten HTML (AI4) und jede `/go/`-Seite leitet auf die registrierte Partner-URL weiter (AI5).
 
@@ -59,7 +59,7 @@
 | 2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet | 0 → 1 ✅ | /go/strom/ |
 | 2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist | 0 → 1 ✅ | /go/tagesgeld/ |
 | 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert | 1 → 2 ✅ | /go/dsl/ |
-| 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 3 → 3 ✅ | /go/dsl/ |
+| 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 1 → 2 ✅ | /go/dsl/ |
 | 2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden | 0 → 1 ✅ | /go/gas/ |
 | 2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet | 0 → 1 ✅ | /go/allgemein/ |
 | 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp | 0 → 1 ✅ | /go/mietwagen/ |
