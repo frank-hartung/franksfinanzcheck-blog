@@ -1,17 +1,129 @@
 # Entscheidungsvorlage: die roten Punkte
 
-**Stand:** 23.11.2026 · **Basis:** `main` @ `f405f49` (Squash-Merge #1307) ·
-**Messung:** Lauf [`45151875836`](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/45151875836)
-(`sicherheits-wache.yml`, `workflow_dispatch`, 23.11.2026 09:58Z)
+**Stand:** 23.11.2026 · **Basis:** `main` @ `566cd39` ·
+**Messung:** Lauf [`45181319212`](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/45181319212)
+(`sicherheits-wache.yml`, `workflow_dispatch`, 23.11.2026 13:10Z) — Befund
+unverändert gegenüber [`45151875836`](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/45151875836)
 
-**Die Empfehlung in einem Satz:** Der Code ist auf Soll — es fehlen vier
-Betreiber-/Redaktionshandlungen (und ein fünfter Punkt, der keiner ist: ein
-toter Automatikschritt, Abschnitt 5a). Sie werden **in dieser Reihenfolge** erledigt:
-Edge-Regel (schließt F-01 auf allen drei Messzielen mit einer Änderung), Worker-Leseschlüssel,
-M1-Titel, dann die drei Textbefunde als datierte Redaktionsaufgaben.
+**Die Entscheidung:** Der Code ist auf Soll. **A und B werden in einem
+Durchgang erledigt — heute, 45 Minuten, nach dem Ablauf in Abschnitt 0.** C
+(Titel) und D (Texte) sind damit ausdrücklich **nicht** Teil dieses Durchgangs;
+sie bekommen Termine und Verantwortliche, weil ein Siegel und ein Artikeltext
+nicht von einem Werkzeug-PR entschieden werden. Punkt 5a ist keine Aufgabe,
+sondern eine Störung: der Tageslauf, der sie beheben sollte, ist selbst tot.
 
 Kein Punkt dieser Vorlage ist ein Programmierauftrag. Wer hier Code ändert,
 ändert am falschen Ende.
+
+---
+
+## 0. Der Durchgang — die Entscheidung, die Sie jetzt umsetzen
+
+**Entschieden wird nicht mehr, *was* — sondern dass A und B in **einem**
+Durchgang erledigt werden, in dieser Reihenfolge, mit diesen Befehlen.** 45
+Minuten, zwei Zugänge (Cloudflare-Zone, GitHub), danach ist der Live-Nachweis
+grün oder der Durchgang ist an einer benannten Stelle abgebrochen. C und D sind
+**nicht** Teil des Durchgangs (Termine in Abschnitt 4 und 5).
+
+**Warum A und B zusammen:** Nach jedem der beiden allein bleibt der Lauf rot
+(Schritt 4 bzw. Schritt 6), und ein halb grüner Nachweis wird erfahrungsgemäß
+nicht zu Ende geführt. Beide sind Betreiberhandlungen ohne Redaktionsanteil —
+also ein Termin, nicht zwei.
+
+### Vorbereitung (einmal, 5 Minuten)
+
+| Was | Wo |
+|---|---|
+| Zone-Token `FF Edge Freigabe`, Rechte `Zone.DNS:Edit`, `Zone.Settings:Edit`, `Zone.Transform Rules:Edit`, Zone `franksfinanzcheck.de` | Cloudflare → My Profile → API Tokens → Create Token |
+| Neuer Zufallswert für den Leseschlüssel | `openssl rand -hex 32` → in den Passwortmanager, **nicht** in den Chat |
+
+### A — Edge-Regel (20 Minuten)
+
+1. **Messen** (schreibt nichts), in einem **frischen** Terminal — der Name
+   `CLOUDFLARE_API_TOKEN` wird auch vom Worker-Deploy benutzt, ein alter Wert in
+   der Shell würde die falsche Zone treffen:
+   ```bash
+   CLOUDFLARE_API_TOKEN=<zone-token> npm run edge:freigabe
+   ```
+   *Erwartet:* Zeilen mit `✅ Zone erreichbar` und `✅ DNS …: proxied`, dazu
+   `❌` bei der Regel/den Herkünften. Steht dort `❌ DNS … nicht vollständig
+   proxied` → **Stop** (siehe Stop-Regeln unten); eine Transform Rule kann auf
+   einer unproxied Zone nichts bewirken.
+2. **Herstellen:**
+   ```bash
+   CLOUDFLARE_API_TOKEN=<zone-token> npm run edge:freigabe:apply
+   ```
+   *Erwartet:* „kontrollierte Herstellung“, Regel `FF Sicherheits-Header`
+   angelegt/aktualisiert, SSL-Modus unverändert oder strenger — **nie**
+   herabgestuft. Meldet das Skript eine mehrdeutige Zone oder einen
+   SSL-Konflikt: **Stop**, nicht erzwingen.
+3. **Gegenmessen ohne Token** (misst die echte Auslieferung, drei Ziele):
+   ```bash
+   npm run header:check:live
+   ```
+   *Erwartet:* grün auf `https://franksfinanzcheck.de/`, `/methodik/` **und**
+   `https://www.franksfinanzcheck.de/`.
+4. **Selbstheilung scharfschalten** — erst jetzt, nicht vorher:
+   GitHub → Settings → Secrets → `CF_EDGE_HEAL_TOKEN` = derselbe Zonentoken ·
+   Settings → Variables → `CF_EDGE_AUTOHEAL` = `true`.
+
+### B — Worker-Leseschlüssel (10 Minuten)
+
+**Korrektur meiner früheren Empfehlung:** „den aktuellen Wert aus dem Worker
+ziehen“ geht nicht — Cloudflare-Worker-Secrets sind write-only, `wrangler secret
+list` zeigt nur Namen. Der einzige ausführbare Weg ist die **Rotation**, und sie
+ist hier unbedenklich: den Leseschlüssel konsumieren ausschließlich drei
+GitHub-Workflows (`newsletter-daily`, `newsletter-lifecycle`,
+`sicherheits-wache`) über **ein** Secret.
+
+1. **Ziel prüfen, nicht raten:** Cloudflare → Workers & Pages → der Worker, der
+   die Route `abos.franksfinanzcheck.de` bedient. Dort → Settings → Variables
+   and Secrets. (CLI-Alternative: `cd newsletter-worker && npx wrangler secret
+   list` — der Name kommt aus `wrangler.toml`, das ist `ff-newsletter`. Passt
+   der nicht zur Route, im Dashboard arbeiten.)
+2. **Worker-Seite:** `EXPORT_KEY` auf den neuen Zufallswert setzen (Encrypt /
+   `printf '%s' "<wert>" | npx wrangler secret put EXPORT_KEY`).
+   `EXPORT_KEY_WRITE` **nicht** anfassen — die Rollen müssen verschieden bleiben.
+3. **GitHub-Seite, direkt danach** (das Fenster, in dem der alte Wert ungültig
+   ist, soll Minuten dauern, nicht Tage):
+   ```bash
+   gh secret set NEWSLETTER_WORKER_EXPORT_KEY --body "<wert>"
+   ```
+4. **Gegenprobe** (ohne den Schlüssel irgendwohin zu schreiben):
+   ```bash
+   NEWSLETTER_WORKER_BASE=https://abos.franksfinanzcheck.de \
+   NEWSLETTER_WORKER_EXPORT_KEY="<wert>" npm run betrieb:check:live
+   ```
+   *Erwartet:* `schluesselrollen: getrennt`, kein `403` in den Exporten.
+
+### Abschluss (5 Minuten)
+
+```bash
+gh workflow run sicherheits-wache.yml --ref main
+gh run watch
+```
+*Erwartet:* Schritt 4 (Header) `success`, Schritt 6 (Worker) `success`,
+Schritt 7 (Live-Nachweis) `success`, Schritt 10 (Selbstheilung) `success` oder
+`warning`.
+
+### Stop-Regeln (lieber abbrechen als erzwingen)
+
+| Meldung | Bedeutung | Was dann |
+|---|---|---|
+| `Zone … nicht eindeutig im Konto des Tokens` | Token sieht mehrere Zonen | Token auf **eine** Zone einschränken, neu messen — keine Ersatzzone |
+| `❌ DNS … nicht vollständig proxied` | orangene Wolke fehlt | erst DNS (Runbook A1, Schritt 1), dann erneut |
+| SSL-Modus würde sinken | Schutzverlust | Apply verweigert das selbst — nichts umgehen, melden |
+| `betrieb:check:live` weiter `403` | Werte auf beiden Seiten ungleich | Schritt 2 und 3 wiederholen, **nicht** `EXPORT_KEY_WRITE` als Ersatz nehmen |
+
+### Was ich von Ihnen zurückbrauche
+
+1. Die Ausgabe von `npm run edge:freigabe` (vorher) und `:apply` (nachher).
+2. Die Ausgabe von `npm run header:check:live`.
+3. Das Ergebnis von `npm run betrieb:check:live` — **ohne** Schlüsselwert.
+4. Die Lauf-ID des Abschlusslaufs.
+
+Damit prüfe ich gegen die Artefakte (`f01-live.md`, `worker-live.md`) und melde
+zurück, ob der Nachweis wirklich vollständig ist — nicht nur der Exit-Code.
 
 ---
 
@@ -60,11 +172,11 @@ und schreibt idempotent; es stuft ein bestehendes `Full (strict)` **nie** herab.
    `Zone.DNS:Edit`, `Zone.Settings:Edit`, `Zone.Transform Rules:Edit`.
    Nicht den Worker-Deploy-Token wiederverwenden (Runbook A1c, Punkt 2).
 2. Ist gegen Soll messen:
-   `CF_API_TOKEN=… npm run edge:freigabe`
+   `CLOUDFLARE_API_TOKEN=… npm run edge:freigabe`
    Erwartet in der Ausgabe: die drei fehlenden Herkünfte und der Host-Filter
    ohne `www`.
 3. Herstellen:
-   `CF_API_TOKEN=… npm run edge:freigabe:apply`
+   `CLOUDFLARE_API_TOKEN=… npm run edge:freigabe:apply`
 4. Datenschutz unmittelbar danach erneut prüfen (der Apply aktualisiert B7):
    `npm run edge:b7` → grün.
 5. Selbstheilung scharfschalten (erst nach Schritt 3, sonst heilt sie ins
@@ -91,41 +203,52 @@ Zone erreichen und behaupte deshalb **nicht**, dass die Regel jetzt stimmt.
 
 ---
 
-## 3. Entscheidung B — Worker-Leseschlüssel abgleichen
+## 3. Entscheidung B — Worker-Leseschlüssel rotieren
 
-**Risiko:** mittel (Exporte schlagen fehl; die Wache kann Schlüsselrollen nicht
-bestätigen) · **Aufwand:** ~10 Minuten.
+**Risiko:** mittel (Exporte schlagen fehl; die Wache kann die Schlüsselrollen
+nicht bestätigen) · **Aufwand:** ~10 Minuten.
 
-**Entscheidung:** Den **GitHub-Wert an den laufenden Worker anpassen**, nicht
-umgekehrt.
+**Entscheidung:** **Rotieren** — neuen Wert auf beiden Seiten setzen. Nicht
+„angleichen“.
 
-**Begründung:** `EXPORT_KEY` ist das Secret, mit dem der laufende Worker
-`ff-newsletter-2026-10-24` bereits arbeitet. Ihn zu drehen hieße: Worker neu
-deployen, alle Aufrufer mitziehen, in der Zwischenzeit fail-closed. Der
-GitHub-Wert ist ein Verbraucher, kein Vertragspartner — er wird nachgezogen.
+**Begründung (Korrektur meiner ersten Fassung):** Der dort beschriebene Weg —
+„aktuellen Wert aus dem Worker ziehen und in GitHub eintragen“ — ist **nicht
+ausführbar**. Cloudflare-Worker-Secrets sind write-only; `wrangler secret list`
+nennt nur Namen, die Werte sind weder über CLI noch über die API lesbar. Bleibt
+die Rotation. Sie ist hier unkritisch, weil den Leseschlüssel ausschließlich
+drei GitHub-Workflows über **ein** Secret konsumieren (`newsletter-daily.yml`,
+`newsletter-lifecycle.yml`, `sicherheits-wache.yml`) — kein n8n-Lauf, kein
+externer Dienst, keine Browser-Erweiterung.
 
 **Schritte (Betreiber):**
 
-1. Den aktuellen Wert von `EXPORT_KEY` aus dem Worker ziehen
-   (`cd newsletter-worker && npx wrangler secret list` zeigt nur Namen; den
-   Wert nur aus dem eigenen Secret-Store, nie im Chat, nie im Repo).
-2. GitHub → Settings → Secrets and variables → Actions →
-   `NEWSLETTER_WORKER_EXPORT_KEY` auf genau diesen Wert setzen.
-3. **Nicht** `EXPORT_KEY_WRITE` / `NEWSLETTER_WORKER_WRITE_KEY` mitziehen —
-   die beiden Rollen müssen verschieden bleiben (Runbook A4).
-4. Gegenprobe:
+1. Neuen Wert erzeugen: `openssl rand -hex 32` → Passwortmanager.
+2. Ziel verifizieren, nicht raten: In Cloudflare → Workers & Pages der Worker,
+   der die Route `abos.franksfinanzcheck.de` bedient (Dashboard → Settings →
+   Variables and Secrets). Der Name in `wrangler.toml` ist `ff-newsletter`;
+   weicht die Route davon ab, im Dashboard arbeiten.
+3. Worker-Seite: `EXPORT_KEY` auf den neuen Wert setzen.
+   `EXPORT_KEY_WRITE` **nicht** anfassen — die Rollen müssen verschieden
+   bleiben (Runbook A4).
+4. GitHub-Seite, unmittelbar danach:
+   `gh secret set NEWSLETTER_WORKER_EXPORT_KEY --body "<wert>"`.
+5. Gegenprobe ohne Schlüssel im Klartext:
    ```bash
    NEWSLETTER_WORKER_BASE=https://abos.franksfinanzcheck.de \
-   NEWSLETTER_WORKER_EXPORT_KEY=… python3 scripts/worker_betrieb_wache.py
+   NEWSLETTER_WORKER_EXPORT_KEY="<wert>" npm run betrieb:check:live
    ```
-   Erwartet: kein 401/403, `schluesselrollen: getrennt`.
 
-**Abnahmekriterium:** Neuer Wache-Lauf, Schritt 6 `success`; `worker-live.md`
-enthält `OK` statt `STOERUNG`. Erst dann ist der Live-Nachweis (Schritt 7)
-überhaupt grün werden **können**.
+**Wichtig zur Reihenfolge:** Zwischen Schritt 3 und 4 sind Exporte kurzzeitig
+gesperrt (fail-closed). Deshalb beide Schritte in einer Sitzung, nicht über
+Tage verteilt — und nicht am Monatsanfang, wenn `newsletter-lifecycle` läuft.
 
-**Verantwortlich:** Betreiber (Secrets). Ein Abgleich „irgendwie gleich“ ist
-kein Nachweis — der Nachweis ist der grüne Schritt 6.
+**Abnahmekriterium:** `betrieb:check:live` meldet `schluesselrollen: getrennt`
+und keinen `403` in den Exporten; der Wache-Lauf hat Schritt 6 auf `success`
+und `worker-live.md` sagt `OK` statt `STOERUNG`. Erst dann kann Schritt 7
+(Live-Nachweis) überhaupt grün werden.
+
+**Verantwortlich:** Betreiber (Secrets). Ein „irgendwie gleich“ ist kein
+Nachweis — der Nachweis ist der grüne Schritt 6.
 
 ---
 
