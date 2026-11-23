@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-22 12:12:16 UTC",
+ "generated_at": "2026-11-23 13:55:56 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 145,
- "checked_links": 320,
+ "checked_articles": 146,
+ "checked_links": 324,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -32,7 +32,7 @@
   {
    "code": "IW2",
    "slug": "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026",
-   "line": 131,
+   "line": 133,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",

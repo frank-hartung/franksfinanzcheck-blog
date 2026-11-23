@@ -330,7 +330,13 @@ def _melde_doppelt(befunde: list[Befund], gesehen: dict, rahmen: list,
 
 def scanne_yaml(fm: str, startzeile: int, pfad: str,
                 anker: set[str] | None = None) -> list[Befund]:
-    """Prüft jeden Schlüsselwert ohne Parser. Die Klasse vom 26.10.2026."""
+    """Prüft jeden Schlüsselwert ohne Parser. Die Klasse vom 26.10.2026.
+
+    Grenze (bekannt und getestet): Duplikate in FLOW-Mappings
+    (`meta: {a: 1, a: 2}`) sieht nur der Parser – der Zeilenscanner liest
+    Flow-Sammlungen als Wert und steigt aus. Block-Mappings jeder Ebene,
+    verschachtelt wie in Sequenzen, erkennt er dagegen selbst.
+    """
     befunde: list[Befund] = []
     anker = anker if anker is not None else set()
     # #1313 (22.11.2026): Duplikate werden JE EBENE geprüft. Bis dahin stand
@@ -397,6 +403,7 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             rest_zeile = ""
         else:
             key_einzug = einzug
+            rest_zeile = rest_zeile[2:]
 
         # Offene Bereiche schließen: Eine Zeile gleicher oder geringerer
         # Einrückung ist ein Geschwister, kein Kind. Ein `- ` beginnt einen
@@ -419,6 +426,7 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
         key = treffer.group("key").strip()
         wert = treffer.group("rest")
         spalte = key_einzug + len(treffer.group("key")) + 2
+        spalte = einzug + len(treffer.group("key")) + 2
 
         if not wert.strip():
             # Block-Öffner (`eltern:`): Duplikat zählt im ELTERN-Bereich,
@@ -564,45 +572,6 @@ def _yaml_modul():
     return yaml
 
 
-def _strict_yaml_loader(yaml, startzeile: int):
-    """YAML-SafeLoader, der doppelte Mapping-Schlüssel in jeder Ebene ablehnt.
-
-    Hintergrund (#1313): `yaml.safe_load` nimmt bei doppelten Schlüsseln still
-    den letzten Wert (z. B. doppelter `aenderungsgrund` in
-    `redaktionelle_pruefung`), während Hugos go-yaml den gesamten Bau mit
-    „mapping key ... already defined“ abbricht. Dieser Loader schließt die
-    Lücke für alle Mapping-Ebenen inkl. Flow-Mappings (`{a: 1, a: 2}`).
-    """
-    class _StrictSafeLoader(yaml.SafeLoader):
-        pass
-
-    def _construct_mapping(loader, node, deep=False):
-        gesehen: dict[object, int] = {}
-        for key_node, _ in node.value:
-            key = loader.construct_object(key_node, deep=deep)
-            try:
-                ist_doppelt = key in gesehen
-            except TypeError:
-                ist_doppelt = False
-            if ist_doppelt:
-                erste_zeile = startzeile + gesehen[key]
-                raise yaml.constructor.ConstructorError(
-                    "while constructing a mapping",
-                    node.start_mark,
-                    f"doppelter Schlüssel {key!r} (zuerst Zeile {erste_zeile})",
-                    key_node.start_mark,
-                )
-            try:
-                gesehen[key] = key_node.start_mark.line
-            except TypeError:
-                pass
-        return yaml.SafeLoader.construct_mapping(loader, node, deep=deep)
-
-    _StrictSafeLoader.add_constructor(
-        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
-        _construct_mapping,
-    )
-    return _StrictSafeLoader
 class DoppelterSchluessel(Exception):
     """Doppelter Mapping-Schlüssel – Hugo bricht daran den Bau ab."""
 
@@ -650,14 +619,20 @@ def strenger_loader(yaml, startzeile: int):
 
 def tiefenpruefung_yaml(fm: str, startzeile: int, pfad: str,
                         yaml=None) -> tuple[list[Befund], bool]:
-    """Vollständiger, strikter YAML-Parse (inkl. doppelter Schlüssel in jeder Ebene).
-    Ohne PyYAML: (keine Befunde, False)."""
-    yaml = yaml or _yaml_modul()
+    """Vollständiger YAML-Parse. Ohne PyYAML: (keine Befunde, False).
+
+    `yaml=None` heißt „nimm, was da ist“; `yaml=False` heißt „bewusst ohne
+    Parser“. Ohne diese Unterscheidung war der Testpfad „ohne PyYAML“ ein
+    No-Op: Der Aufruf fiel auf den installierten Parser zurück, und die Tests
+    prüften den Scanner nie wirklich (gefunden 23.11.2026 beim Nachweis, dass
+    der CI-Schritt VOR dem `pip install` läuft).
+    """
     if yaml is None:
+        yaml = _yaml_modul()
+    if not yaml:
         return [], False
     befunde: list[Befund] = []
     try:
-        daten = yaml.load(fm, Loader=_strict_yaml_loader(yaml, startzeile))
         daten = yaml.load(fm, Loader=strenger_loader(yaml, startzeile))
     except DoppelterSchluessel as dup:
         befunde.append(Befund(
@@ -1114,35 +1089,6 @@ def run_selftest() -> int:
                        '    url: "https://example.org/a?b=1"\n'
                        '  -\n    titel: "Verbraucherzentrale"\n'
                        '    url: "https://example.org/b"'), []))
-    # 14e) #1313 (21.11.2026): Verschachtelter doppelter Schlüssel
-    #      (`redaktionelle_pruefung.aenderungsgrund`) tötet Hugo ebenfalls,
-    #      während PyYAML `safe_load` still den letzten Wert nimmt. Beide
-    #      Schichten (Scanner F3 und strikter YAML-Loader F2) müssen anschlagen.
-    faelle.append(("verschachtelter doppelter Schlüssel (#1313)",
-                   _GUT.replace(
-                       "draft: false",
-                       "draft: false\n"
-                       "redaktionelle_pruefung:\n"
-                       '  aenderungsgrund: "Erstentwurf"\n'
-                       '  pruefdatum: "2026-11-21"\n'
-                       '  aenderungsgrund: "Casing-Fix"'),
-                   ["F3", "F2"] if yaml is not None else ["F3"]))
-    # 14f) Doppelter Schlüssel innerhalb DESSELBEN Sequenz-Eintrags ist ein
-    #      Blocker – Geschwister-Einträge dagegen nicht.
-    faelle.append(("doppelter Schlüssel im selben Sequenz-Eintrag",
-                   _GUT.replace(
-                       '  - titel: "Bundesnetzagentur"\n'
-                       '    url: "https://example.org/a?b=1"',
-                       '  - titel: "Bundesnetzagentur"\n'
-                       '    titel: "Zweiter Titel"\n'
-                       '    url: "https://example.org/a?b=1"'),
-                   ["F3", "F2"] if yaml is not None else ["F3"]))
-    if yaml is not None:
-        faelle.append(("doppelter Schlüssel im Flow-Mapping",
-                       _GUT.replace(
-                           "draft: false",
-                           'draft: false\nmeta: {a: "1", a: "2"}'),
-                       ["F2"]))
     # 14e) #1313 (22.11.2026): Doppelter Schlüssel UNTERHALB von Ebene 0.
     #      Genau dieser Fall stand im Bestand (doppeltes `aenderungsgrund`
     #      in `redaktionelle_pruefung`), der Scanner schwieg, weil er nur
