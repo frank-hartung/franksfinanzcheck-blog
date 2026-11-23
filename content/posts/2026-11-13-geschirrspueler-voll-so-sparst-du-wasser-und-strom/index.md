@@ -1,9 +1,9 @@
 ---
 title: "Geschirrspüler voll beladen: Wasser und Strom sparen"
 description: "Vergleiche beim Geschirrspüler ganze Spülgänge statt einzelne Teller. Belade die Körbe so, dass Sprüharme frei bleiben und kein zweiter Lauf nötig wird."
-date: 2026-11-13T11:26:17Z
-draft: true
-reserve: true
+date: 2026-11-23T02:55:19Z
+draft: false
+reserve_published: 2026-11-23
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

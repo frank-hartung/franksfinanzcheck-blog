@@ -1,9 +1,9 @@
 ---
 title: "Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand?"
 description: "Mehrwegflaschen Pfand: Pfand ist kein Rabatt, sondern Geld, das du bei der Rückgabe zurückbekommst. Vergleiche Getränke nach Literpreis und halte…"
-date: 2026-11-20T12:06:20Z
-draft: true
-reserve: true
+date: 2026-11-23T02:55:43Z
+draft: false
+reserve_published: 2026-11-23
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

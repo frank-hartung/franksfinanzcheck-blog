@@ -80,8 +80,10 @@ nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
 - [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 90 Beiträge)
+## Alle Artikel (neueste zuerst, 92 Beiträge)
 
+- [Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand?](https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/): Mehrwegflaschen Pfand: Pfand ist kein Rabatt, sondern Geld, das du bei der Rückgabe zurückbekommst. Vergleiche Getränke nach Literpreis und halte…
+- [Geschirrspüler voll beladen: Wasser und Strom sparen](https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/): Vergleiche beim Geschirrspüler ganze Spülgänge statt einzelne Teller. Belade die Körbe so, dass Sprüharme frei bleiben und kein zweiter Lauf nötig wird.
 - [Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten](https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/): Vor dem Gasanbieterwechsel brauchst du Verbrauch, Vertragsende und Zählerdaten. Prüfe, ob der neue Tarif auch nach dem ersten Vertragsjahr passt.
 - [Energieeffiziente Geräte: So sinken deine Fixkosten](https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/): Energieeffiziente: Vergleiche bei Geräten nicht nur das Energielabel. Rechne den Strombedarf für deine Nutzung in Euro um und stelle ihn dem Kaufpreis…
 - [Mesh-WLAN nachrüsten: Wann lohnt sich die Investition?](https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/): Teste bei schlechtem WLAN erst die Verbindung per Kabel und den Standort des Routers. Prüfe danach, ob ein Mesh-System die betroffenen Räume erreicht.
@@ -182,4 +184,4 @@ nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-11-22.*
+(scripts/generate_llms_txt.py). Stand: 2026-11-23.*
