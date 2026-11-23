@@ -1,11 +1,12 @@
-# Entscheidungsvorlage: die vier roten Punkte
+# Entscheidungsvorlage: die roten Punkte
 
 **Stand:** 23.11.2026 · **Basis:** `main` @ `f405f49` (Squash-Merge #1307) ·
 **Messung:** Lauf [`45151875836`](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/45151875836)
 (`sicherheits-wache.yml`, `workflow_dispatch`, 23.11.2026 09:58Z)
 
 **Die Empfehlung in einem Satz:** Der Code ist auf Soll — es fehlen vier
-Betreiber-/Redaktionshandlungen. Sie werden **in dieser Reihenfolge** erledigt:
+Betreiber-/Redaktionshandlungen (und ein fünfter Punkt, der keiner ist: ein
+toter Automatikschritt, Abschnitt 5a). Sie werden **in dieser Reihenfolge** erledigt:
 Edge-Regel (behebt 6 von 8 Live-Befunden mit einer Änderung), Worker-Leseschlüssel,
 M1-Titel, dann die drei Textbefunde als datierte Redaktionsaufgaben.
 
@@ -27,6 +28,7 @@ Kein Punkt dieser Vorlage ist ein Programmierauftrag. Wer hier Code ändert,
 | B7 Datenschutz | `python3 scripts/cloudflare_edge_freigabe.py --b7-check` | **✅ erfüllt** („Datenschutz B7 bereits auf Cloudflare-Proxy umgestellt“) |
 | Frontmatter-Bestand | `python3 scripts/frontmatter_wache.py --pfad content --json` | 174 Dateien, **0 Blocker, 0 Hinweise** |
 | Inhaltsbefunde | `unittest` der drei Module (unten) | **3 rot, auf `main` reproduziert** — Textbefunde, kein Code-Befund |
+| Verwaiste Seiten | `unittest scripts.tests.test_gsc_abdeckung` **auf `main`** | **rot**: zwei Inhaltsseiten ohne redaktionellen Inlink (Nachtrag, Abschnitt 5a) |
 
 **Wichtig für die Einordnung:** Das Repo beschreibt den Sollzustand bereits
 exakt (`cloudflare/edge-schutz.md` A1, `static/_headers`, Dieselbigkeit wird
@@ -191,6 +193,53 @@ Skript darf sie erfinden.
 
 ---
 
+## 5a. Nachtrag (23.11.2026) — ein fünfter Befund, und er ist eine Störung
+
+Beim Abschluss dieses PRs gemessen, **auf `main` ohne meine Änderung**
+(Worktree auf `origin/main` @ `48da9e8`):
+
+```
+python3 -m unittest scripts.tests.test_gsc_abdeckung
+→ FAIL: BestandOhneInseln.test_keine_inhaltsseite_ohne_redaktionellen_inlink
+```
+
+Zwei Inhaltsseiten haben keinen redaktionellen Inlink:
+
+* `/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/`
+* `/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/`
+
+**Das ist kein Redaktionsbefund, obwohl es wie einer aussieht.** Das Repo heilt
+verwaiste Seiten selbst (`gsc_abdeckung.py --verlinkung --heilen`, im
+Tageslauf `gsc-import.yml`, Schritt 8). Dieser Schritt wurde aber seit
+mindestens drei Tagen **übersprungen**, weil der Lauf vorher stirbt:
+
+| Lauf | Datum | Ergebnis | Tödlicher Schritt |
+|---|---|---|---|
+| `45026814884` | 22.11. | failure | 6 „Leistungsdaten holen (searchAnalytics, nur lesend)“ |
+| `44908881174` | 21.11. | failure | dito |
+| `44749084253` | 20.11. | failure | dito |
+
+Schritt 6 rot → Schritt 8 „Selbstheilung – verwaiste Seiten verlinken“
+**skipped** → die beiden Seiten bleiben unverlinkt → der Regressionstest bleibt
+rot. Die Kette ist gemessen, nicht vermutet (Job-Steps über die Actions-API).
+
+**Entscheidung:** Das ist eine **Störung** (Zugangsdaten/Abruf der
+Search-Console-Leistungsdaten), keine Textaufgabe — und sie heilt sich nicht
+selbst, weil der Heiler hinter dem toten Schritt steht.
+
+**Schritte (Betreiber):** Re-Run von `gsc-import.yml` mit Blick auf Schritt 6
+(`gh run view 45026814884 --log` bzw. Re-Run → Schrittprotokoll). Ist es der
+GSC-Zugang: Zugangsdaten erneuern, Lauf wiederholen. Danach läuft Schritt 8
+automatisch und setzt die Inlinks; die Redaktion muss nichts schreiben.
+
+**Abnahmekriterium:** `gsc-import.yml` grün bis Schritt 8; danach
+`python3 -m unittest scripts.tests.test_gsc_abdeckung` → 119 Tests OK. Der
+ReDoS-Job des PR-Gates wird damit ebenfalls grün — er prüft diese Suite mit.
+
+**Verantwortlich:** Betreiber (Zugang). **Nicht** die Redaktion: einen Inlink
+von Hand zu setzen wäre das Symptom, nicht die Ursache — und beim nächsten
+Automatik-Artikel stünde derselbe Befund wieder da.
+
 ## 6. Warum diese Reihenfolge
 
 1. **A zuerst**, weil eine Änderung sechs Befunde schließt und den
@@ -203,6 +252,10 @@ Skript darf sie erfinden.
    stehen — sie ändert nichts an der Live-Sicherheit.
 4. **D** läuft parallel in der Redaktion und ist bewusst **nicht** Teil des
    Live-Nachweises: Textqualität ist kein Sicherheitsbefund.
+5. **5a** steht am Ende, weil es die geringste Wirkung auf die Sicherheit hat —
+   aber es ist die einzige Position, die einen *toten Automatikschritt*
+   offenlegt. Bleibt sie liegen, wächst die Zahl verwaister Seiten mit jedem
+   Automatik-Artikel.
 
 ## 7. Abgrenzung (was hier nicht entschieden wird)
 
