@@ -28,7 +28,7 @@ Kein Punkt dieser Vorlage ist ein Programmierauftrag. Wer hier Code ändert,
 | B7 Datenschutz | `python3 scripts/cloudflare_edge_freigabe.py --b7-check` | **✅ erfüllt** („Datenschutz B7 bereits auf Cloudflare-Proxy umgestellt“) |
 | Frontmatter-Bestand | `python3 scripts/frontmatter_wache.py --pfad content --json` | 174 Dateien, **0 Blocker, 0 Hinweise** |
 | Inhaltsbefunde | `unittest` der drei Module (unten) | **3 rot, auf `main` reproduziert** — Textbefunde, kein Code-Befund |
-| Verwaiste Seiten | `unittest scripts.tests.test_gsc_abdeckung` **auf `main`** | **rot**: zwei Inhaltsseiten ohne redaktionellen Inlink (Nachtrag, Abschnitt 5a) |
+| Verwaiste Seiten | `unittest scripts.tests.test_gsc_abdeckung` auf `main` (48da9e8) | war **rot** (zwei Seiten ohne Inlink), inzwischen auf `main` geheilt — die Ursache nicht (Nachtrag, Abschnitt 5a) |
 
 **Wichtig für die Einordnung:** Das Repo beschreibt den Sollzustand bereits
 exakt (`cloudflare/edge-schutz.md` A1, `static/_headers`, Dieselbigkeit wird
@@ -207,6 +207,13 @@ Zwei Inhaltsseiten haben keinen redaktionellen Inlink:
 
 * `/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/`
 * `/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/`
+
+**Nachtrag zum Nachtrag (23.11., 10:49Z):** Der *Befund* ist auf `main`
+inzwischen weggeheilt (`5f12dcc`) — die beiden Seiten haben wieder Inlinks, der
+Test ist grün. Die **Ursache** steht unverändert: `gsc-import.yml` ist seit dem
+19.11. in jedem Lauf rot (vier Läufe, immer derselbe Schritt). Der nächste
+Automatik-Artikel, der vor dem Heiler erscheint, erzeugt denselben Befund neu.
+Deshalb bleibt der Punkt auf der Liste — als Störung, nicht als Textaufgabe.
 
 **Das ist kein Redaktionsbefund, obwohl es wie einer aussieht.** Das Repo heilt
 verwaiste Seiten selbst (`gsc_abdeckung.py --verlinkung --heilen`, im
