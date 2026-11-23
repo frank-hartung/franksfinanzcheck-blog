@@ -1,10 +1,10 @@
 {
   "10 Tipps für günstige Reisekreditkarten": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: KI-Floskeln: es gibt zahlreiche; Lesbarkeit: Flesch 55.9 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze und alltägliche Wörter statt langer Kompos",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-25",
-    "sperre_bis": "2026-10-28"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-23",
+    "sperre_bis": "2026-11-24"
   },
   "5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt": {
     "fehler": 1,
@@ -378,11 +378,12 @@
     "sperre_bis": "2026-10-28"
   },
   "Günstige Tarife fürs Handy": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 630 Wörter / 4795 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); RS5: 12 Zahlenbehauptung(en) ohne Satzbeleg oder klare ",
+    "fehler": 0,
+    "grund": "produziert: handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-25",
-    "sperre_bis": "2026-10-28"
+    "letzter_erfolg": "2026-11-23",
+    "letzter_versuch": "2026-11-23",
+    "sperre_bis": "2027-05-22"
   },
   "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung": {
     "abgleich_fehler": 2,
@@ -649,10 +650,10 @@
   },
   "SparTipps für den Alltag": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 16 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Faustregel:** Prüfe jeden Vertrag, der länger als zwölf Monate läuft, auf seinen ak",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-25",
-    "sperre_bis": "2026-10-28"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-23",
+    "sperre_bis": "2026-11-24"
   },
   "Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag": {
     "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
@@ -827,6 +828,12 @@
     "letzter_erfolg": "2026-11-17",
     "letzter_versuch": "2026-11-17",
     "sperre_bis": "2027-05-16"
+  },
+  "WLAN-Repeater oder Powerline: Was durch Wände wirklich kommt": {
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-23",
+    "sperre_bis": "2026-11-24"
   },
   "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?": {
     "fehler": 1,
