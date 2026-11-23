@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T16:58:06Z",
+  "generated_at": "2026-11-23T17:33:31Z",
   "modus": "kandidaten",
-  "commit": "87c1ff46fd06367f472fb09ced06c83746361fdc",
+  "commit": "a592362613a40bfa9e8e630a496c924702510011",
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
@@ -632,7 +632,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1046,7 +1046,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1170,7 +1170,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1324,7 +1324,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
@@ -1631,7 +1631,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-31",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2156,7 +2156,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
