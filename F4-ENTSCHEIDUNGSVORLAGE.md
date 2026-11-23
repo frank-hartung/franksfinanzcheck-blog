@@ -8,7 +8,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Keine Prüfsummen im Dokument.** Maßgeblich ist, welche Befunde offen sind und ob die beanstandeten Werte heute noch im Text stehen; die Fassungsbindung führt der Ledger (`geprueft_fassung`). So altert die Vorlage nicht an fremden Commits.
 
-**162 offene Live-Befunde auf 48 Artikeln.** Für **75** gibt es frühere Entscheidungen zu diesem Befund;
+**165 offene Live-Befunde auf 49 Artikeln.** Für **78** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **87** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -967,6 +967,46 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 > Am heutigen Text geprüft (SHA-256 5708f03841d4): Die verlangte Quelle steht im Abschnitt „Warum diese Frugalismus-Tipps dein Mindset verändern“ inline – „**Hinweis zum Stand der Preise:** Im Oktober 2026 lagen die Verbraucherpreise um **+2,8 %** über dem Vorjahr, Energie um **+14,9 %** und Nahrungsmittel um **+0,4 %** ([Statistische“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
 - Heute in Zeile 33: 2,8 % – **ohne** Kennzeichnung
+
+## `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
+
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `3f0a88ede9d44ee910cb` | luecke | 2026-11-23 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anb… |
+| `51e259fd2d8582e774f7` | luecke | 2026-11-23 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauche… |
+| `55f8eeedc587cf0895ee` | luecke | 2026-11-23 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energi… |
+
+### `3f0a88ede9d44ee910cb`
+
+**Befund:** Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft & ergänzt (Welle 1): Der Verbraucherservice Energie der Bundesnetzagentur für Anfragen und Beschwerden ist im Artikel explizit genannt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `51e259fd2d8582e774f7`
+
+**Befund:** Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft (Welle 1): Die kostenfreie Schlichtungsstelle Energie ist im heutigen Text direkt verlinkt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `55f8eeedc587cf0895ee`
+
+**Befund:** Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft (Welle 1): Behördliche Markttransparenzquellen der Bundesnetzagentur (Preisübersichten für Haushaltskunden und SMARD) sind direkt verlinkt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster`
 
@@ -2156,6 +2196,9 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7017065ee7c74c7ae45
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1e06a96f6f71e104ce0b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 81c6a707139046b83ccd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8cc00288af8a1f2b02d8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f0a88ede9d44ee910cb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 51e259fd2d8582e774f7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 55f8eeedc587cf0895ee --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5a1bf10697f58e5fe14a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

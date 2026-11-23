@@ -228,17 +228,18 @@ Repository-Einstellung** – Betreiberarbeit, §7.5.
 
 ## 5. Was das für die Schließakte bedeutet
 
-Nach dem Rebase auf `40affb7` (Copy-Editing „ZEIT-Niveau“) wurden die
-abgeleiteten Register neu erzeugt:
+Nach jedem Rebase wurden die abgeleiteten Register neu erzeugt; Stand auf
+`ae3bded` (letzte Bot-Commits: Copy-Editing, Belegkette, ein KI-Entwurf):
 
-- **BEFUND-AKTE.md:** 259 offene Befunde auf 72 Seiten, davon 46 live,
+- **BEFUND-AKTE.md:** 265 offene Befunde auf 75 Seiten, davon 49 live,
   ältester 24 Tage, Frist 14 Tage, **95 über der Frist**.
-- F4-Entscheidungsvorlage: 2.211 Zeilen, uhrfest.
+- F4-Entscheidungsvorlage: 2.299 Zeilen, uhrfest.
 - `--struktur-pruefen`: 415 Listeneinträge, keine doppelten Schlüssel.
 
 Die Zahl ist gegenüber dem letzten Bericht (256/71/45) gestiegen – nicht, weil
-neue Befunde entstanden, sondern weil `40affb7` Artikel angefasst hat und die
-Fassungshashes neu binden. **Das ist der Preis dafür, dass Titel geändert
+neue Befunde entstanden, sondern weil die Redaktion Artikel angefasst hat und die
+Fassungshashes neu binden. Jeder dieser Commits kostet Registerarbeit: Das ist
+der Betriebspreis der Textpflege, nicht ein Defekt. **Das ist der Preis dafür, dass Titel geändert
 werden** (§2): Jeder geänderte Text bindet Befunde neu. Wer diesen Preis nicht
 zahlen will, muss Titel vor der Siegelung ändern, nicht danach.
 
@@ -248,10 +249,10 @@ zahlen will, muss Titel vor der Siegelung ändern, nicht danach.
 
 | Bereich | Datei | Nachweis |
 |---|---|---|
-| 5 Titel | `content/posts/2026-09-07…`, `09-11…`, `09-27…`, `10-07…`, `11-10…` | `check_titles.py`: 144 Titel, 0 Verstöße |
+| 5 Titel | `content/posts/2026-09-07…`, `09-11…`, `09-27…`, `10-07…`, `11-10…` | `check_titles.py`: 145 Titel, 0 Verstöße |
 | R6 + Heilung + Selbsttest | `scripts/check_titles.py` | `--selftest`: „R1–R6 scharf“ |
 | SSOT-Guard | `scripts/post_utils.py` (`ohne_dash_einzelwort`) | `test_titel_kuerzen`: 11 Tests OK |
-| Wache | `scripts/frontmatter_wache.py` | `--selftest` 27/27; 174 Dateien, 0 Blocker |
+| Wache | `scripts/frontmatter_wache.py` | `--selftest` 27/27; 175 Dateien, 0 Blocker |
 | Register-Rückweg | `scripts/faktenfrische_befund_ledger.py` | kaputte Fassung → „nicht streng lesbar“; heutige → „415, sauber“ |
 | Covers | `data/covers_manifest.json`, `static/images/covers/*` (5 + 70 Varianten) | `check_covers.py`: 144 Covers, 0 stale |
 | llms.txt / Map | `static/llms.txt`, `data/kannibalisierung_map.yaml` | regeneriert bzw. Titel nachgezogen |
@@ -266,7 +267,10 @@ zahlen will, muss Titel vor der Siegelung ändern, nicht danach.
 `hugo --destination public` (0 Fehler).
 **Vollsuite:** 6.397 Tests, 6 Fehler – alle sechs waren veraltete Register, nach
 `abgeleitete_register.py --fix` + `faktenfrische_befund_akte.py --schreiben` +
-`f4_entscheidungsvorlage.py` grün nachgemessen.
+`f4_entscheidungsvorlage.py` grün nachgemessen. (Die Vollsuite lief auf dem Stand
+vor dem letzten Rebase; die betroffenen Module wurden danach einzeln erneut
+gefahren – `test_abgeleitete_register`, `test_faktenfrische_befund_akte`,
+`test_1098_produktionswahrheit` je `EXIT 0`.)
 
 ---
 
@@ -440,8 +444,8 @@ gh api repos/frank-hartung/franksfinanzcheck-blog/commits/15a793c24 --jq '.files
 ```
 
 **Zahlen dieses Stands:** 92 öffentliche Beiträge · 38 mit Rolle · 54 ohne ·
-144 Titel geprüft, 0 Verstöße · 144 Covers, 0 stale · 415 Registereinträge ·
-259 offene Befunde auf 72 Seiten (46 live, 95 über der Frist) · 6.397 Tests.
+145 Titel geprüft, 0 Verstöße · 144 Covers, 0 stale · 415 Registereinträge ·
+265 offene Befunde auf 75 Seiten (49 live, 95 über der Frist) · 6.397 Tests.
 
 ---
 
