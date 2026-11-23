@@ -1,16 +1,16 @@
 {
   "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
   "titel": "Grundversorgung Strom und Gas: Was sie leistet und kostet",
-  "erzeugt": "2026-11-22 12:49 UTC",
+  "erzeugt": "2026-11-23 15:16 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "YMYL",
-    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
-    "alter_tage": 40,
+    "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
+    "alter_tage": 41,
     "intervall": 45,
     "frist": "2026-11-27",
-    "restlaufzeit": 5
+    "restlaufzeit": 4
   },
   "geo": {
     "punkte": 6,
@@ -26,14 +26,40 @@
       "faktencheck": true
     }
   },
-  "treffer": [],
-  "befunde": [],
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n\n*   [Allgemeines](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start2.html)\n            *   [Unterversorgungsfeststellung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/Unterversorgungsfeststellungen/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "praezision",
+      "text": "Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'.",
+      "stelle": "In der Grundversorgung gelten kurze Fristen, damit der Zustand nicht zur Falle wird.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet.",
+      "stelle": "Die Ersatzversorgung greift in einer Übergangszeit, wenn ein Haushalt Strom oder Gas verbraucht, ohne einen Vertrag dafür zu haben.",
+      "beleg": ""
+    }
+  ],
   "fehler": [
     "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
-    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
   ],
   "fassung_sha256": "a42c98f246b53bee50b96012deb1d31e52544395ba03c1577990c4469d724ae2",
   "text_sha256": "f7e828d26c9b52d013cf2d3e62e8375f7e109e0121fc0b35a24caa2f0038bf56",
-  "fachpruefung": "übersprungen (keine Fundstellen)"
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 2 Befund(e) ohne belegbaren Textanker verworfen"
 }
