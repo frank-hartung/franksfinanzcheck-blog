@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T10:49:35Z",
+  "generated_at": "2026-11-23T12:08:43Z",
   "modus": "kandidaten",
-  "commit": "8dfe3d997997e68c5f24937f999aa9f5c58ecdeb",
+  "commit": "e3d456d58092b8b5c85267cf625e56cd2f4921bd",
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
@@ -1267,7 +1267,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1927,7 +1927,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2327,7 +2327,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
@@ -2399,7 +2399,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     }
   }
