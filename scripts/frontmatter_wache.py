@@ -429,8 +429,19 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             continue                      # Fortsetzung eines mehrzeiligen Texts
         key = treffer.group("key").strip()
         wert = treffer.group("rest")
+        # #1345 (23.11.2026): Hier standen zwei Zuweisungen untereinander,
+        # die zweite überschrieb die erste – `key_einzug` war damit toter
+        # Code. Für eine normale Zeile sind beide gleich (`key_einzug ==
+        # einzug`), für einen Sequenz-Eintrag (`- key: wert`) nicht: Dort
+        # beginnt der Schlüssel hinter dem Eintragsmarker, und nur
+        # `key_einzug` hält die Invariante „Spalte = Wertanfang minus 1", auf
+        # die die Offset-Rechnungen unten vertrauen (F6 rechnet
+        # `spalte + wert.index(" #") + 3`). Mit `einzug` zeigte die Spalte bei
+        # Sequenz-Einträgen zwei Zeichen zu früh – in den Schlüssel statt auf
+        # den Wert. Überbleibsel desselben Eingriffs (#1343), der auch
+        # `rest_zeile = rest_zeile[2:]` in den `else`-Zweig verschoben hatte;
+        # jener Teil ist in #1347 geheilt worden, dieser war geblieben.
         spalte = key_einzug + len(treffer.group("key")) + 2
-        spalte = einzug + len(treffer.group("key")) + 2
 
         if not wert.strip():
             # Block-Öffner (`eltern:`): Duplikat zählt im ELTERN-Bereich,
@@ -1183,14 +1194,89 @@ def run_selftest() -> int:
     if unveraendert != _GUT or belege_sauber:
         fehler.append("Heilung: saubere Datei wurde verändert")
 
+    # ------------------------------------------------------------------
+    # 19) #1345 (23.11.2026) – SCHICHT-1-PROBEN: der Scanner ALLEIN.
+    #
+    # Alle Proben oben laufen über `pruefe_datei`, also über BEIDE Schichten.
+    # Als #1343 beim Einfügen der `key_einzug`-Verwaltung die Zeile
+    # `rest_zeile = rest_zeile[2:]` aus dem `- `-Zweig in den `else`-Zweig
+    # verschob, verlor jeder Schlüssel einer normalen Zeile seine ersten zwei
+    # Zeichen (`title:` → `tle:`, `date:` → `te:`). Aufgefallen ist davon nur
+    # F5 – weil F5 ausschließlich im Scanner lebt. Das scanner-seitige F4 war
+    # genauso tot, blieb aber unsichtbar, weil Schicht 2 (Parser) F4 ebenfalls
+    # liefert. #1347 hat die Ursache geheilt; diese Proben sorgen dafür, dass
+    # sich dieselbe Blindstelle nicht wiederholen kann.
+    #
+    # Das ist keine theoretische Sorge: `_yaml_modul()` liefert None, wenn
+    # PyYAML fehlt („hängt vom Runner ab“). Ohne Schicht 2 wäre die
+    # Datumsprüfung komplett weg gewesen – bei grünem Selbsttest.
+    #
+    # Geprüft wird auch der Schlüsselname in der Meldung selbst: Der
+    # Duplikat-BLOCKER (die Klasse vom 26.10.2026, an der Hugo den Bau
+    # abbricht) nannte verstümmelt „`tle`" statt „`title`" und hätte jede
+    # Diagnose in die Irre geschickt.
+    schicht1 = [
+        ("Schicht 1 allein: F5 (YAML-1.1-Wahrheitswert)",
+         'title: yes\n', ["F5"], "title"),
+        ("Schicht 1 allein: F4 (kein ISO-Datum in `date`)",
+         'date: 14.10.2026\n', ["F4"], "date"),
+        ("Schicht 1 allein: F4 (kein ISO-Datum in `lastmod`)",
+         'lastmod: 14.10.2026\n', ["F4"], "lastmod"),
+        ("Schicht 1 allein: Duplikat-BLOCKER nennt den Schlüssel",
+         'title: "a"\ntitle: "b"\n', ["F3"], "title"),
+    ]
+    sonder_proben = 0
+    for name, fm, soll, schluessel in schicht1:
+        sonder_proben += 1
+        befunde = scanne_yaml(fm, 1, "content/x/index.md")
+        ist = sorted({b["regel"] for b in befunde})
+        fehlend = [r for r in soll if r not in ist]
+        if fehlend:
+            fehler.append(f"{name}: Regel(n) {fehlend} fehlen, bekommen {ist}"
+                          f" – der Scanner ist blind für schlüssel-abhängige"
+                          f" Regeln (Verdacht: `rest_zeile` wird gekappt)")
+        elif not any(schluessel in b["meldung"] for b in befunde):
+            fehler.append(f"{name}: Meldung nennt den Schlüssel `{schluessel}`"
+                          f" nicht – ein verstümmelter Schlüsselname ist der"
+                          f" Hinweis auf einen abgeschnittenen Zeilenanfang")
+
+    # 20) Spalten-Invariante. F6 rechnet `spalte + wert.index(" #") + 3`; das
+    #     setzt voraus, dass `spalte` bei einem Sequenz-Eintrag dieselbe
+    #     Beziehung zum Wert hat wie bei einer normalen Zeile. Seit #1345 gilt
+    #     `spalte = key_einzug + len(key) + 2`; davor überschrieb eine zweite
+    #     Zuweisung mit `einzug` die erste, und die Spalte zeigte bei
+    #     `- key: wert` zwei Zeichen zu früh – in den Schlüssel statt auf den
+    #     Wert.
+    for name, probe, zeilen_nr in (
+            ("Spalte bei normaler Zeile",
+             'description: Studie Bericht # Kommentar\n', 1),
+            ("Spalte bei Sequenz-Eintrag",
+             'quellen:\n  - titel: Studie Bericht # Kommentar\n', 2),
+            ("Spalte bei Sequenz mit Zusatz-Einzug",
+             'quellen:\n  -   titel: Studie Bericht # Kommentar\n', 2),
+    ):
+        sonder_proben += 1
+        befunde = scanne_yaml(probe, 1, "content/x/index.md")
+        f6 = [b for b in befunde if b["regel"] == "F6"]
+        zeile = probe.splitlines()[zeilen_nr - 1]
+        raut = zeile.index("#") + 1
+        if not f6:
+            fehler.append(f"{name}: F6 fehlt, bekommen "
+                          f"{sorted({b['regel'] for b in befunde})}")
+        elif f6[0]["spalte"] != raut + 1:
+            fehler.append(f"{name}: Spalte {f6[0]['spalte']} zeigt nicht eins"
+                          f" hinter das Rautenzeichen bei {raut} – die"
+                          f" Offset-Rechnung passt nicht zu `key_einzug`")
+
     if fehler:
         print("🛑 Selbsttest FEHLGESCHLAGEN:")
         for f in fehler:
             print("   -", f)
         return 2
-    print(f"✅ Selbsttest: {len(faelle) + 2} Proben bestanden – Wache ist "
-          f"scharf (Tiefenprüfung: "
-          f"{'YAML-Parser' if yaml is not None else 'Scanner'}).")
+    print(f"✅ Selbsttest: {len(faelle) + 2 + sonder_proben} Proben bestanden"
+          f" – Wache ist scharf (Tiefenprüfung: "
+          f"{'YAML-Parser' if yaml is not None else 'Scanner'}; "
+          f"{sonder_proben} davon gegen Schicht 1 allein).")
     return 0
 
 
