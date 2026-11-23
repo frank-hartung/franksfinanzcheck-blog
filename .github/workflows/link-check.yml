@@ -258,7 +258,20 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
+          set +e
           python3 scripts/schema_seo_gate.py | tee schemagate.log
+          rc=$?
+          # Funde als Annotation (25.11.2026): Ohne diesen Block zeigt die
+          # PR-Ansicht nur „Process completed with exit code 1" – Regel und
+          # Seite stehen ausschließlich im Rohlog, das je nach Umgebung gar
+          # nicht abrufbar ist. Eine Wache, deren Befund niemand lesen kann,
+          # ist eine halbe Wache.
+          if [ "$rc" -ne 0 ]; then
+            grep -m 8 "❌" schemagate.log \
+              | sed -e 's/%/%25/g' -e 's/^/::error title=Schema-Fund::/' \
+              || true
+          fi
+          exit "$rc"
 
       - name: Label sicherstellen
         if: env.REPORT_PRODUCTION == 'true' && (steps.links.outcome == 'failure' || steps.schema.outcome == 'failure')

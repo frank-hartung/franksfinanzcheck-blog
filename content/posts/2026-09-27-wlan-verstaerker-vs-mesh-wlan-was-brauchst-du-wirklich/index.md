@@ -202,6 +202,7 @@ Der Grundsatz, der mir bei jeder Netzwerkfrage am meisten Geld gespart hat: **Mi
 
 **Für deinen nächsten Check:** Prüfe den vorgesehenen Standort des Repeaters mit dem Handy. Empfängt es dort kaum ein Signal vom Router, kann auch ein neues Gerät diesen Standort nicht beliebig ausgleichen.
 
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [24-Monats-Effektivpreis-Rechner](../../werkzeuge/effektivpreis-rechner/) · [WLAN verbessern in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DNS‑Server wechseln für schnelleres Internet](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/) · [Wie viel Streaming‑Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)  
 Weiterlesen: [Pillar Internet & DSL](../../pillar/internet-dsl/) · [Fixkosten-Scanner](../../werkzeuge/fixkosten-scanner/) · [WLAN verbessern in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DNS‑Server wechseln für schnelleres Internet](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/) · [Wie viel Streaming‑Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)  
 
 ## Häufige Fragen
