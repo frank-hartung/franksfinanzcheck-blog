@@ -261,7 +261,7 @@ Dein nächster Schritt dauert zehn Minuten: Miss heute Abend die TV-Leiste im au
 
 **Für deinen nächsten Check:** Unterscheide Standby von Aufgaben im Hintergrund. Ein Router oder eine Kühltruhe erfüllt auch nachts eine Funktion und sollte nicht einfach über eine Steckerleiste abgeschaltet werden.
 
-**Weiterlesen:** [Stromfresser im ganzen Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Stromfresser im ganzen Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Geschirrspüler voll beladen](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/)
 
 ## Häufige Fragen
 

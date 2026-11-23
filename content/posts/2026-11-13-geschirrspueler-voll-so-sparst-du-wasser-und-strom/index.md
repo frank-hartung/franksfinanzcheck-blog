@@ -198,7 +198,7 @@ Wenn sich dort Schimmel bildet, riecht die Maschine unangenehm. Ein gut gepflegt
 
 **Für deinen nächsten Check:** Kontrolliere nach dem Spülgang, ob alle Flächen sauber sind. Musst du einzelne Teile erneut spülen, hat die dichtere Beladung einen Teil des Vorteils schon verbraucht.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Mehrwegflaschen Pfand](../../posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/)
 **Lesetipp:** [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
 
 ## Häufige Fragen

@@ -108,6 +108,11 @@ der Grenze, an der ein Eingriff den Nutzen rechtfertigt.
 
 ## 3. Was der Inhaber entscheiden muss (kein Code)
 
+> **Entschieden am 23.11.2026:** Die beiden operativen Entscheidungen aus #1324
+> (Prüf-Budget 19 → 21, Löschung des blockierten WLAN-Doppelentwurfs) sind in
+> `ENTSCHEIDUNG-BETREIBER-2026-11-23.md` gefallen – begründet, gemessen und mit
+> Rücknahmeweg. Die folgende Liste bleibt davon unberührt.
+
 1. **Release-Scorecard 29/90** (Issue #1193): 59 Live-Artikel blockieren an
    `F4-fachbefund` (Faktenalter) – die Wiedervorlagen sind redaktionell, kein
    Werkzeugdefekt. Der Deploy hängt **nicht** daran.
