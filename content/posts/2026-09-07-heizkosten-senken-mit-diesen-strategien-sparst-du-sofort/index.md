@@ -159,7 +159,7 @@ Notiere Wetter und Abwesenheiten knapp dazu. So erkennst du Trends, ohne einen k
 
 12,23 Cent je Kilowattstunde – das ist der Neukunden-Schnitt der [BDEW-Gaspreisanalyse Herbst 2026](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) für Einfamilienhäuser. Als feste Zielmarke taugt die Zahl nicht. Als grober Maßstab aber schon: Liegt dein Arbeitspreis klar darüber, lohnt ein Blick in den Vertrag. Region, Verbrauchsmenge und Vertragsart verschieben das Bild zusätzlich.
 
-Wenn es mit dem Anbieter ernsthaft klemmt, bist du nicht auf Kulanz angewiesen. Die [Schlichtungsstelle Energie](https://www.schlichtungsstelle-energie.de/) vermittelt bei Streit mit Versorgern kostenfrei für private Verbraucher. Wie sich Marktpreise entwickeln, bündelt die Bundesnetzagentur in ihren [Preisübersichten für Haushaltskunden](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) und auf der Markttransparenzplattform [SMARD](https://www.smard.de/).
+Wenn es mit dem Anbieter ernsthaft klemmt, bist du nicht auf Kulanz angewiesen. Der Verbraucherservice Energie der Bundesnetzagentur nimmt Anfragen und Beschwerden entgegen; bei Streit mit Versorgern vermittelt die [Schlichtungsstelle Energie](https://www.schlichtungsstelle-energie.de/) kostenfrei für private Verbraucher. Wie sich Marktpreise entwickeln, bündelt die Bundesnetzagentur in ihren [Preisübersichten für Haushaltskunden](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) und auf der Markttransparenzplattform [SMARD](https://www.smard.de/).
 
 Rechne jedes Angebot mit deiner tatsächlichen Jahresmenge durch. Wichtig sind:
 

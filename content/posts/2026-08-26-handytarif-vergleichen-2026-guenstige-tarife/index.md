@@ -153,6 +153,28 @@ Lies Enddatum und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendig
 
 Hebe Kündigung, Blatt zum Vertrag und Termin der Mitnahme gut auf. Die Mitnahme der Nummer allein stoppt alte Kosten nicht automatisch.
 
+## Häufige Fragen
+
+### Wie finde ich meinen echten Datenbedarf heraus?
+
+Sieh dir die letzten drei vollen Rechnungen an. Notiere den normalen Verbrauch und einen Monat mit viel Nutzung. So buchst du weder zu klein noch unnötig groß.
+
+### Lohnt ein Handy mit Vertrag oder der freie Kauf?
+
+Rechne beide Wege über volle 24 Monate durch. Ziehe vom Paketpreis die Kosten für einen reinen SIM-Tarif ab. Ist der Rest teurer als der Ladenpreis, lohnt der freie Kauf mehr.
+
+### Wie nehme ich meine Rufnummer sicher mit?
+
+Vergleiche Name, Anschrift und Geburtsdatum zwischen altem und neuem Anbieter. Schon ein Zahlendreher stoppt die Mitnahme. Sichere dir das Enddatum und den Termin der Portierung schriftlich.
+
+### Wann passt ein monatlich kündbarer Tarif besser?
+
+Bei geplantem Umzug, unsicherem Empfang vor Ort oder schwankendem Bedarf. Du zahlst manchmal leicht mehr pro Monat, bleibst aber sofort frei für einen besseren Tarif.
+
+### Was mache ich bei unklaren Posten auf der ersten Rechnung?
+
+Prüfe zuerst Teilmonate, Anschlusskosten und den Start des Rabatts. Entdeckst du ein nicht bestelltes Extra, schreibe dem Anbieter sofort kurz und sachlich mit deiner Vertragsnummer.
+
 **Dein nächster Schritt:** Notiere Datenbedarf, Wunsch-Netz und kurze oder lange Frist. Vergleiche erst dann die Preise. Als Einstieg hilft dir der [Partnervergleich für Handytarife](/go/handytarife/). Steht dein neues Angebot schon fest, nutze die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
 **Dein nächster Schritt:** Notiere Datenbedarf, gewünschtes Netz und maximale Bindung. Vergleiche erst dann die Preise. Als Einstieg kannst du den [Partnervergleich für Handytarife](/go/handytarife/) nutzen. Wenn du schon ein konkretes Wechselangebot hast, hilft dir die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
 

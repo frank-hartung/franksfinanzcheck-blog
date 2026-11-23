@@ -1543,3 +1543,37 @@ würde die beiden neuen Siegel-Einträge still zurücknehmen.
 | Eigener Gate-Schritt | `Skill-Vertrag` läuft als eigener Schritt in `.github/workflows/link-check.yml` vor dem Hugo-Bau-Vertrag sowie über `GUARDS` (C6) in `governance_contract.py --quick` |
 | Schutz repo-eigener Ergänzungen | deutsche Lektorats-Ausgabe aus dem Fremd-Ordner nach `.claude/skills/ff-lektorat/` überführt und in `data/skill_ergaenzungen.json` verankert (K10); `ff-*` im `skills-lock.json` bleibt durch K4 verboten |
 | Beschreibungs-Budget | K9 deckelt die Vorladelast aller Skill-Beschreibungen hart auf `56,0 KB`; Themen-Skills stehen zusätzlich unter P1–P7 in `scripts/skills_portfolio.py` |
+
+---
+
+## H. Agentur-Entscheidung & Betriebsfreigabe (Stand 23.11.2026)
+
+Konsolidierte Betreiber-Festlegung für die verbliebenen externen Einrichtungsschritte (Blöcke A, B, C) samt Go/No-Go-Regeln und bewussten Scope-Cuts. Alle quellen- und repo-seitigen Voraussetzungen sind bereits umgesetzt und per Test belegt.
+
+### H1 · WAF Skip-Regel für Sitemap & Feeds (#1279 / #1280)
+
+- **Entscheidung:** Globales Cloudflare Bot Fight Mode bleibt **AN**; stattdessen wird genau eine schmale Custom-WAF-Skip-Regel `FF Allow Sitemap and Feeds` angelegt (vollständiger Ausdruck und Prüfbefehle in `cloudflare/edge-schutz.md`, Abschnitt 7 / A1c).
+- **Ausdruck:** `(http.request.method eq "GET" and http.request.uri.path in {"/sitemap.xml" "/robots.txt" "/index.xml"})` → **Skip** (Super Bot Fight Mode / Bot Fight Mode / Managed Rules), **vor** allgemeinen Rate-Limit-/Bot-Regeln einsortieren.
+- **Nachweis:** `curl -sI -A "Googlebot/2.1 (+http://www.google.com/bot.html)" https://franksfinanzcheck.de/sitemap.xml` muss HTTP `200` und `content-type: application/xml` ohne `cf-mitigated: challenge` liefern; anschließend `GSC-Abdeckung` manuell anstoßen und `#1279`/`#1280` erst nach grünem Lauf schließen.
+
+### H2 · Block A — Reihenfolge & Newsletter Go/No-Go
+
+| Reihenfolge | Schritt | Status / Nachweis |
+|---|---|---|
+| 1 | WAF Skip-Regel `FF Allow Sitemap and Feeds` (#1279/#1280) | Cloudflare Dashboard → `curl` HTTP `200` + `GSC-Abdeckung` grün |
+| 2 | Edge-Header & Proxy (`npm run edge:freigabe:apply`) | `content/datenschutz/index.md` (**B7**) ist im Repo **bereits umgestellt** (`npm run edge:b7` Exit 0) |
+| 3 | Environment `cloudflare-produktion` absichern + Secrets (`CF_WORKERS_DEPLOY_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`) + `newsletter-worker` deployen (#1235) | `npm run worker:environment` Exit 0 → `Deploy-Zugang prüfen` → `Cloudflare-Worker deployen` → `Sicherheits-Wache` Live-Job grün |
+| 4 | KV Offsite-Backup E8 → E1–E6 (`npm run backup:einrichten`, #1283/#1284) | `CLOUDFLARE_API_TOKEN` + `KV_BACKUP_PUBLIC_KEY` (age) + `KV_BACKUP_R2_*` → `KV-Offsite-Backup` grün |
+| 5 | **Newsletter-Versand Go/No-Go** | **NO-GO** solange `#1235` oder `#1283/#1284` rot; sofort **GO** nach erfolgreichem Abschluss von Schritt 3 + 4 |
+
+### H3 · Block B — Rechtsfristen (fällig 29.11.2026) & API-Zugänge
+
+- **Rechtsfristen (`#1232` `dpf-zertifizierung-pruefen`, `#1233` `affiliate-partnerbedingungen`, `#1234` `rechtslage-screening`):** Niemals nur das Issue manuell schließen — stets den Workflow `Fristen-Check (Recht)` auf `main` mit `erledigt=<id>` ausführen, damit der Fristenzustand im Register sauber fortgeschrieben wird.
+- **KI- & Mess-Zugänge:** Gemini (`#1230`) und Groq (`#1191`) auf Pay-as-you-go mit hartem Budget-Cap (**15 €/Monat** gesamt) umstellen; kostenlosen `PSI_API_KEY` als Secret hinterlegen (`#1152`); `PINTEREST_ACCESS_TOKEN` erneuern.
+
+### H4 · Bewusste Scope-Cuts (zurückgestellt bis Q1/2027)
+
+- **KV-Backup D1 (Verteiler-Prüfung) & E7 (Wiederherstellungsübung):** Optional nach E1–E6, bewusst auf Q1/2027 verschoben.
+- **YMYL-Siegel `kfz-versicherung`:** Bleibt bis zur regulären Q1/2027-Quartalsprüfung unangetastet; keine kosmetischen Eingriffe am gesperrten Artikel.
+- **Fachbefund-Triage (`BEFUND-AKTE.md`):** Welle 1 (eskalierte Live-Befunde `>= 21 Tage`) im Repo vollständig abgearbeitet; Welle 2 (verbleibende Live-Seiten) in Folge-Sprints; Welle 3 (Entwürfe) erst bedarfsweise vor Veröffentlichung.
+

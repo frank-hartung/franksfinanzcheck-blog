@@ -6577,22 +6577,11 @@ entscheidungen:
   befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: 47f855cb4f0fe1e5c65f
   befund_fassung: legacy-unbekannt
-  geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
   geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
   typ: luecke
   beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
     bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
     in den bereitgestellten Statistiken.
-  beleg: ''
-  entschieden_von: Frank Hartung (Redaktion)
-  entschieden_am: '2026-11-23'
-  fassung_wechsel: true
-  begruendung: Heutige Fassung am 23.11.2026 nachgeprueft, weil der Satz zum Kfz-Stichtag
-    praezisiert wurde (Zugang statt Versand). Der Befund betraf die entfernten, unbelegten
-    Kfz-Wechsel-Spannen (150-400 Euro bzw. 180-350 Euro); diese stehen weiterhin nicht
-    im Artikel, und die Sperre gegen die alten Spannen bleibt ueber verboten_behauptend
-    scharf. Der Befund ist gegenueber dem heutigen Text weiterhin gegenstandslos;
-    die Bindung an die Prueffassung wird auf die Fassung mit der Praezisierung nachgezogen.
   beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
   entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
     dauerhaft beheben)'
@@ -6613,10 +6602,53 @@ entscheidungen:
   folgeentscheidung: true
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 47f855cb4f0fe1e5c65f
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  typ: luecke
+  beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
+    bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
+    in den bereitgestellten Statistiken.
+  beleg: ''
+  entschieden_von: Frank Hartung (Redaktion)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Heutige Fassung am 23.11.2026 nachgeprueft, weil der Satz zum Kfz-Stichtag
+    praezisiert wurde (Zugang statt Versand). Der Befund betraf die entfernten, unbelegten
+    Kfz-Wechsel-Spannen (150-400 Euro bzw. 180-350 Euro); diese stehen weiterhin nicht
+    im Artikel, und die Sperre gegen die alten Spannen bleibt ueber verboten_behauptend
+    scharf. Der Befund ist gegenueber dem heutigen Text weiterhin gegenstandslos;
+    die Bindung an die Prueffassung wird auf die Fassung mit der Praezisierung nachgezogen.
+  vorgaenger_geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 7f66ec82ee1a3f095b0c
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
+  typ: praezision
+  beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
+    ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
+    fehlt.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
+    dauerhaft beheben)'
+  entschieden_am: '2026-11-22'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Dublettenheilung #1027 (gleiche Umformulierung
+    der Kfz-Stichtag-Passage wie bei 47f855cb4f0fe1e5c65f). Erneut geprüft: Der heutige
+    Volltext enthält die Behauptung ''lukrativste Spar-Saison des Jahres'' nicht mehr;
+    der Herbst wird als Kassensturz statt Konsum-Saison begründet, und der Satz zum
+    größten saisonalen Hebel steht unverändert. Der Beitrag enthält keinen saisonalen
+    Datenvergleich, verspricht also weiterhin keine belegte Überlegenheit des Herbstes.
+    Fassung vorher 692d9701, heute cddc3cdf.'
+  vorgaenger_geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: 7f66ec82ee1a3f095b0c
   befund_fassung: legacy-unbekannt
   geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
-  geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
   typ: praezision
   beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
     ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
@@ -6632,18 +6664,6 @@ entscheidungen:
     dem heutigen Text weiterhin gegenstandslos; die Sperre gegen die alte Saison-Aussage
     bleibt ueber verboten_behauptend scharf. Die Bindung an die Prueffassung wird
     auf die Fassung mit der Praezisierung nachgezogen.
-  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
-  entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
-    dauerhaft beheben)'
-  entschieden_am: '2026-11-22'
-  fassung_wechsel: true
-  begruendung: 'Folgeentscheidung nach Dublettenheilung #1027 (gleiche Umformulierung
-    der Kfz-Stichtag-Passage wie bei 47f855cb4f0fe1e5c65f). Erneut geprüft: Der heutige
-    Volltext enthält die Behauptung ''lukrativste Spar-Saison des Jahres'' nicht mehr;
-    der Herbst wird als Kassensturz statt Konsum-Saison begründet, und der Satz zum
-    größten saisonalen Hebel steht unverändert. Der Beitrag enthält keinen saisonalen
-    Datenvergleich, verspricht also weiterhin keine belegte Überlegenheit des Herbstes.
-    Fassung vorher 692d9701, heute cddc3cdf.'
   vorgaenger_geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
   folgeentscheidung: true
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
@@ -6687,6 +6707,9 @@ entscheidungen:
     Die verboten_behauptend-Sperre bleibt scharf; keine Veroeffentlichungsfreigabe.
     Bindung an die neue Prueffassung nachgezogen.'
   vorgaenger_geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: 6b0aa3429d97e8c74ed8
   befund_fassung: legacy-unbekannt
   geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
@@ -6837,4 +6860,720 @@ entscheidungen:
     Zeile 191); fachliche Prüfung vom 04.11.2026 am heutigen Volltext unverändert
     bestätigt.
   vorgaenger_geprueft_fassung: d6d862672d7c9783690bbacc92a43ba0c748c72f8a3ef10daac210ed4980e188
+  folgeentscheidung: true
+- slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  befund_ursprung_slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  befund_id: 124ff2c3cd3917c274aa
+  befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
+  geprueft_fassung: 991809c39c5d2e1eda861a12217fbba6307ecd518389bd7ad5c07f36cbc64396
+  typ: praezision
+  beanstandung: Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten
+    Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der beanstandete Superlativ
+    ''Die besten Tarife'' steht nicht mehr im Artikel; Vergleichshinweise sind sachlich
+    ohne Superlativ formuliert.'
+  vorgaenger_geprueft_fassung: 003498e3c5a219342cd18d5d31e8f6171fe0ae46b455fa1d02032d429d604aff
+  folgeentscheidung: true
+- slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  befund_ursprung_slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  befund_id: 7bdec96c0329769bebe6
+  befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
+  geprueft_fassung: 991809c39c5d2e1eda861a12217fbba6307ecd518389bd7ad5c07f36cbc64396
+  typ: luecke
+  beanstandung: Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11
+    bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine
+    Themenübersicht darstellt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Unbelegte Oktober-2026-Gaspreisspannen
+    (11 bis 13 Cent/kWh) stehen nicht mehr im Artikel; Zahlen sind offen als Modellannahmen
+    oder mit Quellenbezug markiert.'
+  vorgaenger_geprueft_fassung: 003498e3c5a219342cd18d5d31e8f6171fe0ae46b455fa1d02032d429d604aff
+  folgeentscheidung: true
+- slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  befund_ursprung_slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  befund_id: a56734aa032e0ed9e0c4
+  befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
+  geprueft_fassung: 991809c39c5d2e1eda861a12217fbba6307ecd518389bd7ad5c07f36cbc64396
+  typ: luecke
+  beanstandung: Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht,
+    Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Regulierungsrahmen (Sonderkündigungsrecht,
+    Ausnahmen und Informationspflichten) ist im heutigen Text explizit mit Verweis
+    auf die Bundesnetzagentur dargestellt.'
+  vorgaenger_geprueft_fassung: 003498e3c5a219342cd18d5d31e8f6171fe0ae46b455fa1d02032d429d604aff
+  folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 30caa57be394afb62947
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: 742a79c7eb409c5bb70c681bf70e29f9090b3db3905b504ed3e82700b734c3d4
+  typ: luecke
+  beanstandung: Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt
+    in den Recherche-Fundstellen ein entsprechender Beleg.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der alte Wert 11,93 Cent/kWh
+    wurde entfernt; stattdessen verlinkt der Artikel direkt auf die BDEW-Gaspreisanalyse
+    Herbst 2026 (12,23 / 11,67 Cent/kWh) mit Hinweis ''Marktübersicht ist kein Tarifangebot''.'
+  vorgaenger_geprueft_fassung: 94a4dd7fe450da9b7dc5c13801b98f857679672f2393edd2e16aab7d969914e1
+  folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 32a3ea879f2cf126b3a7
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: 742a79c7eb409c5bb70c681bf70e29f9090b3db3905b504ed3e82700b734c3d4
+  typ: luecke
+  beanstandung: Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen
+    der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim
+    Anbieterwechsel zentral ist.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Pflichten der Versorger
+    bei Preisänderungen (Mindestfrist 1 Monat, Sonderkündigungsrecht, Ausnahmen, Grund-/Ersatzversorgung)
+    sind mit direkten Bundesnetzagentur-Links dargelegt; doppelter Absatz wurde bereinigt.'
+  vorgaenger_geprueft_fassung: 94a4dd7fe450da9b7dc5c13801b98f857679672f2393edd2e16aab7d969914e1
+  folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: c583efe1ce02df3ca2d7
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: 742a79c7eb409c5bb70c681bf70e29f9090b3db3905b504ed3e82700b734c3d4
+  typ: luecke
+  beanstandung: Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur
+    für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde
+    nicht gestützt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die unbelegte 360-Euro-Ersparnis-Behauptung
+    für Januar 2026 steht nicht mehr im Artikel; alle Beispielwerte sind als Rechenbeispiele
+    gekennzeichnet.'
+  vorgaenger_geprueft_fassung: 94a4dd7fe450da9b7dc5c13801b98f857679672f2393edd2e16aab7d969914e1
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: 437b809ffbf41e5af434
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: 9c287fa13663c71b431e6e443fb04090072f66e01b86dc84ea0e3ab9255cf1c3
+  typ: luecke
+  beanstandung: Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel
+    die Grundversorgung garantiert – regulatorischer Rahmen fehlt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Grund-/Ersatzversorgung
+    beim Anbieterwechsel ist im heutigen Text differenziert mit Verweis auf die Bundesnetzagentur
+    eingeordnet.'
+  vorgaenger_geprueft_fassung: 08ade8bd952055c6686884c2f795fb591160ffb52d57b87ccb11b0618d4cbc2a
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: 9fbacd9942c2dfa1447f
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: 9c287fa13663c71b431e6e443fb04090072f66e01b86dc84ea0e3ab9255cf1c3
+  typ: luecke
+  beanstandung: Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur
+    rund 6 % Energie einspart – Prozent‑Angabe fehlt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die 6-%-Faustregel je Grad
+    Raumtemperatur verlinkt im heutigen Text direkt auf den Ratgeber der Verbraucherzentrale.'
+  vorgaenger_geprueft_fassung: 08ade8bd952055c6686884c2f795fb591160ffb52d57b87ccb11b0618d4cbc2a
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: da30cbb5fbc8c801daf0
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: 9c287fa13663c71b431e6e443fb04090072f66e01b86dc84ea0e3ab9255cf1c3
+  typ: luecke
+  beanstandung: Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 %
+    Einsparungen realistisch sind – Prozent‑Wert unbelegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die Einsparspannen bei Heizungsmaßnahmen
+    sind im heutigen Text direkt mit dem Ratgeber der Verbraucherzentrale verknüpft
+    und ohne pauschale Zusage formuliert.'
+  vorgaenger_geprueft_fassung: 08ade8bd952055c6686884c2f795fb591160ffb52d57b87ccb11b0618d4cbc2a
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: db8a69f08dc0020adebd
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: 9c287fa13663c71b431e6e443fb04090072f66e01b86dc84ea0e3ab9255cf1c3
+  typ: luecke
+  beanstandung: Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise
+    gelten – Preis‑Trend‑Behauptung fehlt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Eine Preis-Trend-Behauptung
+    zu ''besseren Gaspreisen im Oktober 2026'' steht nicht mehr im Artikel; Oktober
+    2026 erscheint nur noch als Stichtag für das eigene Zählerfoto.'
+  vorgaenger_geprueft_fassung: 08ade8bd952055c6686884c2f795fb591160ffb52d57b87ccb11b0618d4cbc2a
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: e834f4702e87194affe7
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: 9c287fa13663c71b431e6e443fb04090072f66e01b86dc84ea0e3ab9255cf1c3
+  typ: luecke
+  beanstandung: Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise
+    18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): 18.000 kWh/Jahr werden im
+    heutigen Text ausdrücklich als ''angenommene 18.000 kWh im Jahr'' (Rechenbeispiel)
+    statt als statistischer Faktenwert geführt.'
+  vorgaenger_geprueft_fassung: 08ade8bd952055c6686884c2f795fb591160ffb52d57b87ccb11b0618d4cbc2a
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 252413dcc16cea146beb
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: e9878de04359da89189478285d4cbf49a5fadbfe4ebdf9cf6aff603be9c8d825
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher
+    angekündigt werden muss, ohne dafür eine Quelle anzugeben.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die Monatsfrist bei Preisänderungen
+    ist im heutigen Text direkt mit Link auf die Bundesnetzagentur (Preise und Abschläge)
+    belegt.'
+  vorgaenger_geprueft_fassung: c82b40466c908cc852857f07b586348842466e71ed120b9229880d1a6fa01b3a
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 48a0a962046c8315270e
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: e9878de04359da89189478285d4cbf49a5fadbfe4ebdf9cf6aff603be9c8d825
+  typ: praezision
+  beanstandung: Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf
+    den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine
+    konkrete Quelle und bleibt vage.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Risiko- und Preisgarantie-Einordnung
+    ist im heutigen Text sachlich unter Bezug auf Verbraucherzentrale und Vertragsbedingungen
+    präzisiert.'
+  vorgaenger_geprueft_fassung: c82b40466c908cc852857f07b586348842466e71ed120b9229880d1a6fa01b3a
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 9326152f4d788cff56bd
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: e9878de04359da89189478285d4cbf49a5fadbfe4ebdf9cf6aff603be9c8d825
+  typ: praezision
+  beanstandung: Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung
+    Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung
+    belegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Sonderkündigungsrecht und
+    Ausnahmen bei Preisänderungen sind im Abschnitt ''Was die Bundesnetzagentur zu
+    Preisänderungen sagt'' mit Direktlink belegt.'
+  vorgaenger_geprueft_fassung: c82b40466c908cc852857f07b586348842466e71ed120b9229880d1a6fa01b3a
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: ab4d084fd367c8e4d518
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: e9878de04359da89189478285d4cbf49a5fadbfe4ebdf9cf6aff603be9c8d825
+  typ: luecke
+  beanstandung: Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026
+    (laut BDEW) wird nicht durch eine Quelle belegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der unbelegte BDEW-Wert
+    11,93 Cent/kWh steht nicht mehr im Artikel.'
+  vorgaenger_geprueft_fassung: c82b40466c908cc852857f07b586348842466e71ed120b9229880d1a6fa01b3a
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: d215addd22dea72c44df
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: e9878de04359da89189478285d4cbf49a5fadbfe4ebdf9cf6aff603be9c8d825
+  typ: luecke
+  beanstandung: Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie
+    pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die 6-%-Faustregel verlinkt
+    im heutigen Text direkt auf den entsprechenden Ratgeber der Verbraucherzentrale.'
+  vorgaenger_geprueft_fassung: c82b40466c908cc852857f07b586348842466e71ed120b9229880d1a6fa01b3a
+  folgeentscheidung: true
+- slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+  befund_ursprung_slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+  befund_id: 3f0a88ede9d44ee910cb
+  befund_fassung: 7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648
+  geprueft_fassung: 345db4dc7b62acba23e89fc10b4351ba90bdcc4b086ecacf44f09dd4ae5a83ca
+  typ: luecke
+  beanstandung: Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur,
+    über das Verbraucher Probleme mit Anbietern direkt melden können.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft & ergänzt (Welle 1): Der Verbraucherservice
+    Energie der Bundesnetzagentur für Anfragen und Beschwerden ist im Artikel explizit
+    genannt.'
+  vorgaenger_geprueft_fassung: c50b94e164f0c39b006da4d6db778d1834b313bcbbf6f9897e97c42a75464b9c
+  folgeentscheidung: true
+- slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+  befund_ursprung_slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+  befund_id: 51e259fd2d8582e774f7
+  befund_fassung: 7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648
+  geprueft_fassung: 345db4dc7b62acba23e89fc10b4351ba90bdcc4b086ecacf44f09dd4ae5a83ca
+  typ: luecke
+  beanstandung: Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen
+    Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern
+    zur Verfügung stehen.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die kostenfreie Schlichtungsstelle
+    Energie ist im heutigen Text direkt verlinkt.'
+  vorgaenger_geprueft_fassung: c50b94e164f0c39b006da4d6db778d1834b313bcbbf6f9897e97c42a75464b9c
+  folgeentscheidung: true
+- slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+  befund_ursprung_slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+  befund_id: 55f8eeedc587cf0895ee
+  befund_fassung: 7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648
+  geprueft_fassung: 345db4dc7b62acba23e89fc10b4351ba90bdcc4b086ecacf44f09dd4ae5a83ca
+  typ: luecke
+  beanstandung: Der Artikel erwähnt keine behördlichen Informationsquellen wie das
+    Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen
+    bietet.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Behördliche Markttransparenzquellen
+    der Bundesnetzagentur (Preisübersichten für Haushaltskunden und SMARD) sind direkt
+    verlinkt.'
+  vorgaenger_geprueft_fassung: c50b94e164f0c39b006da4d6db778d1834b313bcbbf6f9897e97c42a75464b9c
+  folgeentscheidung: true
+- slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  befund_ursprung_slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  befund_id: 045ff990e44a7035e9a0
+  befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
+  geprueft_fassung: 2f4500c8506b2e142428be0a33ea0f3e9ebfce983741bb299293a5993b963e9d
+  typ: luecke
+  beanstandung: Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen
+    und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung
+    beim Vermieter hinausgeht.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der Verbraucherservice der
+    Bundesnetzagentur für Anfragen und Beschwerden ist im heutigen Text explizit genannt.'
+  vorgaenger_geprueft_fassung: 6ee863bee70a6d2fd194e8ac14db4d6642c8670b5e87d766e4065721c6626d19
+  folgeentscheidung: true
+- slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  befund_ursprung_slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  befund_id: 8919c2d1145af782d17a
+  befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
+  geprueft_fassung: 2f4500c8506b2e142428be0a33ea0f3e9ebfce983741bb299293a5993b963e9d
+  typ: luecke
+  beanstandung: Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt
+    aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz
+    (Schlichtungsverfahren) unerwähnt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die kostenfreie Schlichtungsstelle
+    Energie ist im heutigen Text direkt verlinkt.'
+  vorgaenger_geprueft_fassung: 6ee863bee70a6d2fd194e8ac14db4d6642c8670b5e87d766e4065721c6626d19
+  folgeentscheidung: true
+- slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  befund_ursprung_slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  befund_id: c39938841291b1e9e140
+  befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
+  geprueft_fassung: 2f4500c8506b2e142428be0a33ea0f3e9ebfce983741bb299293a5993b963e9d
+  typ: praezision
+  beanstandung: Die Markttransparenz und der Verbraucherschutz im Energiesektor werden
+    durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser
+    Kontext fehlt bei der Einordnung von Marktdaten.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Behördliche Marktdaten der
+    Bundesnetzagentur (SMARD) sind im heutigen Text direkt als Einordnungsquelle verlinkt.'
+  vorgaenger_geprueft_fassung: 6ee863bee70a6d2fd194e8ac14db4d6642c8670b5e87d766e4065721c6626d19
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: 0aa915539d57841e5014
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 6ccb55de94355f3861008f986306063bbdc6475374adc0f41aa5a18b5d1dbac4
+  typ: luecke
+  beanstandung: Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten
+    Vergleich auszublenden, fehlt eine Quellenangabe.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der Hinweis zum Vergleich
+    ohne Bonus und Einbeziehung von Verbraucherzentrale-Empfehlungen ist im heutigen
+    Text sauber verknüpft.'
+  vorgaenger_geprueft_fassung: 985937d9ab3cfc264bb538fdbdb2cc55e6f085cc690ef98ba701e491116df850
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: 5e1be48085014a836807
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 6ccb55de94355f3861008f986306063bbdc6475374adc0f41aa5a18b5d1dbac4
+  typ: luecke
+  beanstandung: Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026
+    wird nicht belegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der alte Wert 11,93 Cent/kWh
+    wurde entfernt; der Text verlinkt stattdessen direkt auf die BDEW-Gaspreisanalyse
+    Herbst 2026.'
+  vorgaenger_geprueft_fassung: 985937d9ab3cfc264bb538fdbdb2cc55e6f085cc690ef98ba701e491116df850
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: 6fdf31c3b68b6122bd0d
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 6ccb55de94355f3861008f986306063bbdc6475374adc0f41aa5a18b5d1dbac4
+  typ: praezision
+  beanstandung: Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter
+    oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der Abschnitt differenziert
+    heute klar zwischen eigenem Gasliefervertrag und Zentralheizung (''in der Regel
+    Vermieter oder Eigentümergemeinschaft'').'
+  vorgaenger_geprueft_fassung: 985937d9ab3cfc264bb538fdbdb2cc55e6f085cc690ef98ba701e491116df850
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: c27c182c615bd7ca3b78
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 6ccb55de94355f3861008f986306063bbdc6475374adc0f41aa5a18b5d1dbac4
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen
+    klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Informationspflichten bei
+    Preisänderungen sind im heutigen Text mit Verweis auf die Bundesnetzagentur belegt.'
+  vorgaenger_geprueft_fassung: 985937d9ab3cfc264bb538fdbdb2cc55e6f085cc690ef98ba701e491116df850
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: e1e40e9bbbdd109df86e
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 6ccb55de94355f3861008f986306063bbdc6475374adc0f41aa5a18b5d1dbac4
+  typ: luecke
+  beanstandung: Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht
+    besteht, ohne dafür eine Quelle zu nennen.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Sonderkündigungsrecht inkl.
+    Ausnahmen bei staatlichen Preisbestandteilen/Umsatzsteuer ist im heutigen Text
+    mit Bundesnetzagentur-Verweis dargelegt.'
+  vorgaenger_geprueft_fassung: 985937d9ab3cfc264bb538fdbdb2cc55e6f085cc690ef98ba701e491116df850
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: 334751e6f61ad0033fe4
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: 81097caa481ec38ff6788d38208e22eec1aab4dcf29eb93a4ac82437d864b43a
+  typ: luecke
+  beanstandung: Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar
+    2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft & präzisiert (Welle 1): Die 360 € bei
+    20.000 kWh und 1,8 Cent/kWh Differenz stehen ausdrücklich als ''Rechenbeispiel
+    ohne Marktversprechen'' ohne Behauptung eines Januar-2026-Durchschnitts.'
+  vorgaenger_geprueft_fassung: 83f4762aac72d32f80ba4d5f7aa8ff1e6eb771c3d7bd48b95fc037b07ab1b2e4
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: 36759a5efe5e8e5163d0
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: 81097caa481ec38ff6788d38208e22eec1aab4dcf29eb93a4ac82437d864b43a
+  typ: luecke
+  beanstandung: Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur
+    der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Die 6-%-Faustregel je Grad
+    Raumtemperatur verlinkt direkt auf den Ratgeber der Verbraucherzentrale.'
+  vorgaenger_geprueft_fassung: 83f4762aac72d32f80ba4d5f7aa8ff1e6eb771c3d7bd48b95fc037b07ab1b2e4
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: 942922d1afd7844618e9
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: 81097caa481ec38ff6788d38208e22eec1aab4dcf29eb93a4ac82437d864b43a
+  typ: luecke
+  beanstandung: Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt
+    rund 180 € im Jahr“ wird nicht belegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): 1 Cent × 18.000 kWh = 180
+    € ist eine rein arithmetische Beispielrechnung im ausdrücklich gekennzeichneten
+    Modellfall.'
+  vorgaenger_geprueft_fassung: 83f4762aac72d32f80ba4d5f7aa8ff1e6eb771c3d7bd48b95fc037b07ab1b2e4
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: d41f0d5ce8798df0211b
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: 81097caa481ec38ff6788d38208e22eec1aab4dcf29eb93a4ac82437d864b43a
+  typ: praezision
+  beanstandung: Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“
+    ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der Superlativ ''Die besten
+    Tarife'' steht nicht mehr im Artikel.'
+  vorgaenger_geprueft_fassung: 83f4762aac72d32f80ba4d5f7aa8ff1e6eb771c3d7bd48b95fc037b07ab1b2e4
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: e139d0769faadd04392a
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: 81097caa481ec38ff6788d38208e22eec1aab4dcf29eb93a4ac82437d864b43a
+  typ: luecke
+  beanstandung: Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne
+    Quellenangabe genannt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Volltext am 23.11.2026 geprüft (Welle 1): Der alte Wert 11,93 Cent/kWh
+    wurde entfernt; stattdessen verlinkt der Artikel auf die BDEW-Gaspreisanalyse
+    Herbst 2026 (12,23 Cent/kWh) als grobe Orientierung.'
+  vorgaenger_geprueft_fassung: 83f4762aac72d32f80ba4d5f7aa8ff1e6eb771c3d7bd48b95fc037b07ab1b2e4
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 47f855cb4f0fe1e5c65f
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892
+  typ: luecke
+  beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
+    bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
+    in den bereitgestellten Statistiken.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Volltext unverändert ohne unbelegte Kfz-Wechsel-Spannen (150-400 € / 180-350
+    €).'
+  vorgaenger_geprueft_fassung: 42d09ef3ae723da0866bd7855234c0a7fb57561b0205bdd3fbe6fc95a565bb43
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 6b0aa3429d97e8c74ed8
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892
+  typ: luecke
+  beanstandung: Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch
+    um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich
+    die allgemeine Preisentwicklung von Energie (+14,9 %).
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Keine pauschale 8-12-%-Behauptung im Text; 8-%-Beispiel ist ausdrücklich als
+    Rechenbeispiel gekennzeichnet.'
+  vorgaenger_geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 7f66ec82ee1a3f095b0c
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892
+  typ: praezision
+  beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
+    ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
+    fehlt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Formulierung ''lukrativste Spar-Saison des Jahres'' steht nicht im Artikel.'
+  vorgaenger_geprueft_fassung: 42d09ef3ae723da0866bd7855234c0a7fb57561b0205bdd3fbe6fc95a565bb43
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 84c991c5d152b14a2675
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892
+  typ: luecke
+  beanstandung: Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung
+    präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Pauschale 500-1.300-€-Spanne steht nicht im Artikel; Beispielrechnungen legen
+    Annahmen offen.'
+  vorgaenger_geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: a70e7adc97c58317ccc1
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892
+  typ: luecke
+  beanstandung: Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑
+    und Vorratshaltung ist nicht mit einer Quelle untermauert.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Unbelegte 50-80-€-Spanne für saisonale Vorratshaltung steht nicht mehr im
+    Artikel.'
+  vorgaenger_geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
+  folgeentscheidung: true
+- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_ursprung_slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_id: 0051151e6c46f4c2bdb3
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: e50b3a1b4a15dd408657a29aa70bbc3a6fff7baf41735788df6c17f52ef0411e
+  typ: luecke
+  beanstandung: Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass
+    die Verbraucherzentrale diese Spanne angibt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Kautionsspanne 900 € bis 2.500 € ist im Text ausdrücklich als Modellwert gekennzeichnet
+    und nicht der Verbraucherzentrale zugeschrieben.'
+  vorgaenger_geprueft_fassung: 7f54857e3e7f81d404894287eb58b01e1a3c037f8a54c40b5e0e7a6c3a58359c
+  folgeentscheidung: true
+- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_ursprung_slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_id: 0790f52160dfaa819917
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: e50b3a1b4a15dd408657a29aa70bbc3a6fff7baf41735788df6c17f52ef0411e
+  typ: luecke
+  beanstandung: Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung
+    ist nicht durch Zahlen der Verbraucherzentrale gedeckt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Differenz 145 € pro Woche ist im Text ausdrücklich als Modellannahme gekennzeichnet.'
+  vorgaenger_geprueft_fassung: 7f54857e3e7f81d404894287eb58b01e1a3c037f8a54c40b5e0e7a6c3a58359c
+  folgeentscheidung: true
+- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_ursprung_slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_id: 53c3fde8e986e6560890
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: e50b3a1b4a15dd408657a29aa70bbc3a6fff7baf41735788df6c17f52ef0411e
+  typ: luecke
+  beanstandung: Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind,
+    wird von der Verbraucherzentrale nicht bestätigt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): 15 bis 25 % Aufschlag an Flughafenstationen ist im Text ausdrücklich als Modellwert
+    gekennzeichnet.'
+  vorgaenger_geprueft_fassung: 7f54857e3e7f81d404894287eb58b01e1a3c037f8a54c40b5e0e7a6c3a58359c
+  folgeentscheidung: true
+- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_ursprung_slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_id: 89adecebaae75c147402
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: e50b3a1b4a15dd408657a29aa70bbc3a6fff7baf41735788df6c17f52ef0411e
+  typ: luecke
+  beanstandung: Die Aussage, dass eine „Zero‑Excess“-Option die Kaution komplett auf
+    0 € senkt und dafür 5 €‑12 € pro Tag kostet, wird von der Verbraucherzentrale
+    nicht belegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): ''Zero Excess'' wird ohne unbelegte 5-12-€/Tag-Faktenbehauptung als optionale
+    Anbieter-Regel erläutert.'
+  vorgaenger_geprueft_fassung: 7f54857e3e7f81d404894287eb58b01e1a3c037f8a54c40b5e0e7a6c3a58359c
+  folgeentscheidung: true
+- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_ursprung_slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  befund_id: a1a269b73a1b9c2dfc88
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: e50b3a1b4a15dd408657a29aa70bbc3a6fff7baf41735788df6c17f52ef0411e
+  typ: luecke
+  beanstandung: Der Hinweis, dass eine Vollkasko ohne Selbstbeteiligung nur 3 €‑8 €
+    pro Tag mehr kostet, fehlt in den Angaben der Verbraucherzentrale.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am 23.11.2026 nach KI-Kennzeichnungs-Update (Welle
+    1): Unbelegte 3-8-€/Tag-Angabe für Vollkasko ohne Selbstbeteiligung steht nicht
+    im Artikel.'
+  vorgaenger_geprueft_fassung: 7f54857e3e7f81d404894287eb58b01e1a3c037f8a54c40b5e0e7a6c3a58359c
   folgeentscheidung: true
