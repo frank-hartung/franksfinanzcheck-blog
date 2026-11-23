@@ -423,6 +423,32 @@ Grund und neuem Prüfdatum im selben PR – sichtbar, nicht still.
 
 ---
 
+## 8a. Nachtrag 23.11.2026, 16:30 UTC – was der erste Deploy nach dem Merge zeigte
+
+Der Merge (`5a59525`, 16:09) startete Lauf `45213215455`; der deploy-Job wurde
+**rot in Schritt 36 „Cover-Herkunft – Reproduktionswache (fail-closed)“**
+(`python3 scripts/ki_cover_herkunft.py --pruefen`), Pages `skipped`.
+
+**Ursache ist meine eigene Änderung, nicht ein Altfall:** `generate_covers.py`
+rendert die Bytes neu, aber der Herkunftsbeleg im Frontmatter
+(`cover.provenienz.sha256`, `geprueft_am`) beschreibt weiter die alten Bytes.
+Die Wache vergleicht Beleg und Datei – zu Recht.
+
+**Dauerheilung (nachgezogen, 0 Befunde):**
+
+```bash
+python3 scripts/generate_covers.py              # Titel geändert → Cover neu
+python3 scripts/ki_cover_herkunft.py --heilen   # Beleg auf die neuen Bytes ziehen
+python3 scripts/ki_cover_herkunft.py --pruefen  # muss 0 Befunde melden
+```
+
+**Betriebsregel daraus:** Cover-Regeneration ist ein **zweiteiliger** Vorgang.
+Wer nur `generate_covers.py` fährt, produziert ein rotes, fail-closed Gate –
+und damit denselben Stillstand wie am Mittag, nur mit anderem Namen. Diese
+Regel gehört zum Runbook (§7.2), nicht in ein Log.
+
+---
+
 ## 9. Anhang
 
 **Register-Fehlermeldung wörtlich** (Fassung `f3cd413`, reproduziert über die
