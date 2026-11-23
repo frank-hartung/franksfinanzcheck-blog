@@ -1412,5 +1412,6 @@ def werkzeugbefund_melden(schritt: str, text: str, root: Path = ROOT) -> None:
 
 if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(
-        "ki_provenienz.py ist eine Bibliothek. CLI: scripts/ki_provenienz_gate.py "
-        "(--gate, --heilen, --wache, --selftest, --json)")
+        "ki_provenienz.py ist eine Bibliothek, kein Aufrufziel. Die Schalter "
+        "gehören zu scripts/ki_provenienz_gate.py (Gate, Heilen, Wache, "
+        "Selbsttest, JSON-Ausgabe) – dort steht die Hilfe.")
