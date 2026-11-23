@@ -551,7 +551,15 @@ def main(argv: list[str] | None = None) -> int:
 
     # Klinke zieht bei Heilungen nach; offene NEUE Befunde werden nicht
     # eingefroren.
-    if baseline:
+    #
+    # 23.11.2026: `--json`/`--md` sind ABFRAGEN. Bei `markdown_struktur_wache.py`
+    # hat genau diese Zeile den regression-Job gerissen: Ein `--json`-Aufruf
+    # schrieb die Baseline auf null, der Folgetest fand `{}` und wurde rot.
+    # Dasselbe Muster hier – deshalb dieselbe Regel an beiden Stellen, nicht
+    # als kopierte Ausnahme, sondern als gemeinsamer Grundsatz: Wer den
+    # Bestand verändert, sagt es (`--seed` friert ein, ein Lauf ohne
+    # Maschinenformat rastet ein); `--json`/`--md` berichten nur.
+    if baseline and not maschinenformat:
         _schreibe_baseline(klinke_einrasten(stand, baseline), args.dry_run)
     else:
         # Ohne Baseline wäre jeder Befund „neu“ – das ist beim ersten Lauf
@@ -561,7 +569,8 @@ def main(argv: list[str] | None = None) -> int:
         pass
 
     _schreibe_history(len(ergebnis["neu"]) + len(ergebnis["verschlechtert"]),
-                       len(ergebnis["bekannt"]), dateien, args.dry_run)
+                       len(ergebnis["bekannt"]), dateien,
+                       args.dry_run or maschinenformat)
     _drucke(stand, ergebnis, baseline, dateien, args.json, args.md)
 
     return 1 if (ergebnis["neu"] or ergebnis["verschlechtert"]) else 0
