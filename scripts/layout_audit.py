@@ -738,7 +738,78 @@ def auto_fix_links():
     return fixed_total
 
 
+def _selftest() -> int:
+    """Prüft das WERKZEUG, nicht die Umgebung (Befund 23.11.2026).
+
+    WARUM ES DIESEN SELBSTTEST GIBT
+    -------------------------------
+    `layout_audit.py` hatte keinen. Ein Aufruf mit `--selftest` wurde still
+    ignoriert und lief in den VOLLMODUS – der ohne `public/` mit „Bau
+    fehlt" rot abbricht. Ergebnis: wer das Werkzeug prüfen wollte, prüfte
+    das Vorhandensein eines Builds. Ein Selbsttest, der an der Umgebung
+    scheitert, sagt nichts über den Code; er ist eine Umgebungsprüfung im
+    Gewand einer Wachen-Prüfung.
+
+    Hier wird stattdessen ein synthetischer Bau in ein Temp-Verzeichnis
+    geschrieben und die Erkennung daran gemessen – ohne Hugo, ohne Netz.
+    """
+    import tempfile
+    fehler: list[str] = []
+
+    # 1) Fehlendes Bauverzeichnis ist ein Befund, keine leere Messung.
+    alter_base = globals()["BASE"]
+    try:
+        globals()["BASE"] = os.path.join(tempfile.gettempdir(), "gibt-es-nicht-layout")
+        probleme, seiten, artikel = pruefe_baubasis()
+        if not probleme:
+            fehler.append("fehlendes Bauverzeichnis muss ein Befund sein")
+        if seiten or artikel:
+            fehler.append("ohne Bau dürfen keine Seiten gezählt werden")
+
+        # 2) Ein echter, minimaler Bau wird als messbar erkannt.
+        with tempfile.TemporaryDirectory() as td:
+            os.makedirs(os.path.join(td, "posts", "beispiel"), exist_ok=True)
+            with open(os.path.join(td, "index.html"), "w", encoding="utf-8") as fh:
+                fh.write("<html><head><title>Start</title></head><body>"
+                         "<a href=\"/posts/beispiel/\">Artikel</a></body></html>")
+            with open(os.path.join(td, "posts", "beispiel", "index.html"),
+                      "w", encoding="utf-8") as fh:
+                fh.write("<html><head><title>Artikel</title></head><body>"
+                         "<h1>Ein Artikel</h1><p>Text.</p></body></html>")
+            for i in range(MIN_SEITEN):
+                pfad = os.path.join(td, f"seite-{i}.html")
+                with open(pfad, "w", encoding="utf-8") as fh:
+                    fh.write(f"<html><body>Seite {i}</body></html>")
+            globals()["BASE"] = td
+            probleme, seiten, artikel = pruefe_baubasis()
+            if probleme:
+                fehler.append(f"messbarer Bau wurde abgelehnt: {probleme}")
+            if seiten < MIN_SEITEN:
+                fehler.append(f"Seiten wurden nicht gezählt: {seiten}")
+            if artikel < MIN_ARTIKEL:
+                fehler.append(f"Artikel wurden nicht erkannt: {artikel}")
+
+            # 3) Ein Bau ohne Startseite bleibt rot (nicht „leer, also OK").
+            os.remove(os.path.join(td, "index.html"))
+            probleme, _, _ = pruefe_baubasis()
+            if not any("Startseite" in p for p in probleme):
+                fehler.append("fehlende Startseite muss gemeldet werden")
+    finally:
+        globals()["BASE"] = alter_base
+
+    if fehler:
+        print("❌ LAYOUT-AUDIT-SELBSTTEST FEHLGESCHLAGEN:")
+        for f in fehler:
+            print("   -", f)
+        return 2
+    print("✅ LAYOUT-AUDIT-SELBSTTEST bestanden (Baubasis fail-closed, "
+          "Seiten-/Artikel-Erkennung, Startseiten-Pflicht – ohne Hugo und Netz).")
+    return 0
+
+
 def main():
+    if "--selftest" in sys.argv:
+        return _selftest()
     if "--fix" in sys.argv:
         n = auto_fix_links()
         return 0 if n == 0 else 2

@@ -86,6 +86,30 @@ class _Basis(unittest.TestCase):
 
 
 class BaubasisTests(_Basis):
+    def test_selftest_laeuft_nicht_in_den_vollmodus(self) -> None:
+        """`--selftest` prüft das WERKZEUG, nicht die Umgebung.
+
+        Befund 23.11.2026: `layout_audit.py` kannte das Flag nicht. Ein
+        Aufruf `--selftest` wurde still ignoriert und lief in den
+        Vollmodus – der ohne `public/` mit „Bau fehlt" rot abbricht. Wer
+        das Werkzeug prüfen wollte, prüfte also, ob ein Build existiert.
+        Jetzt: Exit 0 OHNE Build, denn der Selbsttest legt seinen eigenen
+        synthetischen Bau in ein Temp-Verzeichnis.
+        """
+        import os
+        import subprocess
+        import sys
+        from pathlib import Path as P
+        repo = P(__file__).resolve().parents[2]
+        umgebung = {k: v for k, v in os.environ.items() if k != "LAYOUT_BASE_DIR"}
+        lauf = subprocess.run(
+            [sys.executable, str(repo / "scripts" / "layout_audit.py"), "--selftest"],
+            capture_output=True, text=True, cwd=repo, env=umgebung)
+        self.assertEqual(0, lauf.returncode,
+                         "der Selbsttest darf nicht an einem fehlenden Build "
+                         "scheitern:\n" + lauf.stdout + lauf.stderr)
+        self.assertIn("SELBSTTEST bestanden", lauf.stdout)
+
     def test_leerer_bau_ist_nicht_messbar(self) -> None:
         probleme, seiten, artikel = la.pruefe_baubasis()
         self.assertTrue(probleme, "Ein leerer Bau muss Befunde liefern")
