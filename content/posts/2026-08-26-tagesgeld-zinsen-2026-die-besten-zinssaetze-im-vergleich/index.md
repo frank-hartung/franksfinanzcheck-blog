@@ -53,11 +53,13 @@ Tagesgeldkonto im Check: Zwei Banken werben mit unterschiedlichen Tagesgeldzinse
 
 ## Wofür brauchst du das Geld?
 
+
 Genau das ist der Hebel: Tagesgeldkonto.
+
 
 Darum geht es hier konkret: Tagesgeldkonto.
 
-Trenne deine Rücklage für unerwartete Ausgaben von Geld, dessen Verwendung bereits feststeht. Die nächste Jahresrechnung für die Versicherung ist beispielsweise keine Überraschung. Für einen [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) zählt vor allem, dass du ohne Verkauf von Wertpapieren und ohne langfristige Bindung an ihn herankommst.
+Trenne deine Rücklage für unerwartete Ausgaben von Geld, dessen Verwendung bereits feststeht. Die nächste Jahresrechnung für die Versicherung ist beispielsweise keine Überraschung. Für einen [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) zählt vor allem, dass du ohne Verkauf von Wertpapieren und ohne langfristige Bindung an ihn herankommst. Wie viel Rücklage zu deinem Haushalt passt, schätzt du mit dem [Notgroschen-Rechner](../../werkzeuge/notgroschen-rechner/) ab.
 
 Tagesgeld eignet sich nicht zum Bezahlen an der Kasse. In der Regel überweist du zuerst auf das vereinbarte Referenzkonto. „Täglich verfügbar“ bedeutet nicht, dass eine Überweisung jederzeit sofort gutgeschrieben ist. Halte auf dem Girokonto genug für unmittelbar fällige Abbuchungen bereit.
 
@@ -65,7 +67,7 @@ Tagesgeld eignet sich nicht zum Bezahlen an der Kasse. In der Regel überweist d
 
 Notiere den **Jahreszinssatz**, den **Aktionszeitraum** und das **Guthaben, für das er gilt**. Prüfe, ob das Angebot an eine erstmalige Kontoeröffnung, zusätzlich eingezahltes Geld oder ein weiteres Produkt gebunden ist. Liegt ein Teil deiner Einlage über einer Betragsgrenze, rechne beide Teile getrennt.
 
-Ein Aktionszins von 3 % pro Jahr für drei Monate bedeutet nicht 3 % Ertrag in drei Monaten. Und ein heute genannter variabler Anschlusszins ist für die Zeit nach der Aktion keine Zusage. Rechne deshalb mindestens eine zweite Variante mit niedrigerem Anschlusszins durch.
+Ein Aktionszins von 3 % pro Jahr für drei Monate bedeutet nicht 3 % Ertrag in drei Monaten. Und ein heute genannter variabler Anschlusszins ist für die Zeit nach der Aktion keine Zusage. Rechne deshalb mindestens eine zweite Variante mit niedrigerem Anschlusszins durch. Welche Kontoarten es gibt und worauf du bei Gebühren achtest, steht im Ratgeber [Konto & Karten](../../pillar/konto-karten/).
 
 ### Beispiel: Der Anschlusszins entscheidet mit
 

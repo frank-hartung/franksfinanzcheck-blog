@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 0ea428bd26ad8823dc5f87a17b9c387724b80c8fed70db20e695774883cc24c9
-    geprueft_am: 2026-11-21
+    sha256: 2dd0a630ecb7248b96f01ca62d24464553fcb3c360b29c2c050babbad77e5ae6
+    geprueft_am: 2026-11-22
 kurzantwort: "Ein guter Essensplan für die Woche stoppt teure Spontankäufe im Markt und sorgt dafür, dass offene Zutaten ganz aufgebraucht werden. Wer erst seine Vorräte prüft, passende Gerichte kombiniert und strikt nach Liste einkauft, senkt seine Ausgaben dauerhaft ohne Verzicht."
 faktencheck: 2026-11-13
 faktenfrische_aliases:
@@ -55,8 +55,8 @@ Gerade beim Essen steckt in fast jedem [Budget](../../posts/2026-10-27-frugalism
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Fixkosten auf CHECK24 vergleichen**](/go/allgemein/)
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+💡 **Schnell‑Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner‑Vergleich: [**Jetzt Fixkosten auf CHECK24 vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum schützt ein Essensplan Woche dein Budget doppelt?
 
@@ -108,14 +108,14 @@ Mit dem Trick „Einmal kochen, zweimal anders essen“ kommt nie Langeweile auf
 
 Kleine Käufe zwischendurch fallen einzeln kaum auf. Ein Snack beim Bäcker hier, eine volle Tüte nach Feierabend dort – erst über das Jahr zeigt sich die echte Summe. Schauen wir uns dazu eine ehrliche Modellrechnung für einen Haushalt mit zwei Personen an. Alle Zahlen sind klare Annahmen für dieses Beispiel:
 
-- **Annahme 1 (ungeplante Käufe):** Ohne Plan gibt es pro Woche zwei schnelle Stopps nach der Arbeit mit je 12 € für spontane Extras – das sind 24 € pro Woche (Annahme).
-- **Annahme 2 (Reste im Müll):** Dazu landen jede Woche vergessene Frischewaren im Wert von 6 € in der Tonne (Annahme).
-- **Annahme 3 (Umsetzung im Alltag):** Mit einem festen **Essensplan Woche** und einem klaren Einkauf sinken diese vermeidbaren Kosten um zwei Drittel (Modellwert).
+- **Annahme 1 (ungeplante Käufe):** Ohne Plan gibt es pro Woche zwei schnelle Stopps nach der Arbeit mit je **12 €** für spontane Extras – das sind **24 €** pro Woche (Annahme).
+- **Annahme 2 (Reste im Müll):** Dazu landen jede Woche vergessene Frischewaren im Wert von **6 €** in der Tonne (Annahme).
+- **Annahme 3 (Umsetzung im Alltag):** Mit einem festen **Essensplan Woche** und einem klaren Einkauf sinken diese vermeidbaren Kosten um zwei Drittel (Modellwert).
 
-**Formel und Rechenweg (Modellrechnung):**
-1. Extras und Müll ohne Plan: 24 € + 6 € = 30 € pro Woche (Modellrechnung).
-2. Gesparter Anteil pro Woche (zwei Drittel): 30 € × 2 ÷ 3 = 20 € im jeweiligen Zeitraum (Modellrechnung).
-3. **Probe aufs ganze Jahr:** 20 € × 52 Wochen = 1.040 € im Jahr, also etwa 86,67 € pro Monat (Modellrechnung; 1.040 € ÷ 12 = 86,67 €).
+**Rechenweg (Modellrechnung):**
+1. Extras und Müll ohne Plan: **24 €** + **6 €** = **30 €** pro Woche (Modellrechnung).
+2. Gesparter Anteil pro Woche (zwei Drittel): **30 €** × 2 ÷ 3 = **20 €** im jeweiligen Zeitraum (Modellrechnung).
+3. **Probe aufs ganze Jahr:** **20 €** × **52 Wochen** = **1.040 €** im Jahr, also etwa **86,67 €** pro Monat (Modellrechnung; **1.040 €** ÷ **12** = **86,67 €**).
 
 *Ergebnis der Beispielrechnung:* Schon weniger Stopps im Laden und das Aufbrauchen bezahlter Ware sparen in diesem Beispiel über tausend Euro im Jahr – ganz [ohne Verzicht](../../posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/) auf gutes Essen.
 
@@ -163,4 +163,4 @@ Mit Zwiebeln, Knoblauch, Tomaten aus der Dose, Brühe, Eiern, Reis, Nudeln, Lins
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+*Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

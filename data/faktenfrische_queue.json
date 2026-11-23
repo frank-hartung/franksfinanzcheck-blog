@@ -6590,9 +6590,9 @@
       "faellig": false,
       "frist": "2026-11-29",
       "geo": 100,
-      "befund": true,
+      "befund": false,
       "unvollstaendig": false,
-      "status": "befund"
+      "status": "vorlauf"
     },
     {
       "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
@@ -6602,8 +6602,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
@@ -6635,8 +6635,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
@@ -6646,8 +6646,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
@@ -6657,8 +6657,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
@@ -6668,8 +6668,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
@@ -6679,8 +6679,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
@@ -6690,8 +6690,8 @@
       "frist": "2026-12-02",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
@@ -6701,8 +6701,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
@@ -6712,8 +6712,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
@@ -6723,8 +6723,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
@@ -6734,8 +6734,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
@@ -6745,8 +6745,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -6756,8 +6756,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
@@ -6767,8 +6767,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
@@ -6778,8 +6778,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
@@ -6800,8 +6800,8 @@
       "frist": "2026-12-05",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "offen": [
@@ -6872,17 +6872,6 @@
       "status": "unvollstaendig"
     },
     {
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
-      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
-    },
-    {
       "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
       "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
       "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
@@ -6890,8 +6879,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
@@ -6901,8 +6890,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
@@ -6912,8 +6901,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
@@ -6923,8 +6912,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
@@ -6934,8 +6923,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
@@ -6945,8 +6934,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
@@ -6956,8 +6945,8 @@
       "frist": "2026-12-02",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
@@ -6967,8 +6956,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
@@ -6978,8 +6967,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
@@ -6989,8 +6978,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
@@ -7000,8 +6989,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
@@ -7011,8 +7000,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -7022,8 +7011,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
@@ -7033,8 +7022,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
@@ -7044,8 +7033,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
@@ -7055,8 +7044,8 @@
       "frist": "2026-12-05",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "vorlauf": [
@@ -7100,6 +7089,17 @@
       "faellig": false,
       "frist": "2026-11-29",
       "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
+    },
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-29",
+      "geo": 100,
       "befund": false,
       "unvollstaendig": false,
       "status": "vorlauf"

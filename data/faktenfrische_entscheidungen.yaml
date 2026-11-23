@@ -6578,6 +6578,7 @@ entscheidungen:
   befund_id: 47f855cb4f0fe1e5c65f
   befund_fassung: legacy-unbekannt
   geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
   typ: luecke
   beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
     bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
@@ -6592,6 +6593,22 @@ entscheidungen:
     im Artikel, und die Sperre gegen die alten Spannen bleibt ueber verboten_behauptend
     scharf. Der Befund ist gegenueber dem heutigen Text weiterhin gegenstandslos;
     die Bindung an die Prueffassung wird auf die Fassung mit der Praezisierung nachgezogen.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
+    dauerhaft beheben)'
+  entschieden_am: '2026-11-22'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Dublettenheilung #1027: Die Passage ''Den eigenen
+    Kfz-Stichtag ermitteln'' wurde umformuliert, weil sie fünf gemeinsame 5-Gramme
+    mit dem YMYL-Beitrag 2026-08-26-kfz-versicherung-vergleich hatte. Inhaltlich unverändert:
+    31.12./einen Monat Frist/30.11./unterjährig; neuer Wortlaut ''Läuft dein Kfz-Vertrag
+    zum 31. Dezember aus und gilt eine Kündigungsfrist von einem Monat, muss dein
+    Schreiben spätestens am 30. November zugehen.'' Der heute vollständig gelesene
+    Text enthält weiterhin keine der verbotenen Zahlen 150-400 EUR und 180-350 EUR
+    und keine Formulierung ''lukrativste Spar-Saison''; beide Anker (''wie viel du
+    sparst, zeigt nur der Vergleich deiner eigenen Police bei gleicher Leistung'',
+    ''unterjähriger Vertrag ... Ablauftermin maßgeblich'') stehen unverändert. Fassung
+    vorher 692d9701, heute cddc3cdf.'
   vorgaenger_geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
   folgeentscheidung: true
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
@@ -6599,6 +6616,7 @@ entscheidungen:
   befund_id: 7f66ec82ee1a3f095b0c
   befund_fassung: legacy-unbekannt
   geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
   typ: praezision
   beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
     ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
@@ -6614,6 +6632,18 @@ entscheidungen:
     dem heutigen Text weiterhin gegenstandslos; die Sperre gegen die alte Saison-Aussage
     bleibt ueber verboten_behauptend scharf. Die Bindung an die Prueffassung wird
     auf die Fassung mit der Praezisierung nachgezogen.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
+    dauerhaft beheben)'
+  entschieden_am: '2026-11-22'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Dublettenheilung #1027 (gleiche Umformulierung
+    der Kfz-Stichtag-Passage wie bei 47f855cb4f0fe1e5c65f). Erneut geprüft: Der heutige
+    Volltext enthält die Behauptung ''lukrativste Spar-Saison des Jahres'' nicht mehr;
+    der Herbst wird als Kassensturz statt Konsum-Saison begründet, und der Satz zum
+    größten saisonalen Hebel steht unverändert. Der Beitrag enthält keinen saisonalen
+    Datenvergleich, verspricht also weiterhin keine belegte Überlegenheit des Herbstes.
+    Fassung vorher 692d9701, heute cddc3cdf.'
   vorgaenger_geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
   folgeentscheidung: true
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
@@ -6657,4 +6687,69 @@ entscheidungen:
     Die verboten_behauptend-Sperre bleibt scharf; keine Veroeffentlichungsfreigabe.
     Bindung an die neue Prueffassung nachgezogen.'
   vorgaenger_geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  befund_id: 6b0aa3429d97e8c74ed8
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
+  typ: luecke
+  beanstandung: Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch
+    um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich
+    die allgemeine Preisentwicklung von Energie (+14,9 %).
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
+    dauerhaft beheben)'
+  entschieden_am: '2026-11-22'
+  fassung_wechsel: true
+  begruendung: 'Drittnachprüfung des heutigen Volltexts (die Entscheidung von damals
+    band an den Altbestand-Hash a217963d und war damit formal offen): Der Satz ''technische
+    Maßnahmen senken den Energieverbrauch um 8 bis 12 Prozent'' ist im Beitrag nicht
+    vorhanden, auch nicht paraphrasiert. Die Wirkung von Heizungsmaßnahmen wird stattdessen
+    ausdrücklich von Anlage und Gebäude abhängig gemacht, und die Beispielrechnungen
+    legen ihre Annahmen offen; beide Anker stehen unverändert. Belegt wird nur die
+    allgemeine Preisentwicklung. Keine Zahl ohne Quelle im Text gefunden. Heutige
+    Fassung cddc3cdf.'
+  vorgaenger_geprueft_fassung: a217963d44f2fe0ccd579aa042ebbfcd22e175a7008824549d4f006db15dadd4
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 84c991c5d152b14a2675
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
+  typ: luecke
+  beanstandung: Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung
+    präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
+    dauerhaft beheben)'
+  entschieden_am: '2026-11-22'
+  fassung_wechsel: true
+  begruendung: 'Drittnachprüfung des heutigen Volltexts (Altbestand-Bindung a217963d):
+    Ich habe den Beitrag vollständig gelesen und nach Gesamtsummen pro Haushalt gesucht.
+    Die pauschale Spanne 500-1300 EUR ist nicht mehr enthalten, ebenso wenig die Formulierung
+    ''Gesamteinsparungen von 500''. Wo Sparbeträge auftauchen, sind sie als Beispielrechnung
+    gekennzeichnet und die Annahmen offen dokumentiert; genau dieser Anker (''Beispielrechnungen
+    unten legen ihre Annahmen offen'') steht unverändert im Text. Damit ist die Beanstandung
+    ''Modellrechnung ohne Kennzeichnung und ohne Quelle'' gegenstandslos. Heutige
+    Fassung cddc3cdf.'
+  vorgaenger_geprueft_fassung: a217963d44f2fe0ccd579aa042ebbfcd22e175a7008824549d4f006db15dadd4
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: a70e7adc97c58317ccc1
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: cddc3cdf0b1c265c04c760bad857d2ab89d9b7c3858782a935757b21b472b28a
+  typ: luecke
+  beanstandung: Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑
+    und Vorratshaltung ist nicht mit einer Quelle untermauert.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Frank Hartung (Auftrag 22.11.2026 an Arena-Agent: vollständig
+    dauerhaft beheben)'
+  entschieden_am: '2026-11-22'
+  fassung_wechsel: true
+  begruendung: 'Drittnachprüfung des heutigen Volltexts (Altbestand-Bindung a217963d):
+    Das Sparpotenzial 50-80 EUR durch saisonale Lebensmittel- und Vorratshaltung ist
+    im Beitrag nicht mehr beziffert; weder die Spanne noch eine gleichwertige Zahl
+    ohne Quelle ist auffindbar. Die Aussagen zu Vorratshaltung bleiben qualitativ
+    und sind an die offen gelegten Beispielrechnungen gekoppelt (Anker unverändert
+    vorhanden). Keine neue unbelegte Zahl eingeführt. Heutige Fassung cddc3cdf.'
+  vorgaenger_geprueft_fassung: a217963d44f2fe0ccd579aa042ebbfcd22e175a7008824549d4f006db15dadd4
   folgeentscheidung: true

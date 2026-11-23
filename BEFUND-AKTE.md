@@ -3,16 +3,19 @@
 _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
 **304 offene Befunde auf 83 Seiten · davon 56 Live-Seiten mit 201 Befunden · ältester 24 Tage · Frist 14 Tage.**
+**301 offene Befunde auf 82 Seiten · davon 55 Live-Seiten mit 198 Befunden · ältester 24 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 304 |
-| Seiten betroffen | 83 (davon live: 56) |
+| Offene Befunde | 301 |
+| Seiten betroffen | 82 (davon live: 55) |
 | Text seit dem Befund geändert | 253 |
-| Altbestand ohne Fassungs-Hash | 13 |
+| Altbestand ohne Fassungs-Hash | 10 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 137 |
 | In Eskalation (21 Tage) | 34 |
+| Über der Frist (14 Tage) | 134 |
+| In Eskalation (21 Tage) | 31 |
 
 ## So schließt du einen Befund
 
@@ -32,7 +35,7 @@ _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 266 von 304 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 263 von 301 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 

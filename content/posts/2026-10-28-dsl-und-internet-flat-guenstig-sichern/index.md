@@ -25,8 +25,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 1f8d2a2399961e32528fc4755bbc0c8751bed2f71276fd8454658801d28d8e0a
-    geprueft_am: 2026-11-21
+    sha256: eabc33e079f201fb8fe06a467976d77a46570928756fe8f522026a0ccec74b40
+    geprueft_am: 2026-11-22
 quellen:
   - id: "Q1"
     titel: "§ 56 TKG – Vertragslaufzeit, Kündigung nach stillschweigender Vertragsverlängerung"

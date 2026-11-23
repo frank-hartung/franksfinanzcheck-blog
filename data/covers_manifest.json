@@ -1243,7 +1243,7 @@
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
   "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-11-22T12:43:52+00:00",
+  "ts": "2026-11-22T17:55:06+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1405,7 +1405,7 @@
  },
  "2026-10-26-gastarife-vergleichen-vor-dem-herbst": {
   "title": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
-  "ts": "2026-11-22T12:43:54+00:00",
+  "ts": "2026-11-22T17:55:03+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1432,7 +1432,7 @@
  },
  "2026-10-28-dsl-und-internet-flat-guenstig-sichern": {
   "title": "Internet-Flats vergleichen: Was kostet der Anschluss",
-  "ts": "2026-11-22T12:43:56+00:00",
+  "ts": "2026-11-22T17:55:00+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1558,7 +1558,7 @@
  },
  "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": {
   "title": "Günstige Flüge für den Spätsommer finden",
-  "ts": "2026-11-22T12:43:57+00:00",
+  "ts": "2026-11-22T17:54:57+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1818,8 +1818,8 @@
   }
  },
  "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
-  "title": "Wie viel Bandbreite brauchst du fürs Streaming?",
-  "ts": "2026-11-19T13:38:13+00:00",
+  "title": "Streaming-Bandbreite: Wie viel brauchst du wirklich?",
+  "ts": "2026-11-22T14:28:09+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -2404,7 +2404,7 @@
  },
  "2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
   "title": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
-  "ts": "2026-11-22T12:08:01+00:00",
+  "ts": "2026-11-22T17:32:41+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -2413,7 +2413,7 @@
  },
  "2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
   "title": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
-  "ts": "2026-11-22T12:08:03+00:00",
+  "ts": "2026-11-22T17:32:43+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -2422,7 +2422,7 @@
  },
  "2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
   "title": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
-  "ts": "2026-11-22T12:08:05+00:00",
+  "ts": "2026-11-22T17:32:46+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -2431,7 +2431,7 @@
  },
  "2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
   "title": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
-  "ts": "2026-11-22T12:08:07+00:00",
+  "ts": "2026-11-22T17:32:48+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -2440,7 +2440,7 @@
  },
  "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
   "title": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
-  "ts": "2026-11-22T12:08:10+00:00",
+  "ts": "2026-11-22T17:32:54+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -2449,7 +2449,7 @@
  },
  "2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
   "title": "Strompreis 2026: Herbst-Check für deine Stromkosten",
-  "ts": "2026-11-22T12:08:12+00:00",
+  "ts": "2026-11-22T16:40:56+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -2458,7 +2458,7 @@
  },
  "2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
   "title": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
-  "ts": "2026-11-22T12:08:14+00:00",
+  "ts": "2026-11-22T17:32:56+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -2467,7 +2467,7 @@
  },
  "2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
   "title": "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe",
-  "ts": "2026-11-22T12:08:16+00:00",
+  "ts": "2026-11-22T17:32:59+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -2476,19 +2476,28 @@
  },
  "2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
   "title": "Gebrauchte Möbel: Woran erkennst du gute Qualität?",
-  "ts": "2026-11-22T12:08:19+00:00",
+  "ts": "2026-11-22T16:41:03+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  },
- "2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
-  "title": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
-  "ts": "2026-11-22T12:08:21+00:00",
+ "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+  "title": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
+  "ts": "2026-11-22T17:32:50+00:00",
   "design": {
    "v": 3,
-   "badge": "INTERNET & DSL",
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
+  "title": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
+  "ts": "2026-11-22T17:32:52+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  }

@@ -24,6 +24,7 @@ WAS HIER GEPRÜFT WIRD
 Kein Ersatz für eine Fachprüfung: Rückfall-Schutz, kein Wahrheitsbeweis.
 """
 from pathlib import Path
+import re
 import sys
 import unittest
 
@@ -202,6 +203,118 @@ class BestandTests(unittest.TestCase):
                          'Zerstückelte Kennzeichnung im Bestand – '
                          f'python3 scripts/pflicht_marker_reparatur.py --apply '
                          f'({len(treffer)} Funde)')
+
+
+class RechtsnormStattModellwertTests(unittest.TestCase):
+    """Wurzel zum Modellwert-Artefakt (BEFUND 22.11.2026).
+
+    Live stand der Satz: „Die DSGVO (Verordnung (EU) 2016/679) regelt die
+    Verarbeitung personenbezogener Daten; das ist ein Modellwert.“ Eine
+    Rechtsnorm ist kein Modellwert, sie ist geltendes Recht – der Stempel war
+    faktisch falsch, in einem YMYL-Satz über die DSGVO.
+
+    Ursache war `_ZAHLBEHAUPTUNG`: Der Ausdruck verknüpfte zwei sehr
+    unterschiedliche Fälle mit ODER – Zahl MIT Einheit (immer eine Behauptung)
+    und NACKTE Zahl ab drei Ziffern (nur manchmal eine). Der nackte Zweig fraß
+    die `2016` der Fundstellenangabe, `_marker_reparatur` sah „der Satz trägt
+    eine Zahl“ und hängte den Teilsatz an.
+
+    #1318 hat den Satz von Hand korrigiert. Die Ursache blieb im Baum, mit
+    gemessenen 44 Zeilen Exposition im Bestand (1 Fundstelle, 40
+    Paragraphenverweise, 3 Link-Pfade mit Datum); der Bestand war nur deshalb
+    sauber, weil diese Marker gerade nicht zerstückelt waren. Hier steht die
+    Sicherung der Wurzelheilung – in BEIDE Richtungen, denn ein zu grober Guard
+    wäre eine Scheinheilung in die Gegenrichtung: Er nähme echten
+    Modellrechnungen ihre Kennzeichnungspflicht und verstieße damit still
+    gegen genau das, was #964 durchgesetzt hat.
+    """
+
+    def test_selbsttest_laeuft_durch(self):
+        self.assertEqual(sprachkern.selbsttest(), 0)
+
+    def test_rechtsnorm_ist_keine_zahlenbehauptung(self):
+        for satz in [
+            'Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung '
+            'personenbezogener Daten',
+            'Nach § 5 Abs. 2 UWG ist diese Werbung unzulässig',
+            'Art. 6 DSGVO erlaubt die Verarbeitung nur mit Rechtsgrundlage',
+            'Siehe Ziff. 12 des Vertrags',
+            'Vergleiche S. 240 des Berichts',
+            'Das Aktenzeichen lautet 2016/679',
+        ]:
+            self.assertFalse(sprachkern._zaahlbehauptung(satz),
+                             f'Rechtsverweis als Zahlenbehauptung gelesen: {satz}')
+
+    def test_linkziel_ist_keine_zahlenbehauptung(self):
+        satz = ('Die Zahlen stehen in der [Pressemeldung]'
+                '(https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10)')
+        self.assertFalse(sprachkern._zaahlbehauptung(satz),
+                         'Datumpfad eines Link-Ziels als Zahlenbehauptung gelesen')
+
+    def test_echte_modellrechnung_bleibt_kennzeichnungspflichtig(self):
+        """Gegenrichtung – der Guard darf nichts wegnehmen, was Pflicht ist."""
+        for satz in [
+            'Ein Haus braucht 18.000 kWh im Jahr',
+            'Nach 24 Monaten kostet der Tarif 460 €',
+            'Der Preis liegt bei ca. 11 Cent je kWh',
+            'Die Ersparnis beträgt 12 Prozent',
+            'Rund 1500 Nutzer haben teilgenommen',
+            'Der Tarif bietet 500 GB Datenvolumen',
+        ]:
+            self.assertTrue(sprachkern._zaahlbehauptung(satz),
+                            f'echte Zahlenbehauptung wegmaskiert: {satz}')
+
+    def test_mischfall_behaelt_die_behauptung(self):
+        """Ein Satz darf einen Paragraphen zitieren UND eine Zahl behaupten.
+
+        Deshalb prüft der Guard den Kontext um den EINZELNEN Treffer, nicht den
+        ganzen Satz. Ein satzweiser Guard würde hier die Kennzeichnung
+        verlieren.
+        """
+        for satz in ['Nach § 5 kostet das 460 € im Monat',
+                     'Gemäß Art. 15 DSGVO fallen dafür 25 Euro an']:
+            self.assertTrue(sprachkern._zaahlbehauptung(satz),
+                            f'Kennzeichnungspflicht im Mischfall verloren: {satz}')
+
+    def test_heilung_setzt_den_stempel_nicht_an_eine_rechtsnorm(self):
+        roh = ('Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung '
+               'personenbezogener Daten als Modellwert. Du kannst Auskunft '
+               'verlangen.')
+        neu, eingriffe = sprachkern.pflicht_marker_heilen(roh)
+        self.assertNotIn('das ist ein Modellwert', neu,
+                         f'Modellwert-Stempel an einer Rechtsnorm: {neu}')
+        self.assertIn('Du kannst Auskunft verlangen', neu,
+                      'Aussage nach dem Marker verloren')
+        self.assertGreaterEqual(eingriffe, 1)
+        # Die Heilung muss idempotent sein – sonst heilt jeder Lauf weiter.
+        nochmal, n2 = sprachkern.pflicht_marker_heilen(neu)
+        self.assertEqual((nochmal, n2), (neu, 0))
+
+    def test_heilung_behaelt_den_stempel_an_einer_modellrechnung(self):
+        roh = 'Ein Haus braucht 18.000 kWh im Jahr als Modellwert. Rechne selbst nach.'
+        neu, _eingriffe = sprachkern.pflicht_marker_heilen(roh)
+        self.assertIn('das ist ein Modellwert', neu,
+                      f'Kennzeichnungspflicht verloren: {neu}')
+
+    def test_bestand_traegt_keinen_stempel_an_einer_rechtsnorm(self):
+        """Der Bestand: kein Modellwert-Stempel an einem Rechtsnorm-Satz.
+
+        Das ist die Prüfung, die am 22.11.2026 gefehlt hat. #1318 heilte den
+        einen Satz, den ein anderer Test zufällig sah; diese Probe sieht die
+        Klasse.
+        """
+        norm = re.compile(r'\b(?:DSGVO|BGB|UWG|StVO|GG|EStG|HGB|SGB|AO|ZPO|'
+                          r'OWiG|VVG|Verordnung|Richtlinie|Gesetz)\b|§\s*\d|'
+                          r'Art\.\s*\d', re.I)
+        treffer = []
+        for pfad in sorted((ROOT / 'content').rglob('index.md')):
+            text = pfad.read_text(encoding='utf-8')
+            for satz in re.split(r'(?<=[.!?])\s+', text):
+                if 'das ist ein Modellwert.' in satz and norm.search(satz):
+                    treffer.append(f'{pfad.relative_to(ROOT)}: {satz.strip()[:90]}')
+        self.assertEqual(treffer[:5], [],
+                         'Modellwert-Stempel an einem Rechtsnorm-Satz – '
+                         'eine Rechtsnorm ist geltendes Recht, kein Modellwert')
 
 
 if __name__ == '__main__':

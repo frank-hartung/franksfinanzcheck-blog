@@ -311,12 +311,40 @@ def _flow_geschlossen(wert: str, klammer: str) -> bool:
     return False
 
 
+def _melde_doppelt(befunde: list[Befund], gesehen: dict, rahmen: list,
+                   key: str, nr: int, einzug: int, pfad: str,
+                   anzeige: str) -> None:
+    """Ein Schlüssel zweimal im selben Bereich = Hugo-Blocker (WF-990)."""
+    bereich = tuple(sid for _, sid in rahmen)
+    kennung = (bereich, key)
+    if kennung in gesehen:
+        befunde.append(Befund(
+            "F3", BLOCKER, pfad, nr, einzug + 1,
+            f"Schlüssel `{anzeige}` steht doppelt (zuerst Zeile "
+            f"{gesehen[kennung]}). Hugo bricht den Bau daran ab "
+            f"(mapping key already defined); ein YAML-Parser nimmt "
+            f"still den letzten Wert und verschweigt den ersten."))
+        return
+    gesehen[kennung] = nr
+
+
 def scanne_yaml(fm: str, startzeile: int, pfad: str,
                 anker: set[str] | None = None) -> list[Befund]:
     """Prüft jeden Schlüsselwert ohne Parser. Die Klasse vom 26.10.2026."""
     befunde: list[Befund] = []
     anker = anker if anker is not None else set()
-    gesehen: dict[str, int] = {}
+    # #1313 (22.11.2026): Duplikate werden JE EBENE geprüft. Bis dahin stand
+    # hier `gesehen: dict[str, int]` und die Prüfung hing an `einzug == 0` –
+    # ein doppeltes `aenderungsgrund` unter `redaktionelle_pruefung` (Ebene 1)
+    # blieb unsichtbar, PyYAML nahm still den letzten Wert, Hugo brach `main`
+    # den Bau ab (#1309/#1312). `rahmen` hält die offenen Bereiche mit ihrer
+    # Einrückung; `gesehen` ist nach (Bereich, Schlüssel) geschlüsselt.
+    # Bereiche statt bloßer Einrückung, weil gleiche Schlüssel unter
+    # VERSCHIEDENEN Eltern (`a.x`, `b.x`) und in VERSCHIEDENEN Listen-Einträgen
+    # gültig sind – die Lehre aus dem Fehlalarm #1291.
+    gesehen: dict[tuple[tuple[str, ...], str], int] = {}
+    rahmen: list[tuple[int, str]] = []   # (Einrückung, Bereichs-Kennung)
+    listen_nr = 0
     block_einzug: int | None = None      # aktiver Block-Skalar (`|`, `>`)
     offene_quote: tuple[str, int, str] | None = None   # (art, startzeile, key)
 
@@ -350,24 +378,32 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             continue
 
         rest_zeile = zeile[einzug:]
-        # Sequenz-Eintrag: `- key: wert` oder `- wert`
+        # Sequenz-Eintrag: `- key: wert`, `- wert` oder ein allein stehendes `-`.
         # WF-1291 (21.11.2026): `sequenz` wird gemerkt, BEVOR der Eintrags-
-        # marker abgeschnitten wird. Vorher stand `rest_zeile` danach immer
-        # ohne `- ` da – die Doppelt-Prüfung unten (`einzug == 0 and not
-        # rest_zeile.startswith("-")`) war damit für JEDEN Top-Level-Eintrag
-        # einer Liste wahr. Ein `quellen:`-Block mit den Schlüsseln
-        # `id`/`titel`/`url` je Eintrag wurde deshalb als „Schlüssel `id`
-        # steht doppelt“ gemeldet: ein BLOCKER auf gültigem YAML, obwohl
-        # jeder Parser und Hugo die Datei fehlerfrei lesen. Der Fehlalarm
-        # stand seit 20.11.2026 auf `main` (Issue #1285/#1287) und hätte
-        # jeden Artikel mit Quellenliste als unbaubar gebrandmarkt.
-        # `- key: wert` eröffnet ein NEUES Mapping je Eintrag – gleiche
-        # Schlüssel in verschiedenen Einträgen sind YAML-korrekt.
+        # marker abgeschnitten wird. Der Fehlalarm damals: Ein `quellen:`-Block
+        # mit `id`/`titel`/`url` je Eintrag wurde als „Schlüssel `id` steht
+        # doppelt“ gemeldet – ein BLOCKER auf gültigem YAML, der jeden Artikel
+        # mit Quellenliste als unbaubar gebrandmarkt hätte (Issue #1285/#1287).
+        # Jeder Eintrag ist ein EIGENES Mapping; die Bereichsverwaltung unten
+        # hält das strukturell fest, statt es je Schlüssel zu erraten.
         sequenz = rest_zeile.startswith("- ") or rest_zeile == "-"
         if rest_zeile.startswith("- "):
             rest_zeile = rest_zeile[2:]
-        elif rest_zeile == "-":
-            continue
+
+        # Offene Bereiche schließen: Eine Zeile gleicher oder geringerer
+        # Einrückung ist ein Geschwister, kein Kind. Ein `- ` beginnt einen
+        # NEUEN Bereich (eigener Listen-Eintrag = eigenes Mapping) – auch das
+        # allein stehende `-`, dessen Eintrag erst in der nächsten Zeile
+        # beginnt. Genau diese Form (`-\n    id: …`) hat den Fehlalarm in
+        # #1291 umgangen, weil der Rahmen VOR dem `continue` gesetzt wird.
+        while rahmen and rahmen[-1][0] >= einzug:
+            rahmen.pop()
+        if sequenz:
+            listen_nr += 1
+            rahmen.append((einzug, f"liste{listen_nr}"))
+
+        if sequenz and not rest_zeile.strip():
+            continue                      # `-` allein: Eintrag folgt darunter
 
         treffer = SCHLUESSEL_ZEILE.match(rest_zeile)
         if not treffer:
@@ -377,25 +413,21 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
         spalte = einzug + len(treffer.group("key")) + 2
 
         if not wert.strip():
-            continue                      # verschachtelter Block folgt
+            # Block-Öffner (`eltern:`): Duplikat zählt im ELTERN-Bereich,
+            # danach öffnet die Zeile einen eigenen Bereich für ihre Kinder.
+            _melde_doppelt(befunde, gesehen, rahmen, key, nr, einzug,
+                           pfad, key)
+            rahmen.append((einzug, f"block@{nr}"))
+            continue
         if not wert.startswith(" "):
             continue                      # `key:` ohne Leerzeichen ist kein Mapping
         wert = wert.lstrip(" ")
 
-        if einzug == 0 and not sequenz:
-            if key in gesehen:
-                # WF-990: BLOCKER, nicht HINWEIS. Hugo bricht an einem
-                # doppelten Mapping-Schlüssel den ganzen Bau ab – PyYAML
-                # nimmt still den letzten Wert, deshalb sieht der Parser
-                # (Schicht 2) den Fall nie. Dieser Scanner ist die einzige
-                # Instanz, die ihn vor dem Bau findet.
-                befunde.append(Befund(
-                    "F3", BLOCKER, pfad, nr, 1,
-                    f"Schlüssel `{key}` steht doppelt (zuerst Zeile "
-                    f"{gesehen[key]}). Hugo bricht den Bau daran ab "
-                    f"(mapping key already defined); ein YAML-Parser nimmt "
-                    f"still den letzten Wert und verschweigt den ersten."))
-            gesehen.setdefault(key, nr)
+        # WF-990 + #1313: BLOCKER, nicht HINWEIS. Hugo bricht an einem
+        # doppelten Mapping-Schlüssel den ganzen Bau ab – PyYAML nimmt still
+        # den letzten Wert, deshalb sieht der Parser den Fall nicht. Dieser
+        # Scanner meldet ihn ohne Parser und in jeder Ebene.
+        _melde_doppelt(befunde, gesehen, rahmen, key, nr, einzug, pfad, key)
 
         # ---- Wert klassifizieren ----
         if wert.startswith("#"):
@@ -523,6 +555,51 @@ def _yaml_modul():
     return yaml
 
 
+class DoppelterSchluessel(Exception):
+    """Doppelter Mapping-Schlüssel – Hugo bricht daran den Bau ab."""
+
+    def __init__(self, key, zeile: int, spalte: int):
+        super().__init__(key)
+        self.key = key
+        self.zeile = zeile
+        self.spalte = spalte
+
+
+def strenger_loader(yaml, startzeile: int):
+    """PyYAML-Loader, der doppelte Schlüssel in JEDER Ebene ablehnt.
+
+    WARUM (22.11.2026): Der Textscanner unten prüft Duplikate nur auf
+    Einrückung 0 (Top-Level). Der Fall vom 21.11.2026 (Issue #1312) war
+    verschachtelt: `redaktionelle_pruefung` enthielt zweimal
+    `aenderungsgrund`. Der Scanner schwieg, PyYAML nahm still den letzten
+    Wert – und erst Hugo brach den Bau ab. Der Parser kennt die Ebenen;
+    deshalb prüft er sie, statt sie zu erraten.
+    """
+
+    class Streng(yaml.SafeLoader):
+        pass
+
+    def konstruiere(loader, node, deep=False):
+        gesehen = set()
+        for key_node, _wert_node in node.value:
+            key = loader.construct_object(key_node, deep=deep)
+            try:
+                doppelt = key in gesehen
+            except TypeError:          # unhashbarer Schlüssel: kein Duplikat
+                continue
+            if doppelt:
+                raise DoppelterSchluessel(
+                    key,
+                    startzeile + key_node.start_mark.line,
+                    key_node.start_mark.column + 1)
+            gesehen.add(key)
+        return yaml.SafeLoader.construct_mapping(loader, node, deep)
+
+    Streng.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+                           konstruiere)
+    return Streng
+
+
 def tiefenpruefung_yaml(fm: str, startzeile: int, pfad: str,
                         yaml=None) -> tuple[list[Befund], bool]:
     """Vollständiger YAML-Parse. Ohne PyYAML: (keine Befunde, False)."""
@@ -531,7 +608,17 @@ def tiefenpruefung_yaml(fm: str, startzeile: int, pfad: str,
         return [], False
     befunde: list[Befund] = []
     try:
-        daten = yaml.safe_load(fm)
+        daten = yaml.load(fm, Loader=strenger_loader(yaml, startzeile))
+    except DoppelterSchluessel as dup:
+        befunde.append(Befund(
+            "F3", BLOCKER, pfad, dup.zeile, dup.spalte,
+            f"Schlüssel `{dup.key}` steht doppelt in derselben Ebene "
+            f"(Zeile {dup.zeile}). Hugo bricht den Bau daran ab "
+            f"(mapping key already defined); PyYAML nimmt still den letzten "
+            f"Wert – deshalb muss die Datei vor dem Merge bereinigt werden. "
+            f"Vorbild: #1309/#1312 (21.11.2026, doppeltes "
+            f"`aenderungsgrund` in `redaktionelle_pruefung`)."))
+        return befunde, True
     except yaml.YAMLError as exc:
         mark = getattr(exc, "problem_mark", None)
         zeile = startzeile + (mark.line if mark is not None else 0)
@@ -646,7 +733,31 @@ def pruefe_datei(pfad: Path, text: str, *, anzeige: str | None = None,
     else:
         befunde.extend(tiefenpruefung_json(fm, start, anzeige))
         tief = True
-    return befunde, tief
+    return _ein_befund_je_duplikat(befunde), tief
+
+
+def _ein_befund_je_duplikat(befunde: list[Befund]) -> list[Befund]:
+    """Derselbe doppelte Schlüssel wird von zwei Schichten gesehen.
+
+    Seit #1313 prüft der strenge Loader Duplikate in jeder Ebene, der
+    Textscanner weiterhin die oberste. Für ein Duplikat auf Einrückung 0
+    melden damit BEIDE – richtig als Beleg, falsch als Arbeitsliste: Der
+    Redakteur soll eine Zeile beheben, nicht zwei Befunde. Gleiche Zeile,
+    gleicher Schlüssel = ein Befund.
+    """
+    gesehen: set[tuple[int, str]] = set()
+    ergebnis: list[Befund] = []
+    for b in befunde:
+        if "steht doppelt" not in b["meldung"]:
+            ergebnis.append(b)
+            continue
+        key = b["meldung"].split("`")[1] if b["meldung"].count("`") >= 2 else ""
+        kennung = (b["zeile"], key)
+        if kennung in gesehen:
+            continue
+        gesehen.add(kennung)
+        ergebnis.append(b)
+    return ergebnis
 
 
 def _anzeige(pfad: Path) -> str:
@@ -953,6 +1064,25 @@ def run_selftest() -> int:
                        '    url: "https://example.org/a?b=1"\n'
                        '  -\n    titel: "Verbraucherzentrale"\n'
                        '    url: "https://example.org/b"'), []))
+    # 14e) #1313 (22.11.2026): Doppelter Schlüssel UNTERHALB von Ebene 0.
+    #      Genau dieser Fall stand im Bestand (doppeltes `aenderungsgrund`
+    #      in `redaktionelle_pruefung`), der Scanner schwieg, weil er nur
+    #      `einzug == 0` prüfte – Hugo hat den Bau abgebrochen.
+    faelle.append(("gleicher Schlüssel doppelt auf Ebene 1",
+                   _GUT.replace(
+                       "draft: false",
+                       "draft: false\nredaktionelle_pruefung:\n"
+                       "  pruefdatum: 2026-11-21\n"
+                       "  aenderungsgrund: Erstprüfung\n"
+                       "  aenderungsgrund: Zweitprüfung"),
+                   ["F3"]))
+    # 14f) Gegenprobe dazu: gleicher Schlüssel unter ZWEI VERSCHIEDENEN
+    #      Eltern ist gültiges YAML und muss still bleiben.
+    faelle.append(("gleicher Schlüssel unter verschiedenen Eltern",
+                   _GUT.replace(
+                       "draft: false",
+                       "draft: false\nquelle_a:\n  id: Q1\n"
+                       "quelle_b:\n  id: Q2"), []))
     # 15) Datum, das Hugo nicht lesen kann.
     faelle.append(("Datum als Text", _GUT.replace(
         "date: 2026-10-14T14:57:58Z", "date: 14.10.2026"), ["F4"]))

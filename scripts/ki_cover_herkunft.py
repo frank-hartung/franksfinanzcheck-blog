@@ -45,6 +45,12 @@ DREI BELEGE, EIN WERKZEUG
 3. `--pruefen` ist die Wache: Es rendert jedes Cover erneut (ohne
    Schreibzugriff) und verlangt Pixelgleichheit. Weicht eines ab, ist die
    Attestation falsch geworden – dann ist das ein Befund, kein Rauschen.
+   Seit dem 22.11.2026 prüft sie zusätzlich die BYTES des Belegs: Nennt
+   `cover.ki_pruefung.sha256` einen anderen Wert, als die Datei trägt, ist
+   die Erklärung veraltet (Befundklasse „Beleg-Drift"). Anlass: 13 Cover auf
+   `main`, deren Bild `check_covers.py --fix` nach einer Titeländerung neu
+   gerendert hatte – Pixelmessung grün, sha256 aus der Vorfassung, gemessen
+   von niemandem.
    Zusätzlich: Steht `trainedAlgorithmicMedia` im Frontmatter, gehört die
    Datei dem KI-Weg (`ki_bild_markierung.py`), nicht diesem.
 4. `--heilen` zieht den Beleg (1) für genau die Cover nach, die die Messung
@@ -332,7 +338,7 @@ def messung(root: Path = ROOT) -> dict:
     die die eigene Messung widerlegt.
     """
     ergebnis = {"befunde": [], "geprueft": 0, "ausserhalb": 0,
-                "ohne_beleg": [], "abweichung": []}
+                "ohne_beleg": [], "abweichung": [], "beleg_veraltet": []}
     kp, gc = _kern()
     try:
         import cover_render_check as crc
@@ -378,6 +384,36 @@ def messung(root: Path = ROOT) -> dict:
                 befunde.append(f"{slug}: reproduzierbar, aber ohne Beleg im "
                                "Frontmatter (--attestieren schreibt ihn)")
                 ergebnis["ohne_beleg"].append(slug)
+                continue
+            # ------------------------------------------------------------
+            #  BELEG-DRIFT (22.11.2026) – die Erklärung nennt die falschen Bytes
+            #  ----------------------------------------------------------
+            #  BEFUND: `generate_covers.py` rendert ein Cover neu, sobald der
+            #  Titel driftet (`check_covers.py --fix` im Deploy ruft genau das).
+            #  Die Bilddatei ändert damit ihre Bytes – der Beleg im Frontmatter
+            #  (`cover.ki_pruefung.sha256`) bleibt auf dem alten Stand stehen,
+            #  weil `--heilen` bis hierher ausschließlich die Klasse „noch gar
+            #  kein Beleg" nachzog. Am 22.11.2026 lagen 13 solcher Belege auf
+            #  `main`: Pixelmessung grün (das Bild IST das Renderer-Ergebnis),
+            #  sha256 falsch (sie beschreibt die Vorfassung). Gemessen hat das
+            #  niemand – `--pruefen` verglich nur Pixel.
+            #
+            #  Die Pixelgleichheit ist hier die Legitimation: Sie belegt, dass
+            #  die Datei das ist, was der Renderer für diesen Artikel zeichnet.
+            #  Ein Beleg, der dieselbe Datei mit einer anderen sha256 beschreibt,
+            #  ist damit nachweislich veraltet – und `--heilen` darf ihn
+            #  nachziehen. Weicht das Bild dagegen ab, bleibt alles hart: Dann
+            #  wäre ein nachgezogener Beleg eine Erklärung, die die eigene
+            #  Messung widerlegt (dieselbe Grenze wie oben).
+            # ------------------------------------------------------------
+            belegt = str((cover.get(FRONTMATTER_FELD) or {}).get("sha256") or "")
+            tatsaechlich = _sha256(ziel)
+            if belegt.strip().lower() != tatsaechlich:
+                befunde.append(f"{slug}: Beleg nennt sha256 {belegt.strip()[:12]}…, "
+                               f"die Datei trägt {tatsaechlich[:12]}… – die "
+                               "Herkunftserklärung beschreibt nicht diese Bytes "
+                               "(Pixelmessung grün: --heilen zieht den Beleg nach)")
+                ergebnis["beleg_veraltet"].append(slug)
     return ergebnis
 
 
@@ -408,21 +444,28 @@ def heilen(root: Path = ROOT, trocken: bool = False) -> dict:
     Auslieferung ein, bis ein Mensch den Beleg von Hand nachzog (zuletzt
     13.11.2026 für 132 Cover).
 
-    Geheilt wird ausschließlich die Klasse „reproduzierbar, aber ohne Beleg":
-    Die Pixelmessung ist in diesem Lauf bereits grün gelaufen, der Beleg
-    erklärt also genau das, was gemessen wurde. Alles Übrige bleibt hart:
+    Geheilt wird ausschließlich, was die Messung dieses Laufs trägt:
+      · „reproduzierbar, aber ohne Beleg" → Beleg schreiben,
+      · „reproduzierbar, aber Beleg nennt eine fremde sha256" → Beleg auf die
+        Bytes dieser Datei nachziehen (22.11.2026: 13 Cover auf `main`, deren
+        Erklärung die Vorfassung beschrieb, weil `check_covers.py --fix` das
+        Bild nach einer Titeländerung neu gerendert hatte).
+    Die Pixelmessung ist in beiden Fällen in diesem Lauf grün gelaufen, der
+    Beleg erklärt also genau das, was gemessen wurde. Alles Übrige bleibt hart:
       · „Bild weicht vom Renderer ab" → Entscheidung (neu rendern oder Beleg
-        zurückziehen), nie eine Heilung.
+        zurückziehen), nie eine Heilung – auch dann nicht, wenn zusätzlich die
+        sha256 veraltet ist.
       · fehlende Bilddatei, nicht ableitbare Erwartung → Befund.
       · Render nicht möglich → WerkzeugFehler (Exit 2), blinde Messung.
     Fremde Belege (KI-Cover, `trainedAlgorithmicMedia`) tastet `attestieren()`
     ohnehin nicht an; der Lauf ist idempotent.
 
-    Rückgabe: {geschrieben, fehler, hart, geprueft, ausserhalb, trocken}.
+    Rückgabe: {geschrieben, erneuert, fehler, hart, geprueft, ausserhalb, trocken}.
     """
     m = messung(root)
-    geschrieben, fehler = 0, []
-    for slug in m["ohne_beleg"]:
+    geschrieben, erneuert, fehler = 0, 0, []
+    for klasse, slug in ([("neu", s) for s in m["ohne_beleg"]]
+                         + [("erneuert", s) for s in m["beleg_veraltet"]]):
         try:
             anz, _uebersprungen, slug_fehler = attestieren(root, trocken=trocken,
                                                            nur=slug)
@@ -430,8 +473,10 @@ def heilen(root: Path = ROOT, trocken: bool = False) -> dict:
             fehler.append(f"{slug}: {exc}")
             continue
         geschrieben += anz
+        if klasse == "erneuert":
+            erneuert += anz
         fehler.extend(slug_fehler)
-    return {"geschrieben": geschrieben, "fehler": fehler,
+    return {"geschrieben": geschrieben, "erneuert": erneuert, "fehler": fehler,
             "hart": list(m["abweichung"]), "geprueft": m["geprueft"],
             "ausserhalb": m["ausserhalb"], "trocken": trocken}
 
@@ -487,6 +532,39 @@ def selbsttest() -> int:
             fehler.append(f"nach der Heilung noch Befunde: {befunde}")
         if heilen(root)["geschrieben"] != 0:
             fehler.append("heilen ist nicht idempotent")
+        # 2b) BELEG-DRIFT (22.11.2026): Die Datei bleibt das Renderer-Ergebnis,
+        # aber der Beleg nennt eine fremde sha256. Genau so lag es auf `main`:
+        # `check_covers.py --fix` rendert ein Cover nach einer Titeländerung
+        # neu, die Bytes ändern sich, der Beleg bleibt auf der Vorfassung
+        # stehen – und `--heilen` zog bisher nur die Klasse „noch kein Beleg"
+        # nach. Die Wache muss die Drift nennen, die Heilung muss den Beleg auf
+        # die echten Bytes stellen und danach schweigen (Idempotenz).
+        echt = _sha256(cover)
+        text = artikel.read_text(encoding="utf-8")
+        if f"sha256: {echt}" not in text:
+            fehler.append("Probe 2b nicht vorbereitet: der Beleg nennt die Datei-sha nicht")
+        else:
+            artikel.write_text(text.replace(f"sha256: {echt}", "sha256: " + "0" * 64),
+                               encoding="utf-8")
+            befunde, _, _ = pruefen(root)
+            if not any("beschreibt nicht diese Bytes" in b for b in befunde):
+                fehler.append("Wache merkt einen Beleg mit veralteter sha256 nicht")
+            geplant = heilen(root, trocken=True)
+            if geplant["erneuert"] != 1:
+                fehler.append(f"heilen(trocken=True) plante {geplant['erneuert']} "
+                              "Erneuerung(en) statt 1")
+            if "0" * 64 not in artikel.read_text(encoding="utf-8"):
+                fehler.append("heilen(trocken=True) hat trotz Trockenlauf geschrieben")
+            lauf = heilen(root)
+            if lauf["erneuert"] != 1 or lauf["geschrieben"] != 1:
+                fehler.append(f"heilen erneuerte {lauf['erneuert']} Beleg(e) statt 1")
+            if echt not in artikel.read_text(encoding="utf-8"):
+                fehler.append("der erneuerte Beleg nennt nicht die sha256 der Datei")
+            befunde, _, _ = pruefen(root)
+            if befunde:
+                fehler.append(f"nach der Beleg-Erneuerung noch Befunde: {befunde}")
+            if heilen(root)["geschrieben"] != 0:
+                fehler.append("die Beleg-Erneuerung ist nicht idempotent")
         # 3) Bild manipulieren → die Attestation ist nicht mehr belegt.
         # Gemessen wird das an den PIXELN (die Wache vergleicht Bilder, nicht
         # Bytes). Ein angehängtes Nullbyte änderte kein Pixel – die Probe
@@ -501,9 +579,16 @@ def selbsttest() -> int:
             fehler.append("Wache merkt ein manipuliertes Bild nicht")
         # 3b) Die Heilung darf ein abweichendes Cover NICHT attestieren: Der
         # Beleg wäre eine Herkunftserklärung, die die eigene Messung
-        # widerlegt. Er muss als harter Befund stehen bleiben.
+        # widerlegt. Er muss als harter Befund stehen bleiben. Das gilt auch
+        # dann, wenn derselbe Beleg zusätzlich eine veraltete sha256 nennt
+        # (Klasse aus 2b) – beide Klassen zusammen dürfen keine Heilung
+        # auslösen, sonst wäre die Pixelabweichung durch die Hintertür heilbar.
+        artikel.write_text(
+            artikel.read_text(encoding="utf-8").replace(f"sha256: {echt}",
+                                                        "sha256: " + "0" * 64),
+            encoding="utf-8")
         lauf = heilen(root)
-        if lauf["geschrieben"] != 0:
+        if lauf["geschrieben"] != 0 or lauf["erneuert"] != 0:
             fehler.append("heilen attestiert ein Cover, das vom Renderer abweicht")
         if slug not in lauf["hart"]:
             fehler.append("heilen nennt das abweichende Cover nicht als hart")
@@ -543,7 +628,9 @@ def selbsttest() -> int:
             print("   -", f)
         return 2
     print("✅ Cover-Herkunft: Beleg erkannt, Attestation wirksam, Manipulation "
-          "erkannt, KI-Beleg geschützt, IPTC in der Datei lesbar.")
+          "erkannt, Beleg-Drift (veraltete sha256) erkannt und auf die Bytes der "
+          "Datei erneuert – bei Pixelabweichung bewusst nicht –, KI-Beleg "
+          "geschützt, IPTC in der Datei lesbar.")
     return 0
 
 
@@ -578,8 +665,10 @@ def main(argv=None) -> int:
             else:
                 if ergebnis["geschrieben"]:
                     print(f"🔧 Cover-Herkunft: {ergebnis['geschrieben']} Beleg(e) "
-                          f"{'geplant' if args.trocken else 'nachgezogen'} – die "
-                          "Pixelmessung war für genau diese Cover bereits grün.")
+                          f"{'geplant' if args.trocken else 'nachgezogen'} "
+                          f"(davon {ergebnis['erneuert']} auf die Bytes der Datei "
+                          "erneuert) – die Pixelmessung war für genau diese Cover "
+                          "bereits grün.")
                 for slug in ergebnis["hart"]:
                     print(f"::warning title=Cover-Herkunft::{slug}: Bild weicht vom "
                           "Renderer ab – keine Heilung (Entscheidung: neu rendern "
@@ -588,7 +677,8 @@ def main(argv=None) -> int:
                     print(f"::error title=Cover-Herkunft::{f}")
                 print(f"Cover-Herkunft (Heilung): {ergebnis['geprueft']} Cover "
                       f"gemessen, {ergebnis['geschrieben']} Beleg(e) "
-                      f"{'geplant' if args.trocken else 'nachgezogen'}, "
+                      f"{'geplant' if args.trocken else 'nachgezogen'} "
+                      f"({ergebnis['erneuert']} erneuert), "
                       f"{len(ergebnis['hart'])} harte(r) Befund(e) für die Wache, "
                       f"{len(ergebnis['fehler'])} Schreibfehler.")
             return 1 if ergebnis["fehler"] else 0

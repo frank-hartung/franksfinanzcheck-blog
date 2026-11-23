@@ -97,7 +97,14 @@ budget:
   #  Die Heilung ist nicht „weniger messen“: Die Intervalle oben
   #  bleiben unangetastet. Es wird mehr geliefert.
   auto_skalierung: true         # Budget folgt dem Bedarf (unten)
-  hartes_limit_pro_lauf: 19     # 17 nötige + 2 Reserveplätze im Vollrückstands-Stresstest (14.11.2026)
+  hartes_limit_pro_lauf: 21     # 19 nötige + 2 Reserveplätze im Vollrückstands-Stresstest (22.11.2026)
+  #  22.11.2026: 19 → 21. Gemessen mit `empfohlenes_budget` über den heutigen
+  #  Bestand im Vollrückstand (139 Seiten überfällig, Stichtag 22.02.2027):
+  #  nötig sind 19 Prüfungen pro Lauf, Abbau in 7 Tagen (erlaubt 7). Bei
+  #  Limit 19 bliebe kein einziger Reserveplatz – die Deckungs-Wache hat genau
+  #  das gemeldet (`test_vollrueckstand_nach_97_tagen_behaelt_reserve`).
+  #  Die Regel vom 10.11.2026 (gemessener Bedarf plus zwei Plätze) ist
+  #  unverändert; der Sockel bleibt 10, der Normalbetrieb ändert sich nicht.
   #  Das harte Limit ist der Vertrag mit der Deckungs-Wache
   #  (scripts/faktenfrische_kapazitaet.py, Governance C45): Es muss
   #  den Bedarf auch an einem Spitzentag decken. Reicht es nicht

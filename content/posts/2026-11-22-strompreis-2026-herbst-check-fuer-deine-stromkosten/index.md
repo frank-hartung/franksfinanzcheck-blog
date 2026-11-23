@@ -3,7 +3,8 @@ title: "Strompreis 2026: Herbst-Check für deine Stromkosten"
 description: "Ist der neue Strompreis tatsächlich höher? Rechne Grundpreis und Arbeitspreis mit demselben Verbrauch durch und vergleiche die jährliche Differenz."
 date: 2026-11-22T11:51:18Z
 draft: true
-reserve: true
+reserve_blocked: "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f"
+reserve_blocked_at: 2026-11-22T16:52:04Z
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -28,8 +29,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: ed2d31e93b8fb4214f199500596548bbc297cd42d8edb5602b0fdc52c2338f98
-    geprueft_am: 2026-11-21
+    sha256: 911c44e65cedf6264248a8c9b73dabfd24015dea322bbf689015e3cffc00b027
+    geprueft_am: 2026-11-22
 faktencheck: 2026-11-09
 kurzantwort: "Ob sich ein Stromtarifwechsel im Herbst lohnt, entscheidet nicht eine unsichere Preisprognose, sondern der Vergleich deiner aktuellen Jahresabrechnung mit verfügbaren Wahltarifen. Prüfe Arbeitspreis, Grundpreis, Laufzeit und den Umfang einer eingeschränkten Preisgarantie, bevor deine Kündigungsfrist abläuft."
 faktenfrische_aliases:
@@ -48,7 +49,6 @@ quellen:
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
 ---
-
 
 Draußen färben sich die Blätter bunt und die Tage werden kürzer.  
 Während du die Heizung langsam hochdrehst, landet oft Post in deinem Briefkasten.  

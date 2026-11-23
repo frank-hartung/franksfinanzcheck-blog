@@ -4,7 +4,8 @@ description: "Prüfe bei gebrauchten Möbeln Verbindungen, Maße und Oberfläche
 kurzantwort: Echtes Holz erkennst du an der durchgehenden Maserung an den Kanten. Ein kräftiges Rütteln entlarvt lockere Leimverbindungen sofort. Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.
 date: 2026-11-22T11:51:18Z
 draft: true
-reserve: true
+reserve_blocked: "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbe"
+reserve_blocked_at: 2026-11-22T16:52:04Z
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
@@ -29,8 +30,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 10133afa481278c5ebf521a1c90fc1c8e76ec7327cd4422db45dfb8b4e4d3cea
-    geprueft_am: 2026-11-21
+    sha256: 4a8d4c1f35333b44076924cc64231d0ef3905ddfda2152d4903fe69df0ba1ad9
+    geprueft_am: 2026-11-22
 faktencheck: 2026-11-17
 faktenfrische_aliases:
   - "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet"
@@ -39,7 +40,6 @@ faktenfrische_aliases:
   - "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet"
   - "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet"
 ---
-
 
 Du stehst in einer Garage oder in einem staubigen Hinterhof. Vor dir steht ein Schrank. Er sieht auf den ersten Blick gut aus. Der Preis ist verlockend niedrig.
 
