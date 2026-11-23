@@ -237,6 +237,46 @@ class CliTest(unittest.TestCase):
         self.assertIn("AMBER", lauf.stdout)
         self.assertIn("kein /go/-Verzeichnis im Build", lauf.stdout)
 
+    # ------------------------------------------------------------------
+    #  EXIT-VERTRAG (23.11.2026) – der Guard muss scheitern KÖNNEN
+    # ------------------------------------------------------------------
+    def test_ohne_build_exit_2_statt_0(self) -> None:
+        """DER BEFUND (#1247): Der Guard gab Exit 0 für „nichts gemessen".
+
+        Ursache: `run()` lieferte nur `len(gaps)` zurück. Ohne Build gibt es
+        keine Lücken (nichts wurde angesehen), also `0` → `return 0` →
+        grün. Eine Wache, die nicht scheitern kann, prüft nichts – sie
+        beruhigt. Nachgestellt war genau das im Bericht sichtbar: „kein
+        Build unter public/ … Gemessene Anker: 0", Exit trotzdem 0.
+        """
+        with tempfile.TemporaryDirectory() as td:
+            lauf = self._lauf("--public", os.path.join(td, "gibt-es-nicht"))
+        self.assertEqual(
+            2, lauf.returncode,
+            "fehlende Messgrundlage ist NICHT GEMESSEN (2), nicht GRÜN (0):\n"
+            + lauf.stdout + lauf.stderr)
+
+    def test_amber_exit_1(self) -> None:
+        """Gemessene Lücken sind ein Befund – Exit 1."""
+        with tempfile.TemporaryDirectory() as td:
+            lauf = self._lauf("--public", td)
+        self.assertEqual(1, lauf.returncode,
+                         "AMBER muss Exit 1 sein:\n" + lauf.stdout)
+
+    def test_exit_codes_sind_unterscheidbar(self) -> None:
+        """Die drei Zustände müssen drei Codes haben.
+
+        Vorher fielen „nicht gemessen" und „sauber" auf 0 zusammen. Damit
+        war die Ampel im Bericht die einzige Spur – und ein Bericht, den
+        niemand liest, ist keine Wache. Der Exit-Code ist die Schnittstelle,
+        an der Workflow und Mensch entscheiden.
+        """
+        with tempfile.TemporaryDirectory() as td:
+            ohne_build = self._lauf("--public", os.path.join(td, "weg"))
+            amber = self._lauf("--public", td)
+        self.assertEqual(2, ohne_build.returncode, "NICHT GEMESSEN = 2")
+        self.assertEqual(1, amber.returncode, "AMBER = 1")
+
 
 if __name__ == "__main__":
     unittest.main()

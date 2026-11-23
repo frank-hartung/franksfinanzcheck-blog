@@ -333,7 +333,14 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
                 f.write(body)
         except OSError:
             pass
-    return len(gaps)
+    # Die Ampel ist Teil des Ergebnisses, nicht nur ein Satz im Bericht.
+    # Vorher gab `run()` ausschließlich `len(gaps)` zurück – damit war
+    # „nichts gemessen" (0 Lücken) von „alles in Ordnung" (0 Lücken) nicht
+    # zu unterscheiden, und der Aufrufer meldete für einen fehlenden Build
+    # Exit 0. Genau das ist die Blindheit aus #1247: Der Guard konnte
+    # nicht scheitern, weil er nie etwas gemessen hatte.
+    return {"ampel": ampel, "gaps": gaps, "checked": checked,
+            "not_measured": not_measured, "notes": notes}
 
 
 def gateway_keys():
@@ -514,19 +521,32 @@ def main(argv=None):
     report = val("--report", "")
     live = val("--live", "")
     try:
-        n = run(public_dir, report_path=report or "", do_live=live or None,
-                require_events="--require-green" in argv)
+        erg = run(public_dir, report_path=report or "", do_live=live or None,
+                  require_events="--require-green" in argv)
     except Exception as exc:  # noqa: BLE001
         print(f"❌ Klick-Ketten-Guard intern fehlgeschlagen: {exc.__class__.__name__}: {exc}")
         return 2
+    ampel = erg["ampel"]
+    n = len(erg["gaps"])
+    # EXIT-VERTRAG (neu 23.11.2026):
+    #   0 = GREEN       – gemessen und sauber
+    #   1 = AMBER       – gemessen und Lücken gefunden
+    #   2 = NICHT GEMESSEN – keine Messgrundlage (kein Build, keine Anker)
+    # Ein Exit 0 für „nicht gemessen" ist ein Scheingrün: Der Aufrufer
+    # (Workflow, Wache, Mensch) liest „bestanden" und hat nichts geprüft.
+    code = {"GREEN": 0, "AMBER": 1}.get(ampel, 2)
     try:
         from audit_log import log_event
         log_event(module="click_chain_guard", action="check",
                   input={"public": public_dir, "live": live},
-                  output={"gaps": n}, status="ok" if n == 0 else "error")
+                  output={"ampel": ampel, "gaps": n, "checked": erg["checked"]},
+                  status={"GREEN": "ok", "AMBER": "error"}.get(ampel, "unknown"))
     except Exception:  # noqa: BLE001
         pass
-    return 1 if n else 0
+    if code == 2:
+        print("🟡 NICHT GEMESSEN: ohne Build (oder ohne Anker) ist die Kette "
+              "nicht bewiesen – das ist kein Erfolg. Erst `hugo` bauen.")
+    return code
 
 
 if __name__ == "__main__":
