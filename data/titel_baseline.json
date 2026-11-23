@@ -1,5 +1,5 @@
 {
-  "stand": "2026-11-22",
+  "stand": "2026-11-23",
   "hinweis": "Sperrklinke: nur abwärts. Erzeugt von scripts/titel_klinke.py --seed.",
   "schwellen": {
     "T1_max_zeichen": 60,

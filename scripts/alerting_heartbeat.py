@@ -24,12 +24,30 @@ Jeder abgeschlossene Lauf eines gelisteten Workflows MÜSSTE genau einen
 Alerting-Lauf auslösen (bei Erfolg der Schließpfad, bei Rot der Alarm). Ein
 Lauf ohne zugehörigen Alerting-Lauf ist ein verlorenes Ereignis.
 
-Urteil:
-  · EIN ungedeckter ROTER Lauf (failure/timed_out) ist immer ein Befund –
-    genau das ist der Vorfall: Rot, von dem niemand erfährt.
-  · Zwei oder mehr verlorene Ereignisse im Fenster sind ein Befund –
-    Einzelverluste kommen als GitHub-Flake vor (Hinweis), Muster nicht.
-  · Ein einzelner Verlust ist ein Hinweis (beobachten, nicht eskalieren).
+Urteil (neu gefasst am 23.11.2026)
+-------------------------------
+Der Vorfall war „Rot, von dem niemand erfährt". Genau das wird gemessen:
+
+  · EIN ungedeckter ROTER Lauf (failure/timed_out) ist IMMER ein Befund –
+    ohne Schwelle, ohne Toleranz. Das ist der Schaden.
+  · Verlorene GRÜNE Läufe sind folgenlos: Es gab nichts zu alarmieren,
+    der Schließpfad hat nichts zu schließen. Sie werden gezählt, aber erst
+    ab einer Verlustquote von ROT_VERLUST_SCHWELLE % eskaliert – darunter
+    sind sie ein Hinweis. (Eine Warnung, die bei 2 % Grün-Rauschen
+    anspringt, wird nach drei Tagen ignoriert; dann ist sie auch bei 35 %
+    wirkungslos.)
+
+WARUM DIE ÄNDERUNG (Befund vom 23.11.2026)
+-----------------------------------------
+Vom 20.–23.11.2026 lief der Herzschlag drei Tage hintereinander ROT – bei
+2,1 % Verlust (8 von 377) und NULL verlorenen roten Läufen. Die alte Regel
+„ab zwei verlorenen Ereignissen ist es ein Befund" maß damit die
+Grundlast des Kanals, nicht den Ausfall. Alle acht Verluste waren
+erfolgreiche Läufe (6× Newsletter-Lifecycle, 2× Deploy) – für die gibt es
+keinen Alarm, dessen Ausbleiben jemanden gefährdet. Ein Melder, der bei
+jedem GitHub-Flake schreit, erzieht dazu, ihn wegzuklicken: Der nächste
+echte Befund fällt dann mit weg. Die Quote bleibt sichtbar (Hinweis),
+eskaliert wird der Schaden.
 
 KANAL-PROBE (WF-829B / #922, 30.10.2026)
 ----------------------------------------
@@ -96,6 +114,17 @@ VORLAUF_MINUTEN = 5
 
 ABGESCHLOSSEN = {"success", "failure", "cancelled", "timed_out"}
 ROT = {"failure", "timed_out"}
+# Ab welcher Verlustquote GRÜNER Läufe ein Befund entsteht. Rot-Verluste
+# haben KEINE Schwelle (siehe Urteil im Modul-Docstring): Ein roter Lauf,
+# der niemanden erreicht, ist der Vorfall selbst. Grün-Verluste sind
+# Rauschen, solange sie nicht massiv werden – 5 % ist der Punkt, ab dem
+# ein struktureller Defekt wahrscheinlicher ist als ein GitHub-Flake.
+ROT_VERLUST_SCHWELLE = 5.0
+# Unterhalb dieser Ereigniszahl ist eine Quote statistisch wertlos: 1 von 1
+# sind 100 %, und dieselbe Zahl entsteht bei einem einzigen GitHub-Flake.
+# Erst ab hier darf die Quote eskalieren. Rot-Verluste sind davon NICHT
+# betroffen – ein ungemeldeter roter Lauf ist auch als Einzelfall ein Befund.
+MINDEST_EREIGNISSE = 20
 
 
 def parse_ts(wert: str) -> dt.datetime:
@@ -464,17 +493,31 @@ def abgleich(laeufe: list, alarme: list, jetzt: dt.datetime) -> dict:
             f"{len(rot_offen)} rote Läufe gelisteter Workflows erreichten nie das "
             f"Fehler-Alerting – niemand wurde informiert: {namen}. Genau das ist "
             "Befund E (14 rote Gate-Läufe ohne eine einzige Meldung).")
-    if len(fehlend) >= 2:
-        quote = round(100.0 * len(fehlend) / len(relevant), 1) if relevant else 0.0
-        befunde.append(
-            f"{len(fehlend)} von {len(relevant)} Ereignissen kamen nie an "
-            f"({quote} % Verlust in {FENSTER_STUNDEN} h, Gnadenfrist {GNADE_MINUTEN} min). "
-            "Vorfalls-Messung 08.–18.09.2026: ~35 % repo-weit.")
-    elif len(fehlend) == 1:
-        l = fehlend[0]
-        hinweise.append(
-            f"1 verlorenes Ereignis (`{l['name']}`, {l['conclusion']}, "
-            f"{iso(l['completed_at'])}) – Einzel-Flake möglich, Beobachtung läuft.")
+    # Grün-Verluste: Rauschen, bis die Quote strukturell wird.
+    gruen_offen = [l for l in fehlend if l["conclusion"] not in ROT]
+    if gruen_offen:
+        quote = (round(100.0 * len(gruen_offen) / len(relevant), 1)
+                 if relevant else 0.0)
+        namen_gr = ", ".join(f"`{l['name']}`" for l in gruen_offen[:4])
+        if quote >= ROT_VERLUST_SCHWELLE and len(relevant) >= MINDEST_EREIGNISSE:
+            befunde.append(
+                f"{len(gruen_offen)} von {len(relevant)} GRÜNEN Ereignissen kamen "
+                f"nie an ({quote} % Verlust in {FENSTER_STUNDEN} h, Gnadenfrist "
+                f"{GNADE_MINUTEN} min; Schwelle {ROT_VERLUST_SCHWELLE} %): {namen_gr}. "
+                "Bei dieser Quote ist ein struktureller Defekt wahrscheinlicher "
+                "als ein GitHub-Flake. Vorfalls-Messung 08.–18.09.2026: ~35 % "
+                "repo-weit – damals waren es ROTE Läufe ohne Meldung.")
+        else:
+            warum = ("unter der Schwelle von %s %%" % ROT_VERLUST_SCHWELLE
+                     if len(relevant) >= MINDEST_EREIGNISSE else
+                     "zu wenige Ereignisse für eine Quote (Mindestmenge %d)"
+                     % MINDEST_EREIGNISSE)
+            hinweise.append(
+                f"{len(gruen_offen)} von {len(relevant)} GRÜNEN Ereignissen kamen "
+                f"nie an ({quote} % in {FENSTER_STUNDEN} h) – {warum}; "
+                f"folgenlos, denn ein grüner Lauf hat nichts zu alarmieren. "
+                f"Beobachtung läuft "
+                f"({namen_gr}{', …' if len(gruen_offen) > 4 else ''}).")
 
     return {"gesamt": len(relevant),
             "alarme": len(alarme),
@@ -664,11 +707,24 @@ def _selftest() -> int:
     ein = abgleich([_mk("A", "success", parse_ts("2026-09-18T04:58:00+00:00"))], [], J)
     if ein["fehlend"] != 1 or ein["befunde"] or len(ein["hinweise"]) != 1:
         fehler.append("Einzelverlust muss Hinweis bleiben, kein Befund")
+    # Zwei verlorene GRÜNE Läufe: unter der Quote ein HINWEIS, kein Befund.
+    # (Das war der Fehler vom 20.–23.11.2026: Die alte Regel eskalierte jeden
+    # Verlust ab zwei Ereignissen und stand deshalb drei Tage rot, ohne dass
+    # ein roter Lauf ungemeldet geblieben wäre.)
     zwei = abgleich([_mk("A", "success", parse_ts("2026-09-18T04:58:00+00:00"), "1"),
-                     _mk("B", "cancelled", parse_ts("2026-09-18T06:00:00+00:00"), "2")],
+                     _mk("B", "success", parse_ts("2026-09-18T06:00:00+00:00"), "2")],
                     [], J)
-    if not any("2 von 2" in b for b in zwei["befunde"]):
-        fehler.append("zwei verlorene Ereignisse müssen ein Befund sein")
+    if zwei["befunde"]:
+        fehler.append("verlorene GRÜNE Läufe unter der Quote sind ein Hinweis")
+    if not any("GRÜNEN Ereignissen" in h for h in zwei["hinweise"]):
+        fehler.append("Grün-Verluste müssen als Hinweis benannt werden")
+    # Quote über der Schwelle: dann Befund.
+    viele = [_mk(f"W{i}", "success",
+                 parse_ts(f"2026-09-18T04:{i:02d}:00+00:00"), str(i))
+             for i in range(20)]
+    quote_hoch = abgleich(viele, [], J)
+    if not any("GRÜNEN Ereignissen" in b for b in quote_hoch["befunde"]):
+        fehler.append("eine Verlustquote über der Schwelle muss ein Befund sein")
     rot = abgleich([_mk("Gate", "failure", parse_ts("2026-09-18T04:58:00+00:00"))], [], J)
     if not rot["befunde"] or not any("rote Läufe" in b for b in rot["befunde"]):
         fehler.append("ein ungedeckter ROTER Lauf muss SOFORT ein Befund sein")
