@@ -2,17 +2,17 @@
 
 _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**265 offene Befunde auf 75 Seiten · davon 49 Live-Seiten mit 165 Befunden · ältester 24 Tage · Frist 14 Tage.**
+**270 offene Befunde auf 76 Seiten · davon 50 Live-Seiten mit 170 Befunden · ältester 24 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 265 |
-| Seiten betroffen | 75 (davon live: 49) |
-| Text seit dem Befund geändert | 222 |
+| Offene Befunde | 270 |
+| Seiten betroffen | 76 (davon live: 50) |
+| Text seit dem Befund geändert | 237 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
-| Über der Frist (14 Tage) | 95 |
+| Über der Frist (14 Tage) | 100 |
 | In Eskalation (21 Tage) | 10 |
 
 ## So schließt du einen Befund
@@ -33,7 +33,7 @@ _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 227 von 265 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 242 von 270 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -683,6 +683,62 @@ Datei: `content/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad12cdcf94bd8459bd8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` · **LIVE** (blockiert) · Risikoklasse erhoeht · 2 Befund(e)
+
+Datei: `content/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `dc1e5d50a58f50e0ade1` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die verlinkte Seite der Bundesnetzagentur ist eine reine Navigations-Übersicht und enthält keine der im Text versprochenen Beschreibungen zu Tarifbestandteilen oder Preisregelungen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `def8ad23c34566c795fe` | praezision | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Verknüpfung der HT/NT-Definition mit der Bundesnetzagentur ist unpräzise, da die verlinkte Seite lediglich eine Themenübersicht ohne fachliche Definitionen darstellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc1e5d50a58f50e0ade1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden def8ad23c34566c795fe --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `3eab428a91b1b16b7df8` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Pufferhöhe die zentrale Rechengröße darstellt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `7da9383cbc6a45e1a3ac` | praezision | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die Validität der Kalkulationsbasis zu stützen. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `da7852bcca291061c39b` | praezision | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Modellrechnung für Fixkosten berücksichtigt nicht die spezifische Teuerung bei Energie (+12,7 %), was bei der Kalkulation von Strom und Gas zu einer Unterdeckung führen kann. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3eab428a91b1b16b7df8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7da9383cbc6a45e1a3ac --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden da7852bcca291061c39b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · **LIVE** (blockiert) · Risikoklasse erhoeht · 2 Befund(e)
+
+Datei: `content/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `68afba3e6a16a364ce45` | praezision | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'. | – |
+| `dc5ff05c5dda79d01373` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce45 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
+
+Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `5c096f87730532352820` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-10-dsl-wechselbonus-sichern` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md`
@@ -767,20 +823,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8230373c2c33722d66d
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden efee7b0cefffa501cc57 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` · **LIVE** (blockiert) · Risikoklasse erhoeht · 2 Befund(e)
-
-Datei: `content/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `dc1e5d50a58f50e0ade1` | luecke | 2 T | Text unverändert seit dem Befund | Die verlinkte Seite der Bundesnetzagentur ist eine reine Navigations-Übersicht und enthält keine der im Text versprochenen Beschreibungen zu Tarifbestandteilen oder Preisregelungen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `def8ad23c34566c795fe` | praezision | 2 T | Text unverändert seit dem Befund | Die Verknüpfung der HT/NT-Definition mit der Bundesnetzagentur ist unpräzise, da die verlinkte Seite lediglich eine Themenübersicht ohne fachliche Definitionen darstellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc1e5d50a58f50e0ade1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden def8ad23c34566c795fe --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
 
 Datei: `content/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/index.md`
@@ -815,46 +857,24 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` · **LIVE** · Risikoklasse standard · 5 Befund(e)
 
-Datei: `content/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `3eab428a91b1b16b7df8` | luecke | 0 T | Text unverändert seit dem Befund | Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Pufferhöhe die zentrale Rechengröße darstellt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `7da9383cbc6a45e1a3ac` | praezision | 0 T | Text unverändert seit dem Befund | Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die Validität der Kalkulationsbasis zu stützen. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `da7852bcca291061c39b` | praezision | 0 T | Text unverändert seit dem Befund | Die Modellrechnung für Fixkosten berücksichtigt nicht die spezifische Teuerung bei Energie (+12,7 %), was bei der Kalkulation von Strom und Gas zu einer Unterdeckung führen kann. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3eab428a91b1b16b7df8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7da9383cbc6a45e1a3ac --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden da7852bcca291061c39b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · **LIVE** (blockiert) · Risikoklasse erhoeht · 2 Befund(e)
-
-Datei: `content/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/index.md`
+Datei: `content/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/index.md`
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
-| `68afba3e6a16a364ce45` | praezision | 0 T | Text unverändert seit dem Befund | Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'. | – |
-| `dc5ff05c5dda79d01373` | luecke | 0 T | Text unverändert seit dem Befund | Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet. | – |
+| `334751e6f61ad0033fe4` | luecke | 21 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `36759a5efe5e8e5163d0` | luecke | 21 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `942922d1afd7844618e9` | luecke | 21 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `d41f0d5ce8798df0211b` | praezision | 21 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e139d0769faadd04392a` | luecke | 21 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
 
 ```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce45 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
-
-Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `5c096f87730532352820` | luecke | 0 T | Text unverändert seit dem Befund | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 334751e6f61ad0033fe4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 36759a5efe5e8e5163d0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 942922d1afd7844618e9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
@@ -1243,6 +1263,20 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 517fa8859b484cd7646
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e11e305aefae61e25820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check` · nicht im Live-Bestand · 2 Befund(e)
+
+Seite: `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `4232b77745f1559839a5` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesnetzagentur. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `9c67474aa62927df4ee4` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe zum gesetzlichen Grenzwert für den Standby-Verbrauch (0,5 Watt) wird als Fakt dargestellt, ist aber in der Quelle zur Produktsicherheit nicht belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4232b77745f1559839a5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9c67474aa62927df4ee4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026` · nicht im Live-Bestand · 3 Befund(e)
 
 Seite: `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026`
@@ -1305,20 +1339,6 @@ Seite: `konto-karten`
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5bf7111c673ee53be341 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b3c137c4bb2ebd44eb74 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check` · nicht im Live-Bestand · 2 Befund(e)
-
-Seite: `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `4232b77745f1559839a5` | luecke | 3 T | Text unverändert seit dem Befund | Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesnetzagentur. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `9c67474aa62927df4ee4` | luecke | 3 T | Text unverändert seit dem Befund | Die Angabe zum gesetzlichen Grenzwert für den Standby-Verbrauch (0,5 Watt) wird als Fakt dargestellt, ist aber in der Quelle zur Produktsicherheit nicht belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4232b77745f1559839a5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9c67474aa62927df4ee4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
