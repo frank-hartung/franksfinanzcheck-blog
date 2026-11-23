@@ -536,6 +536,82 @@ class VerschachtelterDoppelterSchluessel1313Test(unittest.TestCase):
         self.assertTrue(any(b["regel"] == "F2" and "doppelter Schlüssel" in b["meldung"]
                             for b in blocker),
                         f"Flow-Duplikat nicht als F2 erkannt: {blocker}")
+class VerschachtelterDoppelterSchluesselTest(unittest.TestCase):
+    """Issue #1313 (22.11.2026): Duplikate UNTERHALB von Einrückung 0.
+
+    Der Fall vom 21.11.2026: In `redaktionelle_pruefung` stand
+    `aenderungsgrund` zweimal – zwei Zeilen mit Einrückung 2. Der
+    Textscanner prüfte Duplikate nur bei `einzug == 0` und schwieg;
+    PyYAML nahm still den letzten Wert; Hugo brach `main` den Bau ab.
+    Der strenge Loader liest das Frontmatter deshalb mit
+    Ebenen-Gedächtnis – der Parser kennt die Verschachtelung, der
+    Zeilenscanner muss sie raten.
+    """
+
+    VERSCHACHTELT = SAUBER.replace(
+        "draft: false",
+        "draft: false\n"
+        "redaktionelle_pruefung:\n"
+        "  pruefdatum: 2026-11-21\n"
+        "  aenderungsgrund: Erstprüfung\n"
+        "  aenderungsgrund: Zweitprüfung")
+
+    def test_verschachteltes_duplikat_ist_blocker(self) -> None:
+        befunde = pruefe(self.VERSCHACHTELT)
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertTrue(doppelt, "verschachteltes Duplikat bleibt unentdeckt")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
+        self.assertIn("aenderungsgrund", doppelt[0]["meldung"])
+
+    def test_auch_ohne_pyyaml_scharf(self) -> None:
+        """Der CI-Schritt läuft VOR dem `pip install` – dort gibt es kein PyYAML.
+
+        Genau deshalb prüft der Scanner die Ebenen selbst: Ein Wächter, der
+        nur mit Parser scharf ist, ist im entscheidenden Lauf stumpf.
+        """
+        doppelt = [b for b in pruefe(self.VERSCHACHTELT, yaml_modul="ohne")
+                   if "steht doppelt" in b["meldung"]]
+        self.assertTrue(doppelt, "ohne PyYAML bleibt #1313 unsichtbar")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
+        self.assertIn("aenderungsgrund", doppelt[0]["meldung"])
+
+    @unittest.skipUnless(HAT_YAML, "ohne PyYAML keine Ebenen-Prüfung")
+    def test_zeile_zeigt_auf_das_zweite_vorkommen(self) -> None:
+        befunde = pruefe(self.VERSCHACHTELT)
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]][0]
+        zeilen = self.VERSCHACHTELT.splitlines()
+        # Die gemeldete Zeile muss die ZWEITE Angabe sein – dort bricht Hugo.
+        self.assertIn("Zweitprüfung", zeilen[doppelt["zeile"] - 1])
+        self.assertEqual("aenderungsgrund", doppelt["meldung"].split("`")[1])
+
+    def test_gleicher_schluessel_in_verschiedenen_bloecken_ist_kein_duplikat(self) -> None:
+        """`a.x` und `b.x` sind zwei Mappings – YAML erlaubt das."""
+        text = SAUBER.replace(
+            "draft: false",
+            "draft: false\n"
+            "quelle_a:\n  id: Q1\n"
+            "quelle_b:\n  id: Q2")
+        self.assertEqual([], [b for b in pruefe(text)
+                              if "steht doppelt" in b["meldung"]])
+
+    def test_listen_mit_gleichen_schluesseln_bleiben_still(self) -> None:
+        """Die #1291-Gegenprobe gilt auch unterhalb von Einrückung 0."""
+        text = SAUBER.replace(
+            "draft: false",
+            "draft: false\n"
+            "redaktionelle_pruefung:\n  quellen:\n"
+            "  - id: Q1\n    titel: Eins\n"
+            "  - id: Q3\n    titel: Drei\n"
+            "  - id: Q5\n    titel: Fünf")
+        self.assertEqual([], [b for b in pruefe(text)
+                              if "steht doppelt" in b["meldung"]])
+
+    def test_top_level_duplikat_bleibt_erkannt(self) -> None:
+        """Die Verschärfung darf den WF-990-Fall nicht verlieren."""
+        doppelt = [b for b in pruefe(DoppelterSchluesselToetetDenBauTest.KAPUTT_DOPPELT)
+                   if "steht doppelt" in b["meldung"]]
+        self.assertEqual(1, len(doppelt), "ein Duplikat, nicht zwei Meldungen")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
 
 
 if __name__ == "__main__":

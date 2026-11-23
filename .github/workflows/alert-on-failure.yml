@@ -98,6 +98,15 @@
 #      überhaupt ankommen (Befund E des Gate-Vorfalls 18.09.2026: ~35 %
 #      kamen nie an). Ihn über eben diesen Kanal beobachten hieße, im
 #      Störungsfall ausgerechnet dann zu schweigen. Er meldet sich selbst.
+#    Dazu – seit der Blindstellen-Heilung (23.11.2026) ausdrücklich und
+#    mit Grund, statt still weggelassen zu werden:
+#    - "🤖 Auto-Assign PR zu frank-hartung" – läuft ausschließlich auf pull_request – das Produktions-Scoping (#343) unterdrückt jede Meldung, der Eintrag wäre Schein-Deckung
+#    - "Lesbarkeit (Live-Änderungen)" – läuft ausschließlich auf pull_request – rot ist dort als PR-Check sichtbar, ein Eintrag wäre Schein-Deckung (#343)
+#    - "Reserve-Nachweis (Probe auf einem Ref)" – Einmal-Probe auf einem fremden Ref per workflow_dispatch – kein Produktionslauf
+#    - "Reserve-Nachweis #614 (Probe auf einem Ref)" – Einmal-Probe zu Issue #614 auf einem fremden Ref – kein Produktionslauf
+#    Maßgeblich ist die Wache, nicht dieser Kommentar:
+#    `python3 scripts/alerting_heartbeat.py --deckung` zählt jede
+#    Workflow-Datei gegen die Wacht-Liste und diese Ausnahmen.
 # ============================================================
 name: Fehler-Alerting
 
@@ -193,6 +202,57 @@ on:
       # die Code-Selbstheilung darf bei Eichproben-Bruch (Exit 3) oder
       # Rollback (Exit 2) niemals stumm fehlschlagen.
       - "Code-Selbstheilung · Heilungs-PR"
+      # ------------------------------------------------------------
+      # BLINDSTELLE GESCHLOSSEN (23.11.2026 – Wurzelheilung H)
+      #   37 der 105 Workflows standen nicht auf dieser Liste, darunter
+      #   VIER der sechs PR-Gates des Auftrags (Entity-Marken-Gate,
+      #   Integritäts-Lock, SEO-Parität mit „Gate (Frontmatter, ohne
+      #   Build)“, YMYL-Siegelwache) und die KI-Provenienz-Wache. Die
+      #   lief 8/8 rot – 12 ungeklärte Register-Fälle, 9 Tage vor der
+      #   Frist 2026-12-02 – und es entstand KEIN Issue: Der Befund sagt
+      #   „braucht Menschen“, erreichte aber keinen Menschen. Beweis:
+      #   8 offene auto-report-Meldungen, keine davon für sie.
+      #   Das ist Befund E (18.09.2026: 14 rote Gate-Läufe, null
+      #   Meldungen) eine Ebene höher – dort verlor der Kanal Ereignisse,
+      #   hier war der Lauf nie gelistet. Ein Kanal, der seine eigene
+      #   Reichweite nicht misst, meldet seine Blindstelle nicht.
+      #   Deshalb steht die Deckung jetzt unter Wache:
+      #   scripts/alerting_heartbeat.py --deckung (statisch, ohne Netz).
+      #   Nur was auf main laufen kann, wird gelistet: PR-only-Läufe
+      #   unterdrückt das Produktions-Scoping (#343) – sie einzutragen
+      #   wäre Schein-Deckung. Sie stehen unten begründet als Ausnahme.
+      # ------------------------------------------------------------
+      - "Alt-Text-Gemini-Probe (manuell)"   # Handlauf – auch Handläufe gehören überwacht (wie Redaktions-Politur)
+      - "Externe Autorität & Distribution"   # Autoritäts-/Distributions-Messung fällt sonst still aus
+      - "Befundakte nachziehen"   # schreibt die Befund-Akte nach – Stillstand lässt die Akte altern, ohne Signal
+      - "Bestands-Regressionswache"   # Wache über den Bestand – ihr Ausfall ist doppelt blind
+      - "Beweis-Gate (Beweissystem)"   # Beweis-Gate auf push/main – rot ohne Meldung
+      - "Cockpit"   # Betriebs-Cockpit zeigt sonst Altdaten ohne Warnung
+      - "Endredaktion"   # Endredaktion committed – rot = Qualitätsverlust ohne Signal
+      - "Entity-Marken-Gate (Marken-Identität)"   # GATE DES AUFTRAGS: Marken-Identität läuft auf push/main – rot ohne Meldung
+      - "GSC-Abdeckung – Wochenbericht"   # Wochenbericht + Heilung verwaister Seiten – Ausfall bleibt unbemerkt
+      - "GSC-Tageslauf (Daten + Indexierungs-Anfragen)"   # war am 22.11. 13:18 rot – keine Meldung; ohne ihn rechnet die Abdeckung mit Altdaten
+      - "Integritäts-Lock (PR-Gate)"   # GATE DES AUFTRAGS: Siegel-Lock (workflow_dispatch auf main) – rot ohne Meldung
+      - "KI-Provenienz-Wache"   # BELEGTER SCHADEN: 8/8 rote Läufe (11.–23.11.) ohne ein einziges Issue – die Eskalation sagt „braucht Menschen“, erreichte aber 9 Tage vor Frist 2026-12-02 niemanden
+      - "n8n & Whisper Bridge"   # ihr Ausfall trennt n8n vom Repo
+      - "Pinterest-Restart (geführt)"   # geführter Lauf – rot muss trotzdem sichtbar werden
+      - "Poppy-Werkbank"   # Werkbank-Lauf – still rot = Werkzeug unbemerkt kaputt
+      - "Redaktionelle YMYL-Prüfung"   # YMYL-Fachfreigabe – ihr Ausfall ist ein Rechtsrisiko ohne Signal
+      - "Release-Scorecard (Produktionswahrheit)"   # war am 22.11. 13:15 rot – keine Meldung; ohne sie fehlt der Produktionsmaßstab
+      - "Robustheits-Wache (Laufzeit-Fangnetze)"   # Laufzeit-Fangnetze auf push/main – rot ohne Meldung
+      - "Schaltwerk (Automationen)"   # steuert die Automationen – fällt es aus, bleiben alle Folgeläufe still weg
+      - "SEO-Parität (Cornerstones · Fokus-Keywords · Social-Karten)"   # GATE DES AUFTRAGS: trägt den Job „Gate (Frontmatter, ohne Build)“ – rot ohne Meldung
+      - "Wöchentlicher Live-SEO-Crawl"   # war am 22.11. 16:00 rot – keine Meldung
+      - "Social-Perf-Feedback"   # Performance-Rückmeldung an Social – still aus
+      - "Spam-Schutz-Wache"   # sein Ausfall ist ein Sicherheitsverlust ohne Signal
+      - "Sprach-Qualitäts-Pipeline (Highend, Profi-Agentur)"   # Sprachqualität auf Profi-Niveau – rot = Niveauverlust ohne Signal
+      - "Suchradar – Suchergebnis-Erfassung"   # ohne sie fehlt die Sichtbarkeitsmessung
+      - "Themenwelten – Navigation & Darstellung"   # Navigations-Gate auf push/main – rot ohne Meldung
+      - "Vergleichs-Gate (Bewertungsraster)"   # Bewertungsraster-Gate auf push/main – rot ohne Meldung
+      - "Daten- und Visualisierungs-Gate"   # Daten-Gate (dispatch auf main) – rot ohne Meldung
+      - "Vorgangs-Abschluss (Abschlussvermerk an die Meldung)"   # schließt Meldungen ab – fällt er aus, bleiben Issues offen, ohne dass es jemand merkt
+      - "Werkbank (Antwortwerk & Werkzeuge)"   # Antwortwerk – still rot = Auskünfte unbemerkt kaputt
+      - "YMYL-Siegelwache"   # GATE DES AUFTRAGS: YMYL-Siegel auf push/main – rot ohne Meldung
     types:
       - completed
 

@@ -154,3 +154,6 @@ Lies Enddatum und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendig
 Hebe Kündigung, Blatt zum Vertrag und Termin der Mitnahme gut auf. Die Mitnahme der Nummer allein stoppt alte Kosten nicht automatisch.
 
 **Dein nächster Schritt:** Notiere Datenbedarf, Wunsch-Netz und kurze oder lange Frist. Vergleiche erst dann die Preise. Als Einstieg hilft dir der [Partnervergleich für Handytarife](/go/handytarife/). Steht dein neues Angebot schon fest, nutze die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
+**Dein nächster Schritt:** Notiere Datenbedarf, gewünschtes Netz und maximale Bindung. Vergleiche erst dann die Preise. Als Einstieg kannst du den [Partnervergleich für Handytarife](/go/handytarife/) nutzen. Wenn du schon ein konkretes Wechselangebot hast, hilft dir die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
+
+**Weiterlesen:** [Ratgeber Internet, DSL & Mobilfunk](../../pillar/internet-dsl/) · [Kündigungsfristen-Kalender](../../werkzeuge/kuendigungsfristen-kalender/)

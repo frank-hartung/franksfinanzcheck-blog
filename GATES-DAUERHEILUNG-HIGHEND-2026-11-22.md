@@ -1343,6 +1343,15 @@ aus Abschnitt 2 auslösen – pro Artikel.
      der gehört nicht in einen Gate-PR, der selbst schon sechs Rebases hinter
      sich hat. Der Selbsttest ist inzwischen gesichert (Kasten in Abschnitt 8,
      Punkt 6), die Verdrahtung nicht.
+     **NACHTRAG 23.11.2026 – ERLEDIGT.** Verdrahtet als eigener Schritt
+     „Inhalts-Wache FF1–FF5 (Artikel-Bestand, ohne Build)" in `link-check.yml`,
+     genau neben das Diff-Tor, wie hier vorgesehen: fail-closed mit
+     `set -o pipefail`, kein `|| true`, keine Schwelle. Neu gemessen statt
+     übernommen: **92** Workflows laufen bei einer `content/posts/**`-Änderung
+     (80 ohne jeden `paths`-Filter + 12 mit passendem), **0** davon riefen die
+     Wache auf. Die Zahl „2 relevante Workflows" aus `relevante_workflows()` war
+     für deren Notbremsen-Zweck richtig, für diese Frage zu klein – Korrektur in
+     `GATES-DAUERHEILUNG-HIGHEND-2026-11-23.md` Abschnitt 5.1.
    - **`automatic_write_protected()` meldet „geschützt" für unlesbare Pfade.**
      Fail-closed ist richtig und bleibt. Offen ist, dass die Klausel
      „Datei fehlt" und „Datei ist versiegelt" nicht unterscheidbar macht – beides
@@ -1350,6 +1359,22 @@ aus Abschnitt 2 auslösen – pro Artikel.
      Exception-Fall hätte die Fehlmessung aus 8.2 in einer Sekunde sichtbar
      gemacht statt über einen Umweg. Kleiner Auftrag, eigener PR, weil er die
      Signatur einer von vielen Heilern genutzten Funktion berührt.
+     **NACHTRAG 23.11.2026 – ERLEDIGT, ohne die Signatur zu brechen.** Neu:
+     `automatic_write_protected_grund(path) -> (bool, grund)` mit den Gründen
+     `siegel` · `status:<wert>` · `datei_fehlt` · `unlesbar:<Klasse>`, dazu
+     `schutz_meldung(grund)`. Die alte Funktion **delegiert** an die neue, die
+     14 Heiler lernen also nicht um – das Boolesche ist bitgleich in sechs
+     Fällen (versiegelt · normal · fehlend · Verzeichnis · Leerstring · `None`).
+     Der konkrete Schaden war größer als hier notiert: `check_titles.py:566`
+     druckte für jedes `True` wörtlich „YMYL: Titel bleibt versiegelt" – eine
+     falsche Aussage über einen Rechtszustand, auch über eine Datei, die es
+     nicht gab. Sie ist geheilt. Bestand **latent**: 175 Content-Dateien,
+     10 `siegel`, 165 frei, **0** nicht prüfbar. Proben W1–W14, vier
+     Sabotage-Varianten gefangen (inkl. fail-open). Belege in
+     `GATES-DAUERHEILUNG-HIGHEND-2026-11-23.md` Abschnitt 6. Richtigstellung
+     einer Notiz aus dieser Akte: `--seal --file <fehlender Pfad>` meldete
+     schon immer ehrlich „🛑 Freigabe nicht versiegelt: [Errno 2]" mit Exit 2 –
+     die Maskierung saß in der Booleschen Vorprüfung, nicht im Siegel-Bericht.
 4. **Historische Protokoll-Doks** mit altem Titel bleiben unverändert
    (Begründung in Abschnitt 2): Ein Prüfbericht ist ein zeitgebundener Beleg – wer
    ihn nachträglich auf den neuen Titel biegt, fälscht das Datum der Prüfung.
