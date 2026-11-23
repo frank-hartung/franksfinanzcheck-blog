@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-22 12:12:14 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-23 13:55:52 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 90 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 5
+**Geprüfte Live-Artikel:** 92 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 5
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -33,7 +33,7 @@
 | 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps | 3 → 3 ✅ | /go/girokonto/, /go/tagesgeld/ |
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet | 0 → 1 ✅ | /go/dsl/ |
-| 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 0 → 1 ✅ | /go/handytarife/ |
+| 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 0 → 2 ✅ | /go/handytarife/ |
 | 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 0 → 1 ✅ | /go/kfz-versicherung/ |
 | 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 0 → 1 ✅ | /go/tagesgeld/ |
 | 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn | 0 → 1 ✅ | /go/gas/ |
@@ -99,9 +99,11 @@
 | 2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort | 2 → 3 ✅ | /go/dsl/ |
 | 2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein | 3 → 3 ✅ | /go/dsl/ |
 | 2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst | 2 → 3 ✅ | /go/kreditkarte/ |
+| 2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom | 2 → 3 ✅ | /go/strom/ |
 | 2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung | 2 → 3 ✅ | /go/dsl/ |
 | 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten | 3 → 3 ✅ | /go/gas/ |
+| 2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten | 2 → 3 ✅ | /go/strom/ |
 
 ## Hinweise (nicht blockierend)
 
