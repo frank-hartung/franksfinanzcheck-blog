@@ -20,6 +20,7 @@ Leihgabe; hier liegen die Verträge:
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
 import datetime as dt
+import os
 import subprocess
 import sys
 import unittest
@@ -243,6 +244,161 @@ class Vertrag(unittest.TestCase):
         self.assertEqual(r.returncode, 0, (r.stdout + r.stderr)[-600:])
         self.assertEqual(vorher, nachher, "der Herzschlag-Selbsttest muss "
                                           "den Arbeitsbaum unberührt lassen (C15)")
+
+
+class DeckungsWache(unittest.TestCase):
+    """Wurzelheilung H (23.11.2026): Die Wacht-Liste muss den Bestand decken.
+
+    Der Herzschlag zählte korrekt, aber per Vertrag nur GELISTETE Läufe. Am
+    23.11.2026 standen 37 der 105 Workflow-Dateien nicht auf der Liste –
+    darunter vier der sechs PR-Gates und die KI-Provenienz-Wache. Die lief 8/8
+    rot (12 ungeklärte Register-Fälle, 9 Tage vor der Frist 2026-12-02) und
+    erzeugte KEIN Issue, obwohl ihr Befund wörtlich „braucht Menschen" sagt.
+    Acht offene auto-report-Meldungen, keine für sie. Das ist Befund E
+    (18.09.2026: 14 rote Gate-Läufe, null Meldungen) eine Ebene höher: Dort
+    verlor der Kanal Ereignisse, hier gab es nie eines.
+    """
+
+    BESTAND = {
+        ".github/workflows/gate.yml":
+            {"name": "Gate", "trigger": frozenset({"push", "pull_request"})},
+        ".github/workflows/nacht.yml":
+            {"name": "Nachtlauf", "trigger": frozenset({"schedule"})},
+        ".github/workflows/pr.yml":
+            {"name": "PR-Gate", "trigger": frozenset({"pull_request"})},
+    }
+
+    def test_bestand_ist_vollstaendig_gedeckt(self):
+        """Der echte Bestand: jede Datei beobachtet oder begründet ausgenommen."""
+        erg = ah.deckung_pruefen()
+        self.assertEqual(erg["status"], 0,
+                         "Deckungslücke im echten Bestand – Rot in einem nicht "
+                         "gelisteten Lauf erzeugt keine Meldung: "
+                         + " | ".join(erg["befunde"]))
+        self.assertEqual(erg["blind"], [])
+        self.assertEqual(erg["scheindeckung"], [])
+        self.assertEqual(erg["unbegruendet"], [])
+        self.assertEqual(erg["verwaist"], [])
+        # Gegen die leere Messung: Der Bestand muss wirklich gezählt worden sein.
+        self.assertGreaterEqual(erg["bestand"], 50)
+        self.assertGreaterEqual(len(erg["gelistet"]), 50)
+        bestand = ah.workflow_bestand()
+        namen = {info["name"] for info in bestand.values()}
+        self.assertEqual(len(namen), erg["bestand"],
+                         "jede Workflow-Datei muss einen Namen tragen, sonst ist "
+                         "die Deckung nicht vollständig messbar")
+        abgedeckt = set(erg["gelistet"]) | set(erg["ausnahmen"])
+        self.assertEqual(sorted(namen - abgedeckt), [],
+                         "Workflow ohne Deckung und ohne begründete Ausnahme")
+
+    def test_blinder_workflow_wird_benannt(self):
+        """Richtung 1: ein main-fähiger Lauf ohne Eintrag ist ein Befund."""
+        erg = ah.deckung_pruefen(gelistet=["Gate"], bestand=self.BESTAND,
+                                 ausnahmen={"PR-Gate"})
+        self.assertEqual(erg["status"], 1)
+        self.assertEqual([n for _p, n, _t in erg["blind"]], ["Nachtlauf"])
+        self.assertIn("Nachtlauf", erg["befunde"][0],
+                      "der Befund muss den blinden Workflow beim Namen nennen – "
+                      "eine Zahl ohne Namen ist nicht handelbar")
+
+    def test_begruendete_ausnahme_heilt_denselben_fall(self):
+        """Richtung 2: dieselbe Lücke, mit Grund ausgenommen, ist grün."""
+        erg = ah.deckung_pruefen(gelistet=["Gate"], bestand=self.BESTAND,
+                                 ausnahmen={"PR-Gate", "Nachtlauf"})
+        self.assertEqual(erg["status"], 0, erg["befunde"])
+        self.assertEqual(erg["blind"], [])
+
+    def test_scheindeckung_pr_only_gelistet(self):
+        """PR-only gelistet = Schein-Deckung: #343 unterdrückt jede Meldung."""
+        erg = ah.deckung_pruefen(gelistet=["Gate", "Nachtlauf", "PR-Gate"],
+                                 bestand=self.BESTAND, ausnahmen=set())
+        self.assertEqual(erg["status"], 1)
+        self.assertEqual([n for _p, n, _t in erg["scheindeckung"]], ["PR-Gate"])
+
+    def test_unbegruendete_luecke_pr_only(self):
+        """PR-only ohne Eintrag und ohne Grund ist eine unbegründete Lücke."""
+        erg = ah.deckung_pruefen(gelistet=["Gate", "Nachtlauf"],
+                                 bestand=self.BESTAND, ausnahmen=set())
+        self.assertEqual(erg["status"], 1)
+        self.assertEqual([n for _p, n, _t in erg["unbegruendet"]], ["PR-Gate"])
+
+    def test_verwaister_listeneintrag(self):
+        """Ein Name ohne passende Datei feuert nie wieder – stille Blindheit."""
+        erg = ah.deckung_pruefen(gelistet=["Gate", "Nachtlauf", "Alt-Name"],
+                                 bestand=self.BESTAND, ausnahmen={"PR-Gate"})
+        self.assertEqual(erg["status"], 1)
+        self.assertEqual(erg["verwaist"], ["Alt-Name"])
+
+    def test_leere_liste_ist_nicht_gruen(self):
+        """Keine Wacht-Liste = nicht messbar (C33), niemals grün."""
+        erg = ah.deckung_pruefen(gelistet=[], bestand=self.BESTAND,
+                                 ausnahmen=set())
+        self.assertEqual(erg["status"], 2)
+
+    def test_ausnahmen_werden_gelesen_nicht_abgetippt(self):
+        """Die Ausnahmen kommen aus dem Kopf der Datei; fehlt der Marker, gilt
+        alles als blind – fail-closed in die sichere Richtung."""
+        text = ('# BEWUSST NICHT ÜBERWACHT:\n'
+                '#    - "Fehler-Alerting" selbst (kann sich nicht selbst '
+                'beobachten)\n'
+                '#    - "PR-Gate" – läuft ausschließlich auf pull_request\n'
+                '# ============================================================\n')
+        self.assertEqual(ah.bewusst_nicht_beobachtet(text),
+                         {"Fehler-Alerting", "PR-Gate"})
+        self.assertEqual(ah.bewusst_nicht_beobachtet("# Kopf ohne Marker\n"),
+                         set(), "Ausnahmen dürfen nie erfunden werden")
+        self.assertEqual(ah.bewusst_nicht_beobachtet(
+            '# BEWUSST NICHT ÜBERWACHT:\n#    - "X"\nname: Echt\n'), {"X"},
+            "der Ausnahmeblock muss am Ende des Kopfblocks enden")
+
+    def test_sabotage_gegenprobe_ist_rot(self):
+        """Ohne einen echten Namen MUSS die Wache rot werden – sonst ist das
+        Grün oben leer (dieselbe Lehre wie die Sabotage-Proben in sprachkern)."""
+        echt = ah.deckung_pruefen()
+        self.assertIn("KI-Provenienz-Wache", echt["gelistet"],
+                      "der belegte Schadensfall muss auf der Wacht-Liste stehen")
+        sabotiert = [n for n in echt["gelistet"] if n != "KI-Provenienz-Wache"]
+        erg = ah.deckung_pruefen(gelistet=sabotiert,
+                                 bestand=ah.workflow_bestand(),
+                                 ausnahmen=set(echt["ausnahmen"]))
+        self.assertEqual(erg["status"], 1)
+        self.assertIn("KI-Provenienz-Wache",
+                      [n for _p, n, _t in erg["blind"]])
+
+    def test_gates_des_auftrags_sind_gelistet(self):
+        """Die sechs Gates des Auftrags dürfen nie wieder blind sein."""
+        erg = ah.deckung_pruefen()
+        for name in ("Entity-Marken-Gate (Marken-Identität)",
+                     "YMYL-Siegelwache",
+                     "Integritäts-Lock (PR-Gate)",
+                     "E2E-Tests (Playwright)",
+                     "Skript-Syntax (liegender Stand)",
+                     "Qualitäts-Gate (Build + interne Links)",
+                     "KI-Provenienz-Wache"):
+            self.assertIn(name, erg["gelistet"],
+                          f"`{name}` fehlt auf der Wacht-Liste – rot auf main "
+                          "würde keine Meldung erzeugen")
+        # SEO-Parität trägt den Job „Gate (Frontmatter, ohne Build)".
+        self.assertTrue(any(n.startswith("SEO-Parität") for n in erg["gelistet"]),
+                        "SEO-Parität trägt den Job „Gate (Frontmatter, ohne "
+                        "Build)“ und fehlt auf der Wacht-Liste")
+
+    def test_deckung_laeuft_ohne_token(self):
+        """Die Prüfung ist statisch: ohne Token/API bleibt sie aussagefähig."""
+        env = {k: v for k, v in os.environ.items()
+               if k not in ("GH_TOKEN", "GITHUB_TOKEN")}
+        r = subprocess.run([sys.executable, "scripts/alerting_heartbeat.py"],
+                           capture_output=True, text=True, cwd=REPO, env=env)
+        self.assertEqual(r.returncode, 2, "ohne Token darf nichts grün sein")
+        self.assertIn("Deckung der Wacht-Liste", r.stdout,
+                      "die netzunabhängige Deckung muss auch ohne Token "
+                      "gemessen und gemeldet werden")
+
+    def test_deckung_als_zuruf(self):
+        r = subprocess.run([sys.executable, "scripts/alerting_heartbeat.py",
+                            "--deckung"], capture_output=True, text=True, cwd=REPO)
+        self.assertEqual(r.returncode, 0, (r.stdout + r.stderr)[-700:])
+        self.assertIn("BLIND", r.stdout)
 
 
 if __name__ == "__main__":

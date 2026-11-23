@@ -292,14 +292,60 @@ def automatic_change_findings(old_raw: str, new_raw: str) -> list[str]:
     return []
 
 
-def automatic_write_protected(path: Path | str) -> bool:
-    """Konservative Vorprüfung für Engines, die nur überspringen können."""
+def automatic_write_protected_grund(path: Path | str) -> tuple[bool, str]:
+    """(geschützt?, Grund) – dieselbe Entscheidung, aber mit unterscheidbarem Grund.
+
+    WARUM (23.11.2026 – Wurzelheilung J): Die Vorprüfung ist bewusst konservativ.
+    Kann sie die Datei nicht lesen, antwortet sie „geschützt"; 14 Heiler hängen
+    daran und dürfen nicht schreiben, wenn die Lage unklar ist. Das Verhalten ist
+    richtig – unbeobachtbar war es trotzdem: Ein Heiler, der übersprang, weil der
+    Pfad FEHLTE, sah exakt aus wie einer, der ein Siegel respektierte, und
+    `check_titles.py` druckte wörtlich „YMYL: Titel bleibt versiegelt" über eine
+    Datei, die es nicht gab. Eine falsche Aussage über einen Rechtszustand ist
+    schlimmer als keine: Sie beruhigt, wo nichts geprüft wurde (C33 – ausgefallene
+    Messung ist kein Grün).
+
+    Die Entscheidung ändert sich hier nicht, nur ihre Begründung wird ehrlich.
+    Gründe: `siegel` (inhalt_sha256) · `status:<wert>` (freigegeben/approved) ·
+    `datei_fehlt` · `unlesbar:<Klasse>`. Leer = nicht geschützt.
+    """
     try:
-        fm, _, _ = load_article(path)
-        review = fm.get("redaktionelle_pruefung") or {}
-        return bool(review.get("inhalt_sha256") or str(review.get("status") or "").strip().lower() in APPROVED_STATUSES)
-    except Exception:
-        return True
+        ziel = Path(path)
+        if not ziel.exists():
+            return True, "datei_fehlt"
+        fm, _, _ = load_article(ziel)
+    except Exception as exc:  # noqa: BLE001 – konservativ: nicht schreiben
+        return True, f"unlesbar:{exc.__class__.__name__}"
+    review = fm.get("redaktionelle_pruefung") or {}
+    if review.get("inhalt_sha256"):
+        return True, "siegel"
+    status = str(review.get("status") or "").strip().lower()
+    if status in APPROVED_STATUSES:
+        return True, f"status:{status}"
+    return False, ""
+
+
+def schutz_meldung(grund: str) -> str:
+    """Menschlicher Text zum Grund – kein Siegel behaupten, das keines ist."""
+    if grund == "siegel":
+        return "Freigabe ist versiegelt (inhalt_sha256)"
+    if grund.startswith("status:"):
+        return f"Freigabe-Status {grund.split(':', 1)[1]}"
+    if grund == "datei_fehlt":
+        return "Datei fehlt – nicht versiegelt, sondern NICHT PRÜFBAR"
+    if grund.startswith("unlesbar:"):
+        return (f"Datei unlesbar ({grund.split(':', 1)[1]}) – nicht versiegelt, "
+                "sondern NICHT PRÜFBAR")
+    return "nicht geschützt"
+
+
+def automatic_write_protected(path: Path | str) -> bool:
+    """Konservative Vorprüfung für Engines, die nur überspringen können.
+
+    Eine Wahrheit: die Entscheidung kommt aus `automatic_write_protected_grund`,
+    damit Boolesches und Begründung nie auseinanderlaufen können.
+    """
+    return automatic_write_protected_grund(path)[0]
 
 
 def _domain(url: str) -> str:
@@ -963,6 +1009,66 @@ def selftest() -> list[str]:
             expect("Siegel verweigert Description ohne Satzende", "Meta-Qualitäts-Gate" in str(exc))
         expect("verweigertes Siegel lässt die Datei unverändert",
                meta_path.read_text(encoding="utf-8") == meta_raw)
+
+    # --- W · Schreibschutz mit unterscheidbarem Grund (23.11.2026) ---------
+    # Die Entscheidung ist unverändert konservativ; bewiesen wird, dass die
+    # BEGRÜNDUNG ein Siegel von einem unlesbaren Pfad unterscheidet – sonst
+    # druckt ein Heiler „YMYL: Titel bleibt versiegelt" über eine Datei, die es
+    # nicht gibt (falsche Aussage über einen Rechtszustand, C33).
+    with tempfile.TemporaryDirectory() as w_tmp:
+        wurzel = Path(w_tmp)
+
+        def _artikel(name: str, prüfung: str) -> Path:
+            datei = wurzel / name
+            datei.write_text("---\ntitle: \"Probe: Titel mit Kolon\"\n"
+                             + prüfung + "---\n\nText.\n", encoding="utf-8")
+            return datei
+
+        w_siegel = _artikel("versiegelt.md",
+                            "redaktionelle_pruefung:\n  inhalt_sha256: abc123\n")
+        w_status = _artikel("status.md",
+                            "redaktionelle_pruefung:\n  status: freigegeben\n")
+        w_offen = _artikel("offen.md", "author: Frank Hartung\n")
+        w_kaputt = _artikel("kaputt.md", "redaktionelle_pruefung: [unterminated\n")
+        w_fehlt = wurzel / "gibt-es-nicht" / "index.md"
+
+        for datei, erwartet_geschuetzt, erwartet_grund in (
+                (w_siegel, True, "siegel"),
+                (w_status, True, "status:freigegeben"),
+                (w_offen, False, ""),
+                (w_fehlt, True, "datei_fehlt"),
+                (wurzel, True, None)):                    # Verzeichnis: unlesbar
+            geschuetzt, grund = automatic_write_protected_grund(datei)
+            expect(f"W Entscheidung für {datei.name}",
+                   geschuetzt is erwartet_geschuetzt)
+            if erwartet_grund is not None:
+                expect(f"W Grund für {datei.name}", grund == erwartet_grund)
+            else:
+                expect(f"W Grund für {datei.name}", grund.startswith("unlesbar:"))
+            # Eine Wahrheit: Boolesches und Begründung laufen nie auseinander.
+            expect(f"W automatic_write_protected stimmt mit dem Grund ({datei.name})",
+                   automatic_write_protected(datei) == geschuetzt)
+
+        expect("W kaputtes Frontmatter bleibt fail-closed",
+               automatic_write_protected_grund(w_kaputt)[0] is True)
+        expect("W kaputtes Frontmatter behauptet kein Siegel",
+               automatic_write_protected_grund(w_kaputt)[1].startswith("unlesbar:"))
+
+        # Der Text zum Grund darf ein Siegel nur behaupten, wenn eines da ist.
+        expect("W Meldung zum Siegel nennt das Siegel",
+               "versiegelt" in schutz_meldung("siegel"))
+        for grund in ("datei_fehlt", "unlesbar:IsADirectoryError"):
+            meldung = schutz_meldung(grund)
+            expect(f"W Meldung zu {grund} verneint das Siegel",
+                   "NICHT PRÜFBAR" in meldung and "ist versiegelt" not in meldung)
+        expect("W leerer Grund heißt nicht geschützt",
+               schutz_meldung("") == "nicht geschützt")
+
+        # SABOTAGE-GEGENPROBE: Ein Siegel muss als Siegel erkennbar bleiben –
+        # sonst wäre die Unterscheidung oben nur zufällig grün.
+        expect("W Sabotage: Siegel wird nicht zum Prüf-Fehler",
+               automatic_write_protected_grund(w_siegel)[1] == "siegel"
+               and not automatic_write_protected_grund(w_siegel)[1].startswith("unlesbar"))
 
     return errors
 

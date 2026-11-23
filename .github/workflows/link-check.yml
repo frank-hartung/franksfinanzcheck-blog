@@ -151,6 +151,25 @@ jobs:
           python3 -m unittest scripts.tests.test_skills_vertrag
 
       # ------------------------------------------------------------
+      #  INHALTS-WACHE FF1–FF5 (Wurzelheilung I, 23.11.2026)
+      #  Die Wache prüft den Artikel-Bestand auf Inhalts-Fehler und trägt einen
+      #  echten `--selftest`. Sie hatte aber KEINEN Aufrufer: Von 92 Workflows,
+      #  die bei einer Änderung in `content/posts/**` laufen, rief sie keiner
+      #  beim Namen auf. Über `selftest_runner.py` lief ihr Selbsttest, die
+      #  PRÜFUNG selbst lief nirgends – gemessen am 23.11.2026 mit
+      #  `trigger_wache.relevante_workflows()` gegen alle 105 Workflow-Dateien.
+      #  Ein Gate, das nur seine eigene Lauffähigkeit beweist, ist eine
+      #  Warteschlange und keine Wache (dieselbe Lehre wie #1097 beim
+      #  Verlinkungs-Auftrag, den zehn Tage niemand ausführte).
+      #  Fail-closed: Exit 1 bei Befund. Kein `|| true`, keine Schwelle, kein
+      #  `continue-on-error` – genau daran war die Klasse ja gewachsen.
+      # ------------------------------------------------------------
+      - name: Inhalts-Wache FF1–FF5 (Artikel-Bestand, ohne Build)
+        run: |
+          set -o pipefail
+          python3 scripts/ff_inhalts_wache.py | tee ff_inhalt.log
+
+      # ------------------------------------------------------------
       #  HUGO-BUILD-VERTRAG (H1–H8, 03.10.2026)
       #  Prüft, dass JEDER Hugo-Bau im Repo über die gemeinsame Action
       #  läuft und seinen Fehler laut meldet. Am 02.10.2026 kostete die

@@ -69,6 +69,7 @@ import os
 import re
 import subprocess
 import sys
+from pathlib import Path
 from typing import Callable
 
 import workflow_js_wache
@@ -165,6 +166,255 @@ def gelistete_workflows(text: str, use_yaml: bool = True) -> list[str]:
             einr = re.match(r"""^(\s*)""", zeile).group(1)
             in_block, basis = True, len(einr)
     return aus
+
+
+# ----------------------------------------------------------------------
+#  DECKUNG DER WACHT-LISTE (Wurzelheilung H, 23.11.2026)
+# ----------------------------------------------------------------------
+# Der Herzschlag zählte bisher korrekt – aber per Vertrag nur GELISTETE Läufe
+# (`abgleich`: „nur gelistete Workflows"). Am 23.11.2026 standen 37 der 105
+# Workflow-Dateien nicht auf der Wacht-Liste, darunter vier der sechs PR-Gates
+# (Entity-Marken-Gate, Integritäts-Lock, SEO-Parität mit dem Job „Gate
+# (Frontmatter, ohne Build)", YMYL-Siegelwache) und die KI-Provenienz-Wache.
+# Die lief 8/8 rot – 12 ungeklärte Register-Fälle, 9 Tage vor der Frist
+# 2026-12-02 – und erzeugte KEIN Issue: Ihr Befund sagt wörtlich „braucht
+# Menschen", erreichte aber keinen Menschen. Beweis: acht offene
+# auto-report-Meldungen, keine einzige für sie.
+#
+# Das ist Befund E (18.09.2026: 14 rote Gate-Läufe, null Meldungen) eine Ebene
+# höher. Dort verlor der Kanal Ereignisse; hier war der Lauf nie gelistet, also
+# gab es nicht einmal ein Ereignis, das man hätte verlieren können. Ein Kanal,
+# der seine eigene Reichweite nicht misst, meldet seine Blindstelle nicht.
+#
+# Diese Prüfung zählt deshalb jede Workflow-Datei gegen die Wacht-Liste und die
+# begründeten Ausnahmen – STATISCH, ohne Netz: Sie bleibt aussagefähig, auch
+# wenn Token oder API tot sind (C33: ausgefallene Messung ist kein Grün).
+WORKFLOW_VERZEICHNIS = os.path.join(".github", "workflows")
+
+# Ein Workflow, der ausschließlich auf pull_request läuft, kann per
+# Produktions-Scoping (#343) nie eine Meldung erzeugen:
+#     isProdRun = branch === defaultBranch && event !== 'pull_request'
+# Ihn zu listen wäre SCHEIN-DECKUNG – schlimmer als eine ehrliche Ausnahme,
+# weil die Liste dann Vollzähligkeit vortäuscht, während die Meldung
+# strukturell ausbleibt. Rote PR-Läufe sind als Checks am PR sichtbar und
+# gehören zum Handwerk (Kommentar #343 im Kopf der Datei).
+MAIN_FAEHIGE_TRIGGER = ("push", "schedule", "workflow_dispatch",
+                        "repository_dispatch", "pull_request_target")
+
+AUSNAHME_MARKER = "BEWUSST NICHT ÜBERWACHT"
+_AUSNAHME_EINTRAG = re.compile(r'^\s*#\s*-\s+"(?P<name>[^"]+)"')
+_NAME_ZEILE = re.compile(r"^name:\s*(.+)$", re.M)
+_TRENNLINIE = re.compile(r"^#+\s*=+\s*$")
+
+
+def bewusst_nicht_beobachtet(text: str) -> set[str]:
+    """Die begründeten Ausnahmen – aus dem Kopf der Datei selbst gelesen.
+
+    Nie abgetippt: Eine Handkopie ist dieselbe Fehlerklasse, die dieses Haus am
+    18.09.2026 zweimal gebissen hat (Wachen-Liste im Gate, Selbsttest-Liste in
+    der Reserve). Steht eine Ausnahme nicht im Kommentarblock, gilt der
+    Workflow als blind – fail-closed, und zwar in die sichere Richtung:
+    lieber eine Meldung zu viel als eine Blindstelle ohne Namen.
+    """
+    aus: set[str] = set()
+    in_block = False
+    for zeile in text.splitlines():
+        if AUSNAHME_MARKER in zeile:
+            in_block = True
+            continue
+        if not in_block:
+            continue
+        gestrichen = zeile.strip()
+        if not gestrichen.startswith("#"):
+            break                                  # Kopfblock ist zu Ende
+        if _TRENNLINIE.match(gestrichen):
+            break                                  # Trennlinie „# ====…"
+        m = _AUSNAHME_EINTRAG.match(zeile)
+        if m:
+            aus.add(m.group("name").strip())
+    return aus
+
+
+def workflow_bestand(root: str = BLOG_DIR) -> dict[str, dict]:
+    """{repo-pfad: {"name", "trigger"}} jeder Workflow-Datei – aus den Dateien.
+
+    Die Aufzählung kommt von `trigger_wache.workflow_dateien`, also von derselben
+    Stelle, die auch die Trigger-Wache nutzt (eine Wahrheit, zwei Orte).
+    """
+    import trigger_wache
+
+    wurzel = Path(root)
+    bestand: dict[str, dict] = {}
+    for pfad in trigger_wache.workflow_dateien(wurzel):
+        try:
+            text = pfad.read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            continue                               # unlesbar = kein Bestand
+        m = _NAME_ZEILE.search(text)
+        if not m:
+            continue                               # namenlos: kein Bezug möglich
+        bestand[pfad.relative_to(wurzel).as_posix()] = {
+            "name": m.group(1).strip().strip("\"'"),
+            "trigger": frozenset(trigger_wache.trigger(text)),
+        }
+    return bestand
+
+
+def deckung_pruefen(root: str = BLOG_DIR, datei: str = ALERTING_DATEI,
+                    gelistet: list | None = None,
+                    bestand: dict | None = None,
+                    ausnahmen: set | None = None) -> dict:
+    """Jede Workflow-Datei ist beobachtet ODER begründet ausgenommen.
+
+    Vier Befundklassen, alle fail-closed:
+
+      blind         – der Workflow kann auf main laufen, steht aber weder auf
+                      der Wacht-Liste noch in den begründeten Ausnahmen. Rot
+                      würde niemand erfahren. Genau das ist der gemessene
+                      Schaden: KI-Provenienz-Wache 8/8 rot, null Meldungen.
+      scheindeckung – der Workflow STEHT auf der Liste, kann aber nicht auf
+                      main laufen (nur pull_request): Das Produktions-Scoping
+                      (#343) unterdrückt jede Meldung, die Liste täuscht also
+                      Deckung vor, die es nicht gibt.
+      unbegruendet  – der Workflow kann nicht auf main laufen und ist weder
+                      gelistet noch begründet ausgenommen. Er ist zwar keine
+                      Blindstelle, aber eine UNBEGRÜNDETE Lücke: Die Entscheidung
+                      gehört mit Grund in den Kopfblock, nicht ins Schweigen.
+      verwaist      – ein Name auf der Liste passt zu keiner Workflow-Datei
+                      (umbenannt oder gelöscht). Der Eintrag feuert nie wieder –
+                      stille Blindheit mit grünem Anschein.
+
+    Eine Ausnahme ohne passenden Workflow ist ein Hinweis, kein Befund: Sie
+    belegt Entscheidungs-Geschichte und richtet keinen Schaden an.
+    """
+    leer = {"datei": datei, "status": 2, "hinweise": [], "gelistet": [],
+            "ausnahmen": [], "blind": [], "scheindeckung": [],
+            "unbegruendet": [], "verwaist": [], "bestand": 0}
+
+    pfad = os.path.join(root, *datei.split("/"))
+    try:
+        with open(pfad, encoding="utf-8") as fh:
+            text = fh.read()
+    except OSError as exc:
+        leer["befunde"] = [
+            f"Wacht-Liste nicht lesbar ({exc.__class__.__name__}) – die Deckung "
+            "ist nicht messbar, also nicht grün (C33)."]
+        return leer
+
+    if gelistet is None:
+        gelistet = gelistete_workflows(text)
+    if not gelistet:
+        leer["befunde"] = [
+            f"Keine beobachteten Workflows in {datei} gefunden – die Zählung "
+            "wäre blind (das darf nie still passieren)."]
+        return leer
+
+    # Injection wie bei `pruefen(gelistet=…)`: Der Selbsttest prüft die Logik
+    # ohne Netz und ohne Schreibzugriff – dieselbe Erwartung, andere Quelle.
+    if ausnahmen is None:
+        ausnahmen = bewusst_nicht_beobachtet(text)
+    if bestand is None:
+        bestand = workflow_bestand(root)
+
+    liste = set(gelistet)
+    main_faehig = set(MAIN_FAEHIGE_TRIGGER)
+    namen = {info["name"] for info in bestand.values()}
+
+    blind, scheindeckung, unbegruendet = [], [], []
+    for pfad_rel in sorted(bestand):
+        info = bestand[pfad_rel]
+        name, trigger = info["name"], info["trigger"]
+        kann_auf_main = bool(trigger & main_faehig)
+        ausgenommen = name in ausnahmen
+        if name in liste:
+            if not kann_auf_main and not ausgenommen:
+                scheindeckung.append((pfad_rel, name, sorted(trigger)))
+            continue
+        if ausgenommen:
+            continue
+        if kann_auf_main:
+            blind.append((pfad_rel, name, sorted(trigger)))
+        else:
+            unbegruendet.append((pfad_rel, name, sorted(trigger)))
+
+    verwaist = sorted(liste - namen)
+    hinweise = [f"Ausnahme ohne passenden Workflow (Entscheidungs-Geschichte): "
+                f"`{n}`" for n in sorted(ausnahmen - namen)]
+
+    befunde = []
+    if blind:
+        aufzaehlung = ", ".join(f"`{n}`" for _p, n, _t in blind)
+        befunde.append(
+            f"{len(blind)} Workflow(s) können auf main laufen, stehen aber weder "
+            f"auf der Wacht-Liste noch in den begründeten Ausnahmen – Rot würde "
+            f"niemand erfahren: {aufzaehlung}. Heilung: Name in `{datei}` unter "
+            "`on.workflow_run.workflows` aufnehmen (Code, Bereich und Titel "
+            "leitet scripts/alert_issue_identity.py selbst ab) oder die Ausnahme "
+            f"im Kopfblock „{AUSNAHME_MARKER}“ BEGRÜNDEN.")
+    if scheindeckung:
+        aufzaehlung = ", ".join(f"`{n}`" for _p, n, _t in scheindeckung)
+        befunde.append(
+            f"{len(scheindeckung)} Workflow(s) stehen auf der Wacht-Liste, können "
+            f"aber nicht auf main laufen – die Deckung ist nur Schein: "
+            f"{aufzaehlung}. Das Produktions-Scoping (#343) unterdrückt jede "
+            "Meldung (`event !== 'pull_request'`), also entsteht nie ein Issue. "
+            f"Heilung: Eintrag entfernen und stattdessen im Kopfblock "
+            f"„{AUSNAHME_MARKER}“ von `{datei}` mit Grund ausnehmen.")
+    if unbegruendet:
+        aufzaehlung = ", ".join(f"`{n}`" for _p, n, _t in unbegruendet)
+        befunde.append(
+            f"{len(unbegruendet)} Workflow(s) laufen ausschließlich abseits von "
+            f"main und sind nicht begründet ausgenommen: {aufzaehlung}. Sie "
+            "einzutragen wäre Schein-Deckung – aber sie still wegzulassen "
+            "versteckt die Entscheidung. Heilung: Ausnahme mit Grund in den "
+            f"Kopfblock „{AUSNAHME_MARKER}“ von `{datei}`.")
+    if verwaist:
+        aufzaehlung = ", ".join(f"`{n}`" for n in verwaist)
+        befunde.append(
+            f"{len(verwaist)} Name(n) auf der Wacht-Liste passen zu keiner "
+            f"Workflow-Datei (umbenannt oder gelöscht) – der Eintrag feuert nie "
+            f"wieder, die Deckung ist nur scheinbar grün: {aufzaehlung}.")
+
+    return {"datei": datei, "status": 1 if befunde else 0,
+            "befunde": befunde, "hinweise": hinweise,
+            "gelistet": sorted(liste), "ausnahmen": sorted(ausnahmen),
+            "blind": blind, "scheindeckung": scheindeckung,
+            "unbegruendet": unbegruendet, "verwaist": verwaist,
+            "bestand": len(bestand)}
+
+
+def deckung_md(erg: dict) -> str:
+    zeilen = ["### Deckung der Wacht-Liste (statisch, ohne Netz)", ""]
+    if erg["status"] == 2:
+        zeilen += ["🛑 **Nicht messbar** – ohne Wacht-Liste ist keine Deckung "
+                   "bestätigt (C33)."] + [f"- {b}" for b in erg["befunde"]]
+        return "\n".join(zeilen) + "\n"
+    zeilen += ["| Größe | Wert |", "|---|---|",
+               f"| Workflow-Dateien im Bestand | {erg['bestand']} |",
+               f"| Beobachtet (Wacht-Liste) | {len(erg['gelistet'])} |",
+               f"| Begründet ausgenommen | {len(erg['ausnahmen'])} |",
+               f"| BLIND (kann auf main laufen, nicht gelistet) | "
+               f"**{len(erg['blind'])}** |",
+               f"| Schein-Deckung (gelistet, kann nicht auf main laufen) | "
+               f"**{len(erg['scheindeckung'])}** |",
+               f"| Unbegründete Lücke (weder gelistet noch ausgenommen) | "
+               f"**{len(erg['unbegruendet'])}** |",
+               f"| Verwaiste Namen auf der Liste | **{len(erg['verwaist'])}** |",
+               ""]
+    if erg["befunde"]:
+        zeilen += ["🔴 **Die Deckung hat eine Lücke.** Rot in einem nicht "
+                   "gelisteten Lauf erzeugt keine Meldung – derselbe Schaden wie "
+                   "Befund E (18.09.2026), nur eine Ebene höher: Dort verlor der "
+                   "Kanal Ereignisse, hier gab es nie eines, das man hätte "
+                   "verlieren können.", ""]
+        zeilen += [f"- {b}" for b in erg["befunde"]]
+    else:
+        zeilen += ["✅ Jede Workflow-Datei ist beobachtet oder begründet "
+                   "ausgenommen – kein Lauf kann auf main rot werden, ohne dass "
+                   "eine Meldung entsteht.", ""]
+    for h in erg["hinweise"]:
+        zeilen.append(f"- ⚠ {h}")
+    return "\n".join(zeilen) + "\n"
 
 
 def fenster(jetzt: dt.datetime) -> tuple[dt.datetime, dt.datetime]:
@@ -545,6 +795,96 @@ def _selftest() -> int:
     finally:
         workflow_js_wache.pruefen = original
 
+    # --- D · Deckung der Wacht-Liste (Wurzelheilung H, 23.11.2026) ----------
+    # Der Herzschlag zählte korrekt, aber nur GELISTETE Läufe. 37 von 105
+    # Workflows waren nicht gelistet – darunter die KI-Provenienz-Wache, die
+    # 8/8 rot lief, ohne dass eine Meldung entstand. Ein Kanal, der seine eigene
+    # Reichweite nicht misst, meldet seine Blindstelle nicht.
+    D_BESTAND = {
+        ".github/workflows/gate.yml":      {"name": "Gate",       "trigger": frozenset({"push", "pull_request"})},
+        ".github/workflows/nacht.yml":     {"name": "Nachtlauf",  "trigger": frozenset({"schedule"})},
+        ".github/workflows/pr.yml":        {"name": "PR-Gate",    "trigger": frozenset({"pull_request"})},
+    }
+    D_TEXT = ('# BEWUSST NICHT ÜBERWACHT:\n'
+              '#    - "Fehler-Alerting" selbst (kann sich nicht selbst beobachten)\n'
+              '#    - "PR-Gate" – läuft ausschließlich auf pull_request\n'
+              '# ============================================================\n')
+
+    # D1 · Vollständige Deckung ist grün.
+    d1 = deckung_pruefen(gelistet=["Gate", "Nachtlauf"], bestand=D_BESTAND,
+                         ausnahmen={"PR-Gate"})
+    if d1["status"] != 0 or d1["befunde"]:
+        fehler.append("D1 vollständige Deckung wird als Befund gemeldet")
+
+    # D2 · Ein main-fähiger Workflow ohne Eintrag ist BLIND – Richtung 1.
+    d2 = deckung_pruefen(gelistet=["Gate"], bestand=D_BESTAND,
+                         ausnahmen={"PR-Gate"})
+    if d2["status"] != 1 or len(d2["blind"]) != 1 or d2["blind"][0][1] != "Nachtlauf":
+        fehler.append("D2 nicht gelisteter main-fähiger Lauf bleibt unbemerkt")
+    elif "Nachtlauf" not in d2["befunde"][0]:
+        fehler.append("D2 Befund nennt den blinden Workflow nicht beim Namen")
+
+    # D3 · Derselbe Workflow als begründete Ausnahme ist grün – Richtung 2.
+    d3 = deckung_pruefen(gelistet=["Gate"], bestand=D_BESTAND,
+                         ausnahmen={"PR-Gate", "Nachtlauf"})
+    if d3["status"] != 0 or d3["blind"]:
+        fehler.append("D3 begründete Ausnahme wird weiter als blind gemeldet")
+
+    # D4 · Gelistet, aber nicht main-fähig = SCHEIN-DECKUNG (#343).
+    d4 = deckung_pruefen(gelistet=["Gate", "Nachtlauf", "PR-Gate"],
+                         bestand=D_BESTAND, ausnahmen=set())
+    if d4["status"] != 1 or [n for _p, n, _t in d4["scheindeckung"]] != ["PR-Gate"]:
+        fehler.append("D4 Schein-Deckung (PR-only gelistet) bleibt unbemerkt")
+
+    # D5 · PR-only ohne Eintrag und ohne Grund = unbegründete Lücke.
+    d5 = deckung_pruefen(gelistet=["Gate", "Nachtlauf"], bestand=D_BESTAND,
+                         ausnahmen=set())
+    if d5["status"] != 1 or [n for _p, n, _t in d5["unbegruendet"]] != ["PR-Gate"]:
+        fehler.append("D5 unbegründete Lücke bleibt unbemerkt")
+
+    # D6 · Ein Name auf der Liste ohne passende Datei feuert nie wieder.
+    d6 = deckung_pruefen(gelistet=["Gate", "Nachtlauf", "Alt-Name"],
+                         bestand=D_BESTAND, ausnahmen={"PR-Gate"})
+    if d6["status"] != 1 or d6["verwaist"] != ["Alt-Name"]:
+        fehler.append("D6 verwaister Listeneintrag bleibt unbemerkt")
+
+    # D7 · Eine leere Wacht-Liste ist kein Grün, sondern nicht messbar (C33).
+    d7 = deckung_pruefen(gelistet=[], bestand=D_BESTAND, ausnahmen=set())
+    if d7["status"] != 2:
+        fehler.append("D7 leere Wacht-Liste gilt als grün statt als nicht messbar")
+
+    # D8 · Ausnahmen werden aus dem Text gelesen, nie abgetippt. Fehlt der
+    #      Marker, gilt alles als blind – fail-closed in die sichere Richtung.
+    gelesen = bewusst_nicht_beobachtet(D_TEXT)
+    if gelesen != {"Fehler-Alerting", "PR-Gate"}:
+        fehler.append(f"D8 Ausnahmen falsch gelesen: {sorted(gelesen)}")
+    if bewusst_nicht_beobachtet("# irgendein Kopf ohne Marker\n") != set():
+        fehler.append("D8 Ausnahmen werden ohne Markerblock erfunden")
+    if bewusst_nicht_beobachtet(
+            '# BEWUSST NICHT ÜBERWACHT:\n#    - "X"\nname: Echt\n') != {"X"}:
+        fehler.append("D8 Ausnahmeblock endet nicht am Kopf-Ende")
+
+    # D9 · Der echte Bestand ist grün: jede Datei beobachtet oder ausgenommen.
+    echt = deckung_pruefen()
+    if echt["status"] != 0:
+        fehler.append("D9 echter Bestand hat eine Deckungslücke: "
+                      + "; ".join(b[:110] for b in echt["befunde"]))
+    elif echt["bestand"] < 50 or len(echt["gelistet"]) < 50:
+        fehler.append(f"D9 Bestand unplausibel klein ({echt['bestand']} Dateien, "
+                      f"{len(echt['gelistet'])} gelistet) – die Messung wäre blind")
+
+    # D10 · SABOTAGE-GEGENPROBE: Ohne einen echten Namen ist die Wache rot.
+    #       Beweist, dass D9 nicht leer grün ist.
+    sabotiert = [n for n in echt["gelistet"] if n != "KI-Provenienz-Wache"]
+    if sabotiert == echt["gelistet"]:
+        fehler.append("D10 KI-Provenienz-Wache steht nicht auf der Wacht-Liste")
+    else:
+        d10 = deckung_pruefen(gelistet=sabotiert, bestand=workflow_bestand(),
+                              ausnahmen=set(echt["ausnahmen"]))
+        if d10["status"] != 1 or not any(
+                n == "KI-Provenienz-Wache" for _p, n, _t in d10["blind"]):
+            fehler.append("D10 Sabotage bleibt grün – die Wache ist stumpf")
+
     if fehler:
         print("🛑 alerting_heartbeat-Selbsttest FEHLGESCHLAGEN:")
         for f in fehler:
@@ -552,7 +892,8 @@ def _selftest() -> int:
         return 2
     print("✅ Herzschlag-Selbsttest grün: Fenster+Gnadenfrist, Zählung, "
           "Zuordnungsgrenzen (±90/5 min), Rot-sofort-Befund, skipped-Ausschluss, "
-          "YAML-1.1-Falle (`on:`→True) + Regex-Fallback, echter Bestand.")
+          "YAML-1.1-Falle (`on:`→True) + Regex-Fallback, echter Bestand, "
+          "Deckung der Wacht-Liste (D1–D10, inkl. Sabotage-Gegenprobe).")
     return 0
 
 
@@ -564,10 +905,30 @@ def main() -> int:
     ap.add_argument("--md", action="store_true")
     ap.add_argument("--kanal", action="store_true",
                     help="prüft nur, ob der Meldeweg selbst lauffähig ist")
+    ap.add_argument("--deckung", action="store_true",
+                    help="prüft nur, ob die Wacht-Liste den Bestand deckt "
+                         "(statisch, ohne Netz)")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
     if args.selftest:
         return _selftest()
+    if args.deckung:
+        deck = deckung_pruefen()
+        text = deckung_md(deck)
+        if args.md:
+            summary = os.environ.get("GITHUB_STEP_SUMMARY")
+            if summary:
+                try:
+                    with open(summary, "a", encoding="utf-8") as fh:
+                        fh.write(text)
+                except OSError:
+                    pass
+        print(text)
+        for b in deck["befunde"]:
+            print(f"  ❌ {b}")
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::error::{b.replace('%', '%25').replace(chr(10), '%0A')}")
+        return deck["status"]
     if args.kanal:
         erg = kanal_pruefen()
         text = kanal_md(erg)
@@ -584,8 +945,18 @@ def main() -> int:
             if os.environ.get("GITHUB_ACTIONS"):
                 print(f"::error::{b.replace('%', '%25').replace(chr(10), '%0A')}")
         return erg["status"]
+    # Deckung der Wacht-Liste ZUERST und unabhängig vom Netz messen
+    # (Wurzelheilung H, 23.11.2026): Die Zustellung kann nur für gelistete
+    # Workflows stimmen, und ein Kanal, der seine eigene Reichweite nicht misst,
+    # meldet seine Blindstelle nicht. Ist der Token weg oder die API tot, darf
+    # genau diese Prüfung nicht mit ausfallen – sie braucht beides nicht (C33).
+    deck = deckung_pruefen()
+
     if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
         print("🛑 Kein GH_TOKEN/GITHUB_TOKEN – der Herzschlag kann nicht messen.")
+        for b in deck["befunde"]:
+            print(f"  ❌ {b}")
+        print(deckung_md(deck))
         return 2
     env = dict(os.environ)
     env.setdefault("GH_TOKEN", env.get("GITHUB_TOKEN", ""))
@@ -594,29 +965,40 @@ def main() -> int:
         erg = pruefen(args.repo)
     except Exception as exc:  # noqa: BLE001 – Messwerzeug kaputt = Klasse 2
         print(f"🛑 Herzschlag-Messung unmöglich: {exc.__class__.__name__}: {exc}")
+        for b in deck["befunde"]:
+            print(f"  ❌ {b}")
+        print(deckung_md(deck))
         return 2
+    # Die oben (netzunabhängig) gemessene Deckung MITZÄHLEN: Sie läuft bei jedem
+    # Herzschlag mit, nicht nur auf Zuruf.
+    befunde = list(erg["befunde"]) + list(deck["befunde"])
+    hinweise = list(erg["hinweise"]) + list(deck["hinweise"])
     if args.md:
+        bericht = als_md(erg) + "\n" + deckung_md(deck)
         summary = os.environ.get("GITHUB_STEP_SUMMARY")
         if summary:
             try:
                 with open(summary, "a", encoding="utf-8") as fh:
-                    fh.write(als_md(erg))
+                    fh.write(bericht)
             except OSError:
                 pass
-    print(als_md(erg) if args.md else
-          f"ALERTING-HERZSCHLAG · {erg['gesamt']} Läufe im Fenster · "
-          f"{erg['alarme']} Alerting-Läufe · {erg['fehlend']} verloren · "
-          f"{len(erg['rot_offen'])} davon rot")
+    else:
+        bericht = (f"ALERTING-HERZSCHLAG · {erg['gesamt']} Läufe im Fenster · "
+                   f"{erg['alarme']} Alerting-Läufe · {erg['fehlend']} verloren · "
+                   f"{len(erg['rot_offen'])} davon rot · Deckung "
+                   f"{len(deck['gelistet'])}/{deck['bestand']} beobachtet, "
+                   f"{len(deck['blind'])} blind")
+    print(bericht)
     github = bool(os.environ.get("GITHUB_ACTIONS"))
-    for b in erg["befunde"]:
+    for b in befunde:
         print(f"  ❌ {b}")
         if github:
             print(f"::error::{b.replace('%', '%25').replace(chr(10), '%0A')}")
-    for h in erg["hinweise"]:
+    for h in hinweise:
         print(f"  ⚠ {h}")
         if github:
             print(f"::warning::{h.replace('%', '%25').replace(chr(10), '%0A')}")
-    return 1 if erg["befunde"] else 0
+    return 1 if befunde else 0
 
 
 if __name__ == "__main__":
