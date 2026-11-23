@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T02:59:35Z",
+  "generated_at": "2026-11-23T10:13:43Z",
   "modus": "kandidaten",
-  "commit": "954351143bdc6bfc3f537ca8361d977a05ee9fbc",
+  "commit": "35c7f360373aa565f415d497a8ce2320303fe77c",
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
@@ -2313,7 +2313,7 @@
       "checks": []
     },
     "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
-      "sha256": "beed8bfeb6aa8cd49d16c7d76c91df3261deac7608654f0c70c301b391cf3a86",
+      "sha256": "c9762133cb78db2ce5d8ac59e608718b34f45bc51afa7501f9bd86a5207cd807",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2327,7 +2327,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
@@ -2399,7 +2399,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": []
     }
   }
