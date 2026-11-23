@@ -99,18 +99,34 @@ geholt, der lokale Klon ist flach und reicht nicht bis August),
 Fachprüf-Register, Redaktions-Queue, Frontmatter. Gemessen am 23.11.2026 am
 gebauten Bestand.
 
+> **Korrektur vom 23.11.2026 (nach Abzeichnung).** Die Spalten „Fachprüfung“
+> und „Prüfer“ sowie die Lesart-Punkte „Fachprüfung“, „Siegel und Freigabe“ und
+> „Fazit der Belege“ wurden am 23.11.2026 berichtigt. Die erste Fassung las für
+> diese Spalten nur das **auto-generierte** `data/fachpruefung_register.yaml`
+> (*Kopf: „Stand: 19.10.2026. Keine Freigabe.“*) und einen Zwischenstand der
+> `data/editorial_review_queue.json` (`generated_at 2026-11-21`) — und meldete
+> daraus „kein Eintrag / ungeprüft“. Gemessen am **Frontmatter**, das
+> `editorial_review_gate` und `ymyl_siegel_wache` tatsächlich durchsetzen,
+> tragen **3 der 12** (`privathaftpflicht`, `wohngebaeudeversicherung`,
+> `kfz-versicherung`) ein gültiges `freigegeben`-Siegel mit benanntem Prüfer,
+> `inhalt_sha256` und `gepruefte_aussagen`; beide Gates sind grün (**Exit 0**).
+> Die KI-**Kennzeichnung** aller 12 bleibt davon unberührt: alle 12 stehen
+> weiter unter `maschinell` mit `ai_generated: true` (Entscheidung A). Die
+> Siegel belegen redaktionelle Verantwortungsübernahme, **nicht** menschliche
+> Urheberschaft. Details: Abschnitt 6 (Korrektur) und Abschnitt 8.1.
+
 | # | Slug (gekürzt) | Titel | Entstehungs-Batch | Commit-Datum | Wörter | Quellen | Fachprüfung | Prüfer |
 |---|---|---|---|---|---|---|---|---|
 | 1 | `internet-dsl-wechseln-praxis-tipps-fuer-den-an` | DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effek | `feat(seo): optimize articles for Google rank` | 2026-08-25 | 1772 | 2 | kein Eintrag | — |
 | 2 | `sparen-im-herbst-die-besten-spartipps-fuer-die` | Sparen im Herbst: Spartipps für die goldene Jahresze | `feat(seo): optimize articles for Google rank` | 2026-08-25 | 2273 | 1 | kein Eintrag | — |
 | 3 | `kostenloses-girokonto-so-findest-du-ein-konto-` | Kostenloses Girokonto: Ein Konto ohne Gebühren finde | `Kadenz-Lücken 17.08. + 19.08. geschlossen` | 2026-08-19 | 2135 | 6 | ausstehend | **keiner benannt** |
-| 4 | `privathaftpflicht-warum-sie-so-wichtig-ist-und` | Privathaftpflicht: Warum so wichtig und was sie kost | `Kadenz-Lücken 17.08. + 19.08. geschlossen` | 2026-08-19 | 1783 | 3 | kein Eintrag | — |
-| 5 | `wohngebaeudeversicherung-vergleich-worauf-du-a` | Wohngebäudeversicherung Vergleich: Worauf du achten  | `feat(seo): optimize articles for Google rank` | 2026-08-25 | 1864 | 3 | kein Eintrag | — |
+| 4 | `privathaftpflicht-warum-sie-so-wichtig-ist-und` | Privathaftpflicht: Warum so wichtig und was sie kost | `Kadenz-Lücken 17.08. + 19.08. geschlossen` | 2026-08-19 | 1783 | 3 | **freigegeben** (Siegel) | Redaktion FranksFinanzcheck · 2026-10-30 |
+| 5 | `wohngebaeudeversicherung-vergleich-worauf-du-a` | Wohngebäudeversicherung Vergleich: Worauf du achten  | `feat(seo): optimize articles for Google rank` | 2026-08-25 | 1864 | 3 | **freigegeben** (Siegel) | Redaktion FranksFinanzcheck · 2026-11-21 |
 | 6 | `so-findest-du-den-richtigen-dsl-tarif-fuer-dei` | DSL-Tarif für dein Zuhause: Das passende Angebot fin | `feat(seo): optimize articles for Google rank` | 2026-08-25 | 1868 | 3 | kein Eintrag | — |
 | 7 | `haushaltsbuch-fuehren-app-excel-oder-papier` | Haushaltsbuch führen: App, Excel oder Stift im Vergl | `Fehlende Blogartikel ergänzt: 6 Premium-Ratg` | 2026-08-25 | 1705 | 3 | ausstehend | **keiner benannt** |
 | 8 | `mietwagen-buchen-ohne-kaution-fallen-urlaub` | Mietwagen ohne Kautionsfallen: So sparst du im Urlau | `Fehlende Blogartikel ergänzt: 6 Premium-Ratg` | 2026-08-25 | 2415 | 1 | kein Eintrag | — |
 | 9 | `handytarif-vergleichen-2026-guenstige-tarife` | Handytarife vergleichen: Welches Angebot passt zu di | `fix(build): Qualitäts-Gate wiederherstellen` | 2026-08-26 | 1363 | 3 | kein Eintrag | — |
-| 10 | `kfz-versicherung-vergleich-bis-zu-800-euro-spa` | Kfz-Versicherung vergleichen: Was ändert sich beim B | `Fehlende Blogartikel ergänzt: 6 Premium-Ratg` | 2026-08-25 | 836 | 3 | kein Eintrag | — |
+| 10 | `kfz-versicherung-vergleich-bis-zu-800-euro-spa` | Kfz-Versicherung vergleichen: Was ändert sich beim B | `Fehlende Blogartikel ergänzt: 6 Premium-Ratg` | 2026-08-25 | 836 | 3 | **freigegeben** (Siegel) | Frank Hartung · 2026-11-21 |
 | 11 | `tagesgeld-zinsen-2026-die-besten-zinssaetze-im` | Tagesgeld vergleichen: Was bleibt nach dem Aktionszi | `fix(build): Qualitäts-Gate wiederherstellen` | 2026-08-26 | 1685 | 3 | ausstehend | **keiner benannt** |
 | 12 | `kreditkarte-vergleichen-kostenlos-sicher-bezah` | Kreditkarte vergleichen: Kostenlos und sicher zahlen | `fix(cadence): 2-3 LIVE an Mo/Mi/Fr dauerhaft` | 2026-09-03 | 1663 | 3 | ausstehend | **keiner benannt** |
 
@@ -121,18 +137,32 @@ gebauten Bestand.
   die der Kadenz- und SEO-Automatik: „optimize articles for Google ranking“,
   „Kadenz-Lücken geschlossen“, „fix(cadence): 2-3 LIVE an Mo/Mi/Fr dauerhaft“.
   Kein Batch-Name nennt einen Menschen als Urheber.
-* **Fachprüfung:** 4 der 12 stehen im Register mit Status **`ausstehend`** und
-  **ohne benannten Prüfer**; 8 haben **gar keinen** Eintrag. Das Register meldet
-  global: `pruefer_status: offen – kein benannter fachpruefer und keine
-  Redaktionsprüfung mit Belegkette`, bei `anzahl: 21`.
-* **Siegel und Freigabe:** kein einziges der 12 Frontmatter trägt ein Siegel-,
-  Freigabe- oder Review-Feld. Die `ymyl_siegel_wache` meldet unabhängig:
-  **„139 Artikel · 0 Befunde (keine Fachfreigabe)“**.
-* **Fazit der Belege:** Für keinen der 12 Artikel ist **Urheberschaft** oder
-  eine umfassende redaktionelle Verantwortungsübernahme belegt. Für **zwei** der
-  12 gibt es inzwischen jedoch belegte Einzelprüfungen des Betreibers — das
-  ändert die Lage und steht in Abschnitt 4.1. Für die übrigen **zehn** lässt sich
-  die Ausnahme des Art. 50 Abs. 4 nicht beanspruchen.
+* **Fachprüfung:** *Korrigiert am 23.11.2026 (Vermerk oben).* Gemessen am
+  Frontmatter — der Quelle, die `editorial_review_gate` und `ymyl_siegel_wache`
+  durchsetzen — tragen **3 der 12** ein gültiges `freigegeben`-Siegel mit
+  benanntem Prüfer: `privathaftpflicht` (Redaktion FranksFinanzcheck,
+  2026-10-30), `wohngebaudeversicherung` (Redaktion FranksFinanzcheck,
+  2026-11-21), `kfz-versicherung` (Frank Hartung, 2026-11-21). Die übrigen **9**
+  haben kein Frontmatter-Siegel; **4** davon führt das auto-generierte
+  `fachpruefung_register.yaml` (*Stand 19.10.2026*) als `ausstehend`, **5** haben
+  dort gar keinen Eintrag.
+* **Siegel und Freigabe:** *Korrigiert am 23.11.2026.* Drei der 12 Frontmatter
+  tragen sehr wohl ein `redaktionelle_pruefung`-Feld mit `status: freigegeben`,
+  `inhalt_sha256`, benanntem Prüfer und `gepruefte_aussagen`. Die
+  `ymyl_siegel_wache` meldet **„139 Artikel · 0 Befunde“** — das heißt **kein
+  Siegel-Drift**, nicht „keine Siegel“; ihr Zusatz „(keine Fachfreigabe)“ ist die
+  Selbstauskunft der Wache („Dies ist KEINE fachliche Freigabe“), keine Zählung.
+  `editorial_review_gate --published --strict` → **Exit 0**: „92 Artikel · 4
+  Hochrisiko · 4 freigegeben · 0 blockiert“.
+* **Fazit der Belege:** *Korrigiert am 23.11.2026.* Die **Urheberschaft** bleibt
+  für alle 12 maschinell (fünf Automatik-Batches, kein Mensch als Urheber
+  benannt) — ein Redaktions-Siegel ändert daran nichts, und alle 12 bleiben unter
+  `maschinell` mit `ai_generated: true` (Entscheidung A). Eine **redaktionelle
+  Verantwortungsübernahme** ist jedoch belegt für **drei** der 12 durch
+  `freigegeben`-Siegel (oben) und für **zwei** weitere (`sparen-im-herbst`,
+  `mietwagen`) durch je fünf Betreiber-Freigaben mit Text-Hash (Abschnitt 4.1).
+  Für die übrigen **sieben** ist weder Urheberschaft noch Verantwortungsübernahme
+  belegt; die Ausnahme des Art. 50 Abs. 4 lässt sich für sie nicht beanspruchen.
 
 ### 4.1 Neue Beleglage vom 23.11.: Betreiber-Freigaben für 2 der 12
 
@@ -269,27 +299,50 @@ Lücke: ein sichtbarer Hinweis ohne Meta-Signal ist ebenso rot.
 
 ---
 
-## 6. Die zwei Fälle mit dem höchsten Einsatz
+## 6. Die zwei Fälle mit dem höchsten Einsatz — Korrektur vom 23.11.2026
 
-Zwei der 12 stehen in `data/editorial_review_queue.json` als **`state: live`**
-mit **`risk: hoch`** — sie sind also veröffentlicht, gelten als Hochrisiko und
-sind **weiter ungeprüft**. Die Queue-Metrik bestätigt das unabhängig:
-`high_risk_total: 10, approved: 6, open_live: 2, open_drafts: 2`. Es sind genau
-diese zwei:
+> **Korrektur (23.11.2026, nach Abzeichnung).** Die erste Fassung dieses
+> Abschnitts meldete die zwei Hochrisiko-Artikel als „weiter ungeprüft ·
+> Fachprüfung: kein Eintrag · Prüfer: keiner benannt“. Das war **falsch** — und
+> zwar schon zum Messzeitpunkt. Die Angabe stammte aus dem **auto-generierten**
+> `data/fachpruefung_register.yaml` (*Kopf: „Stand: 19.10.2026. Keine
+> Freigabe.“*), das die zwei Artikel **gar nicht führt**, sowie aus einem
+> Zwischenstand der `data/editorial_review_queue.json` (`generated_at
+> 2026-11-21`, `open_live: 2`, Befunde E09/E17), den die Re-Siegel-Commits
+> `3672f84` (13:54) und `3718357` (14:01) vom 23.11.2026 überholt hatten —
+> **vor** dem Akte-Commit `321f45c` (18:11). Das Frontmatter wurde nicht
+> gemessen, obwohl es die Quelle ist, die die publikations-blockierenden Gates
+> durchsetzen.
+
+Beide Artikel sind **live** (`draft: false`) und tragen ein gültiges,
+fassungsgebundenes `redaktionelle_pruefung`-Siegel mit `status: freigegeben`:
 
 * **`2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst`**
-  „Wohngebäudeversicherung Vergleich: Worauf du achten musst“ · 1864 Wörter · 3 Quellen · Fachprüfung: **kein Eintrag** · Prüfer: **keiner benannt**
+  „Wohngebäudeversicherung Vergleich: Worauf du achten musst“ · 1864 Wörter ·
+  Prüfer **Redaktion FranksFinanzcheck** (`typ:
+  redaktion-mit-externer-belegkette`, Belegkette Verbraucherzentrale/GDV) ·
+  `pruefdatum 2026-11-21` · `naechste_pruefung 2027-01-05`
 * **`2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen`**
-  „Kfz-Versicherung vergleichen: Was ändert sich beim Beitrag?“ · 836 Wörter · 3 Quellen · Fachprüfung: **kein Eintrag** · Prüfer: **keiner benannt**
+  „Kfz-Versicherung vergleichen: Was ändert sich beim Beitrag?“ · 836 Wörter ·
+  Prüfer **Frank Hartung** (Betreiber, `typ:
+  redaktion-mit-externer-belegkette`) · `pruefdatum 2026-11-21` ·
+  `naechste_pruefung 2027-01-05`
 
-Beides sind Versicherungsvergleiche — ein Thema, bei dem eine falsche Zahl
-echten Vermögensschaden bedeuten kann. Die Kennzeichnung ist hier das Minimum,
-eine Fachprüfung wäre mehr.
+Beide Gates, die eine YMYL-Veröffentlichung sperren, sind **grün**:
+`editorial_review_gate --published --strict` → **Exit 0** („92 Artikel · 4
+Hochrisiko · 4 freigegeben · 0 blockiert“); `ymyl_siegel_wache` → **Exit 0**
+(„139 Artikel · 0 Befunde“ = kein Siegel-Drift).
 
-Das ist **kein** Widerspruch zur Entscheidung aus Abschnitt 2, sondern eine
-**zweite, davon unabhängige** Baustelle: Die Herkunft ist jetzt geklärt und
-gekennzeichnet, die inhaltliche Prüfung dieser zwei Artikel steht weiter aus.
-Wenn Sie nur eine Sache aus dieser Vorlage mitnehmen, dann diese.
+**Folge für die Abzeichnung.** Die Fachprüfung dieser zwei Artikel steht
+**nicht aus** — sie liegt vor, und die nächste turnusgemäße Prüfung ist bereits
+auf **2027-01-05** terminiert. Die Zusatzentscheidung in Abschnitt 8 wird darum
+als **„bereits erledigt“** geführt: Die neue Wache (Abschnitt 8.3, Regel **Z6**)
+prüft dauerhaft, dass die zwei Siegel gültig bleiben — `editorial_review_gate`
+und `ymyl_siegel_wache` grün, Siegel nicht gedriftet, `naechste_pruefung`
+(2027-01-05) nicht verstrichen — und meldet Drift oder Ablauf **statt** einer
+Phantom-Frist. Beides sind Versicherungsvergleiche, bei denen eine falsche Zahl
+echten Vermögensschaden bedeuten kann; darum bleibt die Siegel-Gültigkeit
+dauerhaft bewacht, auch wenn die Prüfung selbst schon erfolgt ist.
 
 ---
 
@@ -343,50 +396,146 @@ Das ist dieselbe Klasse von Fehler, die diese Runde geheilt hat: eine Aussage
 
 ## 8. Abzeichnung
 
-Zum Ausfüllen. Mit der Unterschrift wird die Einordnung der 12 Artikel unter
-`maschinell` in `data/ki_kennzeichnung.yaml` zur Entscheidung des Betreibers.
+**Abgezeichnet am 23.11.2026.** Mit dieser Unterschrift wird die Einordnung der
+12 Artikel unter `maschinell` in `data/ki_kennzeichnung.yaml` zur Entscheidung
+des Betreibers — sie ist damit nicht länger eine „konservative
+Betreiber-Entscheidung“ aus einem Commit-Kommentar, sondern eine belegte,
+datierte und maschinenlesbar gespiegelte Abzeichnung.
+
+Maschinenlesbare Fassung: `data/betreiber_abzeichnung_ki_register.yaml`.
+Bewacht von `scripts/ki_abzeichnung_wache.py` (Abschnitt 8.3).
 
 ```
 Entscheidung zu den 12 Altartikeln im KI-Register (Frist 02.12.2026)
 
-Ich habe die Beleg-Lage in Abschnitt 4 zur Kenntnis genommen: fünf
-Automatik-Batches zwischen 14.08. und 03.09.2026, kein benannter Fachprüfer,
-kein Siegel in den Frontmattern, und — für zwei der zwölf Artikel — je fünf
-Betreiber-Freigaben vom 23.11.2026 mit Text-Hash-Bindung (Abschnitt 4.1).
+Ich habe die Beleg-Lage in Abschnitt 4 zur Kenntnis genommen — einschließlich
+der Korrektur vom 23.11.2026: fünf Automatik-Batches zwischen 14.08. und
+03.09.2026, kein Mensch als Urheber benannt, und — für drei der zwölf Artikel —
+gültige freigegeben-Siegel, für zwei weitere je fünf Betreiber-Freigaben mit
+Text-Hash (Abschnitte 4 und 4.1).
 
 Option A — bestätigen (alle 12 bleiben unter `maschinell`, gekennzeichnet):
 
-    [   ] ja        [   ] nein
+    [X] ja        [   ] nein
 
 Option B — einzelne Artikel zurück nach `menschlich`, nur mit Beleg.
 Belegbare Kandidaten nach Abschnitt 4.1:
 
     [   ] 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-          Beleg: 5 Betreiber-Freigaben 23.11.2026, Text-Hash 2a897cf8eda4…
+          nicht gezogen — Begründung in Abschnitt 8.1, Beleg bleibt als
+          Prüfvermerk in Abschnitt 4.1 und im Datensatz erhalten
     [   ] 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-          Beleg: 5 Betreiber-Freigaben 23.11.2026, Text-Hash e50b3a1b4a15…
-    [   ] anderer Artikel: ____________________________________
-          Beleg (Prüfer, Datum, Fundstelle): ____________________
+          nicht gezogen — Begründung in Abschnitt 8.1, Beleg bleibt als
+          Prüfvermerk in Abschnitt 4.1 und im Datensatz erhalten
+    [   ] anderer Artikel: keiner
 
 Zusatzentscheidung zu den zwei Hochrisiko-Fällen aus Abschnitt 6
-(wohngebaeudeversicherung · kfz-versicherung, beide live und ungeprüft):
+(wohngebaeudeversicherung · kfz-versicherung, beide live und fachgeprüft):
 
-    [   ] Fachprüfung wird bis ____________ nachgeholt
+    [X] Fachprüfung liegt bereits vor — freigegeben am 2026-11-21
+        (wohngebaeudeversicherung: Redaktion FranksFinanzcheck;
+        kfz-versicherung: Frank Hartung), nächste turnusgemäße Prüfung
+        2027-01-05. Die Wache prüft dauerhaft, dass die Siegel gültig
+        bleiben, und meldet Drift oder Ablauf (Regel Z6) — keine
+        Phantom-Frist, weil nichts nachzuholen ist.
     [   ] bleibt offen, Risiko bewusst getragen
 
-Ort, Datum: ______________________
+Ort, Datum: 23.11.2026 (Abzeichnung über Arena-Session, kein Ort angegeben)
 
-Unterschrift (Betreiber): ______________________
+Unterschrift (Betreiber): Frank Hartung — Betreiber-Abzeichnung über
+Arena-Session, 23.11.2026
 ```
 
 Die zwei Kandidaten unter Option B sind **nicht** dieselben wie die zwei
 Hochrisiko-Fälle der Zusatzentscheidung. Das ist kein Widerspruch: Herkunft und
-Kennzeichnung sind für alle 12 geklärt; offen sind einmal die Frage, ob für zwei
-Artikel die Ausnahme greift (Option B), und einmal die inhaltliche Fachprüfung
-zwei anderer Artikel (Zusatzentscheidung).
+Kennzeichnung sind für alle 12 geklärt; offen war einmal die Frage, ob für zwei
+Artikel die Ausnahme greift (Option B — verneint, Abschnitt 8.1), und einmal der
+Stand der inhaltlichen Fachprüfung zweier anderer Artikel (Zusatzentscheidung —
+nach Korrektur bereits erledigt, Abschnitt 6).
 
-Nach der Unterschrift: dieses Dokument committen. Es ist der Beleg, den das
-Register seit dem 02.08.2026 mit `BITTE PRÜFEN` verlangt hat.
+### 8.1 Warum Option B nicht gezogen wurde — gemessen, nicht vermutet
+
+Option B war zunächst gewählt worden. Vor der Umsetzung wurde sie am Bestand
+gemessen (Worktree auf `be3ab63`, Hugo 0.168.0 extended, 3156 Dateien). Beide
+Wege zu B haben einen Preis, den die Vorlage so nicht vorhergesehen hatte:
+
+| Weg | `ki_provenienz_gate --wache` | Kennzeichnung auf den zwei Seiten | Weitere Gates |
+|---|---|---|---|
+| **B wörtlich**: zwei Slugs `maschinell` → `menschlich`, `ai_generated: false` | ❌ **Exit 1** · „⚠️ braucht Menschen (register): 2 Fälle … 9 Tage vor der Frist (2026-12-02) ungeklärt“ | sichtbarer Hinweis **weg** (0 statt 2 Treffer), `<meta name=ai-generated content="true">` **weg**; `ai-generated-scope content="audio"`, `rel=describedby`, `creditText` bleiben | `ki_kennzeichnung_gate --gate` ✅ · YMYL ✅ |
+| **B über Siegelung**: Slugs aus dem Register, `redaktionelle_pruefung` mit `status: freigegeben`, `ai_generated: false` | ✅ Exit 0 · 123/123 Seiten · 0 Eskalationen | sichtbarer Hinweis weg | ❌ `ymyl_siegel_wache` **Exit 1** · E17 „Siegel fehlt oder passt nicht zur Fassung“ ❌ `editorial_review_gate --published --strict` **Exit 1** · E01 `editorial_review_gate --seal` **Exit 2, fail-closed**, Datei bytgleich |
+| **A**: alles bleibt `maschinell` | ✅ Exit 0 · 123/123 · 0 Eskalationen | bleibt auf allen 12 Seiten | alle ✅ · strict: 92 Artikel, 4 Hochrisiko, 4 freigegeben, 0 blockiert |
+
+Drei Erkenntnisse aus der Messung:
+
+1. **`menschlich` ist kein Freigabe-Zustand, sondern eine offene Frage.**
+   `ki_provenienz.ungeklaert()` liefert **jeden** Eintrag der Liste
+   `menschlich`; das Gate eskaliert, sobald ≤ 30 Tage zur Frist verbleiben
+   (`ki_provenienz_gate.py:832`). Die Wache sagt das ausdrücklich selbst: „Ob
+   ein Mensch die redaktionelle Verantwortung übernommen hat, weiß nur der
+   Betreiber.“ Option B hätte also genau das Gate wieder rot gemacht, das dieser
+   Auftrag geheilt hat — und zwar bis zum formalen Frist-Abschluss über
+   `ki_frist_freigabe.py` (`docs/ki-vo-abschluss/abschluss.json`).
+2. **Der saubere Weg zu B führt über eine echte Prüfung, nicht über einen
+   Eintrag.** Ein selbsterklärter `freigegeben`-Block wird von zwei Gates
+   abgelehnt, und das Siegel-Werkzeug verweigert fail-closed. Nötig wäre eine
+   fassungsgebundene Prüfung mit zulässiger Risikoklasse, `inhalt_sha256`,
+   benanntem Prüfer, `naechste_pruefung` und `gepruefte_aussagen` je Aussage mit
+   externer Belegkette — an zwei YMYL-Finanzartikeln. Aus dieser Umgebung ist
+   das nicht ehrlich leistbar: erreichbar sind nur `github`, `npm` und `pypi`,
+   keine einzige Quelle.
+3. **Die Register-Doktrin verbietet den Weg ohnehin.** Im Kopf von
+   `data/ki_kennzeichnung.yaml` steht: „Artikel unter `maschinell` dürfen NIE
+   auf false gesetzt werden, auch nicht über `menschlich` (Lehre aus Commit
+   `1a8a6d10`, der 9 Bot-Artikel still auf false stellte).“ Diese Regel ist
+   bislang **nur Prosa** — die neue Wache macht sie für diese 12 Artikel
+   maschinell prüfbar (Abschnitt 8.3, Regel Z2).
+
+**Folge der Entscheidung für A:** Die 10 Betreiber-Freigaben zu
+`sparen-im-herbst` und `mietwagen` bleiben als Prüfvermerk erhalten — im
+Datensatz mit Text-Hash, und die Wache meldet, wenn dieser Beleg aus dem Ledger
+verschwindet (Regel Z5). Sie begründen keine Umtragung und keine Ausnahme nach
+Art. 50 Abs. 4; sie belegen, dass der Betreiber die Fassungen vom 23.11.2026
+inhaltlich durchgesehen und freigegeben hat.
+
+### 8.2 Was diese Abzeichnung nicht ist
+
+* **Keine Fachprüfung und keine Urheberschaft.** Diese Abzeichnung entscheidet
+  die **Herkunft/Kennzeichnung** der 12 (Option A). Die zwei
+  Hochrisiko-Artikel sind unabhängig davon bereits fachgeprüft (freigegeben
+  2026-11-21, nächste Prüfung 2027-01-05, Abschnitt 6); die Wache bewacht deren
+  Siegel-Gültigkeit, verfügt aber keine neue Prüfung.
+* **Keine Anbieter-Auskunft.** Art. 50 Abs. 2 verpflichtet den Anbieter des
+  generativen Systems; dessen Markierung kann der Betreiber nicht ersetzen
+  (Abschnitt 3).
+* **Kein Beweis der Herkunft.** Die fünf Automatik-Batches sind Indizien, keine
+  Urhebernachweise (Abschnitt 4).
+
+### 8.3 Dauerhaftigkeit: Datensatz und Wache
+
+Die Prosa allein wäre derselbe Fehler wie der Register-Kommentar, der die
+Umfuhrung bislang nur schriftlich verbot. Darum ist die Abzeichnung doppelt
+abgelegt und bewacht:
+
+`data/betreiber_abzeichnung_ki_register.yaml` — Frist, Option, die 12 Slugs,
+die erwartete Einordnung, die zwei Prüfvermerke mit Text-Hash, die zwei
+Hochrisiko-Siegel mit Prüfer/Datum/`naechste_pruefung` und der Hash dieser Akte.
+
+`scripts/ki_abzeichnung_wache.py` — sechs Regeln, jede in beide Richtungen:
+
+| Regel | Prüfung | Schwere |
+|---|---|---|
+| **Z1** | Datensatz vorhanden, lesbar, Pflichtfelder vollständig | Werkzeugfehler, Exit 2 |
+| **Z2** | Alle 12 Slugs stehen unter der abgezeichneten Einordnung im Register und **nicht** in der Gegenliste — die Doktrin „nie auf false, auch nicht über `menschlich`“, maschinell | Blocker |
+| **Z3** | Der Hash dieser Akte stimmt mit dem Datensatz überein — eine Unterschrift, deren Dokument sich danach ändert, ist keine | Blocker |
+| **Z4** | Frist 02.12.2026: verstrichen ohne Abzeichnung ist rot, sonst wird der Abstand genannt | Blocker / Hinweis |
+| **Z5** | Die zwei Prüfvermerke finden sich mit ihrem Text-Hash weiterhin im Ledger — verschwindet der Beleg, verschwindet die Aussage | Blocker |
+| **Z6** | Die zwei Hochrisiko-Siegel bleiben gültig: `editorial_review_gate --published --strict` und `ymyl_siegel_wache` grün, Siegel nicht gedriftet, `naechste_pruefung` (2027-01-05) nicht verstrichen | Blocker / Hinweis |
+
+Verdrahtung: `--selftest` läuft entdeckt im Qualitäts-Gate (Schritt 4
+„Governance-Selbsttests“, unter um 97 und 1461 Tagen vorgestellter Uhr und
+schreibfrei nach C15), der Eintrag in `governance_contract.GUARDS` macht daraus
+eine Quelle; der Echtlauf `--wache` läuft in `ki-provenienz-wache.yml` neben der
+Provenienz-Wache und wird rot durchgereicht.
 
 ---
 
