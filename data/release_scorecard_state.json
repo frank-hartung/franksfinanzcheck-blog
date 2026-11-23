@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T13:47:48Z",
-  "modus": "live",
-  "commit": null,
+  "generated_at": "2026-11-23T14:40:02Z",
+  "modus": "kandidaten",
+  "commit": "15a793c244d30aaedb80e5e3d3dbfc5f8c95b29e",
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
@@ -1446,7 +1446,7 @@
       "checks": []
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
-      "sha256": "3e081d80f8f3acc086039057ef4e91fb05346cfb0af3fd771fdeae8c75ccfe92",
+      "sha256": "ad46a1f4f3e166a87a6a6c5002ca42e6c0745326551d82d657e149ede952f323",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1460,11 +1460,11 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "950fa6f6a7ef30312190db0639c02af3640856a682ea3f79f6075a068c12d3d2",
+      "sha256": "5dac9c4dd91473085b156ba5ec8d620387cf908a7f700dee1e03730530deffa8",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1478,7 +1478,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
