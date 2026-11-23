@@ -90,7 +90,7 @@ runden:
     Sparen-im-Herbst-Artikel. Anlass ist eine redaktionelle Praezisierung im
     selben Artikel (der Satz zum Kfz-Stichtag nennt jetzt ausdruecklich den
     Zugang beim Versicherer statt nur den Eingang); dadurch wanderte der
-    Aussage-Hash der Projektion betrieb-v4 von 692d9701 ueber fce7841e auf 42d09ef3. Beide
+    Aussage-Hash der Projektion betrieb-v4 von 692d9701 ueber fce7841e und 42d09ef3 auf 2a897cf8. Beide
     Befunde waren bereits behoben und sind gegenueber dem heutigen Text
     weiterhin gegenstandslos: die unbelegten Kfz-Wechsel-Spannen (150-400 Euro,
     180-350 Euro) stehen nicht im Artikel, ebenso wenig die Behauptung, der
@@ -325,7 +325,7 @@ befunde:
   rest_risiko: Ein Wechsel kann sich lohnen, muss aber am eigenen Angebot gemessen
     werden.
   ledger_fassung_sha256: legacy-unbekannt
-  geprueft_fassung: 42d09ef3ae723da0866bd7855234c0a7fb57561b0205bdd3fbe6fc95a565bb43
+  geprueft_fassung: 2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892
   projektion: betrieb-v4
   entschieden_am: '2026-11-21'
   entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 21.11.2026'
@@ -372,7 +372,7 @@ befunde:
   - lukrativste spar-saison des jahres
   rest_risiko: Der Herbst bietet keine pauschale Spitzen-Ersparnis über alle Haushalte.
   ledger_fassung_sha256: legacy-unbekannt
-  geprueft_fassung: 42d09ef3ae723da0866bd7855234c0a7fb57561b0205bdd3fbe6fc95a565bb43
+  geprueft_fassung: 2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892
   projektion: betrieb-v4
   entschieden_am: '2026-11-21'
   entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 21.11.2026'
