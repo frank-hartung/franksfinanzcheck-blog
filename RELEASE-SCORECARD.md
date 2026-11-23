@@ -25,8 +25,8 @@
 
 | Artikel | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung | Urteil |
 |---|---|---|---|---|---|---|---|---|---|
-| `2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-24 | **freigabe-reif** |
 | `2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-24 | **freigabe-reif** |
+| `2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-24 | **freigabe-reif** |
 
 ## Live-Bestand (Artikel für Artikel)
 
