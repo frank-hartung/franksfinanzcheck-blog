@@ -64,8 +64,13 @@ SUCHORTE = (ROOT / "content", ROOT / "data", ROOT / "layouts", ROOT / "static")
 # Kopfdaten, Rechner-Ausgaben und Statuszeilen (`STATUS`, `.newsletter-footer`,
 # `[data-ff-wz-kennzahlen]`) stammen aus Templates bzw. Rechenkernen – dort
 # ist ein Wortlaut Teil des Produkts und gehört nicht in diese Wache.
-ANKER = re.compile(
-    r"""toContainText\(\s*(['"`])(?P<text>(?:\\.|(?!\1).)*)\1""")
+# KEIN Regex mit Backreference in einer Wiederholung: `(["\'])(?:(?!\\1).)*\\1`
+# ist die klassische ReDoS-Form (py/redos) – auf einer Zeile aus vielen
+# Backslashes explodiert der Suchbaum exponentiell. Der Parser unten ist
+# linear: Er läuft einmal über die Zeile, merkt sich das öffnende
+# Anführungszeichen und sucht das passende Ende.
+ANKER_AUFRUF = "toContainText("
+QUOTES = "'\"`"
 POST_CONTENT = re.compile(r"""post-content|post-inhalt""")
 
 # Auszeichnung, die Markdown rendert und die im DOM nicht mehr steht.
@@ -73,6 +78,46 @@ AUSZEICHNUNG = re.compile(r"[*_`]{1,3}")
 
 # Kürzer als das ist kein Anker, sondern ein Zeichen.
 MIN_LAENGE = 12
+
+
+def _anker_in_zeile(zeile: str) -> list[str]:
+    """Alle `toContainText('…')`-Texte einer Zeile – linear, ohne Backtracking.
+
+    Bewusst kein Regex: Das Muster `(["'])(?:(?!\\1).)*\\1` ist quadratisch
+    bis exponentiell (CodeQL py/redos). Hier zählt ein einzelner Durchlauf.
+    """
+    treffer: list[str] = []
+    start = 0
+    while True:
+        pos = zeile.find(ANKER_AUFRUF, start)
+        if pos < 0:
+            return treffer
+        i = pos + len(ANKER_AUFRUF)
+        laenge = len(zeile)
+        while i < laenge and zeile[i] in " \t\r\n":
+            i += 1
+        if i >= laenge or zeile[i] not in QUOTES:
+            start = i                      # kein Textargument (z. B. Regex)
+            continue
+        quote = zeile[i]
+        i += 1
+        puffer: list[str] = []
+        while i < laenge:
+            zeichen = zeile[i]
+            if zeichen == "\\" and i + 1 < laenge:
+                puffer.append(zeile[i + 1])   # Escape auflösen
+                i += 2
+                continue
+            if zeichen == quote:
+                treffer.append("".join(puffer))
+                start = i + 1
+                break
+            puffer.append(zeichen)
+            i += 1
+        else:
+            return treffer                  # Zeichenkette nicht geschlossen
+        if i < start:
+            start = i
 
 
 def _normiere(text: str) -> str:
@@ -112,8 +157,7 @@ def pruefe(dateien: list[Path] | None = None, bestand: str | None = None) -> lis
             umfeld = "\n".join(zeilen[max(0, nummer - 4):nummer])
             if not POST_CONTENT.search(umfeld):
                 continue                       # UI-Text, nicht Redaktion
-            for treffer in ANKER.finditer(zeile):
-                text = treffer.group("text")
+            for text in _anker_in_zeile(zeile):
                 if len(text.strip()) < MIN_LAENGE:
                     continue                       # kein Anker, ein Zeichen
                 if _normiere(text) in bestand:

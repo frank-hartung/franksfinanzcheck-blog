@@ -71,6 +71,38 @@ class AnkerFindenTest(unittest.TestCase):
         self.assertEqual([], befunde)
 
 
+class ReDoSTest(unittest.TestCase):
+    """Der Parser muss linear bleiben – CodeQL py/redos hat hier angeschlagen.
+
+    Die erste Fassung nutzte `(["'])(?:(?!\\1).)*\\1`. Auf einer Zeile aus
+    vielen Backslashes wächst der Suchbaum exponentiell. Diese Tests halten
+    fest, dass die Heilung (ein Durchlauf statt Regex) bleibt.
+    """
+
+    def test_viele_backslashes_bleiben_schnell(self):
+        import time
+        boese = 'toContainText("' + "\\a" * 40000
+        start = time.monotonic()
+        ergebnis = wache._anker_in_zeile(boese)
+        dauer = time.monotonic() - start
+        self.assertLess(dauer, 2.0,
+                        f"Parser braucht {dauer:.2f}s für 40.000 Wiederholungen "
+                        "– das ist die ReDoS-Form, die CodeQL meldet")
+        self.assertEqual([], ergebnis)
+
+    def test_mehrere_anker_in_einer_zeile(self):
+        zeile = ('await expect(a).toContainText(\'freie Modellwerte\'); '
+                 'await expect(b).toContainText("keine echten Angebote");')
+        self.assertEqual(["freie Modellwerte", "keine echten Angebote"],
+                         wache._anker_in_zeile(zeile))
+
+    def test_regex_argument_ist_kein_textanker(self):
+        self.assertEqual([], wache._anker_in_zeile("toContainText(/abc/i)"))
+
+    def test_unabgeschlossene_zeichenkette_bricht_ab(self):
+        self.assertEqual([], wache._anker_in_zeile('toContainText("offen'))
+
+
 class BestandTest(unittest.TestCase):
     """Der echte Bestand muss durch die Wache gehen."""
 
