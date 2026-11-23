@@ -237,3 +237,33 @@ erzeugten Beitrag zurückkommt.
 Empfehlung: **A**. Der Blog ist öffentlich und hat ein Anmeldeformular — ein
 fehlender Frame-Schutz ist hier die teurere Lücke. Die Wache
 `scripts/blog_header_gate.py` meldet in beiden Fällen ehrlich, was live fehlt — und unterscheidet seit WF-E813 (15.10.2026) zwischen „es fehlt etwas“ (BEFUND) und „es konnte nichts gemessen werden“ (STOERUNG).
+
+---
+
+## 7. A1c — WAF Skip-Regel für Sitemap & Feeds (#1279/#1280)
+
+**Ursache:** Cloudflare WAF / Bot Fight Mode beantwortet automatisierte
+`GET`-Abrufe auf `/sitemap.xml` mit `HTTP 403 Forbidden`. Dadurch meldet
+`Publication Delivery (öffentlicher Nachweis)` ein Auslieferungsdefizit
+(`0/2`, `#1279`/`#1280`), und Suchmaschinen-Crawler riskieren denselben 403.
+
+**Regel (kopierfertig):** Cloudflare-Dashboard → Zone `franksfinanzcheck.de` →
+**Security → WAF → Custom rules → Create rule**
+
+- **Name:** `FF Allow Sitemap and Feeds`
+- **Filter (Custom filter expression):**
+  ```
+  (http.request.method eq "GET" and http.request.uri.path in {"/sitemap.xml" "/robots.txt" "/index.xml"})
+  ```
+- **Action:** `Skip` (WAF Managed Rules / Bot-Challenge ausschließlich für diese
+  drei statischen, lesenden Endpunkte überspringen — globaler Bot-Schutz bleibt
+  aktiv).
+
+**Prüfen:**
+
+```bash
+curl -sI https://franksfinanzcheck.de/sitemap.xml | head -n 5
+```
+
+Erwartet: `HTTP/2 200` (kein `403`). Anschließend in GitHub:
+**Actions → „Publication Delivery (öffentlicher Nachweis)“ → Run workflow (`main`)**.

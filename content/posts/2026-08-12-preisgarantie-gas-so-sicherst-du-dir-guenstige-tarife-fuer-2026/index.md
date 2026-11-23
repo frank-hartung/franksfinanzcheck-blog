@@ -88,7 +88,6 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
- Tippst du aus Versehen 18.000 Eurocent statt 18.000 kWh ein, oder schätzt du nur grob? Dann vergleicht das Portal mit dem falschen Bedarf.
 Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf. Das ist ein Beispielwert.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
@@ -202,7 +201,6 @@ Ausnahmen: Bei sehr knapper Frist kümmerst du dich besser selbst um die Kündig
 
 Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Nach der [Bundesnetzagentur zu Vertragsarten](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html) bleibt die Versorgung beim Wechsel über das Netz gesichert. Kommt der neue Lieferant zu spät, greift je nach Fall die Grund- oder Ersatzversorgung; ihre Preise können abweichen.
 
-Kommt ein Preisschreiben, prüfst du vier Punkte. Wann gilt der neue Preis? Warum steigt er? Welche Teile sind betroffen? Und wie lange läuft deine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) läuft. Bei einer Preisänderung müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
 Kommt ein Preisschreiben, prüfst du vier Punkte: ab wann der neue Preis gilt, warum er steigt, welche Tarifteile betroffen sind und wie lange deine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) läuft. Lies die Frist in deinem Vertrag nach, nicht im Werbeschreiben.
 
 Bei einer Preisänderung müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).

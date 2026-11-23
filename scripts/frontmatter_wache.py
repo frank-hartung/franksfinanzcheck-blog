@@ -333,12 +333,6 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
     """Prüft jeden Schlüsselwert ohne Parser. Die Klasse vom 26.10.2026."""
     befunde: list[Befund] = []
     anker = anker if anker is not None else set()
-    # Einrückungs-Stack je Mapping-Ebene: [(schluessel_einzug, {key: zeile})].
-    # Schließt #1313 auch ohne PyYAML (Schicht 1): verschachtelte doppelte
-    # Schlüssel wie `redaktionelle_pruefung.aenderungsgrund` werden auf jeder
-    # Ebene erkannt, während Geschwister-Einträge in Sequenzen (`- id: Q1` /
-    # `- id: Q2`) jeweils einen frischen Scope bekommen.
-    ebenen: list[tuple[int, dict[str, int]]] = []
     # #1313 (22.11.2026): Duplikate werden JE EBENE geprüft. Bis dahin stand
     # hier `gesehen: dict[str, int]` und die Prüfung hing an `einzug == 0` –
     # ein doppeltes `aenderungsgrund` unter `redaktionelle_pruefung` (Ebene 1)
@@ -386,12 +380,6 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
         rest_zeile = zeile[einzug:]
         # Sequenz-Eintrag: `- key: wert`, `- wert` oder ein allein stehendes `-`.
         # WF-1291 (21.11.2026): `sequenz` wird gemerkt, BEVOR der Eintrags-
-        # marker abgeschnitten wird. `- key: wert` eröffnet ein NEUES Mapping
-        # je Eintrag – alle Scopes tiefer als der Listen-Bindestrich werden
-        # geschlossen, damit gleiche Schlüssel in verschiedenen Einträgen
-        # (`quellen:` mit `id`/`titel`/`url`) gültig bleiben, echte Duplikate
-        # INNERHALB desselben Eintrags oder Blocks aber weiter als BLOCKER
-        # erkannt werden.
         # marker abgeschnitten wird. Der Fehlalarm damals: Ein `quellen:`-Block
         # mit `id`/`titel`/`url` je Eintrag wurde als „Schlüssel `id` steht
         # doppelt“ gemeldet – ein BLOCKER auf gültigem YAML, der jeden Artikel
@@ -399,19 +387,16 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
         # Jeder Eintrag ist ein EIGENES Mapping; die Bereichsverwaltung unten
         # hält das strukturell fest, statt es je Schlüssel zu erraten.
         sequenz = rest_zeile.startswith("- ") or rest_zeile == "-"
-        if sequenz:
-            while ebenen and ebenen[-1][0] > einzug:
-                ebenen.pop()
         if rest_zeile.startswith("- "):
             nach_strich = rest_zeile[2:]
             zusatz = len(nach_strich) - len(nach_strich.lstrip(" "))
             key_einzug = einzug + 2 + zusatz
             rest_zeile = nach_strich.lstrip(" ")
         elif rest_zeile == "-":
-            continue
+            key_einzug = einzug
+            rest_zeile = ""
         else:
             key_einzug = einzug
-            rest_zeile = rest_zeile[2:]
 
         # Offene Bereiche schließen: Eine Zeile gleicher oder geringerer
         # Einrückung ist ein Geschwister, kein Kind. Ein `- ` beginnt einen
@@ -435,46 +420,23 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
         wert = treffer.group("rest")
         spalte = key_einzug + len(treffer.group("key")) + 2
 
-        if wert.strip() and not wert.startswith(" "):
-            continue                      # `key:wert` ohne Leerzeichen ist kein Mapping
-
-        while ebenen and ebenen[-1][0] > key_einzug:
-            ebenen.pop()
-        if not ebenen or ebenen[-1][0] < key_einzug:
-            ebenen.append((key_einzug, {}))
-        aktuell = ebenen[-1][1]
-        if key in aktuell:
-            # WF-990 + #1313: BLOCKER, nicht HINWEIS – auf jeder Ebene.
-            # Hugo bricht an einem doppelten Mapping-Schlüssel den ganzen Bau
-            # ab (mapping key already defined), während PyYAML safe_load still
-            # den letzten Wert nimmt.
-            befunde.append(Befund(
-                "F3", BLOCKER, pfad, nr, key_einzug + 1,
-                f"Schlüssel `{key}` steht doppelt (zuerst Zeile "
-                f"{aktuell[key]}). Hugo bricht den Bau daran ab "
-                f"(mapping key already defined); ein YAML-Parser nimmt "
-                f"still den letzten Wert und verschweigt den ersten."))
-        aktuell.setdefault(key, nr)
-
         if not wert.strip():
-            continue                      # verschachtelter Block folgt
-        wert = wert.lstrip(" ")
-
             # Block-Öffner (`eltern:`): Duplikat zählt im ELTERN-Bereich,
             # danach öffnet die Zeile einen eigenen Bereich für ihre Kinder.
-            _melde_doppelt(befunde, gesehen, rahmen, key, nr, einzug,
+            _melde_doppelt(befunde, gesehen, rahmen, key, nr, key_einzug,
                            pfad, key)
-            rahmen.append((einzug, f"block@{nr}"))
+            rahmen.append((key_einzug, f"block@{nr}"))
             continue
         if not wert.startswith(" "):
-            continue                      # `key:` ohne Leerzeichen ist kein Mapping
+            continue                      # `key:wert` ohne Leerzeichen ist kein Mapping
         wert = wert.lstrip(" ")
 
         # WF-990 + #1313: BLOCKER, nicht HINWEIS. Hugo bricht an einem
         # doppelten Mapping-Schlüssel den ganzen Bau ab – PyYAML nimmt still
         # den letzten Wert, deshalb sieht der Parser den Fall nicht. Dieser
         # Scanner meldet ihn ohne Parser und in jeder Ebene.
-        _melde_doppelt(befunde, gesehen, rahmen, key, nr, einzug, pfad, key)
+        _melde_doppelt(befunde, gesehen, rahmen, key, nr, key_einzug,
+                       pfad, key)
 
         # ---- Wert klassifizieren ----
         if wert.startswith("#"):
