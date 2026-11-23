@@ -228,7 +228,7 @@ cluster:
       - slug: "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort"
         status: "live"
         rolle: "WLAN-Technik: Router-Standort und Abdeckung"
-        titel: "Router Standort: So findest du einen guten Platz – WLAN"
+        titel: "Router-Standort: So findest du einen guten Platz"
         status_massnahme: "neu 23.11.: Rolle ergänzt (war ohne Rolle live); Titel-Fragment „– WLAN“ offen (Befund 23.11.)"
       - slug: "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
         status: "live"

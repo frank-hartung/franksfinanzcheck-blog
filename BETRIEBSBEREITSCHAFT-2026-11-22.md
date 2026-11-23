@@ -118,9 +118,23 @@ der Grenze, an der ein Eingriff den Nutzen rechtfertigt.
 > Kannibalisierungs-Map ist ab heute ein Gate (`scripts/tests/test_inhalts_register.py`),
 > `internet-dsl` ist vollständig kuratiert (19 Live-Beiträge, 0 ohne Rolle), der
 > Entwurf vom 09.11. ist gelöscht, drei Pillars sind befristet ausgenommen
-> (Prüfdatum 15.12.). Offen und dort terminiert: Titel-Regressionen bei vier
-> Live-Beiträgen, 54 Live-Beiträge ohne Rolle.
+> (Prüfdatum 15.12.). Damals offen: Titel-Regressionen bei vier
+> Live-Beiträgen (tatsächlich fünf – am 23.11. behoben, Regel R6) und
+> 54 Live-Beiträge ohne Rolle (terminiert in drei Wellen).
 
+> **Agentur-Entscheidung 23.11.2026, 15:35 UTC:** `ENTSCHEIDUNG-AGENTUR-2026-11-23.md`.
+> Kurzfassung: **Auslieferung zuerst, dann Titel, dann Rollen – und keine Regel
+> ohne Rückweg.** Belegt und behoben: Der Deploy stand seit 13:56, weil ein
+> Agentur-Commit (`371835702`, 13:01) die Schließakte mit einem doppelten
+> Schlüssel `geprueft_fassung` (Zeile 6581) schrieb – `--struktur-pruefen` meldete
+> dafür „sauber“, das strenge Laden erstarrte erst im Deploy (seither: Rückweg
+> beim Schreiben, strenge Strukturprüfung; `15a793c24` heilte um 14:32). Die
+> Frontmatter-Wache kürzte jeden Schlüssel um zwei Zeichen (`title` → `tle`) und
+> war damit für die YAML-1.1-Regel F5 blind – ihr Selbsttest stand auf rot. Fünf
+> Live-Titel-Torsi sind ersetzt (neue Regel R6), der Ton-Deckel im Deploy ist von
+> 120 auf 60 Minuten gesenkt. Offen und dort terminiert: Rollen in drei Wellen
+> (30.11. / 07.12. / 15.12.), `regression`-Check aus dem Merge-Gate nehmen.
+>
 > **Reparatur 23.11.2026 (Betrieb):** `main` war ab `566cd39` rot. Die Schließakte
 > hatte drei zusammengeklebte Entscheidungen und eine ungültige Kette – mit dem
 > dokumentierten Heiler repariert (0 Strukturfehler, 2 Fragmente verworfen,

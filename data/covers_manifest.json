@@ -252,8 +252,8 @@
   }
  },
  "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-  "title": "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
-  "ts": "2026-11-20T09:35:40+00:00",
+  "title": "Heizkosten senken: Raumtemperatur, Lüften, Heizkörper",
+  "ts": "2026-11-23T15:08:45+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -306,8 +306,8 @@
   }
  },
  "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-  "title": "Standby-Verbrauch messen: Was kostet – Stromfresser",
-  "ts": "2026-11-20T09:35:41+00:00",
+  "title": "Standby-Kosten: Was ein Stromfresser wirklich kostet",
+  "ts": "2026-11-23T15:08:47+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -432,8 +432,8 @@
   "ts": "2026-09-26T18:36:22+00:00"
  },
  "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-  "title": "DSL Hacks: Was passt zu deiner Wohnung? – Schnelles",
-  "ts": "2026-11-20T09:35:43+00:00",
+  "title": "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?",
+  "ts": "2026-11-23T15:08:49+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -765,8 +765,8 @@
   "ts": "2026-10-07T22:34:30+00:00"
  },
  "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
-  "title": "Smart Home: Spart die Automatisierung mehr Strom – Smarte",
-  "ts": "2026-11-20T09:35:46+00:00",
+  "title": "Smart Home: Spart die Automatisierung wirklich Strom?",
+  "ts": "2026-11-23T15:08:52+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1728,8 +1728,8 @@
   }
  },
  "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-  "title": "Router Standort: So findest du einen guten Platz – WLAN",
-  "ts": "2026-11-20T09:35:50+00:00",
+  "title": "Router-Standort: So findest du einen guten Platz",
+  "ts": "2026-11-23T15:08:56+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",

@@ -1498,17 +1498,18 @@ jobs:
           fi
 
       - name: Vorlese-Tonspuren erzeugen (männlich, DE+EN ohne Umschalter – ElevenLabs Premium, kostenloser Fallback)
-        # WANDUHR FÜR DEN SCHLIMMSTEN FALL (Härtung 10.09.2026):
-        # Normal braucht dieser Schritt Budget (20 Min., Backfill 90)
-        # plus Anlauf/Überlauf (Cache-Fetch, ein Segment-Überhang von
-        # höchstens ~12 Min.). 120 Min. decken beides mit Reserve ab.
-        # Bleibt der Schritt DENNOCH hängen (unvorhergesehener Hänger
-        # außerhalb der gedeckelten Synthese), stirbt der Deploy NICHT
-        # erst an der Job-Wanduhr (150 Min.): continue-on-error lässt
-        # ihn mit Cache- + Browser-Fallback weiterlaufen, die
-        # Nachmessung (--heal) räumt Teilausgaben weg. Ton darf den
-        # Livegang verzögern, aber nie verhindern.
-        timeout-minutes: 120
+        # WANDUHR (Härtung 23.11.2026): 120 → 60 Minuten.
+        # Befund vom 23.11.2026: Ein Lauf stand ab 13:56 im Deploy-Job, ab
+        # 14:32 in DIESEM Schritt – die Live-Seite bekam bis 16:32 keine
+        # Änderung, weil Ton die Auslieferung hinter sich herzog. Ein
+        # Hänger kostete also zwei Stunden Fremdzeit, obwohl der Schritt
+        # `continue-on-error` trägt und danach ohnehin der Cache-Fallback
+        # greift. 60 Minuten decken den Normalbetrieb (Budget 20 Min. +
+        # Anlauf/Überlauf ≤ 12 Min.); ein Backfill über 60 Min. ist kein
+        # Regelbetrieb, sondern ein Vorfall – der gehört in einen eigenen
+        # manuellen Lauf (`workflow_dispatch` mit audio_limit_new), nicht
+        # in den Livegang.
+        timeout-minutes: 60
         continue-on-error: true
         # #740 Teil 2: Ist der Kostenriegel nicht belegt, läuft die
         # Geldfläche gar nicht erst an – das ersetzt den harten Abbruch

@@ -412,7 +412,25 @@ def _entscheidungs_segmente(path: Path) -> list[tuple[int, list[dict]]]:
 
 
 def struktur_pruefen(path: Path = ENTSCHEIDUNGEN) -> dict:
-    """Befund zur DATEI-STRUKTUR (nicht zur Fachlichkeit)."""
+    """Befund zur DATEI-STRUKTUR (nicht zur Fachlichkeit).
+
+    ERWEITERT 23.11.2026: Der bisherige Blick (mehrere Entscheidungen in
+    EINEM Listeneintrag) war zu schmal. Am 23.11.2026 stand auf `main` ein
+    doppelter Schlüssel `geprueft_fassung` (Zeile 6581), geschrieben vom
+    Commit „Vollständige Umsetzung der Profi-Agentur-Empfehlungen" (13:01).
+    Diese Prüfung meldete dafür „✅ strukturell sauber" – das strenge Laden
+    (`StrengerLoader`) erstarrte dagegen im Deploy-Gate, und die Live-Seite
+    bekam von 13:56 bis 14:32 keine Änderung. Ein Register, das sich nicht
+    streng laden lässt, ist strukturell NICHT sauber. Deshalb geht die
+    YAML-Strenge jetzt vor: erst laden, dann Listeneinträge prüfen.
+    """
+    try:
+        _laden_streng(path)
+    except LedgerFehler as exc:
+        return {"datei": str(path), "eintraege": 0, "strukturfehler": 1,
+                "funde": [{"zeile": 0, "segmente": 0, "schluessel": [],
+                           "befund": f"Datei nicht streng lesbar: {exc}"}],
+                "ok": False}
     segmente = _entscheidungs_segmente(path)
     funde = []
     for zeile, segs in segmente:
@@ -1824,16 +1842,35 @@ def _yaml_kopf(path: Path) -> str:
 
 
 def _yaml_schreiben(path: Path, daten: dict) -> None:
+    """Schreiben mit RÜCKWEG (23.11.2026).
+
+    Befund: Ein Schreiber machte den Register-Eintrag doppelt (Zeile 6581),
+    das Gate merkte es erst im Deploy – zwei Stunden, in denen niemand
+    ausliefern konnte. Ein Schreiber, der sein eigenes Ergebnis nicht streng
+    zurücklesen kann, hat nichts geschrieben: Er stellt den alten Stand
+    wieder her und meldet den Fehler an der Quelle.
+    """
     kopf = _yaml_kopf(path)
     rumpf = yaml.safe_dump(daten, allow_unicode=True, sort_keys=False,
                            default_flow_style=False)
     tmp = Path(str(path) + ".tmp")
+    vorher = path.read_text(encoding="utf-8") if path.exists() else None
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp.write_text(kopf + rumpf, encoding="utf-8")
         tmp.replace(path)
     except OSError as exc:
         raise LedgerFehler(f"{path.name} nicht schreibbar: {exc}") from exc
+    try:
+        _laden_streng(path)
+    except LedgerFehler as exc:
+        if vorher is None:
+            path.unlink(missing_ok=True)
+        else:
+            path.write_text(vorher, encoding="utf-8")
+        raise LedgerFehler(
+            f"{path.name}: Schreiben hätte ein nicht streng lesbares Register "
+            f"erzeugt ({exc}) – alter Stand wiederhergestellt.") from exc
 
 
 def bindung_auf_feine_projektion(*, decisions_path: Path = ENTSCHEIDUNGEN,
