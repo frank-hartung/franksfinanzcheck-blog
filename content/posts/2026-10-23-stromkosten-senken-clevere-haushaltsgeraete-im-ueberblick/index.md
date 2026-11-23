@@ -9,6 +9,8 @@ reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „he
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
+cornerstone: true
+keywords_fokus: ["Stromkosten"]
 author: "Frank Hartung"
 keywords: ["Stromkosten", "Haushaltsgeräte", "Energieeffizienz", "Stromkosten senken"]
 pin_title: "Stromkosten senken: Clevere Haushaltsgeräte im Überblick"
@@ -185,7 +187,7 @@ Viele glauben, dass lange Programme beim Spüler mehr Strom brauchen. Das Gegent
 
 **Für deinen nächsten Check:** Prüfe, ob das Altgerät ohnehin ersetzt werden muss. Ein Neukauf aus Spargründen hat eine andere Rechnung als die Wahl zwischen zwei notwendigen Ersatzgeräten.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Geschirrspüler voll beladen](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
 
 ## Häufige Fragen
 

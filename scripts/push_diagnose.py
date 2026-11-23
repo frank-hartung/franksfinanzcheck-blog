@@ -357,7 +357,7 @@ def _annotationen(check_run_id: object,
     try:
         roh = _gh(["api",
                    f"repos/{repo()}/check-runs/{check_run_id}/annotations",
-                   "--jq", '.[] | "\(.annotation_level) \(.message)"'])
+                   "--jq", r'.[] | "\(.annotation_level) \(.message)"'])
     except (RuntimeError, OSError):
         return []
     return [z.strip() for z in (roh or "").splitlines() if z.strip()]

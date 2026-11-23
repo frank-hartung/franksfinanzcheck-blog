@@ -188,7 +188,9 @@ Nein. Fällt der neue Anbieter aus oder verzögert sich etwas, springt automatis
 
 ---
 
-Mit Formel, Zählerstand und Vergleichsrechner ist deine Heizsaison komplett planbar. Rechne deinen Abschlag heute nach, lass ihn bei Abweichung anpassen und prüfe, ob dein Tarif noch zum Markt passt – dann steht ein warmer Winter ohne Rechnungsschock nichts mehr im Weg.### Was ist der Unterschied zwischen Abschlag und Vorauszahlung?
+Mit Formel, Zählerstand und Vergleichsrechner ist deine Heizsaison komplett planbar. Rechne deinen Abschlag heute nach, lass ihn bei Abweichung anpassen und prüfe, ob dein Tarif noch zum Markt passt – dann steht ein warmer Winter ohne Rechnungsschock nichts mehr im Weg.
+
+### Was ist der Unterschied zwischen Abschlag und Vorauszahlung?
 
 Beides zahlt vor der Rechnung. Der Abschlag läuft monatlich. Eine Vorauszahlung buchst du einmal. Für die Jahresrechnung zählt beides zusammen.
 

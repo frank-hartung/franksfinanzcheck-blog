@@ -836,6 +836,8 @@ def pruefe_messwerte(reg: dict, rw: dict, bericht: Bericht, nur: str | None) -> 
         vid = str(eintrag.get("id", "")).strip()
         if not vid or vid == "basis" or (nur and vid != nur):
             continue
+        if not nur and str(eintrag.get("status") or "").strip() == "verworfen":
+            continue
 
         messung = lade_messung(vid)
         if not messung:

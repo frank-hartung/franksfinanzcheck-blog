@@ -82,9 +82,9 @@ Dort postest du Termin, Ort und Grundregeln. Jeder meldet, was er mitbringen wil
 > 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 
-## Typische Fehler und wie du sie vermeidest  
+## Typische Stolperfallen beim Kleidertausch
 
-| Fehler                | Warum er kostet                     | Wie du ihn [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/)                     |
+| Stolperfalle          | Was schiefgehen kann                | Bessere Lösung im Tauschkreis                                                                              |
 |-----------------------|-------------------------------------|-------------------------------------------|
 | Zu wenig Auswahl      | Gäste finden nichts Passendes       | Jeder bringt mehrere Stücke              |
 | Unklare Regeln        | Missverständnisse beim Tauschen     | Vorab schriftliche Regeln teilen          |

@@ -7,8 +7,10 @@ draft: false
 tags: ["DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
+cornerstone: true
+keywords_fokus: ["DSL-Tarif"]
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause.jpg"
   alt: "DSL-Tarif für dein Zuhause: Das passende Angebot finden"

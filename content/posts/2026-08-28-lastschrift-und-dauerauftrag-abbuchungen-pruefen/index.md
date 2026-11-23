@@ -7,6 +7,8 @@ draft: false
 tags: ["Girokonto", "Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
+cornerstone: true
+keywords_fokus: ["Lastschrift"]
 author: "Frank Hartung"
 keywords: ["Lastschrift prüfen", "Dauerauftrag", "Abbuchung widersprechen", "Kontoauszug kontrollieren", "Lastschrift und Dauerauftrag", "Lastschrift"]
 pin_title: "Lastschrift und Dauerauftrag: Was du prüfen solltest"

@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg"
   alt: "Mietwagen buchen ohne Kaution: So umgehst du die Fallen im Urlaub"

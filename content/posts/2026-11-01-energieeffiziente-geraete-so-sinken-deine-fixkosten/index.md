@@ -176,7 +176,7 @@ Es geht darum, die Technik für sich arbeiten zu lassen. Ein modernes Gerät nim
 
 **Für deinen nächsten Check:** Achte auf die Bezugsgröße des Labels: Kilowattstunden pro Jahr und pro Programmdurchlauf sind nicht dasselbe. Vergleiche erst nach der Umrechnung auf deine Nutzung.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Gas-Anbieter wechseln](../../posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Gas-Anbieter wechseln](../../posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/) · [Geschirrspüler voll beladen](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/)
 **Lesetipp:** [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
 
 ## Häufige Fragen

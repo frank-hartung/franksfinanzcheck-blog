@@ -6691,3 +6691,88 @@ entscheidungen:
     vorhanden). Keine neue unbelegte Zahl eingeführt. Heutige Fassung cddc3cdf.'
   vorgaenger_geprueft_fassung: a217963d44f2fe0ccd579aa042ebbfcd22e175a7008824549d4f006db15dadd4
   folgeentscheidung: true
+- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_ursprung_slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_id: 04e40219cb4ff593b415
+  befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
+  geprueft_fassung: 512f3bcfccfa8fe39f770de51e9d6c2aa53b28b01d6d5c9d1061921c430f670a
+  typ: praezision
+  beanstandung: Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen,
+    ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Folgeentscheidung nach Behebung der geklebten FAQ-Überschrift (#1263,
+    Zeile 191); fachliche Prüfung vom 04.11.2026 am heutigen Volltext unverändert
+    bestätigt.
+  vorgaenger_geprueft_fassung: d6d862672d7c9783690bbacc92a43ba0c748c72f8a3ef10daac210ed4980e188
+  folgeentscheidung: true
+- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_ursprung_slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_id: 2d01dc2629ad9c81f569
+  befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
+  geprueft_fassung: 512f3bcfccfa8fe39f770de51e9d6c2aa53b28b01d6d5c9d1061921c430f670a
+  typ: luecke
+  beanstandung: Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif
+    ist, wird nicht durch eine Quelle belegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Folgeentscheidung nach Behebung der geklebten FAQ-Überschrift (#1263,
+    Zeile 191); fachliche Prüfung vom 04.11.2026 am heutigen Volltext unverändert
+    bestätigt.
+  vorgaenger_geprueft_fassung: d6d862672d7c9783690bbacc92a43ba0c748c72f8a3ef10daac210ed4980e188
+  folgeentscheidung: true
+- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_ursprung_slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_id: 3fd64026f55df4965cc9
+  befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
+  geprueft_fassung: 512f3bcfccfa8fe39f770de51e9d6c2aa53b28b01d6d5c9d1061921c430f670a
+  typ: luecke
+  beanstandung: Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie
+    einspart, fehlt eine Quellenangabe.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Folgeentscheidung nach Behebung der geklebten FAQ-Überschrift (#1263,
+    Zeile 191); fachliche Prüfung vom 04.11.2026 am heutigen Volltext unverändert
+    bestätigt.
+  vorgaenger_geprueft_fassung: d6d862672d7c9783690bbacc92a43ba0c748c72f8a3ef10daac210ed4980e188
+  folgeentscheidung: true
+- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_ursprung_slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_id: 799c93c89a10fc3cf267
+  befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
+  geprueft_fassung: 512f3bcfccfa8fe39f770de51e9d6c2aa53b28b01d6d5c9d1061921c430f670a
+  typ: luecke
+  beanstandung: Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt,
+    ohne regulatorische Grundlage zu nennen.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Folgeentscheidung nach Behebung der geklebten FAQ-Überschrift (#1263,
+    Zeile 191); fachliche Prüfung vom 04.11.2026 am heutigen Volltext unverändert
+    bestätigt.
+  vorgaenger_geprueft_fassung: d6d862672d7c9783690bbacc92a43ba0c748c72f8a3ef10daac210ed4980e188
+  folgeentscheidung: true
+- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_ursprung_slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  befund_id: cd81b3d9001b04c0a4e1
+  befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
+  geprueft_fassung: 512f3bcfccfa8fe39f770de51e9d6c2aa53b28b01d6d5c9d1061921c430f670a
+  typ: luecke
+  beanstandung: Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine
+    Notversorgung und nie ein Bestpreis, ist unbelegt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Folgeentscheidung nach Behebung der geklebten FAQ-Überschrift (#1263,
+    Zeile 191); fachliche Prüfung vom 04.11.2026 am heutigen Volltext unverändert
+    bestätigt.
+  vorgaenger_geprueft_fassung: d6d862672d7c9783690bbacc92a43ba0c748c72f8a3ef10daac210ed4980e188
+  folgeentscheidung: true

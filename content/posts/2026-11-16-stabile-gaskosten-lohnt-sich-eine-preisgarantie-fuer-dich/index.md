@@ -155,7 +155,7 @@ Dieses Fenster ist meist kurz. Wer die Post ungeöffnet liegen lässt, verpasst 
 
 ## Der 4K-Prüfpfad für deine Gaskosten
 
-Bei FranksFinanzcheck nutzen wir den 4K-Prüfpfad. Er hilft dir, Ordnung in deine Verträge zu bringen.
+Mit der 4K-Methode prüfst du deinen Gasvertrag Schritt für Schritt auf echte Ersparnis.
 
 Gas ist ein klassischer Fixkostenblock. Er lässt sich mit dieser Methode gut bändigen. Wir ordnen dieses Thema dem Schritt "Konditionen rechnen" zu. Es geht darum, nicht nur auf den ersten Blick zu urteilen.
 

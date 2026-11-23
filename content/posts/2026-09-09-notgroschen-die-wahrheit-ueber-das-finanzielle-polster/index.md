@@ -7,6 +7,8 @@ draft: false
 tags: ["Notgroschen", "Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
+cornerstone: true
+keywords_fokus: ["Notgroschen"]
 author: "Frank Hartung"
 keywords: ["Notgroschen", "Notfallreserve", "Finanzpolster", "monatsausgaben", "finanzielle"]
 pin_title: "Notgroschen: Die Wahrheit über das finanzielle Polster"

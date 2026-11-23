@@ -8,6 +8,8 @@ reserve_published: 2026-09-21
 tags: ["Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
+cornerstone: true
+keywords_fokus: ["Finanzieller Puffer"]
 author: "Frank Hartung"
 
 keywords: ["Finanzieller Puffer", "Finanzieller", "Notgroschen"]

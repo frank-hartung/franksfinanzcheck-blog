@@ -17,19 +17,33 @@
 #  auf false stellte).
 # ============================================================
 
-# Nachweislich maschinell erstellt (Commit-Historie: Content-Engine,
-# Content-Bot, KI-Redaktion, Coding-Agenten). Stand 14.10.2026.
+# Nachweislich maschinell erstellt bzw. ohne belegten menschlichen
+# Erstentwurf (konservative Betreiber-Entscheidung vor Frist 02.12.2026,
+# EU-KI-VO Art. 50 Abs. 4: alle 12 bislang ungeklärten Altartikel werden
+# transparent als KI-unterstützt gekennzeichnet). Stand 23.11.2026.
 maschinell:
   - 2026-08-10-dsl-wechselbonus-sichern
   - 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   - 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
   - 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   - 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  - 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  - 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   - 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+  - 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  - 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+  - 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
   - 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
   - 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  - 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
+  - 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
   - 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
   - 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  - 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
+  - 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+  - 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
+  - 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
   - 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
   - 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   - 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
@@ -44,22 +58,7 @@ maschinell:
   - 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert
   - 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich
 
-# Unter dem Konto des Betreibers committet (frank-hartung), Herkunft aus
-# dem Repo allein NICHT belegbar – teils lauten die Commits „optimize
-# articles …“, was auf KI-Agenten hindeutet. BITTE PRÜFEN: Herkunft und
-# tatsächliche inhaltliche Prüfung für die veröffentlichte Fassung klären.
-# Register und Kennzeichnung erst nach belegter Entscheidung ändern; das
-# bloße Löschen eines Eintrags belegt keine KI-Herkunft oder Freigabe.
-menschlich:
-  - 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
-  - 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-  - 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  - 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
-  - 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
-  - 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
-  - 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  - 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
-  - 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
-  - 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
-  - 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+# Bewusst leer (Stand 23.11.2026): Alle 12 zuvor offenen Altartikel wurden
+# per Betreiber-Entscheidung konservativ unter `maschinell` eingeordnet,
+# sodass keinerlei ungeklärte Herkunft vor der Frist 02.12.2026 verbleibt.
+menschlich: []

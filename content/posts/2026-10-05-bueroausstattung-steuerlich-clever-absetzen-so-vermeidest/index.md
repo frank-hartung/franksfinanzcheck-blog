@@ -7,6 +7,8 @@ reserve_published: 2026-10-07
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
+cornerstone: true
+keywords_fokus: ["Büroausstattung steuerlich"]
 author: "Frank Hartung"
 keywords: ["Büroausstattung steuerlich clever absetzen", "Büroausstattung", "Steuerlich", "Vermeidest"]
 pin_title: "Büroausstattung steuerlich clever absetzen: So geht's"

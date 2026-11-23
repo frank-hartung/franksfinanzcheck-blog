@@ -843,9 +843,14 @@ def main() -> int:
 
     if args.lauf:
         regelwerk = lade_regelwerk()
-        alle = [str(e.get("id")) for e in (register.get("varianten") or [])]
         if args.lauf == "alle":
-            ids = alle
+            # Verworfene Historien-Varianten bleiben im Register erhalten,
+            # laufen aber im wöchentlichen Gesamt-Durchlauf (--lauf alle)
+            # nicht mehr gegen aktuelle Budgets (#1248).
+            ids = [
+                str(e.get("id")) for e in (register.get("varianten") or [])
+                if str(e.get("status") or "").strip() != "verworfen"
+            ]
         else:
             # Die Basis läuft immer mit: ein Vergleich ohne Kontrollgruppe
             # ist keine Messung, sondern eine Behauptung.

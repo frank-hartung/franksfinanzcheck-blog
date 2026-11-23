@@ -2,16 +2,16 @@
 
 _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**301 offene Befunde auf 82 Seiten · davon 55 Live-Seiten mit 198 Befunden · ältester 24 Tage · Frist 14 Tage.**
+**296 offene Befunde auf 81 Seiten · davon 54 Live-Seiten mit 193 Befunden · ältester 24 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 301 |
-| Seiten betroffen | 82 (davon live: 55) |
-| Text seit dem Befund geändert | 253 |
+| Offene Befunde | 296 |
+| Seiten betroffen | 81 (davon live: 54) |
+| Text seit dem Befund geändert | 251 |
 | Altbestand ohne Fassungs-Hash | 10 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
-| Über der Frist (14 Tage) | 134 |
+| Über der Frist (14 Tage) | 129 |
 | In Eskalation (21 Tage) | 31 |
 
 ## So schließt du einen Befund
@@ -32,7 +32,7 @@ _Stand 2026-11-23 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 263 von 301 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 261 von 296 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -178,26 +178,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 36759a5efe5e8e5163d
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 942922d1afd7844618e9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
-
-Datei: `content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `04e40219cb4ff593b415` | praezision | 20 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `2d01dc2629ad9c81f569` | luecke | 20 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `3fd64026f55df4965cc9` | luecke | 20 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `799c93c89a10fc3cf267` | luecke | 20 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `cd81b3d9001b04c0a4e1` | luecke | 20 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04e40219cb4ff593b415 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2d01dc2629ad9c81f569 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3fd64026f55df4965cc9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 799c93c89a10fc3cf267 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd81b3d9001b04c0a4e1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
@@ -1384,6 +1364,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 517fa8859b484cd7646
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e11e305aefae61e25820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `05386fbefbe0bd793d3d` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Prognose zu Preisunterschieden zwischen variablen und Festpreisen ist ein Marktdatum, das ohne Bezug auf offizielle Monitoring-Daten der Aufsichtsbehörde bleibt. | – |
+| `10917941e9fae9a9cf04` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Bei der Empfehlung zum Prüfen von Kündigungsfristen und Verträgen fehlt der Hinweis auf die gesetzlichen Schlichtungs- und Beschwerdestellen der Bundesnetzagentur. | – |
+| `ab0470bc947932366bc4` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel führt Marktdaten und Preis-Szenarien für 2026 an, ohne die Bundesnetzagentur als zuständige Aufsichtsbehörde für die Marktbeobachtung zu nennen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 05386fbefbe0bd793d3d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 10917941e9fae9a9cf04 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab0470bc947932366bc4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-28-dsl-und-internet-flat-guenstig-sichern`
@@ -1444,22 +1440,6 @@ Seite: `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check`
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4232b77745f1559839a5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9c67474aa62927df4ee4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `05386fbefbe0bd793d3d` | luecke | 2 T | Text unverändert seit dem Befund | Die Prognose zu Preisunterschieden zwischen variablen und Festpreisen ist ein Marktdatum, das ohne Bezug auf offizielle Monitoring-Daten der Aufsichtsbehörde bleibt. | – |
-| `10917941e9fae9a9cf04` | luecke | 2 T | Text unverändert seit dem Befund | Bei der Empfehlung zum Prüfen von Kündigungsfristen und Verträgen fehlt der Hinweis auf die gesetzlichen Schlichtungs- und Beschwerdestellen der Bundesnetzagentur. | – |
-| `ab0470bc947932366bc4` | luecke | 2 T | Text unverändert seit dem Befund | Der Artikel führt Marktdaten und Preis-Szenarien für 2026 an, ohne die Bundesnetzagentur als zuständige Aufsichtsbehörde für die Marktbeobachtung zu nennen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 05386fbefbe0bd793d3d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 10917941e9fae9a9cf04 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab0470bc947932366bc4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

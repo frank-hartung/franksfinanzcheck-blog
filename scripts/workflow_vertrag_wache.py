@@ -235,7 +235,7 @@ def _zeile_von(text: str, muster: str) -> int:
 # ------------------------------------------------------------ V7 (offline)
 
 def _logische_zeilen(skript: str) -> List[str]:
-    """Zeilenfortsetzungen (`\` am Zeilenende) zu einer logischen Zeile ziehen.
+    r"""Zeilenfortsetzungen (`\` am Zeilenende) zu einer logischen Zeile ziehen.
 
     Ein Aufruf über zwei Zeilen ist EIN Aufruf:
         python3 scripts/ci_tests.py --titel X -- \
