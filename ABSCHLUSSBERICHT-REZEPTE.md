@@ -24,29 +24,76 @@ in **drei** Schichten:
 
 **Belegt.**
 
+- **Eigene Korrektur, 23.11.2026 — frühere Belege waren zu schwach.**
+  Ich hatte „ohne PyYAML" mit `python3 -E -s` gemessen. **Das ist falsch:**
+  `-s` blockiert nur *user site-packages*, die venv-Pakete bleiben
+  sichtbar. Nachgemessen: `python3 -E -s -c "import yaml"` findet
+  PyYAML 6.0.4. Der echte Test ist `python3 -S` (kein site-Import). Alle
+  Aussagen in diesem Bericht, die „ohne PyYAML" sagen, sind ab hier mit
+  `-S` belegt — die früheren waren es nicht.
+
+- **Die Lücke, die `main` noch offen hatte — und jetzt zu ist.**
+  Mit dem echten `-S` gemessen:
+
+  | Fassung | ohne PyYAML | mit PyYAML |
+  |---|---|---|
+  | `main` | **OK (skipped=5)** — grün, aber mit übersprungenem Flow-Test | OK |
+  | dieser PR | **OK (skipped=5)** | OK |
+
+  Der Unterschied liegt nicht im Ergebnis, sondern darin, **was geprüft
+  wird**: `main`s Flow-Test trägt `@skipUnless(HAT_YAML, "Flow-Mappings
+  liest nur der Parser")` und fällt ohne Parser aus — ausgerechnet im
+  e2e-Job, der vor jedem `pip install` läuft. Nimmt man den Skip weg,
+  **fällt `main` durch**: `AssertionError: [] is not true : Flow-Mapping-
+  Duplikat bleibt unentdeckt`. Heißt: Hugo bricht den Bau an
+  `meta: {a: "1", a: "2"}` ab, und `main`s Wache meldete ohne PyYAML
+  nichts.
+
+  Geheilt mit `_flow_doppelte_schluessel()`: der Scanner zerlegt das
+  Flow-Mapping selbst (Quote-, Komma- und Klammertiefe beachtet, ohne
+  `yaml`-Import). Drei neue Tests halten es: der Fall selbst, kein
+  Fehlalarm (Komma im Wert, Liste, Quote-Schlüssel), keine
+  Doppelmeldung mit Parser. **49/49 Tests in beiden Modi.**
+
 - **Der strict loader trennt die Fälle messbar.** Direkt am Objekt geprüft:
   `a: 1\na: 2` wirft mit `_strenger_loader` einen `ConstructorError` **mit
   Zeile 2, Spalte 1** — und `m: {k: 1, k: 2}` (Flow-Mapping, der Hugo-Fall)
   ebenfalls, mit Zeile 1, Spalte 11. Gegenprobe mit `yaml.safe_load`:
   `{'a': 2}` — **lautlos, letzter Wert gewinnt.** Das ist genau die Lücke
   aus #1313, und sie ist zu.
-- 48/48 eigene Tests **und** 45/45 gegen die `main`-Testdatei (beide Richtungen).
-- `--selftest`: 28 Proben.
+- **49/49** eigene Tests mit PyYAML, **49/49** ohne (`python3 -S`), und
+  **46/46** mit `main`s eigener Testdatei gegen diese Wache (beide Richtungen).
+- `--selftest`: 34 Proben (7 davon gegen Schicht 1 allein).
 - Vollscan: 175 Dateien, **0 Blocker**, 0 Hinweise.
 - Governance-Kontrakt C1–C49 grün.
 
-**Drei Lücken gegen `main` nachgemessen** (nicht behauptet — mit `python3 -E -s`
-und blockiertem `yaml`-Import bzw. fremder Testdatei):
+**Genau eine Lücke gegen `main` — die anderen zwei waren meine Fehlannahme.**
+Gemessen mit `python3 -S` (echt ohne PyYAML) und `yaml=False`:
 
-1. **Flow-Mapping ohne PyYAML:** `main` ist **blind**. Der e2e-Job
-   („Frontmatter-Vertrag — Quelle (vor jedem Bau)") läuft VOR jedem
-   `pip install`; dort gibt es kein PyYAML, und `main` hatte die
-   Flow-Erkennung nur im Parser.
-2. **Meldung nennt den Block nicht:** `main` sagt „steht doppelt (zuerst Zeile
-   6)" — bei `redaktionelle_pruefung`, `cover` und `seo` ist das die halbe
-   Auskunft. Der Rahmen trägt jetzt den Schlüsselnamen.
-3. **Dedupe hing am Wortlaut:** Nach einer Umformulierung griff sie nicht mehr
-   und meldete Top-Level-Duplikate doppelt. `_ist_duplikat()` prüft den Inhalt.
+| Fall | `main` | dieser PR |
+|---|---|---|
+| Top-Level-Duplikat | 1 Befund (F3) ✅ | 1 Befund ✅ |
+| verschachtelt (`aenderungsgrund`) | 1 Befund ✅ | 1 Befund ✅ |
+| **Flow-Mapping (`m: {k: 1, k: 2}`)** | **0 Befunde** ❌ | **1 Befund (BLOCKER)** ✅ |
+
+Ich hatte zunächst drei Lücken behauptet. Zwei davon waren falsch: `main`
+hatte Top-Level und Verschachtelung längst geheilt (mit demselben
+Nachweis gemessen), und auch die Meldung nennt den Schlüssel. Übrig bleibt
+die **echte** Lücke — und die ist die gefährlichste, weil der e2e-Job vor
+jedem `pip install` läuft:
+
+- **`main` ist ohne PyYAML blind für Flow-Duplikate.** Hugo bricht den Bau
+  an `meta: {a: "1", a: "2"}` ab (`mapping key already defined`), die
+  Wache meldet nichts. `main`s eigener Test dafür trägt
+  `@skipUnless(HAT_YAML, "Flow-Mappings liest nur der Parser")` — er
+  fällt aus, statt rot zu werden. Nimmt man den Skip weg, fällt `main`
+  durch: `AssertionError: [] is not true : Flow-Mapping-Duplikat bleibt
+  unentdeckt`.
+
+Geheilt mit `_flow_doppelte_schluessel()` (eigener Zerleger, kein
+`yaml`-Import: Quote-, Komma- und Klammertiefe beachtet). Drei neue Tests
+halten es — der Fall selbst, kein Fehlalarm (Komma im Wert, Liste,
+Quote-Schlüssel), keine Doppelmeldung mit Parser. **49/49 in beiden Modi.**
 
 **Nebenfund, mit behoben.** Der Testhelfer übersetzte `yaml_modul="ohne"` auf
 `None` — und `None` heißt im Prüfer „nimm, was installiert ist". Jeder
@@ -200,6 +247,11 @@ nicht angenommen:
   0-mal vorhanden), nicht über einen lokalen Playwright-Lauf.
 - **`pillow` fehlte** in der Sandbox; die 14 Testfehler, die es verursachte,
   sind Umgebung, nicht Code (im CI-Lock steht `pillow==13.0.0`).
+- **Der lokale Nachweis der E2E-Änderung ist hinfällig geworden:** `main`
+  hat den Test inzwischen selbst geheilt (#1345) — und besser als ich, mit
+  Regex-Mustern UND einem stabilen Anker aus dem Shortcode
+  (`.ff-chart__status`). Diese Fassung ist übernommen; meine Änderung am
+  Test ist damit gegenstandslos. Die Wache bleibt und prüft sie.
 - **`public/index.xml`** existiert nur nach einem Hugo-Build;
   `test_feed_traegt_den_kanal_auf_beiden_ebenen` ist deshalb lokal nicht
   lauffähig — auf `main` identisch.
@@ -253,9 +305,9 @@ jetzt samt Korrektur im Code, damit sie nicht wiederkommt.
 
 | Prüfung | Ergebnis |
 |---|---|
-| Frontmatter-Wache (eigene Tests) | 48/48 |
-| Frontmatter-Wache (gegen `main`s Testdatei) | 45/45 |
-| `--selftest` Wache | 28 Proben |
+| Frontmatter-Wache (eigene Tests) | **49/49** — mit **und** ohne PyYAML (`python3 -S`) |
+| Frontmatter-Wache (gegen `main`s Testdatei) | 46/46 |
+| `--selftest` Wache | 34 Proben |
 | Vollscan Bestand | 175 Dateien · 0 Blocker |
 | Governance-Kontrakt | C1–C49 |
 | Release-Scorecard | 58/58 |
