@@ -4,11 +4,11 @@ description: "Vergleiche beim Geschirrspüler ganze Spülgänge statt einzelne T
 date: 2026-11-23T02:55:19Z
 draft: false
 reserve_published: 2026-11-23
-tags: ["Stromkosten senken"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Geschirrspüler voll", "Spülmaschine beladen", "Geschirrspüler sparsam", "Wasser sparen Küche", "Geschirrspüler"]
+keywords: ["Geschirrspüler voll", "Spülmaschine beladen", "Geschirrspüler sparsam", "Wasser sparen Küche", "Geschirrspüler", "Geschirrspüler voll beladen", "Frugalismus", "Geld sparen"]
 pin_title: "Geschirrspüler voll beladen: Wasser und Strom sparen"
 pin_description: "*Werbung | Vergleiche beim Geschirrspüler ganze Spülgänge statt einzelne Teller. Belade die Körbe so, dass Sprüharme frei bleiben und kein zweiter Lauf nötig wird. Kontrolliere nach dem Spülgang, ob alle Flächen sauber sind. Musst du einzelne Teile erneut spülen, hat die dichtere Beladung einen Teil des Vorteils schon verbraucht."
 ai_generated: true

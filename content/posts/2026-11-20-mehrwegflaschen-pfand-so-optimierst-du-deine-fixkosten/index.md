@@ -4,11 +4,11 @@ description: "Mehrwegflaschen Pfand: Pfand ist kein Rabatt, sondern Geld, das du
 date: 2026-11-23T02:55:43Z
 draft: false
 reserve_published: 2026-11-23
-tags: ["Stromkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Mehrwegflaschen Pfand", "Pfand zurückholen", "Getränke sparen", "Mehrwegflaschen", "Fixkosten"]
+keywords: ["Mehrwegflaschen Pfand", "Pfand zurückholen", "Getränke sparen", "Mehrwegflaschen"]
 pin_title: "Mehrwegpfand: Was kostet das Getränk ohne Pfand?"
 pin_description: "*Werbung | Pfand ist kein Rabatt, sondern Geld, das du bei der Rückgabe zurückbekommst. Vergleiche Getränke nach Literpreis und halte das Pfand getrennt fest. Sammle Mehrweg getrennt von Einweg, wenn du unterschiedliche Rückgabeorte nutzt. So wird der nächste Einkauf nicht durch eine unnötige zusätzliche Fahrt teurer."
 ai_generated: true

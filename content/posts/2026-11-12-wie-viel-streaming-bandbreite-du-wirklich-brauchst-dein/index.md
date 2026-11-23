@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Ne
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Streaming Bandbreite", "Internetgeschwindigkeit", "Streaming ruckelt", "Wie viel Streaming-Bandbreite", "Bandbreite", "Wie viel Streaming-Bandbreite brauchst du wirklich?"]
+keywords: ["Streaming Bandbreite", "Internetgeschwindigkeit", "Streaming ruckelt", "Wie viel Streaming-Bandbreite", "Bandbreite", "Wie viel Streaming-Bandbreite brauchst du wirklich?", "Streaming-Bandbreite"]
 pin_title: "Streaming-Bandbreite: Wie viel brauchst du wirklich?"
 pin_description: "*Werbung | Wie viel Bandbreite braucht dein Haushalt fürs Streaming? Addiere gleichzeitige Streams und teste die Verbindung am Fernseher, nicht nur am Router. Teste einen einzelnen Stream und anschließend die typische gleichzeitige Nutzung im Haushalt. So erkennst du, ob erst die Summe der Anwendungen zum Engpass wird."
 ai_generated: true
