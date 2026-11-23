@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T20:04:14Z",
-  "modus": "kandidaten",
-  "commit": "fc36aa06cad81071defd406c00fb3ba2ab069516",
+  "generated_at": "2026-11-23T20:27:31Z",
+  "modus": "live",
+  "commit": null,
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
