@@ -799,7 +799,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+### `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/index.md`
 
@@ -815,7 +815,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7da9383cbc6a45e1a3a
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden da7852bcca291061c39b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · **LIVE** · Risikoklasse erhoeht · 2 Befund(e)
+### `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · **LIVE** (blockiert) · Risikoklasse erhoeht · 2 Befund(e)
 
 Datei: `content/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/index.md`
 
@@ -829,7 +829,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce4
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** · Risikoklasse erhoeht · 1 Befund(e)
+### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
 
 Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
 
