@@ -134,6 +134,11 @@ Viele übersehen Nebenkosten oder schätzen den Vorteil zu hoch ein. Diese Liste
 
 Achte besonders auf das Paar aus COP-Wert und Stromtarif. Genau dort liegt der größte Hebel für deine Kosten.
 
+
+
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
+**Lesetipp:** [Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand?](../../posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/)
+
 ## FAQ – die wichtigsten Fragen kurz erklärt
 
 ### Welcher COP-Wert ist heute üblich?

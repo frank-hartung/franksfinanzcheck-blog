@@ -1,17 +1,17 @@
 {
   "schema": 2,
-  "erzeugt": "2026-11-23 15:18 UTC",
+  "erzeugt": "2026-11-23 18:43 UTC",
   "uebersicht": {
-    "gesamt": 144,
+    "gesamt": 145,
     "ratgeber": 6,
-    "faellig": 6,
-    "vorlauf": 33,
-    "bearbeitet": 10,
+    "faellig": 7,
+    "vorlauf": 0,
+    "bearbeitet": 7,
     "budget": 10,
-    "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
+    "budget_quelle": "Sockel (Erstellungstakt (--neu))",
     "geo_schnitt": 93,
-    "befunde": 265,
-    "befunde_im_lauf": 6,
+    "befunde": 281,
+    "befunde_im_lauf": 5,
     "fachbefunde": [
       {
         "id": "1b7c9b9cac0290f71242",
@@ -34,6 +34,33 @@
         "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
         "zuletzt_gesehen": "2026-11-19 13:54 UTC",
         "herkunft": "dossier-nachlese"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "124ff2c3cd3917c274aa",
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "7bdec96c0329769bebe6",
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "a56734aa032e0ed9e0c4",
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
       },
       {
         "id": "1d4095501e717fb30d7b",
@@ -759,6 +786,33 @@
         "zuletzt_gesehen": "2026-11-06 12:26 UTC"
       },
       {
+        "typ": "luecke",
+        "text": "Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.",
+        "beleg": "",
+        "id": "3f0a88ede9d44ee910cb",
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.",
+        "beleg": "",
+        "id": "51e259fd2d8582e774f7",
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.",
+        "beleg": "",
+        "id": "55f8eeedc587cf0895ee",
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
         "id": "009906e47bcc8265b36a",
         "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
         "fassung_sha256": "dac3639a228efc957cab58feb16cc3305fe7c55fb0f58a6c008c015ca781788a",
@@ -889,7 +943,7 @@
         "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
         "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
         "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
-        "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+        "zuletzt_gesehen": "2026-11-23 15:18 UTC"
       },
       {
         "typ": "praezision",
@@ -900,7 +954,7 @@
         "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
         "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
         "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
-        "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+        "zuletzt_gesehen": "2026-11-23 15:18 UTC"
       },
       {
         "typ": "praezision",
@@ -911,7 +965,52 @@
         "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
         "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
         "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
-        "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+        "zuletzt_gesehen": "2026-11-23 15:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "334751e6f61ad0033fe4",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "36759a5efe5e8e5163d0",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "942922d1afd7844618e9",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "d41f0d5ce8798df0211b",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "e139d0769faadd04392a",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
       },
       {
         "typ": "praezision",
@@ -922,7 +1021,7 @@
         "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
         "fassung_sha256": "a42c98f246b53bee50b96012deb1d31e52544395ba03c1577990c4469d724ae2",
         "text_sha256": "f7e828d26c9b52d013cf2d3e62e8375f7e109e0121fc0b35a24caa2f0038bf56",
-        "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+        "zuletzt_gesehen": "2026-11-23 15:18 UTC"
       },
       {
         "typ": "luecke",
@@ -933,7 +1032,7 @@
         "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
         "fassung_sha256": "a42c98f246b53bee50b96012deb1d31e52544395ba03c1577990c4469d724ae2",
         "text_sha256": "f7e828d26c9b52d013cf2d3e62e8375f7e109e0121fc0b35a24caa2f0038bf56",
-        "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+        "zuletzt_gesehen": "2026-11-23 15:18 UTC"
       },
       {
         "typ": "luecke",
@@ -974,7 +1073,7 @@
         "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
         "fassung_sha256": "311aca0b6ae3060326378781fbc121a2f9aee013736dd6da9d3cc16c44716bc1",
         "text_sha256": "ddbcc7b97ef519ab8f7749b5d80fa189738cfd63563ae781b8e60095331d8493",
-        "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+        "zuletzt_gesehen": "2026-11-23 15:18 UTC"
       },
       {
         "typ": "luecke",
@@ -2685,6 +2784,61 @@
       },
       {
         "typ": "luecke",
+        "text": "Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist.",
+        "stelle": "Ein Speicher lohnt sich, wenn du mindestens 50 % deines Stroms selbst verbrauchst und die Investition über mehrere Jahre amortisieren kannst.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "2f7f57dfb8da49a297be",
+        "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+        "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+        "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+        "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss.",
+        "stelle": "Eine gängige Faustregel für die Wirtschaftlichkeit lautet: Die jährliche Einsparung sollte mindestens 10 % der Investitionssumme betragen, damit sich die Anlage innerhalb eines vernünftigen Zeitraums ",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "3f9faeecdb0a51f6dcc2",
+        "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+        "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+        "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+        "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird.",
+        "stelle": "Eine grobe Faustregel: pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte Leistung.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "885b9067fc764e8b1be0",
+        "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+        "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+        "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+        "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht.",
+        "stelle": "Nach Ablauf der Amortisation profitierst du von kostenlosem Strom.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "befb17bec837c9aaecda",
+        "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+        "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+        "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+        "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient.",
+        "stelle": "Bei einem durchschnittlichen Netzpreis von 0,30 €/kWh sparst du 480 € jährlich.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "d2bb167f864ceae0328e",
+        "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+        "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+        "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+        "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+      },
+      {
+        "typ": "luecke",
         "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
         "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
         "id": "760cdea8544be9d1c7c0",
@@ -2791,13 +2945,13 @@
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 12,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 15,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 17,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 7,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 6,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 18,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 8,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 7,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 4
     },
-    "deckung_prozent": 288.5,
-    "bedarf_je_woche": 24.3,
+    "deckung_prozent": 286.6,
+    "bedarf_je_woche": 24.4,
     "abbau_tage": 0,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
@@ -6006,6 +6160,61 @@
     },
     {
       "typ": "luecke",
+      "text": "Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist.",
+      "stelle": "Ein Speicher lohnt sich, wenn du mindestens 50 % deines Stroms selbst verbrauchst und die Investition über mehrere Jahre amortisieren kannst.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "2f7f57dfb8da49a297be",
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+      "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+      "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss.",
+      "stelle": "Eine gängige Faustregel für die Wirtschaftlichkeit lautet: Die jährliche Einsparung sollte mindestens 10 % der Investitionssumme betragen, damit sich die Anlage innerhalb eines vernünftigen Zeitraums ",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "3f9faeecdb0a51f6dcc2",
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+      "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+      "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird.",
+      "stelle": "Eine grobe Faustregel: pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte Leistung.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "885b9067fc764e8b1be0",
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+      "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+      "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht.",
+      "stelle": "Nach Ablauf der Amortisation profitierst du von kostenlosem Strom.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "befb17bec837c9aaecda",
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+      "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+      "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient.",
+      "stelle": "Bei einem durchschnittlichen Netzpreis von 0,30 €/kWh sparst du 480 € jährlich.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "d2bb167f864ceae0328e",
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+      "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
+      "zuletzt_gesehen": "2026-11-23 18:43 UTC"
+    },
+    {
+      "typ": "luecke",
       "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
       "id": "760cdea8544be9d1c7c0",
@@ -6158,21 +6367,21 @@
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
     "projiziert": false,
-    "artikel": 144,
-    "faellig": 6,
+    "artikel": 145,
+    "faellig": 7,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+      "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
       "frist": "2026-11-27",
       "restlaufzeit": 4
     },
     "budget": 10,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 10.0,
-    "bedarf_je_tag": 3.467,
-    "bedarf_je_woche": 24.3,
-    "deckung_prozent": 288.5,
+    "bedarf_je_tag": 3.489,
+    "bedarf_je_woche": 24.4,
+    "deckung_prozent": 286.6,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -6182,7 +6391,7 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 144,
+    "offen_im_horizont": 145,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -6199,656 +6408,15 @@
     }
   },
   "abbrueche": [],
-  "arbeitsvorrat": [
-    {
-      "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
-      "titel": "Zählerstand ablesen und melden: Schätzwerte vermeiden",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
-      "titel": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
-      "titel": "7 Gewohnheiten für finanzielle Freiheit",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
-      "titel": "Stromfresser im Haushalt entlarven",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
-      "titel": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-28",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "versicherungen",
-      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
-      "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "titel": "Sicher heizen: Welche Kosten sind geschützt",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-      "titel": "Gasrechnung senken: Welche Fehler lassen sich vor",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-      "titel": "Preisgarantie Gas: So prüfst du das Schreiben",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "titel": "Gasabschlag berechnen: So prüfst du den monatlichen Betrag",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-      "titel": "Weihnachten Budget planen: Geschenke und Feiertage",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 83,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-      "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 83,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
-      "titel": "Last-Minute Urlaubsangebote sichern",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "titel": "Heizölpreise vergleichen: So planst du deine Bestellung",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
-      "titel": "Günstigen Mietwagen für den Urlaub buchen",
-      "grund": "frisch geprüft vor 18 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-05",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "strom-sparen",
-      "titel": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-07",
-      "geo": 50,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
-      "titel": "Warmwasser sparen: Was kostet dich eine Dusche?",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-07",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
-      "titel": "Günstige Flüge für den Spätsommer finden",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-07",
-      "geo": 83,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    }
-  ],
-  "offen": [
-    {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-      "titel": "Weihnachten Budget planen: Geschenke und Feiertage",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 83,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-      "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 83,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
-      "titel": "Last-Minute Urlaubsangebote sichern",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
-      "titel": "Günstigen Mietwagen für den Urlaub buchen",
-      "grund": "frisch geprüft vor 18 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-05",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "strom-sparen",
-      "titel": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-07",
-      "geo": 50,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
-      "titel": "Warmwasser sparen: Was kostet dich eine Dusche?",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-07",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
-      "titel": "Günstige Flüge für den Spätsommer finden",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-07",
-      "geo": 83,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    }
-  ],
-  "vorlauf": [
-    {
-      "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
-      "titel": "Zählerstand ablesen und melden: Schätzwerte vermeiden",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
-      "titel": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
-      "titel": "7 Gewohnheiten für finanzielle Freiheit",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
-      "titel": "Stromfresser im Haushalt entlarven",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-27",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
-      "titel": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-28",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "versicherungen",
-      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
-      "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "titel": "Sicher heizen: Welche Kosten sind geschützt",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-      "titel": "Gasrechnung senken: Welche Fehler lassen sich vor",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-      "titel": "Preisgarantie Gas: So prüfst du das Schreiben",
-      "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "titel": "Gasabschlag berechnen: So prüfst du den monatlichen Betrag",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "titel": "Heizölpreise vergleichen: So planst du deine Bestellung",
-      "grund": "frisch geprüft vor 20 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-03",
-      "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    }
-  ],
+  "arbeitsvorrat": [],
+  "offen": [],
+  "vorlauf": [],
   "laeufe": [
     {
       "slug": "2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "titel": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
-      "fassung_sha256": "0544f472399c21e517904c19df4b4b03c558248ad93e088c2f7d5d2e77552212",
-      "text_sha256": "bae4a0b1a9c36c009872fb426e2fc6850a189e9531aabd19f1d65dcd2619beb7",
+      "fassung_sha256": "3df7d1b2b2a0b718c359d3addbb9bf151b0324c69c578679f9e1f53d422e0037",
+      "text_sha256": "c626cb71089c36b645bc135ffc712225bb20adf244f280402a3021cc47a8ef5c",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6864,8 +6432,8 @@
     {
       "slug": "2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "titel": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
-      "fassung_sha256": "0a2abb16f055b7bdddfff043532bed62f89397620ca7ce93ca7170b39acab227",
-      "text_sha256": "36d17a7277c3340a457de4d56538c9c4f2e97342d24242be83c68985c7972f14",
+      "fassung_sha256": "4ec01edfb0309c488c2be1ee48afd8f824663d621bb51050831501482c2c487b",
+      "text_sha256": "d765e29a2904f7d22ce19c3c25afce67f00b015901332d1a63d1dcc8cc12620e",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6881,8 +6449,8 @@
     {
       "slug": "2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "titel": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
-      "fassung_sha256": "8e60ecc44e586e4ebfd5bed5a459e32429c91a476427c9d57f21a38cb6100847",
-      "text_sha256": "8f766c1c9f66ef1dc9958184166b58ea4b549751039d3651ea4616ea112245e8",
+      "fassung_sha256": "6b26433ad93c6499e87b683eb8f5830f229017319ad10582f7a20dab3247bdab",
+      "text_sha256": "e50c7691b67a1ff0013df0e8df7f5686edbf76a43f5acdaa54f8bb3d636b1e1f",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6898,7 +6466,7 @@
     {
       "slug": "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
       "titel": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
-      "fassung_sha256": "254c1d56b32806695440bfa944b8c2259852ec31b64cc43e352af7fa75b98874",
+      "fassung_sha256": "7610bd11fe22b81f674e6366f77375b0fe8120614fba550174cdd6198d0f92fe",
       "text_sha256": "f30984cb1cace7cacc1dee4ba43bf13785e90fbc1bedbe6ae1e93fe0c85fd921",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
@@ -6915,7 +6483,7 @@
     {
       "slug": "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
       "titel": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
-      "fassung_sha256": "1a99aa68891a64b97be337b078bf5e5c5a394c38f36c84185c2a21b9f41bdc4e",
+      "fassung_sha256": "ec687735b10723a7fc0c2c8817a5e95b679176a2aca4cfb0f05e49481f207dca",
       "text_sha256": "fc42da2a2ab2934c505f38d464ec678052c35c96385b9a36243998c6f1794a5c",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
@@ -6932,8 +6500,8 @@
     {
       "slug": "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
       "titel": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
-      "fassung_sha256": "4e176549b067e372329dde5261e2f1c033efacba3a093a9de887999088ce2c51",
-      "text_sha256": "7026cb6e9bd5e2788494c1f48840352ba750ac1bceae5516ef05a924d10a9c8f",
+      "fassung_sha256": "e330cd21038d1dd30a9728260f8fd2133c3595c6b261057a45d603732da2f426",
+      "text_sha256": "70a4d95462709d7441d84ae76b7b675259aee84bfcfbd9067f0c246a2143829a",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6947,117 +6515,53 @@
       ]
     },
     {
-      "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
-      "titel": "Finanzieller Puffer: Der Rechenweg in fünf Minuten",
-      "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
-      "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "titel": "Photovoltaik: Lohnt sich eine Solaranlage 2026?",
+      "fassung_sha256": "468adb2c6e9cf6f32344d85946f55371c976186550ee87eebf2a0575e8b656c6",
+      "text_sha256": "1acf2c9b53314e836735e6c9705687d4410a77402d37df3d85b8b1c4135ca7ef",
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Pufferhöhe die zentrale Rechengröße darstellt.",
-          "stelle": "Wie wirkt sich Inflation auf meinen Notgroschen aus? Inflation frisst Kaufkraft. Deshalb solltest du die Zielsumme regelmäßig prüfen.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Modellrechnung für Fixkosten berücksichtigt nicht die spezifische Teuerung bei Energie (+12,7 %), was bei der Kalkulation von Strom und Gas zu einer Unterdeckung führen kann.",
-          "stelle": "Strom, Gas, Internet | 180 €",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die Validität der Kalkulationsbasis zu stützen.",
-          "stelle": "Lebensmittel | 320 €",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
-      "aenderungen": [
-        "faktencheck: 2026-11-23"
-      ]
-    },
-    {
-      "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
-      "titel": "Grundversorgung Strom und Gas: Was sie leistet und kostet",
-      "fassung_sha256": "a42c98f246b53bee50b96012deb1d31e52544395ba03c1577990c4469d724ae2",
-      "text_sha256": "f7e828d26c9b52d013cf2d3e62e8375f7e109e0121fc0b35a24caa2f0038bf56",
-      "bereich": "artikel",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "praezision",
-          "text": "Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'.",
-          "stelle": "In der Grundversorgung gelten kurze Fristen, damit der Zustand nicht zur Falle wird.",
-          "beleg": ""
+          "text": "Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient.",
+          "stelle": "Bei einem durchschnittlichen Netzpreis von 0,30 €/kWh sparst du 480 € jährlich.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet.",
-          "stelle": "Die Ersatzversorgung greift in einer Übergangszeit, wenn ein Haushalt Strom oder Gas verbraucht, ohne einen Vertrag dafür zu haben.",
-          "beleg": ""
+          "text": "Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss.",
+          "stelle": "Eine gängige Faustregel für die Wirtschaftlichkeit lautet: Die jährliche Einsparung sollte mindestens 10 % der Investitionssumme betragen, damit sich die Anlage innerhalb eines vernünftigen Zeitraums ",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird.",
+          "stelle": "Eine grobe Faustregel: pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte Leistung.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht.",
+          "stelle": "Nach Ablauf der Amortisation profitierst du von kostenlosem Strom.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist.",
+          "stelle": "Ein Speicher lohnt sich, wenn du mindestens 50 % deines Stroms selbst verbrauchst und die Investition über mehrere Jahre amortisieren kannst.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
-      "geo": 100,
+      "geo": 50,
       "fehler": [
         "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
         "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 2 Befund(e) ohne belegbaren Textanker verworfen",
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-23"
-      ]
-    },
-    {
-      "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
-      "titel": "Einlagensicherung: Wie viel Guthaben geschützt ist",
-      "fassung_sha256": "311aca0b6ae3060326378781fbc121a2f9aee013736dd6da9d3cc16c44716bc1",
-      "text_sha256": "ddbcc7b97ef519ab8f7749b5d80fa189738cfd63563ae781b8e60095331d8493",
-      "bereich": "artikel",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.",
-          "stelle": "Die Gesetze nennen Auszahlungsfristen. Ob sie halten, hängt davon ab, wie rasch die Sicherung die Daten übernimmt.",
-          "beleg": ""
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b); 4 Befund(e) ohne belegbaren Textanker verworfen",
-      "aenderungen": [
-        "faktencheck: 2026-11-23"
-      ]
-    },
-    {
-      "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
-      "titel": "DSL-Tarif prüfen: Effektivpreis statt Lockpreis",
-      "fassung_sha256": "2b680efcedcbe0e38803b3aeac4b5a1b40c9b72e1297c05791b58aa495dcb262",
-      "text_sha256": "bbd0314bbbfab41f96ca9adc3cfef6b36ca7e51251dfe3a12cbc13d5e33fd163",
-      "bereich": "artikel",
-      "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [],
-      "geo": 100,
-      "fehler": [],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 3 Befund(e) ohne belegbaren Textanker verworfen",
-      "aenderungen": [
-        "quellen: 1 Belege",
         "faktencheck: 2026-11-23"
       ]
     }

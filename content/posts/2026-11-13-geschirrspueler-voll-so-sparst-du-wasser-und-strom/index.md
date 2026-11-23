@@ -204,7 +204,7 @@ Wenn sich dort Schimmel bildet, riecht die Maschine unangenehm. Ein gut gepflegt
 ## Häufige Fragen
 
 ### Wie lange dauert ein Eco-Programm durchschnittlich?
-Ein Eco-Programm dauert meist zwischen 3 und 4 Stunden (Modellrechnung: Standardwerte moderner Geräte). Die lange Zeit wird benötigt, um die Einweichphase zu verlängern. Dadurch kann die Wassertemperatur gesenkt werden, was den Stromverbrauch massiv reduziert. Die Zeitersparnis bei Kurzprogrammen wird teuer durch höheren Energiebedarf erkauft.
+Ein Eco-Programm dauert meist zwischen 3 und 4 Stunden (Modellrechnung: Standardwerte moderner Geräte). Die lange Zeit wird benötigt, um die Einweichphase zu verlängern. Dadurch kann die Wassertemperatur gesenkt werden, was den [Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/) massiv reduziert. Die Zeitersparnis bei Kurzprogrammen wird teuer durch höheren Energiebedarf erkauft.
 
 ### Warum wird Plastik in der Spülmaschine oft nicht trocken?
 Kunststoff speichert Wärme deutlich schlechter als Porzellan oder Metall. In der Trocknungsphase kühlt Plastik schneller ab, sodass der Wasserdampf nicht mehr so leicht verdunsten kann. Es bilden sich Tropfen. Hier hilft ein hochwertiger Klarspüler oder das manuelle Öffnen der Tür direkt nach Programmende, um den Dampf entweichen zu lassen.

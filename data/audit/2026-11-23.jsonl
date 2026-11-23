@@ -53,3 +53,4 @@
 {"ts": "2026-11-23T18:27:36Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 145}, "output": {"changes": 215}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-23T18:30:31Z", "module": "fix_spaces", "action": "apply", "input": {"files": 145}, "output": {"fixes": 1}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-23T18:33:08Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 139}, "output": {"changed": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-11-23T18:42:14Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 4}, "status": "ok", "critical": false, "commit": null}
