@@ -1,0 +1,80 @@
+# Betreiber-Abzeichnung: KI-Register-Einordnung der 12 Altartikel
+# ================================================================
+# Maschinenlesbare Fassung der Abzeichnung aus
+# ENTSCHEIDUNG-BETREIBER-KI-REGISTER-2026-11-23.md, Abschnitt 8 (unterzeichnet 2026-11-23).
+#
+# Diese Datei ERSETZT NICHT das Register data/ki_kennzeichnung.yaml und auch
+# nicht die Akte. Sie spiegelt die unterzeichnete Entscheidung, damit
+# scripts/ki_abzeichnung_wache.py sie maschinell gegen Register, Akte und
+# Faktenfrische-Ledger pruefen kann (Regeln Z1-Z6).
+#
+# VON HAND GEÄNDERT WIRD HIER NICHTS, um Grün zu erzwingen: Die Wache ist
+# fail-closed und schreibt nicht. Eine Änderung dieser Datei ohne passende
+# Änderung von Register/Akte/Ledger macht die Wache ROT (Z2/Z3/Z5), nicht grün.
+
+schema_version: 1
+
+abzeichnung:
+  datum: "2026-11-23"
+  unterzeichnet_von: "Frank Hartung"
+  wortlaut: "Betreiber-Abzeichnung über Arena-Session, 23.11.2026"
+  akte: "ENTSCHEIDUNG-BETREIBER-KI-REGISTER-2026-11-23.md"
+  abschnitt: "8"
+  akte_sha256: "adb7f3625f3c12aa4402ea5c88390e008173ca337cfb4b73d0e10ca6265de322"
+
+entscheidung:
+  option: "A"            # alle 12 bleiben unter `maschinell`, KI-Hinweis bleibt
+  frist_ki_vo: "2026-12-02"   # Art. 113 i.d.F. VO (EU) 2026/1744, Bestandssysteme
+  register:
+    datei: "data/ki_kennzeichnung.yaml"
+    erwartete_einordnung: "maschinell"
+    gegeneinordnung: "menschlich"   # die 12 duerfen hier NICHT stehen (Regel Z2)
+
+# Die 12 Altartikel, fuer die die Einordnung abgezeichnet wurde.
+artikel:
+  - "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel"
+  - "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit"
+  - "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren"
+  - "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet"
+  - "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst"
+  - "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause"
+  - "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier"
+  - "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub"
+  - "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife"
+  - "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+  - "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich"
+  - "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen"
+
+# Pruefvermerke: Betreiber-Freigaben vom 23.11.2026. Sie begruenden KEINE
+# Umtragung und keine Ausnahme nach Art. 50 Abs. 4 (Option A bleibt), belegen
+# aber, dass der Betreiber die Fassungen inhaltlich durchgesehen hat. Regel Z5
+# prueft, dass dieser Beleg mit seinem Text-Hash im Ledger bleibt.
+pruefvermerke:
+  - slug: "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit"
+    ledger: "data/faktenfrische_entscheidungen.yaml"
+    entschieden_von: "Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)"
+    anzahl_freigaben: 5
+    text_sha256: "2a897cf8eda49a6ed78a5846017a8ed7d47dc8ee18c20d2c794ad4082f99c892"
+  - slug: "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub"
+    ledger: "data/faktenfrische_entscheidungen.yaml"
+    entschieden_von: "Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)"
+    anzahl_freigaben: 5
+    text_sha256: "e50b3a1b4a15dd408657a29aa70bbc3a6fff7baf41735788df6c17f52ef0411e"
+
+# Hochrisiko-Siegel: bereits fachgeprueft (Abschnitt 6, Korrektur 23.11.2026).
+# Regel Z6 prueft, dass die Siegel freigegeben bleiben, inhalt_sha256 unveraendert
+# ist und naechste_pruefung nicht verstreicht — keine Phantom-Frist, die Pruefung
+# liegt vor. Die volle Fassungsdrift-Pruefung bleibt bei ymyl_siegel_wache.
+hochrisiko_siegel:
+  - slug: "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst"
+    status: "freigegeben"
+    pruefer: "Redaktion FranksFinanzcheck"
+    pruefdatum: "2026-11-21"
+    naechste_pruefung: "2027-01-05"
+    inhalt_sha256: "68036f5d84121762cef68c33b1fb98ec7e9f5bcfcbf26b3afa9dc6a763d0b7b1"
+  - slug: "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+    status: "freigegeben"
+    pruefer: "Frank Hartung"
+    pruefdatum: "2026-11-21"
+    naechste_pruefung: "2027-01-05"
+    inhalt_sha256: "35ed98507a06bda89e43406336a39bba3a885067f93c2eb9438dff5777568659"

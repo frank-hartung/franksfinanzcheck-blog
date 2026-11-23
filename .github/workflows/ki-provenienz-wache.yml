@@ -62,6 +62,8 @@ on:
       - "layouts/**"
       # Register der Erzeugungsart + Herkunfts-Nachweise je Artikel.
       - "data/ki_kennzeichnung.yaml"
+      - "data/betreiber_abzeichnung_ki_register.yaml"
+      - "ENTSCHEIDUNG-BETREIBER-KI-REGISTER-2026-11-23.md"
       - "data/ki_provenienz_state.json"
       - "data/recht-fristen.yaml"
       # Sichtbare Stimme: die Aria-Texte offenbaren die maschinelle Tonspur.
@@ -70,6 +72,7 @@ on:
       - "scripts/ki_provenienz.py"
       - "scripts/ki_provenienz_gate.py"
       - "scripts/ki_kennzeichnung_gate.py"
+      - "scripts/ki_abzeichnung_wache.py"
       - "scripts/ki_bild_markierung.py"
       - "scripts/ki_cover_provenienz.py"
       - "scripts/ki_frist_freigabe.py"
@@ -173,6 +176,27 @@ jobs:
               $PFADE
           fi
 
+      # Die Betreiber-Abzeichnung zur KI-Register-Einordnung (Option A,
+      # 23.11.2026, Abschnitt 8 der Entscheidungs-Akte) ist maschinenlesbar
+      # gespiegelt in data/betreiber_abzeichnung_ki_register.yaml. Diese Wache
+      # prüft, dass Abzeichnung und Bestand nicht auseinanderlaufen: die 12
+      # unter `maschinell` (nie unter `menschlich`), der Akte-Hash, die
+      # Prüfvermerke im Faktenfrische-Ledger und die zwei Hochrisiko-Siegel —
+      # und dass die KI-VO-Frist 2026-12-02 nicht ohne rechtzeitige
+      # Abzeichnung verstreicht. Read-only: Sie heilt nichts, schreibt nichts
+      # und erzwingt kein Grün; ein Werkzeugfehler (Exit 2) ist rot wie ein
+      # Inhaltsbefund (Exit 1). Der Selbsttest läuft entdeckt im Qualitäts-Gate.
+      - name: Abzeichnung bewachen (Entscheidungsdatensatz ↔ Bestand)
+        id: abzeichnung
+        run: |
+          set +e
+          python3 scripts/ki_abzeichnung_wache.py --wache > /tmp/ki_abzeichnung.txt 2>&1
+          code=$?
+          set -e
+          cat /tmp/ki_abzeichnung.txt
+          cat /tmp/ki_abzeichnung.txt >> "$GITHUB_STEP_SUMMARY"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+
       # Ausgefallene Messung ist kein Grün (C33): Ein Werkzeugbefund gehört
       # in die Zusammenfassung, auch wenn der Lauf selbst grün wäre.
       - name: Werkzeugbefunde sichtbar machen
@@ -194,6 +218,11 @@ jobs:
           # Interpolation macht den Schritt für Template-Injection offen
           # (Wache `test_keine_github_expression_in_run_bloecken`, #1133).
           WACHE_CODE: ${{ steps.wache.outputs.code }}
+          ABZEICHNUNG_CODE: ${{ steps.abzeichnung.outputs.code }}
         run: |
-          # Leer heißt: die Wache ist gar nicht gelaufen. Auch das ist rot.
-          exit "${WACHE_CODE:-1}"
+          # Leer heißt: die jeweilige Wache ist gar nicht gelaufen. Auch das
+          # ist rot. Werkzeugfehler (Exit 2) und Inhaltsbefund (Exit 1)
+          # bleiben rot; die Provenienz-Wache hat in der Meldung Vorrang.
+          [ "${WACHE_CODE:-1}" = "0" ] || exit "${WACHE_CODE:-1}"
+          [ "${ABZEICHNUNG_CODE:-1}" = "0" ] || exit "${ABZEICHNUNG_CODE:-1}"
+          exit 0
