@@ -36,6 +36,7 @@ cover:
 faktencheck: 2026-11-20
 ---
 
+
 Stell dir vor, in deiner Wohnung brennt Tag und Nacht eine kleine Taschenlampe. In jedem Zimmer. In jeder Ecke. Du siehst sie kaum, aber sie leuchtet ununterbrochen.
 
 Genau das passiert bei dir zu Hause durch kleine Lämpchen und Netzteile. Du verursachst unnötige **Standby Kosten**, die sich monatlich auf deiner Abrechnung summieren. Viele Menschen unterschätzen diese winzigen Beträge. Doch am Ende des Jahres wunderst du dich über die hohe Nachzahlung.
@@ -83,7 +84,7 @@ Gehe zum Zähler und beobachte die Anzeige. Wenn die Zahlen sich immer noch schn
 
 Besonders tückisch sind Geräte mit externen Netzteilen. Diese schwarzen Kästen am Kabel ziehen oft Strom, solange sie in der Dose stecken. Selbst wenn das Handy gar nicht am Ladekabel hängt.
 
-Fühle mal an die Netzteile. Sind sie warm? Dann verbrauchen sie Strom. Das ist eine der einfachsten Methoden, um **[Stromfresser entlarven](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)** zu können.
+Fühle mal an die Netzteile. Sind sie warm? Dann verbrauchen sie Strom. Das ist eine der einfachsten Methoden, um **Stromfresser entlarven** zu können.
 
 ## Die 5 schlimmsten Dauerverbraucher im Check
 

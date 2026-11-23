@@ -47,6 +47,7 @@ quellen:
 faktencheck: 2026-11-23
 ---
 
+
 Finanzieller Puffer im Check: Wie lange könntest du deine laufenden Kosten ohne Gehalt bezahlen? Als Rechenbeispiel betrachten wir eine Rücklage für drei bis sechs Monate. Das ist ein Vergleichsrahmen, keine Vorgabe für jeden Haushalt.
 
  Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €; das ist ein Modellwert. Das ist viel Geld, aber kein Fantasiewert.
@@ -243,7 +244,7 @@ Wenn du dort sparen willst, findest du hier gute Startpunkte:
 
 - [Ratgeber Konto & Karten](../../pillar/konto-karten/)
 - Notgroschen: die Wahrheit
-- [Tagesgeld-Zinsen 2026](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/)
+- Tagesgeld-Zinsen 2026
 
 > 💶 **Spar-Tipp zwischendurch:** Wenn du deine Fixkosten senkst, schrumpft oft auch die nötige Höhe deines Puffers. Einen schnellen Check bekommst du hier: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
@@ -269,7 +270,7 @@ Wenn du heute nur einen Schritt machst, dann diesen: Rechne deine festen Monatsk
 ## Häufige Fragen
 
 ### Soll ich erst Schulden abzahlen oder den Notgroschen aufbauen?
- Ein kleiner Startpuffer von 1.000 € bis 2.000 € ist trotzdem sinnvoll, damit du bei einer kaputten Waschmaschine nicht direkt neue Schulden machst; das ist ein Rechenbeispiel.
+ Ein kleiner Startpuffer von 1.000 € bis 2.000 € ist trotzdem sinnvoll, damit du bei einer kaputten [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) nicht direkt neue Schulden machst; das ist ein Rechenbeispiel.
 
 ### Zählt Geld für die Kfz-Versicherung zum Notgroschen?
 Nein. Die Kfz-Versicherung ist planbar. Dafür legst du besser eine eigene Rücklage an. Der Notgroschen ist nur für Unvorhergesehenes da.

@@ -679,6 +679,11 @@
       "mikro": 1,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -687,5 +692,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-11-20"
+  "stand": "2026-11-23"
 }

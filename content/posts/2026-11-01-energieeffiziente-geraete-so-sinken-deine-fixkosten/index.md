@@ -84,23 +84,23 @@ Du tauschst einmalige Ausgaben gegen dauerhaft niedrigere Monatsbeiträge. Das i
 
 Damit du nicht planlos neue Technik kaufst, nutzen wir den 4K‑Prüfpfad. Er hilft dir, rationale Entscheidungen zu treffen. Hier gibt es keinen Verkaufsdruck, sondern nur harte Fakten für deinen Geldbeutel.
 
-1. **Kosten sehen:** Miss den Strombedarf deiner großen Dauerläufer mit einem einfachen Zwischenstecker. Notiere dir den Verbrauch über 24 Stunden; das ist ein Beispielwert. So siehst du schwarz auf weiß, welcher Apparat dein Geld frisst.  
-2. **Konditionen rechnen:** Vergleiche den alten Verbrauch mit einem neuen Modell. Schau dir den Kaufpreis an. Rechne aus, wie viele Jahre das Gerät laufen muss, bis sich der Preis amortisiert hat. Nur wenn die Rechnung für dich aufgeht, ist ein Kauf sinnvoll.  
-3. **Kündigungsfenster sichern:** Bei Geräten gibt es keine Rücktrittsfrist wie bei Verträgen. Aber es gibt Garantiezeiten und Reparaturfristen. Prüfe, ob eine Reparatur deines alten Geräts noch wirtschaftlich ist. Oft kosten Ersatzteile und Handwerker mehr als ein neues, sparsames Modell.  
-4. **Kurs halten:** Prüfe einmal im Jahr deine Stromrechnung. Haben die neuen Geräte den Erfolg gebracht? Wenn nicht, musst du dein Verhalten anpassen. Vielleicht läuft der Geschirrspüler oft halb leer? Kurs halten bedeutet, die eigenen Gewohnheiten immer wieder zu prüfen.
+1. **Kosten sehen:** Miss den Strombedarf deiner großen Dauerläufer mit einem einfachen Zwischenstecker. Notiere dir den Verbrauch über 24 Stunden; das ist ein Beispielwert. So siehst du schwarz auf weiß, welcher Apparat dein Geld frisst.
+2. **Konditionen rechnen:** Vergleiche den alten Verbrauch mit einem neuen Modell. Schau dir den Kaufpreis an. Rechne aus, wie viele Jahre das Gerät laufen muss, bis sich der Preis amortisiert hat. Nur wenn die Rechnung für dich aufgeht, ist ein Kauf sinnvoll.
+3. **Kündigungsfenster sichern:** Bei Geräten gibt es keine Rücktrittsfrist wie bei Verträgen. Aber es gibt Garantiezeiten und Reparaturfristen. Prüfe, ob eine Reparatur deines alten Geräts noch wirtschaftlich ist. Oft kosten Ersatzteile und Handwerker mehr als ein neues, sparsames Modell.
+4. **Kurs halten:** Prüfe einmal im Jahr deine Stromrechnung. Haben die neuen Geräte den Erfolg gebracht? Wenn nicht, musst du dein Verhalten anpassen. Vielleicht läuft der [Geschirrspüler](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/) oft halb leer? Kurs halten bedeutet, die eigenen Gewohnheiten immer wieder zu prüfen.
 
 ## Was kosten energieeffiziente Geräte im Vergleich?
 
 Die Frage nach den Kosten ist zentral. **Ein hocheffizientes Gerät der Klasse A kostet im Laden oft mehr als ein Modell der Kategorie C oder D.** Viele Käufer greifen dann zum günstigen Preis. Das ist oft ein teurer Fehler. Lass uns das an einem Beispiel durchrechnen. Wir nutzen dafür eine Modellrechnung für einen Kühlschrank.
 
 **Modellrechnung: Kühlschrank‑Tausch**  
-* **Annahme 1:** Ein alter Kühlschrank verbraucht 350 Kilowattstunden (kWh) pro Jahr.  
-* **Annahme 2:** Ein neues Gerät der Klasse A verbraucht 100 kWh pro Jahr.  
-* **Annahme 3:** Der Strompreis liegt bei 0,40 € pro kWh.  
-* **Rechnung Schritt 1:** Ersparnis beim Stromverbrauch = 350 kWh – 100 kWh = 250 kWh Ersparnis pro Jahr.  
-* **Rechnung Schritt 2:** Jährliche Geldersparnis = 250 kWh × 0,40 €/kWh = 100 € Ersparnis pro Jahr.  
-* **Annahme 4:** Das neue Gerät kostet 800 € in der Anschaffung.  
-* **Rechenbeispiel:** Nach 8 Jahren hat sich das Gerät allein durch die Stromersparnis bezahlt gemacht (800 € / 100 € pro Jahr = 8 Jahre).  
+* **Annahme 1:** Ein alter Kühlschrank verbraucht 350 Kilowattstunden (kWh) pro Jahr.
+* **Annahme 2:** Ein neues Gerät der Klasse A verbraucht 100 kWh pro Jahr.
+* **Annahme 3:** Der Strompreis liegt bei 0,40 € pro kWh.
+* **Rechnung Schritt 1:** Ersparnis beim Stromverbrauch = 350 kWh – 100 kWh = 250 kWh Ersparnis pro Jahr.
+* **Rechnung Schritt 2:** Jährliche Geldersparnis = 250 kWh × 0,40 €/kWh = 100 € Ersparnis pro Jahr.
+* **Annahme 4:** Das neue Gerät kostet 800 € in der Anschaffung.
+* **Rechenbeispiel:** Nach 8 Jahren hat sich das Gerät allein durch die Stromersparnis bezahlt gemacht (800 € / 100 € pro Jahr = 8 Jahre).
 * **Ergebnis:** Da ein Kühlschrank oft über ein Jahrzehnt hält, sparst du in der zweiten Lebenshälfte echtes Geld. Jedes Jahr nach dem achten Jahr bleiben 100 € mehr in deiner Tasche (Modellrechnung Ende).
 
 Diese Rechnung zeigt, dass der Preis im Laden nur die halbe Wahrheit ist. Du kaufst dir mit einem effizienten Gerät einen niedrigeren Strompreis für die Zukunft. Das ist wie eine Versicherung gegen steigende Energiepreise. Je teurer der Strom wird, desto schneller rechnet sich dein neues Gerät.
@@ -109,10 +109,10 @@ Diese Rechnung zeigt, dass der Preis im Laden nur die halbe Wahrheit ist. Du kau
 
 Damit du im Laden oder online nicht den Überblick verlierst, habe ich dir eine Liste zusammengestellt. Diese Punkte solltest du vor der Unterschrift prüfen.
 
-* **Größe passend wählen:** Ein riesiger Kühlschrank für eine Person verbraucht unnötig viel Energie. Kaufe nur so viel Volumen, wie du wirklich brauchst.  
-* **Energielabel prüfen:** Schau genau auf den Buchstaben. Seit 2021 gibt es eine neue Skala. Ein altes A+++ ist heute oft nur noch ein C oder D. Vergleiche nur aktuelle Label.  
-* **Eco‑Programme vorhanden:** Hat die Waschmaschine oder der Spüler ein echtes Sparprogramm? Diese dauern länger, brauchen aber viel weniger Energie.  
-* **Zusatzfunktionen hinterfragen:** Brauchst du wirklich einen Kühlschrank mit Internetanschluss oder Eiswürfelspender? Jede Zusatzfunktion verbraucht Strom.  
+* **Größe passend wählen:** Ein riesiger Kühlschrank für eine Person verbraucht unnötig viel Energie. Kaufe nur so viel Volumen, wie du wirklich brauchst.
+* **Energielabel prüfen:** Schau genau auf den Buchstaben. Seit 2021 gibt es eine neue Skala. Ein altes A+++ ist heute oft nur noch ein C oder D. Vergleiche nur aktuelle Label.
+* **Eco‑Programme vorhanden:** Hat die Waschmaschine oder der Spüler ein echtes Sparprogramm? Diese dauern länger, brauchen aber viel weniger Energie.
+* **Zusatzfunktionen hinterfragen:** Brauchst du wirklich einen Kühlschrank mit Internetanschluss oder Eiswürfelspender? Jede Zusatzfunktion verbraucht Strom.
 * **Lautstärke beachten:** In offenen Wohnungen ist ein leises Gerät viel wert. Das spart zwar kein Geld, aber Nerven.
 
 
@@ -140,10 +140,10 @@ Es dauert drei Stunden, kostet dich aber am wenigsten; das ist ein Modellwert.
 
 Du willst jetzt starten und deine [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)? Dann folge diesem Plan. So behältst du den Überblick und triffst kluge Entscheidungen für dein Budget.
 
-1. **Bestandsaufnahme machen:** Gehe durch jeden Raum. Schreibe auf, wie alt deine Großgeräte sind. Suche nach dem Typenschild und Google den Verbrauch, falls du kein Messgerät hast.  
+1. **Bestandsaufnahme machen:** Gehe durch jeden Raum. Schreibe auf, wie alt deine Großgeräte sind. Suche nach dem Typenschild und Google den Verbrauch, falls du kein Messgerät hast.
    Der Kühlschrank ist rund um die Uhr in Betrieb; das ist ein Rechenbeispiel. Er hat Priorität. Danach folgen Trockner und Waschmaschine.  
-2. **Vergleichsrechnung aufstellen:** Nutze meine Modellrechnung von oben. Setze deine eigenen Zahlen ein. Sei ehrlich zu dir selbst. Wenn sich ein Gerät erst nach 20 Jahren rechnet, behalte das alte Modell, solange es läuft.  
-3. **Angebote prüfen:** Suche gezielt nach Auslaufmodellen mit guter Effizienzklasse. Oft gibt es Vorjahresmodelle viel günstiger, obwohl die Technik fast identisch ist.  
+2. **Vergleichsrechnung aufstellen:** Nutze meine Modellrechnung von oben. Setze deine eigenen Zahlen ein. Sei ehrlich zu dir selbst. Wenn sich ein Gerät erst nach 20 Jahren rechnet, behalte das alte Modell, solange es läuft.
+3. **Angebote prüfen:** Suche gezielt nach Auslaufmodellen mit guter Effizienzklasse. Oft gibt es Vorjahresmodelle viel günstiger, obwohl die Technik fast identisch ist.
 4. **Altgerät entsorgen:** Lass das alte Gerät nicht als „Zweitkühlschrank“ im Keller weiterlaufen. Das zerstört jede Ersparnis sofort. Eine fachgerechte Entsorgung ist wichtig.
 
 ## Die Rolle der Wartung für die Effizienz
@@ -162,7 +162,7 @@ Wenn Licht nach außen dringt, ist die Dichtung kaputt. Kalte Luft entweicht und
 
 ## Dein Fixkosten‑Cockpit im Alltag
 
-[Energieeffizienz](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/) ist kein einmaliges Projekt. Es ist eine Einstellung zu deinen laufenden Kosten.
+[Energieeffizienz](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/) Ist kein einmaliges Projekt. Es ist eine Einstellung zu deinen laufenden Kosten.
 
 Ich nenne das gerne das Fixkosten‑Cockpit. Du sitzt am Steuer. Du entscheidest, wie viel Geld du den Energiekonzernen schenkst. Wer seine Geräte kennt und klug wählt, behält mehr von seinem Einkommen für die schönen Dinge im Leben.
 

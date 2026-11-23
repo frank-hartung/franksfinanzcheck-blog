@@ -43,6 +43,7 @@ quellen:
 faktencheck: 2026-11-20
 ---
 
+
 Du brauchst nicht den günstigsten Handytarif auf einer Liste, sondern einen, der dort funktioniert, wo du ihn nutzt. Eine schlecht versorgte Bahnstrecke wird durch zusätzliches Datenvolumen nicht besser. Und für ein ungenutztes Datenpolster zahlst du auch dann, wenn der Preis pro Gigabyte niedrig aussieht.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -176,6 +177,6 @@ Bei geplantem Umzug, unsicherem Empfang vor Ort oder schwankendem Bedarf. Du zah
 Prüfe zuerst Teilmonate, Anschlusskosten und den Start des Rabatts. Entdeckst du ein nicht bestelltes Extra, schreibe dem Anbieter sofort kurz und sachlich mit deiner Vertragsnummer.
 
 **Dein nächster Schritt:** Notiere Datenbedarf, Wunsch-Netz und kurze oder lange Frist. Vergleiche erst dann die Preise. Als Einstieg hilft dir der [Partnervergleich für Handytarife](/go/handytarife/). Steht dein neues Angebot schon fest, nutze die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
-**Dein nächster Schritt:** Notiere Datenbedarf, gewünschtes Netz und maximale Bindung. Vergleiche erst dann die Preise. Als Einstieg kannst du den [Partnervergleich für Handytarife](/go/handytarife/) nutzen. Wenn du schon ein konkretes Wechselangebot hast, hilft dir die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
+**Dein nächster Schritt:** Notiere Datenbedarf, gewünschtes Netz und maximale Bindung. Vergleiche erst dann die Preise. Als Einstieg kannst du den [Partnervergleich für Handytarife](/go/handytarife/) nutzen. Wenn du schon ein konkretes Wechselangebot hast, hilft dir die Checkliste zur Kündigung und Rufnummernmitnahme.
 
 **Weiterlesen:** [Ratgeber Internet, DSL & Mobilfunk](../../pillar/internet-dsl/) · [Kündigungsfristen-Kalender](../../werkzeuge/kuendigungsfristen-kalender/)

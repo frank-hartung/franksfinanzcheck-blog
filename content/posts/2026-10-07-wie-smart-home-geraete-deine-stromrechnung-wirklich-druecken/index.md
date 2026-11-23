@@ -207,7 +207,7 @@ Geeignet sind Verbraucher mit klaren Pausen: Beleuchtung, Fernseher, Ladegeräte
 
 ### Wie prüfe ich, ob die Ersparnis echt ist?
 
-Vergleiche Wochen unter gleichen Bedingungen: ähnliche Temperaturen, gleiche Räume, gleicher Alltag. Ein milder Herbst senkt den Verbrauch auch ohne jede Automatik. Rechne deinen Strompreis dazu und ziehe die Kosten der Lösung ab. Erst dann zeigt sich, ob die Technik beim Strom sparen wirklich hilft.
+Vergleiche Wochen unter gleichen Bedingungen: ähnliche Temperaturen, gleiche Räume, gleicher Alltag. Ein milder Herbst senkt den Verbrauch auch ohne jede Automatik. Rechne deinen Strompreis dazu und ziehe die Kosten der Lösung ab. Erst dann zeigt sich, ob die Technik beim [Strom sparen](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/) wirklich hilft.
 
 ### Was gilt beim Umzug oder in der Mietwohnung?
 

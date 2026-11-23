@@ -125,7 +125,7 @@ Meist bieten Versorger eine eingeschränkte Preisgarantie an. Diese deckt nur de
 
 Steuern oder neue staatliche Abgaben sind oft ausgenommen. Trotzdem ist eine Garantie wichtig. Du machst deine Kosten planbar. Achte darauf, dass die Garantie mindestens so lange läuft wie die Mindestvertragslaufzeit.
 
-Wenn ein Anbieter die Preise trotz Garantie erhöht, hast du ein Sonderkündigungsrecht. Das gilt auch bei Änderungen von Steuern oder Abgaben.
+Wenn ein Anbieter die Preise trotz Garantie erhöht, hast du ein Sonderkündigungsrecht. Das gilt auch bei [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) von Steuern oder Abgaben.
 
 Meist hast du nur zwei Wochen Zeit für die Kündigung; das ist ein Beispielwert.
 
@@ -202,7 +202,7 @@ Nutze deine Macht als Konsument. Ein Wechsel signalisiert den Unternehmen, dass 
 **Für deinen nächsten Check:** Prüfe im neuen Vertrag, ab wann du beliefert werden sollst. Ein Wechselauftrag allein sagt noch nicht, wann die letzte Rechnung des bisherigen Anbieters kommt.
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
-**Lesetipp:** Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar
+**Lesetipp:** [Ökostrom Anbieter wechseln](../../posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/): Sicher, grün und bezahlbar
 
 ## Häufige Fragen
 

@@ -38,6 +38,7 @@ faktenfrische_aliases:
   - "2026-11-21-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich"
 ---
 
+
 Du scrollst durch endlose Listen von Unterkünften für deinen Sommerurlaub.
 Links lockt ein Hotelzimmer mit Frühstücksbuffet, rechts eine geräumige Wohnung mit eigenem Balkon.
 Die Wohnung wirkt auf den ersten Blick deutlich günstiger.
@@ -135,7 +136,7 @@ Hier vergleichen wir die konkrete Leistung.
 
 Bietet das Hotel einen Pool?
 Verfügt die Wohnung über eine [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)?  
-Eine eigene [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) spart im Urlaub bares Geld.
+Eine eigene Waschmaschine spart im Urlaub bares Geld.
 **In einer Modellrechnung (Annahme: 5 € pro Waschgang im Waschsalon) spart eine Familie über zwei Wochen (Voraussetzung) einen spürbaren Betrag.**
 
 **Faustregel:** Rechne bei einer **Ferienwohnung** immer mindestens 30 % (Annahme) auf den reinen Mietpreis für Verpflegung und Nebenkosten oben drauf.
@@ -210,7 +211,7 @@ Hier sind die häufigsten Stolperfallen:
 
 * **Die Kleinkram-Falle:** Du kaufst im Urlaub Gewürze, Öl und Waschmittel neu, weil nichts in der Wohnung ist. Das kostet in der Modellrechnung (Annahme: Basiseinkauf) schnell 30 bis 50 €.
 * **Unterschätzte Parkgebühren:** In Städten wie Amsterdam oder München kostet ein Parkplatz oft 25 € (Annahme) pro Tag. In einer Woche sind das laut Modellrechnung 175 € zusätzlich zur Miete.
-* **[Energiekosten](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/)-Schock:** In manchen Ländern wird Strom extra abgerechnet. Wer die Klimaanlage den ganzen Tag laufen lässt, zahlt am Ende drauf.
+* **Energiekosten-Schock:** In manchen Ländern wird Strom extra abgerechnet. Wer die Klimaanlage den ganzen Tag laufen lässt, zahlt am Ende drauf.
 * **Zeit ist Geld:** Wenn du jeden Tag eine Stunde mit Einkaufen und Kochen verbringst, verlierst du Urlaubszeit. Überlege dir, was dir deine Freizeit wert ist.
 
 Wer diese Fehler vermeidet, rechnet ehrlicher.

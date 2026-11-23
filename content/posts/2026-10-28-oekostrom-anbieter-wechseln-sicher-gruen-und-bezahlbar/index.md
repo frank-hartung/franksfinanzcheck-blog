@@ -51,6 +51,7 @@ faktencheck: 2026-10-28
 ---
 
 
+
 Bei einem Ökostromangebot sind zwei Fragen zu trennen: Wie weist der Anbieter die Herkunft des Stroms nach, und was kostet der Tarif bei deinem Verbrauch?
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

@@ -45,6 +45,7 @@ affiliate_exempt_reason: "Eine Fensterdichtung wird nach Zustand und Passform au
 ---
 
 
+
 Spürst du am geschlossenen Fenster einen Luftzug, suche erst die undichte Stelle. Nicht jede Fuge lässt sich sinnvoll mit demselben Dichtband schließen.
 
 Die Dichtungen sind spröde oder fehlen ganz.  
@@ -197,7 +198,7 @@ Hochwertige EPDM‑Dichtungen halten oft 8 bis 10 Jahre (Beispielwert). Günst
 Die Lebensdauer hängt stark von der richtigen Pflege ab. Wische die Dichtungen einmal im Jahr mit einem feuchten Tuch ab.
 
 ### Hilft Abdichten auch gegen Lärm von draußen?
-Ja, ein dichter Rahmen hält auch Schallwellen effektiv zurück. Wenn du die Lücken schließt, wird es in [deiner Wohnung](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) ruhiger.
+Ja, ein dichter Rahmen hält auch Schallwellen effektiv zurück. Wenn du die Lücken schließt, wird es in deiner Wohnung ruhiger.
 Besonders an Hauptstraßen ist dieser Effekt oft sofort verblüffend. Eine gute Dichtung verbessert somit auch deine Schlafqualität.
 
 ---

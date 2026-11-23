@@ -44,6 +44,7 @@ kurzantwort: "Eine moderne Wärmepumpe senkt die laufenden Heizkosten im Verglei
 ---
 
 
+
 Ein Heizungsvergleich beginnt beim Gebäude, nicht beim Gerätepreis. Wärmebedarf, Vorlauftemperatur und verfügbare Anschlüsse bestimmen mit, welche Lösung technisch und finanziell infrage kommt.
 
 **Das Wichtigste in Kürze**

@@ -38,6 +38,7 @@ faktenfrische_aliases:
   - "2026-11-21-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich"
 ---
 
+
 Beim Carsharing entstehen Kosten auf der Uhr und auf dem Kilometerzähler. Beim eigenen Auto laufen viele Kosten auch dann weiter, wenn es vor der Tür steht. Ein Vergleich braucht deshalb deinen Fahrkalender.
 
 In Deutschland stehen Autos im Schnitt über 23 Stunden am Tag nur herum; das ist ein Modellwert. Trotzdem zahlst du für jede Minute. Du zahlst Versicherung. Du zahlst Steuern.
@@ -99,7 +100,7 @@ Die Fixkosten ohne Sprit liegen in dieser Modellrechnung also bei 2.700 € pro
 
 In dieser Beispielrechnung kostet das Auto also schon 225 €, wenn es nur vor der Tür steht. Jetzt kommen die variablen Kosten dazu. Bei 5.000 Kilometern und einem Verbrauch von sechs Litern rechnen wir mit Spritkosten. Bei einem Preis von 1,80 € pro Liter sind das in dieser Modellrechnung 540 € pro Jahr.
 
-Die Gesamtkosten für das eigene Auto liegen in dieser Beispielrechnung bei 3.240 € pro Jahr. Das entspricht monatlichen Kosten von 270 €. Ein Kilometer [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) in dieser Modellrechnung somit rund 65 Cent.
+Die Gesamtkosten für das eigene Auto liegen in dieser Beispielrechnung bei 3.240 € pro Jahr. Das entspricht monatlichen Kosten von 270 €. Ein Kilometer kostet dich in dieser Modellrechnung somit rund 65 Cent.
 
 Beim Carsharing sieht die Rechnung anders aus. Es gibt oft eine Grundgebühr.
 

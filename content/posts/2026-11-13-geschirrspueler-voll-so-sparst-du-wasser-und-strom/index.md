@@ -140,7 +140,7 @@ Die Maschine wird täglich im Intensiv-Modus gestartet, oft nur zu 80 % gefüll
 
 **Szenario B (Effizient):**
 Die Maschine wird immer voll beladen. Dadurch läuft sie nur 5-mal pro Woche (ca. 260-mal im Jahr) im Eco-Modus.
-* Stromkosten: 260 * 0,9 kWh * 0,40 € = 93,60 € pro Jahr (Modellrechnung).
+* [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 260 * 0,9 kWh * 0,40 € = 93,60 € pro Jahr (Modellrechnung).
 * Wasserkosten: 260 * 10 Liter * 0,005 € = 13,00 € pro Jahr (Modellrechnung).
 * Gesamtkosten Szenario B: 106,60 € pro Jahr (Modellrechnung).
 
@@ -188,7 +188,7 @@ Wenn du deine Spülmaschine beladen hast, achte darauf, dass keine Plastikteile 
 
 Reinige regelmäßig das Sieb am Boden. Wenn das Sieb verstopft ist, muss die Pumpe schwerer arbeiten.
 
-Das erhöht den Verschleiß und den Stromverbrauch. Ein sauberer Filter sorgt zudem dafür, dass das Wasser effizient zirkulieren kann. Wenn die Reinigungsleistung nachlässt, liegt es oft an einem verschmutzten Filter oder verstopften Düsen in den Sprüharmen.
+Das erhöht den Verschleiß und den [Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/). Ein sauberer Filter sorgt zudem dafür, dass das Wasser effizient zirkulieren kann. Wenn die Reinigungsleistung nachlässt, liegt es oft an einem verschmutzten Filter oder verstopften Düsen in den Sprüharmen.
 
 Wische gelegentlich die Kanten der Tür ab. Dort sammelt sich oft Schmutz, den das Spülwasser nicht erreicht.
 

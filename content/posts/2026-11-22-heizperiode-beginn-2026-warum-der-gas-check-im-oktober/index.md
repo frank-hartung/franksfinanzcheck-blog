@@ -36,6 +36,7 @@ faktenfrische_aliases:
   - "2026-11-21-heizperiode-beginn-2026-warum-der-gas-check-im-oktober"
 ---
 
+
 Draußen sinken die Temperaturen. Der erste Frost kündigt sich an. Du gehst zum Heizkörper in deinem Wohnzimmer und drehst den Thermostatkopf auf Stufe 3.
 
 Ein leises Gluckern verrät, dass das warme Wasser nun durch die Rohre fließt. In diesem Moment beginnt für Millionen Haushalte die teuerste Zeit des Jahres.
@@ -117,19 +118,19 @@ Um den Effekt zu verdeutlichen, schauen wir uns ein konkretes Beispiel an. Wir n
 * Neuer Grundpreis (Annahme): 12,50 € / Monat
 * Einmaliger Neukundenbonus (Annahme): 180,00 €
 
-**Schritt 1: Kosten im alten Tarif berechnen (Modellrechnung)**  
+**Schritt 1: Kosten im alten Tarif berechnen (Modellrechnung)**
 * Arbeitspreis: 20.000 kWh × 0,145 €/kWh = 2.900,00 €
 * Grundpreis: 12 Monate × 15,00 €/Monat = 180,00 €
 * Gesamtkosten alt: 3.080,00 € (Modellrechnung)
 
-**Schritt 2: Kosten im neuen Tarif berechnen (Modellrechnung)**  
+**Schritt 2: Kosten im neuen Tarif berechnen (Modellrechnung)**
 * Arbeitspreis: 20.000 kWh × 0,112 €/kWh = 2.240,00 €
 * Grundpreis: 12 Monate × 12,50 €/Monat = 150,00 €
 * Zwischensumme: 2.390,00 €
 * Abzüglich Bonus: 2.390,00 € – 180,00 € = 2.210,00 €
 * Gesamtkosten neu: 2.210,00 € (Modellrechnung)
 
-**Schritt 3: Ersparnis ermitteln (Modellrechnung)**  
+**Schritt 3: Ersparnis ermitteln (Modellrechnung)**
 * Differenz: 3.080,00 € – 2.210,00 € = 870,00 €
 * Ergebnis: In dieser Modellrechnung spart der Haushalt im ersten Jahr 870,00 € durch den Wechsel (Modellrechnung).
 
@@ -173,7 +174,7 @@ Hier kannst du direkt mit dem Vergleich starten: [Gasanbieter wechseln](/go/gas/
 
 ## Warum ist das Fixkosten‑Cockpit so wichtig?
 
-Fixkosten sind wie kleine Lecks in einem Boot. Ein einzelnes Leck ist kaum ein Problem, doch viele kleine Lecks lassen das Boot sinken. Deine [Energiekosten](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/) gehören häufig zu den größten Lecks.
+Fixkosten sind wie kleine Lecks in einem Boot. Ein einzelnes Leck ist kaum ein Problem, doch viele kleine Lecks lassen das Boot sinken. Deine Energiekosten gehören häufig zu den größten Lecks.
 
 Hast du sie im Griff, bleibt dir mehr Spielraum für andere Dinge. Das Fixkosten‑Cockpit bedeutet, dass du die Kontrolle übernimmst und nicht mehr passiver Zahler bist, sondern aktiver Manager deiner Finanzen.
 
@@ -185,7 +186,7 @@ Ein strukturierter Check deiner Verträge gibt dir ein gutes Gefühl. Du weißt,
 
 ## Heizkosten senken Winter: Zusätzliche Tipps für die Praxis
 
-Ein günstiger Tarif ist die halbe Miete. Die andere Hälfte ist dein Verhalten. Du kannst deine [Heizkosten senken](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/) im Winter, indem du kleine [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) vornimmst.
+Ein günstiger Tarif ist die halbe Miete. Die andere Hälfte ist dein Verhalten. Du kannst deine Heizkosten senken im Winter, indem du kleine [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) vornimmst.
 
 In einer Beispielrechnung spart jede Grad weniger Raumtemperatur etwa 6 % Energie. Du musst nicht frieren; oft reicht es, selten genutzte Räume weniger stark zu beheizen.
 

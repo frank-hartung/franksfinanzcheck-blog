@@ -41,6 +41,7 @@ faktencheck: 2026-11-02
 ---
 
 
+
 Auf der Gasrechnung stehen drei verschiedene Größen: der am Zähler gemessene Verbrauch, die abgerechneten Kilowattstunden und die bereits gezahlten Abschläge. Prüfe sie in dieser Reihenfolge.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

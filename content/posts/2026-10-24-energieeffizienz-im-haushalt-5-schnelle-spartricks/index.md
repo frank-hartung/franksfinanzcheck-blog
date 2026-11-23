@@ -153,13 +153,12 @@ Hier siehst du, wie viel Geld du wirklich sparen kannst. Wir nutzen dafür Durch
 **Annahmen** Ein typischer Haushalt verbraucht jährlich etwa 3.500 kWh Strom.
 Der Preis pro kWh liegt aktuell bei 0,40 €.  
 
-**Die Rechnung (Rechenbeispiel)**  
+**Die Rechnung (Rechenbeispiel)**
 1. 3.500 kWh multipliziert mit 0,40 € ergibt 1.400 € Jahreskosten.
 2. Eine Reduktion um 5 % spart dir exakt 70 € im Jahr ein.
 3. Senkst du den Verbrauch um 15 %, sparst du sogar 210 €.
 
-**Ergebnis**  
-Investierst du 30 € in neue LED-Lampen, hast du das Geld nach fünf Monaten zurück. Die Amortisation erfolgt bei solchen Maßnahmen extrem schnell. Danach machst du jeden Monat echten Gewinn. Das Geld kannst du für andere schöne Dinge nutzen.
+**Ergebnis** Investierst du 30 € in neue LED-Lampen, hast du das Geld nach fünf Monaten zurück. Die Amortisation erfolgt bei solchen Maßnahmen extrem schnell. Danach machst du jeden Monat echten Gewinn. Das Geld kannst du für andere schöne Dinge nutzen.
 
 Rechne weitere Beispiele für deine eigene Situation durch. Schau auf deine letzte Abrechnung für die genauen Zahlen.
 

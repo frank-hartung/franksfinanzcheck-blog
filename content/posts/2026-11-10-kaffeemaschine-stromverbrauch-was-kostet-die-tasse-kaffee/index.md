@@ -43,7 +43,7 @@ affiliate_exempt: true
 affiliate_exempt_reason: "Die Kosten pro Tasse werden mit den vorhandenen Geräten und dem eigenen Preis berechnet."
 ---
 
-Du drückst morgens verschlafen auf den Knopf deiner Maschine. Der Duft von frischem Kaffee füllt sofort die Küche. Doch hast du dich schon gefragt, was dieser Moment dich wirklich kostet? **In unserem Modellfall trinken wir vier Tassen am Tag oder 1.460 Gläser im Jahr (Modellrechnung: 4 Becher × 365 Tage).** Wir prüfen heute, welches System dein Konto am besten schont.
+Du drückst morgens verschlafen auf den Knopf deiner Maschine. Der Duft von frischem Kaffee füllt sofort die Küche. Doch hast du dich schon gefragt, was dieser Moment dich [wirklich kostet](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)? **In unserem Modellfall trinken wir vier Tassen am Tag oder 1.460 Gläser im Jahr (Modellrechnung: 4 Becher × 365 Tage).** Wir prüfen heute, welches System dein Konto am besten schont.
 
 Der **Kaffeemaschine Stromverbrauch** spielt eine oft unterschätzte Rolle. Viele Menschen achten beim Kauf nur auf den Anschaffungspreis. Doch die laufenden Kosten für Bohnen, Kapseln und Energie summieren sich über die Jahre. Wer seine Fixkosten im Griff haben will, schaut hier genau hin.
 
@@ -71,7 +71,7 @@ Besonders beim Aufheizen ziehen Kaffeemaschinen viel Energie. Ein Vollautomat mu
 
 Wer nur eine Tasse trinkt, sollte die Maschine danach ausschalten. Das konsequente Trennen vom Netz spart in unserem Modellfall wertvolle Energie. Der Fokus auf den Verbrauch gehört zum ersten Schritt meines 4K-Prüfpfads: Kosten sehen. Nur wer die Verbräuche seiner Technik kennt, kann gezielt handeln.
 
-Es gibt große Unterschiede zwischen den Systemen. Eine einfache Filtermaschine heizt nur das Wasser auf, das sie gerade braucht. Ein Vollautomat führt oft Spülvorgänge beim Ein- und Ausschalten durch. Das kostet Wasser und Strom für die Pumpe sowie das Heizelement.
+Es gibt große Unterschiede zwischen den Systemen. Eine einfache Filtermaschine heizt nur das Wasser auf, das sie gerade braucht. Ein Vollautomat führt oft Spülvorgänge beim Ein- und Ausschalten durch. Das kostet [Wasser und Strom](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/) für die Pumpe sowie das Heizelement.
 
 Wenn du beim **Kaffee zu Hause** sparen willst, achte auf die Energieeffizienzklasse. Oft amortisiert sich ein effizienteres Gerät durch die [geringeren](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) über die Lebensdauer.
 

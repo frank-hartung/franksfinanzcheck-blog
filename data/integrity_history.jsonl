@@ -1,6 +1,3 @@
-{"date": "2026-08-13", "kritisch": 1, "fest": 1}
-{"date": "2026-08-13", "kritisch": 1, "fest": 1}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
 {"date": "2026-08-13", "kritisch": 0, "fest": 1}
 {"date": "2026-08-13", "kritisch": 0, "fest": 0}
 {"date": "2026-08-13", "kritisch": 0, "fest": 0}
@@ -400,3 +397,4 @@
 {"date": "2026-11-20", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-11-23", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/lesbarkeit_heiler.py"], "head": "4bd8251"}
 {"date": "2026-11-23", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/redaktions_standard.py"], "head": "370da50"}
+{"date": "2026-11-23", "kritisch": 0, "fest": 0, "modus": "verify"}

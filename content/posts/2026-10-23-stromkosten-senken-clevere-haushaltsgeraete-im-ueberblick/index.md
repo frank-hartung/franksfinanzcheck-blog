@@ -48,7 +48,7 @@ Stromkosten im Check: Ein älteres Gerät auszutauschen spart nicht automatisch 
 Mit klugen Käufen und einem klaren Plan drückst du deinen Verbrauch auf Dauer.  
 Dieser Check zeigt dir deine größten Stromfresser. Eine einfache Modellrechnung macht dein Sparpotenzial sichtbar.
 
-**Das Wichtigste in Kürze**  
+**Das Wichtigste in Kürze**
 - **Sparsame Geräte** senken deinen Verbrauch in der Beispielrechnung unten um bis zu 40 %.
 - Der **Stromverbrauch** von Kühlschrank und Waschmaschine macht in der Modellrechnung rund 30 % der Kosten im Haushalt aus.
 - Ein klarer **4-K-Check** zeigt dir schnell, wo du am meisten sparst.
@@ -74,8 +74,7 @@ Alte Motoren oder spröde Dichtungen treiben den Zähler nach oben.
 Setze deshalb auf moderne Geräte.
 
 So nutzt du Strom viel gezielter.
-Gute Energieeffizienz schützt dich vor hohen Preisen beim Versorger.  
-[Preisgarantien](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) bieten hier weiteren Schutz.
+Gute Energieeffizienz schützt dich vor hohen Preisen beim Versorger. [Preisgarantien](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) bieten hier weiteren Schutz.
 
 Ein oft übersehener Punkt ist der Verschleiß.  
 Kühlschränke mit zu wenig Kühlmittel laufen oft ohne Pause durch.  

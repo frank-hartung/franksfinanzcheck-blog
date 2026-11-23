@@ -35,6 +35,7 @@ faktenfrische_aliases:
   - "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen"
 ---
 
+
 Lebensmittel retten im Check: Du öffnest den Kühlschrank. Ganz hinten liegt ein welker Salatkopf. Daneben steht ein Joghurt. Das Datum ist bereits seit mehreren Tagen überschritten.
 
 Du wirfst beides in den Müll. Kommt dir das bekannt vor? Jedes weggeworfene Produkt [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) bares Geld. Es sind versteckte Fixkosten deines Haushalts.
@@ -165,7 +166,7 @@ Es ist ein Prozess. Sei nicht zu streng mit dir, wenn doch mal etwas verdirbt. L
 
 ## Was kostet dich eine schlechte Organisation wirklich?
 
-Eine schlechte Organisation in der Küche [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) mehr als nur den Preis des Essens. Du verlierst Zeit. Du musst öfter zum Laden fahren.
+Eine schlechte Organisation in der Küche kostet dich mehr als nur den Preis des Essens. Du verlierst Zeit. Du musst öfter zum Laden fahren.
 
 Du verbrauchst Benzin oder zahlst für das Ticket. Wenn du dann noch frustriert bist, bestellst du vielleicht Pizza. Das ist die teuerste Form der Ernährung. Eine gute Vorbereitung schützt dich vor diesen emotionalen Käufen.
 

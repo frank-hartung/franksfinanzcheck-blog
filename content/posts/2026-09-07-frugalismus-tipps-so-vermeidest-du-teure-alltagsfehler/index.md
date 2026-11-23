@@ -52,6 +52,7 @@ faktencheck: 2026-11-06
 ---
 
 
+
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**; das ist ein Modellwert. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
@@ -60,7 +61,7 @@ Gute **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-c
 
 ![Merkkarte: Kernaussagen zu Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 [Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Überblick“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Das Wichtigste in Kürze
@@ -206,7 +207,7 @@ Legst du diese Summe jedes Jahr mit rund **7 % Rendite** an, stehen nach 20 Jah
 
 Sparen darf nicht wehtun. Wer sich ständig einschränkt, verliert das Ziel aus den Augen. Belohne dich deshalb für Etappenziele: Ist der erste Tausender auf dem Tagesgeldkonto, gönn dir bewusst etwas, das dir wirklich Freude macht.
 
-Hilfreich ist auch ein Umfeld mit ähnlichen Werten. **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** fällt deutlich leichter, wenn nicht jede Verabredung im teuren Restaurant endet. In Foren und Gruppen findest du außerdem laufend neue Kniffe.
+Hilfreich ist auch ein Umfeld mit ähnlichen Werten. **Geld sparen im Alltag** fällt deutlich leichter, wenn nicht jede Verabredung im teuren Restaurant endet. In Foren und Gruppen findest du außerdem laufend neue Kniffe.
 
 Und betrachte Frugalismus als Experiment: Wie wenig brauche ich wirklich, um zufrieden zu sein? Weniger Besitz bedeutet weniger Wartung, weniger Aufräumen, weniger Sorgen. Diese Entlastung ist oft mehr wert als der Betrag auf dem Konto.
 

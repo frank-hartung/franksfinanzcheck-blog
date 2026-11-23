@@ -43,6 +43,7 @@ kurzantwort: "Stelle den Router möglichst zentral und frei auf, statt ihn im Sc
 ---
 
 
+
 Stell dir vor, du sitzt abends auf dem Sofa. Du möchtest deine Lieblingsserie streamen. Doch das Bild stockt. Der Ladekreis dreht sich endlos.
 
 Das nervt gewaltig. Oft suchen wir den Fehler beim Anbieter. Wir schimpfen auf die Leitung. Doch meist liegt das Problem direkt in deiner Wohnung.
