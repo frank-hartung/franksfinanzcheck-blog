@@ -121,16 +121,20 @@ RE_FENCE = re.compile(r"^\s*(```|~~~)")
 #  automatisch zum NEUEN Befund (fail-closed). Ein Eintrag ohne Datum ist
 #  ein Konfigurationsfehler, kein Freibrief.
 # ----------------------------------------------------------------------
-BEFRISTET = [
-    {
-        "datei": ("content/posts/2026-10-02-gasabschlag-berechnen-so-planst-"
-                  "du-die-heizsaison-richtig/index.md"),
-        "bis": "2027-01-31",
-        "grund": ("#1263: wird erst geheilt, wenn die fünf offenen "
-                  "Gasabschlag-Befunde entschieden sind – eine Heilung jetzt "
-                  "würde an unentschiedenen Text binden."),
-    },
-]
+# LEER seit 23.11.2026. Der einzige Eintrag (Gasabschlag, bis 31.01.2027)
+# ist gegengestandslos geworden: `main` hat die geklebte Überschrift in
+# #1329 (`371835702`) geheilt – `erhebe()` findet im Bestand 0 Funde.
+#
+# Eine Befristung, die einen nicht mehr existierenden Befund schützt, ist
+# nicht harmlos: Die Uhr-Probe („muss an jedem Kalendertag grün sein") hätte
+# ab dem 31.01.2027 einen Befund erwartet, den es nicht gibt, und wäre an
+# einem Datum rot geworden, an dem niemand etwas geändert hat. Genau diese
+# Zeitbombe war der Anlass für das Verfallsdatum – sie darf nicht durch die
+# eigene Ausnahme entstehen.
+#
+# Die Struktur bleibt (die Selbsttests prüfen sie weiter): Ein künftiger
+# Eintrag braucht Datei, `bis` und `grund`, und die Uhr-Probe fängt ihn.
+BEFRISTET: list[dict] = []
 
 
 def befristete_grenze(datei: str) -> _dt.date | None:
@@ -467,25 +471,38 @@ def run_selftest() -> int:
     if "M3" in regeln(_GUT.replace("Noch ein Absatz.",
                                    "Noch ein Absatz mit ### Erwähnung.")):
         fehler.append("M3 schlägt außerhalb des FAQ an")
-    # 10) Die Befristung aus #1263: Die Stelle ist ein ganz normaler Befund
-    #     und steht als BEKANNT in der Baseline – sichtbar in jedem Bericht,
-    #     nicht still im Code weggedrückt.
-    gas = ("content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-"
-           "die-heizsaison-richtig/index.md")
-    if not pruefe_text(_GEKLEBT, gas, heute):
-        fehler.append("Testaufbau: die echte Stelle wird nicht erkannt")
-    gas_stand = {gas: pruefe_text(_GEKLEBT, gas, heute)}
-    e = vergleiche(gas_stand, gas_stand, heute)
-    if e["bekannt"] != [gas] or e["neu"]:
-        fehler.append(f"Befristung: bekannte Stelle nicht als bekannt: {e}")
-    # 11) NACH dem Stichtag ist dieselbe Stelle ein NEUER Befund –
-    #     eine Befristung, die nichts bewirkt, wäre eine stille Abschaltung.
-    nach_ablauf = _dt.date(2027, 2, 1)
-    e = vergleiche(gas_stand, gas_stand, nach_ablauf)
-    if e["neu"] != [gas] or e["ablauf"] != [gas]:
-        fehler.append(f"Befristung: nach Ablauf kein neuer Befund: {e}")
-    if not befristet_abgelaufen(nach_ablauf):
-        fehler.append("abgelaufene Befristung wird nicht benannt")
+    # 10) Die Befristung: Die Stelle ist ein ganz normaler Befund und steht
+    #     als BEKANNT in der Baseline – sichtbar in jedem Bericht, nicht
+    #     still im Code weggedrückt.
+    #
+    #     23.11.2026: Der echte Eintrag (Gasabschlag, #1263) ist entfallen,
+    #     weil `main` die Stelle in #1329 geheilt hat. Der MECHANISMUS muss
+    #     aber weiter geprüft werden – sonst wäre die nächste Ausnahme
+    #     ungeprüft. Deshalb trägt der Selbsttest seinen eigenen, klar
+    #     markierten Fall ein und räumt ihn wieder ab. Eine Ausnahme, die
+    #     niemand mehr testet, ist genau die stille Abschaltung, gegen die
+    #     sie gebaut wurde.
+    probe_datei = "content/posts/__selbsttest__/index.md"
+    probe_eintrag = {"datei": probe_datei, "bis": "2027-01-31",
+                     "grund": "Selbsttest: prüft den Ablauf-Mechanismus."}
+    if not pruefe_text(_GEKLEBT, probe_datei, heute):
+        fehler.append("Testaufbau: die geklebte Stelle wird nicht erkannt")
+    probe_stand = {probe_datei: pruefe_text(_GEKLEBT, probe_datei, heute)}
+    BEFRISTET.append(probe_eintrag)
+    try:
+        e = vergleiche(probe_stand, probe_stand, heute)
+        if e["bekannt"] != [probe_datei] or e["neu"]:
+            fehler.append(f"Befristung: bekannte Stelle nicht als bekannt: {e}")
+        # 11) NACH dem Stichtag ist dieselbe Stelle ein NEUER Befund –
+        #     eine Befristung, die nichts bewirkt, wäre eine stille Abschaltung.
+        nach_ablauf = _dt.date(2027, 2, 1)
+        e = vergleiche(probe_stand, probe_stand, nach_ablauf)
+        if e["neu"] != [probe_datei] or e["ablauf"] != [probe_datei]:
+            fehler.append(f"Befristung: nach Ablauf kein neuer Befund: {e}")
+        if not befristet_abgelaufen(nach_ablauf):
+            fehler.append("abgelaufene Befristung wird nicht benannt")
+    finally:
+        BEFRISTET.remove(probe_eintrag)
     # 12) Ein Eintrag ohne ISO-Datum oder ohne Grund ist ein Setup-Fehler.
     for b in BEFRISTET:
         try:
@@ -559,10 +576,17 @@ def main(argv: list[str] | None = None) -> int:
               f"{BASELINE.relative_to(ROOT)}")
         return 0
 
-    if baseline:
+    # 23.11.2026: `--json` und `--md` sind ABFRAGEN, keine Läufe, die den
+    # Bestand verändern. Vorher schrieb ein `--json`-Aufruf die Baseline neu
+    # (mit leerem Bestand: auf 0 Einträge) und riss damit den nachfolgenden
+    # Test um – der Fehler saß nicht im Test, sondern hier. Wer den Bestand
+    # verändern will, sagt es: `--seed` (einfrieren) oder ein Lauf ohne
+    # Maschinenformat (einrasten). Dieselbe Regel gilt für die Historie.
+    schreibend = not maschinenformat and not args.dry_run
+    if baseline and schreibend:
         _schreibe_baseline(klinke_einrasten(stand, baseline), args.dry_run)
     _schreibe_history(len(ergebnis["neu"]), len(ergebnis["bekannt"]),
-                      dateien, args.dry_run)
+                      dateien, args.dry_run or not schreibend)
 
     if args.json:
         print(json.dumps({

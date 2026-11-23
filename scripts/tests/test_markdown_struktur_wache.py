@@ -119,53 +119,80 @@ class ErkennungTest(unittest.TestCase):
 
 
 class BefristungTest(unittest.TestCase):
-    """#1263: die eine zurückgestellte Stelle ist sichtbar und befristet.
+    """Der Ablauf-Mechanismus der befristeten Ausnahme (#1263).
 
-    Sie ist KEINE stille Ausnahme im Code – sie steht als bekannter Befund
-    in der Baseline und wird im Bericht mit Grund und Stichtag genannt.
-    Nach dem Stichtag ist sie ein NEUER Befund (fail-closed).
+    23.11.2026: Der einzige echte Eintrag (Gasabschlag) ist entfallen – `main`
+    hat die geklebte Überschrift in #1329 (`371835702`) geheilt, `erhebe()`
+    findet im Bestand 0 Funde. Eine Ausnahme, die einen nicht mehr
+    existierenden Befund schützt, wird ab ihrem Stichtag rot, ohne dass
+    jemand etwas geändert hat.
+
+    Was bleibt, ist der MECHANISMUS – und der wird hier weiter geprüft, mit
+    einer synthetischen Ausnahme. Sonst wäre die nächste echte Ausnahme
+    ungeprüft, und genau davor soll die Wache schützen.
     """
+
+    PROBE = "content/posts/__test__/index.md"
+    EINTRAG = {"datei": PROBE, "bis": "2027-01-31",
+               "grund": "Testfall für den Ablauf-Mechanismus."}
+
+    def _mit_probe(self):
+        """Kontext: die Probe-Ausnahme gilt nur innerhalb des Tests."""
+        import contextlib
+
+        @contextlib.contextmanager
+        def _cm():
+            m.BEFRISTET.append(self.EINTRAG)
+            try:
+                yield
+            finally:
+                m.BEFRISTET.remove(self.EINTRAG)
+        return _cm()
 
     def test_stelle_wird_erkannt(self) -> None:
         text = GUT.replace("Noch ein Absatz.", "Noch ein Absatz.### Frage?")
-        self.assertTrue(m.pruefe_text(text, GAS, HEUTE),
+        self.assertTrue(m.pruefe_text(text, self.PROBE, HEUTE),
                         "die zurückgestellte Stelle läuft durch die Prüfung")
 
-    def test_stelle_steht_in_der_baseline(self) -> None:
-        baseline = m.lade_baseline()
-        self.assertIn(GAS, baseline,
-                      "die befristete Stelle fehlt in der Baseline – dann "
-                      "wäre sie entweder unsichtbar oder ein Dauerbefund")
+    def test_vor_ablauf_ist_sie_bekannt(self) -> None:
+        f = [{"regel": "M1", "zeile": 191, "spalte": 1, "text": ""}]
+        with self._mit_probe():
+            e = m.vergleiche({self.PROBE: f}, {self.PROBE: f}, HEUTE)
+        self.assertEqual([], e["neu"], "vor dem Stichtag kein neuer Befund")
+        self.assertEqual([self.PROBE], e["bekannt"])
 
-    def test_befristung_hat_datum_und_grund(self) -> None:
+    def test_nach_ablauf_ist_sie_neu(self) -> None:
+        nach_ablauf = _dt.date(2027, 2, 1)
+        f = [{"regel": "M1", "zeile": 191, "spalte": 1, "text": ""}]
+        with self._mit_probe():
+            self.assertTrue(m.befristet_abgelaufen(nach_ablauf),
+                            "die abgelaufene Ausnahme wird benannt")
+            e = m.vergleiche({self.PROBE: f}, {self.PROBE: f}, nach_ablauf)
+        self.assertEqual([self.PROBE], e["neu"], "fail-closed nach dem Stichtag")
+        self.assertEqual([self.PROBE], e["ablauf"])
+
+    def test_gilt_nur_fuer_ihre_datei(self) -> None:
+        f = [{"regel": "M1", "zeile": 5, "spalte": 1, "text": ""}]
+        with self._mit_probe():
+            e = m.vergleiche({"content/posts/anderer/index.md": f}, {}, HEUTE)
+        self.assertEqual(["content/posts/anderer/index.md"], e["neu"])
+
+    def test_jede_echte_befristung_hat_datum_und_grund(self) -> None:
         for e in m.BEFRISTET:
             self.assertTrue(_dt.date.fromisoformat(e["bis"]))
             self.assertTrue(e["grund"].strip())
-
-    def test_befristung_laeuft_ab(self) -> None:
-        nach_ablauf = _dt.date(2027, 2, 1)
-        self.assertTrue(m.befristet_abgelaufen(nach_ablauf))
-        f = [{"regel": "M1", "zeile": 191, "spalte": 1, "text": ""}]
-        e = m.vergleiche({GAS: f}, {GAS: f}, nach_ablauf)
-        self.assertEqual([GAS], e["neu"])
-        self.assertEqual([GAS], e["ablauf"])
-
-    def test_befristung_ist_vor_ablauf_bekannt(self) -> None:
-        f = [{"regel": "M1", "zeile": 191, "spalte": 1, "text": ""}]
-        e = m.vergleiche({GAS: f}, {GAS: f}, HEUTE)
-        self.assertEqual([], e["neu"])
-        self.assertEqual([GAS], e["bekannt"])
-
-    def test_befristung_gilt_nur_fuer_ihre_datei(self) -> None:
-        f = [{"regel": "M1", "zeile": 5, "spalte": 1, "text": ""}]
-        e = m.vergleiche({"content/posts/anderer/index.md": f}, {}, HEUTE)
-        self.assertEqual(["content/posts/anderer/index.md"], e["neu"])
 
     def test_befristung_ist_nicht_ewig(self) -> None:
         for e in m.BEFRISTET:
             bis = _dt.date.fromisoformat(e["bis"])
             self.assertLess(bis, _dt.date(2027, 12, 31),
                             f"Befristung {e['datei']} läuft zu lange")
+
+    def test_probe_ist_wieder_weg(self) -> None:
+        """Kein Zustand leckt: die Probe-Ausnahme lebt nur im Test."""
+        with self._mit_probe():
+            self.assertIn(self.EINTRAG, m.BEFRISTET)
+        self.assertNotIn(self.EINTRAG, m.BEFRISTET)
 
 
 class KlinkeTest(unittest.TestCase):
@@ -249,6 +276,29 @@ class CliTest(unittest.TestCase):
         for feld in ("dateien", "fundstellen", "neu", "bekannt", "geheilt",
                      "befristet_abgelaufen"):
             self.assertIn(feld, daten)
+
+    def test_json_schreibt_weder_baseline_noch_historie(self) -> None:
+        """23.11.2026: `--json` ist eine ABFRAGE, kein Lauf.
+
+        Der Fehler, der den regression-Job riss: `--json` schrieb die
+        Baseline neu – auf 0 Einträge, weil der Bestand sauber war. Der
+        nächste Test fand eine leere Baseline und wurde rot. Der Fehler saß
+        nicht im Test, sondern im Schreibpfad der Wache. `--seed` friert
+        ein, ein Lauf ohne Maschinenformat rastet ein; `--json`/`--md`
+        berichten nur.
+        """
+        baseline = ROOT / "data" / "markdown_baseline.json"
+        hist = ROOT / "data" / "markdown_history.jsonl"
+        vorher_b = baseline.read_text(encoding="utf-8") if baseline.exists() else None
+        vorher_h = hist.read_text(encoding="utf-8") if hist.exists() else None
+        lauf = self._lauf("--json")
+        self.assertEqual(0, lauf.returncode, lauf.stderr)
+        nachher_b = baseline.read_text(encoding="utf-8") if baseline.exists() else None
+        nachher_h = hist.read_text(encoding="utf-8") if hist.exists() else None
+        self.assertEqual(vorher_b, nachher_b,
+                         "`--json` hat die Baseline verändert")
+        self.assertEqual(vorher_h, nachher_h,
+                         "`--json` hat die Historie verändert")
 
     def test_dry_run_schreibt_nichts(self) -> None:
         hist = ROOT / "data" / "markdown_history.jsonl"
