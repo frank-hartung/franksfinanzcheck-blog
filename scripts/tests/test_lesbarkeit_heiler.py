@@ -350,6 +350,35 @@ class NachsorgeAuswahlTests(unittest.TestCase):
     def test_leere_auswahl_ist_kein_fehler(self):
         self.assertEqual([], self._auswahl([]))
 
+    def test_leere_sweep_modi_liefern_exit_0_und_valides_json(self):
+        """Alle Sweep-Modi (--holds, --blocked, --entwuerfe, --new-only) beenden
+        einen leeren Bestand sauber mit Exit 0 statt ap.error (Exit 2)."""
+        orig = (lh.hole_holds, lh.hole_blocked, lh.hole_entwuerfe, lh.hole_neue)
+        try:
+            lh.hole_holds = lambda: []
+            lh.hole_blocked = lambda: []
+            lh.hole_entwuerfe = lambda: []
+            lh.hole_neue = lambda: []
+            for flag in ("--holds", "--blocked", "--entwuerfe", "--new-only"):
+                buf = io.StringIO()
+                with contextlib.redirect_stdout(buf):
+                    rc_code = lh.main([flag])
+                self.assertEqual(rc_code, 0, f"{flag} muss bei leerem Sweep Exit 0 liefern")
+                buf_json = io.StringIO()
+                with contextlib.redirect_stdout(buf_json):
+                    rc_json = lh.main([flag, "--json"])
+                self.assertEqual(rc_json, 0, f"{flag} --json muss Exit 0 liefern")
+                self.assertEqual(json.loads(buf_json.getvalue()),
+                                 {"befund": 0, "berichte": []})
+        finally:
+            lh.hole_holds, lh.hole_blocked, lh.hole_entwuerfe, lh.hole_neue = orig
+
+    def test_ohne_quelle_bleibt_ap_error(self):
+        with self.assertRaises(SystemExit) as ctx:
+            with contextlib.redirect_stderr(io.StringIO()):
+                lh.main([])
+        self.assertEqual(ctx.exception.code, 2)
+
 
 class VerdrahtungTests(unittest.TestCase):
     """Deckung heißt Wirkung: Kette, Deckung und Vertrag kennen den Heiler."""

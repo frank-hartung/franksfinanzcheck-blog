@@ -176,6 +176,23 @@ def _ai_decide(candidates: list[dict]) -> list[bool]:
 # Anwenden
 # ---------------------------------------------------------------------------
 
+def _ist_zusammenfuehrbar(nxt: str) -> bool:
+    """Darf `nxt` an die Vorgängerzeile gehängt werden?
+
+    Schutz vor geklebten Überschriften (#1263): Eine Folgezeile, die eine
+    Überschrift (`### …`), Liste, Trennlinie, Tabelle, Zitat oder Codeblock
+    beginnt, darf NIE mit dem vorherigen Absatz verschmolzen werden.
+    """
+    s = nxt.strip()
+    return bool(
+        s
+        and not RE_BROKEN_END.search(nxt)
+        and not re.match(r"^#{1,6}\s+", s)
+        and not re.match(r"^(?:[-*]|\d+\.)\s+", s)
+        and not RE_HR.match(s)
+        and not s.startswith(("|", ">", "```")))
+
+
 def apply_decisions(body: str, candidates: list[dict], decisions: list[bool]) -> tuple[str, int]:
     """Setzt/baut Umbrüche gemäß KI-Entscheidung. Liefert (neuer_body, anzahl)."""
     lines = body.split("\n")
@@ -193,9 +210,15 @@ def apply_decisions(body: str, candidates: list[dict], decisions: list[bool]) ->
                 changed += 1
         else:
             if c["broken"] and nxt:
-                lines[i] = line.rstrip() + " " + nxt.strip()
-                del lines[i + 1]
-                changed += 1
+                if _ist_zusammenfuehrbar(nxt):
+                    lines[i] = line.rstrip() + " " + nxt.strip()
+                    del lines[i + 1]
+                    changed += 1
+                else:
+                    # Folgezeile ist Überschrift/Liste/Block (#1263): nie
+                    # ankleben, nur die Hard-Break-Spur am Zeilenende entfernen.
+                    lines[i] = RE_BROKEN_END.sub("", line)
+                    changed += 1
     return "\n".join(lines), changed
 
 
@@ -225,16 +248,9 @@ def self_heal(body: str) -> tuple[str, int]:
                 in_faq = False
         if (in_faq or _is_protected(line) or _is_lead_definition(line)
                 or RE_HR.match(line)) and RE_BROKEN_END.search(line):
-            nxt = lines[i + 1].strip() if i + 1 < n else ""
-            mergeable = bool(
-                nxt
-                and not RE_BROKEN_END.search(nxt)
-                and not re.match(r"^#{1,6}\s+", nxt)
-                and not re.match(r"^\s*(?:[-*]|\d+\.)\s+", nxt)
-                and not RE_HR.match(nxt)
-                and not nxt.startswith(("|", ">", "```")))
-            if mergeable:
-                out.append(line.rstrip() + " " + nxt)
+            nxt = lines[i + 1] if i + 1 < n else ""
+            if _ist_zusammenfuehrbar(nxt):
+                out.append(line.rstrip() + " " + nxt.strip())
                 changed += 1
                 i += 2
                 continue
@@ -323,6 +339,15 @@ def run_selftest() -> list:
     out, n = self_heal(body)
     if out != body or n != 0:
         fehler.append("Selbstheilung fasst sauberen Fließtext an")
+
+    # 5) Schutz vor geklebten Überschriften (#1263): apply_decisions darf
+    # eine Folge-Überschrift niemals an den vorherigen Absatz kleben.
+    body = "Absatz mit Gedankenstrich – Ende.  \n### Was kostet ein Wechsel?\n"
+    out, n = apply_decisions(body, [{"idx": 0, "broken": True}], [False])
+    if "### Was kostet ein Wechsel?" not in out.splitlines() or len(out.splitlines()) != 2:
+        fehler.append(f"apply_decisions hat Überschrift angeklebt: {out!r}")
+    if "Ende.  " in out:
+        fehler.append(f"Hard-Break vor Überschrift nicht bereinigt: {out!r}")
     return fehler
 
 

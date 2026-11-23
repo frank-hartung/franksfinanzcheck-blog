@@ -13,7 +13,7 @@ keywords: ["Kreditkarte vergleichen", "kostenlose Kreditkarte", "Kreditkarte ohn
 pinwand: "Konto & Karten | Gebührenfrei & clever"
 pin_title: "Kreditkarte vergleichen: Kostenlos und sicher zahlen"
 pin_description: "*Werbung | Welche Kreditkarte passt zu deinem Alltag? Prüfe Abrechnung, Jahresgebühr und Fremdwährungsentgelt – besonders wenn du Teilzahlung nutzen willst. Kontrolliere die voreingestellte Rückzahlungsart vor dem ersten Einkauf. Eine Karte ohne Jahresgebühr kann bei Teilzahlung trotzdem laufende Zinskosten verursachen."
-ai_generated: false
+ai_generated: true
 engine_level: "reserve"
 kurzantwort: "Eine gute Kreditkarte kann dich im Jahr nichts kosten: Es gibt Karten ohne Jahresgebühr und ohne Fremdwährungsgebühr beim Bezahlen in Euro-fremden Währungen und eine App mit sofortiger Sperrfunktion. Achte außerdem auf eine kostenlose Nutzung im Ausland, eine transparente Abrechnung ohne Sollzinsen und sinnvolle, nicht aufgeblähte Versicherungspakete."
 social_posted: true

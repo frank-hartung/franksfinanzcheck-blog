@@ -110,7 +110,7 @@ Von diesem Konto gehen alle Fixkosten ab. In unserem Modellfall sind das die 50�
 
  Hierhin überweist du am Monatsanfang die 30 % für deine Wünsche; das ist ein Rechenbeispiel. Wenn dieses Konto leer ist, gibt es in diesem Monat keine Extras mehr. Das hilft dir enorm beim **Geld einteilen lernen**. Du hast die volle Kontrolle über deine Freizeit-Ausgaben.
 
- Hier landen die restlichen 20 %; das ist ein Rechenbeispiel. In unserer Beispielrechnung wird dieser Betrag sofort nach Gehaltseingang investiert oder gespart. So kommst du gar nicht erst in Versuchung, das Geld für andere Dinge auszugeben. Bezahle dich selbst immer zuerst.
+Hier landen die restlichen 20 %; das ist ein Rechenbeispiel. In unserer Beispielrechnung wird dieser Betrag direkt am Monatsanfang gespart oder angelegt. Dadurch bleibt das Geld geschützt und fließt nicht unbemerkt in den Alltag. Bezahle dich selbst immer zuerst.
 
 ## Welche Fehler kosten dich beim Geld einteilen lernen am meisten?
 
@@ -122,7 +122,7 @@ Ein weiterer Fehler ist die "Bonus-Falle". Viele wechseln ihren Stromanbieter nu
 
 In unserer Kalkulation prüfen wir stattdessen die langfristigen Konditionen. Ein hoher Bonus verdeckt oft einen teuren Arbeitspreis. Rechne immer die Gesamtkosten über die Mindestlaufzeit aus.
 
-Auch die fehlende Kontrolle der Kündigungsfristen kostet bares Geld. Wer den Termin verpasst, zahlt oft ein weiteres Jahr den hohen Preis. In meinem 4K-Prüfpfad ist das Sichern der Kündigungsfenster ein zentraler Punkt. Nur wer seine Termine kennt, kann rechtzeitig handeln.
+Auch die fehlende Kontrolle der Kündigungsfristen kostet bares Geld. Wer das Enddatum verschläft, bleibt unnötig lange im teuren Altvertrag hängen. In meinem 4K-Prüfpfad ist das Sichern der Kündigungsfenster ein zentraler Punkt. Nur wer seine Termine kennt, kann rechtzeitig handeln.
 
 | Kategorie | Anteil im Modell | Beispiel (bei 2.500 € Netto) | Zweck |
 | :--- | :--- | :--- | :--- |

@@ -33,7 +33,7 @@
 # ============================================================
 
 version: 1
-stand: "2026-09-26"
+stand: "2026-11-23"
 
 # Welche Variante läuft laut Register in Produktion? "" = Basis.
 # Seit 03.10.2026 wieder bewusst Basis: Die kanonische Markenebene enthält
@@ -88,7 +88,7 @@ varianten:
     oberflaeche:
       - "/"
     herkunft: "KI-Entwurf (Relume-Muster „Hero mit Primär-/Sekundärhandlung“), von Hand auf die Marken-Tokens zurückgeschnitten"
-    status: gemessen
+    status: verworfen
     css: "css/varianten/v-hero-conversion.css"
     notizen: >
       Bewusst nur Hierarchie (Gewicht, Fläche, Ruhe) – keine neuen
@@ -147,7 +147,7 @@ varianten:
     oberflaeche:
       - "/"
     herkunft: "KI-Entwurf (Agent-Reach-Recherche GEO/SEO 2026 + Design-System DESIGN.md/PRODUCT.md), auf den Marken-Tokens geschnitten"
-    status: gemessen
+    status: verworfen
     css: "css/varianten/v-hero-premium.css"
     notizen: >-
       Erbt die freigegebene v-hero-conversion-Hierarchie vollständig

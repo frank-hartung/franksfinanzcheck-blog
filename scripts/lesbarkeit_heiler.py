@@ -1047,14 +1047,17 @@ def main(argv: list[str] | None = None) -> int:
     if args.new_only:
         pfade += hole_neue()
     if not pfade:
-        # Ein SWEEP über den Vorrat ist auch dann ein Erfolg, wenn es nichts
-        # zu heilen gibt: Die Wochen-Nachsorge (Issue #712) läuft sonst bei
-        # gesundem Bestand jeden Lauf in einen Fehler. Die Auswahl-Modi mit
-        # explizitem Einzelziel (`--file`) bleiben streng.
-        if (args.entwuerfe and not (args.file or args.holds or args.blocked
-                                    or args.new_only)):
-            print("✅ Lesbarkeits-Nachsorge: kein Entwurf unter der Publish-"
-                  f"Schwelle {MINDEST_FLESCH:g} – nichts zu tun.")
+        # Ein SWEEP über den Vorrat (--holds, --blocked, --entwuerfe,
+        # --new-only) ist auch dann ein Erfolg, wenn es nichts zu heilen
+        # gibt: Bei gesundem Bestand darf kein Sweep-Modus in Exit 2 laufen.
+        # Nur wenn gar keine Quelle genannt wurde, bleibt ap.error streng.
+        if (args.holds or args.blocked or args.entwuerfe or args.new_only) and not args.file:
+            if args.json:
+                print(json.dumps({"befund": 0, "berichte": []},
+                                 ensure_ascii=False, indent=1))
+            else:
+                print("✅ Lesbarkeits-Nachsorge: kein Kandidat unter der Publish-"
+                      f"Schwelle {MINDEST_FLESCH:g} – nichts zu tun.")
             return 0
         ap.error("Quelle fehlt: --file, --holds, --blocked, --entwuerfe oder "
                  "--new-only (oder --selftest/--wirkungsprobe)")

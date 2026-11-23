@@ -8,7 +8,7 @@ tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst.jpg"
   alt: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"

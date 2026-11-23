@@ -10,7 +10,7 @@ categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg"
   alt: "Privathaftpflicht: Warum sie so wichtig ist und was sie kostet"

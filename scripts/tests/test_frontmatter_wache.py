@@ -465,6 +465,77 @@ class CliTest(unittest.TestCase):
             self.assertIn("Antrag und Anmeldung\"", datei.read_text(encoding="utf-8"))
 
 
+class VerschachtelterDoppelterSchluessel1313Test(unittest.TestCase):
+    """Issue #1313: Verschachtelte doppelte YAML-Schlüssel (z. B. aenderungsgrund).
+
+    Am 21.11.2026 legte ein doppelter `aenderungsgrund` in
+    `redaktionelle_pruefung:` den gesamten Hugo-Bau lahm (#1312). PyYAML
+    `safe_load` nahm still den letzten Wert, und Schicht 1 prüfte nur
+    `einzug == 0`. Jetzt schlagen BOTH Schichten (Scanner F3 + StrictLoader F2)
+    als BLOCKER an – ohne Fehlalarme bei Geschwister-Blöcken oder Listen.
+    """
+
+    DOPPELT_VERSCHACHTELT = SAUBER.replace(
+        "draft: false",
+        "draft: false\n"
+        "redaktionelle_pruefung:\n"
+        '  aenderungsgrund: "Erstentwurf – vorgemerkt"\n'
+        '  pruefdatum: "2026-11-21"\n'
+        '  naechste_pruefung: "2027-01-05"\n'
+        '  aenderungsgrund: "Casing-Fix"')
+
+    EINZELN_VERSCHACHTELT = SAUBER.replace(
+        "draft: false",
+        "draft: false\n"
+        "redaktionelle_pruefung:\n"
+        '  aenderungsgrund: "Erstentwurf – vorgemerkt"\n'
+        '  pruefdatum: "2026-11-21"\n'
+        '  naechste_pruefung: "2027-01-05"')
+
+    GESCHWISTER_BLOECKE = SAUBER.replace(
+        "draft: false",
+        "draft: false\n"
+        "cover:\n"
+        '  image: "a.png"\n'
+        "params:\n"
+        '  image: "b.png"')
+
+    def test_verschachteltes_duplikat_ist_blocker_mit_pyyaml(self) -> None:
+        befunde = pruefe(self.DOPPELT_VERSCHACHTELT)
+        blocker = [b for b in befunde if b["schwere"] == w.BLOCKER]
+        self.assertTrue(blocker, "verschachtelter doppelter Schlüssel unentdeckt")
+        regeln = {b["regel"] for b in blocker}
+        self.assertIn("F3", regeln)
+        if HAT_YAML:
+            self.assertIn("F2", regeln)
+
+    def test_verschachteltes_duplikat_ist_blocker_auch_ohne_pyyaml(self) -> None:
+        _, fm, start, _, _ = w.frontmatter_bereich(self.DOPPELT_VERSCHACHTELT)
+        befunde = w.scanne_yaml(fm, start, "content/posts/x/index.md")
+        blocker = [b for b in befunde if b["schwere"] == w.BLOCKER]
+        self.assertTrue(blocker, "ohne PyYAML (Schicht 1) ist der #1313-Fall blind")
+        self.assertEqual({"F3"}, {b["regel"] for b in blocker})
+        self.assertTrue(any("aenderungsgrund" in b["meldung"] for b in blocker))
+
+    def test_einzelner_verschachtelter_schluessel_bleibt_gruen(self) -> None:
+        self.assertEqual([], [b for b in pruefe(self.EINZELN_VERSCHACHTELT)
+                              if b["schwere"] == w.BLOCKER])
+        self.assertEqual([], [b for b in pruefe(self.EINZELN_VERSCHACHTELT, yaml_modul="ohne")
+                              if b["schwere"] == w.BLOCKER])
+
+    def test_gleicher_unterschluessel_in_geschwisterbloecken_erlaubt(self) -> None:
+        self.assertEqual([], [b for b in pruefe(self.GESCHWISTER_BLOECKE)
+                              if b["schwere"] == w.BLOCKER])
+        self.assertEqual([], [b for b in pruefe(self.GESCHWISTER_BLOECKE, yaml_modul="ohne")
+                              if b["schwere"] == w.BLOCKER])
+
+    @unittest.skipUnless(HAT_YAML, "Flow-Mapping-Duplikat erfordert PyYAML")
+    def test_flow_mapping_duplikat_wird_als_f2_blocker_erkannt(self) -> None:
+        text = SAUBER.replace("draft: false", 'draft: false\nmeta: {k: "1", k: "2"}')
+        blocker = [b for b in pruefe(text) if b["schwere"] == w.BLOCKER]
+        self.assertTrue(any(b["regel"] == "F2" and "doppelter Schlüssel" in b["meldung"]
+                            for b in blocker),
+                        f"Flow-Duplikat nicht als F2 erkannt: {blocker}")
 class VerschachtelterDoppelterSchluesselTest(unittest.TestCase):
     """Issue #1313 (22.11.2026): Duplikate UNTERHALB von Einrückung 0.
 

@@ -89,6 +89,23 @@ class FreigabeKontrakt(unittest.TestCase):
         self.assertEqual(treffer[0].schwere, "P1")
         self.assertEqual(treffer[0].besitzer, "human")
 
+    def test_verworfene_variante_blockiert_messwerte_nicht(self):
+        """Historische, verworfene Varianten dürfen #1248 nicht wieder auslösen."""
+        orig_lade = gate.lade_messung
+        try:
+            gate.lade_messung = lambda vid: (
+                {"tiers": {"statisch": {"status": "ok", "werte": {"h1_abweichungen": 2}}}}
+                if vid == "v-test" else None
+            )
+            b = gate.Bericht()
+            gate.pruefe_messwerte(register(status="verworfen"), REGELWERK, b, None)
+            self.assertEqual(b.befunde, [])
+            b_explizit = gate.Bericht()
+            gate.pruefe_messwerte(register(status="verworfen"), REGELWERK, b_explizit, "v-test")
+            self.assertTrue(any(x.regel == "seo.h1_anzahl_exakt" for x in b_explizit.befunde))
+        finally:
+            gate.lade_messung = orig_lade
+
     def test_unterschrift_ohne_messung_ist_P1(self):
         with tempfile.TemporaryDirectory() as tmp:
             original, gate.MESSUNGEN = gate.MESSUNGEN, Path(tmp)

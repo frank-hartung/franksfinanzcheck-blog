@@ -174,7 +174,7 @@ class WorkflowYamlTests(unittest.TestCase):
         self.assertGreater(found, 0, "Kein github-script-Step gefunden?")
 
     def test_keine_backslash_faltung_in_run_bloecken(self):
-        """Lehre aus dem zweiten CI-Fehlschlag (21.09.2026): In einem *plain*
+        r"""Lehre aus dem zweiten CI-Fehlschlag (21.09.2026): In einem *plain*
         `run:`-Skalar faltet YAML den Zeilenumbruch hinter einem Backslash zu
         einem Leerzeichen – der Shell bleibt ein literales `\` als Argument
         übrig (`unrecognized arguments: \`). Genau so ist der Annotations-Step
