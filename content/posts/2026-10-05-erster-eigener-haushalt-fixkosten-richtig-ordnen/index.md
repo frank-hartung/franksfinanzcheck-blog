@@ -64,6 +64,9 @@ Genau daran scheitern die meisten Anfänge, nicht an großen Summen. Es fehlt ei
 ## Die ersten vier Wochen entscheiden über das Jahr
 
 
+Darum geht es hier konkret: erster eigener Haushalt.
+
+
 In den ersten Wochen entstehen die Verträge, die dich lange begleiten: Energielieferung, Internet, Konto, Müllgebühren, Mitgliedschaften. Jeder einzelne Vertrag wird später zur Gewohnheit. Gewohnheiten prüft niemand mehr.
 
 Deshalb lohnt sich die Ordnung jetzt, solange alles neu ist. Die Verbraucherzentrale rät, Ausgaben zuerst sichtbar zu machen und erst danach zu kürzen ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)). Im ersten Haushalt ist das keine Sparmaßnahme, sondern der Aufbau der Struktur.
@@ -194,6 +197,9 @@ Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste
 **Faustregel:** Melde Verträge für Miete, Strom und Internet in den ersten vier Wochen nach dem Einzug in deinem Namen an – was nicht auf dich läuft, kann dich später teuer zu stehen kommen.
 
 **Für deinen nächsten Check:** Notiere bei der Wohnungsübergabe, welche Verträge du selbst abschließen musst. Was im Elternhaus in einer Rechnung steckte, kann im eigenen Haushalt getrennt fällig werden.
+
+
+Genau das ist der Hebel: erster eigener Haushalt.
 
 ## Häufige Fragen
 

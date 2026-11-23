@@ -394,7 +394,20 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
         # hält das strukturell fest, statt es je Schlüssel zu erraten.
         sequenz = rest_zeile.startswith("- ") or rest_zeile == "-"
         if rest_zeile.startswith("- "):
-            rest_zeile = rest_zeile[2:]
+            nach_strich = rest_zeile[2:]
+            zusatz = len(nach_strich) - len(nach_strich.lstrip(" "))
+            key_einzug = einzug + 2 + zusatz
+            rest_zeile = nach_strich.lstrip(" ")
+        elif rest_zeile == "-":
+            key_einzug = einzug
+            rest_zeile = ""
+        else:
+            key_einzug = einzug
+            # KEIN Abschneiden: Der Einzug ist oben (`rest_zeile = zeile[einzug:]`)
+            # bereits entfernt. Das frühere `rest_zeile[2:]` kürzte jeden
+            # Schlüssel um zwei Zeichen (`title` → `tle`) – dadurch war die
+            # YAML-1.1-Regel F5 für Titelfelder blind (Selbsttest rot,
+            # Frontmatter-Vertrag im E2E-Gate rot).
 
         # Offene Bereiche schließen: Eine Zeile gleicher oder geringerer
         # Einrückung ist ein Geschwister, kein Kind. Ein `- ` beginnt einen
@@ -416,24 +429,26 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             continue                      # Fortsetzung eines mehrzeiligen Texts
         key = treffer.group("key").strip()
         wert = treffer.group("rest")
+        spalte = key_einzug + len(treffer.group("key")) + 2
         spalte = einzug + len(treffer.group("key")) + 2
 
         if not wert.strip():
             # Block-Öffner (`eltern:`): Duplikat zählt im ELTERN-Bereich,
             # danach öffnet die Zeile einen eigenen Bereich für ihre Kinder.
-            _melde_doppelt(befunde, gesehen, rahmen, key, nr, einzug,
+            _melde_doppelt(befunde, gesehen, rahmen, key, nr, key_einzug,
                            pfad, key)
-            rahmen.append((einzug, f"block@{nr}"))
+            rahmen.append((key_einzug, f"block@{nr}"))
             continue
         if not wert.startswith(" "):
-            continue                      # `key:` ohne Leerzeichen ist kein Mapping
+            continue                      # `key:wert` ohne Leerzeichen ist kein Mapping
         wert = wert.lstrip(" ")
 
         # WF-990 + #1313: BLOCKER, nicht HINWEIS. Hugo bricht an einem
         # doppelten Mapping-Schlüssel den ganzen Bau ab – PyYAML nimmt still
         # den letzten Wert, deshalb sieht der Parser den Fall nicht. Dieser
         # Scanner meldet ihn ohne Parser und in jeder Ebene.
-        _melde_doppelt(befunde, gesehen, rahmen, key, nr, einzug, pfad, key)
+        _melde_doppelt(befunde, gesehen, rahmen, key, nr, key_einzug,
+                       pfad, key)
 
         # ---- Wert klassifizieren ----
         if wert.startswith("#"):

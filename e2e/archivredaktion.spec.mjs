@@ -19,8 +19,11 @@ test('Kfz-Korrektur erreicht Leser vor dem Teaser der neuen Fassung', async ({ p
 
 test('Tagesgeld-Modell bleibt als Rechnung und nicht als Marktangebot erkennbar', async ({ page }) => {
   await page.goto('/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/');
-  await expect(page.locator('.post-content')).toContainText('frei gewählte Modellannahmen');
-  await expect(page.locator('.post-content')).toContainText('keine Angebote');
+  // 23.11.2026: Der Artikel sagt es inzwischen schärfer („Alle Zahlen sind
+  // freie Modellwerte, keine echten Angebote") – der Test prüft die
+  // Aussage, nicht den alten Wortlaut. Der Anker bleibt unverändert.
+  await expect(page.locator('.post-content')).toContainText('freie Modellwerte');
+  await expect(page.locator('.post-content')).toContainText('keine echten Angebote');
   // Bestehendes Sprungziel aus dem Beweisregister.
   await expect(page.locator('#rechenbeispiel-was-bringt-das-tagesgeld-konkret')).toHaveCount(1);
 });

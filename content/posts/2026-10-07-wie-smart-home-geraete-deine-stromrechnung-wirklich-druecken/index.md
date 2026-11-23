@@ -1,5 +1,5 @@
 ---
-title: "Smart Home: Spart die Automatisierung mehr Strom – Smarte"
+title: "Smart Home: Spart die Automatisierung wirklich Strom?"
 description: "Spart eine smarte Steckdose wirklich Strom? Vergleiche die vermiedene Laufzeit mit Eigenverbrauch und Kaufpreis, bevor du weitere Geräte ausstattest."
 date: 2026-10-14T14:57:12Z
 draft: false
@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 8ce894d32959c33a2899b22fd70d88fbda208f4846849bf2c2af3a248307a739
-    geprueft_am: 2026-11-21
+    sha256: 49cd95640b118366ecdee5a39e92ba0f3baff0c195558eb55e2a0a3e1883d516
+    geprueft_am: 2026-11-23
 quellen:
   - id: "Q1"
     titel: "Energiesparen im Haushalt"

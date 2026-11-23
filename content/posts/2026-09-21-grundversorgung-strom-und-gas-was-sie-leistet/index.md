@@ -46,7 +46,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-09-21"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-23
 kurzantwort: "Die Grundversorgung ist der Tarif, den der örtliche Energieversorger jedem Haushalt ohne Vertrag anbietet. Sie ist gesetzlich vorgeschrieben und liefert immer, ist aber meist teurer als Sondertarife. Wer nach einem Umzug oder nach einem Lieferantenwechsel in der Grundversorgung landet, kann jederzeit in einen anderen Tarif wechseln."
 ---
 

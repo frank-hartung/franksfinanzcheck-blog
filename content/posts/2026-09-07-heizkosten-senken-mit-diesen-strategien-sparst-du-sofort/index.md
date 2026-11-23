@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Heizkosten senken: Welche Maßnahmen passen zu – Heizung"
+title: "Heizkosten senken: Raumtemperatur, Lüften, Heizkörper"
 description: "Heizkosten senken: Bevor du in Heiztechnik investierst, prüfe Heizzeiten, Thermostate und freie Heizflächen. Vergleiche den Verbrauch nur unter ähnlichen…"
 date: 2026-09-23T08:59:05Z
 draft: false
@@ -22,8 +22,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 28074a01d76b32f990dd6a82ec58b6aff4c97a616c0f94986d45b8bb52a0429f
-    geprueft_am: 2026-11-21
+    sha256: 97137ad95e8ca40d07e621c4855aa19d51c4203c41d763656d9ad087413d1f3a
+    geprueft_am: 2026-11-23
 kurzantwort: "Heizkosten senkst du zuerst über passende Raumtemperaturen, kurzes Stoßlüften und freie Heizkörper. Ein Grad weniger spart als Faustwert etwa 6 Prozent Heizenergie, sofern du vorher tatsächlich wärmer geheizt hast. Miss monatlich den Verbrauch und prüfe zusätzlich Arbeitspreis sowie Grundpreis; ein niedrigerer Abschlag allein spart nichts."
 quellen:
   - titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"
@@ -159,7 +159,7 @@ Notiere Wetter und Abwesenheiten knapp dazu. So erkennst du Trends, ohne einen k
 
 12,23 Cent je Kilowattstunde – das ist der Neukunden-Schnitt der [BDEW-Gaspreisanalyse Herbst 2026](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) für Einfamilienhäuser. Als feste Zielmarke taugt die Zahl nicht. Als grober Maßstab aber schon: Liegt dein Arbeitspreis klar darüber, lohnt ein Blick in den Vertrag. Region, Verbrauchsmenge und Vertragsart verschieben das Bild zusätzlich.
 
-Wenn es mit dem Anbieter ernsthaft klemmt, bist du nicht auf Kulanz angewiesen. Die [Schlichtungsstelle Energie](https://www.schlichtungsstelle-energie.de/) vermittelt bei Streit mit Versorgern kostenfrei für private Verbraucher. Wie sich Marktpreise entwickeln, bündelt die Bundesnetzagentur in ihren [Preisübersichten für Haushaltskunden](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) und auf der Markttransparenzplattform [SMARD](https://www.smard.de/).
+Wenn es mit dem Anbieter ernsthaft klemmt, bist du nicht auf Kulanz angewiesen. Der Verbraucherservice Energie der Bundesnetzagentur nimmt Anfragen und Beschwerden entgegen; bei Streit mit Versorgern vermittelt die [Schlichtungsstelle Energie](https://www.schlichtungsstelle-energie.de/) kostenfrei für private Verbraucher. Wie sich Marktpreise entwickeln, bündelt die Bundesnetzagentur in ihren [Preisübersichten für Haushaltskunden](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) und auf der Markttransparenzplattform [SMARD](https://www.smard.de/).
 
 Rechne jedes Angebot mit deiner tatsächlichen Jahresmenge durch. Wichtig sind:
 

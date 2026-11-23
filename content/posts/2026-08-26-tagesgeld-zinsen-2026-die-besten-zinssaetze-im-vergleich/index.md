@@ -158,6 +158,28 @@ Bei mehreren Konten hilft eine kleine Liste deiner Freibeträge. Zwei reine Nett
 3. **Zugriff testen.** Wie änderst du ein Limit? Wie erreichst du die Bank ohne Handy? Gerade für Notfälle zählt das.
 4. **Termin setzen.** Notiere das Ende der Aktion im Kalender. Entscheide dann neu, statt nur wegen eines Lockzinses zu wechseln.
 
+## Häufige Fragen
+
+### Wie schnell komme ich an mein Geld auf dem Tagesgeldkonto?
+
+Du überweist das Guthaben erst auf dein Girokonto. Das dauert je nach Bank meist einen Bankarbeitstag. Für sofort fällige Rechnungen gehört daher ein kleiner Puffer direkt aufs Girokonto.
+
+### Was passiert nach dem Ende des Aktionszinses?
+
+Danach gilt automatisch der normale Zins für Bestandskunden. Der liegt oft deutlich tiefer als der Lockzins. Notiere dir das Enddatum im Kalender und prüfe dann in Ruhe neu.
+
+### Wie sicher ist mein Geld beim Tagesgeld?
+
+Innerhalb der EU gilt die gesetzliche Sicherung in der Regel bis 100.000 € je Person und Bank. Mehrere Marken derselben Bank teilen sich diese Grenze. Prüfe deshalb vorab stets den Einlegerbogen.
+
+### Wann lohnt ein Wechsel zu einer anderen Bank?
+
+Rechne den Zinsunterschied immer in Euro für dein echtes Guthaben um. Bei kleinen Summen bringt ein halber Prozentpunkt oft nur wenige Euro im Jahr. Bei größeren Reserven lohnt der Vergleich schneller.
+
+### Muss ich auf Tagesgeldzinsen Steuern zahlen?
+
+Zinsen zählen zu den Kapitalerträgen. Mit einem passenden Freistellungsauftrag bei deiner Bank nutzt du deinen persönlichen Freibetrag direkt. Prüfe deine Verteilung, wenn du mehrere Konten führst.
+
 **Falls du ein Angebot prüfen möchtest:** Beim [Tagesgeldangebot der C24 Bank (Affiliate-Link)](/go/tagesgeld/) gelten die unmittelbar vor Abschluss ausgewiesenen Konditionen.
 
 Das Angebot steht hier nicht stellvertretend für den Markt. Rechne mindestens eine Alternative mit demselben Betrag und Zeitraum durch.

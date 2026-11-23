@@ -204,7 +204,7 @@ Rechne das erste und zweite Jahr getrennt. Ein günstiges Bonusjahr kann danach 
 
 ## Was ein Wechsel realistisch bringen kann
 
-Rechenbeispiel ohne Marktversprechen: Liegen zwischen altem und neuem Tarif 1,8 Cent pro kWh, sind das bei 20.000 kWh rechnerisch 360 € im Jahr. Das ist nur ein Durchschnitt, kein persönliches Versprechen.
+Rechenbeispiel ohne Marktversprechen: Liegen zwischen altem und neuem Tarif 1,8 Cent pro kWh, sind das bei 20.000 kWh rechnerisch 360 € im Jahr. Das ist nur ein Rechenbeispiel, kein persönliches Versprechen.
 
 Deine Ersparnis berechnest du so:
 

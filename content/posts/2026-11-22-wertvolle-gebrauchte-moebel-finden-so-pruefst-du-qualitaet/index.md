@@ -10,7 +10,7 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Gebrauchte Möbel", "Secondhand Möbel", "Möbel aufarbeiten", "Wertvolle Gebrauchte Möbel finden", "Wertvolle", "Gebrauchte", "Qualität"]
+keywords: ["Gebrauchte Möbel", "Secondhand Möbel", "Möbel aufarbeiten", "Wertvolle Gebrauchte Möbel finden", "Gebrauchte"]
 pin_title: "Gebrauchte Möbel: Woran erkennst du gute Qualität?"
 pin_description: "*Werbung | Prüfe bei gebrauchten Möbeln Verbindungen, Maße und Oberfläche. Rechne Transport und Reparatur in den Preis ein, bevor du ein Angebot annimmst. Miss Türen und Treppenhaus vor der Abholung aus. Ein günstiger Schrank wird teuer, wenn für den Transport überraschend ein anderer Wagen gemietet werden muss."
 ai_generated: true

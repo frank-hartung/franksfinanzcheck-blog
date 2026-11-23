@@ -1,16 +1,16 @@
 {
   "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
   "titel": "DSL-Tarif prüfen: Effektivpreis statt Lockpreis",
-  "erzeugt": "2026-11-22 12:49 UTC",
+  "erzeugt": "2026-11-23 15:17 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "YMYL",
-    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
-    "alter_tage": 40,
+    "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
+    "alter_tage": 41,
     "intervall": 45,
     "frist": "2026-11-27",
-    "restlaufzeit": 5
+    "restlaufzeit": 4
   },
   "geo": {
     "punkte": 6,
@@ -26,12 +26,24 @@
       "faktencheck": true
     }
   },
-  "treffer": [],
-  "befunde": [],
-  "fehler": [
-    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammern/BK_Start.html \"Beschlusskammern\") \n4.   **Telekom­munikation**\n5.   [UntermenuOeffnen](javascript:void(0))[Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html \"Breitband\")[Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html \"Kupfer Glas Migration, Glasfaserausbau\")[Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html \"Frequenzen\")[Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html \"Nummerierung\")[Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html \"Unternehmenspflichten\")[Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html \"Technik\")[Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicher",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
   ],
+  "befunde": [],
+  "fehler": [],
   "fassung_sha256": "120eeede45b3376d20c63aab1e3df056207f1287dabb70f07a6620409c61f461",
   "text_sha256": "bbd0314bbbfab41f96ca9adc3cfef6b36ca7e51251dfe3a12cbc13d5e33fd163",
-  "fachpruefung": "übersprungen (keine Fundstellen)"
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 3 Befund(e) ohne belegbaren Textanker verworfen"
 }

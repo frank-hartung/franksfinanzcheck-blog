@@ -93,6 +93,51 @@ class TitelObergrenzeTest(unittest.TestCase):
                              "Der Parser ist die letzte Stelle vor dem Frontmatter")
 
 
+class GedankenstrichAnhaengselTest(unittest.TestCase):
+    """23.11.2026: fünf Live-Titel endeten auf „… – Einzelwort".
+
+    Die Titel lagen UNTER 60 Zeichen – die Längenregel hat sie nie
+    gesehen. Der Torso entsteht, weil an einen fertigen Kopf ein Keyword
+    als Einzelwort gehängt wird. Die SSOT-Kürzung (`titel_kuerzen` wie
+    `safe_title_cut`) schneidet ihn ab, das Gate `check_titles.py` (R6)
+    meldet ihn unabhängig davon.
+    """
+
+    TORSOS = {
+        "Heizkosten senken: Welche Maßnahmen passen zu – Heizung":
+            "Heizkosten senken: Welche Maßnahmen passen zu",
+        "Standby-Verbrauch messen: Was kostet – Stromfresser":
+            "Standby-Verbrauch messen: Was kostet",
+        "DSL Hacks: Was passt zu deiner Wohnung? – Schnelles":
+            "DSL Hacks: Was passt zu deiner Wohnung?",
+        "Smart Home: Spart die Automatisierung mehr Strom – Smarte":
+            "Smart Home: Spart die Automatisierung mehr Strom",
+        "Router Standort: So findest du einen guten Platz – WLAN":
+            "Router Standort: So findest du einen guten Platz",
+    }
+
+    def test_ssot_schneidet_das_einzelwort_ab(self):
+        for torso, kopf in self.TORSOS.items():
+            self.assertEqual(kopf, titel_kuerzen(torso))
+            self.assertEqual(kopf, post_utils.safe_title_cut(torso))
+
+    def test_erlaubter_untertitel_bleibt(self):
+        for titel in ("Stromfresser finden: So senkst du – auch im Winter",
+                      "Wärmepumpe vs. Gasheizung 2026 – so entscheidest du richtig",
+                      "WLAN – Technik"):
+            self.assertEqual(titel, titel_kuerzen(titel))
+            self.assertEqual(titel, post_utils.safe_title_cut(titel))
+
+    def test_r6_ist_scharf_und_heilbar(self):
+        import check_titles
+        for torso in self.TORSOS:
+            regeln = [r for r, _ in check_titles.check_title(torso)]
+            self.assertIn("R6", regeln, f"R6 übersieht {torso!r}")
+            geheilt = check_titles.fix_title(torso)
+            self.assertEqual([], check_titles.check_title(geheilt))
+            self.assertEqual(geheilt, check_titles.fix_title(geheilt))  # idempotent
+
+
 class SiegelVerweigertUeberlangenTitelTest(unittest.TestCase):
     """Ein Befund, der nicht heilbar ist, darf nicht ins Siegel (#1069)."""
 

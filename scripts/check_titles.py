@@ -16,6 +16,12 @@ Regeln (deterministisch):
       ("dieses Jahr", "dieses Monat", "im Jahr 20XX"); --fix entfernt
       sie, wenn der Rest-Titel noch aussagekräftig ist (>= 20 Zeichen)
   R4  Doppelte Leerzeichen, " :", ": " (ohne Sinn) → FAIL; --fix korrigiert
+  R6  Einzelwort nach dem letzten Gedankenstrich („… passen zu – Heizung")
+      → FAIL. Das ist kein Untertitel, sondern ein angehängtes Keyword:
+      der Satz endet nicht, das Cover bricht danach unschön. Untertitel
+      nach „: " oder „ – " bleibt erlaubt, solange er aus mehr als einem
+      Wort besteht. --fix entfernt das Anhängsel, wenn der Kopf ≥ 20
+      Zeichen trägt.
 
 Nutzung:
   python3 scripts/check_titles.py            # nur prüfen (Exit 0/1)
@@ -278,7 +284,55 @@ def check_title(title):
     befund = r5_truncation(t)
     if befund:
         issues.append(("R5", befund))
+
+    # R6: Gedankenstrich-Anhängsel (23.11.2026).
+    befund6 = r6_dash_einzelwort(t)
+    if befund6:
+        issues.append(("R6", befund6))
     return issues
+
+
+def r6_dash_einzelwort(title):
+    """Meldet ein Einzelwort, das nach dem letzten Gedankenstrich hängt.
+
+    Fundlage 23.11.2026 (fünf Live-Titel, alle unter 60 Zeichen, deshalb von
+    R5 nicht erfasst, weil der Satz davor grammatisch schließt):
+
+        Heizkosten senken: Welche Maßnahmen passen zu – Heizung
+        Standby-Verbrauch messen: Was kostet – Stromfresser
+        DSL Hacks: Was passt zu deiner Wohnung? – Schnelles
+        Smart Home: Spart die Automatisierung mehr Strom – Smarte
+        Router Standort: So findest du einen guten Platz – WLAN
+
+    Gemeinsamkeit: Nach „ – " steht genau ein Wort, das den Satz nicht
+    weiterführt. Ein Untertitel nach Gedankenstrich ist erlaubt („… – so
+    geht's", „… – auch im Winter"), ein Einzelwort ist immer ein Rest.
+    """
+    m = re.search(r"\s[–—]\s+(\S+)$", title)
+    if not m:
+        return None
+    # Kopf unter 20 Zeichen („WLAN – Technik"): dort trennt der Strich einen
+    # Namen, es gibt keinen Satz, der weiterlaufen müsste. Dieselbe Grenze
+    # wie in post_utils.ohne_dash_einzelwort – Gate und Heilung urteilen
+    # gleich, sonst wäre der Befund nicht reparierbar.
+    if len(title[:m.start()].rstrip(" :-–—")) < 20:
+        return None
+    return (f"Einzelwort nach Gedankenstrich: „… – {m.group(1)}“ – "
+            f"kein Untertitel, sondern ein abgeschnittenes Keyword "
+            f"(Untertitel braucht mindestens zwei Wörter)")
+
+
+def heal_r6(title):
+    """Entfernt das Einzelwort nach dem letzten Gedankenstrich (Kopf ≥ 20).
+
+    Wiederverwendet die SSOT aus post_utils, damit Gate und Kürzung
+    dieselbe Form heilen (keine zweite Wahrheit).
+    """
+    try:
+        from post_utils import ohne_dash_einzelwort
+    except Exception:                                    # pragma: no cover
+        return title
+    return ohne_dash_einzelwort(title)
 
 
 def r5_truncation(title):
@@ -372,12 +426,12 @@ def heal_r5(title):
 
 
 def fix_title(title):
-    """Deterministische Korrekturen R1–R5 (R5 nur die heilbaren Klassen).
+    """Deterministische Korrekturen R1–R6 (R5/R6 nur die heilbaren Klassen).
 
     R1 (Doppelpunkt-Konvention) wird über pinterest_seo_healer.ensure_colon_title
     geheilt, falls importierbar – sonst bleiben R2–R4.
     """
-    t = heal_r5(title.strip())
+    t = heal_r6(heal_r5(title.strip()))
     # Ellipsis-Reste (Meta-Optimizer-Kürzung) entfernen
     t = re.sub(r"[…\.]{1,}$", "", t).rstrip()
     for pat, repl in COMPOUND_FIXES:
@@ -539,6 +593,37 @@ def run_selftest():
         if check_title(geheilt_r1) or ",:" in geheilt_r1 or ": –" in geheilt_r1:
             fehler.append(f"R1-Doppelpunkt-Heilung erzeugt Artefakt bei {roh!r}: {geheilt_r1!r}")
 
+    # 6. R6 (23.11.2026): Das Gedankenstrich-Anhängsel ist der Fund, der fünf
+    #    Live-Titel über Wochen getragen hat. Die fünf Originale müssen
+    #    auffallen, die Heilung muss sie schließen, gesunde Untertitel
+    #    (mehr als ein Wort) dürfen nicht darunter leiden.
+    torsos = [
+        "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
+        "Standby-Verbrauch messen: Was kostet – Stromfresser",
+        "DSL Hacks: Was passt zu deiner Wohnung? – Schnelles",
+        "Smart Home: Spart die Automatisierung mehr Strom – Smarte",
+        "Router Standort: So findest du einen guten Platz – WLAN",
+    ]
+    for torso in torsos:
+        if not any(r == "R6" for r, _ in check_title(torso)):
+            fehler.append(f"R6 übersieht das Gedankenstrich-Anhängsel: {torso!r}")
+        geheilt_r6 = fix_title(torso)
+        if check_title(geheilt_r6):
+            fehler.append(f"R6-Heilung hinterlässt Verstoß: {geheilt_r6!r}")
+        if len(geheilt_r6) < 20:
+            fehler.append(f"R6-Heilung entkernt den Titel: {geheilt_r6!r}")
+        if fix_title(geheilt_r6) != geheilt_r6:
+            fehler.append(f"R6-Heilung ist nicht idempotent: {geheilt_r6!r}")
+    for gesund in (
+        "Stromfresser finden: So senkst du – auch im Winter",
+        "Wärmepumpe vs. Gasheizung 2026 – so entscheidest du richtig",
+        "WLAN – Technik",            # Kopf < 20: Gedankenstrich gehört zum Namen
+    ):
+        if any(r == "R6" for r, _ in check_title(gesund)):
+            fehler.append(f"R6 blockiert einen erlaubten Untertitel: {gesund!r}")
+    if fix_title("WLAN – Technik") != "WLAN – Technik":
+        fehler.append("R6-Heilung schneidet einen kurzen Namen ab")
+
     if fehler:
         print("🛑 CHECK-TITLES-SELBSTTEST FEHLGESCHLAGEN:")
         for f in fehler:
@@ -546,7 +631,7 @@ def run_selftest():
         return 2
     print(f"✅ Titel-Selbsttest grün: {len(abgebrochen)} echte Abbrüche erkannt, "
           f"{len(vollstaendig)} vollständige Titel durchgelassen, "
-          f"Heilung deterministisch + idempotent, R1–R4 scharf.")
+          f"Heilung deterministisch + idempotent, R1–R6 scharf.")
     return 0
 
 
@@ -588,7 +673,8 @@ def main():
                 fixed += 1
                 p["title"] = new_title
                 issues = [i for i in issues if i[0] != "R2"
-                          and i[0] != "R3" and i[0] != "R4"]
+                          and i[0] != "R3" and i[0] != "R4"
+                          and i[0] != "R6"]
                 issues = check_title(new_title)
         for rule, msg in issues:
             all_issues.append({"file": p["file"], "title": p["title"][:60],

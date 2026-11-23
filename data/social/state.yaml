@@ -1613,6 +1613,27 @@ history:
     #Wohngebaeude #Versicherung #Photovoltaik #Energiekosten'
   ref: '117662445287551543'
   ai: false
+- posted_at: '2026-11-23T17:08:58.176495+01:00'
+  channel: mastodon
+  slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
+  title: 'September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117666620863784302
+  ok: true
+  text: '20 % – Buche deinen Mietwagen 3‑4 Wochen vor Reisebeginn und nutze Vergleichsportale,
+    um die günstigsten Angebote zu finden.
+
+
+    Im September senken viele Anbieter ihre Preise um 20 %–30 %, weil die Nachfrage
+    niedriger ist.
+
+
+    https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Mietwagen #Reise #GuenstigAutoMieten #SeptemberRoadtrip'
+  ref: '117666620863784302'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1638,4 +1659,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-22T23:27:13.407597+01:00'
+updated_at: '2026-11-23T17:09:07.667982+01:00'
