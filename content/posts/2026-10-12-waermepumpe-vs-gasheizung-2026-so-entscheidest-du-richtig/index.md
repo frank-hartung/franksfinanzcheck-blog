@@ -243,7 +243,7 @@ Wenn du Anlage und Tarif klug abstimmst, senkst du deine Wohnkosten auf Dauer.
 
 **Für deinen nächsten Check:** Teste die Entscheidung mit einem höheren Strompreis und einem höheren Gaspreis getrennt. Eine Heizung sollte nicht nur bei einer einzigen angenommenen Preiskombination passen.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Mehrwegflaschen Pfand](../../posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
 
 ## Häufige Fragen
 
