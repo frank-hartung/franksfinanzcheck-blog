@@ -216,8 +216,15 @@ class LiveBestandTests(unittest.TestCase):
             (ROOT / "data" / "faktenfrische_befunde_state.json")
             .read_text(encoding="utf-8"))
         stichtag = dt.date.fromisoformat(str(zustand.get("stichtag") or TAG))
-        befunde = ledger.befunde_mit_status(stichtag=stichtag)
-        self.assertEqual(zustand["offen"], len(befunde))
+        befunde = ledger.befunde_mit_status(stichtag=stichtag,
+                                            entfernte_ausblenden=False)
+        # Bewusst entfernte Beiträge (data/faktenfrische_entfernt.yaml) bleiben
+        # im Ledger, zählen aber nicht als offene Arbeit: Ohne Text ist der
+        # Befund nicht mehr entscheidbar. Die Akte weist sie gesondert aus.
+        entfernt = akte.entfernte_slugs()
+        erwartet = [b for b in befunde if b["slug"] not in entfernt]
+        self.assertEqual(zustand["offen"], len(erwartet))
+        self.assertEqual(zustand.get("entfallen", 0), len(befunde) - len(erwartet))
         self.assertEqual(zustand["nicht_entscheidbar"], 0)
         # Frische: Der Stichtag der Akte liegt nicht vor dem jüngsten Beleg.
         juengster = max((str(b.get("zuletzt_gesehen") or "")[:10] for b in befunde),

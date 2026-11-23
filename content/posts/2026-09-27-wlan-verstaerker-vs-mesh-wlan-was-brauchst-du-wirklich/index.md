@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "DSL Hacks: Was passt zu deiner Wohnung? – Schnelles"
+title: "DSL Hacks: Was brauchst du wirklich?"
 description: "DSL Hacks: Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder…"
 date: 2026-09-28T01:05:48Z
 draft: false
@@ -22,8 +22,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 0f7749c7b40eaf1b13d8e5919e2e4de9d9e285d8114e16844dde06545494a4e8
-    geprueft_am: 2026-11-21
+    sha256: 38ce2d958f8cd2ab2e9662c570406e9e4f2bad85d6a896bf900372108870147f
+    geprueft_am: 2026-11-23
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"

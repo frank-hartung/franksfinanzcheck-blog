@@ -46,12 +46,9 @@ quellen:
     url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
     herausgeber: "Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin)"
     datum: "2026-09-23"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-23
 kurzantwort: "Gesetzlich geschützt sind Bankguthaben bis 100.000 Euro je Einleger und je Bank. Entscheidend ist nicht der Markenname, sondern das Institut, das die Einlage führt: Zwei Konten bei derselben Bank teilen sich den Schutzbetrag. Anlagen in Aktien, Fonds oder Anleihen fallen nicht unter die Einlagensicherung."
 ---
-
-
-
 
 Die Einlagensicherung spielt bei der Unterschrift kaum eine Rolle. Erst wenn eine Bank in Schwierigkeiten gerät, rückt sie ins Rampenlicht. Steht sie dann in den Nachrichten, ist es zu spät für die einfache Antwort.
 

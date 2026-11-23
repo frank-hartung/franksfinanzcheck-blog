@@ -5,7 +5,7 @@ date: 2026-11-22T11:51:18Z
 draft: true
 reserve_blocked: "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f"
 reserve_blocked_at: 2026-11-22T16:52:04Z
-tags: ["Stromkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

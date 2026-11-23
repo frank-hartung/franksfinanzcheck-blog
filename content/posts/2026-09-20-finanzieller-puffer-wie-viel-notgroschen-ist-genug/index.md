@@ -44,9 +44,8 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: "2026-10-13"
+faktencheck: 2026-11-23
 ---
-
 
 Finanzieller Puffer im Check: Wie lange könntest du deine laufenden Kosten ohne Gehalt bezahlen? Als Rechenbeispiel betrachten wir eine Rücklage für drei bis sechs Monate. Das ist ein Vergleichsrahmen, keine Vorgabe für jeden Haushalt.
 

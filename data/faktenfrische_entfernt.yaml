@@ -1,0 +1,13 @@
+# Beiträge, die bewusst aus dem Bestand entfernt wurden (Entscheidung im Repo).
+#
+# Befunde dieser Seiten bleiben im Anfügeprotokoll des Ledgers – sie werden
+# nicht gelöscht und nicht umgeschrieben. Sie zählen aber nicht mehr als offene
+# Arbeit und nicht als „nicht entscheidbar": Es gibt keinen Text mehr, an dem
+# sich etwas prüfen ließe. Jeder Eintrag nennt Datum, Grund und die Entscheidung.
+entfernt:
+  - slug: "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check"
+    am: "2026-11-23"
+    grund: >-
+      Nicht veröffentlichter Entwurf ohne eigene Rolle in der Kannibalisierungs-Map;
+      der einzige Inlink in einem Live-Beitrag zeigte auf einen 404.
+    entscheidung: "ENTSCHEIDUNG-WLAN-MAP-2026-11-23.md, Abschnitt 4"

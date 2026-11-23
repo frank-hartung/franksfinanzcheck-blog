@@ -8,8 +8,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Keine Prüfsummen im Dokument.** Maßgeblich ist, welche Befunde offen sind und ob die beanstandeten Werte heute noch im Text stehen; die Fassungsbindung führt der Ledger (`geprueft_fassung`). So altert die Vorlage nicht an fremden Commits.
 
-**156 offene Live-Befunde auf 45 Artikeln.** Für **75** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **81** Befunde haben keine frühere aktive Entscheidung.
+**165 offene Live-Befunde auf 49 Artikeln.** Für **78** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **87** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -54,6 +54,12 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `f108d554ff8861370b64` · `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung.
 - `009906e47bcc8265b36a` · `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` · Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit
 - `e0293a43782c64955b27` · `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` · Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen
+- `3eab428a91b1b16b7df8` · `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Pufferhöhe die zentrale Rechengröße darstellt.
+- `7da9383cbc6a45e1a3ac` · `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die Validität der Kalkulationsbasis zu stützen.
+- `da7852bcca291061c39b` · `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · Die Modellrechnung für Fixkosten berücksichtigt nicht die spezifische Teuerung bei Energie (+12,7 %), was bei der Kalkulation von Strom und Gas zu einer Unterdeckung führen kann.
+- `68afba3e6a16a364ce45` · `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'.
+- `dc5ff05c5dda79d01373` · `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet.
+- `5c096f87730532352820` · `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
@@ -962,6 +968,46 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Heute in Zeile 33: 2,8 % – **ohne** Kennzeichnung
 
+## `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
+
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `3f0a88ede9d44ee910cb` | luecke | 2026-11-23 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anb… |
+| `51e259fd2d8582e774f7` | luecke | 2026-11-23 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauche… |
+| `55f8eeedc587cf0895ee` | luecke | 2026-11-23 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energi… |
+
+### `3f0a88ede9d44ee910cb`
+
+**Befund:** Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft & ergänzt (Welle 1): Der Verbraucherservice Energie der Bundesnetzagentur für Anfragen und Beschwerden ist im Artikel explizit genannt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `51e259fd2d8582e774f7`
+
+**Befund:** Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft (Welle 1): Die kostenfreie Schlichtungsstelle Energie ist im heutigen Text direkt verlinkt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `55f8eeedc587cf0895ee`
+
+**Befund:** Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft (Welle 1): Behördliche Markttransparenzquellen der Bundesnetzagentur (Preisübersichten für Haushaltskunden und SMARD) sind direkt verlinkt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster`
 
 - Offene Live-Befunde: **2**
@@ -1121,6 +1167,82 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
+## `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug`
+
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `3eab428a91b1b16b7df8` | luecke | **neu** | nicht mehr im Text: 2,8 % | Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Puff… |
+| `7da9383cbc6a45e1a3ac` | praezision | **neu** | nicht mehr im Text: 0,4 % · 320 € in Zeile 73 ohne Kennzeichnung | Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die V… |
+| `da7852bcca291061c39b` | praezision | **neu** | nicht mehr im Text: 12,7 % | Die Modellrechnung für Fixkosten berücksichtigt nicht die spezifische Teuerung bei Energie (+12,7 %), was bei der Kal… |
+
+### `3eab428a91b1b16b7df8`
+
+**Befund:** Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Pufferhöhe die zentrale Rechengröße darstellt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Im heutigen Text nicht mehr vorhanden: 2,8 %
+
+### `7da9383cbc6a45e1a3ac`
+
+**Befund:** Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die Validität der Kalkulationsbasis zu stützen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Im heutigen Text nicht mehr vorhanden: 0,4 %
+- Heute in Zeile 73: 320 € – **ohne** Kennzeichnung
+
+### `da7852bcca291061c39b`
+
+**Befund:** Die Modellrechnung für Fixkosten berücksichtigt nicht die spezifische Teuerung bei Energie (+12,7 %), was bei der Kalkulation von Strom und Gas zu einer Unterdeckung führen kann.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Im heutigen Text nicht mehr vorhanden: 12,7 %
+
+## `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet`
+
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `68afba3e6a16a364ce45` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wi… |
+| `dc5ff05c5dda79d01373` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie auto… |
+
+### `68afba3e6a16a364ce45`
+
+**Befund:** Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `dc5ff05c5dda79d01373`
+
+**Befund:** Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist`
+
+- Offene Live-Befunde: **1**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `5c096f87730532352820` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. |
+
+### `5c096f87730532352820`
+
+**Befund:** Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp`
 
 - Offene Live-Befunde: **5**
@@ -1268,7 +1390,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 |---|---|---|---|---|
 | `25d6b9a720f981e8e9df` | praezision | **neu** | nicht mehr im Text: 0,4 % | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steige… |
 | `3693b612533c24dcd1ea` | luecke | **neu** | nicht mehr im Text: 12,2 % | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +1… |
-| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 105 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
+| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 107 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
 
 ### `25d6b9a720f981e8e9df`
 
@@ -1292,7 +1414,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 105: 2,8 % – **ohne** Kennzeichnung
+- Heute in Zeile 107: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 
@@ -2074,6 +2196,9 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7017065ee7c74c7ae45
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1e06a96f6f71e104ce0b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 81c6a707139046b83ccd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8cc00288af8a1f2b02d8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f0a88ede9d44ee910cb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 51e259fd2d8582e774f7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 55f8eeedc587cf0895ee --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5a1bf10697f58e5fe14a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -2086,6 +2211,12 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9d67a5e6bd11212c7c1
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a54abc1cad73d20fb689 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a7d1cf6485921e117919 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a7f69a854430d62a4a3e --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3eab428a91b1b16b7df8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7da9383cbc6a45e1a3ac --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden da7852bcca291061c39b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce45 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33278b9e7942ebfdbbac --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6ad7358a9afcfef3babb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7c375a3e1a9bfab1468c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
