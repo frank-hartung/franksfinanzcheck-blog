@@ -65,7 +65,7 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 
 ![Merkkarte: Kernaussagen zu Finanzielle Freiheit: Wie du eine Sparroutine aufbaust](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „[Finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/): Wie du eine Sparroutine aufbaust“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Finanzielle Freiheit: Wie du eine Sparroutine aufbaust“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?
