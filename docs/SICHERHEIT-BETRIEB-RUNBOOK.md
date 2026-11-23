@@ -1566,10 +1566,14 @@ Konsolidierte Betreiber-Festlegung für die verbliebenen externen Einrichtungssc
 | 4 | KV Offsite-Backup E8 → E1–E6 (`npm run backup:einrichten`, #1283/#1284) | `CLOUDFLARE_API_TOKEN` + `KV_BACKUP_PUBLIC_KEY` (age) + `KV_BACKUP_R2_*` → `KV-Offsite-Backup` grün |
 | 5 | **Newsletter-Versand Go/No-Go** | **NO-GO** solange `#1235` oder `#1283/#1284` rot; sofort **GO** nach erfolgreichem Abschluss von Schritt 3 + 4 |
 
-### H3 · Block B — Rechtsfristen (fällig 29.11.2026) & API-Zugänge
+### H3 · Block B — Rechtsfristen (fällig 29.11.2026) & 0-€-API-Zugänge (Regel T1)
 
 - **Rechtsfristen (`#1232` `dpf-zertifizierung-pruefen`, `#1233` `affiliate-partnerbedingungen`, `#1234` `rechtslage-screening`):** Niemals nur das Issue manuell schließen — stets den Workflow `Fristen-Check (Recht)` auf `main` mit `erledigt=<id>` ausführen, damit der Fristenzustand im Register sauber fortgeschrieben wird.
-- **KI- & Mess-Zugänge:** Gemini (`#1230`) und Groq (`#1191`) auf Pay-as-you-go mit hartem Budget-Cap (**15 €/Monat** gesamt) umstellen; kostenlosen `PSI_API_KEY` als Secret hinterlegen (`#1152`); `PINTEREST_ACCESS_TOKEN` erneuern.
+- **KI-Betrieb konsequent bei 0 € (Regel T1, `data/ki_transportweg.yaml`):** Kein Pay-as-you-go und keine Kreditkarte nötig. Alle KI-Workflows (`content-engine-v2.yml`, `content-reserve.yml`, `faktenfrische.yml`, `ki-redaktion.yml`, `endredaktion.yml`, `poppy-werkbank.yml`, `redaktions-standard-bestand.yml`, `saisonaler-hero-refresh.yml`) und Python-Rufer nutzen durchgängig die **4-stufige Gratis-Kette** (`GROQ_API_KEY` → `NVIDIA_API_KEY` über `build.nvidia.com` ohne Karte → `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` Workers AI → `GEMINI_API_KEY` Free-Tier).
+  - **Empfehlung bei Free-Tier-Spitzen (`#1191`):** Kostenlosen `NVIDIA_API_KEY` + Cloudflare Workers AI als GitHub-Secrets ergänzen und bei Bedarf Artikelzahl je Lauf drosseln statt auf bezahlte Tarife umzustellen.
+  - **Agent Reach & Claude:** Agent Reach (`scripts/agent_reach_research.py`) arbeitet rein lesend für **0 € ohne LLM-Key** (RSS/Jina/yt-dlp/gh). Eine automatische Claude-API-Anbindung existiert bewusst nicht (Regel T1 / keine kostenlose Anthropic-API); manuelle Auswertung erzeugter Recherche-Briefs (`data/research/`) in `claude.ai` (Free) bleibt jederzeit möglich.
+  - **Einordnung `#1230` (Content-Reserve):** War kein API-Limit, sondern ein Code-/Artefakt-Fehler (`frontmatter_wache.py` Scanner-Kürzung + doppelter Header in `data/faktenfrische_befunde_1072.yaml`), im Repo behoben und per Regressionstest gesichert.
+- **Weitere kostenlose Zugänge:** Kostenlosen `PSI_API_KEY` als Secret hinterlegen (`#1152`); `PINTEREST_ACCESS_TOKEN` erneuern.
 
 ### H4 · Bewusste Scope-Cuts (zurückgestellt bis Q1/2027)
 

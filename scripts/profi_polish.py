@@ -185,13 +185,13 @@ def ai_polish(a):
     if stamm and stamm in cache:
         return cache[stamm]
 
-    if not (llm_client.available("gemini") or llm_client.available("groq")):
+    if not llm_client.available_providers():
         print("  ⚠️ Keine API-Keys – kein Polish möglich.")
         return None
 
     prompt = build_polish_prompt(a)
 
-    for provider in ("gemini", "groq"):
+    for provider in ("gemini", "groq", "nvidia", "cloudflare"):
         if not llm_client.available(provider):
             continue
         try:

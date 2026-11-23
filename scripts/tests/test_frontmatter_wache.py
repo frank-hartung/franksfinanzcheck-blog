@@ -572,6 +572,22 @@ class VerschachtelterDoppelterSchluesselTest(unittest.TestCase):
         self.assertEqual(1, len(doppelt), "ein Duplikat, nicht zwei Meldungen")
         self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
 
+    def test_scanner_kuerzt_normale_schluessel_nicht_ab(self) -> None:
+        """#1230-Regression: Ein verirrtes `rest_zeile[2:]` im else-Zweig
+        kappte `title:` zu `tle:` und `date:` zu `te:` – F5 und F4 fielen
+        im Scanner still aus und ließen `frontmatter_wache.py --selftest`
+        in `content-reserve.yml` rot laufen.
+        """
+        fm_yes = 'title: yes\ndate: 2026-10-26\ndraft: false\n'
+        befunde_yes = w.scanne_yaml(fm_yes, 2, "probe.md")
+        self.assertIn("F5", [b["regel"] for b in befunde_yes],
+                      "Scanner muss `title: yes` ohne PyYAML als F5 erkennen")
+
+        fm_date = 'title: "Sauber"\ndate: 2026/10/26\ndraft: false\n'
+        befunde_date = w.scanne_yaml(fm_date, 2, "probe.md")
+        self.assertIn("F4", [b["regel"] for b in befunde_date],
+                      "Scanner muss unzulässiges `date` ohne PyYAML als F4 erkennen")
+
 
 if __name__ == "__main__":
     unittest.main()

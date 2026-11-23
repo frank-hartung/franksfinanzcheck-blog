@@ -148,8 +148,8 @@ def generate_description(a):
 
 
 def _llm_meta(prompt: str, max_tokens: int) -> str | None:
-    """Gemini zuerst, Groq als Fallback – alle Transporte liegen im Client."""
-    for provider in ("gemini", "groq"):
+    """Gemini zuerst, danach Groq/NVIDIA/Cloudflare – alle Transporte im Client."""
+    for provider in ("gemini", "groq", "nvidia", "cloudflare"):
         if not llm_client.available(provider):
             continue
         try:
@@ -178,7 +178,7 @@ def ai_description(a):
     if key_id in cache:
         return cache[key_id]
 
-    if not (llm_client.available("gemini") or llm_client.available("groq")):
+    if not llm_client.available_providers():
         return None
 
     title = a["title"][:80]
@@ -214,7 +214,7 @@ def ai_title(a):
     if key_id in cache:
         return cache[key_id]
 
-    if not (llm_client.available("gemini") or llm_client.available("groq")):
+    if not llm_client.available_providers():
         return None
 
     title = a["title"][:80]

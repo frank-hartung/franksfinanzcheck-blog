@@ -593,6 +593,26 @@ def call_groq(prompt):
     )
 
 
+def call_nvidia(prompt):
+    if not llm_client.available("nvidia"):
+        return None
+    return llm_client.chat(
+        "nvidia", prompt=prompt, system=SYSTEM_PROMPT,
+        temperature=0.85, max_tokens=6000, timeout=180,
+        raise_on_error=True,
+    )
+
+
+def call_cloudflare(prompt):
+    if not llm_client.available("cloudflare"):
+        return None
+    return llm_client.chat(
+        "cloudflare", prompt=prompt, system=SYSTEM_PROMPT,
+        temperature=0.85, max_tokens=6000, timeout=180,
+        raise_on_error=True,
+    )
+
+
 def call_gemini(prompt):
     if not llm_client.available("gemini"):
         return None
@@ -654,6 +674,8 @@ def demo_article(topic, angle):
 
 PROVIDERS = [
     ("Groq (Gratis-Key: console.groq.com)", call_groq),
+    ("NVIDIA NIM (Gratis-Key: build.nvidia.com)", call_nvidia),
+    ("Cloudflare Workers AI (Gratis-Kontingent)", call_cloudflare),
     ("Gemini (Gratis-Key: aistudio.google.com)", call_gemini),
 ]
 
@@ -1152,14 +1174,16 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
 
     raw, provider_name = generate_article_text(topic, angle, perspective=None, pin=pin, keywords=keywords, pillar=topic_entry.get("pillar"))
     if not raw:
-        has_key = bool(os.environ.get("GROQ_API_KEY") or os.environ.get("GEMINI_API_KEY"))
+        has_key = bool(llm_client.available_providers())
         if not has_key:
-            print("  ✗ KEIN API-KEY gefunden. So aktivierst du die Automatisierung:")
+            print("  ✗ KEIN API-KEY gefunden. So aktivierst du die Automatisierung (0 €):")
             print("    1) Gratis-Key holen (2 Min., ohne Zahlungsdaten):")
-            print("       Groq   → https://console.groq.com")
-            print("       Gemini → https://aistudio.google.com")
+            print("       Groq       → https://console.groq.com")
+            print("       NVIDIA NIM → https://build.nvidia.com")
+            print("       Cloudflare → Workers AI (CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID)")
+            print("       Gemini     → https://aistudio.google.com")
             print("    2) Im GitHub-Repo: Settings → Secrets and variables → Actions")
-            print("       → New repository secret → GROQ_API_KEY (oder GEMINI_API_KEY)")
+            print("       → New repository secret → GROQ_API_KEY / NVIDIA_API_KEY / CLOUDFLARE_API_TOKEN / GEMINI_API_KEY")
             print("    Alternativ lokal testen: DEMO_MODE=1 python3 scripts/generate_drafts.py")
         else:
             print("  ✗ Provider haben geantwortet, aber mit Fehlern – Logs oben prüfen.")

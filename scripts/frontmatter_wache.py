@@ -403,7 +403,6 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             rest_zeile = ""
         else:
             key_einzug = einzug
-            rest_zeile = rest_zeile[2:]
 
         # Offene Bereiche schließen: Eine Zeile gleicher oder geringerer
         # Einrückung ist ein Geschwister, kein Kind. Ein `- ` beginnt einen
@@ -426,7 +425,6 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
         key = treffer.group("key").strip()
         wert = treffer.group("rest")
         spalte = key_einzug + len(treffer.group("key")) + 2
-        spalte = einzug + len(treffer.group("key")) + 2
 
         if not wert.strip():
             # Block-Öffner (`eltern:`): Duplikat zählt im ELTERN-Bereich,
