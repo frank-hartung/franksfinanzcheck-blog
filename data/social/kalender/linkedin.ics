@@ -7,10 +7,10 @@ X-WR-CALNAME:FranksFinanzcheck – LinkedIn
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:linkedin:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alt
- en-rahmen:nutzen:2026-11-23@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261123T064500Z
-DTEND:20261123T070000Z
+ en-rahmen:nutzen:2026-11-24@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261124T064500Z
+DTEND:20261124T070000Z
 SUMMARY:LinkedIn: Fenster abdichten: So stoppst du Zugluft an alten Ra
  hmen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -22,10 +22,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brau
- chst-dein:nutzen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261124T064500Z
-DTEND:20261124T070000Z
+ chst-dein:nutzen:2026-11-25@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261125T064500Z
+DTEND:20261125T070000Z
 SUMMARY:LinkedIn: Streaming-Bandbreite: Wie viel brauchst du wirklich?
   (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -37,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wi
- ssen-musst:nutzen:2026-11-25@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261125T064500Z
-DTEND:20261125T070000Z
+ ssen-musst:nutzen:2026-11-26@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261126T064500Z
+DTEND:20261126T070000Z
 SUMMARY:LinkedIn: Geschenkkarte: Was du beim Kauf und Aufladen wissen 
  musst (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -52,10 +52,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
- parst:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261126T064500Z
-DTEND:20261126T070000Z
+ parst:nutzen:2026-11-27@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261127T064500Z
+DTEND:20261127T070000Z
 SUMMARY:LinkedIn: Secondhand-Kleidung kaufen: So prüfst du Stoff\, Näh
  te (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -67,10 +67,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
- asse-kaffee:nutzen:2026-11-27@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261127T064500Z
-DTEND:20261127T070000Z
+ asse-kaffee:nutzen:2026-11-30@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261130T064500Z
+DTEND:20261130T070000Z
 SUMMARY:LinkedIn: Kaffeemaschine: Was kostet eine Tasse wirklich? (nut
  zen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -82,10 +82,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
- -in-der-wohnung:nutzen:2026-11-30@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261130T064500Z
-DTEND:20261130T070000Z
+ -in-der-wohnung:nutzen:2026-12-01@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261201T064500Z
+DTEND:20261201T070000Z
 SUMMARY:LinkedIn: Mesh-WLAN nachrüsten: Wann lohnt sich die Investitio
  n? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -97,10 +97,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixk
- osten:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261201T064500Z
-DTEND:20261201T070000Z
+ osten:nutzen:2026-12-02@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261202T064500Z
+DTEND:20261202T070000Z
 SUMMARY:LinkedIn: Energieeffiziente Geräte: So sinken deine Fixkosten 
  (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -111,11 +111,11 @@ URL:https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ge
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-02@fra
+UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-03@fra
  nksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261202T064500Z
-DTEND:20261202T070000Z
+DTSTAMP:20261123T160909Z
+DTSTART:20261203T064500Z
+DTEND:20261203T070000Z
 SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
  vertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -126,10 +126,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-he
- izkosten:nutzen:2026-12-03@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261203T064500Z
-DTEND:20261203T070000Z
+ izkosten:nutzen:2026-12-04@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261204T064500Z
+DTEND:20261204T070000Z
 SUMMARY:LinkedIn: Gas-Anbieter wechseln: Strategien gegen hohe Heizkos
  ten (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -141,10 +141,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
- tzen:2026-12-04@franksfinanzcheck.de
-DTSTAMP:20261122T210637Z
-DTSTART:20261204T064500Z
-DTEND:20261204T070000Z
+ tzen:2026-12-07@franksfinanzcheck.de
+DTSTAMP:20261123T160909Z
+DTSTART:20261207T064500Z
+DTEND:20261207T070000Z
 SUMMARY:LinkedIn: Geld abheben im Ausland: Wo die Gebühren wirklich en
  tstehen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
