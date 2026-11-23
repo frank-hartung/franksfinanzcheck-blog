@@ -3967,7 +3967,7 @@
       "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
       "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
       "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
-      "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+      "zuletzt_gesehen": "2026-11-23 15:18 UTC"
     },
     {
       "typ": "praezision",
@@ -3978,7 +3978,7 @@
       "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
       "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
       "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
-      "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+      "zuletzt_gesehen": "2026-11-23 15:18 UTC"
     },
     {
       "typ": "praezision",
@@ -3989,7 +3989,7 @@
       "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
       "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
       "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
-      "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+      "zuletzt_gesehen": "2026-11-23 15:18 UTC"
     },
     {
       "typ": "luecke",
@@ -4090,7 +4090,7 @@
       "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
       "fassung_sha256": "a42c98f246b53bee50b96012deb1d31e52544395ba03c1577990c4469d724ae2",
       "text_sha256": "f7e828d26c9b52d013cf2d3e62e8375f7e109e0121fc0b35a24caa2f0038bf56",
-      "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+      "zuletzt_gesehen": "2026-11-23 15:18 UTC"
     },
     {
       "typ": "luecke",
@@ -4101,7 +4101,7 @@
       "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
       "fassung_sha256": "a42c98f246b53bee50b96012deb1d31e52544395ba03c1577990c4469d724ae2",
       "text_sha256": "f7e828d26c9b52d013cf2d3e62e8375f7e109e0121fc0b35a24caa2f0038bf56",
-      "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+      "zuletzt_gesehen": "2026-11-23 15:18 UTC"
     },
     {
       "typ": "luecke",
@@ -4142,7 +4142,7 @@
       "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
       "fassung_sha256": "311aca0b6ae3060326378781fbc121a2f9aee013736dd6da9d3cc16c44716bc1",
       "text_sha256": "ddbcc7b97ef519ab8f7749b5d80fa189738cfd63563ae781b8e60095331d8493",
-      "zuletzt_gesehen": "2026-11-23 15:17 UTC"
+      "zuletzt_gesehen": "2026-11-23 15:18 UTC"
     },
     {
       "typ": "luecke",
@@ -6361,9 +6361,9 @@
       "faellig": false,
       "frist": "2026-12-02",
       "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
@@ -6417,8 +6417,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
@@ -6428,8 +6428,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -6439,8 +6439,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
@@ -6450,8 +6450,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
@@ -6461,8 +6461,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
@@ -6483,8 +6483,8 @@
       "frist": "2026-12-05",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "strom-sparen",
@@ -6494,8 +6494,8 @@
       "frist": "2026-12-07",
       "geo": 50,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
@@ -6505,8 +6505,8 @@
       "frist": "2026-12-07",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
@@ -6516,11 +6516,22 @@
       "frist": "2026-12-07",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "offen": [
+    {
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "titel": "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
+      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-02",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
     {
       "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
       "titel": "Weihnachten Budget planen: Geschenke und Feiertage",
@@ -6529,8 +6540,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
@@ -6540,8 +6551,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -6551,8 +6562,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
@@ -6562,8 +6573,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
@@ -6573,8 +6584,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
@@ -6584,8 +6595,8 @@
       "frist": "2026-12-05",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "strom-sparen",
@@ -6595,8 +6606,8 @@
       "frist": "2026-12-07",
       "geo": 50,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
@@ -6606,8 +6617,8 @@
       "frist": "2026-12-07",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
@@ -6617,8 +6628,8 @@
       "frist": "2026-12-07",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "vorlauf": [
@@ -6771,17 +6782,6 @@
       "grund": "frisch geprüft vor 22 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
-      "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
       "geo": 100,
       "befund": false,
       "unvollstaendig": false,
