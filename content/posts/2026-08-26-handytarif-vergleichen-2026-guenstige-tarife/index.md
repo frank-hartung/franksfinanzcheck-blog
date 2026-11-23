@@ -128,3 +128,5 @@ Markiere danach den ersten vollständigen Monat. Stimmen regelmäßiges Grundent
 Lies Enddatum und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) in deiner Vertragsübersicht nach. Wenn du die Nummer behalten möchtest, gleiche die beim alten Anbieter hinterlegten Kundendaten mit dem neuen Auftrag ab. Bewahre Kündigungsbestätigung, Vertragszusammenfassung und bestätigten Portierungstermin auf. Die Rufnummernmitnahme allein beendet nicht automatisch alle Zahlungspflichten aus dem alten Vertrag.
 
 **Dein nächster Schritt:** Notiere Datenbedarf, gewünschtes Netz und maximale Bindung. Vergleiche erst dann die Preise. Als Einstieg kannst du den [Partnervergleich für Handytarife](/go/handytarife/) nutzen. Wenn du schon ein konkretes Wechselangebot hast, hilft dir die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
+
+**Weiterlesen:** [Ratgeber Internet, DSL & Mobilfunk](../../pillar/internet-dsl/) · [Kündigungsfristen-Kalender](../../werkzeuge/kuendigungsfristen-kalender/)

@@ -8,7 +8,7 @@ tags:
 - Kfz-Versicherung
 categories:
 - Ratgeber
-pillar: versicherungen
+pillar: "versicherungen"
 author: Frank Hartung
 ai_generated: true
 cover:

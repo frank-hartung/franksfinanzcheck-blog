@@ -182,4 +182,4 @@ nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-11-22.*
+(scripts/generate_llms_txt.py). Stand: 2026-11-23.*

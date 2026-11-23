@@ -143,3 +143,5 @@ Sieh dir den Bruttobetrag und den tatsächlich gutgeschriebenen Betrag getrennt 
 **Falls du ein Angebot prüfen möchtest:** Beim [Tagesgeldangebot der C24 Bank (Affiliate-Link)](/go/tagesgeld/) gelten die unmittelbar vor Abschluss ausgewiesenen Konditionen.
 
 Das Angebot steht hier nicht stellvertretend für den Markt. Rechne mindestens eine Alternative mit demselben Betrag und Zeitraum durch.
+
+**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/) · [Notgroschen-Rechner](../../werkzeuge/notgroschen-rechner/)

@@ -6573,3 +6573,88 @@ entscheidungen:
     alte Saison-Aussage bleibt über verboten_behauptend scharf.
   vorgaenger_geprueft_fassung: a217963d44f2fe0ccd579aa042ebbfcd22e175a7008824549d4f006db15dadd4
   folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 47f855cb4f0fe1e5c65f
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  typ: luecke
+  beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
+    bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
+    in den bereitgestellten Statistiken.
+  beleg: ''
+  entschieden_von: Frank Hartung (Redaktion)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Heutige Fassung am 23.11.2026 nachgeprueft, weil der Satz zum Kfz-Stichtag
+    praezisiert wurde (Zugang statt Versand). Der Befund betraf die entfernten, unbelegten
+    Kfz-Wechsel-Spannen (150-400 Euro bzw. 180-350 Euro); diese stehen weiterhin nicht
+    im Artikel, und die Sperre gegen die alten Spannen bleibt ueber verboten_behauptend
+    scharf. Der Befund ist gegenueber dem heutigen Text weiterhin gegenstandslos;
+    die Bindung an die Prueffassung wird auf die Fassung mit der Praezisierung nachgezogen.
+  vorgaenger_geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 7f66ec82ee1a3f095b0c
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  typ: praezision
+  beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
+    ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
+    fehlt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Redaktion)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: Heutige Fassung am 23.11.2026 nachgeprueft, weil der Satz zum Kfz-Stichtag
+    praezisiert wurde (Zugang statt Versand). Der Befund betraf die Behauptung, der
+    Herbst sei die 'lukrativste Spar-Saison des Jahres'; diese Aussage und ein messbarer
+    Jahreszeiten-Vergleich stehen weiterhin nicht im Text. Der Befund ist gegenueber
+    dem heutigen Text weiterhin gegenstandslos; die Sperre gegen die alte Saison-Aussage
+    bleibt ueber verboten_behauptend scharf. Die Bindung an die Prueffassung wird
+    auf die Fassung mit der Praezisierung nachgezogen.
+  vorgaenger_geprueft_fassung: 692d9701e86727eb82575ab8dc4ae3c15e426e0029df153ab9d2eaa77575a229
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 47f855cb4f0fe1e5c65f
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 42d09ef3ae723da0866bd7855234c0a7fb57561b0205bdd3fbe6fc95a565bb43
+  typ: luecke
+  beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
+    bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
+    in den bereitgestellten Statistiken.
+  beleg: ''
+  entschieden_von: Frank Hartung (Redaktion)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Sprachliche Glaettung derselben Praezisierung am 23.11.2026 (Zugang
+    statt Absenden). Der Befund bleibt gegenueber dem heutigen Text gegenstandslos:
+    die unbelegten Kfz-Wechsel-Spannen und die Behauptung der lukrativsten Spar-Saison
+    stehen nicht im Artikel, ein messbarer Jahreszeiten-Vergleich fehlt weiterhin.
+    Die verboten_behauptend-Sperre bleibt scharf; keine Veroeffentlichungsfreigabe.
+    Bindung an die neue Prueffassung nachgezogen.'
+  vorgaenger_geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  folgeentscheidung: true
+- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_ursprung_slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  befund_id: 7f66ec82ee1a3f095b0c
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 42d09ef3ae723da0866bd7855234c0a7fb57561b0205bdd3fbe6fc95a565bb43
+  typ: praezision
+  beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
+    ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
+    fehlt.
+  beleg: ''
+  entschieden_von: Frank Hartung (Redaktion)
+  entschieden_am: '2026-11-23'
+  fassung_wechsel: true
+  begruendung: 'Sprachliche Glaettung derselben Praezisierung am 23.11.2026 (Zugang
+    statt Absenden). Der Befund bleibt gegenueber dem heutigen Text gegenstandslos:
+    die unbelegten Kfz-Wechsel-Spannen und die Behauptung der lukrativsten Spar-Saison
+    stehen nicht im Artikel, ein messbarer Jahreszeiten-Vergleich fehlt weiterhin.
+    Die verboten_behauptend-Sperre bleibt scharf; keine Veroeffentlichungsfreigabe.
+    Bindung an die neue Prueffassung nachgezogen.'
+  vorgaenger_geprueft_fassung: fce7841e24101bd3501f8dd251c2dafd1f0e22ac7696b9998189018d4f5d1fff
+  folgeentscheidung: true

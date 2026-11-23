@@ -86,7 +86,7 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
- Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf; das ist ein Beispielwert.
+ Tippst du aus Versehen 18.000 Eurocent statt 18.000 kWh ein, oder schätzt du nur grob? Dann vergleicht das Portal mit dem falschen Bedarf.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
 
@@ -99,7 +99,7 @@ Du brauchst:
 
 Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte. Ein Bonus aus einem früheren Jahr zählt nicht mehr.
 
-**Marktübersicht ist kein Tarifangebot:** Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) nennt im Oktober 2026 für neue Verträge im laufenden Jahr zwei Mittelwerte: 12,23 Cent/kWh im Einfamilienhaus und 11,67 Cent/kWh im Mehrfamilienhaus. Dein Tarif kann davon abweichen. Rechne mit deinem eigenen Angebot.
+**Marktübersicht ist kein Tarifangebot:** Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) nennt zwei Mittelwerte für neue Verträge im laufenden Jahr: 12,23 Cent/kWh im Einfamilienhaus und 11,67 Cent/kWh im Mehrfamilienhaus. Die Zahlen gelten im Oktober 2026. Dein Tarif kann davon abweichen. Rechne mit deinem eigenen Angebot.
 
 ## Minute 3: Portalfilter neutral einstellen
 
@@ -199,7 +199,7 @@ Ausnahmen: Bei sehr knapper Frist, bei einer Sonderkündigung wegen Preiserhöhu
 
 Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Nach der [Bundesnetzagentur zu Vertragsarten](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html) bleibt die Versorgung beim Wechsel über das Netz gesichert. Kommt der neue Lieferant zu spät, greift je nach Fall die Grund- oder Ersatzversorgung; ihre Preise können abweichen.
 
-Kommt ein Preisschreiben, prüfst du vier Punkte: Ab wann gilt der neue Preis, warum er steigt, welche Teile betroffen sind und wie lange deine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) läuft. Bei einer Preisänderung müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+Kommt ein Preisschreiben, prüfst du vier Punkte. Wann gilt der neue Preis? Warum steigt er? Welche Teile sind betroffen? Und wie lange läuft deine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) läuft. Bei einer Preisänderung müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
 
 ## Wie du die mögliche Ersparnis berechnest?
 
@@ -211,14 +211,14 @@ Ob ein Wechsel tatsächlich spart, hängt von deinem bisherigen Vertrag, dem Ang
 
 ## Wann 24 Monate trotzdem passen können?
 
-Eine längere Laufzeit kann sinnvoll sein, wenn:
+Eine längere Laufzeit passt, wenn vier Punkte zusammenkommen:
 
 - Der Startpreis konkurrenzfähig ist,
 - die Garantie den wesentlichen Zeitraum abdeckt,
 - dein Verbrauch stabil ist,
 - dir Planungssicherheit wichtiger als jährliche Flexibilität ist.
 
- Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**; das ist ein Rechenbeispiel. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
+ Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Das ist ein Rechenbeispiel. Diesen Betrag zahlst du für zusätzliche Ruhe. Das gilt aber nur, falls alle anderen Bedingungen vergleichbar sind.
 
 ## Der Check nach dem Abschluss
 

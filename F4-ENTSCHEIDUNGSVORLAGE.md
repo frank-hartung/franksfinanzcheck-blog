@@ -4,7 +4,7 @@
 Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt.
 Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
-**Bezugsstand: 2026-11-22** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
+**Bezugsstand: 2026-11-23** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
 **201 offene Live-Befunde auf 56 Artikeln.** Für **120** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **81** Befunde haben keine frühere aktive Entscheidung.
@@ -212,7 +212,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Datei-SHA256 (heute): `ce46f818fe18a896a81ebc80dc877b1479edcd8614925cfc8b329c54781ddbd3`
+- Datei-SHA256 (heute): `8d5e010d305d44fef4bffc5483333f56243d779e23791c20096994fa243c041a`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -316,7 +316,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`
 
-- Datei-SHA256 (heute): `bfab6e93434f95fb9bafe7b75b8be5fcef1f178314174715df0d3ea6cd795031`
+- Datei-SHA256 (heute): `a9284504078a578d436399f84ac4a745c5b810aecca7a7075084fadfa5b10699`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -861,7 +861,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
 
-- Datei-SHA256 (heute): `556a89ef70cce4e4aeeb77e13f2d19213d6c7d9b0b53c4d7f306f4eb1e0b12b4`
+- Datei-SHA256 (heute): `7c58465b199736c53a110a99afd92051343038a176d94c3849fde71876d062b1`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -914,7 +914,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich`
 
-- Datei-SHA256 (heute): `f6f1b1d7f66a30667270310af0613bad2fb1872ec5c6de357711ee3cec2025c6`
+- Datei-SHA256 (heute): `eaba92d69c9705d8c6da4ee9fd5cdc499294dd75f0e37a79ac918f9bb59f6f2d`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2484,7 +2484,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `16e6720319cb21931ce63fd53358d2cabb03d8a91031e51ce91fec318e946637`
+- Datei-SHA256 (heute): `3994d14f0866e33c8af61d04d8894cbd8275650aeab171efc550cd4f5045f1ab`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
