@@ -367,6 +367,20 @@ jetzt samt Korrektur im Code, damit sie nicht wiederkommt.
 | Workflow-Aufruf-Vertrag | 837 Aufrufe · 0 Verstoß |
 | Wachen-Vertrag | 413 Skripte · 0 Fund |
 
+**Die Uhr-Probe ist auf `main` rot — nachgemessen, nicht vermutet.**
+`scripts/selftest_clock.py --trap-discover scripts/tests --offset 97` in
+einem frischen `main`-Worktree (`a3ccddce7`, ohne einen meiner Commits):
+
+    FAILED (errors=1, skipped=46)
+    🛑 scripts/tests ist datumsabhängig (Uhr um 97 Tage vorgestellt, Exit 1)
+
+In meinem Branch läuft dieselbe Probe mit `FAILED (failures=1, errors=1)` —
+also **ein Fehler mehr**, und der ist meiner (behoben, s. Rezept 3: die
+Befristung). Der verbleibende `errors=1` steht auf `main` genauso.
+
+Sie steht nicht im PR-Check, weil sie in `link-check.yml` hängt und nicht
+in `publication-reliability-tests.yml` — das war mein Irrtum beim Suchen.
+
 **Rot, das bleibt — und warum es kein Befund ist:**
 
 - `test_feed_traegt_den_kanal_auf_beiden_ebenen` — braucht
