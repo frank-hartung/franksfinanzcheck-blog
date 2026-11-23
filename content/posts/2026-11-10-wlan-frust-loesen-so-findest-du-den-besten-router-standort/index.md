@@ -1,5 +1,5 @@
 ---
-title: "Router Standort: So findest du einen guten Platz – WLAN"
+title: "Router-Standort: So findest du einen guten Platz"
 description: "Stelle den Router probeweise höher und frei von Hindernissen auf. Vergleiche die Signalqualität vorher und nachher am selben Platz in der Wohnung."
 date: 2026-11-11T06:30:46Z
 draft: false

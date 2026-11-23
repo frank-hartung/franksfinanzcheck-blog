@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Heizkosten senken: Welche Maßnahmen passen zu – Heizung"
+title: "Heizkosten senken: Raumtemperatur, Lüften, Heizkörper"
 description: "Heizkosten senken: Bevor du in Heiztechnik investierst, prüfe Heizzeiten, Thermostate und freie Heizflächen. Vergleiche den Verbrauch nur unter ähnlichen…"
 date: 2026-09-23T08:59:05Z
 draft: false

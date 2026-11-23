@@ -403,7 +403,11 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             rest_zeile = ""
         else:
             key_einzug = einzug
-            rest_zeile = rest_zeile[2:]
+            # KEIN Abschneiden: Der Einzug ist oben (`rest_zeile = zeile[einzug:]`)
+            # bereits entfernt. Das frühere `rest_zeile[2:]` kürzte jeden
+            # Schlüssel um zwei Zeichen (`title` → `tle`) – dadurch war die
+            # YAML-1.1-Regel F5 für Titelfelder blind (Selbsttest rot,
+            # Frontmatter-Vertrag im E2E-Gate rot).
 
         # Offene Bereiche schließen: Eine Zeile gleicher oder geringerer
         # Einrückung ist ein Geschwister, kein Kind. Ein `- ` beginnt einen

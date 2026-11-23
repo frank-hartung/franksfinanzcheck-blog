@@ -79,6 +79,43 @@ def _clean_tail(s):
     return s.rstrip(_DANGLING_END).rstrip()
 
 
+# 23.11.2026 (Titel-Torsi): Fünf Live-Titel endeten auf „… – Heizung",
+# „… – Stromfresser", „… – WLAN" – ein gültiger Kopf, an den ein
+# Keyword als Einzelwort gehängt worden war. Kein Kürzungsartefakt im
+# engeren Sinn (die Titel lagen unter 60 Zeichen), sondern ein
+# Anhängsel, das als Untertitel nichts sagt: nach einem Gedankenstrich
+# steht genau EIN Wort, das den Satz nicht weiterführt.
+# Deshalb duckt die SSOT Kürzung diesen Rest weg – aber nur, wenn der
+# Kopf allein mindestens 20 Zeichen trägt (darunter wäre der Verlust
+# größer als der Gewinn). Das Gate `check_titles.py` (Regel R6) prüft
+# dieselbe Form unabhängig.
+_DASH_EINZELWORT = None
+
+
+def ohne_dash_einzelwort(titel):
+    """Entfernt ein Einzelwort, das nach dem letzten Gedankenstrich hängt.
+
+    „Heizkosten senken: Welche Maßnahmen passen zu – Heizung"
+    → „Heizkosten senken: Welche Maßnahmen passen zu" (Kopf 41 Zeichen).
+
+    Unberührt bleiben Titel, deren Kopf unter 20 Zeichen liegt (dort ist
+    der Gedankenstrich Teil des Namens, z. B. „WLAN – Technik") und
+    Titel ohne Gedankenstrich.
+    """
+    import re as _re
+    global _DASH_EINZELWORT
+    if _DASH_EINZELWORT is None:
+        _DASH_EINZELWORT = _re.compile(r"\s[–—]\s+(\S+)$")
+    s = (titel or "").strip()
+    m = _DASH_EINZELWORT.search(s)
+    if not m:
+        return s
+    kopf = s[:m.start()].rstrip(" :-–—")
+    if len(kopf) < 20:
+        return s
+    return kopf
+
+
 def _cut_at_word(s, max_len):
     """Kürzt `s` auf max_len Zeichen an der letzten Wortgrenze.
     Rückgabe: gekürzter String (evtl. kürzer als max_len) oder "" wenn
@@ -118,6 +155,9 @@ def titel_kuerzen(titel, max_len=60):
     """
     import re as _re
     t = _re.sub(r"\s+", " ", str(titel or "")).strip()
+    # Schritt 0 (23.11.2026): hängendes Einzelwort nach „ – " abschneiden,
+    # bevor über Länge entschieden wird – sonst gilt der Torso als „passt".
+    t = ohne_dash_einzelwort(t)
     if len(t) <= max_len:
         return t
     m = _re.match(r"^(.{20,%d}?)\s*[:–—]\s+\S.*$" % max_len, t)
@@ -155,6 +195,9 @@ def safe_title_cut(title, max_len=60):
     """
     import re as _re
     t = _re.sub(r"\s+", " ", (title or "").strip())
+    # Schritt 0 (23.11.2026): siehe ohne_dash_einzelwort() – ein Titel, der
+    # unter der Grenze liegt, ist noch nicht automatisch heil.
+    t = ohne_dash_einzelwort(t)
     if not t or len(t) <= max_len:
         return t
 

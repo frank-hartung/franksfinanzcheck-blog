@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Standby-Verbrauch messen: Was kostet – Stromfresser"
+title: "Standby-Kosten: Was ein Stromfresser wirklich kostet"
 description: "Was kostet der Bereitschaftsbetrieb? Miss die Leistung an der Steckdose und rechne mit den Stunden, in denen das Gerät tatsächlich im Standby bleibt."
 date: 2026-09-11T20:00:23Z
 draft: false
