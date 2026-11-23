@@ -725,7 +725,18 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # bytegenau aus HEAD zurück, BEVOR der Bot committed. Ohne Eintrag
           # hier liefe ihr Selbsttest in keinem Gate (C6) – und eine Wache,
           # die niemand verlangt, führt irgendwann niemand aus.
-          "pflichtfeld_verlust_wache.py"]
+            "pflichtfeld_verlust_wache.py",
+            # Betreiber-Abzeichnung zur KI-Register-Einordnung (23.11.2026,
+            # Abschnitt 8 der Entscheidungs-Akte, Option A). Die Wache bindet
+            # die unterzeichnete Entscheidung maschinell an den Bestand:
+            # Register (die 12 unter `maschinell`, nie unter `menschlich`),
+            # Akte-Hash, Faktenfrische-Ledger (Prüfvermerke) und die zwei
+            # Hochrisiko-Siegel. Sie meldet rot, wenn Abzeichnung und Bestand
+            # auseinanderlaufen oder die KI-VO-Frist 2026-12-02 ohne recht-
+            # zeitige Abzeichnung verstreicht. Ohne Eintrag hier liefe ihr
+            # Selbsttest in keinem Gate (C6) – und eine Wache, die niemand
+            # verlangt, führt irgendwann niemand aus.
+            "ki_abzeichnung_wache.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
