@@ -63,6 +63,32 @@ class SSOTVertragTests(unittest.TestCase):
         self.assertTrue(any("geprueft_am" in f for f in fehler),
                         "nach einem Jahr muss die Matrix fällig sein")
 
+    def test_matrix_pruefung_ist_uhrfest(self):
+        """Die Prüfung darf NICHT von der Wanduhr abhängen.
+
+        Der Vorfall: Mit `dt.date.today()` starb der Governance-Selbsttest
+        an der Uhr-Probe, die die Uhr 1461 Tage vorstellt – die Matrix wäre
+        „fällig" gewesen, und ein fest eingetragenes Bestandsdatum hätte
+        den Selbsttest getötet. Ein Fixture muss relativ zum Testdatum
+        liegen; ein BESTANDSdatum ist kein Fixture. Ohne explizites Datum
+        prüft `ssot_pruefen` nur die Form – dann kann die Uhr es nicht
+        brechen, und die Frist wird im Produktionslauf (C19) weiter
+        durchgesetzt.
+        """
+        import datetime as dt
+        # Ohne Datum: die Form ist sauber, egal wie spät es ist.
+        self.assertEqual([], [f for f in rs.ssot_pruefen(self.ssot)
+                             if "geprueft_am" in f])
+        # Mit Datum: die Frist greift (die Zähne bleiben scharf).
+        spaet = dt.date.today() + dt.timedelta(days=rs.MATRIX_HALTBARKEIT_TAGE + 1)
+        self.assertTrue(any("geprueft_am" in f
+                            for f in rs.ssot_pruefen(self.ssot, spaet)))
+
+    def test_zukunftsdatum_ist_ein_tippfehler(self):
+        kaputt = dict(self.ssot)
+        kaputt["geprueft_am"] = "2099-01-01"
+        self.assertTrue(any("Zukunft" in f for f in rs.ssot_pruefen(kaputt)))
+
     def test_matrix_ohne_datum_ist_ein_fehler(self):
         ohne = {k: v for k, v in self.ssot.items() if k != "geprueft_am"}
         self.assertTrue(any("geprueft_am" in f for f in rs.ssot_pruefen(ohne)))

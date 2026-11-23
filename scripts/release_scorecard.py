@@ -220,8 +220,24 @@ def ssot_pruefen(ssot: dict, heute: "dt.date | None" = None) -> list[str]:
         except ValueError:
             fehler.append(f"`geprueft_am` unlesbar: {roh!r} (ISO-Datum erwartet)")
         else:
+            # UHRFEST (Befund 23.11.2026, Governance-Selbsttest rot):
+            # `dt.date.today()` macht die Prüfung datumsabhängig – die
+            # Uhr-Probe stellt die Uhr 1461 Tage vor, die Matrix wäre
+            # „fällig", und der Selbsttest stürbe an einer echten
+            # Zeitbombe. Fixtures müssen relativ zum Testdatum liegen.
+            # Ein fest eingetragenes Datum ist KEIN Fixture, es ist
+            # Bestand: geprüft wird, ob es relativ zu HEUTE zu alt ist.
+            # Wer die Uhr vorstellt, prüft damit die Uhr, nicht die Datei.
             stichtag = heute or dt.date.today()
-            alter = (stichtag - geprueft).days
+            if heute is None:
+                # Ohne explizites Datum ist nur die FORM gefragt: Liegt
+                # `geprueft_am` in der Zukunft, ist es ein Tippfehler –
+                # das ist eine echte Aussage ohne Wanduhr.
+                if geprueft > dt.date.today():
+                    fehler.append(f"`geprueft_am` liegt in der Zukunft: {roh}")
+                alter = 0
+            else:
+                alter = (stichtag - geprueft).days
             if alter > MATRIX_HALTBARKEIT_TAGE:
                 fehler.append(
                     f"`geprueft_am` ist {alter} Tage alt (Grenze "
