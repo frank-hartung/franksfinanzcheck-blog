@@ -134,6 +134,10 @@ SCHLUESSEL_WORKFLOWS = {
     ".github/workflows/faktenfrische.yml": "faktenpruefung",
     ".github/workflows/ki-redaktion.yml": "lang",
     ".github/workflows/content-engine-v2.yml": "news",
+    ".github/workflows/content-reserve.yml": "lang",
+    ".github/workflows/endredaktion.yml": "politur",
+    ".github/workflows/poppy-werkbank.yml": "lang",
+    ".github/workflows/redaktions-standard-bestand.yml": "faktenpruefung",
 }
 
 # Die Brückendatei aus Issue #514 bleibt gelöscht (T5).

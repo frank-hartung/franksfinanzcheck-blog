@@ -1556,8 +1556,8 @@ def fix_rs4_rs5_deterministic(body: str) -> tuple[str, list[str]]:
 # ---------------------------------------------------------------------------
 
 def _call_ai(prompt, max_tokens=6000):
-    """Gemini zuerst, dann Groq – alle Aufrufe laufen über llm_client."""
-    for provider in ("gemini", "groq"):
+    """Gemini zuerst, danach Groq/NVIDIA/Cloudflare – alle Aufrufe über llm_client."""
+    for provider in ("gemini", "groq", "nvidia", "cloudflare"):
         if not llm_client.available(provider):
             continue
         try:
@@ -1749,7 +1749,7 @@ def heal_article_ai(a, res, verworfen=None):
         weiche.append(f"RS6 Phantom-Quellen ({res['rs6'][2]} Stellen)")
     if not fehlend and not weiche:
         return None
-    if not (llm_client.available("gemini") or llm_client.available("groq")):
+    if not llm_client.available_providers():
         print("  ⚠ keine API-Keys – KI-Heilung übersprungen")
         return None
 

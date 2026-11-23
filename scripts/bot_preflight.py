@@ -32,9 +32,10 @@ def check_syntax():
 
 
 def check_api_keys():
-    groq = os.environ.get("GROQ_API_KEY")
-    gemini = os.environ.get("GEMINI_API_KEY")
-    return bool(groq or gemini), bool(groq), bool(gemini)
+    sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+    import llm_client
+    status = {p: llm_client.available(p) for p in llm_client.PROVIDERS}
+    return any(status.values()), status
 
 
 def check_topics():
@@ -113,13 +114,22 @@ def main():
     else:
         print(f"✅ Syntax: {len(SCRIPTS)} Skripte valide")
 
-    # 2) API-Keys
-    has_key, groq, gemini = check_api_keys()
+    # 2) API-Keys (4-stufige Gratis-Kette aus llm_client / Regel T1)
+    has_key, key_status = check_api_keys()
     if not has_key:
         ok = False
-        print("❌ KEIN API-KEY gesetzt (GROQ_API_KEY / GEMINI_API_KEY fehlen beide)")
+        print("❌ KEIN API-KEY gesetzt (GROQ_API_KEY / NVIDIA_API_KEY / CLOUDFLARE_API_TOKEN+ACCOUNT_ID / GEMINI_API_KEY fehlen alle)")
     else:
-        print(f"✅ API-Keys: Groq={'ja' if groq else 'nein'} | Gemini={'ja' if gemini else 'nein'}")
+        anzeige = " | ".join(
+            f"{label}={'ja' if key_status.get(pid) else 'nein'}"
+            for pid, label in (
+                ("groq", "Groq"),
+                ("nvidia", "NVIDIA"),
+                ("cloudflare", "Cloudflare"),
+                ("gemini", "Gemini"),
+            )
+        )
+        print(f"✅ API-Keys: {anzeige}")
 
     # 3) Themenpool (Parsebarkeit – nicht die Kapazität!)
     parse_ok, freie, msg = check_topics()

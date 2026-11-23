@@ -677,8 +677,9 @@ def politur_pruefen(alt: str, neu: str, cfg: dict) -> str | None:
 
 def ki_politur(artikel: dict, funde: list[dict], cfg: dict) -> tuple[bool, str]:
     """Eine Politur-Runde mit Verifikation. (ok, provider|grund)."""
-    kette = [p for p in os.environ.get("ENDREDAKTION_KETTE", "groq,gemini")
-             .split(",") if p.strip()]
+    kette = [p.strip() for p in os.environ.get(
+        "ENDREDAKTION_KETTE", "groq,nvidia,cloudflare,gemini").split(",")
+        if p.strip()]
     for versuch, provider in enumerate(kette[:max(1, len(kette))]):
         antwort = llm_client.chat(
             provider, politur_auftrag(artikel, funde),

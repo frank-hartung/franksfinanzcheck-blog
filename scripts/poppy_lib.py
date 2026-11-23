@@ -533,14 +533,15 @@ def neue_karte(typ: str, *, titel: str, url: str, rohtext: str,
 
 
 # ---------------------------------------------------------------- LLM (Gratis-Kette)
-def chat(system: str, prompt: str, *, kette: tuple = ("groq", "gemini"),
+def chat(system: str, prompt: str, *,
+         kette: tuple = ("groq", "nvidia", "cloudflare", "gemini"),
          temperature: float = 0.4, max_tokens: int = 4096):
-    """(text|None, provider) – Kette aus data/poppy/quellen.yaml oder Env."""
+    """(text|None, provider) – 4-stufige Gratis-Kette aus llm_client oder Env."""
     env_kette = os.environ.get("POPPY_PROVIDER_KETTE", "").strip()
     reihenfolge = (tuple(p.strip() for p in env_kette.split(",") if p.strip())
                    if env_kette else tuple(kette))
     for provider in reihenfolge:
-        if provider not in ("groq", "gemini", "claude", "openai"):
+        if provider not in llm_client.PROVIDERS:
             continue
         text = llm_client.chat(provider, prompt, system=system,
                                temperature=temperature, max_tokens=max_tokens)

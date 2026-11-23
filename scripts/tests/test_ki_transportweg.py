@@ -408,5 +408,70 @@ class Betriebslage(unittest.TestCase):
         self.assertFalse(zustand["redundanz_erfuellt"])
 
 
+class VierStufenGratisRedundanz(unittest.TestCase):
+    """Durchgängige 4-stufige 0-€-Kette in Workflows UND Python-Rufern."""
+
+    ERWARTETE_SECRETS = (
+        "GROQ_API_KEY",
+        "NVIDIA_API_KEY",
+        "CLOUDFLARE_API_TOKEN",
+        "CLOUDFLARE_ACCOUNT_ID",
+        "GEMINI_API_KEY",
+    )
+
+    def test_alle_ki_workflows_reichen_alle_vier_gratis_provider_durch(self):
+        for rel in (
+            ".github/workflows/content-reserve.yml",
+            ".github/workflows/endredaktion.yml",
+            ".github/workflows/poppy-werkbank.yml",
+            ".github/workflows/redaktions-standard-bestand.yml",
+            ".github/workflows/content-engine-v2.yml",
+            ".github/workflows/faktenfrische.yml",
+            ".github/workflows/ki-redaktion.yml",
+            ".github/workflows/saisonaler-hero-refresh.yml",
+        ):
+            text = (ROOT / rel).read_text(encoding="utf-8")
+            self.assertIn(rel, kt.SCHLUESSEL_WORKFLOWS,
+                          f"{rel} muss durch Regel T9 überwacht werden")
+            for secret in self.ERWARTETE_SECRETS:
+                self.assertIn(f"secrets.{secret}", text,
+                              f"{rel} reicht {secret} nicht durch")
+
+    def test_generate_drafts_hat_alle_vier_gratis_provider(self):
+        import generate_drafts as gd
+        namen = " | ".join(name.lower() for name, _ in gd.PROVIDERS)
+        for p in ("groq", "nvidia", "cloudflare", "gemini"):
+            self.assertIn(p, namen, f"generate_drafts.PROVIDERS fehlt {p}")
+
+    def test_bot_preflight_akzeptiert_nvidia_oder_cloudflare_allein(self):
+        import bot_preflight as bp
+        alle = list(self.ERWARTETE_SECRETS)
+        sicherung = {k: os.environ.pop(k) for k in alle if k in os.environ}
+        self.addCleanup(lambda: (
+            [os.environ.pop(k, None) for k in alle],
+            os.environ.update(sicherung),
+        ))
+        os.environ["NVIDIA_API_KEY"] = "probe-nvidia"
+        ok, status = bp.check_api_keys()
+        self.assertTrue(ok)
+        self.assertTrue(status["nvidia"])
+        self.assertFalse(status["groq"])
+
+        os.environ.pop("NVIDIA_API_KEY")
+        os.environ["CLOUDFLARE_API_TOKEN"] = "probe-cf"
+        os.environ["CLOUDFLARE_ACCOUNT_ID"] = "probe-acc"
+        ok_cf, status_cf = bp.check_api_keys()
+        self.assertTrue(ok_cf)
+        self.assertTrue(status_cf["cloudflare"])
+
+    def test_poppy_und_endredaktion_nutzen_vier_gratis_provider(self):
+        import inspect
+        import poppy_lib
+        default_kette = inspect.signature(poppy_lib.chat).parameters["kette"].default
+        self.assertEqual(default_kette, ("groq", "nvidia", "cloudflare", "gemini"))
+        endr_src = (ROOT / "scripts" / "endredaktion.py").read_text(encoding="utf-8")
+        self.assertIn('"groq,nvidia,cloudflare,gemini"', endr_src)
+
+
 if __name__ == "__main__":
     unittest.main()

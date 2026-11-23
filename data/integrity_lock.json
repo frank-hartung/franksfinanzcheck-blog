@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-23T12:41:31.111434+00:00",
-  "head": "4bd8251",
+  "signed_at": "2026-11-23T15:22:32.075192+00:00",
+  "head": "370da50",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -44,7 +44,7 @@
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "b3cbae079dda0b94aa35865808feff391ce223c6c2b98338e6843f48a574df19",
-    "scripts/redaktions_standard.py": "cb69607389508612f812388b0feb6680cc62c838f45cf251bedf9bc186737d24",
+    "scripts/redaktions_standard.py": "0e24c4c3942a73ae0234da314933579152327ffb2979936bad4c9d12994325d2",
     "scripts/reserve_artifacts.py": "f0a5e4affec798d3033b5c34fbc50688e2f9bca69ab0632d31cf9a727bfb3a6f",
     "scripts/serp_limits.py": "cb3d4a55874bea7edb944c5d0239bcd0912db6ec075e48588d21e57cb4397c5f",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
@@ -59,68 +59,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "b10d54e4e2abacd30bdbe7d47e3ac72a77ebcb5d80349a18b9196bf19783e2a6",
-  "audit_start_sha256": "0ef6cb11f2e309dc197fd31a58bce0384a4d82f8e28d272f449f908edf91bb52",
+  "files_sha256": "472b857dd1bde9117d50c8e84c3d6be61c0836027a84e6b7ae027d08bfb31cdb",
+  "audit_start_sha256": "457d4f7dea3c512ebc72318f5a2caf5661c947b7da952cee1ed8b24a4b6bbc7a",
   "audit": [
-    {
-      "date": "2026-11-01",
-      "art": "heal",
-      "head": "4366b11",
-      "geaendert": [
-        "data/skill_lizenzen.json",
-        "data/skill_portfolio.yaml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "data/skill_lizenzen.json",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "4366b11",
-              "datum": "2026-11-01",
-              "betreff": "merge: origin/main (Design-Heilung #1008) – Register neu gebaut"
-            },
-            {
-              "sha": "5296b51",
-              "datum": "2026-11-01",
-              "betreff": "fix(design): B5 geheilt – 29 Flächen mit Druck-Feedback, Wache 0/0 (#1008)"
-            },
-            {
-              "sha": "3189c7c",
-              "datum": "2026-11-01",
-              "betreff": "merge: origin/main (17 Social-Skills) – SEO-Paket bleibt, Social-Pack weicht dem K9-Budget"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "data/skill_portfolio.yaml",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "4366b11",
-              "datum": "2026-11-01",
-              "betreff": "merge: origin/main (Design-Heilung #1008) – Register neu gebaut"
-            },
-            {
-              "sha": "5296b51",
-              "datum": "2026-11-01",
-              "betreff": "fix(design): B5 geheilt – 29 Flächen mit Druck-Feedback, Wache 0/0 (#1008)"
-            },
-            {
-              "sha": "3189c7c",
-              "datum": "2026-11-01",
-              "betreff": "merge: origin/main (17 Social-Skills) – SEO-Paket bleibt, Social-Pack weicht dem K9-Budget"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "211e0a24e25cfddc98e731fae1b4bf4d4218d51ee77ac53eddc76db727f95910",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-03",
       "art": "repair",
@@ -144,7 +85,7 @@
         ]
       },
       "files_sha256": "211e0a24e25cfddc98e731fae1b4bf4d4218d51ee77ac53eddc76db727f95910",
-      "prev_sha256": "0ef6cb11f2e309dc197fd31a58bce0384a4d82f8e28d272f449f908edf91bb52"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-03",
@@ -461,8 +402,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "8a3769d732aeb7ae79af5ef08c7ddfe449de1e62cbb15c90374fe6443afbfc50",
-      "files_sha256": "b10d54e4e2abacd30bdbe7d47e3ac72a77ebcb5d80349a18b9196bf19783e2a6"
+      "files_sha256": "b10d54e4e2abacd30bdbe7d47e3ac72a77ebcb5d80349a18b9196bf19783e2a6",
+      "prev_sha256": "8a3769d732aeb7ae79af5ef08c7ddfe449de1e62cbb15c90374fe6443afbfc50"
+    },
+    {
+      "date": "2026-11-23",
+      "art": "heal",
+      "head": "370da50",
+      "geaendert": [
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "370da50",
+              "datum": "2026-11-23",
+              "betreff": "fix(ki-0eur): 4-Provider-Redundanz überall, Runbook-T1 & Dauerheilung #1230"
+            },
+            {
+              "sha": "96d0256",
+              "datum": "2026-11-23",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "fa72c2b21eb99b5d432edde0cae977df84b6d2c680a4512de76866eefc7f26fb",
+      "files_sha256": "472b857dd1bde9117d50c8e84c3d6be61c0836027a84e6b7ae027d08bfb31cdb"
     }
   ]
 }
