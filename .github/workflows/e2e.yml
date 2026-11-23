@@ -135,6 +135,18 @@ jobs:
           python3 scripts/frontmatter_wache.py --selftest
           python3 scripts/frontmatter_wache.py
 
+      # WF-7D4A / #1329 (23.11.2026): Der Playwright-Job war auf JEDEM Branch
+      # rot – auch auf `main`. Ursache war kein Codefehler, sondern eine
+      # Redaktion: #1329 hat eine Passage geglättet („frei gewählte
+      # Modellannahmen" → „freie Modellwerte"), und ein E2E-Test hing am
+      # alten Wortlaut. Acht Minuten Browser-Setup für einen Satz, der nicht
+      # mehr existiert. Diese Wache prüft die Textanker der E2E-Tests gegen
+      # den Artikelbestand – nach fünf Sekunden, nicht nach acht Minuten.
+      - name: E2E-Textanker – Tests gegen den Artikelbestand
+        run: |
+          python3 scripts/e2e_textanker_wache.py --selftest
+          python3 scripts/e2e_textanker_wache.py
+
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
