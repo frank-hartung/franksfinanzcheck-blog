@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 16e198fcf3ff4f3511636633c760fce7ccdc5d8d5a7df5b607438c90119be028
-    geprueft_am: 2026-11-21
+    sha256: 82d00e67d0e6ad1184f415124985086172ace58616ac3b815374f51dad334ce3
+    geprueft_am: 2026-11-23
 quellen:
   - id: "Q1"
     titel: "WLAN-Router und Repeater richtig platzieren"

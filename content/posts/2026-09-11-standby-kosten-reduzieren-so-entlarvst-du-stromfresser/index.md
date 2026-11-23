@@ -22,8 +22,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 4d2285a529970f6b803ecbd0a36f1bdb88ba1f6cd34949f70367e19a5c2142df
-    geprueft_am: 2026-11-21
+    sha256: c610c77de8688ba766b2a9dcf75dd113710f7604ab67dc9032259963a2115269
+    geprueft_am: 2026-11-23
 kurzantwort: "Standby-Kosten berechnest du mit Leistung mal Zeit: 10 Watt Dauerlast ergeben 87,6 kWh im Jahr und bei 37 Cent pro kWh rund 32 Euro. Miss zuerst TV-Ecke, Homeoffice und alte Audiotechnik. Schalte nur ab, wenn keine Telefonie, Updates, Aufnahmen, Wartungszyklen oder Smart-Home-Funktionen davon abhängen."
 social_posted: true
 quellen:
