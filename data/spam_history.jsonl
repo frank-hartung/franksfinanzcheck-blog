@@ -398,3 +398,7 @@
 {"ts": "2026-11-23T16:55:21Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 12}
 {"ts": "2026-11-23T17:30:54Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-23T17:30:54Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 11}
+{"ts": "2026-11-23T19:10:28Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet", "rules": ["B2", "B3", "B5"]}
+{"ts": "2026-11-23T19:10:28Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich", "rules": ["B3"]}
+{"ts": "2026-11-23T19:10:29Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-23T19:10:29Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 13}

@@ -17,8 +17,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: c705e10bc7fad4e099f04c21997cedca0669b46d3863bd78ea82d1e0ea94b39e
-    geprueft_am: 2026-11-21
+    sha256: c6bed0a4af9690deced5172ad78733b433e541fcf0bedf404326156f8c13129f
+    geprueft_am: 2026-11-23
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas", "Gasanbieter mit Preisgarantie", "Gaspreisentwicklung 202"]

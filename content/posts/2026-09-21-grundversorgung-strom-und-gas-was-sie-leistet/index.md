@@ -54,6 +54,8 @@ Ein Tarif, den du selten bewusst wählst, ist selten der günstigste.
 Er sorgt dafür, dass du nie ohne Strom dastehst.  
 Der Preis bleibt gleich – die Grundversorgung ist nicht billiger, weil sie selbstverständlich ist.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Du musst Anbieter und Tarif unterscheiden.  

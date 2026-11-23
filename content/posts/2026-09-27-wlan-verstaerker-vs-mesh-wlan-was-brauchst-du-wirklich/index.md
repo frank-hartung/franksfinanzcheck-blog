@@ -22,7 +22,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 38ce2d958f8cd2ab2e9662c570406e9e4f2bad85d6a896bf900372108870147f
+    sha256: 2ae6db877ed32e196a57c1e1e45d878498ffa81ec6dcee148dd8311ba7b70f9e
     geprueft_am: 2026-11-23
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -41,7 +41,9 @@ faktencheck: "2026-10-13"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Läuft das Video im Wohnzimmer flüssig, aber im Arbeitszimmer stockt es? Dann liegt das Problem meist nicht am Tarif, sondern am Weg des Signals vom Router zum Gerät.  
+DSL Hacks im Check: Läuft das Video im Wohnzimmer flüssig, aber im Arbeitszimmer stockt es? Dann liegt das Problem meist nicht am Tarif, sondern am Weg des Signals vom Router zum Gerät.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
