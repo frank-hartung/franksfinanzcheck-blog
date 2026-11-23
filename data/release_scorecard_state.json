@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T15:55:20Z",
-  "modus": "live",
-  "commit": "ae3bdedaf192fa0e67d8d7aa81b5ff9a956299e2",
+  "generated_at": "2026-11-23T16:58:06Z",
+  "modus": "kandidaten",
+  "commit": "87c1ff46fd06367f472fb09ced06c83746361fdc",
   "kapazitaet": {
     "stichtag": "2026-11-23",
     "basis": "2026-11-23",
@@ -80,6 +80,7 @@
         "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
         "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
         "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
         "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
@@ -109,7 +110,7 @@
         "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 48
+      "anzahl": 49
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -151,16 +152,16 @@
     }
   ],
   "befundlage": {
-    "offen": 262,
-    "seiten": 74,
-    "live_befunde": 162,
-    "live_seiten": 48,
-    "ueberholt": 219,
+    "offen": 265,
+    "seiten": 75,
+    "live_befunde": 165,
+    "live_seiten": 49,
+    "ueberholt": 222,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 24,
     "frist_tage": 14,
-    "ueber_frist": 92,
+    "ueber_frist": 95,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": 4,
@@ -182,6 +183,7 @@
       "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": 2,
       "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3,
       "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
+      "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": 3,
       "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": 2,
       "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
       "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
@@ -616,7 +618,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e",
+      "sha256": "961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -630,7 +632,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1030,13 +1032,13 @@
       ]
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "sha256": "6afcd71a3e3a2691b9a1fe4d3b7cb15b22916e6df5274bf81ba86609b016179e",
+      "sha256": "d9f96b8e6656b7c6f0ad0fa5c6230fd67ae0bd64f472775954ff4865e1aa1b67",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1046,6 +1048,12 @@
       "naechste_pruefung": "2026-12-02",
       "siegel_drift": "geändert – neu geprüft",
       "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "3f0a88ede9d44ee910cb (luecke): Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.; 51e259fd2d8582e774f7 (luecke): Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.; 55f8eee"
+        },
         {
           "check": "T5-lesbarkeit",
           "dimension": "technik",
@@ -1148,7 +1156,7 @@
       "checks": []
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "2aca2d1896a29d7fc8d3b7d7194f0a646f5be6eafdc56007b104f5e40e630183",
+      "sha256": "616fc588304a7433729007922c50a88e683fe4400103aa8794c0b4d9f0ff59a6",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1162,7 +1170,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1302,7 +1310,7 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "23df138051d2e740de95296da266a8d228635857130599683c415bce97a3b631",
+      "sha256": "8f90c0e5d2f45888caaf666975ca8c1d0efeac219f90a497b84d349946e34260",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1316,7 +1324,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
@@ -1609,7 +1617,7 @@
       ]
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
-      "sha256": "5ecee17b86277342baae1fe92b14ffa40ba1d0a3d5056a1c008f8daa3dfa4d23",
+      "sha256": "1db609b75502c3f3ab4c15b97c72b4d475c3c746cc5673336cbc4f4efdbfb090",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1623,7 +1631,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-31",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2134,7 +2142,7 @@
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "14e14626c095f011fa23e3e10a0a5bd1e47f7f90882bdadb1a57428712e653a7",
+      "sha256": "5aa3b226c22c171d35c414dbab5183f9358459e2146d0ba728f8e37ce8c43a2a",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2148,7 +2156,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {

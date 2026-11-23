@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-11-23 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-11-23 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -67,7 +67,7 @@
 | `2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-11 | **freigabe-reif** |
 | `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-20 | **blockiert** |
 | `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | ⚠️ warnung | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-21 | **blockiert** |
-| `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **blockiert** |
+| `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` | ❌ blockiert | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **blockiert** |
 | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-05 | **blockiert** |
 | `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-21 | **blockiert** |
 | `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-21 | **blockiert** |
@@ -131,7 +131,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 | Check | Dimension | Wirkung | Entscheidet | Artikel |
 |---|---|---|---|---|
-| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 48 |
+| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 49 |
 | **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 5 |
 | **T5-lesbarkeit** | technik | blockiert | Maschine (deterministisch) | 2 |
 | **T1-zeichenlaenge** | technik | blockiert | Maschine (deterministisch) | 1 |
@@ -140,7 +140,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**262** offene Befunde auf **74** Seiten (live: 162 auf 48 Artikeln) · ältester **24 Tage** · Frist 14 Tage · über der Frist: **92**.
+**265** offene Befunde auf **75** Seiten (live: 165 auf 49 Artikeln) · ältester **24 Tage** · Frist 14 Tage · über der Frist: **95**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -148,9 +148,9 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-⚠️ **219 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
+⚠️ **222 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
 
-🔴 **Eskalation:** 92 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
+🔴 **Eskalation:** 95 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
 
 ✅ **F1 (Faktenalter) ist nicht die Ursache:** Die Deckung trägt den Bestand; rot ist der Inhalt, nicht der Takt.
 
@@ -261,6 +261,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 ### `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` (blockiert, Risikoklasse standard)
 
+- **F4-fachbefund** [faktenalter]: 3f0a88ede9d44ee910cb (luecke): Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.; 51e259fd2d8582e774f7 (luecke): Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.; 55f8eeedc587cf0895ee (luecke): Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.
 - **T5-lesbarkeit** [technik]: Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
 
 ### `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` (blockiert, Risikoklasse standard)
