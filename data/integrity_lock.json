@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-14T19:40:35.183563+00:00",
-  "head": "8254522",
+  "signed_at": "2026-11-23T12:41:31.111434+00:00",
+  "head": "4bd8251",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -39,7 +39,7 @@
     "scripts/hardcases_guard.py": "15ffd843f106c7e7dfc4246d8e4ab7944e2db0238bb35bdd4529414d29631996",
     "scripts/internal_linker.py": "6273ffb63c128c5ead3abb657dd61a95c317b5d98f570b673d343a1654793d54",
     "scripts/lektor_guard.py": "eb8b8e43f264c86506952785efb889925f4c5df42ddee6d7bec952330b6d3491",
-    "scripts/lesbarkeit_heiler.py": "92ea9f6f235dcd8f550afd24ab9f517329dace321bc376837fec78741febcec5",
+    "scripts/lesbarkeit_heiler.py": "b19ef3b77de320b412baeb81f1e84d1511b7d4603f38f838edad897910f5f99e",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
@@ -59,68 +59,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "f4520b7af0485112176f245b5aa805285b3f8346acef62d2f28cebf4626f4f95",
-  "audit_start_sha256": "f8f0f22ef557fff43d7c131669a252abd039abd5dc6d5801f0e6db04bc4c0770",
+  "files_sha256": "b10d54e4e2abacd30bdbe7d47e3ac72a77ebcb5d80349a18b9196bf19783e2a6",
+  "audit_start_sha256": "0ef6cb11f2e309dc197fd31a58bce0384a4d82f8e28d272f449f908edf91bb52",
   "audit": [
-    {
-      "date": "2026-11-01",
-      "art": "heal",
-      "head": "957b02b4a",
-      "geaendert": [
-        "data/skill_lizenzen.json",
-        "data/skill_portfolio.yaml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "data/skill_lizenzen.json",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "957b02b4a",
-              "datum": "2026-11-01",
-              "betreff": "merge: main erneut nachgezogen (17 Social-Skills, K3-Routerpflicht)"
-            },
-            {
-              "sha": "782f4e271",
-              "datum": "2026-11-01",
-              "betreff": "feat(skills): 17 Social-Skills aufgenommen, K3-Routerpflicht für jeden Skill (#1006)"
-            },
-            {
-              "sha": "55f30ff60",
-              "datum": "2026-11-01",
-              "betreff": "merge: main erneut nachgezogen (38 Marketing-Skills, ff-lektorat)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "data/skill_portfolio.yaml",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "957b02b4a",
-              "datum": "2026-11-01",
-              "betreff": "merge: main erneut nachgezogen (17 Social-Skills, K3-Routerpflicht)"
-            },
-            {
-              "sha": "782f4e271",
-              "datum": "2026-11-01",
-              "betreff": "feat(skills): 17 Social-Skills aufgenommen, K3-Routerpflicht für jeden Skill (#1006)"
-            },
-            {
-              "sha": "b01d3edb1",
-              "datum": "2026-11-01",
-              "betreff": "fix(skills): emil-design-eng im Themen-Portfolio zugeordnet (P1)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "14b7163886f240f01dbaa6a0272f2d6908cd16e52751a4150a8e81db569404bc",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-01",
       "art": "heal",
@@ -178,7 +119,7 @@
         }
       ],
       "files_sha256": "211e0a24e25cfddc98e731fae1b4bf4d4218d51ee77ac53eddc76db727f95910",
-      "prev_sha256": "f8f0f22ef557fff43d7c131669a252abd039abd5dc6d5801f0e6db04bc4c0770"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-03",
@@ -490,8 +431,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "45cc368db1db43359ebd781ea3c2f5e3d4e269b72d3d23b39972f9e53e83a301",
-      "files_sha256": "f4520b7af0485112176f245b5aa805285b3f8346acef62d2f28cebf4626f4f95"
+      "files_sha256": "f4520b7af0485112176f245b5aa805285b3f8346acef62d2f28cebf4626f4f95",
+      "prev_sha256": "45cc368db1db43359ebd781ea3c2f5e3d4e269b72d3d23b39972f9e53e83a301"
+    },
+    {
+      "date": "2026-11-23",
+      "art": "heal",
+      "head": "4bd8251",
+      "geaendert": [
+        "scripts/lesbarkeit_heiler.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/lesbarkeit_heiler.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "4bd8251",
+              "datum": "2026-11-23",
+              "betreff": "chore(audit): Profi-Agentur-Empfehlungen vollständig umgesetzt (KI-VO, #1263, #1313, #1248, Lesbarkeit, Cornerstone, Orphans)"
+            },
+            {
+              "sha": "48da9e8",
+              "datum": "2026-11-23",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "8a3769d732aeb7ae79af5ef08c7ddfe449de1e62cbb15c90374fe6443afbfc50",
+      "files_sha256": "b10d54e4e2abacd30bdbe7d47e3ac72a77ebcb5d80349a18b9196bf19783e2a6"
     }
   ]
 }

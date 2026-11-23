@@ -398,3 +398,4 @@
 {"date": "2026-11-14", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/generate_covers.py"]}
 {"date": "2026-11-16", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-11-20", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-23", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/lesbarkeit_heiler.py"], "head": "4bd8251"}
