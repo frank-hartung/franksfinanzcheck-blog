@@ -1,52 +1,32 @@
 {
   "target": 6,
-  "ready": 2,
-  "pool_size": 12,
-  "generated_at": "2026-11-21T16:57:13Z",
+  "ready": 0,
+  "pool_size": 11,
+  "generated_at": "2026-11-22T17:20:35Z",
   "candidates": [
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "ready": true,
+      "ready": false,
       "sha256": "22f892be9e82233e0a7a9db7cd9e3060b2ef65a8068bc87bd780fc823a678e1c",
-      "flesch": 63.6,
-      "measured_at": "2026-11-21T16:52:38Z",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "measured_at": "2026-11-22T17:17:15Z",
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "fad86da0000fc425d261dd2bfc12b17a1852955c6924c6138de909f3b7ce0fd8",
-      "flesch": 65.8,
-      "measured_at": "2026-11-21T16:53:09Z",
-      "score": 0.93,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "measured_at": "2026-11-22T17:17:46Z",
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
-      "slug": "2026-11-21-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "slug": "2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "dc3914124a311f719ae645ac9e9566f24b58ef649eec2fc71fadaf74c5b183b2",
+      "sha256": "64a615a00291abb5bdebac5fa33c617737257935e9d055d1fe18a472dd6a51f6",
       "flesch": 69.8,
-      "measured_at": "2026-11-21T16:53:36Z",
+      "measured_at": "2026-11-22T17:18:13Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-21-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -63,14 +43,14 @@
       }
     },
     {
-      "slug": "2026-11-21-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "slug": "2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "31cd90767717dd8bb1b360118a12075c33dbff967370b1df533c03a5290d5b62",
+      "sha256": "80a49fcfabbe9d6d0a6a44ac1db240c4d7ce767b6066db9bfae1572c7267c961",
       "flesch": 73.3,
-      "measured_at": "2026-11-21T16:54:04Z",
+      "measured_at": "2026-11-22T17:18:42Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "🛑 2026-11-21-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Zeichenlänge (check_length.py) nicht bestanden",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -86,14 +66,14 @@
       }
     },
     {
-      "slug": "2026-11-21-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "slug": "2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "0cc72d4f5682f8738484bb525392ecbb224ef701f51d2bc5f5439ce0a743915e",
+      "sha256": "1b842057c9b2a78a9e488fc0750c9c6991c38ee6d622eb9fbb046ff2278a38af",
       "flesch": 63.8,
-      "measured_at": "2026-11-21T16:54:30Z",
+      "measured_at": "2026-11-22T17:19:09Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-21-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -110,14 +90,14 @@
       }
     },
     {
-      "slug": "2026-11-21-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "slug": "2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "ready": false,
-      "sha256": "16e27b5326dee3934b6cea4eb3eb64b4e2861c5a26f8a9e8bd17c67b8900ad16",
+      "sha256": "ab96c70319519c71375976bd0198d2fe05bd69e14bb8ab7c9f86822ac81d3096",
       "flesch": 62.4,
-      "measured_at": "2026-11-21T16:54:56Z",
+      "measured_at": "2026-11-22T17:19:35Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-21-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -134,14 +114,57 @@
       }
     },
     {
-      "slug": "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "slug": "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
       "ready": false,
-      "sha256": "0c218c406989f7ba3327ceb7f153bbf8ff32eb9b9b6b0fa13202d1cdf75911e7",
+      "sha256": "bb38e330ad4c0df108292bd2e61597d7ca1049e4bb87e879c84d4cfec42fe129",
+      "flesch": 67.5,
+      "measured_at": "2026-11-22T17:19:36Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 773 Wörter / 5930 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "details": [
+        "Umfang: 773 Wörter / 5930 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+      ],
+      "score": 0.855,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.52,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+      "ready": false,
+      "sha256": "b4ab35534712449b194e25ac12993e2f67ac0116d15428718304252d7b4675fd",
+      "flesch": 60.0,
+      "measured_at": "2026-11-22T17:19:38Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
+      "details": [
+        "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
+        "Umfang: 1239 Wörter / 9199 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+      ],
+      "score": 0.918,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.56,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "ready": false,
+      "sha256": "247abd808bd8c395c0c703ed601e3382f4b84356707b383207fa130696e2f762",
       "flesch": 71.2,
-      "measured_at": "2026-11-21T16:55:24Z",
+      "measured_at": "2026-11-22T17:20:07Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -158,43 +181,20 @@
       }
     },
     {
-      "slug": "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "1b277fe6b17bb90d3975265fa00d81435669c42bd0f2eb8ec97edbb8e82b7c5e",
-      "flesch": 63.6,
-      "measured_at": "2026-11-21T16:55:50Z",
-      "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
+      "sha256": "cf5676c9f2c6aa0f0b7417f5ed3aad6838084d9a55820c1146231e4e100b98cd",
+      "flesch": 61.3,
+      "measured_at": "2026-11-22T17:20:08Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 709 Wörter / 5112 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
-        "🛑 2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.984,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-11-21-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
-      "ready": false,
-      "sha256": "035182364bd8dad9d2471a1d2aa68102d7f95a39a55caf4d98d9805203bae6cc",
-      "flesch": 60.6,
-      "measured_at": "2026-11-21T16:55:52Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 708 Wörter / 5128 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
-      "details": [
-        "Umfang: 708 Wörter / 5128 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+        "Umfang: 709 Wörter / 5112 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
         "Struktur: nur 4 H2-Abschnitte (Minimum 5)",
         "FAQ: nur 0 Fragen (Premium verlangt 4)"
       ],
-      "score": 0.897,
+      "score": 0.917,
       "parts": {
-        "spelling": 0.86,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 0.49999999999999994,
         "typography": 1.0,
@@ -204,14 +204,14 @@
       }
     },
     {
-      "slug": "2026-11-21-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+      "slug": "2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "ready": false,
-      "sha256": "8b2f03a62068f71bc00bb9ada2420a21c59b5735575bc6f24b15c8c10fbaa7de",
-      "flesch": 68.4,
-      "measured_at": "2026-11-21T16:56:18Z",
+      "sha256": "48e2337ac29a4896103476915fe5ef371d49ff718460a8634b8a47d6164c8ecf",
+      "flesch": 68.5,
+      "measured_at": "2026-11-22T17:20:35Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
-        "🛑 2026-11-21-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -225,69 +225,67 @@
         "affiliate": 1.0,
         "readability": 1.0
       }
-    },
-    {
-      "slug": "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
-      "ready": false,
-      "sha256": "8f97fd143ed07363cef825b543a0c09af428ade5f4c072674601296c300d1a39",
-      "flesch": 69.8,
-      "measured_at": "2026-11-21T16:56:47Z",
-      "reason": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
-      "details": [
-        "🛑 2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa452f879ea8f2da (luecke): Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt.",
-        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.948,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-11-21-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
-      "ready": false,
-      "sha256": "065ae56fc0846fc7b106ec017708700b492f8bdc6f34970b63623874a72fa4c0",
-      "flesch": 67.0,
-      "measured_at": "2026-11-21T16:57:13Z",
-      "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-      "details": [
-        "🛑 2026-11-21-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.972,
-      "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
     }
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "44924314419",
+    "run_id": "45044341506",
     "run_attempt": "1"
   },
   "geschont": [
     {
-      "slug": "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "slug": "2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "klasse": "heilbar",
       "hits": 2,
       "heiler": [
         "faktenfrische.py"
       ],
       "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "check_length.py"
+      ],
+      "warum": "Der Längen-Floor wird von der Kette gehoben; ein kurzer Entwurf heißt meist nur: Der Gratis-Provider war im Cooldown (Realfall #594)."
+    },
+    {
+      "slug": "2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "faktenfrische.py"
+      ],
+      "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "faktenfrische.py"
+      ],
+      "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "faktenfrische.py"
+      ],
+      "warum": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."
+    },
+    {
+      "slug": "2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "check_length.py"
+      ],
+      "warum": "Kurzer Vorstufen-Entwurf wird von check_length.py verlängert."
     }
   ]
 }

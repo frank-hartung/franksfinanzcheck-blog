@@ -24,6 +24,8 @@ nicht anspringt.
 """
 from __future__ import annotations
 
+import contextlib
+import io
 import sys
 import tempfile
 import unittest
@@ -195,6 +197,75 @@ class RegelTest(unittest.TestCase):
         with KleinerBaum() as baum:
             baum.workflow("fliess.yml", "on:\n  push:\n    paths: [scripts/probe.py]\n")
             self.assertEqual(wache.main(["--check", "--root", str(baum.root)]), 2)
+
+
+class BezugTest(unittest.TestCase):
+    """`--bezogen-auf` (22.11.2026): Urteil über DEN Commit, nicht über Altlast.
+
+    Der gemeinsame Schreibweg `scripts/git_sync.sh` muss VOR dem Commit wissen,
+    ob genau dieser Commit einen Workflow referenz- oder waisenbruchig macht.
+    Ein bereits roter Fremdstand auf `main` darf keinen Lauf blockieren – sonst
+    steht die Automatisierung still (dieselbe Grenze wie die Syntax-Notbremse
+    #864). Ohne Auswahl bliebe nur „alles" (blockiert fremde Altlast) oder
+    „nichts" (die Drift landet – real geschehen am 21./22.11.2026).
+    """
+
+    def test_bezug_ueber_datei_aufruf_und_filter(self) -> None:
+        with KleinerBaum() as baum:
+            baum.workflow("rot.yml", workflow(["scripts/anders.py"]))
+            baum.workflow("gruen.yml", workflow(["scripts/probe.py"]))
+
+            def namen(pfade: list[str]) -> list[str]:
+                return sorted(d.name for d in wache.relevante_workflows(baum.root, pfade))
+
+            self.assertEqual(namen(["scripts/anders.py"]), ["rot.yml"])
+            self.assertEqual(namen([".github/workflows/gruen.yml"]), ["gruen.yml"])
+            self.assertEqual(namen(["gruen.yml"]), ["gruen.yml"])
+            self.assertEqual(namen(["scripts/probe.py"]), ["gruen.yml", "rot.yml"])
+            self.assertEqual(namen(["content/ohne-bezug.md"]), [])
+            self.assertEqual(namen([]), [])
+
+    def test_altlast_ausserhalb_der_auswahl_blockiert_nicht(self) -> None:
+        """Kern der Notbremse: Bestand rot, eigener Pfad sauber → Exit 0."""
+        with KleinerBaum() as baum:
+            baum.workflow("rot.yml", workflow(["scripts/anders.py"]))
+            baum.workflow("gruen.yml", workflow(["scripts/probe.py"]))
+            self.assertNotEqual(wache.pruefe(baum.root), [], "Ausgangslage: Bestand ist rot")
+            self.assertEqual(
+                wache.main(["--check", "--root", str(baum.root),
+                            "--bezogen-auf", ".github/workflows/gruen.yml"]), 0)
+
+    def test_eigener_verstoss_wird_in_der_auswahl_rot(self) -> None:
+        with KleinerBaum() as baum:
+            baum.workflow("rot.yml", workflow(["scripts/anders.py"]))
+            self.assertEqual(
+                wache.main(["--check", "--root", str(baum.root),
+                            "--bezogen-auf", "scripts/anders.py"]), 1)
+
+    def test_geloeschter_pfad_zaehlt_ueber_die_filternennung(self) -> None:
+        """W2-Fall: `aufrufe()` sieht nur existierende Dateien – der Filter schon."""
+        with KleinerBaum() as baum:
+            baum.workflow("waise.yml", workflow(["scripts/probe.py", "docs/weg.md"]))
+            self.assertEqual(
+                wache.main(["--check", "--root", str(baum.root),
+                            "--bezogen-auf", "docs/weg.md"]), 1)
+
+    def test_bericht_zeigt_die_auswahl_als_auswahl(self) -> None:
+        text = wache.bericht([], 1, bezug=["scripts/probe.py"])
+        self.assertIn("Auswahl: bezogen auf 1 Pfad(e)", text)
+        self.assertIn("NICHT", text, "der Bericht muss die Messlücke benennen")
+        self.assertNotIn("Auswahl:", wache.bericht([], 1))
+
+    def test_leere_auswahl_ist_kein_gruen_fuer_den_bestand(self) -> None:
+        """Kein Scheingrün (C33): „nichts relevant" ≠ „Bestand gemessen"."""
+        with KleinerBaum() as baum:
+            baum.workflow("rot.yml", workflow(["scripts/anders.py"]))
+            ausgabe = io.StringIO()
+            with contextlib.redirect_stdout(ausgabe):
+                code = wache.main(["--check", "--root", str(baum.root),
+                                   "--bezogen-auf", "content/ohne-bezug.md"])
+        self.assertEqual(code, 0)
+        self.assertIn("KEIN Grün für den Gesamtbestand", ausgabe.getvalue())
 
 
 class AufrufTest(unittest.TestCase):

@@ -1,9 +1,9 @@
 ---
 title: "Geschirrspüler voll beladen: Wasser und Strom sparen"
 description: "Vergleiche beim Geschirrspüler ganze Spülgänge statt einzelne Teller. Belade die Körbe so, dass Sprüharme frei bleiben und kein zweiter Lauf nötig wird."
-date: 2026-11-13T11:26:17Z
-draft: true
-reserve: true
+date: 2026-11-23T02:55:19Z
+draft: false
+reserve_published: 2026-11-23
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -43,8 +43,9 @@ faktenfrische_aliases:
   - "2026-11-12-geschirrspueler-voll-so-sparst-du-wasser-und-strom"
 ---
 
-
 Ein Haushalt mit zwei Erwachsenen und zwei Kindern nutzt die Spülmaschine täglich. Oft wandern Teller, Tassen und Töpfe hinein, wie sie gerade anfallen. Erst wenn der **Geschirrspüler voll** eingeräumt ist, arbeitet das Gerät wirklich sparsam.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Doch bei genauerem Hinsehen zeigen sich viele ungenutzte Lücken zwischen den Tellern. In diesem Modellfall wird die Maschine gestartet, obwohl noch Platz für das Geschirr der nächsten Mahlzeit gewesen wäre. Wer seinen **Geschirrspüler voll** und durchdacht einräumt, reduziert die Anzahl der Spülgänge pro Woche deutlich. Das schont nicht nur die Umwelt, sondern senkt auch die monatlichen Fixkosten für Strom und Wasser spürbar.
 
@@ -197,7 +198,7 @@ Wenn sich dort Schimmel bildet, riecht die Maschine unangenehm. Ein gut gepflegt
 
 **Für deinen nächsten Check:** Kontrolliere nach dem Spülgang, ob alle Flächen sauber sind. Musst du einzelne Teile erneut spülen, hat die dichtere Beladung einen Teil des Vorteils schon verbraucht.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Mehrwegflaschen Pfand](../../posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/)
 **Lesetipp:** [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
 
 ## Häufige Fragen

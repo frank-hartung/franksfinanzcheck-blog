@@ -1,0 +1,37 @@
+{
+  "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
+  "titel": "DSL-Tarif prüfen: Effektivpreis statt Lockpreis",
+  "erzeugt": "2026-11-22 12:49 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+    "alter_tage": 40,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 5
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "120eeede45b3376d20c63aab1e3df056207f1287dabb70f07a6620409c61f461",
+  "text_sha256": "bbd0314bbbfab41f96ca9adc3cfef6b36ca7e51251dfe3a12cbc13d5e33fd163",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
+}

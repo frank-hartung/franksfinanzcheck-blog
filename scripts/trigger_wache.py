@@ -309,9 +309,54 @@ def workflow_dateien(root: Path) -> list[Path]:
     return sorted([*ordner.glob("*.yml"), *ordner.glob("*.yaml")])
 
 
-def pruefe(root: Path = BLOG_DIR) -> list[Befund]:
-    befunde: list[Befund] = []
+def relevante_workflows(root: Path, pfade: Sequence[str]) -> list[Path]:
+    """Workflows, die von den gegebenen Pfaden berührt werden (Bezugsauswahl).
+
+    WARUM (22.11.2026): Die Wache misst den Bestand – das ist im Gate richtig,
+    hilft dem gemeinsamen Schreibweg `scripts/git_sync.sh` aber nicht. Der soll
+    VOR dem Commit wissen, ob genau DIESER Commit einen Workflow referenz- oder
+    waisenbruchig macht; ein bereits roter Fremdstand auf `main` darf keinen
+    Lauf blockieren (dieselbe Grenze wie die Syntax-Notbremse #864). Ohne
+    Auswahl bliebe nur „alles prüfen" (falsch: blockiert fremde Altlast) oder
+    „nichts prüfen" (falsch: die Drift landet, wie am 21./22.11. geschehen).
+
+    Drei Bezüge, alle aus dem Text des Workflows gelesen – nichts geraten:
+      a) die Workflow-Datei selbst liegt in `pfade` (Basename oder Repo-Pfad),
+      b) der Workflow ruft einen der Pfade in einem `run:`-Block auf → W1,
+      c) ein `paths`/`paths-ignore`-Filter nennt einen der Pfade, wörtlich oder
+         über GitHubs Glob-Regeln → W2 (auch für Pfade, die der Commit LÖSCHT:
+         `aufrufe()` sieht nur existierende Dateien, der Filter nicht).
+    """
+    ziel = {p.strip().removeprefix("./") for p in pfade if p and p.strip()}
+    if not ziel:
+        return []
+    auswahl: list[Path] = []
     for datei in workflow_dateien(root):
+        repo_relativ = datei.relative_to(root).as_posix()
+        if repo_relativ in ziel or datei.name in ziel:
+            auswahl.append(datei)
+            continue
+        try:
+            text = datei.read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            continue
+        if aufrufe(text, root) & ziel:
+            auswahl.append(datei)
+            continue
+        filter_liste = [eintrag
+                        for conf in trigger(text).values()
+                        for art in ("paths", "paths-ignore")
+                        for eintrag in conf.get(art) or []]
+        if any(gedeckt(pfad, filter_liste) for pfad in ziel):
+            auswahl.append(datei)
+    return auswahl
+
+
+def pruefe(root: Path = BLOG_DIR, bezug: Sequence[str] | None = None) -> list[Befund]:
+    befunde: list[Befund] = []
+    dateien = (workflow_dateien(root) if bezug is None
+               else relevante_workflows(root, bezug))
+    for datei in dateien:
         name = datei.relative_to(root / WORKFLOW_DIR).as_posix()
         text = datei.read_text(encoding="utf-8")
         ereignisse = trigger(text)
@@ -361,10 +406,18 @@ def pruefe(root: Path = BLOG_DIR) -> list[Befund]:
     return befunde
 
 
-def bericht(befunde: Sequence[Befund], geprueft: int) -> str:
+def bericht(befunde: Sequence[Befund], geprueft: int,
+            bezug: Sequence[str] | None = None) -> str:
     zeilen = ["# Trigger-Wache – was ein Lauf prüft, muss ihn auch auslösen", ""]
     zeilen.append(f"Workflows geprüft: **{geprueft}** · Befunde: **{len(befunde)}**")
     zeilen.append("")
+    if bezug is not None:
+        # Kein Scheingrün (C33): Eine Auswahl prüft die Auswahl – nicht den
+        # Bestand. Wer das liest, muss sehen, dass der Rest nicht gemessen ist.
+        zeilen.append(f"Auswahl: bezogen auf {len(list(bezug))} Pfad(e) dieses "
+                      "Commits – der übrige Bestand ist in diesem Lauf NICHT "
+                      "gemessen (dafür steht `--check` ohne Bezug im Gate).")
+        zeilen.append("")
     if not befunde:
         zeilen.append("Keine Befunde: Jeder aufgerufene Prüfer löst seinen Lauf aus.")
         return "\n".join(zeilen) + "\n"
@@ -488,7 +541,32 @@ jobs:
         probe("W3/asymmetrie_erkannt", len(schief) == 1 and "scripts/a.py" in schief[0].text,
                schief)
 
-        # --- 6 · Fließform wird nicht geraten, sondern gemeldet -----------
+        # --- 6 · Bezugsauswahl: dieser Commit, nicht fremde Altlast --------
+        # (22.11.2026 – der gemeinsame Schreibweg braucht ein Urteil über die
+        # Pfade, die er selbst anfasst; `--check` im Gate bleibt beim Bestand.)
+        auswahl = relevante_workflows(root, ["scripts/anders.py"])
+        probe("Bezug/filternennung_waehlt_aus",
+              [d.name for d in auswahl] == ["rot.yml"], [d.name for d in auswahl])
+        probe("Bezug/w1_in_der_auswahl_gefunden",
+              any(b.regel == REGEL_REFERENZ and b.workflow == "rot.yml"
+                  for b in pruefe(root, bezug=["scripts/anders.py"])), "")
+        probe("Bezug/w2_ueber_pfad_den_der_commit_loescht",
+              any(b.regel == REGEL_WAISE and b.workflow == "waise.yml"
+                  for b in pruefe(root, bezug=["docs/gibt-es-nicht.md"])), "")
+        probe("Bezug/datei_selbst_ist_bezug",
+              [d.name for d in relevante_workflows(
+                  root, [".github/workflows/gruen.yml"])] == ["gruen.yml"], "")
+        probe("Bezug/gruener_workflow_allein_bleibt_gruen",
+              pruefe(root, bezug=[".github/workflows/gruen.yml"]) == [], "")
+        probe("Bezug/aufruf_im_run_block_waehlt_aus",
+              "gruen.yml" in [d.name for d in relevante_workflows(
+                  root, ["scripts/probe.py"])], "")
+        probe("Bezug/ohne_treffer_gibt_es_nichts_zu_pruefen",
+              relevante_workflows(root, ["content/ohne-bezug.md"]) == []
+              and pruefe(root, bezug=["content/ohne-bezug.md"]) == [], "")
+        probe("Bezug/leere_liste_prueft_nichts", relevante_workflows(root, []) == [], "")
+
+        # --- 7 · Fließform wird nicht geraten, sondern gemeldet -----------
         try:
             trigger("on:\n  push:\n    paths: [a, b]\n")
         except ValueError:
@@ -496,13 +574,13 @@ jobs:
         else:
             fehler.append("Fließform: ungeprüfte Form wurde stillschweigend akzeptiert")
 
-    # --- 7 · Der echte Bestand: Selbsttest darf eigene Befunde melden ---
+    # --- 8 · Der echte Bestand: Selbsttest darf eigene Befunde melden ---
     if fehler:
         print("❌ Trigger-Wache-Selbsttest fehlgeschlagen:", file=sys.stderr)
         for eintrag in fehler:
             print(f"   · {eintrag}", file=sys.stderr)
         return 2
-    print("✅ Trigger-Wache-Selbsttest bestanden (Parser, W1, W2, W3, Fließform-Sperre).")
+    print("✅ Trigger-Wache-Selbsttest bestanden (Parser, W1, W2, W3, Bezugsauswahl, Fließform-Sperre).")
     return 0
 
 
@@ -513,26 +591,46 @@ def main(argv: Sequence[str] | None = None) -> int:
     modus.add_argument("--md", action="store_true", help="Markdown-Bericht ausgeben")
     modus.add_argument("--selftest", action="store_true", help="Sabotage- und Gegenproben")
     parser.add_argument("--root", default=str(BLOG_DIR), help="Wurzel (Tests)")
+    parser.add_argument("--bezogen-auf", action="append", default=None, metavar="PFAD",
+                        help="nur Workflows prüfen, die dieser Pfad berührt "
+                             "(Wiederholung möglich). Bezug = die Workflow-Datei "
+                             "selbst, ein Aufruf im `run:`-Block oder eine "
+                             "Nennung im `paths`-Filter. Für den gemeinsamen "
+                             "Schreibweg (git_sync.sh): prüft den Commit, nicht "
+                             "fremde Altlast auf main.")
     args = parser.parse_args(argv)
 
     if args.selftest:
         return selftest()
 
     root = Path(args.root).resolve()
+    bezug = list(args.bezogen_auf) if args.bezogen_auf else None
     try:
-        befunde = pruefe(root)
+        auswahl = None if bezug is None else relevante_workflows(root, bezug)
+        befunde = pruefe(root, bezug=bezug)
     except (OSError, UnicodeError, ValueError) as fehler:
         print(f"❌ Trigger-Wache nicht durchführbar: {fehler}", file=sys.stderr)
         return 2
-    geprueft = len(workflow_dateien(root))
+    geprueft = len(workflow_dateien(root)) if auswahl is None else len(auswahl)
 
     if args.md:
-        print(bericht(befunde, geprueft))
+        print(bericht(befunde, geprueft, bezug=bezug))
         return 1 if befunde else 0
 
-    print(bericht(befunde, geprueft))
+    print(bericht(befunde, geprueft, bezug=bezug))
     if not befunde:
-        print(f"✅ Trigger-Wache: {geprueft} Workflows, keine Befunde.")
+        if bezug is None:
+            print(f"✅ Trigger-Wache: {geprueft} Workflows, keine Befunde.")
+            return 0
+        print(f"✅ Trigger-Wache (Auswahl): {geprueft} relevante(r) Workflow(s) "
+              f"für {len(bezug)} Pfad(e) geprüft, keine Befunde.")
+        if geprueft == 0:
+            # Ehrlich bleiben: „nichts relevant" ist kein Urteil über den
+            # Bestand. Der Satz steht im Log, damit niemand ein Grün liest,
+            # wo keins gemessen wurde.
+            print("   Hinweis: kein Workflow berührt diese Pfade – es gab in der "
+                  "Auswahl nichts zu prüfen. Das ist KEIN Grün für den "
+                  "Gesamtbestand (dafür läuft `--check` ohne Bezug im Gate).")
         return 0
     print(f"❌ Trigger-Wache: {len(befunde)} Befund(e).", file=sys.stderr)
     return 1

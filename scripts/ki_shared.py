@@ -432,6 +432,10 @@ def build_frontmatter(*, title, description, tags, pillar=None,
     # übergibt (ki_redaktion, künftige Rollen), kann das Fenster nicht mehr
     # reißen; gemessen und gekürzt wird nur in serp_limits.
     description = clip_text(description)
+    # Dieselbe Grenze für den Titel (M1). Der Beschreibungs-Schnitt war da,
+    # der Titel-Schnitt fehlte – deshalb ging am 22.11.2026 ein 64-Zeichen-
+    # Titel versiegelt live (siehe metadaten_wache M1).
+    title = post_utils.titel_kuerzen(title, 60)
     review_block = pruefgeruest(title, keywords, pillar)
     date = datetime.datetime.now(datetime.timezone.utc)
     date_str = date.strftime("%Y-%m-%dT%H:%M:%SZ")

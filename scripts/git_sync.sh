@@ -160,6 +160,21 @@
 #    mit Sieben-Gleichheitszeichen-Überschriften bleiben sauber).
 #    Ohne python3 oder ohne origin/$BRANCH wird gewarnt; sonst hart.
 #
+#  NOTBREMSE (22.11.2026) – TRIGGER-VERTRAG: kein Commit/Push, der einen
+#  Workflow etwas aufrufen lässt, das sein eigener paths-Filter nicht auslöst:
+#    Am 21.11.2026 stand `code-selbstheilung.yml` mit einem Aufruf von
+#    `scripts/git_sync.sh` auf main, ohne die Datei in den `paths`-Listen zu
+#    nennen (Skript-Syntax rot, Run 44941227657). Der nächste main-Commit kam
+#    per `GITHUB_TOKEN` (Automationslauf 5e8233e) – und Token-Pushes lösen
+#    keine Folgeläufe aus. Also maß niemand den liegenden Stand, und der
+#    Befund wartete über einen Tag auf den nächsten fremden PR.
+#    Jetzt prüft `scripts/trigger_wache.py --bezogen-auf <pfad>` den Vertrag
+#    für genau die Pfade dieses Commits (`.github/workflows`, `scripts`,
+#    `tools`, `e2e`, inklusive gelöschter Dateien für W2). Fremde Altlast
+#    blockiert keinen Lauf; die Bestandsmessung bleibt im Gate, das seitdem
+#    zusätzlich als Zeitlauf läuft (skript-syntax.yml).
+#    Ohne python3 oder ohne Trigger-Wache wird gewarnt; sonst hart.
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -1206,6 +1221,77 @@ konfliktmarker_notbremse() {
 }
 
 # ========================================================================
+#  NOTBREMSE (22.11.2026) – TRIGGER-VERTRAG: Kein Commit/Push, der einen
+#  Workflow etwas aufrufen lässt, das sein eigener paths-Filter nicht
+#  auslöst (W1), oder der einen Filter auf eine verschwundene Datei zeigen
+#  lässt (W2).
+#
+#    BEFUND: Am 21.11.2026 19:29 wurde `Skript-Syntax (liegender Stand)` auf
+#    `main` rot (Run 44941227657, Schritt Trigger-Wache):
+#    `code-selbstheilung.yml` rief `scripts/git_sync.sh` auf, ohne die Datei
+#    in BEIDEN paths-Listen zu nennen. Geheilt hat es niemand, denn der
+#    nächste Commit auf `main` (Automationslauf `Schaltwerk`, 5e8233e,
+#    22.11. 08:45) wurde mit `GITHUB_TOKEN` gepusht – und Token-Pushes lösen
+#    bei GitHub KEINE Folgeläufe aus. Der Befund stand damit über einen Tag
+#    unbeobachtet auf `main` und färbte erst am nächsten fremden PR wieder
+#    sichtbar rot (dieselbe Blindstelle, für die deploy-catchup.yml und
+#    befund-akte-nachziehen.yml je einen Zeitlauf haben).
+#
+#    Dieser Haken schließt die Lücke an der Quelle, wo der Commit entsteht:
+#    Er prüft den Trigger-Vertrag für genau die Pfade, die DIESER Commit
+#    anfasst (`scripts/trigger_wache.py --bezogen-auf`). Damit gilt dieselbe
+#    Grenze wie bei der Syntax-Notbremse (#864): Ein bereits roter
+#    Fremdstand auf `main` blockiert keinen Lauf – gemessen wird die eigene
+#    Änderung. Die Bestandsmessung bleibt, wo sie hingehört: im Gate
+#    (skript-syntax.yml, dort seit 22.11.2026 zusätzlich als Zeitlauf, der
+#    auch Token-Pushes abdeckt).
+#
+#    Geprüft wird nur, wer Prüfer oder Workflows anfasst (`.github/workflows`,
+#    `scripts`, `tools`, `e2e`) – ein reiner Inhalts-Commit bleibt schnell.
+#    Gelöschte Dateien zählen mit (`--diff-filter=ACMRD`): Sie sind der
+#    W2-Fall, und `aufrufe()` sieht nur existierende Dateien.
+#    Ohne python3 oder ohne Trigger-Wache wird gewarnt, nicht blockiert: Die
+#    Notbremse darf die Automatisierung nicht an einem fehlenden Werkzeug
+#    aufhalten (das Gate misst es ohnehin).
+#  $1 = staged | push
+# ========================================================================
+trigger_notbremse() {
+  local modus="$1" dateien="" f wache="scripts/trigger_wache.py"
+  local -a bezug=() pfadmuster=('.github/workflows/*' 'scripts/*' 'tools/*' 'e2e/*')
+  [ -f "$wache" ] || return 0
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "::warning::git_sync.sh: python3 fehlt – Trigger-Notbremse übersprungen."
+    return 0
+  fi
+  case "$modus" in
+    staged)
+      dateien=$(git diff --cached --name-only --diff-filter=ACMRD -- "${pfadmuster[@]}" || true)
+      ;;
+    push)
+      dateien=$(git diff --name-only --diff-filter=ACMRD "origin/$BRANCH...HEAD" \
+                  -- "${pfadmuster[@]}" 2>/dev/null || true)
+      ;;
+    *)
+      return 0
+      ;;
+  esac
+  [ -n "$dateien" ] || return 0
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    bezug+=(--bezogen-auf "$f")
+  done <<< "$dateien"
+  [ "${#bezug[@]}" -gt 0 ] || return 0
+  if ! python3 "$wache" --check "${bezug[@]}"; then
+    echo "::error::git_sync.sh: Trigger-Vertrag verletzt – kein Commit/Push (Notbremse)."\
+         " Heilung: W1 → die aufgerufene Datei in BEIDE paths-Listen des Workflows"\
+         " (push UND pull_request); W2 → den verwaisten Filtereintrag entfernen oder"\
+         " die Datei wiederherstellen. Lokal: python3 scripts/trigger_wache.py --check"
+    return 1
+  fi
+  return 0
+}
+
+# ========================================================================
 #  ABGELEITETE BILDZEILEN NACHZIEHEN (Dauerheilung 30.10.2026)
 #
 #    Die Bildzeile der Top-20-Abbildungen ist ABGELEITET: aus Titel,
@@ -1393,6 +1479,7 @@ if [ "$PUSH_ONLY" = "1" ]; then
     fi
   fi
   syntax_notbremse push || exit 1        # #864: kein Push mit kaputtem Skript
+  trigger_notbremse push || exit 1       # 22.11.2026: kein Push mit gebrochenem Trigger-Vertrag
   konfliktmarker_notbremse push || exit 1  # #1073+: kein Push mit Merge-Markern
   sync_und_push    || exit 1
   echo "git_sync.sh: Push erfolgreich."
@@ -1450,6 +1537,16 @@ fi
 if ! syntax_notbremse staged; then
   git reset -q || true
   echo "::error::git_sync.sh: Commit abgebrochen (Syntax-Notbremse). Keine Änderung gepusht."
+  exit 1
+fi
+
+# 22.11.2026: Kein Commit, der einen Workflow etwas aufrufen lässt, das sein
+# eigener paths-Filter nicht auslöst (W1) – oder der einen Filter auf eine
+# verschwundene Datei zeigen lässt (W2). Gemessen wird die eigene Änderung,
+# nicht fremde Altlast (dieselbe Grenze wie #864).
+if ! trigger_notbremse staged; then
+  git reset -q || true
+  echo "::error::git_sync.sh: Commit abgebrochen (Trigger-Notbremse). Keine Änderung gepusht."
   exit 1
 fi
 

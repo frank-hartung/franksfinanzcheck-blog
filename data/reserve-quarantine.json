@@ -1,64 +1,8 @@
 {
-  "2026-11-21-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
-    "datei_sha256": "1d900226ad3ccd608f5b64021203616c9cacfad76e42beaf1ed1c517c246f66e",
+  "2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+    "datei_sha256": "aa79bc83c3880977e6e4a341f2152e34d44349bef8142723886d53112f0ac2b6",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T16:43:49Z",
-    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
-    "hits": 1,
-    "klasse": "heilbar",
-    "laeufe": [
-      "run:44924314419"
-    ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
-    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
-  },
-  "2026-11-21-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
-    "datei_sha256": "8835483014e9b3437a57bdda4a20590fb631d91e10c6098a4ff26fb167cf547d",
-    "fassung_gewechselt": true,
-    "first": "2026-11-21T16:43:49Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
-    "hits": 1,
-    "klasse": "heilbar",
-    "laeufe": [
-      "run:44924314419"
-    ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
-  },
-  "2026-11-21-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
-    "datei_sha256": "8066ebb73f59ae22369fc687c512796fc9f3a35ea9d38792e814379e7abae428",
-    "fassung_gewechselt": true,
-    "first": "2026-11-21T16:57:13Z",
-    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
-    "hits": 1,
-    "klasse": "heilbar",
-    "laeufe": [
-      "run:44924314419"
-    ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
-    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
-  },
-  "2026-11-21-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
-    "datei_sha256": "7779308b6ea01ebefeab2f65ecccb2376db855141c3d7b9b0fbb379c602c8a12",
-    "fassung_gewechselt": true,
-    "first": "2026-11-21T16:57:13Z",
-    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
-    "hits": 1,
-    "klasse": "heilbar",
-    "laeufe": [
-      "run:44924314419"
-    ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
-    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
-  },
-  "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
-    "datei_sha256": "7713acde6ab7126c7b0a724140125ab186cc4d20204d1e4a8c44701760d15713",
-    "fassung_gewechselt": true,
-    "first": "2026-11-21T12:04:42Z",
+    "first": "2026-11-22T12:05:58Z",
     "geschont": true,
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "heiler": [
@@ -67,81 +11,146 @@
     "hits": 2,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44899366791",
-      "run:44924314419"
+      "run:45018798061",
+      "run:45044341506"
     ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
-  "2026-11-21-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-    "datei_sha256": "4e465aa69edf5e5096d8c881fb8ff138494a8bcacbd53b6625b1df23a5926d08",
+  "2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+    "datei_sha256": "2b4cf8f93e5d994303dc402c80d7c52652eef90f9f4e0898ff419ff62417e813",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T16:43:49Z",
-    "grund": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
-    "hits": 1,
-    "klasse": "menschlich",
-    "laeufe": [
-      "run:44924314419"
+    "first": "2026-11-22T12:05:58Z",
+    "geschont": true,
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "heiler": [
+      "check_length.py"
     ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
-    "signatur": "faktenfrische nicht bestanden: <n>c<n>e<n>d<n>f<n>da<n>ec<n> (luecke): der hinweis, dass ein anbieterwechsel im durchschnitt <n>‑<n> wochen dauert, fehlt eine nachweisbare quelle.; <n>b<n>daf<n>f<n>a<"
+    "hits": 2,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:45018798061",
+      "run:45044341506"
+    ],
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
   },
-  "2026-11-21-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
-    "datei_sha256": "95f039f3adcb92430c158227d7ffc6eb57ed6f86e60babc0e113a7e4d73246c6",
+  "2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+    "datei_sha256": "4e79bf0a7905678e6e3aca877c70865274a0ba527e49a8b73740bd9f1a61ca20",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T16:57:13Z",
-    "grund": "Reserve-Qualitäts-Gate: Umfang: 708 Wörter / 5128 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+    "first": "2026-11-22T12:05:58Z",
+    "geschont": true,
+    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+    "heiler": [
+      "faktenfrische.py"
+    ],
+    "hits": 2,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:45018798061",
+      "run:45044341506"
+    ],
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
+    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
+  },
+  "2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+    "datei_sha256": "dd8aebee8eb2d8373d71c2be24468a0c557aa43044c5f99b53e95e0e32189745",
+    "fassung_gewechselt": true,
+    "first": "2026-11-22T12:05:58Z",
+    "geschont": true,
+    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+    "heiler": [
+      "faktenfrische.py"
+    ],
+    "hits": 2,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:45018798061",
+      "run:45044341506"
+    ],
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
+    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
+  },
+  "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+    "datei_sha256": "6029e9cd49bf45a6eccc557f766941e700b143722c9f0e5608e0bf4254274a61",
+    "first": "2026-11-22T17:20:35Z",
+    "grund": "Reserve-Qualitäts-Gate: Umfang: 773 Wörter / 5930 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44924314419"
+      "run:45044341506"
     ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
     "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
   },
-  "2026-11-21-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
-    "datei_sha256": "74ba1c48466bc41341721b4e5d1926971dea0bdff324a8a98dadf9ea964755fa",
+  "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
+    "datei_sha256": "e00aabeefd5b14373aec832345da2b3452146f6f91555b7f25da5c1e948164f9",
+    "first": "2026-11-22T17:20:35Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
+    "hits": 1,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:45044341506"
+    ],
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: - jahresgebühr: <n> € oder niedriger als <n> €."
+  },
+  "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
+    "datei_sha256": "a98c2256f84328c163c99fa9b9fc609b025b34fa39ea9d36700d2fce48520404",
     "fassung_gewechselt": true,
-    "first": "2026-11-21T16:43:49Z",
+    "first": "2026-11-22T12:05:58Z",
+    "geschont": true,
+    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+    "heiler": [
+      "faktenfrische.py"
+    ],
+    "hits": 2,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:45018798061",
+      "run:45044341506"
+    ],
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
+    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
+  },
+  "2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+    "datei_sha256": "41efcbd63676d6a8415c3c69429158f7ddc5db3b5b2ad4b7677c238f3c72d280",
+    "fassung_gewechselt": true,
+    "first": "2026-11-22T12:05:58Z",
+    "geschont": true,
+    "grund": "Reserve-Qualitäts-Gate: Umfang: 709 Wörter / 5112 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+    "heiler": [
+      "check_length.py"
+    ],
+    "hits": 2,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:45018798061",
+      "run:45044341506"
+    ],
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
+    "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
+  },
+  "2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+    "datei_sha256": "7dfdbbe410fe5e7e45e599202ab5e76b41579b750ff142f52016a27cfcc494d3",
+    "fassung_gewechselt": true,
+    "first": "2026-11-22T16:52:04Z",
     "grund": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
     "hits": 1,
     "klasse": "unheilbar",
     "laeufe": [
-      "run:44924314419"
+      "run:45044341506"
     ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
-    "signatur": "quellen-gate nicht bestanden: quellenbasis fehlt – veröffentlichte ratgeber brauchen einen nicht-leeren `quellen:`-block im frontmatter (m<n>, #<n>–#<n>)"
-  },
-  "2026-11-21-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
-    "datei_sha256": "21363e6345fe70b713cd0b0862c53ddb78120217b6786847b6ef95fc1e9f424c",
-    "fassung_gewechselt": true,
-    "first": "2026-11-21T16:43:49Z",
-    "grund": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
-    "hits": 1,
-    "klasse": "menschlich",
-    "laeufe": [
-      "run:44924314419"
-    ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
-    "signatur": "faktenfrische nicht bestanden: <n>ddd<n>d<n>dd<n>b<n>b<n>f<n> (luecke): muffiger geruch deutet oft auf tiefliegenden schimmel oder feuchtigkeit hin.; d<n>e<n>fb<n>bd<n>ef<n> (luecke): neue möbel verli"
-  },
-  "2026-11-21-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
-    "datei_sha256": "e8bd5deef5303c4cff54583ffe932cc5762e5f8c20ec816cb6ac3c66930af3c8",
-    "fassung_gewechselt": true,
-    "first": "2026-11-21T16:43:49Z",
-    "grund": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-    "hits": 1,
-    "klasse": "unheilbar",
-    "laeufe": [
-      "run:44924314419"
-    ],
-    "last": "2026-11-21T16:57:13Z",
-    "lauf": "run:44924314419",
+    "last": "2026-11-22T17:20:35Z",
+    "lauf": "run:45044341506",
     "signatur": "quellen-gate nicht bestanden: quellenbasis fehlt – veröffentlichte ratgeber brauchen einen nicht-leeren `quellen:`-block im frontmatter (m<n>, #<n>–#<n>)"
   }
 }

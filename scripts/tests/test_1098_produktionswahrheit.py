@@ -257,6 +257,45 @@ class Entscheidungsvorlage(unittest.TestCase):
                          "F4-ENTSCHEIDUNGSVORLAGE.md ist veraltet – "
                          "python3 scripts/f4_entscheidungsvorlage.py")
 
+    def test_dossier_traegt_keine_pruefsummen(self):
+        """Kein Datei- und kein Aussage-Hash im Dossier – beide altern am Merge-Stand.
+
+        22.11.2026: Der SHA-256 über die ROHE Datei machte die Vorlage bei jedem
+        fremden Byte rot (Cover, `lastmod`, Typografie – und jeder neue Commit auf
+        `main`, weil der CI den MERGE-Stand prüft). Der Zwischenschritt
+        „Aussage-Hash" war stabiler, kippte aber weiter, sobald `main` eine
+        Aussage änderte, die mit keinem offenen Befund zu tun hat. Frische
+        entsteht jetzt aus dem Inhalt: welche Befunde offen sind und ob die
+        beanstandeten Werte heute im Text stehen. Die Fassungsbindung führt der
+        Ledger (`geprueft_fassung`).
+        """
+        for veraltet in ("Datei-SHA256", "Aussage-Hash"):
+            self.assertNotIn(veraltet, self.text,
+                             f"{veraltet} zurück im Dossier – es altert mit dem "
+                             "Merge-Stand statt mit der Aussage.")
+        self.assertIn("Keine Prüfsummen im Dokument", self.text,
+                      "Die Vorlage muss ihre Bindung selbst erklären.")
+
+    def test_frische_haengt_am_wert_nicht_an_der_formatierung(self):
+        """Das Frischekriterium ist die Textlage der beanstandeten Werte.
+
+        Formatierung darf nichts öffnen: `fix_spaces`/`fix_linebreaks` und
+        Zeilenumbrüche ändern keine Aussage. Kommt ein beanstandeter Wert
+        hinzu, muss die Vorlage dagegen neu erzeugt werden.
+        """
+        beanstandung = ("Angaben zu möglichen Einsparungen (150 €–400 €) sind "
+                        "ohne Quellenangabe.")
+        klar = "Ein Absatz ohne die Zahlen.\n\nEin zweiter Absatz."
+        laut = ("Ein  Absatz   ohne  die Zahlen.\n\n\nEin zweiter\nAbsatz.")
+        self.assertEqual(self.vorlage.lage(klar, beanstandung),
+                         self.vorlage.lage(laut, beanstandung),
+                         "Formatierung verschiebt die Textlage – dann wäre die "
+                         "Vorlage wieder an Bytes gebunden.")
+        mit_wert = klar + "\n\nDas spart 150 €–400 € im Jahr."
+        self.assertNotEqual(self.vorlage.lage(klar, beanstandung),
+                            self.vorlage.lage(mit_wert, beanstandung),
+                            "Ein zurückgekehrter Wert öffnet das Dossier nicht.")
+
     def test_vorlage_ist_uhrfest(self):
         """Zweimal erzeugt = zweimal gleich, und ohne Uhr im Text.
 

@@ -1,0 +1,38 @@
+{
+  "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
+  "titel": "Einlagensicherung: Wie viel Guthaben geschützt ist",
+  "erzeugt": "2026-11-22 12:49 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+    "alter_tage": 40,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 5
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
+    "bundesbank.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "29f1ad6e6bd08c8997bf4166e48bfe168063747f4bc1c75af6abe56f4be6f38e",
+  "text_sha256": "ddbcc7b97ef519ab8f7749b5d80fa189738cfd63563ae781b8e60095331d8493",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
+}

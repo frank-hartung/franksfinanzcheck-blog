@@ -48,6 +48,28 @@ on:
       - 'scripts/**.py'
       - 'requirements*.txt'
       - '.github/workflows/**.yml'
+  # ZEITLAUF-BACKSTOP (22.11.2026) – der liegende Stand von `main` ist messbar,
+  # egal wer ihn geschrieben hat.
+  #
+  # BEFUND: Commits, die mit `GITHUB_TOKEN` gepusht werden, lösen bei GitHub
+  # KEINE Folge-Workflows aus. Das ist im Haus bekannt und für die Auslieferung
+  # längst geschlossen (deploy-catchup.yml, befund-akte-nachziehen.yml: „Ein
+  # unabhängiger Zeitlauf schließt diese Lücke"). Für DIESEN Lauf war es offen:
+  #   · 21.11. 19:29  Skript-Syntax auf `main` rot, Schritt Trigger-Wache
+  #                   (Run 44941227657, Commit ab8b4532).
+  #   · 22.11. 08:45  Automationslauf `Schaltwerk` schiebt Commit 5e8233e per
+  #                   Token – kein Push-Lauf, also keine Messung, keine Heilung.
+  #                   Der Befund (W1: `code-selbstheilung.yml` ruft
+  #                   `scripts/git_sync.sh` auf, ohne die Datei im `paths`-Filter
+  #                   zu nennen) stand damit über einen Tag unbeobachtet auf
+  #                   `main` und färbte erst am nächsten fremden PR wieder rot.
+  #
+  # Dieser Lauf ist bewusst winzig (Sekunden, stdlib, keine Browser) – ein
+  # Zeitlauf kostet hier nichts. Vier Stunden sind eng genug, dass ein
+  # Token-Commit nicht über Nacht unsichtbar bleibt, und weit genug, dass die
+  # übrigen Läufe nicht gedrängt werden (Minute 23, entzerrt nach Hausart).
+  schedule:
+    - cron: "23 */4 * * *"
   workflow_dispatch: {}
 
 permissions:

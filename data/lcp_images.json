@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-21T12:51:27+00:00",
+  "generatedAt": "2026-11-23T02:58:23+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1406,6 +1406,22 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/": {
+      "image": "images/covers/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/": {
       "image": "images/covers/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung.jpg",
       "type": "single",
@@ -1440,6 +1456,22 @@
     },
     "/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/": {
       "image": "images/covers/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/": {
+      "image": "images/covers/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

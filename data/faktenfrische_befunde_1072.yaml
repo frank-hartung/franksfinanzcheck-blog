@@ -1,6 +1,6 @@
-stand: '2026-11-21'
+stand: '2026-11-22'
 issue: 1072
-lauf: 2026-11-21 09:15 UTC
+lauf: 2026-11-22 14:14 UTC
 runden:
 - stand: '2026-11-05'
   lauf: 2026-11-05 12:43 UTC
@@ -64,6 +64,25 @@ runden:
     Anker und geprueft_fassung sind an die heutige Projektion `betrieb-v4`
     gebunden. Die Sperren gegen die alten Behauptungen bleiben unverändert scharf;
     eine Veröffentlichungsfreigabe ist damit nicht verbunden.
+- stand: '2026-11-22'
+  lauf: 2026-11-22 14:14 UTC
+  umfang: >-
+    Folgeentscheidungen nach der Dublettenheilung #1027. Der fünf gemeinsame
+    5-Gramme tragende Kfz-Stichtag-Satz im Beitrag 2026-08-14-sparen-im-herbst
+    wurde umformuliert (vorher "muss die ordentliche Kündigung bis zum 30. November
+    beim Versicherer eingehen", heute "muss dein Schreiben spätestens am 30. November
+    zugehen. Endet der Vertrag zu einem anderen Datum, verschiebt sich auch der
+    Termin."). Die Textänderung hat die Bindung der beiden Befunde 47f855cb4f0fe1e5c65f
+    und 7f66ec82ee1a3f095b0c planmäßig geöffnet (692d9701… → cddc3cdf…). Alle fünf
+    Befunde dieses Artikels wurden am heutigen Volltext erneut gelesen: keine der
+    verbotenen Behauptungen (150-400 EUR, 180-350 EUR, 500-1300 EUR, 50-80 EUR,
+    8-12 Prozent Heizenergie, "lukrativste Spar-Saison") ist vorhanden, alle
+    Bedeutungsanker stehen unverändert. Die verbindliche Fassungsbindung liegt im
+    Anfügeprotokoll data/faktenfrische_entscheidungen.yaml; Hashes in diesem Register
+    wurden nicht rückwirkend umgeschrieben. Damit ist der am 20.11.2026 dokumentierte
+    offene Konflikt zwischen Register-Vertrag und Fassungsbinde-Invariante aufgelöst,
+    ohne die Sperren zu lockern. Keine Veröffentlichungsfreigabe ist damit verbunden.
+
 recherche:
   methode: Redaktionelle Prüfung jedes Befunds am jeweils dokumentierten Textstand;
   nachpruefung_2026_11_12: Zweite Runde für die Befunde, deren Anker der Umbau vom
@@ -97,6 +116,21 @@ recherche:
     Register-Vertrag (status behoben) und Fassungsbinde-Invariante dokumentiert;
     sie bleiben offen, bis eine Seite des Regelwerks durch einen absichtlichen
     Wartungsentscheid angepasst wird. Der Sperrgegenstand bleibt in Kraft.
+  nachpruefung_2026_11_22: >-
+    Auflösung des am 20.11. dokumentierten offenen Konflikts. Anlass war keine neue
+    fachliche Erkenntnis, sondern die Dublettenheilung #1027: Die Passage
+    „Den eigenen Kfz-Stichtag ermitteln“ im Beitrag 2026-08-14-sparen-im-herbst wurde
+    umformuliert, weil sie mit dem YMYL-Beitrag 2026-08-26-kfz-versicherung fünf
+    gemeinsame 5-Gramme teilte. Der Rechtsinhalt (31.12., einen Monat Kündigungsfrist,
+    30.11., unterjährig maßgeblich) ist unverändert, nur der Wortlaut ist eigenständig.
+    Alle fünf Befunde des Artikels wurden erneut am Volltext geprüft: keine der
+    verbotenen Behauptungen vorhanden, alle Anker intakt. Die beiden
+    Folgeentscheidungen binden an cddc3cdf… (vorher 692d9701…), die drei übrigen an
+    dieselbe heutige Fassung. Der Satz des Eintrags vom 20.11., die Befunde blieben
+    offen, bis eine Seite des Regelwerks durch einen Wartungsentscheid angepasst wird,
+    beschreibt damit einen überholten Stand; der Weg war die Folgeentscheidung im
+    Anfügeprotokoll, keine Lockerung der Sperren.
+
   abrufe:
   - url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
     titel: Startseite Energie – Bundesnetzagentur

@@ -11,8 +11,12 @@ sterben:
   2. Klick-Beacon auf /go/-Seiten → sonst wird kein Klick gezählt
   3. /go/-Gateway                → muss die SubID an die Partner-URL anhängen
   4. Import (API)                 → Daten müssen im Repo ankommen (Funnel prüft das)
-Dieser Guard prüft Stufe 1–3 am GEMACHTEN Build (und optional live). Fundklasse: 02.09.2026 – Shortcode-CTAs ohne Event,
-hier jetzt für ALLE Seiten (Start, /pillar/, Artikel) als Vertrag.
+Dieser Guard prüft Stufe 1–3 am GEMACHTEN Build (und optional live).
+Fundklasse: 02.09.2026 – Shortcode-CTAs ohne Event. Seit 22.11.2026 gilt
+der Vertrag für JEDE gebaute HTML-Seite (#1247): Die frühere kuratierte
+Liste (Start, /pillar/, Artikel) ließ neue Seitengattungen außerhalb des
+Vertrags. Jeder Befund nennt jetzt zusätzlich die Seite, auf der er steht –
+ein Befund ohne Herkunft ist eine Suchaufgabe, keine Meldung.
 
 SELBSTTEST-KLICK (SOP Frank, manuell – kein Roboter klickt beim Partner):
   1. `python3 scripts/click_chain_guard.py --test-page` zeigt den exakten Klickpfad.
@@ -67,6 +71,12 @@ KEY_PAGES = {
     "pillar/index.html": "Ratgeber-Zentrale",
 }
 
+# Ausnahme mit Absicht: Die Anbieterkennzeichnung des Tarifcheck-Programms
+# ist ein Pflicht-Dokument, kein Werbe-CTA. Sie wird im Layout erzeugt und
+# trägt `data-ff-partner-dokument`. Ohne diese Marke wäre der Rechtstext ein
+# „roher Partnerlink" – die Marke ist die einzige Erlaubnis, nicht die Domain.
+PARTNER_DOKUMENT_ATTR = "data-ff-partner-dokument"
+
 
 def _attrs(anchor_html):
     out = {}
@@ -92,6 +102,11 @@ def scan_page(html, label):
         attrs = _attrs(m.group(0))
         href = (attrs.get("href") or "").replace("&amp;", "&")
         if re.match(r"https?://(a\.check24\.net|a\.partner-versicherung\.de)", href, re.I):
+            # Die Anbieterkennzeichnung ist ein gesetzlich gefordertes Dokument
+            # und darf nicht über ein Affiliate-Gateway laufen. Sie trägt die
+            # Marke ausdrücklich; alles andere bleibt ein Messleck.
+            if PARTNER_DOKUMENT_ATTR in attrs:
+                continue
             problems.append((label, f"roher Partnerlink umgeht Gateway+Messung: {href[:70]}"))
             continue
         gm = GO_HREF_RE.search(href)
@@ -116,22 +131,32 @@ def scan_page(html, label):
 
 
 def walk_site(root):
-    """Alle relevanten Inhaltsseiten des Builds: home, /pillar/ (Übersicht +
-    Ratgeber), Artikel. Gateways unter <root>/go/ werden separat geprüft."""
+    """JEDE gebaute HTML-Seite – außer den /go/-Gateways.
+
+    WARUM VOLLSTÄNDIG (22.11.2026): Der Guard prüfte home, /pillar/ und
+    Artikel, also eine kuratierte Auswahl. Jede neue Seitengattung
+    (/werkzeuge/, /so-entstehen-unsere-vergleiche/, künftige Hubs) lag
+    damit außerhalb des Vertrags – ein CTA dort konnte Event, SubID und
+    Platzierung verlieren, ohne dass irgendein Lauf das bemerkt hätte.
+    Die Wache misst jetzt den Build, nicht eine Liste über den Build.
+    Kosten: ~400 Dateien, Sekunden; der Nutzen ist eine Aussage ohne
+    Auswahl-Blindstelle.
+
+    Die Gateways unter <root>/go/ prüft `check_gateway` separat – sie sind
+    Weiterleitungen, keine Inhaltsseiten.
+    """
     pages = []
-    for rel, label in KEY_PAGES.items():
-        p = os.path.join(root, rel)
-        if os.path.isfile(p):
-            pages.append((p, label))
-    # Artikel-Indexseiten (ein Scan pro Ordner, tiefensicher genug für Hugo)
-    for base in ("posts", "pillar"):
-        d = os.path.join(root, base)
-        if not os.path.isdir(d):
+    for verzeichnis, unterverzeichnisse, dateien in os.walk(root):
+        rel_dir = os.path.relpath(verzeichnis, root)
+        if rel_dir.split(os.sep)[0] == "go":
+            unterverzeichnisse[:] = []
             continue
-        for entry in sorted(os.listdir(d)):
-            p = os.path.join(d, entry, "index.html")
-            if os.path.isfile(p):
-                pages.append((p, f"{base}/{entry}"))
+        for name in sorted(dateien):
+            if not name.endswith(".html"):
+                continue
+            pfad = os.path.join(verzeichnis, name)
+            rel = os.path.relpath(pfad, root).replace(os.sep, "/")
+            pages.append((pfad, KEY_PAGES.get(rel, rel)))
     return pages
 
 
@@ -230,7 +255,9 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
                 gaps.append(f"LIVE {label}: nicht erreichbar – Messkette nicht beweisbar")
                 continue
             for lab, problem in scan_page(html, f"LIVE {label}"):
-                gaps.append(problem)
+                # Seite nennen, nicht nur den Befund: Ohne Herkunft musste
+                # der Mensch den Befund in 400 Seiten suchen (#1247).
+                gaps.append(f"{lab}: {problem}")
     else:
         if not os.path.isdir(public_dir):
             msg = (f"kein Build unter {os.path.relpath(public_dir, BLOG_DIR)}/ "
@@ -251,7 +278,8 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
             for path, label in pages:
                 checked += 1
                 for lab, problem in scan_page(read(path), label):
-                    gaps.append(problem)
+                    # Seite nennen, nicht nur den Befund (#1247).
+                    gaps.append(f"{lab}: {problem}")
             # Gateway-Drift: jedes im Content registrierte /go/-Ziel muss
             # SubID durchreichen (Register = check24_links.yaml)
             try:
@@ -359,6 +387,15 @@ def _selftest():
         failures.append("sauberer Anker wird gemeldet (False Positive)")
     if scan_page(internal, "t"):
         failures.append("interner Link ohne CTA-Vertrag wird gemeldet (False Positive)")
+    # --- Anbieterkennzeichnung: Pflicht-Dokument, kein Werbe-CTA.
+    partner_dok = ('<a href="https://a.partner-versicherung.de/filestore/ad/1166/index.php'
+                   '?partner_id=47086" rel="noopener noreferrer nofollow" '
+                   'target="_blank" data-ff-partner-dokument="tarifcheck">Partner</a>')
+    if scan_page(partner_dok, "t"):
+        failures.append("Anbieterkennzeichnung wird als roher Partnerlink gemeldet")
+    if not any("roher Partnerlink" in p for _l, p in scan_page(
+            partner_dok.replace(' data-ff-partner-dokument="tarifcheck"', ""), "t")):
+        failures.append("roher Partnerlink ohne Dokument-Marke bleibt unerkannt")
     # --- Attribut-Robustheit: einfache Anführungszeichen, Zeilenumbrüche im Tag
     weird = ('<a\n  href="/go/x/?a=1&amp;subid=slug" rel=\'sponsored nofollow noopener\'\n'
              '  data-klick="affiliate_click" data-klick-slug="x"'
@@ -413,9 +450,40 @@ def _selftest():
         os.makedirs(os.path.join(td, "pillar"), exist_ok=True)
         with open(os.path.join(td, "pillar", "index.html"), "w") as f:
             f.write(good)
-        pages = dict((os.path.relpath(p, td), l) for p, l in walk_site(td))
+        pages = dict((os.path.relpath(p, td).replace(os.sep, "/"), l)
+                     for p, l in walk_site(td))
         if "pillar/index.html" not in pages or "index.html" not in pages:
             failures.append(f"walk_site verliert Seiten: {pages}")
+        # Vollständigkeit statt Kuratierung: eine Seite außerhalb von
+        # posts/pillar MUSS gefunden werden – sonst bleibt eine ganze
+        # Seitengattung außerhalb des Vertrags (Fund 22.11.2026).
+        os.makedirs(os.path.join(td, "werkzeuge", "rechner"), exist_ok=True)
+        with open(os.path.join(td, "werkzeuge", "rechner", "index.html"), "w",
+                  encoding="utf-8") as f:
+            f.write(good)
+        with open(os.path.join(td, "werkzeuge", "index.html"), "w",
+                  encoding="utf-8") as f:
+            f.write(good)
+        pages = dict((os.path.relpath(p, td).replace(os.sep, "/"), l)
+                     for p, l in walk_site(td))
+        for erwartet in ("werkzeuge/index.html", "werkzeuge/rechner/index.html"):
+            if erwartet not in pages:
+                failures.append(f"walk_site übersieht {erwartet}: {sorted(pages)}")
+        # Gateways sind Weiterleitungen: nicht als Inhaltsseite scannen.
+        if any(rel.startswith("go/") for rel in pages):
+            failures.append("walk_site mischt /go/-Gateways unter die Inhaltsseiten")
+        # Befund nennt die Seite (#1247): Ein Bericht ohne Herkunft ist eine
+        # Suchaufgabe. Geprüft am echten run()-Pfad, nicht an der Format-Zeile.
+        import contextlib
+        import io
+        with open(os.path.join(td, "index.html"), "w", encoding="utf-8") as f:
+            f.write('<a href="/go/strom/" rel="sponsored">ohne alles</a>')
+        bericht_pfad = os.path.join(td, "report.md")
+        with contextlib.redirect_stdout(io.StringIO()):
+            run(td, report_path=bericht_pfad)
+        bericht_text = read(bericht_pfad)
+        if "Startseite: /go/strom/ ohne data-klick" not in bericht_text:
+            failures.append("Befund nennt die Seite nicht (Report ohne Herkunft)")
     if failures:
         print("❌ CLICK-CHAIN-GUARD-SELFTEST FEHLGESCHLAGEN:")
         for x in failures:
