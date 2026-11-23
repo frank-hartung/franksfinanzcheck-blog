@@ -7,7 +7,7 @@
 **Die Empfehlung in einem Satz:** Der Code ist auf Soll — es fehlen vier
 Betreiber-/Redaktionshandlungen (und ein fünfter Punkt, der keiner ist: ein
 toter Automatikschritt, Abschnitt 5a). Sie werden **in dieser Reihenfolge** erledigt:
-Edge-Regel (behebt 6 von 8 Live-Befunden mit einer Änderung), Worker-Leseschlüssel,
+Edge-Regel (schließt F-01 auf allen drei Messzielen mit einer Änderung), Worker-Leseschlüssel,
 M1-Titel, dann die drei Textbefunde als datierte Redaktionsaufgaben.
 
 Kein Punkt dieser Vorlage ist ein Programmierauftrag. Wer hier Code ändert,
@@ -41,8 +41,8 @@ Freigabe.
 ## 2. Entscheidung A — Edge-Regel `FF Sicherheits-Header`
 
 **Risiko:** hoch (CSP ohne Beacon = Web Analytics stumm; ohne Regel = gar keine
-Sicherheits-Header auf `www`) · **Aufwand:** ~15 Minuten · **Wirkung:** 6 der
-8 Live-Befunde, plus Schritt 10 wird erstmals überhaupt arbeitsfähig.
+Sicherheits-Header auf `www`) · **Aufwand:** ~15 Minuten · **Wirkung:** F-01 auf allen drei
+Zielen, plus Schritt 10 wird erstmals überhaupt arbeitsfähig.
 
 **Entscheidung:** Die Regel wird **per Skript** hergestellt, nicht per Hand
 getippt — und die Selbstheilung wird danach scharfgeschaltet, damit derselbe
@@ -242,7 +242,7 @@ Automatik-Artikel stünde derselbe Befund wieder da.
 
 ## 6. Warum diese Reihenfolge
 
-1. **A zuerst**, weil eine Änderung sechs Befunde schließt und den
+1. **A zuerst**, weil eine Änderung F-01 auf allen drei Zielen schließt und den
    Selbstheilungsmechanismus erstmals benutzbar macht. Solange die Regel fehlt,
    ist jede andere Diskussion über „grün“ gegenstandslos — der Live-Nachweis
    kann nicht grün werden.
