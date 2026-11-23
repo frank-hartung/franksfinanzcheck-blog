@@ -1,18 +1,18 @@
 {
   "counts": {
-    "amber": 2,
-    "green": 8,
+    "amber": 0,
+    "green": 10,
     "info": 2,
-    "red": 0
+    "red": 1
   },
-  "fingerprint": "be2996b2aa7a",
-  "generated": "2026-11-16T13:42:05+00:00",
+  "fingerprint": "c83096140e4d",
+  "generated": "2026-11-23T16:02:10+00:00",
   "issue_action": "report",
   "last": {
     "action": "report",
     "changed": true,
-    "fingerprint": "be2996b2aa7a",
-    "verdict": "AMBER"
+    "fingerprint": "c83096140e4d",
+    "verdict": "RED"
   },
   "steps": {
     "automation": {
@@ -23,7 +23,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "/tmp/automation-report.md",
-      "ts": "2026-11-16T13:41:56+00:00"
+      "ts": "2026-11-23T16:01:58+00:00"
     },
     "build": {
       "actionable": false,
@@ -33,17 +33,17 @@
       "level": "green",
       "message": "Schritt erfolgreich (Report folgt nicht)",
       "report": "",
-      "ts": "2026-11-16T13:42:00+00:00"
+      "ts": "2026-11-23T16:02:03+00:00"
     },
     "click-chain": {
-      "actionable": true,
-      "code": "chain_gap",
+      "actionable": false,
+      "code": "ok",
       "exit": 0,
-      "findings": 4,
-      "level": "amber",
-      "message": "/go/strom/ ohne data-klick=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-klick-slug (Ziel-Klick nicht zuordenbar); /go/strom/ ohne ?subid= (die Quelle des Klicks geht verloren); /go/strom/ ohne data-klick-placement (Klick im Funnel keiner Stelle zuordenbar)",
+      "findings": 0,
+      "level": "green",
+      "message": "in Ordnung",
       "report": "CLICK-CHAIN-REPORT.md",
-      "ts": "2026-11-16T13:42:02+00:00"
+      "ts": "2026-11-23T16:02:07+00:00"
     },
     "clicks": {
       "actionable": false,
@@ -53,7 +53,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "CLICK-REPORT.md",
-      "ts": "2026-11-16T13:42:02+00:00"
+      "ts": "2026-11-23T16:02:07+00:00"
     },
     "cwv": {
       "actionable": false,
@@ -63,7 +63,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "CWV-REPORT.md",
-      "ts": "2026-11-16T13:42:00+00:00"
+      "ts": "2026-11-23T16:02:04+00:00"
     },
     "decay": {
       "actionable": false,
@@ -73,17 +73,17 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "DECAY-REPORT.md",
-      "ts": "2026-11-16T13:42:00+00:00"
+      "ts": "2026-11-23T16:02:03+00:00"
     },
     "lesbarkeit": {
       "actionable": true,
-      "code": "read_draft",
-      "exit": 0,
-      "findings": 1,
-      "level": "amber",
-      "message": "2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten/index.md (Entwurf) – Flesch 55.9 < Publish-Schwelle 60",
+      "code": "red_finding",
+      "exit": 1,
+      "findings": 2,
+      "level": "red",
+      "message": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md – Flesch 51.5 < Floor 60; 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/index.md – Flesch 59.9 < Floor 60",
       "report": "LESBARKEIT-REPORT.md",
-      "ts": "2026-11-16T13:42:02+00:00"
+      "ts": "2026-11-23T16:02:07+00:00"
     },
     "live-policy": {
       "actionable": false,
@@ -93,7 +93,17 @@
       "level": "green",
       "message": "in Ordnung (2 Hinweis(e))",
       "report": "LIVE-POLICY-REPORT.md",
-      "ts": "2026-11-16T13:42:04+00:00"
+      "ts": "2026-11-23T16:02:09+00:00"
+    },
+    "pflichtcheck": {
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 1,
+      "level": "green",
+      "message": "in Ordnung (1 Hinweis(e))",
+      "report": "/tmp/pflichtcheck-frist-report.md",
+      "ts": "2026-11-23T16:01:58+00:00"
     },
     "pinperf": {
       "actionable": false,
@@ -103,7 +113,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "PINTEREST-PERF-REPORT.md",
-      "ts": "2026-11-16T13:42:02+00:00"
+      "ts": "2026-11-23T16:02:07+00:00"
     },
     "revenue-funnel": {
       "actionable": false,
@@ -113,7 +123,7 @@
       "level": "green",
       "message": "in Ordnung (2 Hinweis(e))",
       "report": "REVENUE-FUNNEL-REPORT.md",
-      "ts": "2026-11-16T13:42:02+00:00"
+      "ts": "2026-11-23T16:02:07+00:00"
     },
     "scorecard": {
       "actionable": false,
@@ -123,7 +133,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "EDITORIAL-SCORECARD.md",
-      "ts": "2026-11-16T13:42:05+00:00"
+      "ts": "2026-11-23T16:02:10+00:00"
     },
     "secrets": {
       "actionable": false,
@@ -133,9 +143,9 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "SECRETS-REPORT.md",
-      "ts": "2026-11-16T13:42:01+00:00"
+      "ts": "2026-11-23T16:02:06+00:00"
     }
   },
-  "verdict": "AMBER",
+  "verdict": "RED",
   "version": 1
 }
