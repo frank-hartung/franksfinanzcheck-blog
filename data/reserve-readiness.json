@@ -1,42 +1,22 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 0,
   "pool_size": 11,
   "generated_at": "2026-11-22T17:20:35Z",
   "candidates": [
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "ready": true,
+      "ready": false,
       "sha256": "22f892be9e82233e0a7a9db7cd9e3060b2ef65a8068bc87bd780fc823a678e1c",
-      "flesch": 63.6,
       "measured_at": "2026-11-22T17:17:15Z",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "fad86da0000fc425d261dd2bfc12b17a1852955c6924c6138de909f3b7ce0fd8",
-      "flesch": 65.8,
       "measured_at": "2026-11-22T17:17:46Z",
-      "score": 0.93,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
