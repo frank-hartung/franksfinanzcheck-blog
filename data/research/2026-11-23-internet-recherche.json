@@ -1,0 +1,229 @@
+{
+  "datum": "2026-11-23",
+  "erzeugt_utc": "2026-11-23 18:16 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Angriffe auf russische Schiffe: \"Das kann brandgefährlich für uns alle werden\"",
+            "url": "https://www.tagesschau.de/ukraine-angriffe-ostsee-libyen-100.html",
+            "datum": "2026-11-23T17:59",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Nachfolge von Hubert Aiwanger: Freie Wähler stellen sich breiter auf",
+            "url": "https://www.tagesschau.de/inland/innenpolitik/aiwanger-nachfolge-freie-waehler-100.html",
+            "datum": "2026-11-23T17:47",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Sanktionspaket: Keine Athleten mehr unter russischer Flagge",
+            "url": "https://www.tagesschau.de/ausland/europa/russische-mannschaften-sportler-eu-100.html",
+            "datum": "2026-11-23T17:23",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Marktbericht: Huang-Rückkehr lässt Aktienkurse steigen",
+            "url": "https://www.tagesschau.de/wirtschaft/finanzen/marktberichte/marktbericht-dax-dow-geldanlage-172.html",
+            "datum": "2026-11-23T17:07",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "NATO-Tagung: Warnungen an Russland - \"werden uns verteidigen\"",
+            "url": "https://www.tagesschau.de/ausland/europa/merz-rutte-nato-104.html",
+            "datum": "2026-11-23T16:57",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Donald Trump will Nvidia-Verwaltungsrat von Comeback von Jensen Huang überzeugt haben",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/donald-trump-will-nvidia-verwaltungsrat-von-comeback-von-jensen-huang-ueberzeugt-haben-a-dcc9fc56-d6ab-49fb-8f7f-c5305ca1d498#ref=rss",
+            "datum": "Mon, 23 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Jensen Huang: Spionage-Affäre, Aktieneinbruch, Rückkehr – der Nvidia-Skandal um seien Firmenchef",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/jensen-huang-spionage-affaere-aktieneinbruch-rueckkehr-der-nvidia-skandal-um-seien-firmenchef-a-1a743c65-aff8-4c40-bb80-a0e2398f1863#ref=rss",
+            "datum": "Mon, 23 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Nvidia: Chipkonzern holt Jensen Huang nach Spionageskandal zurück",
+            "url": "https://www.spiegel.de/wirtschaft/nvidia-jensen-huang-kehrt-als-chef-zurueck-a-0b0c979f-9cf5-4e4d-be27-79ecbbb6945e#ref=rss",
+            "datum": "Mon, 23 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Obi und Toom: Fusion in der Baumarktbranche, Marke Toom verschwindet",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/baumarktketten-obi-und-toom-schliessen-sich-zusammen-a-3a984bb7-6185-415f-a62e-146a593dd5c7#ref=rss",
+            "datum": "Mon, 23 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Coca-Cola: EU-Kommission leitet Wettbewerbsverfahren gegen Abfüller ein",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/coca-cola-eu-kommission-leitet-wettbewerbsverfahren-gegen-abfueller-ein-a-299661c2-fc74-4333-bc61-2025aaea1f44#ref=rss",
+            "datum": "Mon, 23 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "KI-Migrationsgesetz: Experten fürchten mehr Klagen statt kürzerer Verfahren",
+            "url": "https://www.heise.de/news/KI-Migrationsgesetz-Experten-fuerchten-mehr-Klagen-statt-kuerzerer-Verfahren-11535154.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-23T19:07",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Dänemark will Mobilfunknutzung in der Schule verbieten",
+            "url": "https://www.heise.de/news/Daenemark-will-Mobilfunknutzung-in-der-Schule-verbieten-11535292.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-23T18:53",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "DLR-Bericht: Der Radverkehr in Deutschland gewinnt Bedeutung",
+            "url": "https://www.heise.de/news/DLR-Bericht-Der-Radverkehr-in-Deutschland-gewinnt-Bedeutung-11535222.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-23T18:47",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "NameDrop: US-Start-up verklagt Apple in Indien auf 160 Millionen Dollar",
+            "url": "https://www.heise.de/news/NameDrop-US-Start-up-verklagt-Apple-in-Indien-auf-160-Millionen-Dollar-11535196.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-23T18:25",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Neuer DJ-CD-Player mit offenem Laufwerk und Auracast",
+            "url": "https://www.heise.de/news/Neuer-DJ-CD-Player-mit-offenem-Laufwerk-und-Auracast-11534926.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-23T17:59",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Vergleichsportale VS Energievermittler24.de (Sparen durch Stromanbieter wechseln)",
+            "url": "https://www.youtube.com/watch?v=1ujV_wftSdA",
+            "kanal": "Strom & Gas Energievermittler24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "TIBBER - Stromkosten senken! Geld Sparen, Stromtarif, Strombörse",
+            "url": "https://www.youtube.com/watch?v=a6flroWreNk",
+            "kanal": "Frührentner",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "STROMKOSTEN SENKEN LEICHT GEMACHT",
+            "url": "https://www.youtube.com/watch?v=AV6klzZwCeo",
+            "kanal": "Energiepreis Reduktion",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Alles über ETFs in nur 20 Minuten: Depot, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=xwxCmCBUc74",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Investieren in ETFs: DAS musst du VORHER wissen!",
+            "url": "https://www.youtube.com/watch?v=b0jlsAiAT04",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten Vergleich: Die beste kostenlose Kreditkarte 2026?",
+            "url": "https://www.youtube.com/watch?v=dVq3lTfSZAY",
+            "kanal": "Überfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten-Vergleich 2026: NEUER Testsieger? Die besten kostenlosen Kreditkarten! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=jNOYUslvA1I",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "0€ Kreditkarten Vergleich (2026) Welche ist die Beste?",
+            "url": "https://www.youtube.com/watch?v=6onQLIHJ-R0",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
