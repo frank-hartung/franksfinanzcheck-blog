@@ -56,8 +56,6 @@ Der Preis bleibt gleich – die Grundversorgung ist nicht billiger, weil sie sel
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-**Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
-
 Du musst Anbieter und Tarif unterscheiden.  
 Die Grundversorgung ist ein Tarif.  
 Sie stammt meist vom örtlichen Grundversorger, dem Unternehmen, das in deinem Netzgebiet liefert.  

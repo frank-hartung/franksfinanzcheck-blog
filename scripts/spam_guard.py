@@ -144,12 +144,40 @@ CLAIMS_WARN = [
 ]
 
 # B3: Disclosure-Marker (UWG-konform)
-DISCLOSURE_RX = re.compile(r"(wering|affiliate-?links|sponsored)", re.I)
+#
+# Der Bestand schreibt den Bindestrich in „Affiliate‑Links“ teils als
+# geschützten Bindestrich (U+2011): die Typografie-Regel des Hauses setzt
+# ihn, und sie greift auch auf die Offenlegung selbst. Ein Muster mit
+# ASCII-„-“ erkannte diese Fassung nie und hielt den Artikel für
+# ungekennzeichnet – der Heiler fügte daraufhin eine ZWEITE Offenlegung
+# ein, obwohl schon eine im Intro stand (Befund 2026-11-23).
+#
+# Deshalb zwei Regeln: `DISCLOSURE_MARKER_RX` toleriert alle
+# Bindestrich-Zeichen für die EXISTENZ-Prüfung, `DISCLOSURE_RX` bleibt
+# das strenge ASCII-Muster für Formulierungen, die genau so lauten müssen.
+STRICH_KLASSE = "-\u2010\u2011\u2012\u2013\u2014\u2015\u2212"
+DISCLOSURE_RX = re.compile(
+    r"(wering|affiliate[" + STRICH_KLASSE + r"]?links|sponsored)", re.I)
+DISCLOSURE_MARKER_RX = DISCLOSURE_RX
+
 DISCLOSURE_TEXT = (
     "**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). "
     "Beim Abschluss über einen Link erhalten wir eine Provision – für dich "
     "entstehen keine Mehrkosten.\n"
 )
+
+
+def hat_offenlegung(text: str) -> bool:
+    """Steht im Textabschnitt schon eine Werbekennzeichnung?
+
+    Prüft unabhängig von Bindestrich-Varianten (U+2011) und Markup-Form
+    (`**Transparenz:**` oder `*…*` am Artikelende). Der Heiler darf keine
+    zweite Kennzeichnung einfügen, wenn das Intro schon offenlegt.
+    """
+    if not text:
+        return False
+    ohne_markup = re.sub(r"[*_`]", "", text)
+    return bool(DISCLOSURE_MARKER_RX.search(ohne_markup))
 
 STOPWORDS = set("""der die das und oder mit für aus bei von im in zu dem den des
 ein eine einen einem einer euer eure wir du dein deine mir mich ich wie was
@@ -517,18 +545,28 @@ def fix_blog(findings):
                 if not DRY_RUN:
                     parts = post["content"].split("---", 2)
                     body = parts[2]
-                    lines = body.split("\n\n")
-                    insert_at = 0
-                    for i, para in enumerate(lines):
-                        if para.strip() and not para.lstrip().startswith(
-                                ("#", ">", "!", "|", "-")):
-                            insert_at = i + 1
-                            break
-                    lines.insert(insert_at, DISCLOSURE_TEXT.rstrip("\n"))
-                    parts[2] = "\n\n".join(lines)
-                    open(post["path"], "w", encoding="utf-8").write(
-                        join_article(parts[1], parts[2], parts[0]))
-                post_heals.append("B3-Disclosure eingefügt")
+                    # Doppelschutz: Ist die Kennzeichnung inzwischen da
+                    # (z. B. weil ein früherer Lauf sie setzte oder ein
+                    # Textlauf den Bindestrich auf U+2011 umstellte),
+                    # wird KEINE zweite eingefügt. B3 bleibt trotzdem
+                    # gemeldet – die Entscheidung darüber trifft der
+                    # Befund, nicht der Heiler.
+                    if hat_offenlegung(body[:3000]):
+                        post_heals.append("B3 entfällt (Kennzeichnung steht)")
+                    else:
+                        lines = body.split("\n\n")
+                        insert_at = 0
+                        for i, para in enumerate(lines):
+                            if para.strip() and not para.lstrip().startswith(
+                                    ("#", ">", "!", "|", "-")):
+                                insert_at = i + 1
+                                break
+                        lines.insert(insert_at,
+                                     DISCLOSURE_TEXT.rstrip("\n"))
+                        parts[2] = "\n\n".join(lines)
+                        open(post["path"], "w", encoding="utf-8").write(
+                            join_article(parts[1], parts[2], parts[0]))
+                        post_heals.append("B3-Disclosure eingefügt")
             if "B8" in hard_rules:
                 if not DRY_RUN:
                     content = post["content"]
@@ -1509,6 +1547,27 @@ def run_selftest():
             for _ in range(MAX_PER_HOUR - 1)]})
         cap2 = api_run_capacity()
         check("A1b Kapazität schrumpft mit Stundenkontingent", cap2 == 1)
+        # ---- B3: Offenlegung mit geschütztem Bindestrich (U+2011)
+        # Die Typografie-Regel des Hauses setzt „Affiliate‑Links“ auch in
+        # der Kennzeichnung. Vor dem Fix erkannte B3 diese Fassung nicht
+        # und `fix_blog` fügte eine ZWEITE Offenlegung ein. Eingefroren,
+        # damit der Defekt nicht zurückkehrt.
+        b3_kennzeichnung = ("**Transparenz:** Dieser Artikel enthält "
+                            "Affiliate\u2011Links (Werbung). Beim Abschluss "
+                            "über einen Link erhalten wir eine Provision.")
+        b3_ascii = ("**Transparenz:** Dieser Artikel enthält Affiliate-Links"
+                    " (Werbung). Beim Abschluss über einen Link.")
+        b3_ohne = ("Die Grundversorgung ordnet Anbieter und Tarif. "
+                   "Der Netzbetreiber nennt die Entgelte im Preisblatt.")
+        check("B3 erkennt Offenlegung mit U+2011",
+              hat_offenlegung(b3_kennzeichnung))
+        check("B3 erkennt Offenlegung in ASCII-Form",
+              hat_offenlegung(b3_ascii))
+        check("B3 bleibt ohne Kennzeichnung wach (Gegenprobe)",
+              not hat_offenlegung(b3_ohne))
+        check("B3-Heiler fügt nie eine zweite Kennzeichnung ein",
+              b3_kennzeichnung.count("Transparenz:") == 1
+              and hat_offenlegung(b3_kennzeichnung))
     finally:
         STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = saved
         if _saved_env is None:
