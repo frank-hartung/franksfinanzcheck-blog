@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 0,
   "pool_size": 10,
-  "generated_at": "2026-11-23T21:02:47Z",
+  "generated_at": "2026-11-24T01:40:30Z",
   "candidates": [
     {
       "slug": "2026-11-23-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
@@ -78,12 +78,17 @@
     {
       "slug": "2026-11-23-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
       "ready": false,
-      "sha256": "32c32c4668f3c800adbb9d8db74c66e5943c29944dc685b6e8d3faa18c038020",
-      "flesch": 68.8,
-      "measured_at": "2026-11-23T21:00:34Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 11 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das Wichtigste in Kürze Prüfe deinen realen Datenverbrauch der letzten drei Monate in den Einstellungen deines Geräts.",
+      "sha256": "7ff98a95d343bb437bfd503ed80b60f5bd47df402ac822183d9436e4a724cafb",
+      "flesch": 68.4,
+      "measured_at": "2026-11-24T01:40:30Z",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "RS5: 11 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das Wichtigste in Kürze Prüfe deinen realen Datenverbrauch der letzten drei Monate in den Einstellungen deines Geräts."
+        "🛑 2026-11-23-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Profi-Affiliate-Check nicht bestanden: A3: nur 0 interne Links (< 2)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.958,
       "parts": {
@@ -235,8 +240,15 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "45259556966",
+    "kind": "partial",
+    "run_id": "45306492609",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-24T01:40:30Z",
+    "renewed": [
+      "2026-11-23-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
