@@ -784,6 +784,15 @@ jobs:
         run: python3 scripts/ki_cover_herkunft.py --selftest
       - name: Cover-Herkunft – Belege nachziehen (selbstheilend, VOR der Wache)
         run: python3 scripts/ki_cover_herkunft.py --heilen
+      # SICHERHEITSNETZ (24.11.2026): `--heilen` zieht NUR Belege nach, deren
+      # Pixelmessung in diesem Lauf grün war (fehlender oder veralteter
+      # sha256). Ein Bild, das der Renderer nicht nachzeichnet, bleibt hart rot
+      # – die Wache verliert also nichts von ihrer Schärfe, sie verliert nur
+      # die Buchhaltungs-Geisel. Anlass: vier rote Läufe am 24.11., weil
+      # `generate_covers.py` Bytes schrieb und der Beleg ein zweiter Befehl war.
+      - name: Cover-Herkunft – Belege nachziehen (nur bei grüner Pixelmessung)
+        run: python3 scripts/ki_cover_herkunft.py --heilen
+
       - name: Cover-Herkunft – Reproduktionswache (fail-closed)
         run: python3 scripts/ki_cover_herkunft.py --pruefen
 
