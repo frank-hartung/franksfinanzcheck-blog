@@ -1634,6 +1634,19 @@ history:
     #Mietwagen #Reise #GuenstigAutoMieten #SeptemberRoadtrip'
   ref: '117666620863784302'
   ai: false
+- posted_at: '2026-11-24T04:22:16.152683+01:00'
+  channel: mastodon
+  slug: 2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom
+  title: 'Geschirrspüler voll beladen: Wasser und Strom sparen'
+  angle: zitat
+  url: https://mastodon.social/@FranksFinanzcheck/117669268722299454
+  ok: true
+  text: 'Spare bis zu 50 € pro Jahr, wenn du die Spülmaschine voll belädst. Starte
+    erst voll, ordne Geschirr ohne verdeckte Sprüharme und verzichte auf Vorspülen
+    – im Eco‑Programm sinkt Strom‑ und Wasserverbrauch deutlich. 💧💶 https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #GeschirrspuelerVoll #SpuelmaschineBeladen'
+  ref: '117669268722299454'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1659,4 +1672,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-23T17:09:07.667982+01:00'
+updated_at: '2026-11-24T04:22:30.995303+01:00'

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 23.11.2026 17:09 (Europe/Berlin)  
+> Automatisch aktualisiert: 24.11.2026 04:22 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -45,6 +45,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 24.11.2026 04:22 · Geschirrspüler voll beladen: Wasser und Strom sparen → https://mastodon.social/@FranksFinanzcheck/117669268722299454
 - ✅ 23.11.2026 17:08 · September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen → https://mastodon.social/@FranksFinanzcheck/117666620863784302
 - ✅ 22.11.2026 23:27 · Wohngebäudeversicherung Vergleich: Worauf du achten musst → https://mastodon.social/@FranksFinanzcheck/117662445287551543
 - ✅ 20.11.2026 23:15 · Wie viel Bandbreite brauchst du fürs Streaming? → https://mastodon.social/@FranksFinanzcheck/117651076043563430
@@ -54,7 +55,6 @@
 - ✅ 17.11.2026 00:45 · Waschmaschine beladen: Weniger Kosten bei jedem Waschgang → https://mastodon.social/@FranksFinanzcheck/117628781271452138
 - ✅ 16.11.2026 14:46 · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € → https://mastodon.social/@FranksFinanzcheck/117626425285672414
 - ✅ 15.11.2026 16:51 · WLAN verbessern: So bringst du stabilen Speed in jede Ecke → https://mastodon.social/@FranksFinanzcheck/117621252329123391
-- ✅ 13.11.2026 14:13 · Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas → https://mastodon.social/@FranksFinanzcheck/117609307232793284
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

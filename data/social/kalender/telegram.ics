@@ -7,10 +7,10 @@ X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wi
- ssen-musst:nutzen:2026-11-23@franksfinanzcheck.de
-DTSTAMP:20261123T160909Z
-DTSTART:20261123T170000Z
-DTEND:20261123T171500Z
+ ssen-musst:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261124T032231Z
+DTSTART:20261128T060000Z
+DTEND:20261128T061500Z
 SUMMARY:Telegram (Kanal): Geschenkkarte: Was du beim Kauf und Aufladen
   wissen musst (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -21,41 +21,11 @@ URL:https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alt
- en-rahmen:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261123T160909Z
-DTSTART:20261128T060000Z
-DTEND:20261128T061500Z
-SUMMARY:Telegram (Kanal): Fenster abdichten: So stoppst du Zugluft an 
- alten Rahmen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdich
- ten-so-stoppst-du-zugluft-an-alten-rahmen/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so
- -stoppst-du-zugluft-an-alten-rahmen/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brau
- chst-dein:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261123T160909Z
+UID:telegram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
+ parst:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261124T032231Z
 DTSTART:20261129T060000Z
 DTEND:20261129T061500Z
-SUMMARY:Telegram (Kanal): Streaming-Bandbreite: Wie viel brauchst du w
- irklich? (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-strea
- ming-bandbreite-du-wirklich-brauchst-dein/
-URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
- andbreite-du-wirklich-brauchst-dein/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
- parst:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261123T160909Z
-DTSTART:20261205T060000Z
-DTEND:20261205T061500Z
 SUMMARY:Telegram (Kanal): Secondhand-Kleidung kaufen: So prüfst du Sto
  ff\, Nähte (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -67,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
- asse-kaffee:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261123T160909Z
-DTSTART:20261206T060000Z
-DTEND:20261206T061500Z
+ asse-kaffee:nutzen:2026-12-05@franksfinanzcheck.de
+DTSTAMP:20261124T032231Z
+DTSTART:20261205T060000Z
+DTEND:20261205T061500Z
 SUMMARY:Telegram (Kanal): Kaffeemaschine: Was kostet eine Tasse wirkli
  ch? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -78,6 +48,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  -stromverbrauch-was-kostet-die-tasse-kaffee/
 URL:https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-strom
  verbrauch-was-kostet-die-tasse-kaffee/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
+ -in-der-wohnung:nutzen:2026-12-06@franksfinanzcheck.de
+DTSTAMP:20261124T032231Z
+DTSTART:20261206T060000Z
+DTEND:20261206T061500Z
+SUMMARY:Telegram (Kanal): Mesh-WLAN nachrüsten: Wann lohnt sich die In
+ vestition? (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nach
+ ruesten-schluss-mit-funkloechern-in-der-wohnung/
+URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
+ n-schluss-mit-funkloechern-in-der-wohnung/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
