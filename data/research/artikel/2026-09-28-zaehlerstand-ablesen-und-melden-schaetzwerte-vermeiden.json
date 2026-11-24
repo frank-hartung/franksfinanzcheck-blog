@@ -1,16 +1,16 @@
 {
   "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
   "titel": "Zählerstand ablesen und melden: Schätzwerte vermeiden",
-  "erzeugt": "2026-11-22 12:49 UTC",
+  "erzeugt": "2026-11-24 15:12 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "YMYL",
-    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
-    "alter_tage": 40,
+    "grund": "frisch geprüft vor 42 Tagen (Intervall 45 Tage)",
+    "alter_tage": 42,
     "intervall": 45,
     "frist": "2026-11-27",
-    "restlaufzeit": 5
+    "restlaufzeit": 3
   },
   "geo": {
     "punkte": 6,
@@ -26,14 +26,46 @@
       "faktencheck": true
     }
   },
-  "treffer": [],
-  "befunde": [],
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.html)\n    *   [Schlichtung](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/start.html)\n    *   [Verbraucherschutz in Zahlen](https://www.bundesnetzagentur.de/DE/Vportal/Verbraucher-Radar/start.html)\n\n*   [Energie (Internationales)](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/start.html)\n\n*   [ACER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/ACER/start.html)\n            *   [CEER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/CEER/start.html)\n            *   [PCI](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/PCI/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))**Energie**[Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html \"Telekommunikation\")[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](htt",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben.",
+      "stelle": "Nach drei Jahren darfst du alte Jahre aussortieren – wenn keine Fragen offen sind; das ist ein Beispielwert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben.",
+      "stelle": "Gaszähler zeigen den Stand in Kubikmetern. Für die Umrechnung in Kilowattstunden nutzt der Versorger einen eigenen Faktor. Er steht auf der Rechnung.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt.",
+      "stelle": "Viele Versorger akzeptieren eine Selbstablesung außerhalb des Fensters.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
   "fehler": [
     "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
-    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
   ],
   "fassung_sha256": "63b7530b41cc1f60482ce6a53a5651b98a6885686745a513e1567a9838efc63a",
   "text_sha256": "2a1fc7a74a3862e570fdd44728565000cf578104898d3521fc00fe40d1f45b7f",
-  "fachpruefung": "übersprungen (keine Fundstellen)"
+  "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b); 2 Befund(e) ohne belegbaren Textanker verworfen"
 }

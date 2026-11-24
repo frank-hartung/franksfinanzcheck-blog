@@ -2,12 +2,12 @@
 
 _Stand 2026-11-24 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**278 offene Befunde auf 78 Seiten · davon 51 Live-Seiten mit 173 Befunden · ältester 25 Tage · Frist 14 Tage.**
+**281 offene Befunde auf 79 Seiten · davon 52 Live-Seiten mit 176 Befunden · ältester 25 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 278 |
-| Seiten betroffen | 78 (davon live: 51) |
+| Offene Befunde | 281 |
+| Seiten betroffen | 79 (davon live: 52) |
 | Text seit dem Befund geändert | 239 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -33,7 +33,7 @@ _Stand 2026-11-24 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 244 von 278 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 244 von 281 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -891,6 +891,22 @@ Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-
 
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · **LIVE** · Risikoklasse erhoeht · 3 Befund(e)
+
+Datei: `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `06bc5a6bc11098317697` | luecke | 0 T | Text unverändert seit dem Befund | Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `471944cae24a034c7c00` | luecke | 0 T | Text unverändert seit dem Befund | Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `780af701a2eaa465d46a` | luecke | 0 T | Text unverändert seit dem Befund | Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 06bc5a6bc11098317697 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 471944cae24a034c7c00 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 780af701a2eaa465d46a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)

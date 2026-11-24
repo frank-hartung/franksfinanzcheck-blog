@@ -46,7 +46,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-09-28"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-24
 kurzantwort: "Zählerstände werden zum Ende des Abrechnungszeitraums abgelesen und dem Versorger gemeldet. Wer den Termin verpasst, riskiert eine Schätzung auf Basis früherer Verbräuche. Ein Foto des Zählers mit Datum, Zählernummer und allen Vorkommastellen belegt den Wert und lässt sich später nachreichen."
 ---
 
