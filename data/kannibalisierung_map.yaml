@@ -19,7 +19,7 @@
 # Rollenvergabe) und keine Quelle der Wahrheit. Verbindlich ist der Titel im
 # Frontmatter des Beitrags; R2/R4 werden am gebauten Beitrag geprüft.
 
-stand: "2026-11-23"
+stand: "2026-11-24"
 regeln_quelle: "data/kannibalisierung_map.yaml (dieses Dokument); Entscheidungen: data/entscheidungen.yaml"
 
 # Abdeckung (neu 23.11.2026)
@@ -29,21 +29,25 @@ regeln_quelle: "data/kannibalisierung_map.yaml (dieses Dokument); Entscheidungen
 #  jeder Live-Beitrag des Pillars in einem der genannten Cluster stehen.
 abdeckung:
   pflicht_ab: "2026-11-23"
+  # 24.11.2026: Alle Pillars sind kuratiert (Rollenkatalog). Die
+  # befristeten Ausnahmen vom 23.11. sind erledigt – sie werden nicht
+  # verlängert, sondern abgeschafft: Ein neuer Beitrag ohne Rolle ist
+  # sofort rot (test_inhalts_register).
   vollstaendige_pillars:
+    - pillar: "frugalismus"
+      cluster: ["K11-haushalt-ordnen", "K12-vorrat-und-saison", "K13-sparen-und-anlegen", "K3-frugalismus", "K4-notgroschen"]
     - pillar: "internet-dsl"
       cluster: ["K5-dsl-internet", "K6-dns"]
-  # Pillars ohne eigenen Cluster: hier gilt die Rollenpflicht noch nicht.
-  # Jede Ausnahme braucht Grund und Prüfdatum; der Test erzwingt beides.
-  ausnahmen:
-    - pillar: "strom-sparen"
-      grund: "kein Cluster vorhanden (32 Live-Beiträge am 23.11.2026); Kuratierung offen"
-      pruefung: "2026-12-15"
+    - pillar: "konto-karten"
+      cluster: ["K14-konto-und-zahlung", "K7-konto-karten-gebuehren"]
     - pillar: "mietwagen"
-      grund: "kein Cluster vorhanden (8 Live-Beiträge am 23.11.2026)"
-      pruefung: "2026-12-15"
+      cluster: ["K15-reise-budget"]
+    - pillar: "strom-sparen"
+      cluster: ["K1-gas-preisgarantie", "K10-gebaeude-und-geraete", "K2-gasrechnung-heizkosten", "K8-verbrauch-messen", "K9-tarif-und-vertrag"]
     - pillar: "versicherungen"
-      grund: "kein Cluster vorhanden (4 Live-Beiträge am 23.11.2026)"
-      pruefung: "2026-12-15"
+      cluster: ["K16-versicherungen"]
+  ausnahmen: []
+
 
 cluster:
 
@@ -286,3 +290,282 @@ cluster:
         rolle: "Girokonto ohne Gebühren"
         status_massnahme: "primär, keine Änderung; Fachprüfung offen (fachpruefung_register.yaml)"
     entscheidung: "Drei Rollen. Alle drei Beiträge sind im Fachprüfungs-Register. Ohne benannten Prüfer keine Freigabe."
+
+  # --- K8-verbrauch-messen (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K8-verbrauch-messen
+    pillar: "strom-sparen"
+    primaerkeyword: "Stromfresser finden"
+    beitraege:
+      - slug: "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
+        status: live
+        rolle: "Messung: Stromfresser über lange Laufzeiten aufspüren"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser"
+        status: live
+        rolle: "Messung: Bereitschaftsbetrieb in Jahreskosten umrechnen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn"
+        status: live
+        rolle: "Messung: Warmwasserkosten aus Durchfluss und Duschdauer"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee"
+        status: live
+        rolle: "Messung: Kosten pro Tasse aus Strom und Anschaffung"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom"
+        status: live
+        rolle: "Messung: ganze Spülgänge statt einzelner Teller vergleichen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
+        status: live
+        rolle: "Messung: Beladung und Programm statt Maximalangabe"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken"
+        status: live
+        rolle: "Bewertung: Automatik gegen Eigenverbrauch und Kaufpreis"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt"
+        status: live
+        rolle: "Auswahl: welche smarte Steuerung zum Haushalt passt"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Acht Rollen, alle mit demselben Werkzeug (messen) auf unterschiedlichem Gegenstand: lange Laufzeiten, Bereitschaft, Warmwasser, Kaffeemaschine, Geschirrspüler, Waschmaschine, Automatik, Geräteauswahl der Steuerung. Keine Zusammenführung: Die Messmethode ist gleich, der Gegenstand und die Zahl am Ende sind es nicht."
+
+  # --- K9-tarif-und-vertrag (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K9-tarif-und-vertrag
+    pillar: "strom-sparen"
+    primaerkeyword: "Stromtarif wechseln"
+    beitraege:
+      - slug: "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet"
+        status: live
+        rolle: "Tarifstatus: Grundversorgung oder Sondervertrag klären"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt"
+        status: live
+        rolle: "Tarifwahl: Doppeltarifzähler gegen eigenes Verbrauchsprofil"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
+        status: live
+        rolle: "Tarifwahl: Herkunftsnachweis, Bindung und Preis getrennt prüfen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem"
+        status: live
+        rolle: "Reaktion: Sonderkündigungsrecht in der Grundversorgung"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten"
+        status: live
+        rolle: "Wechsel: Verbrauch, Vertragsende und Zählerdaten vorbereiten"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden"
+        status: live
+        rolle: "Nachweis: Zählerstand ablesen, melden, Schätzwerte vermeiden"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Sechs Rollen entlang des Vertragslebens: Tarifstatus klären, Tarifwahl rechnen, Herkunft prüfen, auf Erhöhung reagieren, Wechsel vorbereiten, Zählerstand als Nachweis. Wer diese sechs trennt, kann später jede Werbefläche genau einer Absicht zuordnen."
+
+  # --- K10-gebaeude-und-geraete (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K10-gebaeude-und-geraete
+    pillar: "strom-sparen"
+    primaerkeyword: "Energieeffizienz Haushalt"
+    beitraege:
+      - slug: "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick"
+        status: live
+        rolle: "Investition: Gerätetausch gegen gemessenen Verbrauch rechnen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten"
+        status: live
+        rolle: "Auswahl: Energielabel gegen eigenen Nutzungsbedarf"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks"
+        status: live
+        rolle: "Alltag: fünf Anwendungen nach Leistung und Laufzeit prüfen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken"
+        status: live
+        rolle: "Alltag: eine Änderung testen statt Liste abarbeiten"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig"
+        status: live
+        rolle: "Heizungstausch: Investition und Betrieb für dasselbe Gebäude"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten"
+        status: live
+        rolle: "Gebäude: Bedarfs- und Verbrauchswert unterscheiden"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
+        status: live
+        rolle: "Gebäudehülle: Undichtigkeit finden, Dichtung oder Beschlag"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck"
+        status: live
+        rolle: "Förderung: örtliche Bedingungen und Antragszeit prüfen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten"
+        status: live
+        rolle: "Fixkosten: Pfand als Rückgabe, nicht als Rabatt"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Neun Rollen mit Investitions- oder Gebäudebezug: Gerätetausch, Label-Auswahl, zwei Alltags-Listen (bewusst getrennt: die eine prüft fünf Anwendungen, die andere rät zu genau einer Änderung), Heizungstausch, Energieausweis, Gebäudehülle, Förderung, Pfand als Fixkostenposten."
+
+  # --- K11-haushalt-ordnen (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K11-haushalt-ordnen
+    pillar: "frugalismus"
+    primaerkeyword: "Haushaltskosten senken"
+    beitraege:
+      - slug: "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan"
+        status: live
+        rolle: "Abbuchungen: ungenutzte Abos finden und kündigen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen"
+        status: live
+        rolle: "Erste Wohnung: laufende Kosten und Anschaffungen trennen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt"
+        status: live
+        rolle: "Abbuchungen: nach Jahresbetrag und Kündigungstermin sortieren"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle"
+        status: live
+        rolle: "Budget: feste und veränderliche Posten trennen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit"
+        status: live
+        rolle: "Gewohnheit: eine der sieben mit festem Termin versehen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026"
+        status: live
+        rolle: "Budget: Einkommen in Bedarf, Wünsche und Rücklagen teilen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Sechs Rollen am Kontoauszug: ungenutzte Abos, erster Haushalt, Jahresbetrag-Sortierung, feste vs. veränderliche Posten, eine Gewohnheit mit Termin, Einkommensteilung. 50-30-20 bleibt eine Vergleichsfolie, kein Rezept – deshalb eigene Rolle."
+
+  # --- K12-vorrat-und-saison (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K12-vorrat-und-saison
+    pillar: "frugalismus"
+    primaerkeyword: "Vorrat und Saison sparen"
+    beitraege:
+      - slug: "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet"
+        status: live
+        rolle: "Vorrat: Preis je verbrauchter Portion inklusive Verderb"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage"
+        status: live
+        rolle: "Saison: Feiertagsbudget vom verfügbaren Betrag aus planen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst"
+        status: live
+        rolle: "Gebrauchtkauf: Nähte, Stoff, Passform, Reparaturkosten"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht"
+        status: live
+        rolle: "Familie: Ausgabenprioritäten gemeinsam festlegen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Vier Rollen mit Kalenderbezug: Vorrat (Preis je verbrauchter Portion), Weihnachtsbudget, Gebrauchtkauf, Familienausgaben. Getrennt, weil jede Rolle einen anderen Zeitpunkt im Jahr bedient."
+
+  # --- K13-sparen-und-anlegen (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K13-sparen-und-anlegen
+    pillar: "frugalismus"
+    primaerkeyword: "Sparen und anlegen"
+    beitraege:
+      - slug: "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich"
+        status: live
+        rolle: "Sparroutine: Betrag und Rhythmus festlegen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen"
+        status: live
+        rolle: "Anlage: Horizont und Rücklage vor dem Sparplan"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest"
+        status: live
+        rolle: "Steuer: Arbeitsmittel sammeln und absetzen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Drei Rollen jenseits des Alltagssparens: Sparroutine (Betrag und Rhythmus), Anlage (Horizont und Rücklage vor dem Sparplan), Steuer (Arbeitsmittel sammeln und absetzen)."
+
+  # --- K14-konto-und-zahlung (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K14-konto-und-zahlung
+    pillar: "konto-karten"
+    primaerkeyword: "Konto und Karte"
+    beitraege:
+      - slug: "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier"
+        status: live
+        rolle: "Werkzeugwahl: App, Tabelle oder Papier dauerhaft nutzen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich"
+        status: live
+        rolle: "Zins nach der Aktion, Einlagensicherung und Gültigkeit"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen"
+        status: live
+        rolle: "Zahlungsart: wer löst die Buchung aus"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist"
+        status: live
+        rolle: "Schutzgrenze je Bank, nicht je Marke"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto"
+        status: live
+        rolle: "Kontogebühren an echten Buchungen prüfen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst"
+        status: live
+        rolle: "Karte: Einlösbarkeit, Frist und Restguthaben"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Sechs Rollen entlang der Kontofläche: Werkzeugwahl fürs Haushaltsbuch, Zins nach der Aktion, Zahlungsart, Schutzgrenze, Kontogebühren, Geschenkkarte. Der Unterschied zwischen „Konto\" und „Karte\" bleibt sichtbar, weil die Gebühren an unterschiedlichen Stellen entstehen."
+
+  # --- K15-reise-budget (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K15-reise-budget
+    pillar: "mietwagen"
+    primaerkeyword: "Reisekosten planen"
+    beitraege:
+      - slug: "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub"
+        status: live
+        rolle: "Mietwagen: Kaution und Kartenrahmen vor der Buchung"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen"
+        status: live
+        rolle: "Mietwagen: Preis für die ganze Strecke inklusive Kilometer"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp"
+        status: live
+        rolle: "Pauschalreise: Endpreis inklusive Gepäck, Transfer, Verpflegung"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust"
+        status: live
+        rolle: "Camping: Kosten pro Nacht inklusive Stellplatz und Nebenkosten"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
+        status: live
+        rolle: "Urlaubsbudget: Gesamtbudget vor der Buchung festlegen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"
+        status: live
+        rolle: "Reisekasse: rückwärts planen, bezahlt gegen offen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
+        status: live
+        rolle: "Flug: Endpreis inklusive Gepäck und Anfahrt zum Flughafen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck"
+        status: live
+        rolle: "Störung: Ankunftszeit und Grund sichern, Anspruch prüfen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Acht Rollen mit Reisebezug: Mietwagen-Kaution, Mietwagen-Streckenpreis, Pauschalreise-Endpreis, Camping-Nacht, Urlaubsbudget, Reisekasse, Flug-Endpreis, Flugstörung. Mietwagen bleibt der Kern (zwei Rollen), alles andere sind Randrollen derselben Reisekasse."
+
+  # --- K16-versicherungen (24.11.2026: Rollenkatalog eingespielt) ---
+  - id: K16-versicherungen
+    pillar: "versicherungen"
+    primaerkeyword: "Versicherung vergleichen"
+    beitraege:
+      - slug: "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026"
+        status: live
+        rolle: "Eigentümer und Mieter: Wohngebäude, Hausrat, Elementarschutz"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet"
+        status: live
+        rolle: "Haftpflicht: Deckung, Klauseln und Kosten"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst"
+        status: live
+        rolle: "Vergleich: Elementarschaden, grobe Fahrlässigkeit, Neuwert"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+      - slug: "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+        status: live
+        rolle: "Kfz: gleiche Fahrleistung und Selbstbeteiligung vergleichen"
+        status_massnahme: "neu 24.11.: Rolle aus dem Katalog übernommen (data/rollen_katalog.yaml)"
+    entscheidung: "Vier Rollen, jede an einer anderen Police: Haus und Hausrat als Gesamtbild, Privathaftpflicht als Pflichtprodukt, Wohngebäude als Vergleichsaufgabe, Kfz als Beitragsoptimierung. Kein Zusammenlegen: Die vier Verträge haben unterschiedliche Kündigungsfristen."
