@@ -1,5 +1,5 @@
-generated_at: '2026-11-23T13:38:53Z'
-day: '2026-11-23'
+generated_at: '2026-11-24T14:15:44Z'
+day: '2026-11-24'
 mode: deterministic
 teams:
   trending:
@@ -252,62 +252,57 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'DSL-Anbieter wechseln: Wie du den besten Tarif findest'
+  - topic: 7 Gewohnheiten für finanzielle Freiheit
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:7 Gewohnheiten für finanzielle Freiheit
+    score: 0.55
+    keywords: []
+  - topic: 'DSL-Tarife im Vergleich: Welcher ist der beste?'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:DSL-Anbieter wechseln: Wie du den besten Tarif findest'
+    source: 'topics:DSL-Tarife im Vergleich: Welcher ist der beste?'
     score: 0.55
     keywords:
+    - DSL-Tarife
+    - Internetvergleich
     - DSL-Anbieter
-    - Wechsel
-    - Tarif
-  - topic: Günstige Kreditkarten für den Online-Einkauf
+  - topic: DSL-Tarife mit hoher Geschwindigkeit vergleichen
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:DSL-Tarife mit hoher Geschwindigkeit vergleichen
+    score: 0.55
+    keywords:
+    - DSL-Tarif
+    - Internetgeschwindigkeit
+    - Tarife vergleichen
+  - topic: Die Vorteile von Prepaid-Karten für den Urlaub
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Günstige Kreditkarten für den Online-Einkauf
+    source: topics:Die Vorteile von Prepaid-Karten für den Urlaub
     score: 0.55
     keywords:
-    - Kreditkarte
-    - Online-Einkauf
-    - Günstig
-  - topic: 'Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten was?'
+    - Prepaid-Karten
+    - Urlaub
+    - Karten
+  - topic: Internet-Tarife im Vergleich
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten
-      was?'
+    source: topics:Internet-Tarife im Vergleich
     score: 0.55
     keywords:
-    - Internetflat
-    - Hohe Geschwindigkeit
-    - Anbietervergleich
-  - topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
-    score: 0.55
-    keywords:
-    - Kfz Versicherung Wechselsaison
-    - Kfz Versicherung kündigen Frist
-    - Kfz Versicherung wechseln Januar
-  - topic: 'Risikolebensversicherung für Familien: Die richtige Summe finden'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Risikolebensversicherung für Familien: Die richtige Summe finden'
-    score: 0.55
-    keywords:
-    - Risikolebensversicherung
-    - Versicherungssumme berechnen
-    - Familie absichern
-  - topic: Stromfresser im Haushalt entlarven
+    - Internet
+    - Tarif
+    - Vergleich
+  - topic: 'Stromanbieter wechseln: Tarife prüfen und Kosten senken'
     pillar: strom-sparen
     signal: niche_hook
-    source: topics:Stromfresser im Haushalt entlarven
+    source: 'topics:Stromanbieter wechseln: Tarife prüfen und Kosten senken'
     score: 0.55
     keywords:
-    - Stromfresser finden
-    - Strom sparen Tipps
-    - Energiekosten senken
-    - Standby Kosten
+    - Stromanbieter wechseln
+    - Stromvergleich
+    - Stromkosten senken
 live_web:
   enabled: false
   findings: []
