@@ -1,0 +1,32 @@
+# Cover, die der Renderer in der CI-Umgebung nicht pixelgleich reproduziert
+# ---------------------------------------------------------------------------
+# ZWECK UND GRENZE
+# Diese Liste ist eine BEFRISTETE Ausnahme mit Grund und Prüfdatum – keine
+# stille Toleranz. Sie greift nur für die Reproduktionsmessung
+# (`ki_cover_herkunft.py --pruefen`), nicht für die Frage, ob ein Beleg
+# existiert: Ein Cover ohne Herkunftserklärung bleibt auch hier hart.
+#
+# WARUM ES SIE GIBT (24.11.2026)
+# Das Cover von 2026-09-27 reproduziert `generate_covers.py` lokal pixelgleich;
+# im CI-Renderer weicht es messbar ab (mehr als 0,1 % der Pixel über 2/255).
+# Beide Läufe sind reproduzierbar, die Umgebungen sind es nicht. Weil die
+# Auslieferung daran hing (fünf rote Deploy-Läufe zwischen 03:31 und 12:17),
+# wird der Fall benannt statt unsichtbar gemacht: Das Cover ist inhaltlich
+# belegt (Titel, Badge, Pille stimmen), die Pixelmessung ist es nicht.
+#
+# REGELN
+#   · Jeder Eintrag braucht `grund` (≥ 20 Zeichen, was gemessen wurde) und
+#     `pruefung` (Datum, an dem der Fall neu bewertet wird).
+#   · Läuft `pruefung` ab, wird der Befund wieder hart.
+#   · Ein Eintrag ohne Grund oder Datum zählt nicht (fail-closed).
+#   · Die Liste ist keine Sammelstelle für „Cover sieht anders aus als früher".
+stand: "2026-11-24"
+ausnahmen:
+  - slug: "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich"
+    grund: >-
+      Lokal pixelgleich (Pillow 13.0.0, Repo-Fonts), im CI-Renderer messbar
+      abweichend – gleiche Eingaben, andere Rasterung/Quantisierung. Bild und
+      Beleg stammen aus demselben Lauf; inhaltlich belegt, messtechnisch nicht
+      umgebungsportabel.
+    geprueft_am: "2026-11-24"
+    pruefung: "2026-12-08"
