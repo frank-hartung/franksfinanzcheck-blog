@@ -6,7 +6,7 @@ draft: true
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
-keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen", "Günstige Flüge für den Spätsommer finden"]
+keywords: ["Günstige Flüge für den Spätsommer finden", "Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"

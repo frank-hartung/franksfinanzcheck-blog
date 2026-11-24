@@ -20,13 +20,11 @@
 #   · Läuft `pruefung` ab, wird der Befund wieder hart.
 #   · Ein Eintrag ohne Grund oder Datum zählt nicht (fail-closed).
 #   · Die Liste ist keine Sammelstelle für „Cover sieht anders aus als früher".
+# Hinweis zur Bereinigung: Die Ursache der früheren Abweichung bei
+# `2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich` lag nicht
+# am CI-Renderer, sondern daran, dass `keyword_optimizer.py --fix` wegen des
+# veralteten Haupt-Keywords „DSL Hacks“ den Titel nach `check_covers.py --fix`
+# zurücküberschrieben hatte. Nachdem Titel, Description, Keywords und Cover
+# synchronisiert sind, reproduziert das Cover pixelgenau ohne Ausnahme.
 stand: "2026-11-24"
-ausnahmen:
-  - slug: "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich"
-    grund: >-
-      Lokal pixelgleich (Pillow 13.0.0, Repo-Fonts), im CI-Renderer messbar
-      abweichend – gleiche Eingaben, andere Rasterung/Quantisierung. Bild und
-      Beleg stammen aus demselben Lauf; inhaltlich belegt, messtechnisch nicht
-      umgebungsportabel.
-    geprueft_am: "2026-11-24"
-    pruefung: "2026-12-08"
+ausnahmen: []

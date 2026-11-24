@@ -6,7 +6,7 @@ draft: true
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen", "Heizperiode vorbereiten im Spätsommer", "Heizperiode", "vorbereiten"]
+keywords: ["Heizperiode vorbereiten im Spätsommer", "Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen", "Heizperiode", "vorbereiten"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
