@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T12:47:10Z",
+  "generated_at": "2026-11-24T13:40:53Z",
   "modus": "kandidaten",
-  "commit": "f7e933a4ee3a43230c28376099f9f69a317804a0",
+  "commit": "cbcc17c497a7665d6f09b08a87acd7dde5f78674",
   "kapazitaet": {
     "stichtag": "2026-11-24",
     "basis": "2026-11-24",
@@ -1274,7 +1274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1328,7 +1328,7 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "8013c07a055147a8f493030dd77b78686943ac561245ed81418bfff015778e71",
+      "sha256": "8416dbab773f8c9dc151b1a307d06d1d37f184030ba717475bff00d8836d20da",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1396,7 +1396,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2174,7 +2174,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
