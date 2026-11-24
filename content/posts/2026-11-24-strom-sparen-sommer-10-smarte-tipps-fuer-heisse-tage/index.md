@@ -31,7 +31,6 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 65bae5325e0dda4f86695d700562a135c4839508c9c8fe24e6adedc4bc32de39
     geprueft_am: 2026-11-24
-
 ---
 
 Stell dir vor, du sitzt im Wohnzimmer, die Sonne brennt durch das Fenster und der Thermostat zeigt 27 °C. Du willst die Klimaanlage einschalten, merkst aber, wie schnell die Stromrechnung steigen kann. **Strom sparen Sommer** bedeutet, den Verbrauch zu senken, bevor du die nächste Rechnung öffnest.  
@@ -73,8 +72,7 @@ Eine gut eingestellte Klimaanlage senkt die Raumtemperatur um 5 °C, ohne den 
 
 
 ## Typische Fehler beim Strom sparen im Sommer
-Erster Fehler: Du stellst das Thermostat zu niedrig ein – die Klimaanlage läuft im Vollbetrieb.  
-Zweiter Fehler: Du lässt Stand‑by‑Geräte laufen – der kleine Verbrauch summiert sich über Monate.  
+Erster Fehler: Du stellst das Thermostat zu niedrig ein – die Klimaanlage läuft im Vollbetrieb. Zweiter Fehler: Du lässt Stand‑by‑Geräte laufen – der kleine Verbrauch summiert sich über Monate.
 Dritter Fehler: Du wartest die Klimaanlage nicht regelmäßig – ein verstopfter Filter erhöht den Energiebedarf.  
 
 ## Modellrechnung: Was kostet ein kühles Zimmer?
@@ -85,7 +83,7 @@ Dritter Fehler: Du wartest die Klimaanlage nicht regelmäßig – ein verstopfte
 
 *Formel:* Kosten = Leistung × Zeit × Preis.  
 
-*Rechenweg:* 1 kW × 8 Stunden = 8 kWh pro Tag.  
+*Rechenweg:* 1 kW × 8 Stunden = 8 kWh pro Tag.
 8 kWh × 0,30 € = 2,40 € pro Tag.  
 
 *Ergebnis (Modellrechnung):* Bei täglichem Betrieb kostet das Zimmer etwa 2,40 € – das entspricht rund 72 € im Monat. Erhöht man die Soll‑Temperatur um 2 °C, sinkt der tägliche Verbrauch auf etwa 6 kWh, also 1,80 € pro Tag.  

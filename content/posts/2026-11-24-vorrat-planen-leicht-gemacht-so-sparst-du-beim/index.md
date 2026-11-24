@@ -66,17 +66,14 @@ So behältst du die Kontrolle.
 Öffne Kühlschrank, Gefrierfach und Vorratsschrank, bevor du den Einkaufszettel schreibst.  
 Notiere alles, was du bald verbrauchen musst.  
 Diese Bestandsaufnahme bildet die Basis, um deinen **Vorrat planen** zu können.  
-So weißt du, was noch fehlt.  
 
 Gestalte deine Mahlzeiten rund um die vorhandenen Zutaten.  
 Ergänze nur das, was das Rezept verlangt.  
-So vermeidest du, dass du wieder Reis kaufen musst.  
-Du kaufst nur die zwingend benötigten Tomaten.  
+So kaufst du nur die zwingend benötigten Tomaten.  
 
 Schiebe angebrochene Packungen nach vorn.  
 Beschrifte Gefrorenes mit Inhalt und Datum.  
 Achte auf Verbrauchs‑ und Mindesthaltbarkeitsdatum.  
-So sparst du Zeit und Geld.  
 
 > 💶 **Spar‑Tipp zwischendurch:** Faire Konditionen gibt es online in Minuten: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
@@ -85,12 +82,10 @@ So sparst du Zeit und Geld.
 Blicke auf die Tage bis zum nächsten Einkauf.  
 Zähle, wie viele Mahlzeiten du zu Hause zubereitest.  
 Gäste, Schichtdienst oder Reisen verändern den Bedarf sofort.  
-So passt du den Vorrat an deine Lebenssituation an.  
 
 Reserviere keinen Platz für riesige Mengen ohne festen Plan.  
 Vergleiche eine gewöhnliche Woche mit einer stressigen Ausnahmephase.  
 So findest du dauerhaft deinen idealen **Einkauf Rhythmus**.  
-Der Rhythmus bestimmt, wann du nachkaufen musst.  
 
 | Frage | Was sie für den Einkauf bedeutet |
 |---|---|
@@ -100,7 +95,7 @@ Der Rhythmus bestimmt, wann du nachkaufen musst.
 
 ## Wann wird der Mengenrabatt zur Kostenfalle?
 
-In dieser **Modellrechnung** gehen wir von einem Zeitraum von vier Wochen aus und benötigen insgesamt 40 Portionen.  
+In dieser **Modellrechnung** gehen wir von einem Zeitraum von vier Wochen aus und benötigen insgesamt 40 Portionen.  
 Einzelne Portionen kosten laut diesem **Rechenbeispiel** 1 € pro Stück.  
 Die Großpackung senkt den Preis in dieser **Annahme** auf 0,90 € pro Portion.  
 Verbrauchst du alles, zahlst du laut **Modellrechnung** 36 € statt 40 € und sparst laut **Rechenbeispiel** 4 € im Monat.  
