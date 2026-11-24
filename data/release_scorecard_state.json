@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T15:46:23Z",
-  "modus": "live",
-  "commit": "98256642f19d865159d0425ba145563c1958ae85",
+  "generated_at": "2026-11-24T16:35:22Z",
+  "modus": "kandidaten",
+  "commit": "125724c3332e955f465b4b57403dab681f54ad80",
   "kapazitaet": {
     "stichtag": "2026-11-24",
     "basis": "2026-11-24",
@@ -631,7 +631,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e",
+      "sha256": "961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -645,7 +645,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1330,7 +1330,7 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "8416dbab773f8c9dc151b1a307d06d1d37f184030ba717475bff00d8836d20da",
+      "sha256": "79a6b948d7fae755f06f2763302ffd3b1dc475499832ac51888befb919911beb",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1344,7 +1344,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
