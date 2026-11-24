@@ -80,6 +80,8 @@ import json
 import os
 import re
 import sys
+
+import yaml  # noqa: E402  (Ausnahmenliste unten)
 import tempfile
 from pathlib import Path
 
@@ -175,6 +177,39 @@ def _beleg_zeilen(slug: str, sha: str, datum: str | None = None) -> list[str]:
         f"    sha256: {sha}",
         f"    geprueft_am: {tag}",
     ]
+
+
+AUSNAHMEN = ROOT / "data" / "cover_render_ausnahmen.yaml"
+
+
+def render_ausnahmen(root: Path = ROOT, heute: dt.date | None = None) -> dict[str, dict]:
+    """Befristete Ausnahmen der Reproduktionsmessung (siehe Datenfile).
+
+    Ein Eintrag zählt nur, wenn `grund` (≥ 20 Zeichen) und ein `pruefung`-Datum
+    in der Zukunft stehen. Abgelaufene oder leere Einträge werden ignoriert –
+    dann ist der Befund wieder hart. Fail-closed: Die Liste kann die
+    Auslieferung nicht dauerhaft freikaufen, nur einen benannten Fall tragen.
+    """
+    pfad = root / "data" / "cover_render_ausnahmen.yaml"
+    if not pfad.is_file():
+        return {}
+    try:
+        daten = yaml.safe_load(pfad.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError:
+        return {}
+    heute = heute or dt.date.today()
+    aktiv = {}
+    for eintrag in daten.get("ausnahmen") or []:
+        slug = (eintrag.get("slug") or "").strip()
+        grund = (eintrag.get("grund") or "").strip()
+        pruefung = str(eintrag.get("pruefung") or "")
+        try:
+            faellig = dt.date.fromisoformat(pruefung)
+        except ValueError:
+            continue
+        if slug and len(grund) >= 20 and faellig >= heute:
+            aktiv[slug] = eintrag
+    return aktiv
 
 
 def im_renderbereich(pfad: Path) -> bool:
@@ -338,7 +373,8 @@ def messung(root: Path = ROOT) -> dict:
     die die eigene Messung widerlegt.
     """
     ergebnis = {"befunde": [], "geprueft": 0, "ausserhalb": 0,
-                "ohne_beleg": [], "abweichung": [], "beleg_veraltet": []}
+                "ohne_beleg": [], "abweichung": [], "beleg_veraltet": [],
+                "ausnahmen": []}
     kp, gc = _kern()
     try:
         import cover_render_check as crc
@@ -375,6 +411,15 @@ def messung(root: Path = ROOT) -> dict:
                 raise WerkzeugFehler(f"{slug}: Render nicht möglich ({exc})") from exc
             ergebnis["geprueft"] += 1
             if not crc.same_pixels(str(ziel), neu):
+                if slug in render_ausnahmen(root) and beleg_vorhanden(cover):
+                    # Die Ausnahme deckt NUR die Reproduktionsmessung. Ein
+                    # Cover ohne Herkunftserklärung bleibt auch hier hart –
+                    # sonst wäre die Liste eine Hintertür für „kein Beleg".
+                    ergebnis["ausnahmen"].append(slug)
+                    print(f"::warning title=Cover-Herkunft (Ausnahme)::{slug}: "
+                          "Bild weicht im CI-Renderer ab – befristete Ausnahme mit "
+                          "Grund und Prüfdatum in data/cover_render_ausnahmen.yaml")
+                    continue
                 befunde.append(f"{slug}: Bild weicht vom Renderer ab – die "
                                "Herkunftsangabe ist damit nicht mehr belegt "
                                "(Cover neu rendern, dann Beleg nachziehen)")
