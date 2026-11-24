@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T17:11:56Z",
+  "generated_at": "2026-11-24T17:50:14Z",
   "modus": "kandidaten",
-  "commit": "30344357a9784ea32ab482cae3438e5137b79f7e",
+  "commit": "7725805cad662079e62ce00f61c90ee027917530",
   "kapazitaet": {
     "stichtag": "2026-11-24",
     "basis": "2026-11-24",
@@ -131,23 +131,22 @@
       "anzahl": 5
     },
     {
-      "check": "T5-lesbarkeit",
-      "dimension": "technik",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
-      "artikel": [
-        "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
-        "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort"
-      ],
-      "anzahl": 2
-    },
-    {
       "check": "T1-zeichenlaenge",
       "dimension": "technik",
       "wirkung": "blockiert",
       "entscheidung": "auto",
       "quelle": "scripts/check_length.py (via publish_gate.check_length_failures)",
+      "artikel": [
+        "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+      ],
+      "anzahl": 1
+    },
+    {
+      "check": "T5-lesbarkeit",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
       "artikel": [
         "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
       ],
@@ -1045,11 +1044,11 @@
       ]
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "sha256": "db084f0dd10de7d3e001d77ef7c0ea0184065d5d6afabc9b4c59f56459e0a871",
+      "sha256": "523f0704a2d8140c5e0e9b62ca3349a562e384ba7c8ac0a5cdc2c2b8fadb1545",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "blockiert",
         "affiliate": "bestanden",
@@ -1059,19 +1058,13 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
           "dimension": "faktenalter",
           "wirkung": "blockiert",
           "detail": "3f0a88ede9d44ee910cb (luecke): Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.; 51e259fd2d8582e774f7 (luecke): Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.; 55f8eee"
-        },
-        {
-          "check": "T5-lesbarkeit",
-          "dimension": "technik",
-          "wirkung": "blockiert",
-          "detail": "Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
         }
       ]
     },
@@ -1330,7 +1323,7 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "1e4b7759d0967a303bf034ebab0331df73591b3ee22468998ff982aed37c3ba1",
+      "sha256": "689e13be07540f675a50b67108950201d0caadb2c3865e074d3d35117998ecf2",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
