@@ -22,8 +22,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 2ae6db877ed32e196a57c1e1e45d878498ffa81ec6dcee148dd8311ba7b70f9e
-    geprueft_am: 2026-11-23
+    sha256: 70d10dba580c3b316a6e76b98cf9a35458af3788915d2a58c405f5be0ecff0f2
+    geprueft_am: 2026-11-24
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"

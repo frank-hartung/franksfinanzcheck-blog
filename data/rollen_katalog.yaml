@@ -1,0 +1,228 @@
+# Rollenkatalog – Vorschlag der Agentur, Abnahme durch den Betreiber
+#
+# WARUM DIESE DATEI
+# -----------------
+# Am 23.11.2026 blieben 54 von 92 öffentlichen Beiträgen ohne Rolle. Die
+# Entscheidung lautete damals: drei Wellen, drei PRs, drei Fristen
+# (30.11./07.12./15.12.) – Redaktionsarbeit an 54 Einzelfällen. Das ist keine
+# Entscheidung, die ein Betreiber „vollständig umsetzen" kann: Sie verlangt
+# 54 eigene Urteile über Suchabsichten.
+#
+# Dieser Katalog dreht das Verfahren um: Die Rollen sind hier FERTIG
+# formuliert – abgeleitet aus Titel, Description und H2 der Beiträge am
+# 24.11.2026. Der Betreiber prüft EINE Datei, ändert einzelne Zeilen, wenn er
+# will, und spielt sie mit EINEM Befehl ein:
+#
+#     python3 scripts/rollen_katalog.py --pruefen      # was fehlt, was kollidiert
+#     python3 scripts/rollen_katalog.py --uebernehmen  # in die Map schreiben
+#     python3 scripts/rollen_katalog.py --report        # Abnahme-Tabelle
+#
+# Danach tragen alle fünf Pillars die Rollenpflicht (die Ausnahmen in
+# data/kannibalisierung_map.yaml entfallen), und das Gate
+# scripts/tests/test_inhalts_register.py bleibt dauerhaft scharf.
+#
+# QUALITÄTSREGEL (R4 der Map): Zwei Beiträge desselben Clusters müssen sich in
+# den ersten 40 Zeichen des Titels unterscheiden – sonst ist es dieselbe Rolle.
+# `--pruefen` meldet Verstöße, statt sie zu erfinden.
+
+stand: "2026-11-24"
+quelle: "abgeleitet aus Titel, Description und H2 der Beiträge (Stand 24.11.2026)"
+abnahme: "offen – Frank Hartung"
+
+cluster:
+  - id: K8-verbrauch-messen
+    pillar: strom-sparen
+    primaerkeyword: "Stromfresser finden"
+    entscheidung: >-
+      Acht Rollen, alle mit demselben Werkzeug (messen) auf unterschiedlichem
+      Gegenstand: lange Laufzeiten, Bereitschaft, Warmwasser, Kaffeemaschine,
+      Geschirrspüler, Waschmaschine, Automatik, Geräteauswahl der Steuerung.
+      Keine Zusammenführung: Die Messmethode ist gleich, der Gegenstand und die
+      Zahl am Ende sind es nicht.
+    beitraege:
+      - slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+        rolle: "Messung: Stromfresser über lange Laufzeiten aufspüren"
+      - slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+        rolle: "Messung: Bereitschaftsbetrieb in Jahreskosten umrechnen"
+      - slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+        rolle: "Messung: Warmwasserkosten aus Durchfluss und Duschdauer"
+      - slug: 2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee
+        rolle: "Messung: Kosten pro Tasse aus Strom und Anschaffung"
+      - slug: 2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom
+        rolle: "Messung: ganze Spülgänge statt einzelner Teller vergleichen"
+      - slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
+        rolle: "Messung: Beladung und Programm statt Maximalangabe"
+      - slug: 2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken
+        rolle: "Bewertung: Automatik gegen Eigenverbrauch und Kaufpreis"
+      - slug: 2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt
+        rolle: "Auswahl: welche smarte Steuerung zum Haushalt passt"
+
+  - id: K9-tarif-und-vertrag
+    pillar: strom-sparen
+    primaerkeyword: "Stromtarif wechseln"
+    entscheidung: >-
+      Sechs Rollen entlang des Vertragslebens: Tarifstatus klären, Tarifwahl
+      rechnen, Herkunft prüfen, auf Erhöhung reagieren, Wechsel vorbereiten,
+      Zählerstand als Nachweis. Wer diese sechs trennt, kann später jede
+      Werbefläche genau einer Absicht zuordnen.
+    beitraege:
+      - slug: 2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet
+        rolle: "Tarifstatus: Grundversorgung oder Sondervertrag klären"
+      - slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
+        rolle: "Tarifwahl: Doppeltarifzähler gegen eigenes Verbrauchsprofil"
+      - slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
+        rolle: "Tarifwahl: Herkunftsnachweis, Bindung und Preis getrennt prüfen"
+      - slug: 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem
+        rolle: "Reaktion: Sonderkündigungsrecht in der Grundversorgung"
+      - slug: 2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten
+        rolle: "Wechsel: Verbrauch, Vertragsende und Zählerdaten vorbereiten"
+      - slug: 2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden
+        rolle: "Nachweis: Zählerstand ablesen, melden, Schätzwerte vermeiden"
+
+  - id: K10-gebaeude-und-geraete
+    pillar: strom-sparen
+    primaerkeyword: "Energieeffizienz Haushalt"
+    entscheidung: >-
+      Neun Rollen mit Investitions- oder Gebäudebezug: Gerätetausch,
+      Label-Auswahl, zwei Alltags-Listen (bewusst getrennt: die eine prüft fünf
+      Anwendungen, die andere rät zu genau einer Änderung), Heizungstausch,
+      Energieausweis, Gebäudehülle, Förderung, Pfand als Fixkostenposten.
+    beitraege:
+      - slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
+        rolle: "Investition: Gerätetausch gegen gemessenen Verbrauch rechnen"
+      - slug: 2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten
+        rolle: "Auswahl: Energielabel gegen eigenen Nutzungsbedarf"
+      - slug: 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks
+        rolle: "Alltag: fünf Anwendungen nach Leistung und Laufzeit prüfen"
+      - slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
+        rolle: "Alltag: eine Änderung testen statt Liste abarbeiten"
+      - slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
+        rolle: "Heizungstausch: Investition und Betrieb für dasselbe Gebäude"
+      - slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
+        rolle: "Gebäude: Bedarfs- und Verbrauchswert unterscheiden"
+      - slug: 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen
+        rolle: "Gebäudehülle: Undichtigkeit finden, Dichtung oder Beschlag"
+      - slug: 2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck
+        rolle: "Förderung: örtliche Bedingungen und Antragszeit prüfen"
+      - slug: 2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten
+        rolle: "Fixkosten: Pfand als Rückgabe, nicht als Rabatt"
+
+  - id: K11-haushalt-ordnen
+    pillar: frugalismus
+    primaerkeyword: "Haushaltskosten senken"
+    entscheidung: >-
+      Sechs Rollen am Kontoauszug: ungenutzte Abos, erster Haushalt,
+      Jahresbetrag-Sortierung, feste vs. veränderliche Posten, eine Gewohnheit
+      mit Termin, Einkommensteilung. 50-30-20 bleibt eine Vergleichsfolie, kein
+      Rezept – deshalb eigene Rolle.
+    beitraege:
+      - slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
+        rolle: "Abbuchungen: ungenutzte Abos finden und kündigen"
+      - slug: 2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen
+        rolle: "Erste Wohnung: laufende Kosten und Anschaffungen trennen"
+      - slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
+        rolle: "Abbuchungen: nach Jahresbetrag und Kündigungstermin sortieren"
+      - slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
+        rolle: "Budget: feste und veränderliche Posten trennen"
+      - slug: 2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit
+        rolle: "Gewohnheit: eine der sieben mit festem Termin versehen"
+      - slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+        rolle: "Budget: Einkommen in Bedarf, Wünsche und Rücklagen teilen"
+
+  - id: K12-vorrat-und-saison
+    pillar: frugalismus
+    primaerkeyword: "Vorrat und Saison sparen"
+    entscheidung: >-
+      Vier Rollen mit Kalenderbezug: Vorrat (Preis je verbrauchter Portion),
+      Weihnachtsbudget, Gebrauchtkauf, Familienausgaben. Getrennt, weil jede
+      Rolle einen anderen Zeitpunkt im Jahr bedient.
+    beitraege:
+      - slug: 2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet
+        rolle: "Vorrat: Preis je verbrauchter Portion inklusive Verderb"
+      - slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+        rolle: "Saison: Feiertagsbudget vom verfügbaren Betrag aus planen"
+      - slug: 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst
+        rolle: "Gebrauchtkauf: Nähte, Stoff, Passform, Reparaturkosten"
+      - slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
+        rolle: "Familie: Ausgabenprioritäten gemeinsam festlegen"
+
+  - id: K13-sparen-und-anlegen
+    pillar: frugalismus
+    primaerkeyword: "Sparen und anlegen"
+    entscheidung: >-
+      Drei Rollen jenseits des Alltagssparens: Sparroutine (Betrag und
+      Rhythmus), Anlage (Horizont und Rücklage vor dem Sparplan), Steuer
+      (Arbeitsmittel sammeln und absetzen).
+    beitraege:
+      - slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+        rolle: "Sparroutine: Betrag und Rhythmus festlegen"
+      - slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
+        rolle: "Anlage: Horizont und Rücklage vor dem Sparplan"
+      - slug: 2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest
+        rolle: "Steuer: Arbeitsmittel sammeln und absetzen"
+
+  - id: K14-konto-und-zahlung
+    pillar: konto-karten
+    primaerkeyword: "Konto und Karte"
+    entscheidung: >-
+      Sechs Rollen entlang der Kontofläche: Werkzeugwahl fürs Haushaltsbuch,
+      Zins nach der Aktion, Zahlungsart, Schutzgrenze, Kontogebühren,
+      Geschenkkarte. Der Unterschied zwischen „Konto" und „Karte" bleibt
+      sichtbar, weil die Gebühren an unterschiedlichen Stellen entstehen.
+    beitraege:
+      - slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+        rolle: "Werkzeugwahl: App, Tabelle oder Papier dauerhaft nutzen"
+      - slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
+        rolle: "Zins nach der Aktion, Einlagensicherung und Gültigkeit"
+      - slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
+        rolle: "Zahlungsart: wer löst die Buchung aus"
+      - slug: 2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist
+        rolle: "Schutzgrenze je Bank, nicht je Marke"
+      - slug: 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto
+        rolle: "Kontogebühren an echten Buchungen prüfen"
+      - slug: 2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst
+        rolle: "Karte: Einlösbarkeit, Frist und Restguthaben"
+
+  - id: K15-reise-budget
+    pillar: mietwagen
+    primaerkeyword: "Reisekosten planen"
+    entscheidung: >-
+      Acht Rollen mit Reisebezug: Mietwagen-Kaution, Mietwagen-Streckenpreis,
+      Pauschalreise-Endpreis, Camping-Nacht, Urlaubsbudget, Reisekasse,
+      Flug-Endpreis, Flugstörung. Mietwagen bleibt der Kern (zwei Rollen), alles
+      andere sind Randrollen derselben Reisekasse.
+    beitraege:
+      - slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+        rolle: "Mietwagen: Kaution und Kartenrahmen vor der Buchung"
+      - slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
+        rolle: "Mietwagen: Preis für die ganze Strecke inklusive Kilometer"
+      - slug: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp
+        rolle: "Pauschalreise: Endpreis inklusive Gepäck, Transfer, Verpflegung"
+      - slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+        rolle: "Camping: Kosten pro Nacht inklusive Stellplatz und Nebenkosten"
+      - slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+        rolle: "Urlaubsbudget: Gesamtbudget vor der Buchung festlegen"
+      - slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+        rolle: "Reisekasse: rückwärts planen, bezahlt gegen offen"
+      - slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
+        rolle: "Flug: Endpreis inklusive Gepäck und Anfahrt zum Flughafen"
+      - slug: 2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck
+        rolle: "Störung: Ankunftszeit und Grund sichern, Anspruch prüfen"
+
+  - id: K16-versicherungen
+    pillar: versicherungen
+    primaerkeyword: "Versicherung vergleichen"
+    entscheidung: >-
+      Vier Rollen, jede an einer anderen Police: Haus und Hausrat als
+      Gesamtbild, Privathaftpflicht als Pflichtprodukt, Wohngebäude als
+      Vergleichsaufgabe, Kfz als Beitragsoptimierung. Kein Zusammenlegen: Die
+      vier Verträge haben unterschiedliche Kündigungsfristen.
+    beitraege:
+      - slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+        rolle: "Eigentümer und Mieter: Wohngebäude, Hausrat, Elementarschutz"
+      - slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+        rolle: "Haftpflicht: Deckung, Klauseln und Kosten"
+      - slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+        rolle: "Vergleich: Elementarschaden, grobe Fahrlässigkeit, Neuwert"
+      - slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+        rolle: "Kfz: gleiche Fahrleistung und Selbstbeteiligung vergleichen"

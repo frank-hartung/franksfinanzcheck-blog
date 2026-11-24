@@ -25,6 +25,13 @@ cover:
   image: "images/covers/2026-11-23-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen.jpg"
   alt: "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 8983a147b1e7b42c615fb09aa8a5d49dbdbc8d363c1b613a128d2f4e8fc6c73b
+    geprueft_am: 2026-11-24
+
 ---
 
 Handy im Check: Warum bezahlen so viele Menschen in Deutschland **jeden** **Monat** zu viel Geld Wie erkennst du, ob Tarife wirklich dauerhaft günstig sind oder nur im ersten halben Jahr so wirken? Welche Klauseln im Kleingedruckten sorgen dafür, dass deine Rechnung am Ende doch höher ausfällt als gedacht? Diese Fragen klären wir jetzt Schritt für Schritt.
