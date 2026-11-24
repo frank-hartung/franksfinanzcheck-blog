@@ -151,7 +151,7 @@ Nach allen Messungen lässt sich die Wahl sauber runterbrechen:
 
 ### WLAN‑Verstärker, wenn …
 
-- genau **ein Raum** schlecht versorgt ist,
+- Genau **ein Raum** schlecht versorgt ist,
 - das Grundtempo am Router stimmt,
 - du weniger als 70 € ausgeben willst (Beispielrechnung),
 - im betroffenen Raum keine Anwendungen maximalen Durchsatz benötigen.
