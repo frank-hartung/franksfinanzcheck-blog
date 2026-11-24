@@ -22,7 +22,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 70d10dba580c3b316a6e76b98cf9a35458af3788915d2a58c405f5be0ecff0f2
+    sha256: d6913e823b2a9181eddfdf89c71408a608799d48c63068841c41c2d961a84969
     geprueft_am: 2026-11-24
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
