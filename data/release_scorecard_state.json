@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T16:35:22Z",
+  "generated_at": "2026-11-24T17:11:56Z",
   "modus": "kandidaten",
-  "commit": "125724c3332e955f465b4b57403dab681f54ad80",
+  "commit": "30344357a9784ea32ab482cae3438e5137b79f7e",
   "kapazitaet": {
     "stichtag": "2026-11-24",
     "basis": "2026-11-24",
@@ -645,7 +645,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1330,7 +1330,7 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "79a6b948d7fae755f06f2763302ffd3b1dc475499832ac51888befb919911beb",
+      "sha256": "1e4b7759d0967a303bf034ebab0331df73591b3ee22468998ff982aed37c3ba1",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
