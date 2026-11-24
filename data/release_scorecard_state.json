@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T17:50:14Z",
+  "generated_at": "2026-11-24T19:04:28Z",
   "modus": "kandidaten",
-  "commit": "7725805cad662079e62ce00f61c90ee027917530",
+  "commit": "1eb8ce07a0727fc1116c3d42f7d5e474f1b573d8",
   "kapazitaet": {
     "stichtag": "2026-11-24",
     "basis": "2026-11-24",
@@ -1058,7 +1058,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1337,7 +1337,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
