@@ -171,31 +171,31 @@ Für den Vergleich brauchst du Postleitzahl und Verbrauch. Halte zwei Preise fes
 
 ## Häufige Fragen
 
-### Wie oft sollte ich meinen Gastarif prüfen
+### Wie oft sollte ich meinen Gastarif prüfen?
 
 Ein fester Termin im Jahr hilft, Abrechnung, Vertrag und Angebote zusammen zu prüfen. Reagiere zusätzlich auf Mitteilungen über neue Preise. Beachte die genannten Fristen.
 
-### Wie lange dauert der Preisschutz
+### Wie lange dauert der Preisschutz?
 
 Dafür gibt es keine verlässliche Standarddauer. Prüfe im Vertrag, wie lange die Bindung gilt, welche Preisteile erfasst sind und welche Änderungen ausgenommen sind.
 
-### Werden Gaspreise von der Behörde genehmigt
+### Werden Gaspreise von der Behörde genehmigt?
 
 Nein. Anbieter kalkulieren ihre Tarife selbst. Es gibt keine staatliche Genehmigung der Endkundenpreise. Neue Preise müssen aber Gesetz und Vertrag einhalten.
 
-### Kostet ein Wechsel des Gasanbieters etwas
+### Kostet ein Wechsel des Gasanbieters etwas?
 
 Für Haushaltskunden sind Kündigung und Wechsel kostenfrei. Laufzeit und Frist des Vertrags gelten weiter. Prüfe die Angaben zum Wechsel und in deinem Vertrag.
 
-### Spare ich mit einem Grad weniger genau sechs Prozent
+### Spare ich mit einem Grad weniger genau sechs Prozent?
 
 Nein, das ist ein grober Richtwert der Verbraucherzentrale. Die Wirkung hängt von Gebäude, Heizung und Nutzung ab. Eine Modellrechnung kann die Größenordnung zeigen, nicht deine Ersparnis.
 
-### Zeigt ein Portal den gesamten Gasmarkt
+### Zeigt ein Portal den gesamten Gasmarkt?
 
 Das solltest du nicht voraussetzen. Angebote und Darstellungen unterscheiden sich. Prüfe die Bedingungen beim Anbieter und vergleiche die vollständigen Kosten.
 
-### Was gilt in der Grundversorgung
+### Was gilt in der Grundversorgung?
 
 Dort gelten eigene Informations- und Kündigungsregeln. Die Behörde nennt eine Kündigungsfrist von zwei Wochen. Prüfe die Vertragsart, statt eine Frist aus einem anderen Tarif zu übernehmen.
 

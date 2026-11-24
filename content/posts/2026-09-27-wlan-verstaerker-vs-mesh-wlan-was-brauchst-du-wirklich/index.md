@@ -219,4 +219,5 @@ Etwa auf halber Strecke zwischen Router und Problemraum – dort, wo das Origina
 ### Lohnt sich Mesh‑WLAN in einer kleinen Wohnung?
 Selten. Bei bis zu etwa 80 m² und nur einem Problemraum ist ein Repeater oder ein besserer Router‑Standort meist die günstigere Antwort.
 
-### Merke ich den Netzwechsel bei Mesh im Alltag? Nein, genau
+### Merke ich den Netzwechsel bei Mesh im Alltag?
+In der Regel nicht. Mesh-Systeme übergeben ein Gerät im Hintergrund an den nächstgelegenen Knoten, ohne dass die Verbindung sichtbar abreißt. Ein Telefonat oder eine Videokonferenz kann beim Wechsel kurz stocken; laufende Downloads merken davon meist nichts. Die Unterbrechung fällt umso kleiner aus, je näher die Knoten beieinanderstehen und je besser sie per Kabel angebunden sind. Wer auf eine unterbrechungsfreie Verbindung angewiesen ist, schließt das Gerät deshalb besser per LAN an.

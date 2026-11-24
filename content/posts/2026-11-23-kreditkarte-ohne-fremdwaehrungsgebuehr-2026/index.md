@@ -215,7 +215,8 @@ Einige Karten sind komplett gebührenfrei, andere verlangen bis zu 30 € pro 
 ### Warum ist DCC so teuer?
 Der Händler wandelt zum eigenen Kurs um, meist um 3 % bis 5 % höher als der Interbank‑Kurs; das ist ein Modellwert.
 
-### Kann ich die Karte jederzeit kündigen? Ja, wenn du die Kündigungsfrist von mindestens 30 Tagen einhältst; das ist ein Beispielwert. Notiere das Datum, um Überraschungen zu vermeiden.
+### Kann ich die Karte jederzeit kündigen?
+Ja, wenn du die Kündigungsfrist von mindestens 30 Tagen einhältst; das ist ein Beispielwert. Notiere das Datum, um Überraschungen zu vermeiden.
 
 ---
 

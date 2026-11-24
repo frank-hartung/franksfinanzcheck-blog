@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inhalts-Wache FF1–FF5: verhindert die Fehler, die im SEO-Umbau aufgefallen sind.
+"""Inhalts-Wache FF1–FF6: verhindert die Fehler, die im SEO-Umbau aufgefallen sind.
 
 FF1  Erfahrungsbehauptung ohne Kennzeichnung („Ich habe …“, „Meine Erfahrung“,
      „Mein eigener …“, „Fallstudie“ ohne „fiktiv“/„Beispiel“). Zitierte
@@ -9,6 +9,10 @@ FF3  Live-Beitrag ohne Rechner-Link (/werkzeuge/) oder ohne Pillar-Link.
 FF4  Doppelte Live-Titel (Kannibalisierung über identischen Titel).
 FF5  Top-20-Abbildungen fehlen oder sind nicht eingebunden
      (delegiert an scripts/abbildungen_ableiten.py --check).
+FF6  FAQ-Frage ohne brauchbare Antwort (leer oder < 40 Zeichen) und Frage,
+     die mitten im Block ihr „?“ verliert (abgeschnittener Satz). Im
+     FAQPage-JSON-LD steht dann eine leere `acceptedAnswer`, die Google
+     verwirft.
 
 Modi:
   python3 scripts/ff_inhalts_wache.py             # Exit 1 bei Befund
@@ -100,6 +104,54 @@ def find_experience(body):
     return findings
 
 
+FAQ_HEADING = "## Häufige Fragen"
+FAQ_MIN_ANTWORT = 40
+
+
+def find_leere_faq(body):
+    """FF6: FAQ-Frage ohne brauchbare Antwort.
+
+    Befund 23.11.2026: Der WLAN-Artikel endete mitten in der letzten
+    FAQ-Frage („Merke ich den Netzwechsel bei Mesh im Alltag? Nein, genau“)
+    – ohne Antwort. Markdown rendert das als Überschrift, im FAQPage-JSON-LD
+    steht eine leere `acceptedAnswer`, und Google verwirft den Eintrag. Die
+    Schema-Wache (S4) fängt das erst am fertigen Build; hier fällt es schon
+    am Quelltext auf, ohne Hugo.
+    """
+    text = body or ""
+    i = text.find(FAQ_HEADING)
+    if i < 0:
+        return []
+    block = text[i + len(FAQ_HEADING):]
+    fragen = re.findall(r"^### (.+)$", block, re.M)
+    findings = []
+    ohne_fragezeichen = []
+    for frage in fragen:
+        rest = block.split("### " + frage, 1)[1]
+        nxt = re.search(r"^### ", rest, re.M)
+        antwort = (rest[:nxt.start()] if nxt else rest).strip()
+        antwort = re.sub(r"^[-*_]{3,}\s*$", "", antwort, flags=re.M).strip()
+        zu_kurz = len(antwort) < FAQ_MIN_ANTWORT
+        if zu_kurz:
+            findings.append(
+                f"Frage „{frage[:50]}“ ohne brauchbare Antwort "
+                f"({len(antwort)} Zeichen, mindestens {FAQ_MIN_ANTWORT})")
+        # Ein Abriss erzeugt EINE Meldung, nicht zwei.
+        if not frage.strip().endswith("?") and not zu_kurz:
+            ohne_fragezeichen.append(frage)
+
+    # Fehlende Fragezeichen: zwei Fälle, zwei Bedeutungen. Im Bestand tragen
+    # die weit überwiegenden Fragen ihr „?“; fehlt es in EINER Frage, während
+    # die anderen es tragen, wurde ein Satz abgeschnitten (Befund 23.11.2026).
+    # Fehlt es im GANZEN Block, ist der Artikel durchgehend anders geschrieben
+    # – Schreibweise, kein Abriss, und damit kein Wachen-Befund.
+    if ohne_fragezeichen and len(ohne_fragezeichen) < len(fragen):
+        for frage in ohne_fragezeichen:
+            findings.append(f"Frage „{frage[:50]}“ endet nicht auf „?“ "
+                            f"– vermutlich abgeschnittener Satz")
+    return findings
+
+
 def run_checks():
     posts = sorted(glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")))
     findings = []
@@ -117,6 +169,8 @@ def run_checks():
             findings.append(f"FF2 {rel}: Formel-Titel in keywords")
         for f in find_experience(body):
             findings.append(f"FF1 {rel}: {f}")
+        for f in find_leere_faq(body):
+            findings.append(f"FF6 {rel}: {f}")
         if live:
             title = _field(front, "title")
             live_titles.setdefault(title, []).append(rel)
@@ -201,12 +255,42 @@ def selftest():
         print("  ✗ Beitrag OHNE pillar-Feld bekommt die Template-Ausnahme – "
               "die Boxen hätten nichts zu verlinken.")
 
+    # FF6 (23.11.2026): Der WLAN-Artikel endete mitten in der letzten
+    # FAQ-Frage; im FAQPage-JSON-LD stand eine leere acceptedAnswer. Die
+    # Proben sind in BEIDE Richtungen scharf – eine Wache, die jede Frage
+    # ohne „?“ meldet, wäre nach dem ersten Fehlalarm abgeschaltet.
+    faq_proben = [
+        # (Text, erwartete Trefferzahl)
+        ("## Häufige Fragen\n\n### Brauche ich Mesh? Nein, genau\n", 1),
+        ("## Häufige Fragen\n\n### Brauche ich Mesh?\n", 1),
+        # Abriss MITTEN im Block: die erste Frage trägt „?“, die letzte nicht.
+        ("## Häufige Fragen\n\n### Frage eins?\n"
+         + "Antwort eins ist ausreichend lang und belegt.\n\n"
+         "### Merke ich den Wechsel im Alltag? Nein, genau\n", 1),
+        # Durchgehend ohne „?“: Schreibweise, kein Abriss, kein Befund.
+        ("## Häufige Fragen\n\n### Frage eins\n"
+         + "Antwort eins ist ausreichend lang und belegt.\n\n"
+         "### Frage zwei\nAntwort zwei ebenso, mit eigenen Worten.\n", 0),
+        # Saubere FAQ: keine Funde (Gegenprobe).
+        ("## Häufige Fragen\n\n### Frage eins?\n"
+         + "Antwort eins ist ausreichend lang und belegt.\n\n"
+         "### Frage zwei?\nAntwort zwei ebenso, mit eigenen Worten.\n", 0),
+        # Kein FAQ-Block: keine Zuständigkeit.
+        ("## Inhalt\n\nNur Fließtext ohne Fragen.\n", 0),
+    ]
+    for text, expect in faq_proben:
+        got = len(find_leere_faq(text))
+        if got != expect:
+            bad += 1
+            print(f"  ✗ FF6-Probe falsch: {got} Fund(e), erwartet {expect} – "
+                  f"{text[:60]!r}")
+
     if bad:
         print(f"🛑 Inhalts-Wache-Selbsttest: {bad} Probe(n) falsch")
         return 2
-    n_proben = len(cases) + len(feld_proben) + 2
+    n_proben = len(cases) + len(feld_proben) + len(faq_proben) + 2
     print(f"✅ Inhalts-Wache-Selbsttest bestanden "
-          f"({n_proben} Proben: FF1 + Feldleser + Siegel-Ausnahme scharf)")
+          f"({n_proben} Proben: FF1 + FF6 + Feldleser + Siegel-Ausnahme scharf)")
     return 0
 
 
@@ -216,7 +300,7 @@ def main(argv):
     findings = run_checks()
     for f in findings:
         print("  -", f)
-    print(f"Inhalts-Wache FF1–FF5: {len(findings)} Befund(e)")
+    print(f"Inhalts-Wache FF1–FF6: {len(findings)} Befund(e)")
     return 1 if findings else 0
 
 
