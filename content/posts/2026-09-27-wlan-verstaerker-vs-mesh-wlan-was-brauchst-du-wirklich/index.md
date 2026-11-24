@@ -9,7 +9,7 @@ tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN", "WLAN-Repeater oder Mesh"]
+keywords: ["WLAN-Verstärker vs. Mesh-WLAN", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN", "WLAN-Repeater oder Mesh"]
 pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
 pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen!"
 ai_generated: true
@@ -22,6 +22,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 70d10dba580c3b316a6e76b98cf9a35458af3788915d2a58c405f5be0ecff0f2
     sha256: eeeafe655dcb8473718cf990766cf05b945f915f90446a461c19c430f43d8cac
     geprueft_am: 2026-11-24
 quellen:
