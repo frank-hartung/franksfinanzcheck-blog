@@ -1,13 +1,13 @@
 {
-  "generated": "2026-11-23T00:45:45Z",
+  "generated": "2026-11-24T04:42:31Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
-      "level": "gelb",
+      "level": "rot",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig",
-        "lesbarkeit: 2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten/index.md (Entwurf) – Flesch 55.9 < Publish-Schwelle 60",
-        "Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig"
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 0/6 bereit – Nachschub nötig",
+        "lesbarkeit: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md – Flesch 51.5 < Floor 60; 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/index…",
+        "Artikel-Reserve knapp: 0/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -27,10 +27,9 @@
       ]
     },
     "Affiliate & Umsatz": {
-      "level": "gelb",
+      "level": "gruen",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (click-chain)",
-        "click-chain: /go/strom/ ohne data-klick=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-klick-slug (Ziel-Klick nicht zuordenbar); /go/strom/ ohne ?subi…"
+        "in Ordnung (2 Kennzahl(en) noch ohne Datenlage)"
       ],
       "sources": [
         "data/governance_status.json",
@@ -69,7 +68,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 22 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 23 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
