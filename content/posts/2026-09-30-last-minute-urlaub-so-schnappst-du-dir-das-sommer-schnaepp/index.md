@@ -280,7 +280,7 @@ Gleiche Reisedaten, Personenzahl, Unterkunft, Verpflegung und Gepäck ab. Vergle
 ### Was ist mit Versicherung?
 Prüfe zunächst vorhandene Policen und Kartenleistungen. Entscheidend sind versicherte Personen, Deckung, Selbstbehalt, Ausschlüsse und Fristen. Eine Jahrespolice kann bei häufigen Reisen passen. Sie ist aber nicht automatisch günstiger oder umfassender.
 
-### Kurzer Merksatz vor der Buchung
+**Kurzer Merksatz vor der Buchung.**
 Nimm dir Zeit. Der Rabatt auf dem Banner ist selten der echte Preis. Rechne nach. Frag nach. Vergleiche in Ruhe. So buchst du günstig. Und so vermeidest du Überraschungen nach der Reise.
 
 ## Weiterrechnen und vertiefen

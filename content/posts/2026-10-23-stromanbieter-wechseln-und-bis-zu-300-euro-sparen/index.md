@@ -157,31 +157,31 @@ Der letzte Punkt ist der wichtigste. Ein günstiges Suchergebnis ist noch kein p
 
 ## Häufige Fragen
 
-### Kostet mich der Wechsel etwas
+### Kostet mich der Wechsel etwas?
 
 Für Haushaltskunden sind Kündigung und Wechsel kostenfrei. Das bestätigt die Behörde unter Verweis auf § 20 StromGVV und § 20a Absatz 3 EnWG. Für andere Kundengruppen gilt das nicht automatisch.
 
-### Muss ich selbst kündigen
+### Muss ich selbst kündigen?
 
 Bei einem normalen Wechsel kündigt der neue Anbieter im Regelfall für dich, wenn du ihn bevollmächtigst. Bei einer Erhöhung solltest du selbst fristgerecht kündigen. Das Sonderrecht kann kurz befristet sein.
 
-### Wie viel kann ich durch einen Wechsel sparen
+### Wie viel kann ich durch einen Wechsel sparen?
 
 Eine pauschale Summe lässt sich nicht seriös nennen. Die Ersparnis hängt von deinem Verbrauch, deinem alten Tarif und dem neuen Angebot ab. Rechne mit deinen Werten; die Beispielrechnung oben zeigt nur den Weg.
 
-### Was ist bei einem Bonus zu beachten
+### Was ist bei einem Bonus zu beachten?
 
 Lies die Bedingungen und den Termin der Zahlung. Rechne den Tarif zusätzlich ohne Bonus. Wenn der Vorteil wegfällt, muss der Preis für das Folgejahr trotzdem zu deinem Budget passen.
 
-### Ist ein dynamischer Tarif immer günstiger
+### Ist ein dynamischer Tarif immer günstiger?
 
 Nein. Bei einem dynamischen Tarif folgt der Preis dem Markt. Das kann in günstigen Stunden Vorteile bringen, verlangt aber Flexibilität und ein bewusstes Risiko. Prüfe die Preisformel und die technischen Voraussetzungen, bevor du dich entscheidest.
 
-### Zeigt ein Portal den gesamten Markt
+### Zeigt ein Portal den gesamten Markt?
 
 Verlass dich nicht darauf. Portale zeigen eine Auswahl und unterscheiden sich bei Anbietern, Filtern und Sortierung. Prüfe die Bedingungen beim Anbieter und vergleiche die vollständigen Kosten.
 
-### Was gilt nach dem Ende der Garantie
+### Was gilt nach dem Ende der Garantie?
 
 Danach gilt der Preis, der sich aus deinem Vertrag und den dann gültigen Preisen ergibt. Prüfe rechtzeitig, ob ein Wechsel günstiger ist. Die Garantie schützt nicht dauerhaft vor einer Erhöhung.
 
