@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
+title: "DSL Hacks: Was brauchst du wirklich?"
 description: "DSL Hacks: Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder…"
 date: 2026-09-28T01:05:48Z
 draft: false
@@ -23,6 +23,7 @@ cover:
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 70d10dba580c3b316a6e76b98cf9a35458af3788915d2a58c405f5be0ecff0f2
+    sha256: eeeafe655dcb8473718cf990766cf05b945f915f90446a461c19c430f43d8cac
     geprueft_am: 2026-11-24
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -41,7 +42,7 @@ faktencheck: "2026-10-13"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-WLAN-Verstärker oder Mesh-WLAN im Check: Läuft das Video im Wohnzimmer flüssig, aber im Arbeitszimmer stockt es? Dann liegt das Problem meist nicht am Tarif, sondern am Weg des Signals vom Router zum Gerät.
+DSL Hacks im Check: WLAN-Verstärker oder Mesh-WLAN im Check: Läuft das Video im Wohnzimmer flüssig, aber im Arbeitszimmer stockt es? Dann liegt das Problem meist nicht am Tarif, sondern am Weg des Signals vom Router zum Gerät.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -52,7 +53,7 @@ Dieser Ratgeber zeigt dir, welche Lösung zu deiner Wohnung oder deinem Haus pas
 💡 **Schnell‑Tipp von FranksFinanzcheck:** Prüfe zuerst, was dein Anschluss liefert. Viele Haushalte zahlen für Tempo, das sie nie bekommen. Ein Tarifwechsel wirkt oft Wunder: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_  
 
-## Das Wichtigste in Kürze
+## Das Wichtigste in Kürze – DSL Hacks
 
 - Ein **WLAN‑Verstärker (Repeater)** behebt ein einzelnes Funkloch.
 - **Mesh‑WLAN** deckt mehrere Räume, Etagen oder viele Geräte ab.

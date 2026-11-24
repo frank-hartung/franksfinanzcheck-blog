@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "generated_at": "2026-11-23T20:56:24Z",
+  "generated_at": "2026-11-24T13:40:53Z",
   "modus": "kandidaten",
-  "commit": "44a465d276f2111ba6ca2f62106f720b7529f67c",
+  "commit": "cbcc17c497a7665d6f09b08a87acd7dde5f78674",
   "kapazitaet": {
-    "stichtag": "2026-11-23",
-    "basis": "2026-11-23",
+    "stichtag": "2026-11-24",
+    "basis": "2026-11-24",
     "projiziert": false,
-    "artikel": 145,
-    "faellig": 6,
+    "artikel": 146,
+    "faellig": 7,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
       "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
       "frist": "2026-11-27",
-      "restlaufzeit": 4
+      "restlaufzeit": 3
     },
     "budget": 10,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 10.0,
-    "bedarf_je_tag": 3.489,
-    "bedarf_je_woche": 24.4,
-    "deckung_prozent": 286.6,
+    "bedarf_je_tag": 3.511,
+    "bedarf_je_woche": 24.6,
+    "deckung_prozent": 284.8,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -31,12 +31,12 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 145,
+    "offen_im_horizont": 146,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-23",
+      "bis": "2027-03-24",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -161,9 +161,9 @@
     "ueberholt": 239,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 24,
+    "aeltester_tage": 25,
     "frist_tage": 14,
-    "ueber_frist": 103,
+    "ueber_frist": 108,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
@@ -1260,7 +1260,7 @@
       ]
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
-      "sha256": "2d83b039d6a04857aeffe68b2f75260f0729d6d1ac7294c30ff19dc57eab05d0",
+      "sha256": "449d1c9002d53a2fd865cec06ac6f557f5ff5781faa0d553d376b7bb1815af18",
       "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1328,11 +1328,11 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "a80e5f7d9a3511b85dfdb1aa82e4bcb4c2e2edca9a9d46c653fcbe5411e3d49c",
-      "urteil": "warnung",
+      "sha256": "8416dbab773f8c9dc151b1a307d06d1d37f184030ba717475bff00d8836d20da",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -1342,15 +1342,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "T1w-zeichenlaenge-optimum",
-          "dimension": "technik",
-          "wirkung": "warnung",
-          "detail": "Zeichenlänge unter-optimum (11903 Zeichen, Optimum 12.000–18.000)"
-        }
-      ]
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "6375633f5b9aa450bfda71c2452f0cbe1861499c9148102c06d9e8645f12b60f",
@@ -1389,7 +1382,7 @@
       "checks": []
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "eada9455746994432ced384ecbd8a0a5266ce2d3245ac99746d8b176ea8966c2",
+      "sha256": "82873db8e6d418534154baa146ce3af761796e42aed1fc0f0479354b95260229",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1415,7 +1408,7 @@
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge ueber-optimum (18259 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge ueber-optimum (18260 Zeichen, Optimum 12.000–18.000)"
         }
       ]
     },
@@ -2167,7 +2160,7 @@
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "cf82b502dfa70e1f8bd21cc5f5c73ecd36245ab940a53c22d3137fb9a74fe8fd",
+      "sha256": "91f8520dfeb867edf1d57f0f1768f6b09c05e85f293d796fc0f0398437f67d67",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

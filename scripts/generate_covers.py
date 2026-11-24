@@ -995,6 +995,32 @@ def main(argv=None):
         print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
               f"{variants} responsive Varianten nachgezogen "
               f"(von {len(files)} Artikeln).")
+        # WER RENDERT, BELEGT (24.11.2026) – der Vorgang ist zweiteilig, und
+        # das war die Falle: `ki_cover_herkunft --pruefen` ist fail-closed und
+        # vergleicht den Frontmatter-Beleg (cover.provenienz.sha256) mit den
+        # Bytes der Datei. Dieses Skript schrieb die neuen Bytes, den Beleg
+        # aber nie – vier Deploy-Läufe am 24.11. (03:31, 04:14, 04:51, 10:24)
+        # starben in Schritt 36 „Cover-Herkunft", Pages `skipped`, die
+        # Live-Site stand ab 03:31. Der Docstring von `heilen()` beschreibt
+        # genau diesen Fehler schon vom 17.11. – er wiederholte sich, weil die
+        # Belegpflege ein zweiter Befehl war, an den man denken musste.
+        # Deshalb: Der Beleg wird hier nachgezogen, nicht in einem Runbook.
+        # `heilen()` fasst nur an, was die Pixelmessung dieses Laufs trägt;
+        # ein echtes Bild/Beleg-Auseinanderfallen bleibt hart und meldet sich.
+        if covers:
+            try:
+                import ki_cover_herkunft as _herkunft
+                lauf = _herkunft.heilen(Path(BLOG_DIR))
+                print(f"   Herkunftsbelege: {lauf['geschrieben']} nachgezogen "
+                      f"({lauf['erneuert']} erneuert, {lauf['geprueft']} Cover gemessen)")
+                if lauf["hart"] or lauf["fehler"]:
+                    print(f"   ⚠️  Herkunft bleibt offen: {len(lauf['hart'])} harte "
+                          f"Befunde, {len(lauf['fehler'])} Fehler – "
+                          f"`python3 scripts/ki_cover_herkunft.py --pruefen`")
+            except Exception as exc:      # pragma: no cover – Werkzeugkante
+                # Kein stiller Durchmarsch: Wer nicht belegen kann, sagt es.
+                print(f"   ⚠️  Herkunftsbelege NICHT nachgezogen: {exc} "
+                      f"– `python3 scripts/ki_cover_herkunft.py --heilen`")
 
 
 if __name__ == "__main__":
