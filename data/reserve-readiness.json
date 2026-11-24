@@ -1,15 +1,15 @@
 {
   "target": 6,
   "ready": 0,
-  "pool_size": 11,
-  "generated_at": "2026-11-24T14:43:25Z",
+  "pool_size": 12,
+  "generated_at": "2026-11-24T19:42:02Z",
   "candidates": [
     {
       "slug": "2026-11-24-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "54d4d6dd7242aa926293ad2da7121d88cbadfb2c68db83afac63b3b20fbc7d50",
+      "sha256": "f9dd6ce3fe59afab364def5a14267d1f1e63e2bcfb1111e7c23546e3f282e6b5",
       "flesch": 69.8,
-      "measured_at": "2026-11-24T14:40:35Z",
+      "measured_at": "2026-11-24T19:38:45Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-24-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -31,9 +31,9 @@
     {
       "slug": "2026-11-24-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "dfc8cfbb7cede23900ed332c402be80a8f657c4f7237e658c9e2156c90455cd7",
+      "sha256": "54fdba8cf9730c5491f3c3a89b8fb30b04b5966ca27c689316e70af882c6d1b5",
       "flesch": 73.3,
-      "measured_at": "2026-11-24T14:41:03Z",
+      "measured_at": "2026-11-24T19:39:18Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
         "🛑 2026-11-24-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -54,9 +54,9 @@
     {
       "slug": "2026-11-24-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "b3c92df5d0bb98387112b2c4f7324384d130bc726935e8aebabc268d3b16cf07",
+      "sha256": "1b7a2a65ccedf923c88cc4015b2de2814d29ae4a343d47cd6dce60077376da79",
       "flesch": 63.8,
-      "measured_at": "2026-11-24T14:41:30Z",
+      "measured_at": "2026-11-24T19:39:48Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-24-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -78,9 +78,9 @@
     {
       "slug": "2026-11-24-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
       "ready": false,
-      "sha256": "89a8d1059c4ea5eff875de1e17f202012497efb3d1968f18a75120b9ae2802d2",
+      "sha256": "c40c6161d16935a3a2c88c8e0be4edad9dba4cd413807e9df0c832899c2c4cba",
       "flesch": 68.4,
-      "measured_at": "2026-11-24T14:41:57Z",
+      "measured_at": "2026-11-24T19:40:19Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-24-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -104,9 +104,9 @@
     {
       "slug": "2026-11-24-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "ready": false,
-      "sha256": "a04b99404a0c3dd36270fd8bae4ba6959b58a39918c84cdd8983e52329f8c029",
+      "sha256": "a79a07c0c314d7f432e80229c6d15ef676e678a8bf211e8dce138ad47f99e85a",
       "flesch": 62.4,
-      "measured_at": "2026-11-24T14:42:23Z",
+      "measured_at": "2026-11-24T19:40:49Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-24-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -128,9 +128,9 @@
     {
       "slug": "2026-11-24-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
       "ready": false,
-      "sha256": "3a4d3027ea71cb0bf15ee392e59e508315260c544a0c8f7b26c2ed72fce8ba00",
+      "sha256": "eaae53cee0137ded5671b21a181daa355185f5f224d5185e20b4a0c7cf299b0c",
       "flesch": 67.5,
-      "measured_at": "2026-11-24T14:42:24Z",
+      "measured_at": "2026-11-24T19:40:51Z",
       "reason": "Reserve-Qualitäts-Gate: Umfang: 760 Wörter / 5864 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
         "Umfang: 760 Wörter / 5864 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
@@ -149,9 +149,9 @@
     {
       "slug": "2026-11-24-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
       "ready": false,
-      "sha256": "d772adbb585601191a04951df7626bded1ae3766e47b2352893dcdae3db99017",
+      "sha256": "5b9cf3eb77db27502d212eef8f442db2ea8e74c4dd4b6b5a65bc59bb6e2ef8b7",
       "flesch": 60.0,
-      "measured_at": "2026-11-24T14:42:26Z",
+      "measured_at": "2026-11-24T19:40:53Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
       "details": [
         "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
@@ -171,9 +171,9 @@
     {
       "slug": "2026-11-24-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
       "ready": false,
-      "sha256": "f34f776c23f3caba00b299aae137f8403badf42baf60a04a7dbc075742649b59",
+      "sha256": "c18df97e1c493af20be27a06c4f36388eac27e040ab9520cfe588f44052c7b90",
       "flesch": 71.2,
-      "measured_at": "2026-11-24T14:42:55Z",
+      "measured_at": "2026-11-24T19:41:26Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-24-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -195,9 +195,9 @@
     {
       "slug": "2026-11-24-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
       "ready": false,
-      "sha256": "2bb87283045da3d1e91dfda5b8d96bce5ec4fced76559efc5b47d110811a073d",
+      "sha256": "d735931a95e4b133928e11f6cd9097111983194494789a0668ed8bd652cec240",
       "flesch": 60.8,
-      "measured_at": "2026-11-24T14:42:57Z",
+      "measured_at": "2026-11-24T19:41:28Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das reduziert den Bedarf an Klimaanlagenbetrieb um bis zu 30 %.",
       "details": [
         "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das reduziert den Bedarf an Klimaanlagenbetrieb um bis zu 30 %.",
@@ -217,9 +217,9 @@
     {
       "slug": "2026-11-24-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "a52ecc401235096244b71ab1855434c42c95a55336122a7407813daf213d6e28",
+      "sha256": "b2d970d99ea3e993a240d783b7289d29e2e4679f340d6db1bfe654729b6a81f3",
       "flesch": 64.2,
-      "measured_at": "2026-11-24T14:42:58Z",
+      "measured_at": "2026-11-24T19:41:30Z",
       "reason": "Reserve-Qualitäts-Gate: Umfang: 680 Wörter / 4873 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
         "Umfang: 680 Wörter / 4873 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
@@ -239,9 +239,9 @@
     {
       "slug": "2026-11-24-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "ready": false,
-      "sha256": "1f21912f1bc7a7d36eb685b1071c605573b9b7d5ceb5de9542c55b8a76c1e63e",
+      "sha256": "4d933876750e4f40e6a85de26d7521e411f71571ccb42bb5bfec2a4bd4ab40ea",
       "flesch": 68.5,
-      "measured_at": "2026-11-24T14:43:25Z",
+      "measured_at": "2026-11-24T19:42:00Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
         "🛑 2026-11-24-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -258,11 +258,51 @@
         "affiliate": 1.0,
         "readability": 1.0
       }
+    },
+    {
+      "slug": "2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt",
+      "ready": false,
+      "sha256": "11b155abba689f5f3b8a4be3c09a04a396334d2d9b61034f81db15a4ae8f231b",
+      "flesch": 61.3,
+      "measured_at": "2026-11-24T19:42:02Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Für ein Haus bis 150 m² reichen meist zwei Knoten.",
+      "details": [
+        "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Für ein Haus bis 150 m² reichen meist zwei Knoten.",
+        "Umfang: 791 Wörter / 5706 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+      ],
+      "score": 0.917,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.88,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "45409527826",
+    "kind": "partial",
+    "run_id": "45472136214",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-24T19:42:02Z",
+    "renewed": [
+      "2026-11-24-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "2026-11-24-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "2026-11-24-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "2026-11-24-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
+      "2026-11-24-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "2026-11-24-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+      "2026-11-24-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+      "2026-11-24-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "2026-11-24-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
+      "2026-11-24-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+      "2026-11-24-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+      "2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
