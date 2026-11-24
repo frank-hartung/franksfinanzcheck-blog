@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "DSL Hacks: Was brauchst du wirklich?"
+title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
 description: "DSL Hacks: Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder…"
 date: 2026-09-28T01:05:48Z
 draft: false
@@ -22,8 +22,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 70d10dba580c3b316a6e76b98cf9a35458af3788915d2a58c405f5be0ecff0f2
-    sha256: eeeafe655dcb8473718cf990766cf05b945f915f90446a461c19c430f43d8cac
+    sha256: ca75afc5e15de2205a764df664ae33e85a5af493f2399815933dd4c119ea30d1
     geprueft_am: 2026-11-24
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"

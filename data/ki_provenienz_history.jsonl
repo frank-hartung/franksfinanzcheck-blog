@@ -4,3 +4,4 @@
 {"eingriffe": 1, "eskalationen": 0, "funde": 0, "revision": "48da9e8", "schritt": "wache", "ungeklaert": 0, "zeit": "2026-11-23T16:32:49Z"}
 {"art": "llms", "datei": "static/llms.txt", "revision": "87c1ff46f", "schritt": "heilen", "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)", "zeit": "2026-11-23T16:53:11Z"}
 {"art": "llms", "datei": "static/llms.txt", "revision": "f7e933a4e", "schritt": "heilen", "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)", "zeit": "2026-11-24T12:42:35Z"}
+{"art": "llms", "datei": "static/llms.txt", "revision": "30344357a", "schritt": "heilen", "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)", "zeit": "2026-11-24T17:07:20Z"}
