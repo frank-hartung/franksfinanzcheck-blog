@@ -6582,8 +6582,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
@@ -6626,8 +6626,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
@@ -6659,8 +6659,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
@@ -6681,8 +6681,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
@@ -6692,8 +6692,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -6703,8 +6703,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
@@ -6714,8 +6714,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
@@ -6725,8 +6725,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
@@ -6747,8 +6747,8 @@
       "frist": "2026-12-05",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "strom-sparen",
@@ -6758,8 +6758,8 @@
       "frist": "2026-12-07",
       "geo": 50,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
@@ -6769,8 +6769,8 @@
       "frist": "2026-12-07",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
@@ -6780,8 +6780,8 @@
       "frist": "2026-12-07",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "offen": [
@@ -6793,8 +6793,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
@@ -6804,8 +6804,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
@@ -6815,8 +6815,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
@@ -6826,8 +6826,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
@@ -6837,8 +6837,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -6848,8 +6848,8 @@
       "frist": "2026-12-03",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
@@ -6859,8 +6859,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
@@ -6870,8 +6870,8 @@
       "frist": "2026-12-03",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
@@ -6881,8 +6881,8 @@
       "frist": "2026-12-05",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "strom-sparen",
@@ -6892,8 +6892,8 @@
       "frist": "2026-12-07",
       "geo": 50,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
@@ -6903,8 +6903,8 @@
       "frist": "2026-12-07",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
@@ -6914,8 +6914,8 @@
       "frist": "2026-12-07",
       "geo": 83,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "vorlauf": [
