@@ -144,6 +144,14 @@ der Grenze, an der ein Eingriff den Nutzen rechtfertigt.
 > Clustern, 0 Ausnahmen, 6/6 Pillars vollständig, 92/92 Beiträge mit
 > Rolle – ein Befehl statt drei Wellen. Details: `ENTSCHEIDUNG-AGENTUR-2026-11-23.md` §10.
 >
+> **Nachtrag 24.11.2026, 13:15 UTC – ausgeliefert.** `deploy` (`45395917007`,
+> `f7e933a`) **success**, Pages-Deployment `13:14:46Z` **success**; der
+> Blocker war ein einziges Cover (`2026-09-27-wlan-verstaerker-…`), das der
+> CI-Renderer nicht pixelgleich reproduziert. Drei Nachträge: neu gerendert
+> (#1367), Toleranz statt Bit-Gleichheit (#1368), befristete Ausnahme mit
+> Frist **08.12.2026** (#1369). Offen sind nur noch deine zwei Handlungen:
+> fünf `curl`-Titel (§10.5) und `regression` aus den Required-Checks.
+>
 > **Reparatur 23.11.2026 (Betrieb):** `main` war ab `566cd39` rot. Die Schließakte
 > hatte drei zusammengeklebte Entscheidungen und eine ungültige Kette – mit dem
 > dokumentierten Heiler repariert (0 Strukturfehler, 2 Fragmente verworfen,
