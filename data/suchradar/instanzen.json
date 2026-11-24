@@ -1,10 +1,10 @@
 {
  "https://paulgo.io": {
-  "erfolge": 27,
+  "erfolge": 28,
   "fehler": 0,
-  "letzte_antwort": "2026-11-23T18:31:03.387324+02:00",
+  "letzte_antwort": "2026-11-24T18:29:43.741954+02:00",
   "letzter_fehler": "",
-  "letzte_dauer_ms": 7373.9
+  "letzte_dauer_ms": 7417.9
  },
  "https://opnxng.com": {
   "erfolge": 23,

@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-23T18:40:01.150915+02:00",
+ "zeitstempel": "2026-11-24T18:38:36.159224+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -8,15 +8,15 @@
   "fehler": 3,
   "uebersprungen": 0
  },
- "treffer_gesamt": 189,
+ "treffer_gesamt": 180,
  "treffer_organisch": 0,
  "datenqualitaet": {
   "anfragen_erfolgreich": 22,
   "anfragen_organisch": 0,
   "anfragen_rueckfall": 22,
-  "treffer_gesamt": 189,
+  "treffer_gesamt": 180,
   "treffer_organisch": 0,
-  "treffer_rueckfall": 189,
+  "treffer_rueckfall": 180,
   "rueckfall_anteil": 1.0,
   "anbieter": {
    "wikipedia": 22
@@ -120,16 +120,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Urlaub",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -250,6 +240,16 @@
   },
   {
    "anfrage": "Versicherungssumme berechnen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Versicherungstipps",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
