@@ -558,15 +558,18 @@ jobs:
       - name: Titel-Gate (R1–R5, inkl. Truncation-Wächter, selbstheilend)
         run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch, publish_gate greift)"
 
-      - name: Cover-Gate (Varianten, Stale, Brand, C4 Text-Komplettheit – selbstheilend)
-        run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
-
       - name: Keyword-Gate (Premium #303 – Titel/Description/First-Para/H2/Dichte – selbstheilend)
         run: |
           python3 scripts/keyword_optimizer.py --selftest
           python3 scripts/keyword_optimizer.py --fix || echo "⚠ Keyword-Gate – Funde im Log (selbstgeheilt)"
           python3 scripts/keyword_gate.py --selftest
           python3 scripts/keyword_gate.py --fix || echo "⚠ Keyword-Gate (Premium) – Funde im Log (selbstgeheilt)"
+
+      # Beide Titel-Schreiber müssen fertig sein, bevor das Cover-Gate ein
+      # veraltetes Titelbild neu rendert. Danach prüft die Herkunftswache
+      # weiterhin unabhängig Pixel und Beleg (Run 45374581619 / #1358).
+      - name: Cover-Gate (Varianten, Stale, Brand, C4 Text-Komplettheit – selbstheilend)
+        run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
 
       # ================= METADATEN-WACHE (WF-7B6B / #925, 29.10.2026) ==========
       # Befund: Das Keyword-Gate oben schrieb am 27.10.2026 eine Description
