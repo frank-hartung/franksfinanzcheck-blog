@@ -8,8 +8,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Keine Prüfsummen im Dokument.** Maßgeblich ist, welche Befunde offen sind und ob die beanstandeten Werte heute noch im Text stehen; die Fassungsbindung führt der Ledger (`geprueft_fassung`). So altert die Vorlage nicht an fremden Commits.
 
-**173 offene Live-Befunde auf 51 Artikeln.** Für **86** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **87** Befunde haben keine frühere aktive Entscheidung.
+**176 offene Live-Befunde auf 52 Artikeln.** Für **86** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **90** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -60,6 +60,9 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `68afba3e6a16a364ce45` · `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'.
 - `dc5ff05c5dda79d01373` · `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` · Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet.
 - `5c096f87730532352820` · `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.
+- `06bc5a6bc11098317697` · `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben.
+- `471944cae24a034c7c00` · `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben.
+- `780af701a2eaa465d46a` · `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt.
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
@@ -1348,6 +1351,40 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
+## `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden`
+
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `06bc5a6bc11098317697` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben. |
+| `471944cae24a034c7c00` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben. |
+| `780af701a2eaa465d46a` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt. |
+
+### `06bc5a6bc11098317697`
+
+**Befund:** Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `471944cae24a034c7c00`
+
+**Befund:** Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `780af701a2eaa465d46a`
+
+**Befund:** Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp`
 
 - Offene Live-Befunde: **5**
@@ -2330,6 +2367,9 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce45 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 06bc5a6bc11098317697 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 471944cae24a034c7c00 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 780af701a2eaa465d46a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33278b9e7942ebfdbbac --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6ad7358a9afcfef3babb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7c375a3e1a9bfab1468c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

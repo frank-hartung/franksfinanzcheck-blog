@@ -73,7 +73,7 @@
 | `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-07 | **blockiert** |
 | `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-07 | **freigabe-reif** |
 | `2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-11 | **freigabe-reif** |
-| `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
+| `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-08 | **blockiert** |
 | `2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-11 | **freigabe-reif** |
 | `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` | ⚠️ warnung | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-11 | **blockiert** |
 | `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **freigabe-reif** |
@@ -124,7 +124,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 | Check | Dimension | Wirkung | Entscheidet | Artikel |
 |---|---|---|---|---|
-| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 51 |
+| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 52 |
 | **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 5 |
 | **T5-lesbarkeit** | technik | blockiert | Maschine (deterministisch) | 2 |
 | **T1-zeichenlaenge** | technik | blockiert | Maschine (deterministisch) | 1 |
@@ -133,7 +133,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**278** offene Befunde auf **78** Seiten (live: 173 auf 51 Artikeln) · ältester **25 Tage** · Frist 14 Tage · über der Frist: **108**.
+**281** offene Befunde auf **79** Seiten (live: 176 auf 52 Artikeln) · ältester **25 Tage** · Frist 14 Tage · über der Frist: **108**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -153,19 +153,19 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 | Kennzahl | Wert |
 |---|---|
-| Seiten im Bestand (Posts + Ratgeber) | 146 |
-| Fällig heute / überfällig | 7 / 0 |
-| Bedarf | 3,51 Prüfungen/Tag (24,6/Woche) |
+| Seiten im Bestand (Posts + Ratgeber) | 148 |
+| Fällig heute / überfällig | 9 / 0 |
+| Bedarf | 3,56 Prüfungen/Tag (24,9/Woche) |
 | Angebot | 10,00/Tag (Budget 10 × 1,00 Läufe/Tag) |
-| **Deckung** | **285 %** |
+| **Deckung** | **281 %** |
 | Rückstand abgebaut | in 0 Tagen (Frist 7 Tage) |
-| Nächste Frist | `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` am 2026-11-27 (in 3 Tagen) |
+| Nächste Frist | `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` am 2026-11-27 (in 3 Tagen) |
 | Empfohlenes Budget | 10 je Lauf (Limit 21) |
-| Spitzentag (#1039) | ✅ mitgemessen (54 Bündeltage, kein Befund) |
+| Spitzentag (#1039) | ✅ mitgemessen (55 Bündeltage, kein Befund) |
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
-## Blockierende Funde (52 Artikel)
+## Blockierende Funde (53 Artikel)
 
 ### `2026-08-10-dsl-wechselbonus-sichern` (blockiert, Risikoklasse standard)
 
@@ -292,6 +292,10 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 ### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` (blockiert, Risikoklasse erhoeht)
 
 - **F4-fachbefund** [faktenalter]: 5c096f87730532352820 (luecke): Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.
+
+### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` (blockiert, Risikoklasse erhoeht)
+
+- **F4-fachbefund** [faktenalter]: 06bc5a6bc11098317697 (luecke): Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben.; 471944cae24a034c7c00 (luecke): Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben.; 780af701a2eaa465d46a (luecke): Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt.
 
 ### `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` (blockiert, Risikoklasse standard)
 
@@ -425,17 +429,19 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | 2026-12-21 |
 | `2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten` | standard | nicht erforderlich | frisch geprüft vor 15 Tagen (Intervall 30 Tage) | 2026-12-09 |
 | `2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` | standard | nicht erforderlich | frisch geprüft vor 7 Tagen (Intervall 90 Tage) | 2027-02-15 |
-| `2026-11-23-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-23-deine-naechtliche-grundlast-strom-so-erkennst-du-wo` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 45 Tage) | 2026-12-27 |
-| `2026-11-23-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-23-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-23-heizperiode-beginn-2026-warum-der-gas-check-im-oktober` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-23-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-23-kreditkarte-ohne-fremdwaehrungsgebuehr-2026` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-23-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 | `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 45 Tage) | 2027-01-07 |
-| `2026-11-23-vorrat-planen-leicht-gemacht-so-sparst-du-beim` | standard | nicht erforderlich | frisch geprüft vor 7 Tagen (Intervall 90 Tage) | 2027-02-15 |
-| `2026-11-23-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste` | standard | nicht erforderlich | frisch geprüft vor 11 Tagen (Intervall 90 Tage) | 2027-02-11 |
+| `2026-11-24-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-deine-naechtliche-grundlast-strom-so-erkennst-du-wo` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 45 Tage) | 2026-12-27 |
+| `2026-11-24-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-heizperiode-beginn-2026-warum-der-gas-check-im-oktober` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-kreditkarte-ohne-fremdwaehrungsgebuehr-2026` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-24-vorrat-planen-leicht-gemacht-so-sparst-du-beim` | standard | nicht erforderlich | frisch geprüft vor 7 Tagen (Intervall 90 Tage) | 2027-02-15 |
+| `2026-11-24-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste` | standard | nicht erforderlich | frisch geprüft vor 11 Tagen (Intervall 90 Tage) | 2027-02-11 |
+| `2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 

@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-23 18:40:01 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-24 18:38:36 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -12,7 +12,7 @@
 | Aus dem Zwischenspeicher | 0 |
 | Fehlgeschlagen | 3 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 189 |
+| Treffer gesamt | 180 |
 | Davon organisch | 0 |
 | Eigene Treffer | 0 von 22 Anfragen |
 
@@ -22,7 +22,7 @@
 |---|---|
 | Anfragen mit echtem Suchindex | 0 von 22 |
 | Anfragen nur mit Wissens-Rückfall | 22 |
-| Organische Treffer | 0 von 189 |
+| Organische Treffer | 0 von 180 |
 | Rückfall-Anteil | 100 % |
 | Aussagekraft | keine |
 

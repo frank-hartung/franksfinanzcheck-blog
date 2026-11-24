@@ -8,9 +8,9 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:pinterest:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-24@fr
  anksfinanzcheck.de
-DTSTAMP:20261124T032231Z
-DTSTART:20261124T091500Z
-DTEND:20261124T093000Z
+DTSTAMP:20261124T160012Z
+DTSTART:20261124T201500Z
+DTEND:20261124T203000Z
 SUMMARY:Pinterest: DSL-Wechselbonus sichern: So sparst du beim Interne
  tvertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
  ntie-gas:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261126T091500Z
 DTEND:20261126T093000Z
 SUMMARY:Pinterest: Sicher heizen: Welche Kosten sind geschützt (nutzen)
@@ -35,71 +35,11 @@ URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:pinterest:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
- utzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
+UID:pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspl
+ an:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261124T160012Z
 DTSTART:20261128T091500Z
 DTEND:20261128T093000Z
-SUMMARY:Pinterest: Geld abheben im Ausland: Wo die Gebühren wirklich e
- ntstehen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
- nd-gebuehren-vermeiden/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
- and-gebuehren-vermeiden/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstig
- e-tarife-fuer-2026:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
-DTSTART:20261129T091500Z
-DTEND:20261129T093000Z
-SUMMARY:Pinterest: Preisgarantie Gas: So sicherst du günstige Tarife (
- nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-
- sicherst-du-dir-guenstige-tarife-fuer-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
- -sicherst-du-dir-guenstige-tarife-fuer-2026/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-a
- nbieterwechsel:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
-DTSTART:20261201T091500Z
-DTEND:20261201T093000Z
-SUMMARY:Pinterest: DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten und Eff
- ektivpreis (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln
- -praxis-tipps-fuer-den-anbieterwechsel/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
- n-praxis-tipps-fuer-den-anbieterwechsel/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verm
- eiden:nutzen:2026-12-03@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
-DTSTART:20261203T091500Z
-DTEND:20261203T093000Z
-SUMMARY:Pinterest: Gasrechnung senken: Welche Fehler lassen sich vor (
- nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fe
- hler-im-spaetsommer-vermeiden/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
- ehler-im-spaetsommer-vermeiden/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspl
- an:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
-DTSTART:20261205T091500Z
-DTEND:20261205T093000Z
 SUMMARY:Pinterest: Abos und Verträge: Der stille Posten im Haushaltspl
  an (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -110,9 +50,69 @@ URL:https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-s
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:pinterest:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
+ utzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261124T160012Z
+DTSTART:20261129T091500Z
+DTEND:20261129T093000Z
+SUMMARY:Pinterest: Geld abheben im Ausland: Wo die Gebühren wirklich e
+ ntstehen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
+ nd-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verm
+ eiden:nutzen:2026-12-01@franksfinanzcheck.de
+DTSTAMP:20261124T160012Z
+DTSTART:20261201T091500Z
+DTEND:20261201T093000Z
+SUMMARY:Pinterest: Gasrechnung senken: Welche Fehler lassen sich vor (
+ nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fe
+ hler-im-spaetsommer-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
+ ehler-im-spaetsommer-vermeiden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-a
+ nbieterwechsel:nutzen:2026-12-03@franksfinanzcheck.de
+DTSTAMP:20261124T160012Z
+DTSTART:20261203T091500Z
+DTEND:20261203T093000Z
+SUMMARY:Pinterest: DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten und Eff
+ ektivpreis (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln
+ -praxis-tipps-fuer-den-anbieterwechsel/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstig
+ e-tarife-fuer-2026:nutzen:2026-12-05@franksfinanzcheck.de
+DTSTAMP:20261124T160012Z
+DTSTART:20261205T091500Z
+DTEND:20261205T093000Z
+SUMMARY:Pinterest: Preisgarantie Gas: So sicherst du günstige Tarife (
+ nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-
+ sicherst-du-dir-guenstige-tarife-fuer-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
+ -sicherst-du-dir-guenstige-tarife-fuer-2026/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:pinterest:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto
  -ohne-gebuehren:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261206T091500Z
 DTEND:20261206T093000Z
 SUMMARY:Pinterest: Kostenloses Girokonto: Ein Konto ohne Gebühren find
@@ -127,7 +127,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inte
  rnet:nutzen:2026-12-08@franksfinanzcheck.de
-DTSTAMP:20261124T032231Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261208T091500Z
 DTEND:20261208T093000Z
 SUMMARY:Pinterest: DSL-Vergleich: So findest du den günstigsten Intern

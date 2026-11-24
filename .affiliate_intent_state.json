@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-23 13:55:56 UTC",
+ "generated_at": "2026-11-24 14:28:17 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 146,
- "checked_links": 324,
+ "checked_articles": 147,
+ "checked_links": 326,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -30,9 +30,64 @@
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   },
   {
+   "code": "IW4",
+   "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+   "line": 21,
+   "route": "strom",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+   "line": 196,
+   "route": "strom",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
    "code": "IW2",
    "slug": "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026",
-   "line": 133,
+   "line": 138,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+   "line": 10,
+   "route": "allgemein",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+   "line": 89,
+   "route": "allgemein",
+   "slot": "mid",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+   "line": 128,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
