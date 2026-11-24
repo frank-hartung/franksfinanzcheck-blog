@@ -893,7 +893,7 @@ Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · **LIVE** · Risikoklasse erhoeht · 3 Befund(e)
+### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · **LIVE** (blockiert) · Risikoklasse erhoeht · 3 Befund(e)
 
 Datei: `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md`
 
