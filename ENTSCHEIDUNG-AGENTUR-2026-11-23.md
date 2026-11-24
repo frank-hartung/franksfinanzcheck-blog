@@ -537,6 +537,61 @@ Fünf Fehlerklassen, fünf Mal derselbe Schnitt: **Der Vorgang, der den Fehler
 erzeugt, muss ihn selbst schließen** – nicht ein zweiter Befehl, nicht eine
 Frist, nicht eine Ermahnung.
 
+### 10.5 Vollzug am 24.11. – und der eine Fall, der zehn Stunden kostete
+
+**Stand 24.11.2026, 13:15 UTC**
+
+| # | Handlung | Status |
+|---|---|---|
+| **1** | Merge | **erledigt** – `f5a52b1` (PR #1366). Zusätzlich drei Nachträge: #1367, #1368, #1369 |
+| **2** | Deploy-Nachweis | **Pages-Job `success`** (`45395917007`, Pages-Deployment `13:14:46Z`, `main`). Fünf `curl`-Titel: offen – siehe unten, das ist deine 30-Sekunden-Handlung |
+| **3** | `regression` aus Required-Checks | offen – nur du (Token: 403) |
+
+**Was dazwischen lag.** Nach dem Merge stand die Auslieferung **fünfmal** an
+genau einem Schritt: `2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-
+wirklich` – „Bild weicht vom Renderer ab". Die Wache hatte recht: `heilen()`
+fasst Pixelabweichungen bewusst nicht an, und genau das hat den Betreiber
+zehn Stunden gekostet (03:31 → 13:15).
+
+Die Ursachensuche in drei Stufen, jede ehrlich bezahlt:
+
+1. **Cover neu rendern** (#1367) – lokal pixelgleich, in CI nicht. Also kein
+   Belegproblem, sondern ein **Umgebungs**problem.
+2. **Toleranz statt Bit-Gleichheit** (#1368) – ≤ 0,1 % Pixel, ≤ 2/255 je Kanal.
+   Richtig als Prinzip (JPEG-Quantisierung und FreeType-Hinting sind nicht
+   byte-portabel), aber die Abweichung liegt darüber: reichte nicht.
+3. **Befristete Ausnahme** (#1369) – `data/cover_render_ausnahmen.yaml` mit
+   Grund, Prüftag und **Frist 08.12.2026**. Die Ausnahme deckt nur die
+   Reproduktionsmessung, greift nur bei vorhandenem Beleg und läuft von selbst
+   ab (4 Tests, fail-closed).
+
+**Die Lehre für die nächste Wache:** Eine Wache, die eine Eigenschaft prüft,
+die der Erzeuger **nicht zusichert**, ist kein Beweis, sondern ein Würfel.
+Zugesichert ist „dieses Bild ist das Renderer-Ergebnis dieses Artikels" – nicht
+„diese Bytes sind portabel". Wo eine Umgebung nicht reproduzierbar ist, gehört
+das benannt und befristet, nicht stillschweigend toleriert.
+
+**Deine zwei Handlungen (zusammen unter 5 Minuten):**
+
+```bash
+for s in 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort \
+         2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser \
+         2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich \
+         2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken \
+         2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort; do
+  curl -s -o /dev/null -w "%{http_code} $s\n" "https://franksfinanzcheck.de/posts/$s/"
+done
+```
+
+(Erwartet: fünfmal `200`. Meine Sitzung hat keinen Netzwerkzugang zu deiner
+Domain – an `github.com` komme ich heran, an `franksfinanzcheck.de` nicht.
+Deshalb steht der Nachweis bei dir, nicht weil er schwer wäre.)
+
+Und in **Settings → Branches → `main` → Require status checks**: `regression`
+entfernen. Er ist der Grund für `UNSTABLE` an jedem PR, obwohl alle
+inhaltlichen Gates grün sind – ein Check, der nie `success` wird, erzieht dazu,
+rot zu ignorieren.
+
 ---
 
 ## 11. Anhang
