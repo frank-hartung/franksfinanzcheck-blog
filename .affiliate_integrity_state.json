@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-23 20:51:19 UTC",
+ "generated_at": "2026-11-24 14:28:13 UTC",
  "verdict_changed": false,
  "state_schema_version": 2,
  "exit_code": 0,
@@ -10,8 +10,8 @@
  "unresolved_problems": [],
  "errors": [],
  "build": {
-  "built": true,
-  "reason": "public/ veraltet → Hugo-Rebuild",
+  "built": false,
+  "reason": "public/ aktuell (kein Rebuild nötig)",
   "ok": true
  },
  "exemptions": {
