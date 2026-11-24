@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
  asse-kaffee:nutzen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261124T155841Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261124T170000Z
 DTEND:20261124T171500Z
 SUMMARY:Telegram (Kanal): Kaffeemaschine: Was kostet eine Tasse wirkli
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wi
  ssen-musst:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261124T155841Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261128T060000Z
 DTEND:20261128T061500Z
 SUMMARY:Telegram (Kanal): Geschenkkarte: Was du beim Kauf und Aufladen
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
  parst:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261124T155841Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261129T060000Z
 DTEND:20261129T061500Z
 SUMMARY:Telegram (Kanal): Secondhand-Kleidung kaufen: So prüfst du Sto
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
  -in-der-wohnung:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261124T155841Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261205T060000Z
 DTEND:20261205T061500Z
 SUMMARY:Telegram (Kanal): Mesh-WLAN nachrüsten: Wann lohnt sich die In
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixk
  osten:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261124T155841Z
+DTSTAMP:20261124T160012Z
 DTSTART:20261206T060000Z
 DTEND:20261206T061500Z
 SUMMARY:Telegram (Kanal): Energieeffiziente Geräte: So sinken deine Fi
