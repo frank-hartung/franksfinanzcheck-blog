@@ -6,7 +6,7 @@ draft: true
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus", "DSL- und Internet-Flat günstig sichern", "Internet-Flat", "DSL-Vergleich", "DSL  und Internet Flat günstig sichern"]
+keywords: ["Internet-Flat", "DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus", "DSL- und Internet-Flat günstig sichern", "DSL-Vergleich", "DSL  und Internet Flat günstig sichern"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"

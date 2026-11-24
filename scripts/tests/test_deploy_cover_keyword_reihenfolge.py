@@ -44,7 +44,7 @@ class DeployCoverKeywordTest(unittest.TestCase):
             post.parent.mkdir(parents=True)
             original = (ROOT / "content/posts" / SLUG / "index.md").read_text(encoding="utf-8")
             # Das alte irrelevante Haupt-Keyword provoziert den CI-Schaden.
-            fixed = 'keywords: ["WLAN-Verstärker vs. Mesh-WLAN", "DSL Hacks",'
+            fixed = 'keywords: ["WLAN-Verstärker vs. Mesh-WLAN",'
             old = 'keywords: ["DSL Hacks", "WLAN-Verstärker vs. Mesh-WLAN",'
             self.assertIn(fixed, original)
             post.write_text(original.replace(fixed, old, 1), encoding="utf-8")

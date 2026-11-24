@@ -7,7 +7,7 @@ draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["News"]
 pillar: "frugalismus"
-keywords: ["Vertrags-Check im Herbst: Strom", "Versicherung", "Konto und Internet prüfen", "Saison Update", "Herbst-Check", "Herbst Check", "DSL-Vergleich"]
+keywords: ["Herbst-Check", "Vertrags-Check im Herbst: Strom", "Versicherung", "Konto und Internet prüfen", "Saison Update", "Herbst Check", "DSL-Vergleich"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"

@@ -7,7 +7,7 @@ draft: true
 tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken", "Gastarif vergleichen", "Gaspreisgarantie", "Gastarif wechseln", "Gastarife vergleichen"]
+keywords: ["Gastarife vergleichen", "Gasvergleich", "Gaskosten sparen", "Heizkosten senken", "Gastarif vergleichen", "Gaspreisgarantie", "Gastarif wechseln"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
