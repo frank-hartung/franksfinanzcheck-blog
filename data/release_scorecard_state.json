@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T13:40:53Z",
+  "generated_at": "2026-11-24T14:34:37Z",
   "modus": "kandidaten",
-  "commit": "cbcc17c497a7665d6f09b08a87acd7dde5f78674",
+  "commit": "f3d870ccec6536cdba0dff6c328fc2008581e880",
   "kapazitaet": {
     "stichtag": "2026-11-24",
     "basis": "2026-11-24",
@@ -1342,7 +1342,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
