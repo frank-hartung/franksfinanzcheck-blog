@@ -1,15 +1,15 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-23 18:49 UTC  
+**Stand:** 2026-11-24 01:41 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-11-23): 2 Artikel – Ziel erfüllt. – Bestand: 3 von Gates gehalten (ältester 7 Tage: faktenfrische: 4232b77745f1559839a5 (luecke): Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesn…)
+**Befund:** Letzter Publikationstag (2026-11-23): 2 Artikel – Ziel erfüllt. – Bestand: 3 von Gates gehalten (ältester 8 Tage: faktenfrische: 05ae2eeee6a578aac17b (luecke): Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.; 2980f6b227953c5ac8af (luecke): Keine Quelle für die Aussage, …)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-11-23 (Montag) |
-| Publikationstag heute | ja |
+| Heute | 2026-11-24 (Dienstag) |
+| Publikationstag heute | nein |
 | Artikel letzter Publikationstag (2026-11-23) | 2 |
-| Letzter Artikel überhaupt | 2026-11-23 (0 Tage her) |
+| Letzter Artikel überhaupt | 2026-11-23 (1 Tage her) |
 | Live-Artikel gesamt | 92 |
 | Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 3 |
