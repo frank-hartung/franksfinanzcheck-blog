@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T14:34:37Z",
+  "generated_at": "2026-11-24T15:21:03Z",
   "modus": "kandidaten",
-  "commit": "f3d870ccec6536cdba0dff6c328fc2008581e880",
+  "commit": "a59e55fc46dcd5183fad91e868b55c37df07c9da",
   "kapazitaet": {
     "stichtag": "2026-11-24",
     "basis": "2026-11-24",
     "projiziert": false,
-    "artikel": 146,
-    "faellig": 7,
+    "artikel": 148,
+    "faellig": 9,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
+      "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
       "frist": "2026-11-27",
       "restlaufzeit": 3
     },
     "budget": 10,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 10.0,
-    "bedarf_je_tag": 3.511,
-    "bedarf_je_woche": 24.6,
-    "deckung_prozent": 284.8,
+    "bedarf_je_tag": 3.556,
+    "bedarf_je_woche": 24.9,
+    "deckung_prozent": 281.3,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -31,7 +31,7 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 146,
+    "offen_im_horizont": 148,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 10,
     "empfehlung_erreicht": true,
     "hartes_limit": 21,
-    "spitze_geprueft": 54
+    "spitze_geprueft": 55
   },
   "ursachen": [
     {
@@ -90,6 +90,7 @@
         "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
         "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
+        "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
         "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
         "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
         "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
@@ -112,7 +113,7 @@
         "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 51
+      "anzahl": 52
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -154,10 +155,10 @@
     }
   ],
   "befundlage": {
-    "offen": 278,
-    "seiten": 78,
-    "live_befunde": 173,
-    "live_seiten": 51,
+    "offen": 281,
+    "seiten": 79,
+    "live_befunde": 176,
+    "live_seiten": 52,
     "ueberholt": 239,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
@@ -195,6 +196,7 @@
       "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
       "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": 2,
       "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": 1,
+      "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": 3,
       "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": 5,
       "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": 3,
       "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
@@ -1346,22 +1348,29 @@
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
-      "sha256": "6375633f5b9aa450bfda71c2452f0cbe1861499c9148102c06d9e8645f12b60f",
-      "urteil": "freigabe-reif",
+      "sha256": "b99d9c9e6e0b6f0e47407bc68b09f7ec50a12ad0c0f62c972242c95221848da3",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2027-01-08",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "06bc5a6bc11098317697 (luecke): Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben.; 471944cae24a034c7c00 (luecke): Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben.; 780af701a2eaa465d46a (luecke): Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt."
+        }
+      ]
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
       "sha256": "c9b2293a09189cc0634f8c276a8d6975054d47381f7e35d6dcd49a8f2283abdd",
