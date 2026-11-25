@@ -4,8 +4,9 @@ description: Mit internet tuning kostenlos surfst du schneller und sicherer. Erf
 kurzantwort: Ein schnellerer DNS-Server verkürzt die Wartezeit beim Seitenaufruf spürbar. Moderne Filter blockieren schädliche Webseiten direkt auf Server-Ebene. Du entscheidest, welcher Dienst deine Daten zur Namensauflösung verarbeitet.
 date: 2026-11-25T10:55:22Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-11-25T11:40:24Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+cadence_grund: "faktenfrische aufgehoben: faktencheck: 2026-11-25 – Re-Queue für vollständigen Publish-Gate-Lauf"
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -33,6 +34,7 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: f4f3b6cd88a1277ecf5351fe43ef30ba6a081fe336a1495c3eac0563d0f68610
     geprueft_am: 2026-11-25
+faktencheck: 2026-11-25
 ---
 
 Dein Browser lädt quälend langsam.

@@ -4,8 +4,9 @@ description: Willst du DSL wechseln und dabei bares Geld sparen? Mit diesen Tipp
 kurzantwort: Durch gesetzliche Regelungen ist die Versorgungssicherheit beim internet anbieterwechsel garantiert. Neukunden-Boni und Wechselprämien machen den Umstieg finanziell attraktiv. Ob du deinen Router mieten oder kaufen solltest, hängt von der geplanten Nutzungsdauer ab.
 date: 2026-11-25T10:51:47Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-11-25T11:40:24Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+cadence_grund: "faktenfrische aufgehoben: faktencheck: 2026-11-25 – Re-Queue für vollständigen Publish-Gate-Lauf"
 tags: ["DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -33,6 +34,7 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 9a9bac13a48311967521a404c5dd546fff05af910031dfdfb3721668accf0abf
     geprueft_am: 2026-11-25
+faktencheck: 2026-11-25
 ---
 
 DSL wechseln im Check: Stell dir vor, du sitzt abends auf dem Sofa. Du willst deine Lieblingsserie streamen. Doch das Bild ruckelt nur. Der Ladebalken dreht sich endlos.
