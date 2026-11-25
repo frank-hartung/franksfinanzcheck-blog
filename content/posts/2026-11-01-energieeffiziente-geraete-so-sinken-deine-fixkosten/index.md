@@ -154,7 +154,7 @@ Das treibt den Verbrauch in die Höhe. Ein vereister Gefrierschrank ist ein klas
 
 Reinige regelmäßig die Rückseite deines Kühlschranks. Staub auf den Kühlschlangen verhindert den Wärmeaustausch. Das Gerät braucht dann mehr Strom. Auch bei der Waschmaschine hilft Pflege.
 
-Ein sauberes Flusensieb und regelmäßiges Entkalken halten den Verbrauch niedrig. Kalk auf den Heizstäben wirkt wie ein [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/) gegen die Wärme. Es dauert länger, bis das Wasser heiß ist. Das kostet dich jeden Monat bares Geld.
+Ein sauberes Flusensieb und regelmäßiges Entkalken halten den Verbrauch niedrig. Kalk auf den Heizstäben wirkt wie ein [Schutzschild](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/) gegen die Wärme. Es dauert länger, bis das Wasser heiß ist. Das kostet dich jeden Monat bares Geld.
 
 Prüfe auch die Türdichtungen. Nimm eine Taschenlampe und lege sie in den Kühlschrank.
 
