@@ -218,7 +218,7 @@ Ein Neuvertrag ist häufig günstiger, weil Neukundenkonditionen gelten. Rechne 
 
  Sechs bis acht Wochen Vorlauf geben dir Wahlmöglichkeiten bei Terminen; das ist eine Modellannahme.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/) · [Mesh WLAN nachrüsten](../../posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/) · [Mesh WLAN nachrüsten](../../posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/)
 **Lesetipp:** [DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)
 
 ---

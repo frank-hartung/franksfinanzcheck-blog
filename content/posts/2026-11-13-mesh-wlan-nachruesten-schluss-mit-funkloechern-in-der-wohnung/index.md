@@ -165,7 +165,7 @@ Mit einem stabilen Mesh-System im Hintergrund bist du flexibel bei der Wahl dein
 
 **Für deinen nächsten Check:** Prüfe, ob du die Mesh-Knoten per Netzwerkkabel verbinden kannst. Die Verbindung der Knoten untereinander kann wichtiger sein als der Abstand zum Endgerät.
 
-**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/) **Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/)
+**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/) **Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
 
 ## Häufige Fragen
 

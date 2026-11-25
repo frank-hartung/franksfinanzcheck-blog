@@ -70,7 +70,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was sind Fluggastrechte?
 
-Hinter diesem Begriff verbirgt sich ein [Schutzschild](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/) für Reisende. Die Europäische Union hat strenge Regeln erlassen. Diese gelten für fast alle Flüge innerhalb der EU. Auch Flüge aus der EU in andere Länder sind abgedeckt.
+Hinter diesem Begriff verbirgt sich ein [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/) für Reisende. Die Europäische Union hat strenge Regeln erlassen. Diese gelten für fast alle Flüge innerhalb der EU. Auch Flüge aus der EU in andere Länder sind abgedeckt.
 
 Sogar Flüge von außerhalb in die EU zählen dazu. Voraussetzung ist hier ein Sitz der Airline in der EU.
 

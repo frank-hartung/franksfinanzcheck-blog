@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-25T18:40:15Z",
+  "erzeugt": "2026-11-25T18:56:26Z",
   "stichtag": "2026-11-25",
   "offen": 287,
   "seiten": 81,
   "live_seiten": 52,
   "live_befunde": 174,
-  "ueberholt": 243,
+  "ueberholt": 241,
   "ohne_fassung": 5,
   "seite_fehlt": 0,
   "entfallen": 3,
@@ -2363,28 +2363,6 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-08-10-dsl-wechselbonus-sichern",
-      "id": "1b7c9b9cac0290f71242",
-      "typ": "luecke",
-      "text": "Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-10-dsl-wechselbonus-sichern",
-      "id": "ee260c27a6bfdd60fa04",
-      "typ": "luecke",
-      "text": "Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
       "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "id": "7c2624072c861d136c96",
       "typ": "luecke",
@@ -2832,6 +2810,28 @@
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
       "alter_tage": 26,
       "fassung_status": "ohne-fassung",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-10-dsl-wechselbonus-sichern",
+      "id": "1b7c9b9cac0290f71242",
+      "typ": "luecke",
+      "text": "Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 6,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-10-dsl-wechselbonus-sichern",
+      "id": "ee260c27a6bfdd60fa04",
+      "typ": "luecke",
+      "text": "Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 6,
+      "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
     },
