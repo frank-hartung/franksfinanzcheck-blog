@@ -3,7 +3,9 @@ title: "DSL wechseln ohne Ausfall: So sparst du beim Internet"
 description: Willst du DSL wechseln und dabei bares Geld sparen? Mit diesen Tipps gelingt der Internet Anbieterwechsel ohne Ausfallzeit und Technik-Frust.
 kurzantwort: Durch gesetzliche Regelungen ist die Versorgungssicherheit beim internet anbieterwechsel garantiert. Neukunden-Boni und Wechselprämien machen den Umstieg finanziell attraktiv. Ob du deinen Router mieten oder kaufen solltest, hängt von der geplanten Nutzungsdauer ab.
 date: 2026-11-25T16:06:13Z
-draft: false
+draft: true
+cadence_demoted: 2026-11-25T17:09:30Z
+cadence_grund: "faktenfrische: 22e300c6973fedbbd737 (luecke): Keine Quelle für die Behauptung, dass nach 24 Monaten mit ein‑monatiger Frist gekündigt werden kann.; 44c5160c5216180ebd6a (luecke)…"
 tags: ["DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
