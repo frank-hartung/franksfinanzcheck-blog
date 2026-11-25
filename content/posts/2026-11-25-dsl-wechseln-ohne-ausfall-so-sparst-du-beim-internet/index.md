@@ -33,15 +33,6 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 9a9bac13a48311967521a404c5dd546fff05af910031dfdfb3721668accf0abf
     geprueft_am: 2026-11-25
-quellen:
-  - titel: "Bundesnetzagentur – Verbraucherportal Telekommunikation: Vertrag und Laufzeit"
-    url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html"
-    herausgeber: "Bundesnetzagentur"
-    datum: "2026-11-25"
-  - titel: "Verbraucherzentrale – Probleme beim Anbieterwechsel: So wehren Sie sich"
-    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
-    herausgeber: "Verbraucherzentrale"
-    datum: "2026-11-25"
 faktencheck: 2026-11-25
 ---
 
@@ -232,10 +223,6 @@ Setze dir einen Termin für deinen nächsten Vertragscheck. So stellst du sicher
 Gehe jetzt den ersten Schritt. Schau in deine Unterlagen.
 
 Prüfe deine Kündigungsfrist. Der Markt wartet mit attraktiven Angeboten auf dich. Ein **Internet anbieterwechsel** ist oft der Startschuss für eine optimierte Haushaltskasse.
-
-**Weiterlesen:** [Ratgeber Internet & DSL – alle Vergleiche und Anleitungen](../../pillar/internet-dsl/)
-
-**Rechner:** [24-Monats-Effektivpreis-Rechner für DSL- und Mobilfunktarife](../../werkzeuge/effektivpreis-rechner/)
 
 ---
 

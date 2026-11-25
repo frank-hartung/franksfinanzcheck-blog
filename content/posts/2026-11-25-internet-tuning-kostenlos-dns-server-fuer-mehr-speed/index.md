@@ -33,15 +33,6 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: f4f3b6cd88a1277ecf5351fe43ef30ba6a081fe336a1495c3eac0563d0f68610
     geprueft_am: 2026-11-25
-quellen:
-  - titel: "IP-Adressen und Filtervarianten von 1.1.1.1"
-    url: "https://developers.cloudflare.com/1.1.1.1/ip-addresses/"
-    herausgeber: "Cloudflare"
-    datum: "2026-11-25"
-  - titel: "Google Public DNS: Einrichtung und IP-Adressen"
-    url: "https://developers.google.com/speed/public-dns/docs/using"
-    herausgeber: "Google for Developers"
-    datum: "2026-11-25"
 faktencheck: 2026-11-25
 ---
 
@@ -236,10 +227,6 @@ Wer einmal mit einem schnellen DNS-Server gesurft ist, will nicht zurück.
 Es ist der erste Schritt zu einem optimierten digitalen Haushalt.
 Nimm dir die [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Zeit für dieses Upgrade; das ist ein Modellwert.
 Dein Browser wird es dir bei jedem Klick danken.
-
-**Weiterlesen:** [Ratgeber Internet & DSL – Tarife, WLAN und Netztechnik](../../pillar/internet-dsl/)
-
-**Rechner:** [Fixkosten-Scanner für Internet, Handy und laufende Verträge](../../werkzeuge/fixkosten-scanner/)
 
 ## Häufige Fragen
 
