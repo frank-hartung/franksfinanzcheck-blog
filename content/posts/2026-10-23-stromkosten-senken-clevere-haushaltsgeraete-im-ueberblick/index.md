@@ -68,12 +68,12 @@ Du zahlst für Leistung, die ohne Nutzen verpufft.
 Moderne Sensoren steuern den Bedarf heute viel genauer.
 
 So kannst du deine [Stromkosten senken](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) – bei gleicher Leistung. [Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) hilft dir dabei.  
-Ein schlechter Wirkungsgrad belastet dein Konto jeden Monat.
+Ein schlechter Wirkungsgrad treibt deine Stromkosten jeden Monat hoch.
 
-Alte Motoren oder spröde Dichtungen treiben den Zähler nach oben.  
+Alte Motoren oder spröde Dichtungen treiben den Zähler nach oben.
 Setze deshalb auf moderne Geräte.
 
-So nutzt du Strom viel gezielter.
+So nutzt du Strom viel gezielter und senkst deine Stromkosten spürbar.
 Gute Energieeffizienz schützt dich vor hohen Preisen beim Versorger. [Preisgarantien](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) bieten hier weiteren Schutz.
 
 Ein oft übersehener Punkt ist der Verschleiß.  
@@ -120,8 +120,8 @@ Bei einer Annahme von 40 ct pro kWh sparst du in dieser Beispielrechnung jedes 
 - Annahme für den Strompreis: 40 ct pro kWh.
 - Annahme für die Nutzungsdauer: 10 Jahre.
 
-**Formel der Modellrechnung:** **Ersparnis = (alter Verbrauch – neuer Bedarf) × Strompreis × Jahre.** Der Tausch spart in dieser Beispielrechnung über zehn Jahre rund 520 € an Strom ein.
-Der Kaufpreis zahlt sich oft schon nach wenigen Jahren aus. Danach bleibt dir Jahr für Jahr mehr Geld auf dem Konto. Ein neuer Trockner mit Wärmepumpe spart sogar noch schneller.
+**Formel der Modellrechnung:** **Ersparnis = (alter Verbrauch – neuer Bedarf) × Strompreis × Jahre.** Der Tausch drückt deine Stromkosten in dieser Beispielrechnung über zehn Jahre um rund 520 €.
+Der Kaufpreis zahlt sich oft schon nach wenigen Jahren aus. Danach bleibt dir Jahr für Jahr mehr Geld auf dem Konto. Ein neuer Trockner mit Wärmepumpe senkt deine Stromkosten sogar noch schneller.
 
 In einer Beispielrechnung braucht ein alter Trockner rund 550 kWh im Jahr.
 
@@ -138,11 +138,11 @@ Mit diesem Plan findest du sofort deine größten Kostentreiber. Du entscheidest
 
 ## Typische Fehler beim Gerätetausch
 
-Viele Käufer greifen im Laden schlicht zum falschen Modell. Ein riesiger Kühlschrank mit gutem Schild braucht oft mehr als ein kleines Gerät. Wer allein lebt, braucht keine riesige Trommel für die Wäsche. Läuft die Maschine nur halb voll, sinkt der Nutzen stark.
+Viele Käufer greifen im Laden schlicht zum falschen Modell. Ein riesiger Kühlschrank mit gutem Schild erhöht die Stromkosten oft mehr als ein kleines Gerät. Wer allein lebt, braucht keine riesige Trommel für die Wäsche. Läuft die Maschine nur halb voll, sinkt der Nutzen stark.
 
 Prüfe vor dem Kauf immer, welche Größe zu deinem Alltag passt. Oft lassen Käufer auch Zuschüsse für sparsame Geräte liegen. Manche Städte oder Versorger zahlen Boni für den Tausch alter Kühlgeräte. Solche Programme senken deinen Aufwand im Rechenbeispiel oft um bis zu 30 %.
 
-Wer den Standby-Strom übersieht, zahlt jedes Jahr unnötig drauf. Ein typisches Beispiel ist die Musikanlage im ständigen Ruhemodus. Stoppe diese stillen Fresser durch Steckerleisten mit Schalter. So behältst du die volle Kontrolle über deine festen Kosten.
+Wer den Standby-Strom übersieht, treibt seine Stromkosten jedes Jahr unnötig hoch. Ein typisches Beispiel ist die Musikanlage im ständigen Ruhemodus. Stoppe diese stillen Fresser durch Steckerleisten mit Schalter. So behältst du die volle Kontrolle über deine festen Kosten.
 
 Eine weitere Falle ist der falsche Umgang mit neuer Technik. Wer ein sparsames Gerät kauft, lässt es oft länger laufen oder wählt ein größeres Modell. So frisst dein Verhalten den Vorteil der neuen Technik wieder auf. Nutze das neue Gerät daher genauso bewusst wie das alte.
 

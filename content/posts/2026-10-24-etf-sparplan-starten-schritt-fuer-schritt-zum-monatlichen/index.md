@@ -11,7 +11,8 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["ETF‑Sparplan starten", "Geld sparen", "ETF-Sparplan starten", "ETF Sparplan starten", "ETF-Sparplan", "Schritt-für-Schritt-Anleitung"]
+keywords: ["ETF-Sparplan starten", "Geld sparen", "ETF Sparplan starten", "ETF-Sparplan", "Schritt-für-Schritt-Anleitung"]
+keywords_fokus: ["ETF-Sparplan", "ETF-Sparplan starten"]
 pin_title: "ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung"
 pin_description: "*Werbung | Vor einem ETF-Sparplan stehen Anlagehorizont und Rücklage. Prüfe erst, welchen Betrag du auch bei fallenden Kursen langfristig entbehren kannst. Trenne Sparrate und verfügbares Guthaben. Einen langfristigen Sparplan solltest du nicht auf Geld stützen, das du bereits für die nächste Jahresrechnung brauchst."
 ai_generated: true
@@ -43,7 +44,7 @@ faktencheck: 2026-11-17
 
 Was nach Miete, Rücklagen und absehbaren Rechnungen übrig bleibt, ist nicht automatisch für die Börse bestimmt. Für einen ETF-Sparplan zählt, welchen Betrag du langfristig entbehren kannst.
 
-Du hast sicher schon von einem ETF-Sparplan gehört. Aber welche Schritte sind für den Start wirklich nötig?
+Du hast sicher schon von einem ETF-Sparplan gehört. Doch wenn du einen ETF-Sparplan starten willst, welche Schritte sind für den Beginn wirklich nötig?
 
 Welche Fallen lauern auf dem Weg zum Erfolg? Hier gehst du von der ersten Idee bis zur fertigen Order. Wir bleiben dabei praktisch, prüfbar und verzichten auf leere Werbeversprechen.
 

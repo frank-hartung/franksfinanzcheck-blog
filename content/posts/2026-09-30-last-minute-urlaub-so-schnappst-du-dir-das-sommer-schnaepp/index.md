@@ -11,6 +11,7 @@ pillar: "mietwagen"
 author: "Frank Hartung"
 
 keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Reiseschnäppchen"]
+keywords_fokus: ["Last Minute"]
 pin_title: "Last Minute Urlaub: So findest du echte Reiseschnäppchen"
 pin_description: "*Werbung | Ein Last-Minute-Angebot passt nur, wenn der Endpreis stimmt. Vergleiche Gepäck, Transfer und Verpflegung für dieselben Reisetage und Personen. Vergleiche die verfügbaren Flugzeiten mit deinen Urlaubstagen. Eine billige Verbindung, für die du eine weitere Übernachtung brauchst, hat einen anderen Endpreis."
 ai_generated: true

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
-description: "DSL-Bonus angeboten? Vergleiche Grundpreis, Anschluss und Router über die Laufzeit und notiere, wann du die Prämie beantragen musst."
+description: "DSL-Wechselbonus angeboten? Vergleiche Grundpreis, Anschluss und Router über die Laufzeit und notiere die Frist."
 date: 2026-08-10T10:20:09Z
 draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
@@ -24,6 +24,7 @@ kurzantwort: "Ein DSL-Wechselbonus ist nur dann wirklich attraktiv, wenn du ihn 
 
 social_posted: true
 keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern", "DSL A"]
+keywords_fokus: ["DSL-Wechselbonus", "Anschlusskosten"]
 pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
 pin_description: "*Werbung | Beim DSL-Wechsel winken aktuell Wechselboni von bis zu 200 € – als Cashback, Gutschrift oder Hardware-Rabatt. Wir zeigen, wie du Bonus UND günstigen Tarif kombinierst, ohne in die Vertragsfalle zu tappen. Jetzt Angebote vergleichen und Bonus kassieren!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
@@ -45,7 +46,7 @@ faktencheck: 2026-11-19
 
 
 
-Ein DSL-Tarif mit Bonus kann im ersten Jahr günstiger sein und im zweiten deutlich mehr kosten. Lege die Rechnung deines bisherigen Anbieters neben das neue Angebot und markiere das Ende der Rabattphase.
+Ein DSL-Tarif mit DSL-Wechselbonus kann im ersten Jahr günstiger sein und im zweiten deutlich mehr kosten. Lege die Rechnung deines bisherigen Anbieters neben das neue Angebot und markiere das Ende der Rabattphase.
 
 Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das macht den Tarif aber noch lange nicht zum Schnäppchen. Erst wenn du Bonus, Grundgebühr, Anschlusskosten und Laufzeit genau zusammenrechnest, siehst du die Wahrheit: Sparst du wirklich – oder zahlst du nur eine hübsch verpackte Startprämie selbst?
 

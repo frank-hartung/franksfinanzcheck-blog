@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis"
-description: "Beim DSL-Wechsel soll der neue Anschluss rechtzeitig bereitstehen. Kläre den Schalttermin und vergleiche die Gesamtkosten statt nur den Einstiegspreis."
+description: "Beim DSL-Anbieterwechsel soll der neue Anschluss pünktlich laufen. Kläre Schalttermin und Gesamtkosten vorab."
 date: 2026-08-14T08:35:12Z
 draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
@@ -24,6 +24,7 @@ kurzantwort: "Ein Anbieterwechsel bei Internet und DSL ist heute meist ein Verwa
 
 social_posted: true
 keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln", "DSL-Anbieterwechsel", "DSL Anbieterwechsel"]
+keywords_fokus: ["DSL-Anbieterwechsel", "Effektivpreis"]
 pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
 pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
@@ -41,9 +42,9 @@ faktencheck: 2026-11-20
 ---
 
 
-Viele zahlen beim Internet nicht deshalb zu viel, weil die Leitung so teuer wäre. Sie zahlen zu viel, weil alte Verträge still weiterlaufen. Bestandskunden rutschen dann oft in Tarife, die deutlich teurer sind als aktuelle Neukundenangebote – bei gleicher Technik im Keller.
+Viele zahlen beim DSL-Anbieterwechsel nicht deshalb zu viel, weil die Leitung teuer wäre. Sie zahlen zu viel, weil alte Verträge still weiterlaufen. Bestandskunden rutschen dann oft in Tarife, die deutlich teurer sind als aktuelle Neukundenangebote – bei gleicher Technik im Keller.
 
-Der gute Teil: **Internet & [DSL wechseln](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)** ist heute viel einfacher als sein Ruf. Es wird kein Wohnzimmer aufgerissen, kein neues Kabel quer durch die Wohnung gezogen und in vielen Fällen nicht einmal selbst gekündigt. Der eigentliche Aufwand liegt eher im Vergleich als in der Technik.
+Der gute Teil: Ein **DSL-Anbieterwechsel** ist heute viel einfacher als sein Ruf. Es wird kein Wohnzimmer aufgerissen, kein neues Kabel quer durch die Wohnung gezogen und in vielen Fällen nicht einmal selbst gekündigt. Der eigentliche Aufwand liegt eher im Vergleich als in der Technik.
 
 Wenn du sauber rechnest, sparst du über 24 Monate oft **280 € bis 380 €**, manchmal auch mehr; das ist ein Modellwert. Genau dafür brauchst du aber einen klaren Blick auf Preis, Bonus, Router und Laufzeit – nicht nur auf die große Werbeziffer.
 
@@ -54,14 +55,14 @@ Wenn du sauber rechnest, sparst du über 24 Monate oft **280 € bis 380 €**
 
 ## Das Wichtigste in Kürze
 
- Ein Wechsel lohnt sich oft schon, wenn du noch in einem alten Tarif mit **40 € bis 50 € pro Monat** festhängst; das ist ein Modellwert.
+1. Ein DSL-Anbieterwechsel lohnt sich oft schon, wenn du noch in einem alten Tarif mit **40 € bis 50 € pro Monat** festhängst; das ist ein Modellwert.
 2. Wichtigster Wert ist der **Effektivpreis über 24 Monate**.
 3. Bonus, Anschlusskosten und Routermiete gehören immer in dieselbe Rechnung.
 4. Kündige möglichst nicht blind selbst, wenn der neue Anbieter den Wechsel übernehmen kann.
 5. Prüfe nicht nur den Preis, sondern auch, ob die gewählte Geschwindigkeit wirklich zu deinem Haushalt passt.
 6. Der größte Fehler ist, nur auf den Lockpreis der ersten Monate zu schauen.
 
-## Warum sich ein regelmäßiger Anbieterwechsel oft lohnt
+## Warum sich ein regelmäßiger DSL-Anbieterwechsel oft lohnt
 
 Der Telekommunikationsmarkt belohnt selten Treue. Neukunden bekommen Rabatte, Startguthaben und reduzierte Grundgebühren. Bestandskunden zahlen dagegen oft Jahr für Jahr den höheren Regelpreis.
 

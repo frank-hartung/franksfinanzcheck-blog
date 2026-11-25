@@ -50,11 +50,15 @@ Du hast gerade einen Film gestartet. Das Bild lädt stockend. Die Seite braucht 
 
 Oft ist ein kleiner Baustein im Hintergrund mit im Spiel: der DNS-Server. Er übersetzt Webnamen in technische Adressen. Antwortet er langsam, wirkt das Surfen zäh. Ein Wechsel kann sich dann lohnen – deine Leitung wird dadurch aber nicht schneller.
 
-Du musst dafür keine neue Hardware kaufen. Hier zeige ich dir den Weg. Du lernst, warum der Wechsel hilft und wo seine Grenzen liegen. Ich erkläre dir den sicheren Umstieg. Zudem erfährst du, welche Fehler du vermeiden solltest.
+Du musst dafür keine neue Hardware kaufen. Hier zeige ich dir den Weg.
+
+Du lernst, warum der Wechsel hilft und wo seine Grenzen liegen. Ich erkläre dir den sicheren Umstieg und welche Fehler du vermeidest.
 
 ## Was ist DNS und warum es die Geschwindigkeit beeinflusst
 
-Das Domain-Name-System (DNS) ist das Telefonbuch des Internets. Es wandelt Webnamen in Zahlen um. Diese Zahlen heißen IP-Adressen. Dein Computer braucht sie, um Server zu finden. Ohne diesen Dienst müsstest du lange Zahlenfolgen tippen. Jeder Klick im Browser kann eine solche Abfrage starten.
+Das Domain-Name-System (DNS) ist das Telefonbuch des Internets. Es wandelt Webnamen in Zahlen um, sogenannte IP-Adressen.
+
+Dein Computer braucht sie, um Server zu finden. Ohne diesen Dienst müsstest du lange Zahlenfolgen tippen. Jeder Klick im Browser kann eine solche Abfrage starten.
 
 Diese Suche dauert meist nur Millisekunden. Antwortet der zuständige Server jedoch langsam, summieren sich die Pausen bei jedem Seitenaufruf. Das Surfen wirkt dann zäh und träge. Ob der Standard-Server deines Anbieters zu den langsamen gehört, zeigt eine Messung – dazu weiter unten mehr.
 
@@ -71,13 +75,17 @@ Besonders bei Seiten mit vielen Elementen kann sich das zeigen. Hier werden oft 
 
 Die Tabelle zeigt dir deine Optionen. Du kannst die Werte direkt übernehmen. So sparst du dir die Suche nach technischen Details. Wähle einen Dienst, der zu deinen Zielen passt.
 
-Cloudflare wirbt mit einem klaren Datenschutz-Versprechen. Google ist sehr verbreitet. OpenDNS bietet Filteroptionen für Familien. Eine allgemeingültige Rangliste gibt es nicht: Welcher Server bei dir am schnellsten antwortet, hängt von Standort, Tageszeit und Netz ab. Der Standard-DNS deines Anbieters ist bequem eingerichtet, aber nicht automatisch der schnellste. Miss deshalb selbst nach – wie das geht, zeigt der nächste Abschnitt.
+Cloudflare wirbt mit einem klaren Datenschutz-Versprechen. Google ist sehr verbreitet. OpenDNS bietet Filteroptionen für Familien.
+
+Eine allgemeingültige Rangliste gibt es nicht: Welcher Server bei dir am schnellsten antwortet, hängt von Standort, Tageszeit und Netz ab. Der Standard-DNS deines Anbieters ist bequem eingerichtet, aber nicht automatisch der schnellste. Miss deshalb selbst nach – wie das geht, zeigt der nächste Abschnitt.
 
 ## Was DNS leistet – und was nicht
 
 DNS beschleunigt nur einen Teilschritt: die Namensauflösung. Dein Gerät fragt, wo eine Webseite liegt, und erhält eine IP-Adresse. Wie schnell die Daten danach fließen, entscheidet dieser Eintrag nicht. Das übernehmen Tarif, Leitung und Technik bei dir zu Hause.
 
-Router und WLAN sind dabei ein großer Hebel. Aktuelle Tests zeigen, wie stark die Hardware den Alltag prägt: Der heise-Test einer neuen FRITZ!Box mit Wi-Fi 7 macht Hardware-Kompromisse zum Thema – sie kosten dort kaum Leistung, senken aber den Stromverbrauch. Solche Fragen entscheidet das Gerät, nicht der DNS-Eintrag. Prüfe deshalb zuerst die Basis: Router-Update, gutes WLAN, passender Tarif. Der DNS-Wechsel ist dann die Feinjustierung obendrauf.
+Router und WLAN sind dabei ein großer Hebel. Aktuelle Tests zeigen, wie stark die Hardware den Alltag prägt: Der heise-Test einer neuen FRITZ!Box mit Wi-Fi 7 macht Hardware-Kompromisse zum Thema – sie kosten dort kaum Leistung, senken aber den Stromverbrauch.
+
+Solche Fragen entscheidet das Gerät, nicht der DNS-Eintrag. Prüfe deshalb zuerst die Basis: Router-Update, gutes WLAN, passender Tarif. Der DNS-Wechsel ist dann die Feinjustierung obendrauf.
 
 ## Wie du deine aktuelle DNS-Leistung prüfst
 
@@ -99,7 +107,9 @@ Als Faustregel gilt: Antwortzeiten unter 20 Millisekunden wirken flott, Werte ü
 > Das sind 1.000 Sekunden oder fast 17 Minuten pro Monat.
 > Auch hier gilt: Das Modell rechnet den günstigsten Fall ohne Cache.
 
-Diese Zeitersparnis merkst du vor allem beim ersten Aufruf einer Seite. Das Netz reagiert dann flotter auf deine Eingaben. Beim Gaming steckt DNS meist nur im Verbindungsaufbau – der Datenfluss im Spiel läuft über deine Leitung. Beim Streaming starten Filme etwas früher, wenn die Adresssuche schneller klappt. Ein Turbo für große Downloads ist DNS dagegen nicht: Deine Bandbreite bleibt die Obergrenze.
+Diese Zeitersparnis merkst du vor allem beim ersten Aufruf einer Seite. Das Netz reagiert dann flotter auf deine Eingaben.
+
+Beim Gaming steckt DNS meist nur im Verbindungsaufbau – der Datenfluss im Spiel läuft über deine Leitung. Beim Streaming starten Filme etwas früher, wenn die Adresssuche schneller klappt. Ein Turbo für große Downloads ist DNS dagegen nicht: Deine Bandbreite bleibt die Obergrenze.
 
 **Faustregel für den Test:**
 Wiederhole die Messung zu verschiedenen Tageszeiten. Abends sind viele Netze stärker belastet. Ein guter DNS-Server bleibt auch dann stabil und schnell.
@@ -144,7 +154,9 @@ Beim Wechsel können kleine Fehler passieren. Diese bremsen den Erfolg oft aus. 
 | Fehlende Testphase | Man gibt zu früh auf, weil ein Test nicht sofort klappt | Teste das System für zwei Wochen. Dokumentiere die Ladezeiten in dieser Zeit. |
 | Router-Software alt | Ein altes Menü übernimmt die neuen Daten nicht korrekt | Mache zuerst ein Update für deinen Router. Das schließt auch Sicherheitslücken. |
 
-Ein leerer Cache ist besonders wichtig. Dein PC merkt sich alte Wege zu Webseiten. Er fragt den neuen Server sonst erst viel später. Mit dem Befehl zum Leeren erzwingst du den Neustart. Das dauert nur wenige Sekunden. Danach nutzt dein PC sofort die neue Route.
+Ein leerer Cache ist besonders wichtig. Dein PC merkt sich alte Wege zu Webseiten und fragt den neuen Server sonst erst viel später.
+
+Mit dem Befehl zum Leeren erzwingst du den Neustart in wenigen Sekunden. Danach nutzt dein PC sofort die neue Route.
 
 **Faustregel für die Sicherheit:**
 Trage immer zwei Server-Adressen ein. Es gibt meist einen primären und einen sekundären Server. Falls ein Server ausfällt, springt der zweite sofort ein. So bleibt dein Internet immer erreichbar.
@@ -171,9 +183,13 @@ Ja, das ist an jedem Handy oder Laptop möglich. In den WLAN-Optionen findest du
 ### Wie prüfe ich, ob der neue DNS-Server wirklich schneller ist?
 Nutze Programme wie „namebench“ für einen genauen Vergleich. Das Tool testet viele Server für dich durch. Es zeigt dir am Ende den schnellsten Anbieter für deinen Standort. Du kannst auch einfach die Ladezeit deiner Lieblingsseite stoppen. Der Unterschied ist oft mit bloßem Auge sichtbar.
 
-Du hast nun das Wissen für ein flinkeres Netz. Der Wechsel ist ein kleiner Hebel – kein Turbo, aber im Alltag oft spürbar. Öffne jetzt das Menü deines Routers. Notiere die alten Zahlen zur Sicherheit. Ersetze sie dann durch einen Dienst aus der Tabelle, den du vorher gemessen hast.
+Du hast nun das Wissen für ein flinkeres Netz. Der Wechsel ist ein kleiner Hebel – kein Turbo, aber im Alltag oft spürbar.
 
-Den passenden Internet-Tarif findest du über einen Vergleich. Die DNS-Wahl selbst triffst du mit deiner eigenen Messung. Dokumentiere deine Eindrücke im Franks Fixkosten-Kompass. So optimierst du dein digitales Zuhause Schritt für Schritt. Viel Erfolg beim Surfen!
+Öffne jetzt das Menü deines Routers und notiere die alten Zahlen zur Sicherheit. Ersetze sie dann durch einen Dienst aus der Tabelle, den du vorher gemessen hast.
+
+Den passenden Internet-Tarif findest du über einen Vergleich. Die DNS-Wahl selbst triffst du mit deiner eigenen Messung.
+
+Dokumentiere deine Eindrücke im Franks Fixkosten-Kompass. So optimierst du dein digitales Zuhause Schritt für Schritt. Viel Erfolg beim Surfen!
 
 ---
 
@@ -183,6 +199,6 @@ _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Informa
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

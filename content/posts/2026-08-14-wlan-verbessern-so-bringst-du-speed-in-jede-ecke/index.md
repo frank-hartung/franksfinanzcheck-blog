@@ -4,6 +4,7 @@ title: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
 description: "Das WLAN stockt im Nebenzimmer? Miss das Tempo am Router und am Gerät. So unterscheidest du ein Funkloch von einem langsamen Anschluss."
 date: 2026-08-28T01:05:14Z
 draft: false
+cornerstone: true
 tags: ["WLAN verbessern", "DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -24,6 +25,7 @@ kurzantwort: "Um dein WLAN spürbar zu verbessern, platziere den Router zentral 
 
 social_posted: true
 keywords: ["WLAN verbessern", "WLAN-Empfang", "Mesh WLAN", "WLAN Repeater", "Internetgeschwindigkeit", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
+keywords_fokus: ["WLAN", "Mesh"]
 pin_title: "WLAN-Verstärker vs. Mesh-WLAN: Was lohnt sich wirklich?"
 pin_description: "*Werbung | Funklöcher im Schlafzimmer, Ruckeln im Homeoffice? Wir erklären verständlich den Unterschied zwischen WLAN-Repeater und Mesh-System – mit Kostenvergleich und klarer Empfehlung für jede Wohnungsgröße. Jetzt lesen!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
@@ -88,7 +90,7 @@ Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € 
 
 ## 5 Sofort-Tipps zur Optimierung deines Heimnetzwerks
 
- **Router erhöht und zentral aufstellen:** Platziere den Router in mindestens 1 Meter Höhe auf einem Regal oder Sideboard in einem zentralen Flur, um Hindernisse am Boden zu vermeiden; das ist ein Modellwert.
+1. **Router erhöht und zentral aufstellen:** Platziere den Router in mindestens 1 Meter Höhe auf einem Regal oder Sideboard in einem zentralen Flur, um Hindernisse am Boden zu vermeiden; das ist ein Modellwert.
 2. **2,4-GHz- und 5-GHz-Netz trennen:** Gib beiden Frequenzbändern in den Router-Einstellungen unterschiedliche Namen (SSIDs). Verbinde bandbreitenintensive Endgeräte wie Laptops und Smart-TVs mit dem schnellen 5-GHz-Band, während Smart-Home-Komponenten das weitreichende 2,4-GHz-Band nutzen.
 3. **Funkkanal automatisch optimieren:** Moderne Router bieten eine automatische Kanalwahl, die regelmäßig prüft, welcher Frequenzbereich in der Nachbarschaft am geringsten ausgelastet ist.
 4. **Antennen präzise ausrichten:** Besitzt dein Router externe Stabantennen, richte eine Antenne senkrecht nach oben und eine zweite im 45-Grad-Winkel aus, um sowohl horizontale als auch vertikale Funkwellen optimal abzustrahlen.
@@ -123,7 +125,7 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 
 ## Typische WLAN-Fehler, die Speed fressen
 
- Das holt oft 30 bis 50 % Reichweite zurück; das ist ein Beispielwert.
+**Router hinter dem Sofa oder im Schrank.** Frei aufgestellt holt er oft 30 bis 50 % Reichweite zurück; das ist ein Beispielwert.
 
 **2,4 GHz und 5 GHz unter demselben Namen.** Alte Geräte bleiben am langsamen Band. So ziehen sie das ganze Netz nach unten. Vergib getrennte Namen, zum Beispiel „Zuhause“ und „Zuhause-5G“. Dann hast du die Kontrolle.
 
@@ -135,7 +137,7 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 
 ## Schritt-für-Schritt: vom Funkloch zum nutzbaren Homeoffice
 
- Alles unter 30 % der Vertragswerte ist ein Funk- oder Leitungsproblem – beides musst du trennen; das ist ein Modellwert.
+1. **Speed-Test am Zielort:** Alles unter 30 % der Vertragswerte ist ein Funk- oder Leitungsproblem – beides musst du trennen; das ist ein Modellwert.
 2. **Kabel-Referenz.** Liegt der LAN-Test klar unter dem Vertrag, ist es der Anschluss (Provider anrufen, Entstörungsnummer, 14-Tage-Protokoll). Liegt LAN gut und WLAN schlecht, arbeitest du am Funk.
 3. **Position.** Router auf Augenhöhe, weg von Mikrowelle, DECT-Basis und Bluetooth-Lautsprechern. Antennen senkrecht.
 4. **Kanal und Band.** 5 GHz für Arbeitsgeräte, 2,4 GHz für Smarthome. DFS-Kanäle meiden, wenn die FRITZ!Box ständig neu startet (Radar-Erkennung).
@@ -167,7 +169,7 @@ Ein einfacher Test hilft:
 2. Miss danach im selben Raum per WLAN.
 3. Miss anschließend an deinem Problemort.
 
-Wenn schon per Kabel deutlich zu wenig ankommt, liegt das Problem eher beim Anschluss oder beim Tarif. Dann bringt dir das beste Mesh-System nur begrenzt etwas. Zahlst du zum Beispiel **39 € bis 49 € im Monat** für einen 100-Mbit- oder 250-Mbit-Tarif und per LAN kommen dauerhaft nur **40 % bis 50 %** davon an, solltest du zuerst den Anbieter oder Router prüfen.
+Wenn schon per Kabel deutlich zu wenig ankommt, liegt das Problem eher beim Anschluss oder beim Tarif. Dann bringt dir das beste Mesh-System nur begrenzt etwas. Zahlst du zum Beispiel **39 € bis 49 € im Monat** für einen 100-Mbit- oder 250-Mbit-Tarif? Kommen per LAN dauerhaft nur **40 % bis 50 %** davon an, prüfst du zuerst Anbieter oder Router.
 
 Wenn per Kabel fast alles ankommt, per WLAN aber nur ein Bruchteil, ist das Funknetz der eigentliche Hebel. Dann helfen Standort, Kanalwahl, Bandtrennung und gegebenenfalls Mesh deutlich mehr als ein neuer Vertrag.
 

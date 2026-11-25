@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Flugvergleich", "Billigflüge", "Reisekosten sparen", "Flugvergleich im Winter"]
+keywords_fokus: ["Flugvergleich", "Billigflüge"]
 pin_title: "Flugvergleich im Winter: So findest du echte Billigflüge"
 pin_description: "*Werbung | Vergleiche Winterflüge für denselben Reiseplan. Nimm Gepäck, Anfahrt zum Flughafen und ungünstige Abflugzeiten in die Entscheidung mit auf. Vergleiche Abflug und Rückkehr als Paar. Ein günstiger Hinflug nützt wenig, wenn der passende Rückflug nur mit einem teuren zusätzlichen Urlaubstag zu haben ist."
 ai_generated: true
@@ -82,11 +83,11 @@ Die reinen Ticketpreise sind nur die halbe Wahrheit. In der Luftfahrtbranche hat
 * Rechnung (Beispielrechnung): 45 € + (25 € × 2) + (12 € × 2) = 119 € Gesamtkosten für Hin‑ und Rückflug.
 * Ergebnis (Beispielrechnung): Der Endpreis liegt bei 119 € – das entspricht dem 2,64‑fachen des reinen Ticketpreises (119 € / 45 € ≈ 2,64).
 
-Solche Rechnungen zeigen, dass der günstigste Einstiegspreis selten der Endpreis ist. Du solltest daher immer den „Alles‑inklusive‑Preis“ vergleichen. Achte auch auf die Kosten für die Anreise zum Flughafen. Ein billiger Flug ab einem entfernten Ort bringt nichts, wenn die hohen Kosten für die Anreise die Ersparnis beim Ticketpreis wieder zunichtemachen.
+Solche Rechnungen zeigen, dass der günstigste Einstiegspreis beim Flugvergleich selten der Endpreis ist. Du solltest daher immer den „Alles‑inklusive‑Preis“ vergleichen. Achte beim Flugvergleich auch auf die Kosten für die Anreise zum Flughafen. Ein billiger Flug ab einem entfernten Ort bringt nichts, wenn die hohen Kosten für die Anreise die Ersparnis beim Ticketpreis wieder zunichtemachen.
 
 ## Der 4K‑Prüfpfad für deine Reisekosten
 
-Bei FranksFinanzcheck nutzen wir den 4K‑Prüfpfad. Er hilft dir, Ordnung in deine Verträge und Ausgaben zu bringen. Auch bei der Urlaubsplanung ist er ein wertvoller Kompass.
+Bei FranksFinanzcheck nutzen wir für jeden Flugvergleich den 4K‑Prüfpfad. Er hilft dir, Ordnung in deine Verträge und Ausgaben zu bringen. Auch bei der Urlaubsplanung ist er ein wertvoller Kompass.
 
 1. **Kosten sehen:** Erfasse alle Beträge. Nicht nur den Flug, sondern auch Parkgebühren, Mietwagen und Verpflegung am Flughafen. Schreibe diese Summen auf.
 2. **Konditionen rechnen:** Vergleiche nicht nur den Preis. Was ist bei Stornierung? Ist das Gepäck wirklich dabei? Rechne den Gesamtpreis inklusive aller Extras aus.
@@ -95,7 +96,7 @@ Bei FranksFinanzcheck nutzen wir den 4K‑Prüfpfad. Er hilft dir, Ordnung in de
 
 Dieser Pfad sorgt dafür, dass du am Ende nicht von deiner Kreditkartenabrechnung überrascht wirst. Besonders im Winter, wenn durch Heizkosten und Versicherungen ohnehin viele Fixkosten anfallen, ist Disziplin wichtig. **Billigflüge** sind nur dann ein Gewinn, wenn sie dein restliches Budget nicht sprengen.
 
-## 10 Geheimtipps für den Flugvergleich im Winter
+## 10 Spartipps für den Flugvergleich im Winter
 
 Um wirklich zu sparen, musst du die Mechaniken der Buchungsportale kennen. Hier sind Strategien, die oft übersehen werden:
 

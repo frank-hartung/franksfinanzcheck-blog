@@ -68,7 +68,7 @@ Es gibt drei Wege, auf denen Geld ohne dein tägliches Zutun das Konto verlässt
 
 Der Unterschied ist praktisch relevant. Beim Dauerauftrag kennst du Höhe und Rhythmus, weil du beides festgelegt hast. Bei der Lastschrift kennt der Empfänger die Höhe. Das ist bei Stromabschlägen und Abos gewollt und bei Rechnungen üblich.
 
-## Was du beim Mandat wirklich erteilst?
+## Was du beim Lastschrift-Mandat wirklich erteilst?
 
 Ein Lastschriftmandat ist keine Einzelfreigabe, sondern eine Erlaubnis für einen Empfänger. Es enthält dessen Kennung und deine Kontodaten. Damit darf der Empfänger Beträge einziehen.
 

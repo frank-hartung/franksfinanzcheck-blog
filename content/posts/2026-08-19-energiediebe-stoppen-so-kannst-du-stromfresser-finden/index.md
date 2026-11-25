@@ -22,6 +22,7 @@ cover:
 kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät. Miss Kühlgeräte sieben Tage lang und Geräte mit wechselnden Programmen über mehrere vollständige Nutzungen. Rechne dann Jahresverbrauch mal persönlichem Strompreis. Erst wenn die jährliche Ersparnis den Kaufpreis in sinnvoller Zeit ausgleicht, lohnt ein Austausch."
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken"]
+keywords_fokus: ["Energiediebe stoppen"]
 pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
 pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"

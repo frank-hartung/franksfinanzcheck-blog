@@ -10,6 +10,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Störung Internetanbieter", "Internetausfall melden", "Entstörung Frist", "Ausfall Entschädigung", "Störung beim Internetanbieter", "Internetanbieter", "DSL-Vergleich", "Internetvertrag wechseln"]
+keywords_fokus: ["Störung", "Internetanbieter"]
 pin_title: "Störung beim Internetanbieter: So sicherst du deine Rechte"
 pin_description: "*Werbung | Dokumentiere Ausfälle mit Zeitpunkt und Störungsmeldung. Unterscheide ein Problem im WLAN von einer Störung am Anschluss, bevor du Ansprüche prüfst. Bewahre die Vorgangsnummer neben deinem Störungsprotokoll auf. Ein dokumentierter Beginn hilft bei der Klärung mehr als die Erinnerung an einen besonders schlechten Abend."
 ai_generated: true

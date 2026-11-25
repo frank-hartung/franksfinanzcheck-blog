@@ -10,6 +10,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Gasrechnung prüfen", "Gasrechnung Fehler", "Nachzahlung vermeiden", "Zählerstand kontrollieren", "Heizkostenabrechnung prüfen", "Gasrechnung lesen", "Zählerstand"]
+keywords_fokus: ["Gasrechnung"]
 pin_title: "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen"
 pin_description: "*Werbung | Stimmt der Gasverbrauch auf der Rechnung? Gleiche Zählernummer, Ablesezeitraum und Stände ab, bevor du die Umrechnung in Kilowattstunden prüfst. Prüfe beim Einzug den dokumentierten Anfangsstand. Selbst mit korrektem Tarif stimmt der Rechnungsbetrag nicht, wenn dir Verbrauch von vor der Übergabe zugerechnet wird."
 ai_generated: true

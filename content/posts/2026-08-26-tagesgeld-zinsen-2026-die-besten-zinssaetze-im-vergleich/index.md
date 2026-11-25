@@ -4,6 +4,7 @@ description: "Beim Tagesgeld zählt auch der Zins nach der Aktion. Prüfe Bank, 
 date: 2026-09-09T14:46:26Z
 lastmod: 2026-11-19
 draft: false
+cornerstone: true
 tags: ["Tagesgeld und Zinsen", "Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
@@ -24,6 +25,7 @@ kurzantwort: "Vergleiche die Zinsen für deinen Anlagebetrag und deine Anlagedau
 
 social_posted: true
 keywords: ["Tagesgeldkonto", "Tagesgeldzinsen", "Zinsen vergleichen", "Geld sicher anlegen", "Notgroschen", "Einlagensicherung", "Tagesgeld-Zinsen 2026", "Tagesgeld Zinsen 2026"]
+keywords_fokus: ["Tagesgeld", "Notgroschen"]
 pin_title: "Wohin mit dem Notgroschen? Tagesgeld & Co. clever nutzen"
 pin_description: "*Werbung | Dein Notfall-Polster auf dem Girokonto verliert jeden Tag an Wert: Wir vergleichen die smarten Parkplätze – Tagesgeld, Geldmarkt, verzinste Unterkonten – und zeigen, was wirklich sicher UND schnell verfügbar ist. Jetzt Zinsen mitnehmen!"
 pinwand: "Budget & Haushaltskasse: clever planen"
@@ -44,7 +46,7 @@ faktencheck: 2026-11-21
 ---
 
 
-Tagesgeldkonto im Check: Zwei Banken werben mit unterschiedlichen Tagesgeldzinsen. Der höhere Satz gilt nur für neue Einlagen und endet nach wenigen Monaten. Welches Konto über ein Jahr mehr bringt, siehst du erst, wenn du den Zeitraum nach der Aktion mitrechnest. Eine Liste vermeintlicher Bestzinsen hilft dabei wenig: Zinssätze ändern sich, dein Bedarf an verfügbarem Geld nicht unbedingt.
+Tagesgeld im Check: Zwei Banken werben mit unterschiedlichen Tagesgeldzinsen. Der höhere Satz gilt nur für neue Einlagen und endet nach wenigen Monaten. Welches Konto über ein Jahr mehr bringt, siehst du erst, wenn du den Zeitraum nach der Aktion mitrechnest. Eine Liste vermeintlicher Bestzinsen hilft dabei wenig: Zinssätze ändern sich, dein Bedarf an verfügbarem Geld nicht unbedingt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -80,7 +82,7 @@ Alle Zahlen sind **freie Modellwerte**, keine echten Angebote. Wir rechnen grob 
 | Weitere neun Monate | 10.000 € × 1 % × 9/12 = 75 € | 10.000 € × 2 % × 9/12 = 150 € |
 | Bruttoertrag für zwölf Monate | **150 €** | **200 €** |
 
-Wer das Geld schon nach drei Monaten braucht, rechnet anders als für ein volles Jahr. Hebst du früher Geld ab oder sinkt der Zins, ändert sich der Ertrag sofort. Der hohe Startzins gewinnt also nicht von selbst.
+Wer das Geld schon nach drei Monaten braucht, rechnet anders als für ein volles Jahr Tagesgeld. Hebst du früher Geld ab oder sinkt der Zins, ändert sich der Ertrag sofort. Der hohe Startzins gewinnt also nicht von selbst.
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 

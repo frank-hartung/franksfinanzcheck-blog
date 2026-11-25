@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["DSL-Vergleich", "Internet schneller machen", "WLAN verbessern", "DSL-Wechselbonus", "Handytarife", "Kündigungsfrist", "Glasfaser"]
+keywords_fokus: ["DSL", "Glasfaser", "Kündigungsfrist"]
 cover:
   image: "images/covers/pillar-internet-dsl.jpg"
   alt: "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz"
@@ -40,7 +41,7 @@ quellen:
 faktencheck: 2026-11-19
 ---
 
-Ein stabiler und schneller Internetanschluss gehört heute zur Grundversorgung jedes Haushalts – egal ob für Homeoffice, 4K-Streaming oder Cloud-Backups. Dennoch zahlen Millionen Haushalte in Deutschland Monat für Monat deutlich zu viel für veraltete Bandbreiten, unnötige Routermieten oder stillschweigend verlängerte Altverträge. Die Hebel für eine erfolgreiche Vertrags- und Wechselentscheidung sind klar definiert: Heimnetzwerk optimieren, den echten 24-Monats-Effektivpreis kalkulieren, gesetzliche Kündigungsrechte nach TKG und BGB konsequent nutzen und Mobilfunkverträge von teuren Endgeräte-Finanzierungen entkoppeln. In diesem umfassenden Ratgeber erfährst du, wie du Verträge systematisch bereinigst und dauerhaft Bestkonditionen sicherst.
+Ein stabiler und schneller Internetanschluss über DSL, Kabel oder Glasfaser gehört heute zur Grundversorgung jedes Haushalts – egal ob für Homeoffice, 4K-Streaming oder Cloud-Backups. Dennoch zahlen Millionen Haushalte in Deutschland Monat für Monat deutlich zu viel für veraltete Bandbreiten, unnötige Routermieten oder stillschweigend verlängerte Altverträge. Die Hebel für eine erfolgreiche Vertrags- und Wechselentscheidung sind klar definiert: Heimnetzwerk optimieren, den echten 24-Monats-Effektivpreis kalkulieren, gesetzliche Kündigungsrechte nach TKG und BGB konsequent nutzen und Mobilfunkverträge von teuren Endgeräte-Finanzierungen entkoppeln. In diesem umfassenden Ratgeber erfährst du, wie du Verträge systematisch bereinigst und dauerhaft Bestkonditionen sicherst.
 
 ## Das Wichtigste auf einen Blick
 
@@ -98,7 +99,7 @@ Hier sind die aktuellen Markt-Benchmarks für Festnetz- und Mobilfunkverträge i
 
 ---
 
-## 3. Sparpotenziale bei Internet & Mobilfunk
+## 3. Sparpotenziale bei DSL, Internet & Mobilfunk
 
 | Bereich | Typische Ersparnis | Zeitaufwand | Effekt |
 |---|---|---|---|

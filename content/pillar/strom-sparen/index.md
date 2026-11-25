@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["Strom sparen", "Gasanbieter wechseln", "Stromfresser", "Gaspreisgarantie", "Heizkosten senken", "Dynamische Stromtarife", "Wärmepumpenstrom"]
+keywords_fokus: ["Strom", "Preisgarantie", "Gas"]
 cover:
   image: "images/covers/pillar-strom-sparen.jpg"
   alt: "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten"

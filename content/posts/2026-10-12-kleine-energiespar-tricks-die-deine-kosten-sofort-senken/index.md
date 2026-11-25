@@ -1,9 +1,10 @@
 ---
-title: "Energie sparen: Welche kleinen Änderungen sich im Alltag"
-description: "Teste eine Änderung beim Kochen, Heizen oder Waschen. Notiere Verbrauch und Nutzung vorher und nachher, statt mit pauschalen Sparquoten zu planen."
+title: "Energie sparen: Kleine Energiespar-Tricks für den Alltag"
+description: "Kleine Energiespar-Tricks im Check: Teste eine Änderung beim Kochen, Heizen oder Waschen und miss den echten Verbrauch statt pauschaler Quoten."
 
 date: 2026-10-21T01:39:08Z
 draft: false
+cornerstone: true
 reserve_published: 2026-10-21
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
@@ -12,6 +13,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Kleine Energiespar‑Tricks", "Energiespar", "Stromkosten senken", "Energie sparen", "Änderungen", "Frugalismus", "Geld sparen", "minimalistisch leben"]
+keywords_fokus: ["Kleine Energiespar-Tricks", "Energie sparen"]
 pin_title: "Energie sparen: Welche kleinen Änderungen sich im Alltag lohnen"
 pin_description: "*Werbung | Teste eine Änderung beim Kochen, Heizen oder Waschen. Notiere Verbrauch und Nutzung vorher und nachher, statt mit pauschalen Sparquoten zu planen. Schätze nicht gleichzeitig Nutzungsdauer und Geräteleistung. Wenn du eine der beiden Größen misst, wird die Rechnung nachvollziehbarer und die Unsicherheit kleiner."
 ai_generated: true
@@ -25,14 +27,14 @@ redaktionelle_pruefung:
 inspiration: Energiekosten senken mit kleinen Veränderungen
 cover:
   image: "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg"
-  alt: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
+  alt: "Energie sparen: Kleine Energiespar-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: b19f4e8b878a0ab6d2eaa4ccf4cace01b52519f5875f3ef892d0789ed381a4b6
-    geprueft_am: 2026-11-21
+    sha256: 0201d914bf215ac8520805173372d1a139feaf8280e9e4669914daa7f6b317f1
+    geprueft_am: 2026-11-25
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"

@@ -4,6 +4,7 @@ title: "Sicher heizen: Welche Kosten sind geschützt"
 description: "Sicher heizen: Was bleibt beim Gasvertrag wirklich fest? Lies in der Preisgarantie nach, welche Preisbestandteile sie erfasst und wann der Schutz endet."
 date: 2026-08-10T09:29:05Z
 draft: false
+cornerstone: true
 tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -22,6 +23,7 @@ cover:
 kurzantwort: "Eine Gaspreisgarantie schützt nur die Teile des Preises, die im Vertrag stehen, und nur für eine feste Zeit. Meist ist der Einkauf des Gases erfasst. Steuern, Abgaben, Umlagen und Netzkosten können außen vor bleiben. Die Garantie lohnt sich, wenn Preis, Umfang und Laufzeit zusammenpassen. Sie lohnt sich nicht, wenn du schon zum Start deutlich zu viel zahlst."
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Heizkosten", "Heizkosten sparen", "Brandschutz beim"]
+keywords_fokus: ["Sicher heizen"]
 pin_title: "Gaspreisgarantie: Welche Kosten sind geschützt und wie lange?"
 pin_description: "*Werbung | Was bleibt beim Gasvertrag wirklich fest? Lies in der Preisgarantie nach, welche Preisbestandteile sie erfasst und wann der Schutz endet. Markiere auf der letzten Gasrechnung Grundpreis und Arbeitspreis. Vergleiche beide mit dem Angebot: Was dort nicht von der Garantie erfasst ist, kann sich weiter ändern."
 pin_text_sync: false

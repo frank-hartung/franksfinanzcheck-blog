@@ -80,7 +80,7 @@ Ein Preisvergleich zeigt dir Angebote nebeneinander – ob Fahrzeuggröße, Koff
 
 Richte ein eigenes Sparziel ein. Du kannst Geld regelmäßig beiseitelegen, wenn es nach den nötigen Ausgaben übrig ist. Wähle einen Betrag, der sich auch in einem normalen Monat tragen lässt. Wenn deine Einnahmen schwanken, plane lieber mit einem kleineren festen Auftrag und ergänze ihn später freiwillig.
 
-Mach aus dem Ziel keinen Test deiner Disziplin. Wenn eine Rechnung dazwischenkommt, darfst du den Plan ändern. Prüfe dann, ob du den Reisezeitraum verschieben oder [Kosten senken](../../posts/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check/) willst. Nimm kein Geld aus einer wichtigen Rücklage, nur damit die Buchung heute klappt.
+Mach aus dem Ziel keinen Test deiner Disziplin. Wenn eine Rechnung dazwischenkommt, darfst du den Plan ändern. Prüfe dann, ob du den Reisezeitraum verschieben oder [Fixkosten senken](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) willst. Nimm kein Geld aus einer wichtigen Rücklage, nur damit die Buchung heute klappt.
 
 Eine separate Reisekasse hilft, das übrige Geld nicht versehentlich auszugeben. Sie muss kein besonderes Konto sein. Wichtig ist, dass du den Zweck erkennst und die Bedingungen verstehst. Prüfe mögliche Kosten und Zugriff, bevor du ein neues Produkt eröffnest.
 

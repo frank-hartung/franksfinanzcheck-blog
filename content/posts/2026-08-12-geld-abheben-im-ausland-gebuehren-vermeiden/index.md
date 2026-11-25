@@ -1,6 +1,6 @@
 ---
 title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
-description: "Am Geldautomaten im Ausland können Gebühren und Wechselkursaufschläge zusammenkommen. So liest du die Anzeige vor dem Abheben."
+description: "Geld abheben im Ausland: Am Automaten kommen oft Gebühren und Aufschläge zusammen. So liest du die Anzeige richtig."
 date: 2026-08-12T06:10:00Z
 lastmod: 2026-11-04
 draft: false
@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Geld abheben im Ausland", "Auslandsgebühren Karte", "Automatengebühr", "Fremdwährungsgebühr", "Kreditkarte oh", "e Ausla", "Kreditkarte", "Kreditkarte Ausland Gebühren"]
+keywords_fokus: ["Geld abheben im Ausland", "Kreditkarte"]
 pin_title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
 pin_description: "*Werbung | Am Geldautomaten im Ausland können Gebühren und Wechselkursaufschläge zusammenkommen. So liest du die Anzeige vor dem Abheben. Fotografiere im Zweifel die Gebührenanzeige vor der Bestätigung. So kannst du den am Automaten angezeigten Betrag später vom Entgelt deiner eigenen Bank unterscheiden."
 ai_generated: true
@@ -50,7 +51,7 @@ faktencheck: 2026-11-19
 kurzantwort: "Beim Abheben im Ausland rechnen in der Regel zwei Stellen ab: der Betreiber des Automaten und deine Bank. Ob und wie viel deine Bank für Abhebungen außerhalb des Euro-Raums verlangt, steht im Preis- und Leistungsverzeichnis deines Kontos. Bietet der Automat zusätzlich eine Abrechnung in Euro an, entscheidest du selbst, ob du sie annimmst."
 ---
 
-Am Strandautomaten in Portugal oder Kroatien dauert das Abheben keine Minute. Die Rechnung kommt später.
+Beim Geld abheben im Ausland dauert der Vorgang am Strandautomaten in Portugal oder Kroatien keine Minute. Die Rechnung kommt später.
 
 Sie passt oft nicht zum abgehobenen Betrag. Genau an dieser Stelle entsteht der Eindruck, die Bank habe sich vertan. Meistens hat sie nicht.
 
@@ -72,33 +73,33 @@ Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mi
 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn du vor der nächsten Reise ohnehin deine Fixkosten prüfst, gehört das Konto in dieselbe Liste. Hier kannst du ein dauerhaft gebührenfreies Modell ansehen: [**Kostenloses C24 Girokonto ansehen**](/go/girokonto/)
 *(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
-## Warum am Automaten zwei Rechnungen entstehen?
+## Warum beim Geld abheben im Ausland zwei Rechnungen entstehen?
 
-Der Automat gehört selten deiner Bank. Im Ausland betreiben ihn lokale Institute, Wechselstuben oder selbstständige Netzbetreiber.
+Der Automat gehört fast nie deiner Hausbank. Vor Ort stellen örtliche Banken, Wechselbüros oder private Netze das Gerät auf.
 
-Sie stellen ihre Infrastruktur bereit. Dafür verlangen sie ein Nutzungsentgelt. Dieses Entgelt taucht nicht in deinem Preisverzeichnis auf. Es wird nicht von deiner Bank erhoben.
+Sie bieten den Dienst vor Ort an. Dafür verlangen sie ein direktes Entgelt am Gerät. Dieser Posten steht nie in der Preisliste deiner eigenen Bank.
 
-Der zweite Posten entsteht zu Hause. Manche Banken berechnen für jede Abhebung außerhalb des Euro-Raums eine feste Gebühr.
+Der zweite Posten entsteht daheim. Manche Banken verlangen für jeden Abzug außerhalb der Euro-Zone eine feste Gebühr.
 
-Andere arbeiten mit einem prozentualen Aufschlag. Wieder andere verlangen gar nichts, haben dafür aber andere Preise. Das ist keine Frage von gut oder böse, sondern eine Frage der Kalkulation.
+Andere nehmen einen festen Satz in Prozent vom Betrag. Wieder andere kosten dort null Euro, drehen aber an anderen Stellen am Preis. Jede Bank rechnet eben anders.
 
-Wichtig ist die Reihenfolge: Zuerst rechnet der Automat in Fremdwährung ab. Danach rechnet deine Bank den Betrag in Euro um. Jeder Schritt kann Kosten enthalten, und beide Schritte sind getrennt dokumentiert.
+Wichtig ist die Folge am Gerät: Erst rechnet der Automat in der Fremdwährung ab. Dann tauscht deine Bank den Betrag in Euro um. Beide Schritte kosten unter Umständen Geld und stehen einzeln auf dem Beleg.
 
 ## Was in deinem Preis- und Leistungsverzeichnis steht
 
-Das Preisverzeichnis ist die verbindliche Liste aller Entgelte deines Kontos. Für Abhebungen im Ausland stehen dort in der Regel eigene Positionen. Eine für Abhebungen im Euro-Raum, eine für Abhebungen außerhalb. Die BaFin erklärt den Aufbau dieser Dokumente und die Rechte von Kontoinhabern in ihrem [Ratgeber zum Girokonto](https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html).
+In der Preisliste deines Kontos stehen alle festen Kosten sauber aufgelistet. Für Geld im Ausland findest du meist zwei Zeilen. Eine gilt im Euro-Raum, eine außerhalb. Die BaFin erklärt den Aufbau dieser Liste und deine Rechte im [Ratgeber zum Girokonto](https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html).
 
-Zusätzlich veröffentlicht die BaFin mit dem [Kontenvergleich](https://kontenvergleich.bafin.de/) eine Übersicht, in der sich die Entgelte verschiedener Konten vergleichen lassen. Dort siehst du, dass die Spanne zwischen Konten deutlich größer ist als der Unterschied zwischen Reiseländern.
+Zudem zeigt dir der [Kontenvergleich](https://kontenvergleich.bafin.de/) der BaFin viele Tarife im klaren Vergleich. Du merkst dort schnell: Die Unterschiede zwischen zwei Konten sind oft viel größer als zwischen zwei Reiseländern.
 
-Wenn du dein eigenes Verzeichnis nicht zur Hand hast, genügt ein Blick in die Preisliste im Online-Banking. Suche dort nach dem Abschnitt „Zahlungsverkehr“ und den Zeilen zur Kartenzahlung. Diese zwei Zeilen entscheiden über den größten Teil der Kosten, die im Urlaub entstehen können.
+Fehlt dir dein Papierheft, öffne einfach die Preisliste im Online-Banking. Suche dort nach den Worten „Zahlungsverkehr“ und „Kartenzahlung“. Diese zwei Stellen legen fest, was du im Urlaub am Ende wirklich zahlst.
 
 ## Die Währungsfrage am Display
 
-Viele Automaten bieten dir an, den Betrag direkt in Euro abzurechnen. Der Fachbegriff dafür lautet dynamische Währungsumrechnung. Für dich bedeutet das: Der Automat rechnet selbst um und legt seinen eigenen Kurs zugrunde. Dieses Angebot ist kein Service, sondern ein Geschäft.
+Viele Automaten bieten auf dem Schirm direkt Euro an. Fachleute nennen das dynamische Währungsumrechnung. Der Betreiber des Geräts rechnet dann selbst um und setzt seinen eigenen Kurs fest. Das ist kein Service für dich, sondern ein gutes Geschäft für den Aufsteller.
 
-Nimmst du das Euro-Angebot an, kennst du den Endpreis sofort. Das ist bequem, aber selten günstig. Der Kurs liegt in der Praxis häufig über dem Referenzkurs, den deine Bank verwendet. Lehne das Angebot ab, wird der Betrag in Landeswährung abgerechnet und deine Bank rechnet später um.
+Wählst du Euro am Schirm, siehst du zwar gleich den Endbetrag. Das wirkt nett, kommt aber meist teuer. Der Kurs liegt in der Regel klar schlechter als der Kurs deiner Hausbank. Lehne Euro deshalb ab – dann bucht der Automat in Landeswährung und deine Bank rechnet fair um.
 
-Umgekehrt gilt: In manchen Ländern und an manchen Automaten ist das Euro-Angebot der einzige Weg. Dann bleibt nur die Entscheidung, ob dir der angezeigte Kurs für diese eine Abhebung reicht. Prüfe den angezeigten Kurs kurz gegen den Kurs, den dir deine Banking-App für heute zeigt. Diese Gegenprobe dauert zehn Sekunden.
+Manchmal lässt dir ein Gerät keine Wahl und zeigt nur Euro an. Prüfe dann kurz am Handy, wie der echte Tageskurs heute steht. Der kurze Blick dauert zehn Sekunden und bewahrt vor teuren Fallen.
 
 ## Modellrechnung: Vier Abhebungen im Urlaub
 

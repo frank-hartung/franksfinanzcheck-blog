@@ -1,6 +1,6 @@
 ---
 title: "Einlagensicherung: Wie viel Guthaben geschützt ist"
-description: "Mehrere Konten bedeuten nicht automatisch mehrfachen Schutz. Prüfe, welche Bank hinter jeder Marke steht und wie deine Einlagen dort zusammenzählen."
+description: "Einlagensicherung: Mehrere Konten bedeuten nicht mehr Schutz. Prüfe, welche Bank hinter jeder Marke steht und wie Beträge zählen."
 date: 2026-09-23T06:10:00Z
 lastmod: 2026-10-13
 draft: false
@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Einlagensicherung", "Guthaben geschützt", "Bank Insolvenz", "Tagesgeld Sicherheit"]
+keywords_fokus: ["Einlagensicherung", "Tagesgeldkonto"]
 pin_title: "Einlagensicherung: Wie viel Guthaben geschützt ist"
 pin_description: "*Werbung | Mehrere Konten bedeuten nicht automatisch mehrfachen Schutz. Prüfe, welche Bank hinter jeder Marke steht und wie deine Einlagen dort zusammenzählen. Liste für jede Bank auch Guthaben auf dem Girokonto auf. Nur ein Blick auf das Tagesgeldkonto kann die Summe beim selben Institut unterschätzen."
 ai_generated: true
@@ -57,7 +58,7 @@ Die Einlagensicherung spielt bei der Unterschrift kaum eine Rolle. Erst wenn ein
 
 Die Sicherheit von Bankguthaben ist in Deutschland gesetzlich geregelt. Der Schutz bleibt nicht unbegrenzt und lässt sich nicht beliebig teilen. Wer das System einmal verstanden hat, ordnet Angebote viel besser ein.
 
-## Was geschützt ist?
+## Was über die Einlagensicherung geschützt ist?
 
 Gesetzlich geschützt sind Guthaben auf Bankkonten. Dazu zählen Sicht-, Termin- und Spareinlagen.
 

@@ -11,6 +11,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Gasabschlag berechnen", "Gas Abschlag senken", "Heizsaison vorbereiten", "Gastarif prüfen", "Grundversorgung Gas", "Gasabschlag", "Heizsaison"]
+keywords_fokus: ["Gasabschlag"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Gasabschlag berechnen: So prüfst du den monatlichen Betrag"
 pin_description: "*Werbung | Berechne den Gasabschlag mit Jahresverbrauch, Arbeitspreis und Grundpreis. Teile durch die Zahl der tatsächlich vorgesehenen Abschlagszahlungen. Vergleiche nicht den Abschlag allein. Auch bei unverändertem Jahrespreis sehen elf Teilzahlungen anders aus als zwölf; maßgeblich bleibt der Abrechnungsplan."

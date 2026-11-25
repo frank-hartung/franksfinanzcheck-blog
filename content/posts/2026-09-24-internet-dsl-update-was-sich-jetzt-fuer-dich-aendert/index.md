@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis"
-description: "Was kostet DSL nach dem Aktionsjahr? Addiere Rabattmonate, reguläre Monatsentgelte und Einmalkosten und teile die Summe durch die Vergleichsdauer."
+description: "DSL-Effektivpreis nach dem Aktionsjahr: Addiere Rabattmonate, Regelpreise sowie Einmalkosten und teile durch die Laufzeit."
 date: 2026-10-07T01:34:23Z
 draft: false
 reserve_published: 2026-10-07
@@ -10,6 +10,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["News"]
 pillar: "internet-dsl"
 keywords: ["DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick", "Internet & DSL-Update", "Internet & DSL Update", "DSL-Update", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
+keywords_fokus: ["Effektivpreis", "Internet & DSL-Update"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
@@ -36,7 +37,7 @@ quellen:
 faktencheck: 2026-11-23
 ---
 
-**Stand: 24.09.2026.** Dieses **Internet & DSL-Update** ordnet ein, warum aktuell nicht nur der [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) zählt, sondern vor allem die ehrliche Frage: **Passt dein Tarif überhaupt zu deinem Alltag?**
+**Stand: 24.09.2026.** Dieses **Internet & DSL-Update** ordnet ein, warum aktuell nicht nur der [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) zählt, sondern vor allem der ehrliche Effektivpreis für deinen Alltag.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -46,7 +47,7 @@ Genau deshalb ist das wichtigste Update im Markt oft kein großer Technik‑Skan
 
 ---
 
- Entscheidend ist der Effektivpreis über 24 Monate und ob dein Bedarf wirklich getroffen wird: [**Internet & DSL vergleichen**](/go/dsl/); das ist ein Modellwert. Das ist ein Modellwert.
+**DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick** – vergleiche in Ruhe über 24 Monate, ob dein Bedarf wirklich getroffen wird: [**Internet & DSL vergleichen**](/go/dsl/).
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
@@ -74,7 +75,7 @@ Die Folge: Ein Haushalt kann technisch völlig ordentlich versorgt sein – und 
 
 Viele wählen beim Internettarif nach dem Bauchgefühl: lieber zu viel als zu wenig. Das ist verständlich. Finanziell ist es oft unnötig.
 
-Denn ein Tarif mit 250 Mbit/s ist nicht automatisch sinnvoller als einer mit 50 oder 100 Mbit/s. Entscheidend ist, wie dein Haushalt das Internet wirklich nutzt; das ist ein Beispielwert; das ist ein Beispielwert.
+Denn ein Tarif mit 250 Mbit/s ist nicht automatisch sinnvoller als einer mit 50 oder 100 Mbit/s. Entscheidend ist, wie dein Haushalt das Internet wirklich nutzt; das ist ein Beispielwert.
 
 ### Was oft gleichzeitig läuft
 

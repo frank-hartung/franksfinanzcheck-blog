@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Geschenkkarte", "Gutschein aufladen", "Karte verschenken"]
+keywords_fokus: ["Geschenkkarte", "Gutschein aufladen"]
 pin_title: "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst"
 pin_description: "*Werbung | Prüfe vor dem Kauf einer Geschenkkarte, wo und wie lange sie einlösbar ist. Bewahre Beleg und Restguthaben zusammen auf, bis alles verbraucht ist. Bewahre den Nachweis über die Aufladung getrennt vom Guthabencode auf. Wer nur den Kassenbon hat, sollte den noch einlösbaren Code nicht öffentlich teilen."
 ai_generated: true

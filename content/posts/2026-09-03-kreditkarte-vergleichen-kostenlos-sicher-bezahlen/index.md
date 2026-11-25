@@ -10,6 +10,7 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Kreditkarte vergleichen", "kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte Ausland gebührenfrei", "Fremdwährungsgebühr vermeiden", "Kreditkarte Sicherheit", "beste Kreditkarte 2026", "Kreditkarte mit Reiseversicherung"]
+keywords_fokus: ["Kreditkarte"]
 pinwand: "Konto & Karten | Gebührenfrei & clever"
 pin_title: "Kreditkarte vergleichen: Kostenlos und sicher zahlen"
 pin_description: "*Werbung | Welche Kreditkarte passt zu deinem Alltag? Prüfe Abrechnung, Jahresgebühr und Fremdwährungsentgelt – besonders wenn du Teilzahlung nutzen willst. Kontrolliere die voreingestellte Rückzahlungsart vor dem ersten Einkauf. Eine Karte ohne Jahresgebühr kann bei Teilzahlung trotzdem laufende Zinskosten verursachen."
