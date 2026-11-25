@@ -114,7 +114,7 @@ Diese Staffelung ist der Grund, warum manche Rechnung im zweiten Jahr höher aus
 
 Für die Liste bedeutet das eine zusätzliche Spalte. Trage nicht nur den aktuellen Betrag ein, sondern auch den Betrag, der nach Ablauf einer Aktion gilt. Dann siehst du beim nächsten Blick auf die Abbuchung sofort, ob die Erhöhung vereinbart war oder ob du nachfragen musst.
 
-Dasselbe gilt für Staffeln bei Strom, Internet und Kartenkonten. Dort steht der Startpreis im Vordergrund und der Folgepreis in der Preisliste. Ein Vergleich ohne den Folgepreis ist kein Vergleich.
+Dasselbe gilt für Staffeln bei Strom, [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) und Kartenkonten. Dort steht der Startpreis im Vordergrund und der Folgepreis in der Preisliste. Ein Vergleich ohne den Folgepreis ist kein Vergleich.
 
 ## Preiserhöhung und Umzug als Anlass
 

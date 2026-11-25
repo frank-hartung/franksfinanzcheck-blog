@@ -41,6 +41,7 @@ kurzantwort: "Bei einer Gaspreiserhöhung besteht ein gesetzliches Sonderkündig
 
 
 
+
 Eine Gaspreiserhöhung ist kein guter Anlass für eine übereilte Kündigung. Kläre zuerst die Vertragsart: Für die Grundversorgung gelten andere Bedingungen als für einen Sondervertrag.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -249,7 +250,7 @@ Wenn die Preise sinken, dein Vertrag aber noch teuer ist, solltest du den nächs
 
 Setze dir eine Erinnerung. 
 Ein Nachmittag im Jahr (Modellrechnung) reicht oft aus, um alle Fixkosten zu prüfen. 
-Strom, Gas, Internet und Versicherungen gehören dazu. 
+Strom, Gas, [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) und Versicherungen gehören dazu. 
 Wer hier systematisch vorgeht, behält die Kontrolle über sein Budget.
 
 Das ist das Ziel von FranksFinanzcheck. 

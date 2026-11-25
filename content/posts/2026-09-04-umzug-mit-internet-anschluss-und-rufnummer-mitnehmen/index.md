@@ -161,7 +161,7 @@ Ein Kabel- oder Glasfaseranschluss braucht einen Termin. Plane dafür mehr Zeit 
 
 ## Was du beim Umzug dokumentierst
 
-Beim Thema Umzug und Internet entscheidet Dokumentation über den Verlauf. Lege einen Ordner an, digital oder auf Papier.
+Beim Thema Umzug und [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) entscheidet Dokumentation über den Verlauf. Lege einen Ordner an, digital oder auf Papier.
 
 Hinein gehören: der Umzugsauftrag mit Datum, jede Bestätigung des Anbieters, der Technikertermin, die Bestätigung der Rufnummernmitnahme, Fotos von Geräten und Anschlussdosen sowie Notizen zu Telefonaten mit Namen und Uhrzeit.
 

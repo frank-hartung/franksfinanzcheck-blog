@@ -51,6 +51,7 @@ kurzantwort: "Gesetzlich geschützt sind Bankguthaben bis 100.000 Euro je Einleg
 ---
 
 
+
 Die Einlagensicherung spielt bei der Unterschrift kaum eine Rolle. Erst wenn eine Bank in Schwierigkeiten gerät, rückt sie ins Rampenlicht. Steht sie dann in den Nachrichten, ist es zu spät für die einfache Antwort.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -184,7 +185,7 @@ Die Verbraucherzentrale empfiehlt, beim Abschluss eines Girokontos Entgelte und 
 
 **Faustregel:** Verteile größere Guthaben auf mehrere Banken innerhalb des Einlagensicherungsfonds – die gesetzliche Sicherung gilt pro Kunde und pro Institut, nicht pro Kontotyp.
 
-**Für deinen nächsten Check:** Liste für jede Bank auch Guthaben auf dem Girokonto auf. Nur ein Blick auf das [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) kann die Summe beim selben Institut unterschätzen.
+**Für deinen nächsten Check:** Liste für jede Bank auch Guthaben auf dem Girokonto auf. Nur ein Blick auf das Tagesgeldkonto kann die Summe beim selben Institut unterschätzen.
 
 ## Häufige Fragen
 

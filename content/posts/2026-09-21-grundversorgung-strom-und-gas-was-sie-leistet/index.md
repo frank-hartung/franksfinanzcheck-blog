@@ -88,8 +88,7 @@ In der Übergangszeit gibt es kaum Alternative, weil die Belieferung laufen muss
 
 ## Warum die Grundversorgung teurer ist?
 
-Der Grund liegt in der Struktur.  
-Ein Sondertarif wird für ein konkretes Kundenprofil kalkuliert – Haushaltsgröße, Verbrauch, Laufzeit.  
+Der Grund liegt in der Struktur. Ein Sondertarif wird für ein konkretes Kundenprofil kalkuliert – Haushaltsgröße, Verbrauch, Laufzeit.
 Die Grundversorgung muss für jedes Profil passen und jederzeit verfügbar sein.  
 
 Sondertarife werden aktiv über Vergleichsportale und Werbung verkauft. Das erzeugt Preiswettbewerb. Die Grundversorgung wird nicht beworben, weil sie ohnehin verfügbar ist.  
@@ -98,10 +97,10 @@ Ein Vergleich mit deinen echten Verbrauchswerten zeigt, ob die Grundversorgung i
 
 ## Kündigen aus dem Grundversorgungstarif
 
-Hier liegt der eigentliche Vorteil: kurze Fristen verhindern, dass du in einer teuren Falle steckst.  
+Hier liegt der eigentliche Vorteil: kurze Fristen verhindern, dass du in einer teuren Falle steckst.
 Die Bundesnetzagentur nennt die konkreten Fristen und Formvorschriften im [Verbraucherportal zu Kündigung und Lieferantenwechsel](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html).  
 
-Kündige nicht zuerst und suche dann einen neuen Anbieter.  
+Kündige nicht zuerst und suche dann einen neuen Anbieter.
 Beauftrage erst den neuen Vertrag und lass die Umschaltung abstimmen. Der neue Anbieter kümmert sich meist um die Abmeldung beim bisherigen Versorger.  
 
 Kündigst du zu früh, rutschst du in die **Ersatzversorgung Umzug**. Dann verlierst du den Vorteil der kurzen Frist, ohne dass ein neuer Vertrag existiert.  
@@ -110,12 +109,10 @@ Kündigst du zu früh, rutschst du in die **Ersatzversorgung Umzug**. Dann verli
 
 **Beispielrechnung** – Annahme: Ein Haushalt verbraucht 3.000 kWh Strom im Jahr. Der Grundversorgungstarif kostet 0,42 € pro kWh, ein Sondertarif 0,32 €. Grundpreis und Boni bleiben außen vor.  
 
-Rechenweg Grundversorgung: 3.000 × 0,42 € = 1.260 € im Jahr.  
-Rechenweg Sondertarif: 3.000 × 0,32 € = 960 € im Jahr.  
+Rechenweg Grundversorgung: 3.000 × 0,42 € = 1.260 € im Jahr. Rechenweg Sondertarif: 3.000 × 0,32 € = 960 € im Jahr.
 **Modellrechnung**: Der Unterschied beträgt 300 € im Jahr.  
 
-Gegenprobe: Eine Einzelperson verbraucht 1.500 kWh.  
-Rechenweg: 1.500 × 0,42 € = 630 €; 1.500 × 0,32 € = 480 €.  
+Gegenprobe: Eine Einzelperson verbraucht 1.500 kWh. Rechenweg: 1.500 × 0,42 € = 630 €; 1.500 × 0,32 € = 480 €.
 **Modellrechnung**: Der Unterschied beträgt 150 €.  
 
 Der Hebel wächst mit dem Verbrauch, und der Grundpreis kann den Vergleich verschieben. Rechne deshalb immer Arbeitspreis und Grundpreis zusammen.  

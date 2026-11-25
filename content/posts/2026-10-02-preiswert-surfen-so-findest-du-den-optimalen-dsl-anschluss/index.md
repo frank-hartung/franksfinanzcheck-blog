@@ -52,6 +52,7 @@ kurzantwort: "Prüfe zuerst, welche Anschlüsse an deiner Adresse verfügbar sin
 
 
 
+
 Du willst preiswert surfen? Dein Anschluss kostet viel, aber du nutzt das volle Tempo nie?
 
 Schuld ist selten der Anbieter. Schuld ist fast immer ein alter Vertrag.

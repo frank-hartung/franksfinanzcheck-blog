@@ -62,7 +62,7 @@ Miss die Geschwindigkeit zuerst per Netzwerkkabel und danach am Fernseher per WL
 
 ## Wie viel Streaming-Bandbreite brauchst du wirklich?
 
-Zuerst musst du deinen Alltag genau unter die Lupe nehmen. Wer nutzt bei dir im Haus das Internet zur gleichen Zeit?
+Zuerst musst du deinen Alltag genau unter die Lupe nehmen. Wer nutzt bei dir im Haus das [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) zur gleichen Zeit?
 
 Schaut ein Kind ein Video auf YouTube, während du einen Film in 4K streamst? Jede Aktion braucht einen Teil der Leitung. Wenn alle gleichzeitig online sind, wird es eng im Datenrohr. Notiere dir deshalb alle Geräte, die oft zur selben Zeit laufen.
 

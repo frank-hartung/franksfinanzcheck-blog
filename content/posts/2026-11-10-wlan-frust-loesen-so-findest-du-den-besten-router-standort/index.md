@@ -44,6 +44,7 @@ kurzantwort: "Stelle den Router möglichst zentral und frei auf, statt ihn im Sc
 
 
 
+
 Stell dir vor, du sitzt abends auf dem Sofa. Du möchtest deine Lieblingsserie streamen. Doch das Bild stockt. Der Ladekreis dreht sich endlos.
 
 Das nervt gewaltig. Oft suchen wir den Fehler beim Anbieter. Wir schimpfen auf die Leitung. Doch meist liegt das Problem direkt in deiner Wohnung.
@@ -81,7 +82,7 @@ Wenn diese Leistung nicht bei deinem Endgerät ankommt, zahlst du zu viel. Wir w
 
 Die Physik lässt sich nicht austricksen. Aber du kannst sie für dich nutzen.
 
-Der richtige Platz sorgt dafür, dass die Wellen frei schwingen können. Das reduziert Fehlerkorrekturen im Datenstrom. Dein Internet fühlt sich sofort schneller an. Es ist die einfachste Methode, um Fixkosten bei der Hardware zu sparen.
+Der richtige Platz sorgt dafür, dass die Wellen frei schwingen können. Das reduziert Fehlerkorrekturen im Datenstrom. Dein [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) fühlt sich sofort schneller an. Es ist die einfachste Methode, um Fixkosten bei der Hardware zu sparen.
 
 ## So findest du den perfekten Platz für dein WLAN
 
@@ -107,7 +108,7 @@ Das Kabel kostet nur wenige Euro. Ein neuer Router ist dagegen mit einer deutlic
 
 Nicht alle Gegenstände sind gleich schlimm für dein WLAN. Manche Materialien wirken wie ein [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/).
 
-Du lässt kaum Wellen durch. Wenn du diese Störer kennst, kannst du sie umgehen. Das hilft dir massiv dabei, den **[WLAN-Empfang](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) verbessern** zu können.
+Du lässt kaum Wellen durch. Wenn du diese Störer kennst, kannst du sie umgehen. Das hilft dir massiv dabei, den **WLAN-Empfang verbessern** zu können.
 
 Metall ist der größte Feind. Es reflektiert die Wellen oder schluckt sie komplett.
 

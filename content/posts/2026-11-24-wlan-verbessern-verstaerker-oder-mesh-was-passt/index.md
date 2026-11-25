@@ -21,6 +21,17 @@ redaktionelle_pruefung:
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 
 inspiration: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
+cover:
+  image: "images/covers/2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt.jpg"
+  alt: "WLAN verbessern: Verstärker oder Mesh – was passt?"
+  caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 7c6c13dfa10c3df97efe81e06f43ec8bd5a2d85d44dd3b29f7d75b506e6d72a9
+    geprueft_am: 2026-11-25
+
 ---
 
 Du sitzt im Wohnzimmer, der Film stockt, das Symbol flackert. Der Router steht im Arbeitszimmer, die Entfernung ist groß. Du fragst dich, ob ein einzelner Verstärker reicht oder ein Mesh‑System nötig ist. So findest du heraus, wie du dein WLAN verbessern kannst.  

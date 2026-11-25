@@ -65,7 +65,7 @@ Die Frage lautet deshalb nicht, ob ein VPN gut oder schlecht ist. Sie lautet, we
 
 Ein VPN baut zwischen deinem Gerät und einem Server des Anbieters einen verschlüsselten Tunnel auf. Alles, was diesen Weg nimmt, ist für Dritte auf der Strecke nicht lesbar. Das Bundesamt für Sicherheit in der Informationstechnik (BSI) beschreibt genau diesen Mechanismus als Kern eines VPN, und zwar für die Verbindung zwischen Endgerät und VPN-Server.
 
-Der Zielserver im Internet sieht danach die IP-Adresse des VPN-Servers statt deiner eigenen. Das schützt deine Herkunft gegenüber den besuchten Seiten, macht dich aber nicht anonym. Wer sich bei einem Dienst einloggt, bleibt für diesen Dienst erkennbar, denn Konten verraten dich unabhängig von der IP-Adresse.
+Der Zielserver im [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) sieht danach die IP-Adresse des VPN-Servers statt deiner eigenen. Das schützt deine Herkunft gegenüber den besuchten Seiten, macht dich aber nicht anonym. Wer sich bei einem Dienst einloggt, bleibt für diesen Dienst erkennbar, denn Konten verraten dich unabhängig von der IP-Adresse.
 
 Wichtig ist die Grenze des Tunnels. Er endet am VPN-Server. Was danach im offenen Internet passiert, liegt nicht mehr in seiner Reichweite. Wer also einem fremden Dienst vertraut, vertraut ihm mit den Daten, sobald sie den Tunnel verlassen haben.
 

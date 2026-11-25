@@ -21,8 +21,27 @@ redaktionelle_pruefung:
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 
 inspiration: "Internet-Tuning für 0 €: DNS-Server wechseln Schritt für Schritt"
+cover:
+  image: "images/covers/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed.jpg"
+  alt: "Internet tuning kostenlos: DNS-Server für mehr Speed"
+  caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: f4f3b6cd88a1277ecf5351fe43ef30ba6a081fe336a1495c3eac0563d0f68610
+    geprueft_am: 2026-11-25
 ---
-Dein Browser lädt. Der blaue Kreis dreht sich. Sekunden verstreichen nutzlos. Oft liegt das nicht an deiner Leitung. Dein Anbieter nutzt meist einen langsamen Standard-Server. Dieser Server übersetzt Web-Adressen in Zahlen. Dieser Vorgang heißt Namensauflösung. Ein lahmer Server bremst jeden Klick aus. Mit **internet tuning kostenlos** änderst du das sofort. Du tauschst den digitalen Wegweiser einfach aus. Das kostet keinen Cent. Es erfordert kein technisches Studium. In wenigen Minuten reagiert dein Internet spürbar flinker.
+
+Dein Browser lädt quälend langsam.
+Der blaue Kreis dreht sich endlos auf dem Tab.
+Oft liegt das Problem nicht an deiner Leitung selbst.
+Dein Anbieter nutzt meist einen trägen Standard-Server für die Adresssuche.
+
+Ein lahmer Server bremst jeden Klick aus – mit **Internet tuning kostenlos** änderst du das sofort.
+Du tauschst den digitalen Wegweiser einfach aus.
+Das kostet keinen Cent und erfordert kein technisches Studium.
+In wenigen Minuten reagiert dein Internet spürbar flinker.
 
 **Das Wichtigste in Kürze**
 * **Mehr Tempo:** Ein schnellerer DNS-Server verkürzt die Wartezeit beim Seitenaufruf spürbar.
@@ -30,82 +49,135 @@ Dein Browser lädt. Der blaue Kreis dreht sich. Sekunden verstreichen nutzlos. O
 * **Volle Kontrolle:** Du entscheidest, welcher Dienst deine Daten zur Namensauflösung verarbeitet.
 * **Null Kosten:** Dieser Optimierungsschritt ist dauerhaft gratis und für jedes Gerät verfügbar.
 
-## Was ist internet tuning kostenlos eigentlich?
 
-Stell dir das Internet wie ein riesiges Telefonbuch vor. Du gibst eine Adresse ein. Dein Computer versteht aber nur Zahlen. Er fragt einen Server nach der passenden Nummer. Dieser Server ist der DNS-Server (Domain Name System). Dein Anbieter stellt dir automatisch einen bereit. Oft sind diese Server überlastet oder langsam. 
 
-Hier setzt mein 4K-Prüfpfad an. Wir schauen uns im Schritt "Konditionen rechnen" die Leistung an. Bekommst du das Maximum aus deinem Vertrag? Oft zahlst du für 100 Mbit, fühlst dich aber wie bei 16 Mbit. Das liegt oft an der Trägheit der Namensauflösung. Ein Wechsel des DNS-Servers optimiert diese Kondition. Du nutzt deine vorhandene Leitung einfach effizienter aus.
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt DSL-Tarife vergleichen**](/go/dsl/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
+## Was ist Internet tuning kostenlos eigentlich?
+
+Stell dir das Netz wie ein riesiges Telefonbuch vor.
+Du tippst eine Webadresse ein, doch dein Computer versteht nur Zahlenkolonnen.
+Er fragt einen Server nach der passenden Nummer.
+Dieser digitale Wegweiser heißt DNS-Server (Domain Name System).
+
+Oft sind die Server der Provider überlastet oder technisch veraltet.
+Hier setzt mein 4K-Prüfpfad an.
+Wir prüfen im Schritt "Konditionen rechnen" deine tatsächliche Leistung.
+Ein Wechsel des DNS-Servers optimiert diese Kondition sofort.
+
+Du nutzt deine vorhandene Leitung einfach effizienter aus.
+Oft zahlst du für 100 Mbit, fühlst dich aber wie bei 16 Mbit (Annahme).
+Das liegt häufig an der Trägheit der Namensauflösung.
+Ein schnellerer Server beseitigt diese künstliche Bremse.
 
 **Faustregel:** Wenn Seiten erst nach einer Gedenksekunde laden, ist oft der DNS-Server der Flaschenhals.
 
 ## Warum lohnt sich das schnellere Surfen?
 
-Jeder Klick sendet eine Anfrage. Eine Webseite besteht aus vielen Elementen. Bilder, Skripte und Texte kommen oft von verschiedenen Quellen. Dein Browser muss für jede Quelle die Adresse auflösen. Ein schneller DNS-Server spart bei jedem Vorgang Millisekunden. Das summiert sich bei jedem Seitenaufruf. Du wirst **schneller surfen**, ohne einen teureren Tarif zu buchen.
+Jeder Klick sendet unzählige Anfragen an verschiedene Quellen.
+Bilder, Texte und Skripte laden oft von unterschiedlichen Servern.
+Dein Browser muss für jedes Element die Adresse einzeln auflösen.
+Ein optimierter DNS-Server spart bei jedem dieser Vorgänge wertvolle Zeit.
 
-Besonders beim Gaming zählt jede Millisekunde. Ein niedriger Ping ist dort entscheidend. Aber auch beim normalen Arbeiten nerven Verzögerungen. Ein optimierter Server reagiert oft doppelt so schnell wie der Standard-Dienst deines Providers. Das ist digitales Tuning ohne Risiko. Du veränderst nichts an deiner Hardware. Du stellst lediglich die Software-Weichen neu.
+So wirst du spürbar **schneller surfen**, ohne einen teureren Tarif zu buchen.
+Besonders beim Gaming zählt jede Millisekunde für einen niedrigen Ping.
+Aber auch im Homeoffice nerven unnötige Verzögerungen.
+Du veränderst nichts an deiner Hardware, sondern stellst lediglich die Software-Weichen neu.
+
+Ein optimierter Server reagiert oft doppelt so schnell wie der Standard-Dienst.
+Das ist digitales Tuning ohne jedes Risiko.
+Du verbesserst das Ansprechverhalten deines gesamten Netzwerks.
+Der Effekt ist bei jedem neuen Tab sofort spürbar.
 
 ## Wie verbessert ein DNS-Wechsel die Sicherheit?
 
-Sicherheit im Netz ist ein hohes Gut. Viele private Nutzer unterschätzen die Gefahr. Kriminelle nutzen oft gefälschte Webseiten. Ein guter DNS-Dienst bietet hier aktiven Schutz. Er erkennt bekannte Phishing-Seiten sofort. Die Verbindung wird dann gar nicht erst aufgebaut. So steigerst du deine **dns sicherheit** massiv. 
+Sicherheit im Netz betrifft jeden privaten Nutzer.
+Kriminelle locken dich oft auf gefälschte Webseiten.
+Ein spezialisierter DNS-Dienst bietet hier einen aktiven [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/).
+Er erkennt bekannte Phishing-Seiten und blockiert die Verbindung sofort.
 
-Einige Anbieter filtern sogar Werbung oder Tracker heraus. Das schont deine Privatsphäre. Deine Daten landen nicht mehr ungefiltert beim Internetanbieter. Dieser weiß sonst genau, welche Seiten du besuchst. Alternative Server wie Quad9 legen Wert auf Datenschutz. Sie speichern deine IP-Adresse nicht dauerhaft. Das ist ein großer Vorteil für deine digitale Souveränität.
+So steigerst du deine **DNS Sicherheit** massiv mit nur einem Handgriff.
+Einige Anbieter filtern zusätzlich lästige Werbung oder Tracker heraus.
+Das schont deine Privatsphäre und beschleunigt den Seitenaufbau weiter.
+Deine Daten landen nicht mehr ungefiltert bei deinem [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/).
+
+Alternative Server wie Quad9 speichern deine IP-Adresse nicht dauerhaft.
+Dieser Anbieter legt großen Wert auf Datenschutz und digitale Souveränität.
+Du entziehst dich damit der Protokollierung durch deinen Provider.
+Das ist ein großer Vorteil für deine Anonymität im Netz.
 
 ## DNS wechseln Tutorial: So gehst du vor
 
-Du kannst den DNS-Server an zwei Stellen ändern. Entweder direkt im Router oder auf deinem Endgerät. Die Änderung im Router gilt für alle Geräte im WLAN. Das ist die effizienteste Methode. Hier ist dein **dns wechseln tutorial** für die gängigsten Systeme.
+Du kannst den DNS-Server an zwei Stellen anpassen.
+Entweder änderst du ihn direkt im Router oder auf deinem Endgerät.
+Die Änderung im Router gilt automatisch für alle Geräte im WLAN.
+Hier folgt dein kompaktes **DNS wechseln Tutorial** für die gängigsten Systeme.
 
-### Schrittfolge für den Router (Beispiel Fritz!Box)
+### Schrittfolge für den Router (Beispiel FRITZ!Box)
 
 1. Öffne deinen Browser und gib "fritz.box" in die Adresszeile ein.
-2. Melde dich mit deinem Passwort an.
-3. Klicke im Menü auf "Internet" und dann auf "Zugangsdaten".
-4. Wähle den Reiter "DNS-Server" aus.
+2. Melde dich mit deinem persönlichen Passwort an.
+3. Klicke im Menü auf "Internet" und danach auf "Zugangsdaten".
+4. Wähle oben den Reiter "DNS-Server" aus.
 5. Aktiviere den Punkt "Andere DNSv4-Server verwenden".
 6. Trage die Adressen deines Wunsch-Anbieters in die Felder ein.
-7. Speichere die Einstellungen mit "Übernehmen" ab.
+7. Speichere die Einstellungen mit dem Button "Übernehmen" ab.
 
 ### Schrittfolge für Windows 11
 
 1. Drücke die Windows-Taste und tippe "Netzwerkstatus" ein.
 2. Klicke auf deine aktive Verbindung (WLAN oder Ethernet).
 3. Suche den Punkt "DNS-Serverzuweisung" und klicke auf "Bearbeiten".
-4. Stelle von "Automatisch (DHCP)" auf "Manuell" um.
-5. Aktiviere den Schalter für "IPv4".
+4. Stelle die Auswahl von "Automatisch (DHCP)" auf "Manuell" um.
+5. Aktiviere den Schalter für das Protokoll "IPv4".
 6. Gib die neue DNS-Adresse bei "Bevorzugter DNS" ein.
-7. Bestätige die Eingabe mit "Speichern".
+7. Bestätige deine Eingabe mit einem Klick auf "Speichern".
 
 ## Modellrechnung: Zeitgewinn durch DNS-Tuning
 
-Lohnt sich der Aufwand wirklich? Wir schauen uns das in einer Beispielrechnung an. Wir nehmen an, du nutzt das Internet intensiv.
+Lohnt sich der Aufwand für dich wirklich?
+Wir schauen uns das in einer Beispielrechnung an.
+Wir nehmen an, du nutzt das Internet täglich intensiv.
 
 **Annahmen für die Beispielrechnung:**
-* Anzahl der täglichen DNS-Anfragen: 500 (entspricht normalem Surfen).
-* Zeitersparnis pro Anfrage durch schnelleren Server: 40 Millisekunden (0,04 Sekunden).
-* Nutzungstage pro Jahr: 365 Tage.
+* Anzahl der täglichen DNS-Anfragen: 500
+* Zeitersparnis pro Anfrage durch schnelleren Server: 40 Millisekunden (0,04 Sekunden)
+* Nutzungstage pro Jahr: 365 Tage
 
 **Rechnung:**
-1. Ersparnis pro Tag: 500 Anfragen * 0,04 Sekunden = 20 Sekunden (Ergebnis der Beispielrechnung).
-2. Ersparnis pro Jahr: 20 Sekunden * 365 Tage = 7.300 Sekunden (Ergebnis der Beispielrechnung).
-3. Umrechnung in Minuten: 7.300 Sekunden / 60 = ca. 121,67 Minuten (Ergebnis der Beispielrechnung).
+1. Ersparnis pro Tag: 500 Anfragen * 0,04 Sekunden = 20 Sekunden (Ergebnis der Beispielrechnung).
+2. Ersparnis pro Jahr: 20 Sekunden * 365 Tage = 7.300 Sekunden (Ergebnis der Beispielrechnung).
+3. Umrechnung in Minuten: 7.300 Sekunden / 60 = ca. 121,67 Minuten (Ergebnis der Beispielrechnung).
 
 **Rechenprobe:**
-121,67 Minuten / 60 = ca. 2,03 Stunden. 
+121,67 Minuten / 60 = ca. 2,03 Stunden.
 
-Du sparst also rund zwei Stunden reine Wartezeit pro Jahr (Ergebnis der Beispielrechnung). Das klingt erst mal wenig. Aber diese Zeit ist "tote Zeit". Sie unterbricht deinen Lesefluss. Sie nervt dich jeden Tag. Diese zwei Stunden gewinnst du durch einmalige fünf Minuten Arbeit zurück. Das ist eine hervorragende Rendite für deinen Zeitaufwand.
+Du sparst also rund zwei Stunden reine Wartezeit pro Jahr (Ergebnis der Beispielrechnung).
+Diese Zeit ist verlorene "tote Zeit" vor dem Bildschirm.
+Du unterbrichst deinen Lesefluss und nervst dich täglich.
+Diesen Gewinn sicherst du dir durch einmalig [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Arbeit.
 
 ## Typische Fehler beim DNS-Wechsel
 
-Viele Nutzer machen am Anfang kleine Fehler. Das führt dazu, dass das Internet gar nicht mehr geht. Keine Sorge, das lässt sich leicht beheben.
+Viele Nutzer machen am Anfang kleine Flüchtigkeitsfehler.
+Das führt dazu, dass die Internetverbindung kurzzeitig abbricht.
+Keine Sorge, diese Fehler lassen sich leicht beheben.
+Prüfe deine Eingaben einfach anhand dieser Liste.
 
-* **Zahlendreher:** Die Adressen bestehen aus vier Zahlenblöcken. Ein Punkt an der falschen Stelle blockiert alles. Prüfe die Eingabe doppelt.
-* **IPv6 vergessen:** Viele Anschlüsse nutzen heute IPv6. Wenn du nur IPv4 änderst, nutzt der Rechner oft weiter den alten Server. Trage beide Adressen ein.
-* **Kein Backup:** Notiere dir die alten Einstellungen. Meist stehen sie auf "automatisch". Aber sicher ist sicher.
-* **Router-Neustart fehlt:** Manchmal übernehmen Geräte die neuen Daten nicht sofort. Ein kurzer Neustart des Routers hilft oft.
-* **Mischmasch:** Nutze für den primären und sekundären Server denselben Anbieter. Das sorgt für Stabilität.
+* **Zahlendreher:** Die Adressen bestehen aus vier Blöcken. Ein falscher Punkt blockiert den Zugang.
+* **IPv6 vergessen:** Viele moderne Anschlüsse nutzen IPv6. Trage auch hier die passenden Server-Adressen ein.
+* **Kein Backup:** Notiere dir zur Sicherheit die alten Einstellungen. Meist stehen diese auf "automatisch".
+* **Router-Neustart fehlt:** Manche Geräte übernehmen die neuen Daten nicht sofort. Ein Neustart hilft hier oft.
+* **Anbieter-Mischmasch:** Nutze für den primären und sekundären Server denselben Anbieter. Das garantiert Stabilität.
 
 ## Die besten kostenlosen DNS-Anbieter im Vergleich
 
-Es gibt viele Anbieter auf dem Markt. Welcher passt zu dir? Hier ist eine Übersicht der bekanntesten Dienste.
+Es gibt verschiedene Anbieter auf dem Markt.
+Welcher Dienst passt am besten zu deinem Nutzerverhalten?
+Hier findest du eine Übersicht der bekanntesten kostenlosen Dienste.
 
 | Anbieter | Primäre Adresse | Fokus | Besonderheit |
 | :--- | :--- | :--- | :--- |
@@ -114,38 +186,76 @@ Es gibt viele Anbieter auf dem Markt. Welcher passt zu dir? Hier ist eine Übers
 | Quad9 | 9.9.9.9 | Sicherheit | Blockiert bösartige Domains aktiv |
 | Digitalcourage | 5.1.66.255 | Datenschutz | Unabhängig, kein Logging, aus Deutschland |
 
-Wähle Cloudflare, wenn du maximal **schneller surfen** willst. Wähle Quad9, wenn dir Schutz vor Viren wichtig ist. Digitalcourage ist ideal für Puristen beim Datenschutz.
+Wähle Cloudflare, wenn du maximal **schneller surfen** willst.
+Wähle Quad9, wenn dir der Schutz vor Viren wichtig ist.
+Digitalcourage ist ideal für Puristen beim Thema Datenschutz.
+Alle genannten Dienste sind dauerhaft kostenlos.
 
 ## Den Kurs halten: Regelmäßig prüfen
 
-Im 4K-Prüfpfad ist der letzte Schritt "Kurs halten". Das gilt auch für dein Internet. Ein DNS-Server kann mal Probleme haben. Oder es gibt neue, noch schnellere Anbieter. Ich empfehle dir, einmal im Quartal einen Speedtest zu machen. Prüfe dabei auch, ob deine DNS-Einstellungen noch aktiv sind.
+Im 4K-Prüfpfad ist der letzte Schritt "Kurs halten".
+Das gilt auch für dein **Internet**.
+Ein DNS-Server kann gelegentlich technische Probleme bereiten.
+Prüfe deine Einstellungen daher einmal im Quartal mit einem Speedtest.
 
-Manchmal setzen Updates des Betriebssystems diese Werte zurück. Das passiert selten, aber es kommt vor. Wenn du merkst, dass die Seiten wieder träge laden, schau kurz in die Einstellungen. So sicherst du dir dauerhaft dein **internet tuning kostenlos**.
+Manchmal setzen System-Updates deine Werte ungefragt zurück.
+Wenn Seiten wieder träge laden, schau kurz in die Konfiguration.
+So sicherst du dir dauerhaft dein **Internet tuning kostenlos**.
+Bleib wachsam bei der Performance deines Anschlusses.
 
-Falls dein Internet trotz Tuning langsam bleibt, liegt es oft am Tarif. Vergleiche dann deine Fixkosten. Ein Anbieterwechsel kann Wunder wirken. Hier kannst du aktuelle Tarife prüfen: [DSL-Vergleich starten](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=dsl) (Werbung). Ein Wechsel spart oft mehrere hundert Euro im Jahr. Kombiniere das mit dem DNS-Tuning für das beste Erlebnis.
+Falls dein Anschluss trotz Tuning langsam bleibt, liegt es oft am Basistarif.
+Vergleiche dann deine Fixkosten für den Anschluss.
+Ein Anbieterwechsel spart oft mehrere hundert Euro im Jahr (Annahme).
+Hier kannst du aktuelle Tarife prüfen: [DSL-Vergleich starten](/go/dsl/) (Werbung).
 
 ## Fazit: Wenig Aufwand, große Wirkung
 
-Ein DNS-Wechsel ist eine der einfachsten Methoden zur Optimierung. Du musst kein Geld ausgeben. Du musst keine neue Hardware kaufen. Du änderst nur eine Adresse in deinem System. Das Ergebnis ist ein flüssigeres Internetgefühl. Deine Daten sind bei den richtigen Anbietern zudem besser geschützt. 
+Ein DNS-Wechsel ist die einfachste Methode zur Optimierung.
+Du musst kein Geld ausgeben oder neue Hardware kaufen.
+Du änderst lediglich eine Adresse in deinem System.
+Das Ergebnis ist ein deutlich flüssigeres Gefühl beim Surfen.
 
-Nutze die oben genannte Anleitung. Probiere es einfach aus. Du kannst jederzeit zu den alten Einstellungen zurückkehren. Es gibt kein Risiko. Wer einmal mit einem schnellen DNS-Server gesurft ist, will meist nicht mehr zurück. Es ist der erste Schritt zu einem optimierten digitalen Haushalt.
+Deine Daten sind bei den richtigen Anbietern zudem besser geschützt.
+Nutze die oben genannte Anleitung und probiere es aus.
+Du kannst jederzeit zu den alten Einstellungen zurückkehren.
+Es gibt für dich kein technisches Risiko.
+
+Wer einmal mit einem schnellen DNS-Server gesurft ist, will nicht zurück.
+Es ist der erste Schritt zu einem optimierten digitalen Haushalt.
+Nimm dir die fünf Minuten Zeit für dieses Upgrade; das ist ein Modellwert.
+Dein Browser wird es dir bei jedem Klick danken.
 
 ## Häufige Fragen
 
 ### Kann ich beim DNS-Wechsel etwas kaputt machen?
-Nein, du veränderst keine Hardware. Wenn das Internet nicht mehr geht, hast du dich vermutlich vertippt. Stelle die Option einfach wieder auf "automatisch". Dann nutzt dein Gerät wieder den Standard-Server deines Anbieters. Alles funktioniert dann wie vorher.
+Nein, du veränderst keine Hardware an deinen Geräten.
+Wenn das Internet nicht mehr geht, hast du dich vermutlich vertippt.
+Stelle die Option einfach wieder auf "automatisch" zurück.
+Dann nutzt dein Gerät wieder den Standard-Server deines Anbieters.
 
 ### Funktioniert das Tuning auch am Smartphone?
-Ja, das klappt auch mobil. In den WLAN-Einstellungen deines Handys kannst du für jedes Netzwerk einen DNS-Server festlegen. Für das mobile Datennetz (LTE/5G) gibt es spezielle Apps. Diese Apps leiten deine Anfragen über den gewünschten Server um.
+Ja, das klappt auch bei mobilen Endgeräten problemlos.
+In den WLAN-Einstellungen deines Handys kannst du eigene DNS-Server festlegen.
+Für das mobile Datennetz gibt es zudem spezielle Apps.
+Diese leiten deine Anfragen sicher über den gewünschten Server um.
 
 ### Welcher DNS-Server ist der beste für Gamer?
-Cloudflare (1.1.1.1) gilt oft als Favorit für Gamer. Der Dienst hat eine sehr geringe Latenz. Das kann den Ping in Online-Spielen leicht verbessern. Es ersetzt aber keine schlechte Leitung. Es optimiert nur den Weg der Datenpakete.
+Cloudflare (1.1.1.1) gilt oft als Favorit für Online-Spiele.
+Der Dienst weist eine sehr geringe Latenz auf.
+Das kann den Ping in Spielen leicht verbessern.
+Es optimiert den Weg der Datenpakete durch das Netz.
 
 ### Kostet die Nutzung von Google oder Cloudflare Geld?
-Nein, die großen öffentlichen DNS-Server sind kostenlos. Diese Firmen haben ein Interesse an einem schnellen Internet. Google nutzt die Daten (anonymisiert), um das Netz besser zu verstehen. Cloudflare möchte sein Netzwerk bekannter machen. Für dich als Privatnutzer bleibt es gratis.
+Nein, die großen öffentlichen DNS-Server sind dauerhaft kostenlos.
+Diese Firmen haben ein Eigeninteresse an einem schnellen Internet.
+Google nutzt anonymisierte Daten, um das Netz besser zu verstehen.
+Für dich als Privatnutzer entstehen keinerlei Gebühren.
 
 ### Muss ich den DNS-Server auf jedem Gerät einzeln ändern?
-Wenn du die Änderung in deinem Router vornimmst, gilt sie für alle. Jedes Handy, jeder Laptop und jeder Smart-TV nutzt dann automatisch den neuen Dienst. Das ist die bequemste Lösung. Nur wenn du unterwegs in anderen WLAN-Netzen bist, greifen diese Einstellungen nicht mehr. Dann müsstest du sie am Endgerät direkt eintragen.
+Änderst du die Daten direkt im Router, gilt das für alle.
+Jedes Handy und jeder Laptop nutzt dann automatisch den neuen Dienst.
+Das ist die bequemste Lösung für dein Zuhause.
+Nur unterwegs in fremden WLAN-Netzen greifen diese Einstellungen nicht.
 
 ---
 

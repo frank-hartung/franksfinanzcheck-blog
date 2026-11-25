@@ -122,7 +122,7 @@ Viele Reisende kennen ihre Rechte nicht. Eine sachliche Forderung hilft dir, ein
 
 Zudem ist der Prozess heute einfacher als früher. Du musst keinen Anwalt im Koffer haben. Es gibt klare Wege. Du kannst es selbst versuchen.
 
-Oder du nutzt Helfer im Internet. In beiden Fällen ist das Ziel gleich.
+Oder du nutzt Helfer im [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/). In beiden Fällen ist das Ziel gleich.
 
 Du willst eine faire Behandlung. Das stärkt auch die Position aller Reisenden. Wenn Airlines merken, dass Kunden ihre Rechte kennen, investieren sie mehr in Pünktlichkeit. Das verbessert den Service für alle in der Zukunft.
 

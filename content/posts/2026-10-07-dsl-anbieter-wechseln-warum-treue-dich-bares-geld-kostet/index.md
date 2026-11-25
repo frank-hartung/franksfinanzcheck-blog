@@ -115,7 +115,7 @@ Ein Wechsel ist kein Grund, jede Zusatzleistung anzunehmen. Fernsehen, Sicherhei
 
 ## Was bereitest du zu Hause vor?
 
-Prüfe, welche Geräte du mit dem Internet verbindest. Notiere, wo der Router steht und welche Geräte per Kabel laufen. Ein [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) löst nicht jedes WLAN-Problem. Wenn die Verbindung nur in einem Zimmer schwach ist, kann der Standort des Routers wichtiger sein als ein teurerer Vertrag.
+Prüfe, welche Geräte du mit dem [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) verbindest. Notiere, wo der Router steht und welche Geräte per Kabel laufen. Ein [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) löst nicht jedes WLAN-Problem. Wenn die Verbindung nur in einem Zimmer schwach ist, kann der Standort des Routers wichtiger sein als ein teurerer Vertrag.
 
 Frag, ob du deinen Router weiter nutzen kannst. Sichere Zugangsdaten und Anleitung, bevor du etwas zurücksetzt. Wenn der Anbieter ein neues Gerät schickt, lies, wann du es anschließen sollst. Heb auch das Rücksendeetikett und die Frist für den alten Router auf, falls du ihn zurückgeben musst.
 

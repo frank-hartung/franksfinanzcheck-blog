@@ -58,6 +58,7 @@ faktencheck: "2026-10-14"
 
 
 
+
 Wenn du den DNS-Server wechselst, änderst du den Server, der deine Namensanfragen bearbeitet. Das kann Filter, Datenschutz und die Antwortzeit beeinflussen. Es macht den Anschluss aber nicht schneller. Und es verschlüsselt DNS nicht automatisch.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -116,7 +117,7 @@ DoH und DoT verschlüsseln die Verbindung zwischen deinem Gerät und dem DNS-Ser
 
 Weitere Netzwerkdaten bleiben sichtbar. Dazu gehören die Verbindung zur Ziel-IP und der Zeitpunkt oder Umfang des Datenverkehrs. HTTPS schützt den Inhalt der Website-Verbindung. Es macht dich aber nicht vollständig anonym.
 
-Der Inkognitomodus ändert daran nichts. Er begrenzt vor allem, was der Browser lokal speichert. Google weist darauf hin, dass Arbeitgeber oder [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) Aktivitäten dennoch beobachten können ([Chrome-Hilfe](https://support.google.com/chrome/answer/95464?hl=de)).
+Der Inkognitomodus ändert daran nichts. Er begrenzt vor allem, was der Browser lokal speichert. Google weist darauf hin, dass Arbeitgeber oder Internetanbieter Aktivitäten dennoch beobachten können ([Chrome-Hilfe](https://support.google.com/chrome/answer/95464?hl=de)).
 
 ## DNS auf Router oder Endgerät ändern
 
@@ -124,7 +125,7 @@ Notiere zuerst die bisherigen Einstellungen. Mache einen Screenshot. So kannst d
 
 ### FRITZ!Box als Beispiel
 
-Bei vielen FRITZ!Box-Modellen findest du die DNS-Einstellungen unter **Internet → Zugangsdaten** oder **Internet → Zugangsart → DNS-Server**. Die Bezeichnungen unterscheiden sich nach Modell und FRITZ!OS. Aktiviere die Verwendung anderer DNSv4- beziehungsweise DNSv6-Server. Trage die Adressen des gewählten Anbieters ein. Die [FRITZ! Knowledge Base](https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box) beschreibt die Menüs für ein konkretes Modell.
+Bei vielen FRITZ!Box-Modellen findest du die DNS-Einstellungen unter **[Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) → Zugangsdaten** oder **Internet → Zugangsart → DNS-Server**. Die Bezeichnungen unterscheiden sich nach Modell und FRITZ!OS. Aktiviere die Verwendung anderer DNSv4- beziehungsweise DNSv6-Server. Trage die Adressen des gewählten Anbieters ein. Die [FRITZ! Knowledge Base](https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box) beschreibt die Menüs für ein konkretes Modell.
 
 Für verschlüsselte Anfragen reicht die Eingabe einer IP-Adresse nicht immer aus. Bei DNS over TLS verlangt die FRITZ!Box zusätzlich den Servernamen. Aktiviere diese Funktion nur, wenn Router und DNS-Server sie unterstützen. Die Box kann für einzelne Dienste weiterhin die DNS-Server des Internetanbieters verwenden.
 

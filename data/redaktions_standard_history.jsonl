@@ -369,3 +369,5 @@
 {"zeit": "2026-11-20T15:26:17.559604+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "RS1-RS6", "aktion": "fix-ki"}
 {"zeit": "2026-11-20T21:49:25.730256+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-20T23:22:21.121122+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-25T11:31:00.798339+00:00", "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T11:31:00.798339+00:00", "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed", "regel": "RS5", "aktion": "fix-deterministisch"}

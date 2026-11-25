@@ -135,7 +135,7 @@ Kaufe erst nach dem Test weitere Bausteine.
 
 Lies, wie lange der Hersteller Software und Ersatzteile bereitstellt. Prüfe, ob das Gerät noch mit deiner App und deinem Router arbeitet.  
 
-Ein günstiger Kauf hilft wenig, wenn du bald weitere Teile ersetzen musst. Plane auch, wie du die Technik bedienst, falls dein Internet ausfällt.  
+Ein günstiger Kauf hilft wenig, wenn du bald weitere Teile ersetzen musst. Plane auch, wie du die Technik bedienst, falls dein [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) ausfällt.  
 
 Eine einfache Handbedienung kann im Alltag wichtig sein.  
 
