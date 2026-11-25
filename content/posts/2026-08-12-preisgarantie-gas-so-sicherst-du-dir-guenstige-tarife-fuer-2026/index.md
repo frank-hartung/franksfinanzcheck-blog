@@ -17,7 +17,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 820446b08a79426a8ce6d3c0c858803495cc044ed31ca5cb9657f02565009a61
+    sha256: 554158a3fb3c2c0d94d7f3a574d4db2110cfa19854fd99dc5cb43b971be9d945
     geprueft_am: 2026-11-25
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true
@@ -46,7 +46,6 @@ quellen:
     datum: "2026-10-28"
 faktencheck: 2026-11-01
 ---
-
 
 Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob Preisgarantie und Laufzeit zueinander passen.
 

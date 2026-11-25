@@ -1,17 +1,17 @@
 {
   "schema": 2,
-  "erzeugt": "2026-11-25 11:39 UTC",
+  "erzeugt": "2026-11-25 21:35 UTC",
   "uebersicht": {
     "gesamt": 150,
     "ratgeber": 6,
-    "faellig": 11,
+    "faellig": 10,
     "vorlauf": 0,
     "bearbeitet": 10,
     "budget": 10,
     "budget_quelle": "Sockel (Erstellungstakt (--neu))",
     "geo_schnitt": 92,
-    "befunde": 279,
-    "befunde_im_lauf": 0,
+    "befunde": 298,
+    "befunde_im_lauf": 3,
     "fachbefunde": [
       {
         "id": "1b7c9b9cac0290f71242",
@@ -105,6 +105,33 @@
         "beleg": "",
         "zuletzt_gesehen": "2026-11-19 13:55 UTC",
         "herkunft": "dossier-nachlese"
+      },
+      {
+        "typ": "luecke",
+        "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "30caa57be394afb62947",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "32a3ea879f2cf126b3a7",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "c583efe1ce02df3ca2d7",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
       },
       {
         "id": "29eea3c457afaba3d7bd",
@@ -966,6 +993,51 @@
         "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
         "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
         "zuletzt_gesehen": "2026-11-23 15:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "334751e6f61ad0033fe4",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "36759a5efe5e8e5163d0",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "942922d1afd7844618e9",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "d41f0d5ce8798df0211b",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "e139d0769faadd04392a",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
       },
       {
         "typ": "praezision",
@@ -2827,6 +2899,127 @@
       },
       {
         "typ": "luecke",
+        "text": "Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen.",
+        "stelle": "Die Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen (Faustregel: bei 10‑jähriger Lebensdauer sollte die Investition innerhalb dieser Zeit zu",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "3d2d36e19ac1ec848670",
+        "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+        "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
+        "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
+        "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
+        "stelle": "Der rechtliche Rahmen verlangt, dass du das Gerät beim Netzbetreiber anmeldest. Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "74ec0b50099e3723c1c2",
+        "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+        "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
+        "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
+        "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme.",
+        "stelle": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme, jedoch können allgemeine Förderungen für Photovoltaik‑Anlagen unter bestimmten Voraussetzungen gelten.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "fa697489f22c6a9b4df7",
+        "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+        "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
+        "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
+        "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+      },
+      {
+        "id": "22e300c6973fedbbd737",
+        "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
+        "fassung_sha256": "1473f78bc82d4fcd6443549f2308bd8a618b9f6d878e9933ef0f6fb7f8b42656",
+        "text_sha256": "d53ec890155e22ea5c26292bb8d92a044261c583a748d2f92de67c82946330cb",
+        "typ": "luecke",
+        "text": "Keine Quelle für die Behauptung, dass nach 24 Monaten mit ein‑monatiger Frist gekündigt werden kann.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:52 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "44c5160c5216180ebd6a",
+        "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
+        "fassung_sha256": "1473f78bc82d4fcd6443549f2308bd8a618b9f6d878e9933ef0f6fb7f8b42656",
+        "text_sha256": "d53ec890155e22ea5c26292bb8d92a044261c583a748d2f92de67c82946330cb",
+        "typ": "luecke",
+        "text": "Unbelegte Angabe, dass eine Unterbrechung gesetzlich auf einen Arbeitstag begrenzt ist.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:52 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "74b9c10685d0c142d4a9",
+        "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
+        "fassung_sha256": "1473f78bc82d4fcd6443549f2308bd8a618b9f6d878e9933ef0f6fb7f8b42656",
+        "text_sha256": "d53ec890155e22ea5c26292bb8d92a044261c583a748d2f92de67c82946330cb",
+        "typ": "luecke",
+        "text": "Keine Quelle für die Aussage, dass die Versorgungssicherheit beim Anbieterwechsel gesetzlich garantiert ist.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:52 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "78969434dfaab5679386",
+        "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
+        "fassung_sha256": "1473f78bc82d4fcd6443549f2308bd8a618b9f6d878e9933ef0f6fb7f8b42656",
+        "text_sha256": "d53ec890155e22ea5c26292bb8d92a044261c583a748d2f92de67c82946330cb",
+        "typ": "praezision",
+        "text": "Pauschale 15 %‑Ersparnis‑Regel ohne Quellenangabe oder Modellkennzeichnung.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:52 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "f229e8455cc020e41f6d",
+        "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
+        "fassung_sha256": "1473f78bc82d4fcd6443549f2308bd8a618b9f6d878e9933ef0f6fb7f8b42656",
+        "text_sha256": "d53ec890155e22ea5c26292bb8d92a044261c583a748d2f92de67c82946330cb",
+        "typ": "luecke",
+        "text": "Fehlende Belegangabe, dass der neue Anbieter die Kündigung beim alten übernimmt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:52 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "1189ae6574e7b39ffd14",
+        "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed",
+        "fassung_sha256": "6374b2938d40a37b693edd049d1cbb07cbc357c39ae99c154490022a84f824b5",
+        "text_sha256": "3786d161f15a6501039b6edc5b32ae18d9c288b184668124144b813fd7f3c6aa",
+        "typ": "luecke",
+        "text": "Aussage, dass alle genannten DNS‑Dienste dauerhaft kostenlos sind, fehlt eine Quelle.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:53 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "4d85c7ed65b4feed178a",
+        "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed",
+        "fassung_sha256": "6374b2938d40a37b693edd049d1cbb07cbc357c39ae99c154490022a84f824b5",
+        "text_sha256": "3786d161f15a6501039b6edc5b32ae18d9c288b184668124144b813fd7f3c6aa",
+        "typ": "luecke",
+        "text": "Versprechen, dass der Geschwindigkeits‑Effekt bei jedem neuen Tab sofort spürbar ist, ohne Evidenz.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:53 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "4e7bace05ab581449621",
+        "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed",
+        "fassung_sha256": "6374b2938d40a37b693edd049d1cbb07cbc357c39ae99c154490022a84f824b5",
+        "text_sha256": "3786d161f15a6501039b6edc5b32ae18d9c288b184668124144b813fd7f3c6aa",
+        "typ": "luecke",
+        "text": "Behauptung, dass ein schnellerer DNS-Server die Wartezeit beim Seitenaufruf spürbar verkürzt, ohne Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+        "zuletzt_gesehen": "2026-11-25 14:53 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "typ": "luecke",
         "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
         "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
         "id": "760cdea8544be9d1c7c0",
@@ -2934,13 +3127,13 @@
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 13,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 16,
       "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 23,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 8,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 11,
-      "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 4
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 9,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 10,
+      "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     },
-    "deckung_prozent": 278.6,
-    "bedarf_je_woche": 25.1,
-    "abbau_tage": 1,
+    "deckung_prozent": 277.8,
+    "bedarf_je_woche": 25.2,
+    "abbau_tage": 0,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
   },
@@ -6235,6 +6428,39 @@
       "zuletzt_gesehen": "2026-11-23 18:43 UTC"
     },
     {
+      "typ": "luecke",
+      "text": "Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen.",
+      "stelle": "Die Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen (Faustregel: bei 10‑jähriger Lebensdauer sollte die Investition innerhalb dieser Zeit zu",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "3d2d36e19ac1ec848670",
+      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+      "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
+      "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
+      "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
+      "stelle": "Der rechtliche Rahmen verlangt, dass du das Gerät beim Netzbetreiber anmeldest. Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "74ec0b50099e3723c1c2",
+      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+      "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
+      "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
+      "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme.",
+      "stelle": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme, jedoch können allgemeine Förderungen für Photovoltaik‑Anlagen unter bestimmten Voraussetzungen gelten.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "fa697489f22c6a9b4df7",
+      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+      "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
+      "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
+      "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+    },
+    {
       "id": "22e300c6973fedbbd737",
       "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
       "fassung_sha256": "1473f78bc82d4fcd6443549f2308bd8a618b9f6d878e9933ef0f6fb7f8b42656",
@@ -6477,7 +6703,7 @@
     "basis": "2026-11-25",
     "projiziert": false,
     "artikel": 150,
-    "faellig": 11,
+    "faellig": 10,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -6488,97 +6714,80 @@
     "budget": 10,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 10.0,
-    "bedarf_je_tag": 3.589,
-    "bedarf_je_woche": 25.1,
-    "deckung_prozent": 278.6,
+    "bedarf_je_tag": 3.6,
+    "bedarf_je_woche": 25.2,
+    "deckung_prozent": 277.8,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 1,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
-    "verletzungen_neu": 1,
+    "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
-    "verletzungen": [
-      {
-        "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed",
-        "titel": "Internet tuning kostenlos: DNS-Server für mehr Speed",
-        "frist": "2026-11-25",
-        "tag": "2026-11-26",
-        "tage_zu_spaet": 1,
-        "vorher_faellig": false,
-        "folgeprüfung": false
-      }
-    ],
+    "verletzungen": [],
     "offen_im_horizont": 150,
-    "puenktlich": false,
+    "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
       "bis": "2027-03-25",
       "tage": 120,
-      "weg_frei": false,
-      "erstverletzung": "2026-11-26",
-      "erstverletzung_seite": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed",
-      "erstverletzung_frist": "2026-11-25",
-      "verletzungen": 1,
-      "seiten": 1,
+      "weg_frei": true,
+      "erstverletzung": null,
+      "erstverletzung_seite": null,
+      "erstverletzung_frist": null,
+      "verletzungen": 0,
+      "seiten": 0,
       "rueckstand_verletzungen": 0
     }
   },
   "abbrueche": [],
-  "arbeitsvorrat": [
-    {
-      "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
-      "titel": "DSL wechseln ohne Ausfall: So sparst du beim Internet",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "faellig": true,
-      "frist": null,
-      "geo": 67,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed",
-      "titel": "Internet tuning kostenlos: DNS-Server für mehr Speed",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "faellig": true,
-      "frist": null,
-      "geo": 50,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    }
-  ],
-  "offen": [
-    {
-      "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
-      "titel": "DSL wechseln ohne Ausfall: So sparst du beim Internet",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "faellig": true,
-      "frist": null,
-      "geo": 67,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed",
-      "titel": "Internet tuning kostenlos: DNS-Server für mehr Speed",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "faellig": true,
-      "frist": null,
-      "geo": 50,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    }
-  ],
+  "arbeitsvorrat": [],
+  "offen": [],
   "vorlauf": [],
   "laeufe": [
     {
-      "slug": "2026-11-24-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+      "titel": "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie",
+      "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
+      "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen.",
+          "stelle": "Die Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen (Faustregel: bei 10‑jähriger Lebensdauer sollte die Investition innerhalb dieser Zeit zu",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme.",
+          "stelle": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme, jedoch können allgemeine Förderungen für Photovoltaik‑Anlagen unter bestimmten Voraussetzungen gelten.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
+          "stelle": "Der rechtliche Rahmen verlangt, dass du das Gerät beim Netzbetreiber anmeldest. Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
+      "geo": 50,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b); 2 Befund(e) ohne belegbaren Textanker verworfen",
+      "aenderungen": [
+        "faktencheck: 2026-11-25"
+      ]
+    },
+    {
+      "slug": "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "titel": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
       "fassung_sha256": "3df7d1b2b2a0b718c359d3addbb9bf151b0324c69c578679f9e1f53d422e0037",
       "text_sha256": "c626cb71089c36b645bc135ffc712225bb20adf244f280402a3021cc47a8ef5c",
@@ -6595,7 +6804,7 @@
       ]
     },
     {
-      "slug": "2026-11-24-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "slug": "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "titel": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
       "fassung_sha256": "4ec01edfb0309c488c2be1ee48afd8f824663d621bb51050831501482c2c487b",
       "text_sha256": "d765e29a2904f7d22ce19c3c25afce67f00b015901332d1a63d1dcc8cc12620e",
@@ -6612,10 +6821,10 @@
       ]
     },
     {
-      "slug": "2026-11-24-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
+      "slug": "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
       "titel": "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen",
-      "fassung_sha256": "9684d79c164d3e10798517716304612ae33dbb053bcadd698c6010590c8fd4e8",
-      "text_sha256": "cbe807c935953a2dd1843ed3f679a95a21a81361262fcbc288311ef5d74f681d",
+      "fassung_sha256": "9e366dcdd8afe19ef586024b58db5e07cf704f8d3bd54dd0a4958c6ab57f2fb0",
+      "text_sha256": "06a8b7fd1ad7bac8f81cf763afc9c5f2a8ae2b91d7eddcc190e856d08a41fb0b",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6629,7 +6838,7 @@
       ]
     },
     {
-      "slug": "2026-11-24-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "slug": "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "titel": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
       "fassung_sha256": "6b26433ad93c6499e87b683eb8f5830f229017319ad10582f7a20dab3247bdab",
       "text_sha256": "e50c7691b67a1ff0013df0e8df7f5686edbf76a43f5acdaa54f8bb3d636b1e1f",
@@ -6646,10 +6855,10 @@
       ]
     },
     {
-      "slug": "2026-11-24-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+      "slug": "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
       "titel": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
-      "fassung_sha256": "9db8cf33b1ded1210b71e64d46ec31b6749012c5b523af3287a89dcec0763867",
-      "text_sha256": "897e95e10188d31684b2d31ba71e9d8b929decb2ae85bde36ca42810b2f7677b",
+      "fassung_sha256": "6f696a11d74e37d18f8d23bc7477d297f17ea014d8b50deb6595ea09bd3af948",
+      "text_sha256": "18335dfaabbe145583472446d90a379d64a76895a42e851052ff0a85f62847fd",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6663,7 +6872,7 @@
       ]
     },
     {
-      "slug": "2026-11-24-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+      "slug": "2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
       "titel": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
       "fassung_sha256": "e5c8de5042249c2d9978a007a69b823682121c2df727f90b247f007beb3175bc",
       "text_sha256": "fc42da2a2ab2934c505f38d464ec678052c35c96385b9a36243998c6f1794a5c",
@@ -6680,10 +6889,10 @@
       ]
     },
     {
-      "slug": "2026-11-24-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "slug": "2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
       "titel": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
-      "fassung_sha256": "e330cd21038d1dd30a9728260f8fd2133c3595c6b261057a45d603732da2f426",
-      "text_sha256": "70a4d95462709d7441d84ae76b7b675259aee84bfcfbd9067f0c246a2143829a",
+      "fassung_sha256": "8f9ae8faa41c1c71008ef51c5e1f9aefa8516ad7e812ed9efeafadcc00e3e7dc",
+      "text_sha256": "b87658f2aeb2587578dd57fa7cb9cca19a29c9b17800cbfc96cace92afe57686",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6697,10 +6906,10 @@
       ]
     },
     {
-      "slug": "2026-11-24-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
+      "slug": "2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
       "titel": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
-      "fassung_sha256": "aa97f9b5ea3f3b966d9807e33cbca53a714099ae600af40524e1b443097d14ae",
-      "text_sha256": "a8d4d81fe91ce84fc6b6a5d7f89f87c62980dcd387a9b66bfe5bf09919b87680",
+      "fassung_sha256": "ed432392a6fc4685a023ee3e740c0489d096c412b82a74d21db94c40317e6294",
+      "text_sha256": "224453cb8b03b115386238735fd767e132a210f99bb16fbd41692e9317008ac4",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6714,10 +6923,10 @@
       ]
     },
     {
-      "slug": "2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt",
+      "slug": "2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt",
       "titel": "WLAN verbessern: Verstärker oder Mesh – was passt?",
-      "fassung_sha256": "fe110fa0fbc927c32c50a9dbe5165f81b09f5696452fdf6cb7f8dfa33ff0450c",
-      "text_sha256": "28a82e85e1e2b34c6ccfaa76b7e0d4122f42500e068ab3097aafd38bbe31a659",
+      "fassung_sha256": "08ee2855c88d602ba5f0cc772915c3276e863e7adc01139a75ab7a6a35889f19",
+      "text_sha256": "fc64031e82ded16f0335bbe992deac955c6c3a9826501d1314fe8a641e83be76",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6729,26 +6938,6 @@
       "aenderungen": [
         "unangetastet: bytegebundener Reserve-Entwurf (#900) – Nachmessung gehört zur Reserve-Kette, nicht in diesen Lauf"
       ]
-    },
-    {
-      "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
-      "titel": "DSL wechseln ohne Ausfall: So sparst du beim Internet",
-      "fassung_sha256": "e07644ba6be5f850ceab9372f4c7b7bb7e6480337ba1928a5a379732a9fd2ed1",
-      "text_sha256": "55ca77840ad5f4c13ef92803c1b6d0461b764ea2f9d164b3df7241b12e5ede10",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [],
-      "geo": 67,
-      "fehler": [],
-      "fachpruefung": "Fehler: gemini: HTTPError; groq: HTTPError; cloudflare/@cf/openai/gpt-oss-120b: ungültiges Antwortformat",
-      "aenderungen": []
     }
-  ],
-  "nachlese": {
-    "zeit": "2026-11-25 14:54 UTC",
-    "ergaenzt": 8,
-    "quelle": "data/research/artikel"
-  }
+  ]
 }
