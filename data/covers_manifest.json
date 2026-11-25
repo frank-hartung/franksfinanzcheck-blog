@@ -28,7 +28,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-11-23T18:40:55+00:00",
+  "ts": "2026-11-25T11:35:37+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -2687,6 +2687,33 @@
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt": {
+  "title": "WLAN verbessern: Verstärker oder Mesh – was passt?",
+  "ts": "2026-11-25T11:27:13+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet": {
+  "title": "DSL wechseln ohne Ausfall: So sparst du beim Internet",
+  "ts": "2026-11-25T11:27:15+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed": {
+  "title": "Internet tuning kostenlos: DNS-Server für mehr Speed",
+  "ts": "2026-11-25T11:27:16+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
    "savings": ""
   }
  }

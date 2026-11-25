@@ -131,7 +131,7 @@ Sichere vor jeder Änderung deine alten Werte mit einem Bild. So springst du bei
 
 ### FRITZ!Box als Beispiel
 
-Bei vielen FRITZ!Box-Modellen liegen die Felder unter **Internet → Zugangsdaten** oder **Zugangsart → DNS-Server**. Der genaue Name hängt von Modell und FRITZ!OS ab. Aktiviere dort eigene Server für IPv4 und IPv6 und trage die Nummern ein. Die [FRITZ! Knowledge Base](https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box) erklärt den Weg für ein festes Modell.
+Bei vielen FRITZ!Box-Modellen liegen die Felder unter **[Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) → Zugangsdaten** oder **Zugangsart → DNS-Server**. Der genaue Name hängt von Modell und FRITZ!OS ab. Aktiviere dort eigene Server für IPv4 und IPv6 und trage die Nummern ein. Die [FRITZ! Knowledge Base](https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box) erklärt den Weg für ein festes Modell.
 
 Für den Schutz per TLS braucht die Box mehr als eine Nummer. Bei DNS over TLS fragt die FRITZ!Box zusätzlich nach dem Servernamen. Nutze das nur, wenn Router und Dienst das bieten. Einzelne Dienste der Box nutzen teils weiter den Server des Anbieters.
 

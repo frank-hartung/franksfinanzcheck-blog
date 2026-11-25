@@ -52,6 +52,7 @@ kurzantwort: "Gesetzlich geschützt sind Bankguthaben bis 100.000 Euro je Einleg
 ---
 
 
+
 Die Einlagensicherung spielt bei der Unterschrift kaum eine Rolle. Erst wenn eine Bank in Schwierigkeiten gerät, rückt sie ins Rampenlicht. Steht sie dann in den Nachrichten, ist es zu spät für die einfache Antwort.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

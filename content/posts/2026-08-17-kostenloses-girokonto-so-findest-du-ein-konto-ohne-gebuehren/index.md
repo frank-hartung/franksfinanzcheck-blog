@@ -172,7 +172,7 @@ Der Unterschied der Karten zählt heute mehr als früher. Viele Banken geben die
 
 ### Debitkarte ist stark bei:
 
-- Zahlungen im Internet und in Apps,
+- Zahlungen im [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) und in Apps,
 - Auslandsaufenthalten und Reisen,
 - Echtzeit-Kontrolle via Push-Benachrichtigung,
 - Kontaktlosem Bezahlen via Apple Pay oder Google Pay.

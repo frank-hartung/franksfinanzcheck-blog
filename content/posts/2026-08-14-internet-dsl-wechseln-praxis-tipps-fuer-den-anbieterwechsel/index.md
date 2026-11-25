@@ -285,7 +285,7 @@ Diese Minute Aufmerksamkeit spart dir oft die ärgerlichsten Fehlentscheidungen.
 
 ## Fazit: Beim DSL-Wechsel gewinnt, wer sauber rechnet
 
-Ein **Internet Anbieterwechsel** ist heute deutlich einfacher, als viele denken im Rechenfall. Die große Kunst liegt nicht in der Technik, sondern im Rechnen. Wer Bonus, Grundgebühr, Routerkosten und Laufzeit sauber zusammennimmt, spart oft mehrere hundert Euro über zwei Jahre.
+Ein **[Internet Anbieterwechsel](../../posts/2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet/)** ist heute deutlich einfacher, als viele denken im Rechenfall. Die große Kunst liegt nicht in der Technik, sondern im Rechnen. Wer Bonus, Grundgebühr, Routerkosten und Laufzeit sauber zusammennimmt, spart oft mehrere hundert Euro über zwei Jahre.
 
 Wichtig ist vor allem: Nicht vom schönsten Lockpreis blenden lassen. Der starke Tarif ist nicht der lauteste, sondern der mit dem besten Gesamtpaket. Genau so wird aus ein paar Minuten Vergleich ein echter Vorteil für deine Fixkosten.
 

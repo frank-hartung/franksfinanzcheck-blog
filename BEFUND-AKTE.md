@@ -2,18 +2,18 @@
 
 _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**281 offene Befunde auf 79 Seiten · davon 52 Live-Seiten mit 176 Befunden · ältester 26 Tage · Frist 14 Tage.**
+**276 offene Befunde auf 78 Seiten · davon 51 Live-Seiten mit 171 Befunden · ältester 26 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 281 |
-| Seiten betroffen | 79 (davon live: 52) |
-| Text seit dem Befund geändert | 239 |
+| Offene Befunde | 276 |
+| Seiten betroffen | 78 (davon live: 51) |
+| Text seit dem Befund geändert | 238 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
-| Über der Frist (14 Tage) | 123 |
-| In Eskalation (21 Tage) | 42 |
+| Über der Frist (14 Tage) | 118 |
+| In Eskalation (21 Tage) | 37 |
 
 ## So schließt du einen Befund
 
@@ -33,7 +33,7 @@ _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 244 von 281 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 243 von 276 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -67,26 +67,6 @@ Datei: `content/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f0a88ede9d44ee910cb --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 51e259fd2d8582e774f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 55f8eeedc587cf0895ee --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
-
-Datei: `content/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `334751e6f61ad0033fe4` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `36759a5efe5e8e5163d0` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `942922d1afd7844618e9` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `d41f0d5ce8798df0211b` | praezision | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `e139d0769faadd04392a` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 334751e6f61ad0033fe4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 36759a5efe5e8e5163d0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 942922d1afd7844618e9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
@@ -673,6 +653,24 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8a0df5531569ec042ec
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bda1b543db068b3e00ff --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · **LIVE** (blockiert) · Risikoklasse erhoeht · 4 Befund(e)
+
+Datei: `content/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `3a3269aa4a2e95d780ad` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung | – |
+| `c3ff13d7ca048da95112` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen | – |
+| `ec052a0155f98740a3b5` | praezision | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen | – |
+| `ee3a722844f4b84b84b8` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3a3269aa4a2e95d780ad --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c3ff13d7ca048da95112 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec052a0155f98740a3b5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee3a722844f4b84b84b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md`
@@ -793,24 +791,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4095501e717fb30d7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77520584b5afd8ebd7f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` · **LIVE** (blockiert) · Risikoklasse erhoeht · 4 Befund(e)
-
-Datei: `content/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `3a3269aa4a2e95d780ad` | luecke | 5 T | Text unverändert seit dem Befund | Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung | – |
-| `c3ff13d7ca048da95112` | luecke | 5 T | Text unverändert seit dem Befund | Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen | – |
-| `ec052a0155f98740a3b5` | praezision | 5 T | Text unverändert seit dem Befund | Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen | – |
-| `ee3a722844f4b84b84b8` | luecke | 5 T | Text unverändert seit dem Befund | Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3a3269aa4a2e95d780ad --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden c3ff13d7ca048da95112 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec052a0155f98740a3b5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee3a722844f4b84b84b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)

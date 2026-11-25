@@ -80,7 +80,7 @@ Wenn diese Leistung nicht bei deinem Endgerät ankommt, zahlst du zu viel. Wir w
 
 Die Physik lässt sich nicht austricksen. Aber du kannst sie für dich nutzen.
 
-Der richtige Platz sorgt dafür, dass die Wellen frei schwingen können. Das reduziert Fehlerkorrekturen im Datenstrom. Dein Internet fühlt sich sofort schneller an. Es ist die einfachste Methode, um Fixkosten bei der Hardware zu sparen.
+Der richtige Platz sorgt dafür, dass die Wellen frei schwingen können. Das reduziert Fehlerkorrekturen im Datenstrom. Dein [Internet](../../posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/) fühlt sich sofort schneller an. Es ist die einfachste Methode, um Fixkosten bei der Hardware zu sparen.
 
 ## So findest du den perfekten Platz für dein WLAN
 

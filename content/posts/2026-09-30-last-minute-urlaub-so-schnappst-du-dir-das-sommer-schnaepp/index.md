@@ -50,6 +50,7 @@ faktencheck: 2026-11-11
 
 
 
+
 ![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
