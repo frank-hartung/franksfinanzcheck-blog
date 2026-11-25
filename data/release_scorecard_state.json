@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-25T14:01:07Z",
+  "generated_at": "2026-11-25T14:55:30Z",
   "modus": "kandidaten",
-  "commit": "6283879a4b215b1afb1f77ef8453be77a83ffd49",
+  "commit": "5267ce663376ba260b0ebe97ce3a1ce7f6936804",
   "kapazitaet": {
     "stichtag": "2026-11-25",
     "basis": "2026-11-25",
     "projiziert": false,
     "artikel": 150,
-    "faellig": 11,
+    "faellig": 9,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -16,12 +16,12 @@
       "frist": "2026-11-27",
       "restlaufzeit": 2
     },
-    "budget": 11,
+    "budget": 10,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 11.0,
+    "kapazitaet_je_tag": 10.0,
     "bedarf_je_tag": 3.589,
     "bedarf_je_woche": 25.1,
-    "deckung_prozent": 306.5,
+    "deckung_prozent": 278.6,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -47,10 +47,10 @@
       "rueckstand_verletzungen": 0
     },
     "sockel": 10,
-    "empfohlenes_budget": 11,
+    "empfohlenes_budget": 10,
     "empfehlung_erreicht": true,
     "hartes_limit": 21,
-    "spitze_geprueft": 54
+    "spitze_geprueft": 57
   },
   "ursachen": [
     {
@@ -153,8 +153,8 @@
     }
   ],
   "befundlage": {
-    "offen": 276,
-    "seiten": 78,
+    "offen": 284,
+    "seiten": 80,
     "live_befunde": 171,
     "live_seiten": 51,
     "ueberholt": 238,
@@ -234,7 +234,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -259,7 +259,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -327,7 +327,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
@@ -363,7 +363,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-04",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
@@ -431,7 +431,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-04",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -456,7 +456,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -517,7 +517,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-04",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -542,7 +542,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-22",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -642,7 +642,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -685,7 +685,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
@@ -765,7 +765,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -846,7 +846,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -871,7 +871,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -896,7 +896,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-26",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
@@ -939,7 +939,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
@@ -982,7 +982,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
@@ -1025,7 +1025,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1056,7 +1056,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1081,7 +1081,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1156,7 +1156,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
@@ -1174,7 +1174,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1199,7 +1199,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1224,7 +1224,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
@@ -1242,7 +1242,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
@@ -1260,7 +1260,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1285,7 +1285,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1328,7 +1328,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
@@ -1389,7 +1389,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1438,7 +1438,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1463,7 +1463,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1506,7 +1506,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
@@ -1524,7 +1524,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1574,7 +1574,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
@@ -1592,7 +1592,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-31",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1642,7 +1642,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-31",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1717,7 +1717,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
@@ -1828,7 +1828,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1959,7 +1959,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2002,7 +2002,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2027,7 +2027,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
@@ -2045,7 +2045,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten": {
@@ -2081,7 +2081,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-16",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
@@ -2106,7 +2106,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2131,7 +2131,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
@@ -2167,7 +2167,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
@@ -2185,7 +2185,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
@@ -2228,7 +2228,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
@@ -2246,7 +2246,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst": {
@@ -2300,7 +2300,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     }
   }

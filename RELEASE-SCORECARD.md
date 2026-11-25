@@ -133,7 +133,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**276** offene Befunde auf **78** Seiten (live: 171 auf 51 Artikeln) · ältester **26 Tage** · Frist 14 Tage · über der Frist: **118**.
+**284** offene Befunde auf **80** Seiten (live: 171 auf 51 Artikeln) · ältester **26 Tage** · Frist 14 Tage · über der Frist: **118**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -154,14 +154,14 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | Kennzahl | Wert |
 |---|---|
 | Seiten im Bestand (Posts + Ratgeber) | 150 |
-| Fällig heute / überfällig | 11 / 0 |
+| Fällig heute / überfällig | 9 / 0 |
 | Bedarf | 3,59 Prüfungen/Tag (25,1/Woche) |
-| Angebot | 11,00/Tag (Budget 11 × 1,00 Läufe/Tag) |
-| **Deckung** | **306 %** |
+| Angebot | 10,00/Tag (Budget 10 × 1,00 Läufe/Tag) |
+| **Deckung** | **279 %** |
 | Rückstand abgebaut | in 0 Tagen (Frist 7 Tage) |
 | Nächste Frist | `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` am 2026-11-27 (in 2 Tagen) |
-| Empfohlenes Budget | 11 je Lauf (Limit 21) |
-| Spitzentag (#1039) | ✅ mitgemessen (54 Bündeltage, kein Befund) |
+| Empfohlenes Budget | 10 je Lauf (Limit 21) |
+| Spitzentag (#1039) | ✅ mitgemessen (57 Bündeltage, kein Befund) |
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
@@ -425,20 +425,20 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten` | standard | nicht erforderlich | frisch geprüft vor 16 Tagen (Intervall 30 Tage) | 2026-12-09 |
 | `2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 90 Tage) | 2027-02-15 |
 | `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2027-01-07 |
-| `2026-11-24-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-deine-naechtliche-grundlast-strom-so-erkennst-du-wo` | standard | nicht erforderlich | frisch geprüft vor 13 Tagen (Intervall 45 Tage) | 2026-12-27 |
-| `2026-11-24-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-heizperiode-beginn-2026-warum-der-gas-check-im-oktober` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-kreditkarte-ohne-fremdwaehrungsgebuehr-2026` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-24-vorrat-planen-leicht-gemacht-so-sparst-du-beim` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 90 Tage) | 2027-02-15 |
-| `2026-11-24-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 90 Tage) | 2027-02-11 |
-| `2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo` | standard | nicht erforderlich | frisch geprüft vor 13 Tagen (Intervall 45 Tage) | 2026-12-27 |
+| `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2027-01-09 |
+| `2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 90 Tage) | 2027-02-23 |
+| `2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 90 Tage) | 2027-02-15 |
+| `2026-11-25-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 90 Tage) | 2027-02-11 |
+| `2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 
