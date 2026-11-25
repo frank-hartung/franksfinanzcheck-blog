@@ -36,6 +36,7 @@ cover:
 faktencheck: 2026-11-25
 ---
 
+
 DSL wechseln im Check: Stell dir vor, du sitzt abends auf dem Sofa. Du willst deine Lieblingsserie streamen. Doch das Bild ruckelt nur. Der Ladebalken dreht sich endlos.
 
 Ein Blick auf die letzte Rechnung zeigt: Du zahlst für diesen Frust auch noch zu viel. Viele Haushalte in Deutschland behalten ihren alten Vertrag aus reiner Gewohnheit. Du fürchtest den Aufwand oder einen plötzlichen Blackout beim Surfen.
@@ -84,7 +85,7 @@ Bei FranksFinanzcheck nutzen wir den 4K-Prüfpfad. Er hilft dir, den Überblick 
 
 Die größte Angst ist das "Internet-Loch". Niemand möchte tagelang ohne Verbindung sein.
 
-Doch diese Sorge ist fast immer unbegründet. In Deutschland ist der Ablauf gesetzlich streng geregelt. Wenn du deinen **[DSL wechseln](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)** willst, arbeiten alter und neuer Anbieter zusammen.
+Doch diese Sorge ist fast immer unbegründet. In Deutschland ist der Ablauf gesetzlich streng geregelt. Wenn du deinen **DSL wechseln** willst, arbeiten alter und neuer Anbieter zusammen.
 
 Der wichtigste Rat: Kündige nicht selbst. Das ist der häufigste Fehler.
 
@@ -186,7 +187,7 @@ Damit du nichts vergisst, habe ich hier die wichtigsten Punkte zusammengefasst. 
 * [ ] Letzte Monatsrechnung zur Hand (wegen Kundennummer)?
 * [ ] Gewünschte Bandbreite ermittelt (z. B. 100 Mbit/s); das ist ein Modellwert?
 * [ ] Verfügbarkeitscheck an deiner Adresse durchgeführt?
-* [ ] Entscheidung getroffen: **[Router mieten oder kaufen](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)**?
+* [ ] Entscheidung getroffen: **Router mieten oder kaufen**?
 * [ ] Rufnummernmitnahme beim neuen Anbieter beauftragt?
 * [ ] Termin für die Schaltung notiert?
 * [ ] Rücksendung der alten Hardware vorbereitet?

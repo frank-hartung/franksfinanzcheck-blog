@@ -126,7 +126,7 @@ Sinkt sie stark ab, brauchst du bessere Dichtungen. Faustregel: Jede undichte St
 
 Erledige jede Woche eine Aufgabe aus dieser Liste. So wirst du [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) sparsamer. Du hast keinen Zeitdruck und siehst stetig Fortschritte. Dokumentiere deine Taten in einem kleinen Heft.
 
-Kombiniere die einzelnen Punkte für den besten Erfolg. Faustregel: Fünf kleine Änderungen bringen oft mehr als eine große Investition.
+Kombiniere die einzelnen Punkte für den besten Erfolg. Faustregel: Fünf kleine [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) bringen oft mehr als eine große Investition.
 
 Die Summe der kleinen Ersparnisse macht den Unterschied auf dem Konto. Du entwickelst so ein Gespür für unnötigen Verbrauch. Das hilft dir auch in Zukunft beim Sparen.
 

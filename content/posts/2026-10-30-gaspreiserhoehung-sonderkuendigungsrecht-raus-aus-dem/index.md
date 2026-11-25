@@ -42,6 +42,7 @@ kurzantwort: "Bei einer Gaspreiserhöhung besteht ein gesetzliches Sonderkündig
 
 
 
+
 Eine Gaspreiserhöhung ist kein guter Anlass für eine übereilte Kündigung. Kläre zuerst die Vertragsart: Für die Grundversorgung gelten andere Bedingungen als für einen Sondervertrag.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

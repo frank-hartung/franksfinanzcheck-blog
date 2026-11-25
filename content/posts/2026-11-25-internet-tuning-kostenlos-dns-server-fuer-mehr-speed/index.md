@@ -36,6 +36,7 @@ cover:
 faktencheck: 2026-11-25
 ---
 
+
 Dein Browser lädt quälend langsam.
 Der blaue Kreis dreht sich endlos auf dem Tab.
 Oft liegt das Problem nicht an deiner Leitung selbst.
@@ -225,7 +226,7 @@ Es gibt für dich kein technisches Risiko.
 
 Wer einmal mit einem schnellen DNS-Server gesurft ist, will nicht zurück.
 Es ist der erste Schritt zu einem optimierten digitalen Haushalt.
-Nimm dir die [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Zeit für dieses Upgrade; das ist ein Modellwert.
+Nimm dir die fünf Minuten Zeit für dieses Upgrade; das ist ein Modellwert.
 Dein Browser wird es dir bei jedem Klick danken.
 
 ## Häufige Fragen

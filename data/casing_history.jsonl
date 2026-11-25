@@ -215,3 +215,7 @@
 {"tag": "2026-11-25", "zeit": "11:30", "modus": "fix", "dateien": 0, "gepruefte_dateien": 2, "gepruefte_woerter": 3810, "erkannte_befunde": 0, "befunde": 0, "hart": 0, "gefixt": 0, "geparkt": 0}
 {"tag": "2026-11-25", "zeit": "16:06", "modus": "fix", "dateien": 2, "gepruefte_dateien": 156, "gepruefte_woerter": 289645, "erkannte_befunde": 3, "befunde": 3, "hart": 0, "gefixt": 0, "geparkt": 0}
 {"tag": "2026-11-25", "zeit": "18:40", "modus": "fix", "dateien": 2, "gepruefte_dateien": 156, "gepruefte_woerter": 289711, "erkannte_befunde": 3, "befunde": 3, "hart": 0, "gefixt": 0, "geparkt": 0}
+{"tag": "2026-11-25", "zeit": "21:20", "modus": "fix", "dateien": 1, "gepruefte_dateien": 14, "gepruefte_woerter": 23200, "erkannte_befunde": 2, "befunde": 2, "hart": 0, "gefixt": 0, "geparkt": 0}
+{"tag": "2026-11-25", "zeit": "21:20", "modus": "fix", "dateien": 1, "gepruefte_dateien": 14, "gepruefte_woerter": 23200, "erkannte_befunde": 2, "befunde": 2, "hart": 0, "gefixt": 0, "geparkt": 0}
+{"tag": "2026-11-25", "zeit": "21:20", "modus": "gate", "dateien": 1, "gepruefte_dateien": 14, "gepruefte_woerter": 23200, "erkannte_befunde": 2, "befunde": 2, "hart": 0, "gefixt": 0, "geparkt": 0}
+{"tag": "2026-11-25", "zeit": "21:26", "modus": "fix", "dateien": 1, "gepruefte_dateien": 14, "gepruefte_woerter": 23255, "erkannte_befunde": 2, "befunde": 2, "hart": 0, "gefixt": 0, "geparkt": 0}

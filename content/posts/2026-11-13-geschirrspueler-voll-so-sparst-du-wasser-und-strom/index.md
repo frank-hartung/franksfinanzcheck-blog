@@ -44,6 +44,7 @@ faktenfrische_aliases:
 ---
 
 
+
 Ein Haushalt mit zwei Erwachsenen und zwei Kindern nutzt die Spülmaschine täglich. Oft wandern Teller, Tassen und Töpfe hinein, wie sie gerade anfallen. Erst wenn der **Geschirrspüler voll** eingeräumt ist, arbeitet das Gerät wirklich sparsam.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
