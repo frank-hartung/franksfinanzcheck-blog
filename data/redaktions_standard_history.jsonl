@@ -371,3 +371,16 @@
 {"zeit": "2026-11-20T23:22:21.121122+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-25T11:31:00.798339+00:00", "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet", "regel": "RS5", "aktion": "fix-deterministisch"}
 {"zeit": "2026-11-25T11:31:00.798339+00:00", "slug": "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}

@@ -626,7 +626,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `0b4755213f0c38321710` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Behauptung 'kein üblicher Wechselgewinn' ohne Daten |
-| `3e0c5fa74179e97866b8` | luecke | **neu** | 9,99 € in Zeile 32 gekennzeichnet | Preisangabe 9,99 € monatlich ohne Quelle |
+| `3e0c5fa74179e97866b8` | luecke | **neu** | 9,99 € in Zeile 31 gekennzeichnet | Preisangabe 9,99 € monatlich ohne Quelle |
 | `ae90ebae2842ff9f97f1` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Aussage über Downloadwert vs Gesprächsqualität ohne Beleg |
 | `b2611d9120121d0ad785` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Empfehlung, nicht den günstigsten Tarif zu wählen, fehlt Beleg |
 | `fcb8168c18bd423c5180` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Unterschiedliche Aufgaben von 2‑Jahres‑ vs monatlich kündbarem Vertrag ohne Beleg |
@@ -645,7 +645,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 32: 9,99 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 31: 9,99 € – gekennzeichnet („modellrechnung“)
 
 ### `ae90ebae2842ff9f97f1`
 
@@ -1196,8 +1196,8 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 |---|---|---|---|---|
 | `7a87eaaa2b863ba8cc46` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die… |
 | `9d67a5e6bd11212c7c1e` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird oh… |
-| `a54abc1cad73d20fb689` | luecke | 2026-11-11 · 1. Entscheidung | 32 € in Zeile 22 ohne Kennzeichnung | Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht a… |
-| `a7d1cf6485921e117919` | luecke | 2026-11-11 · 1. Entscheidung | 37,3 Cent in Zeile 44 gekennzeichnet | Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt. |
+| `a54abc1cad73d20fb689` | luecke | 2026-11-11 · 1. Entscheidung | 32 € in Zeile 20 ohne Kennzeichnung | Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht a… |
+| `a7d1cf6485921e117919` | luecke | 2026-11-11 · 1. Entscheidung | 37,3 Cent in Zeile 42 gekennzeichnet | Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt. |
 | `a7f69a854430d62a4a3e` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatoris… |
 
 ### `7a87eaaa2b863ba8cc46`
@@ -1228,7 +1228,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Die Rechnung ist als Modell gekennzeichnet: „10 Watt rund um die Uhr entsprechen 87,6 kWh und bei 0,37 €/kWh rund 32 € im Jahr (Rechenbeispiel)“, dazu die Tabelle mit dem Rechenweg. Der Preis ist Rechenwert mit BDEW-Beleg.
 
-- Heute in Zeile 22: 32 € – **ohne** Kennzeichnung
+- Heute in Zeile 20: 32 € – **ohne** Kennzeichnung
 
 ### `a7d1cf6485921e117919`
 
@@ -1238,7 +1238,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 0964b3927ad1): Die verlangte Quelle steht im Abschnitt „So rechnest du wenige Watt in Jahreskosten um“ inline – „Der BDEW-Schnitt von 37,3 Cent pro kWh{{< beleg kennzahl="bdew-haushaltsstrompreis" kurz="BDEW" >}} dient hier nur als Rechenwert.“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 44: 37,3 Cent – gekennzeichnet („beispielwert“)
+- Heute in Zeile 42: 37,3 Cent – gekennzeichnet („beispielwert“)
 
 ### `a7f69a854430d62a4a3e`
 
@@ -2092,7 +2092,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 70 gekennzeichnet · 120 € in Zeile 29 gekennzeichnet · 80 € in Zeile 28 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
+| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 67 gekennzeichnet · 120 € in Zeile 26 gekennzeichnet · 80 € in Zeile 25 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
 | `b7f0d52968d89cdf8c5b` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) u… |
 | `be911855d67f998be662` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwoh… |
 
@@ -2104,9 +2104,9 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 f5cf5ca16db6): Die Zahl steht weiterhin im Artikel, ist aber ausdrücklich als Modell-/Beispielwert gekennzeichnet: „**Beispielrechnung:** Die angenommenen Einsparungen betragen 120 € im Jahr für Strom, 25 € pro Monat für ungenutzte Abos und 80 € im Jahr für die Kfz‑Versicherung, insgesamt 500 € nach zwölf“. Beanstandet war die Zahl OHNE Kennzeichnung; das trifft nicht mehr zu.
 
-- Heute in Zeile 70: 500 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 29: 120 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 28: 80 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 67: 500 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 26: 120 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 25: 80 € – gekennzeichnet („modellrechnung“)
 
 ### `b7f0d52968d89cdf8c5b`
 

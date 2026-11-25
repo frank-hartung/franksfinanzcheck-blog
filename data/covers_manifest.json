@@ -2719,7 +2719,7 @@
  },
  "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
   "title": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
-  "ts": "2026-11-25T14:06:57+00:00",
+  "ts": "2026-11-25T19:33:16+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -2728,7 +2728,7 @@
  },
  "2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
   "title": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
-  "ts": "2026-11-25T14:09:02+00:00",
+  "ts": "2026-11-25T19:34:37+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -2737,7 +2737,7 @@
  },
  "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
   "title": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
-  "ts": "2026-11-25T14:11:06+00:00",
+  "ts": "2026-11-25T19:35:57+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -2746,7 +2746,7 @@
  },
  "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen": {
   "title": "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen",
-  "ts": "2026-11-25T14:13:10+00:00",
+  "ts": "2026-11-25T19:37:17+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -2755,7 +2755,7 @@
  },
  "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
   "title": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
-  "ts": "2026-11-25T14:15:15+00:00",
+  "ts": "2026-11-25T19:38:37+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -2764,7 +2764,7 @@
  },
  "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
   "title": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
-  "ts": "2026-11-25T14:17:19+00:00",
+  "ts": "2026-11-25T19:39:58+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -2773,7 +2773,7 @@
  },
  "2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
   "title": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
-  "ts": "2026-11-25T14:41:47+00:00",
+  "ts": "2026-11-25T19:41:20+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -2801,15 +2801,6 @@
  "2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
   "title": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
   "ts": "2026-11-25T14:41:51+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-11-25-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
-  "title": "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe",
-  "ts": "2026-11-25T14:41:52+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
