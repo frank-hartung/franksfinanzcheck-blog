@@ -404,3 +404,6 @@
 {"ts": "2026-11-25T14:43:03Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
 {"ts": "2026-11-25T14:46:41Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-25T14:46:41Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
+{"ts": "2026-11-25T17:33:50Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie", "rules": ["B3", "B8"]}
+{"ts": "2026-11-25T17:33:50Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-25T17:33:50Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 10}
