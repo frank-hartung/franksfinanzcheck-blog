@@ -1,5 +1,5 @@
 {
-  "stand": "2026-11-23",
+  "stand": "2026-11-25",
   "hinweis": "Sperrklinke: nur abwärts. Erzeugt von scripts/titel_klinke.py --seed.",
   "schwellen": {
     "T1_max_zeichen": 60,
@@ -171,7 +171,7 @@
       "schwere": 0
     },
     "content/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/index.md": {
-      "titel": "Heizkosten senken: Welche Maßnahmen passen zu – Heizung",
+      "titel": "Heizkosten senken: Raumtemperatur, Lüften, Heizkörper",
       "schwere": 0
     },
     "content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md": {
@@ -191,7 +191,7 @@
       "schwere": 0
     },
     "content/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/index.md": {
-      "titel": "Standby-Verbrauch messen: Was kostet – Stromfresser",
+      "titel": "Standby-Kosten: Was ein Stromfresser wirklich kostet",
       "schwere": 0
     },
     "content/posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
@@ -243,7 +243,7 @@
       "schwere": 0
     },
     "content/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/index.md": {
-      "titel": "DSL Hacks: Was passt zu deiner Wohnung? – Schnelles",
+      "titel": "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?",
       "schwere": 0
     },
     "content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md": {
@@ -315,7 +315,7 @@
       "schwere": 0
     },
     "content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md": {
-      "titel": "Smart Home: Spart die Automatisierung mehr Strom – Smarte",
+      "titel": "Smart Home: Spart die Automatisierung wirklich Strom?",
       "schwere": 0
     },
     "content/posts/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert/index.md": {
@@ -462,10 +462,6 @@
       "titel": "Handytarife vergleichen: Welche Leistungen nutzt",
       "schwere": 0
     },
-    "content/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/index.md": {
-      "titel": "WLAN verbessern: Mesh-System oder Repeater im Check?",
-      "schwere": 0
-    },
     "content/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/index.md": {
       "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
       "schwere": 0
@@ -475,7 +471,7 @@
       "schwere": 0
     },
     "content/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/index.md": {
-      "titel": "Router Standort: So findest du einen guten Platz – WLAN",
+      "titel": "Router-Standort: So findest du einen guten Platz",
       "schwere": 0
     },
     "content/posts/2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten/index.md": {
@@ -542,44 +538,76 @@
       "titel": "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?",
       "schwere": 0
     },
-    "content/posts/2026-11-22-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich/index.md": {
-      "titel": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
-      "schwere": 0
-    },
-    "content/posts/2026-11-22-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md": {
-      "titel": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
-      "schwere": 0
-    },
-    "content/posts/2026-11-22-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich/index.md": {
-      "titel": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
-      "schwere": 0
-    },
-    "content/posts/2026-11-22-heizperiode-beginn-2026-warum-der-gas-check-im-oktober/index.md": {
-      "titel": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
-      "schwere": 0
-    },
-    "content/posts/2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen/index.md": {
-      "titel": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
-      "schwere": 0
-    },
     "content/posts/2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten/index.md": {
       "titel": "Strompreis 2026: Herbst-Check für deine Stromkosten",
-      "schwere": 0
-    },
-    "content/posts/2026-11-22-vorrat-planen-leicht-gemacht-so-sparst-du-beim/index.md": {
-      "titel": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
-      "schwere": 0
-    },
-    "content/posts/2026-11-22-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste/index.md": {
-      "titel": "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe",
       "schwere": 0
     },
     "content/posts/2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet/index.md": {
       "titel": "Gebrauchte Möbel: Woran erkennst du gute Qualität?",
       "schwere": 0
     },
-    "content/posts/2026-11-22-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater/index.md": {
-      "titel": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
+    "content/posts/2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026/index.md": {
+      "titel": "Photovoltaik: Lohnt sich eine Solaranlage 2026?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie/index.md": {
+      "titel": "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich/index.md": {
+      "titel": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md": {
+      "titel": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet/index.md": {
+      "titel": "DSL wechseln ohne Ausfall: So sparst du beim Internet",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich/index.md": {
+      "titel": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen/index.md": {
+      "titel": "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober/index.md": {
+      "titel": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed/index.md": {
+      "titel": "Internet tuning kostenlos: DNS-Server für mehr Speed",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch/index.md": {
+      "titel": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026/index.md": {
+      "titel": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen/index.md": {
+      "titel": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage/index.md": {
+      "titel": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim/index.md": {
+      "titel": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste/index.md": {
+      "titel": "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe",
+      "schwere": 0
+    },
+    "content/posts/2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt/index.md": {
+      "titel": "WLAN verbessern: Verstärker oder Mesh – was passt?",
       "schwere": 0
     }
   }

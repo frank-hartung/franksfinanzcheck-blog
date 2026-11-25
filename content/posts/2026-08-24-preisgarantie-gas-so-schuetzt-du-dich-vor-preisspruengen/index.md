@@ -61,7 +61,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Preisgarantie Gas: So prüfst du das Schreiben](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Preisgarantie Gas: So prüfst du das Schreiben“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Gaspreisgarantie: So prüfst du das Schreiben“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Wenn ein neuer Preis im Brief steht
@@ -157,7 +157,7 @@ Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wech
 
 ![Gliederung des Beitrags: Preisgarantie Gas: So prüfst du das Schreiben](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Preisgarantie Gas: So prüfst du das Schreiben“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Gaspreisgarantie: So prüfst du das Schreiben“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Jahrespreis nach einer Erhöhung rechnen
 

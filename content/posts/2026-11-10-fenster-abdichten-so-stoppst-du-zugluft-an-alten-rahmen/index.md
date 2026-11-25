@@ -160,7 +160,7 @@ Das Verschließen reduziert den unkontrollierten Luftwechsel erheblich. In diese
 
 ## 4K‑Prüfpfad: Kurs halten beim Energiesparen
 
-Das Fenster abdichten ist Teil des vierten Schritts in meinem System. Es geht darum, den Kurs zu halten. – Einmal den Stromanbieter zu wechseln, reicht allein nicht aus. Du musst deine Fixkosten immer ganzheitlich betrachten.
+Das Fenster abdichten ist Teil des vierten Schritts in meinem System. Es geht darum, den Kurs zu halten. Einmal den Stromanbieter zu wechseln, reicht allein nicht aus. Du musst deine Fixkosten immer ganzheitlich betrachten.
 
 Dazu gehört die thermische Hülle [deiner Wohnung](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/). Wenn du deine Fenster optimiert hast, solltest du die [Verträge prüfen](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/). Oft zahlen Haushalte viel zu viel für ihren Strom. Ein Vergleich dauert nur wenige Minuten deiner Zeit.
 

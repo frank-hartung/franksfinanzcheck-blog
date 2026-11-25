@@ -46,7 +46,7 @@ Der große Punkt ist die Ausbeute. Eine Wärmepumpe wird mit dem Faktor COP geme
 | Merkmal                | Wärmepumpe                     | Gasheizung                     |
 |------------------------|--------------------------------|--------------------------------|
 | Energiequelle          | Strom + Umweltwärme            | Erdgas                         |
-| Typischer Wirkungsgrad | COP 3 – 5 (Faustregel)         | Brennwert ≈ 95 % (Faustregel)  |
+| Typischer Wirkungsgrad | COP 3–5 (Faustregel)         | Brennwert ≈ 95 % (Faustregel)  |
 | Einbau-Aufwand         | Gute Planung, teils Bohrung    | Schnell, wenig Umbau           |
 | Lebensdauer            | 15–20 Jahre (Faustregel)       | 20–25 Jahre (Faustregel)       |
 
