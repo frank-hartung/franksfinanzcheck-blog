@@ -6,7 +6,7 @@ draft: false
 reserve_published: 2026-11-23
 tags: ["Geld sparen im Alltag", "Budget planen"]
 categories: ["Ratgeber"]
-pillar: "strom-sparen"
+pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Mehrwegflaschen Pfand", "Pfand zurückholen", "Getränke sparen", "Mehrwegflaschen"]
 keywords_fokus: ["Mehrwegflaschen Pfand", "Pfand zurückholen"]
@@ -227,7 +227,7 @@ Das führt zu unnötigen Wegen, wenn du in verschiedenen Läden einkaufst. Versu
 
 **Für deinen nächsten Check:** Sammle Mehrweg getrennt von Einweg, wenn du unterschiedliche Rückgabeorte nutzt. So wird der nächste Einkauf nicht durch eine unnötige zusätzliche Fahrt teurer.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Geschirrspüler voll beladen](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Geschirrspüler voll beladen](../../posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/)
 **Lesetipp:** [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
 
 ## Häufige Fragen

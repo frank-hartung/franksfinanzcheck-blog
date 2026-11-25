@@ -149,7 +149,7 @@ Prüfe bei einem Bonus, ob er einmalig oder laufend gilt. Lies die Regeln und re
 
 Ein kleiner Preis pro kWh nützt wenig, wenn der Grundpreis hoch ist. Dann frisst die Grundgebühr den Vorteil auf. Eine kurze Bindung erhöht zudem das Risiko späterer Sprünge.
 
-Ein Portal zeigt eine Auswahl, nicht den ganzen Markt. Anbieter, Filter und Reihung weichen ab. Verlass dich nicht auf ein pauschales Versprechen, dass dort alle Tarife stehen. Prüfe die Papiere beim Anbieter vor deinem Klick.
+Ein Portal zeigt eine Auswahl, nicht den gesamten Markt. Anbieter, Filter und Reihung weichen ab. Verlass dich nicht auf ein pauschales Versprechen, dass dort alle Tarife oder alle Bedingungen erscheinen. Prüfe die Papiere beim Anbieter vor deinem Klick.
 
 Tarife mit Vorkasse verdienen einen genauen Blick. Die Behörde warnt, dass Vorkasse bei einer Pleite oft weg ist (Q1). Gas fließt danach weiter – du landest in der teureren Ersatzversorgung. Dein Geld holst du aber kaum noch zurück.
 
