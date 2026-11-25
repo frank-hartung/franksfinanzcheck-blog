@@ -2,14 +2,14 @@
   "target": 6,
   "ready": 0,
   "pool_size": 11,
-  "generated_at": "2026-11-25T19:16:45Z",
+  "generated_at": "2026-11-25T21:57:07Z",
   "candidates": [
     {
       "slug": "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "381399f35f43d271c244bb03b7c0239c09a09ba0bd09167840119de0f89408d8",
+      "sha256": "475b4f61e0fb487fb804c73236be0866a21f2b606b14a163d4d55fb303f2a41e",
       "flesch": 69.8,
-      "measured_at": "2026-11-25T19:14:22Z",
+      "measured_at": "2026-11-25T21:55:57Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -31,14 +31,12 @@
     {
       "slug": "2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "bee57a94debca0841d61c27951efdb478f0a1ef992c321d58e877257c4529441",
-      "flesch": 73.3,
-      "measured_at": "2026-11-25T19:14:50Z",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "sha256": "ded1fe71c6a9d532371f5ba788f60bf5d45c894772033ea4ab464d9460cf0a3d",
+      "flesch": 72.9,
+      "measured_at": "2026-11-25T21:56:00Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
-        "🛑 2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen."
       ],
       "score": 0.972,
       "parts": {
@@ -54,9 +52,9 @@
     {
       "slug": "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "1add05910e40aa588f30c5a189a97ffd107f1430e56f84f164d1d0f0036223d6",
+      "sha256": "0b2cd6ba40f66845108180205da61f54b7babc86a4e9616f924b9cdafd627286",
       "flesch": 63.8,
-      "measured_at": "2026-11-25T19:15:16Z",
+      "measured_at": "2026-11-25T21:56:28Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -78,15 +76,12 @@
     {
       "slug": "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
       "ready": false,
-      "sha256": "a8bbe02f6d29471dd1a077aca3cf221343ca7498efe052c98cb9c7b0d62cdef1",
-      "flesch": 64.2,
-      "measured_at": "2026-11-25T19:15:43Z",
-      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "sha256": "2b73129cc3ff98e2ce2f36da01509b216fdd8513a64bda55262beda93a54c874",
+      "flesch": 64.0,
+      "measured_at": "2026-11-25T21:56:30Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Mit dem passenden SIM-Only-Tarif und einem separat gekauften Smartphone sparst du auf zwei Jahre gerechnet massiv Geld.",
       "details": [
-        "🛑 2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
-        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Mit dem passenden SIM-Only-Tarif und einem separat gekauften Smartphone sparst du auf zwei Jahre gerechnet massiv Geld."
       ],
       "score": 0.968,
       "parts": {
@@ -102,9 +97,9 @@
     {
       "slug": "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "ready": false,
-      "sha256": "5df0cd41b5f0338e2a402b00f893d9bd8695587e4ec3fee44728ad0173be8c04",
+      "sha256": "c29befb9daeca8f6903d1dd528dbacb9f1395ad990938eba03c7f2b4f006f713",
       "flesch": 62.4,
-      "measured_at": "2026-11-25T19:16:09Z",
+      "measured_at": "2026-11-25T21:56:56Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -126,9 +121,9 @@
     {
       "slug": "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
       "ready": false,
-      "sha256": "88b97b35eb35c82e904dae1b0b5966e1c537e188a8d51630540ebda5b58aba59",
+      "sha256": "db54245c9631d32a1d57757201101f0492cf92979fc945c4215020b88c3c880c",
       "flesch": 60.4,
-      "measured_at": "2026-11-25T19:16:10Z",
+      "measured_at": "2026-11-25T21:56:58Z",
       "reason": "Reserve-Qualitäts-Gate: Umfang: 979 Wörter / 7344 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
         "Umfang: 979 Wörter / 7344 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
@@ -147,9 +142,9 @@
     {
       "slug": "2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
       "ready": false,
-      "sha256": "8000faad0764ff80795be38c889c35f24e7ce813b0f6087aa198aa8c2f744a0c",
+      "sha256": "827251ecff80a2449ed556bca1e4c232010f52b9bd4a01aa2ef280ea8b2f9e02",
       "flesch": 60.0,
-      "measured_at": "2026-11-25T19:16:13Z",
+      "measured_at": "2026-11-25T21:57:01Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
       "details": [
         "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
@@ -169,15 +164,12 @@
     {
       "slug": "2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
       "ready": false,
-      "sha256": "9cd34c19c027808d544e5ed0f83291abf3e4dd8b78e9e7a32bc665adef46cfe6",
-      "flesch": 71.2,
-      "measured_at": "2026-11-25T19:16:41Z",
-      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "sha256": "4f402c3c30b9e1d6ce70a3013f62d6417dc8ded22bc19c82289abb8ddf0926a6",
+      "flesch": 70.6,
+      "measured_at": "2026-11-25T21:57:04Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
-        "🛑 2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
-        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen."
       ],
       "score": 0.94,
       "parts": {
@@ -193,13 +185,13 @@
     {
       "slug": "2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
       "ready": false,
-      "sha256": "ff95bcd44fdb41b45f074a82bc91bb88cf76b004dd5036dd964af5fa9b59f101",
-      "flesch": 60.8,
-      "measured_at": "2026-11-25T19:16:43Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das reduziert den Bedarf an Klimaanlagenbetrieb um bis zu 30 %.",
+      "sha256": "2a423703da5d72074affa567fea7383c310cb60ae3094426906458b2001a2628",
+      "flesch": 60.2,
+      "measured_at": "2026-11-25T21:57:06Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
-        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das reduziert den Bedarf an Klimaanlagenbetrieb um bis zu 30 %.",
-        "Umfang: 794 Wörter / 5730 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
+        "Umfang: 859 Wörter / 6186 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
       "score": 0.931,
       "parts": {
@@ -215,23 +207,24 @@
     {
       "slug": "2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "7a8855f32289b4f13c33ba21378c745b38ec4466f202bd8749b026a8f03ab8d1",
-      "flesch": 61.8,
-      "measured_at": "2026-11-25T19:16:44Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 650 Wörter / 4708 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "sha256": "4a3d785bbd3ac72baadf432255d2b3c62eaf4adf3e70efa0c596202b637602d8",
+      "flesch": 57.6,
+      "measured_at": "2026-11-25T21:57:07Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
-        "Umfang: 650 Wörter / 4708 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
-        "FAQ: nur 0 Fragen (Premium verlangt 4)"
+        "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
+        "Umfang: 838 Wörter / 6088 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+        "FAQ: nur 3 Fragen (Premium verlangt 4)"
       ],
-      "score": 0.907,
+      "score": 0.887,
       "parts": {
         "spelling": 0.96,
         "meta": 1.0,
-        "structure": 0.49999999999999994,
-        "typography": 1.0,
+        "structure": 0.7,
+        "typography": 0.9,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 0.75
       }
     },
     {
@@ -258,8 +251,24 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "45678501059",
+    "kind": "partial",
+    "run_id": "45694139229",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-25T21:57:07Z",
+    "renewed": [
+      "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
+      "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+      "2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+      "2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
+      "2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
