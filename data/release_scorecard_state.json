@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-25T17:44:09Z",
+  "generated_at": "2026-11-25T18:57:39Z",
   "modus": "kandidaten",
-  "commit": "65a74bc6aa691e4dc34aeb94e6f0c85bd6cecc43",
+  "commit": "1f89773ada404d05cf412ea7e1d9176a1273b518",
   "kapazitaet": {
     "stichtag": "2026-11-25",
     "basis": "2026-11-25",
@@ -63,6 +63,7 @@
         "2026-08-10-dsl-wechselbonus-sichern",
         "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
         "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
         "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
         "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
@@ -112,7 +113,7 @@
         "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 51
+      "anzahl": 52
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -153,20 +154,21 @@
     }
   ],
   "befundlage": {
-    "offen": 284,
-    "seiten": 80,
-    "live_befunde": 171,
-    "live_seiten": 51,
-    "ueberholt": 238,
+    "offen": 287,
+    "seiten": 81,
+    "live_befunde": 174,
+    "live_seiten": 52,
+    "ueberholt": 241,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 26,
     "frist_tage": 14,
-    "ueber_frist": 118,
+    "ueber_frist": 121,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
       "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": 4,
+      "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
       "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": 3,
       "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": 4,
       "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": 5,
@@ -313,13 +315,13 @@
       ]
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "0846ac7eaa53d13baa5bf0f79a140a7455330476d40f4fed1c9d6179e75f7b67",
-      "urteil": "freigabe-reif",
+      "sha256": "f890bb1901c053e7477ab4e803b2d7b9d88f350f8f488be5b0efe6a4a397f111",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -327,8 +329,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "30caa57be394afb62947 (luecke): Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.; 32a3ea879f2cf126b3a7 (luecke): Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.; c583efe1ce02df3ca2d7 (luecke):"
+        }
+      ]
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "5372ac6cb7eccd4807f13afeed3eba6a913b369e4492a7f2712924a965a01728",
@@ -642,7 +651,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1510,7 +1519,7 @@
       "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "683215cdf9fb58f622f43dad4ff6634a7bb1efb33ba55b64f111f603d78f4889",
+      "sha256": "d374d9dc8951e0373e9114bfae2f242dfd0bd9e0c573ffe0f201a817c7e493b1",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1524,7 +1533,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1988,7 +1997,7 @@
       "checks": []
     },
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
-      "sha256": "2b8a7753c655a647b6d1eb25c9fcde4517cbe6333cf494113bb27e7a6f514954",
+      "sha256": "974114412aa39fc0ab78efe1d022908433064a787d23552bfa69cdad57cccb97",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2002,7 +2011,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2117,7 +2126,7 @@
       ]
     },
     "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
-      "sha256": "47c3ae0556c966bb57d31183b9cdfa2a3da9299be298f40c830b36c1fcadd62d",
+      "sha256": "cfe0b291de3dfe2afc3bd3693c1b417d516d515b4ea38c91eb97af857cb21b43",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2131,7 +2140,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
@@ -2153,7 +2162,7 @@
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "db0285b500d2bfcc9f0a0ef55e5b1c9cf8952c6004da001e656cc7d19f495fc8",
+      "sha256": "a22db33fa4d1fca3fe4428ae40f5f5d81f1bd76c09cb5d09e3e2378dfa4bfd8d",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2167,7 +2176,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
