@@ -1,9 +1,9 @@
-generated_at: '2026-11-24T14:15:44Z'
-start_date: '2026-11-25'
+generated_at: '2026-11-25T13:29:16Z'
+start_date: '2026-11-26'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
-- date: '2026-11-25'
-  weekday: Wed
+- date: '2026-11-27'
+  weekday: Fri
   slot: 1
   topic: 'Grundversorgung raus: So entkommst du dem teuersten Stromtarif'
   pillar: strom-sparen
@@ -24,8 +24,8 @@ slots:
 
     - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
     an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
-- date: '2026-11-27'
-  weekday: Fri
+- date: '2026-11-30'
+  weekday: Mon
   slot: 2
   topic: 'Ökostrom wechseln: Günstig und seriös im Vergleich'
   pillar: strom-sparen
@@ -35,8 +35,6 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [niche_hook] Stromanbieter wechseln: Tarife prüfen und Kosten senken
-
     - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
     ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
 
@@ -45,9 +43,13 @@ slots:
     auf den eigenen Verbrauch an.
 
     - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
-- date: '2026-11-30'
-  weekday: Mon
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [trending] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
+    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
+    auf den eigenen Verbrauch an.'
+- date: '2026-12-02'
+  weekday: Wed
   slot: 3
   topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
   pillar: versicherungen
@@ -69,8 +71,8 @@ slots:
 
     - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
     – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.'
-- date: '2026-12-02'
-  weekday: Wed
+- date: '2026-12-04'
+  weekday: Fri
   slot: 4
   topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
   pillar: versicherungen
@@ -92,8 +94,8 @@ slots:
     - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
     – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
     statt sie automatisch zu verlängern.'
-- date: '2026-12-04'
-  weekday: Fri
+- date: '2026-12-07'
+  weekday: Mon
   slot: 5
   topic: 'Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
   pillar: internet-dsl
@@ -109,9 +111,9 @@ slots:
 
     - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
 
-    - [niche_hook] DSL-Tarife im Vergleich: Welcher ist der beste?'
-- date: '2026-12-07'
-  weekday: Mon
+    - [niche_hook] Günstige Angebote für Internet und TV'
+- date: '2026-12-09'
+  weekday: Wed
   slot: 6
   topic: 'Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
   pillar: internet-dsl
@@ -130,11 +132,30 @@ slots:
     sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
     als der reine Anbieterwechsel.
 
-    - [niche_hook] DSL-Tarife im Vergleich: Welcher ist der beste?'
-- date: '2026-12-09'
-  weekday: Wed
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs'
+- date: '2026-12-11'
+  weekday: Fri
   slot: 7
-  topic: Günstigen Ratenkredit mit Bestzins sichern
+  topic: 'Campingurlaub 2026: So hältst du die Kosten im Rahmen'
+  pillar: mietwagen
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [niche_hook] Campingurlaub 2026: So hältst du die Kosten im Rahmen
+
+    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
+
+    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
+    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+
+    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
+- date: '2026-12-14'
+  weekday: Mon
+  slot: 8
+  topic: Die Vorteile einer kostenlosen Kreditkarten-Umstellung
   pillar: konto-karten
   source: topics
   campaign: null
@@ -142,7 +163,8 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [evergreen] Kontoeröffnung mit günstigen Gebühren
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
 
     - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
     unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
@@ -151,108 +173,87 @@ slots:
     genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
     Monaten wieder fallen.
 
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.'
-- date: '2026-12-11'
-  weekday: Fri
-  slot: 8
-  topic: 'Gebrauchte Möbel: So erkennst du solide Ware'
-  pillar: frugalismus
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
-
-    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-
-    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
-    geht es um bewussten Konsum, nicht um Askese.
-
-    - [niche_hook] 7 Gewohnheiten für finanzielle Freiheit'
-- date: '2026-12-14'
-  weekday: Mon
-  slot: 9
-  topic: SparTipps für den Alltag
-  pillar: frugalismus
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [niche_hook] 7 Gewohnheiten für finanzielle Freiheit
-
-    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
-
-    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-
-    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
-    geht es um bewussten Konsum, nicht um Askese.'
+    - [evergreen] Kontoeröffnung mit günstigen Gebühren'
 - date: '2026-12-16'
   weekday: Wed
-  slot: 10
-  topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
-  pillar: versicherungen
+  slot: 9
+  topic: DSL- und Internet-Flat günstig sichern
+  pillar: internet-dsl
   source: topics
-  campaign: kfz-wechselsaison-2027
-  cta: Jetzt Kfz-Versicherung vergleichen
+  campaign: black-friday-tarife-2026
+  cta: Jetzt DSL- & Handytarife vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
 
-    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
+    - [niche_hook] Günstige Angebote für Internet und TV
 
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
-    - [news] Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das
-    erstbeste Ergebnis nimmt, lässt oft bares Geld liegen.'
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.'
 - date: '2026-12-18'
   weekday: Fri
-  slot: 11
-  topic: 'Private Unfallversicherung: Für wen sie sich wirklich lohnt'
-  pillar: versicherungen
+  slot: 10
+  topic: 'Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte mit Wärmepumpe'
+  pillar: strom-sparen
   source: topics
-  campaign: kfz-wechselsaison-2027
-  cta: Jetzt Kfz-Versicherung vergleichen
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
+    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
 
-    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
 
-    - [pain_point] Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet –
-    oder zahlen umgekehrt für überhöhte Summen ohne Prüfung.
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
 
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.'
+    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
 - date: '2026-12-21'
   weekday: Mon
-  slot: 12
-  topic: Mietwagen-Kosten im Ausland minimieren
-  pillar: mietwagen
+  slot: 11
+  topic: Internet-Tarife im Vergleich
+  pillar: internet-dsl
   source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
+  campaign: black-friday-tarife-2026
+  cta: Jetzt DSL- & Handytarife vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
+    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
+    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+    als der reine Anbieterwechsel.
 
-    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
-    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
-    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.
 
-    - [niche_hook] Stromanbieter wechseln: Tarife prüfen und Kosten senken'
+    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
+- date: '2026-12-23'
+  weekday: Wed
+  slot: 12
+  topic: 'Strom sparen im Sommer: 10 Tipps für heiße Monate'
+  pillar: strom-sparen
+  source: topics
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [niche_hook] Strom und Gas vergleichen und sparen
+
+    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'

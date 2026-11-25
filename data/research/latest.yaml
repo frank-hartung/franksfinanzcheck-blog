@@ -1,5 +1,5 @@
-generated_at: '2026-11-24T14:15:44Z'
-day: '2026-11-24'
+generated_at: '2026-11-25T13:29:16Z'
+day: '2026-11-25'
 mode: deterministic
 teams:
   trending:
@@ -109,6 +109,7 @@ teams:
     source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.85
     keywords:
+    - Heizperiode vorbereiten im Spätsommer
     - Gasrechnung senken
     - Heizkosten sparen
     - Herbst Vorbereitung
@@ -252,57 +253,61 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 7 Gewohnheiten für finanzielle Freiheit
-    pillar: frugalismus
+  - topic: 'Campingurlaub 2026: So hältst du die Kosten im Rahmen'
+    pillar: mietwagen
     signal: niche_hook
-    source: topics:7 Gewohnheiten für finanzielle Freiheit
-    score: 0.55
-    keywords: []
-  - topic: 'DSL-Tarife im Vergleich: Welcher ist der beste?'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:DSL-Tarife im Vergleich: Welcher ist der beste?'
+    source: 'topics:Campingurlaub 2026: So hältst du die Kosten im Rahmen'
     score: 0.55
     keywords:
-    - DSL-Tarife
-    - Internetvergleich
-    - DSL-Anbieter
-  - topic: DSL-Tarife mit hoher Geschwindigkeit vergleichen
-    pillar: internet-dsl
+    - Camping
+    - Urlaub sparen
+    - Campingplatz
+  - topic: 'Grundlast messen: Wo dein Strom nachts hingeht'
+    pillar: strom-sparen
     signal: niche_hook
-    source: topics:DSL-Tarife mit hoher Geschwindigkeit vergleichen
+    source: 'topics:Grundlast messen: Wo dein Strom nachts hingeht'
     score: 0.55
     keywords:
-    - DSL-Tarif
-    - Internetgeschwindigkeit
-    - Tarife vergleichen
-  - topic: Die Vorteile von Prepaid-Karten für den Urlaub
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Die Vorteile von Prepaid-Karten für den Urlaub
-    score: 0.55
-    keywords:
-    - Prepaid-Karten
-    - Urlaub
-    - Karten
-  - topic: Internet-Tarife im Vergleich
+    - Grundlast Strom
+    - Stromverbrauch nachts
+    - Zähler beobachten
+  - topic: Günstige Angebote für Internet und TV
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:Internet-Tarife im Vergleich
+    source: topics:Günstige Angebote für Internet und TV
     score: 0.55
     keywords:
     - Internet
-    - Tarif
-    - Vergleich
-  - topic: 'Stromanbieter wechseln: Tarife prüfen und Kosten senken'
-    pillar: strom-sparen
+    - TV
+    - Günstig
+  - topic: 'Private Unfallversicherung: Für wen sie sich wirklich lohnt'
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Stromanbieter wechseln: Tarife prüfen und Kosten senken'
+    source: 'topics:Private Unfallversicherung: Für wen sie sich wirklich lohnt'
     score: 0.55
     keywords:
-    - Stromanbieter wechseln
-    - Stromvergleich
-    - Stromkosten senken
+    - Unfallversicherung
+    - Private Unfallversicherung
+    - Absicherung
+  - topic: Strom und Gas vergleichen und sparen
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Strom und Gas vergleichen und sparen
+    score: 0.55
+    keywords:
+    - Strom
+    - Gas
+    - Vergleichen
+    - Sparen
+  - topic: 'Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    score: 0.55
+    keywords:
+    - Zahnzusatzversicherung
+    - Zahnarztkosten sparen
+    - Zahnersatz versichern
 live_web:
   enabled: false
   findings: []
