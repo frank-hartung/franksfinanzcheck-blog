@@ -16,7 +16,7 @@
       "ueberlang": false
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
-      "mikro": 2,
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
@@ -111,12 +111,12 @@
       "ueberlang": false
     },
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-      "mikro": 5,
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
-      "mikro": 8,
+      "mikro": 6,
       "serien": 0,
       "ueberlang": false
     },
@@ -256,7 +256,7 @@
       "ueberlang": false
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
-      "mikro": 6,
+      "mikro": 5,
       "serien": 0,
       "ueberlang": false
     },
@@ -381,7 +381,7 @@
       "ueberlang": false
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
-      "mikro": 2,
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
@@ -446,7 +446,7 @@
       "ueberlang": false
     },
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
-      "mikro": 1,
+      "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
@@ -516,7 +516,7 @@
       "ueberlang": false
     },
     "2026-11-02-last-minute-urlaubsangebote-sichern": {
-      "mikro": 1,
+      "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
@@ -537,11 +537,6 @@
     },
     "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif": {
       "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": {
-      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
@@ -581,12 +576,7 @@
       "ueberlang": false
     },
     "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-      "mikro": 9,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
-      "mikro": 0,
+      "mikro": 8,
       "serien": 0,
       "ueberlang": false
     },
@@ -620,21 +610,6 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
-      "mikro": 4,
-      "serien": 0,
-      "ueberlang": true
-    },
-    "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
       "mikro": 1,
       "serien": 0,
@@ -645,32 +620,7 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-      "mikro": 2,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
-      "mikro": 10,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-18-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
-      "mikro": 2,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-18-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
-      "mikro": 3,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-20-internet-tuning-kostenlos-mehr-speed-fuer-dein-wlan": {
+    "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
       "mikro": 0,
       "serien": 0,
       "ueberlang": false
@@ -680,18 +630,98 @@
       "serien": 0,
       "ueberlang": false
     },
+    "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
     "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026": {
       "mikro": 2,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": true
     },
     "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet": {
       "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
+    "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
     "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed": {
       "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+      "mikro": 7,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
+      "mikro": 7,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage": {
+      "mikro": 7,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt": {
+      "mikro": 11,
       "serien": 0,
       "ueberlang": false
     }
