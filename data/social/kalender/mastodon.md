@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 25.11.2026 02:28 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.11.2026 16:45 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Mi, 25. November 2026
-- **07:30** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
 - **11:30** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
 ### Fr, 27. November 2026
@@ -50,6 +48,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 25.11.2026 16:45 · Geschenkkarte: Was du beim Kauf und Aufladen wissen musst → https://mastodon.social/@FranksFinanzcheck/117677853811296490
 - ✅ 24.11.2026 04:22 · Geschirrspüler voll beladen: Wasser und Strom sparen → https://mastodon.social/@FranksFinanzcheck/117669268722299454
 - ✅ 23.11.2026 17:08 · September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen → https://mastodon.social/@FranksFinanzcheck/117666620863784302
 - ✅ 22.11.2026 23:27 · Wohngebäudeversicherung Vergleich: Worauf du achten musst → https://mastodon.social/@FranksFinanzcheck/117662445287551543
@@ -59,7 +58,6 @@
 - ✅ 18.11.2026 15:15 · Flugverspätung Entschädigung: So holst du dein Geld zurück → https://mastodon.social/@FranksFinanzcheck/117637863727269953
 - ✅ 17.11.2026 00:45 · Waschmaschine beladen: Weniger Kosten bei jedem Waschgang → https://mastodon.social/@FranksFinanzcheck/117628781271452138
 - ✅ 16.11.2026 14:46 · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € → https://mastodon.social/@FranksFinanzcheck/117626425285672414
-- ✅ 15.11.2026 16:51 · WLAN verbessern: So bringst du stabilen Speed in jede Ecke → https://mastodon.social/@FranksFinanzcheck/117621252329123391
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
