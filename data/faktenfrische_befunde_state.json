@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-25T21:31:11Z",
+  "erzeugt": "2026-11-25T21:37:18Z",
   "stichtag": "2026-11-25",
-  "offen": 289,
-  "seiten": 81,
-  "live_seiten": 52,
-  "live_befunde": 176,
-  "ueberholt": 254,
+  "offen": 295,
+  "seiten": 83,
+  "live_seiten": 53,
+  "live_befunde": 179,
+  "ueberholt": 256,
   "ohne_fassung": 5,
   "seite_fehlt": 0,
   "entfallen": 3,
@@ -13,10 +13,11 @@
   "aeltester_tage": 26,
   "frist_tage": 14,
   "eskalation_tage": 21,
-  "ueber_frist": 123,
-  "in_eskalation": 42,
+  "ueber_frist": 126,
+  "in_eskalation": 45,
   "je_seite": {
     "2026-08-10-dsl-wechselbonus-sichern": 2,
+    "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": 4,
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": 3,
@@ -91,6 +92,7 @@
     "2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
     "2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": 3,
     "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026": 5,
+    "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie": 3,
     "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet": 5,
     "2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed": 3,
     "frugalismus": 3,
@@ -150,6 +152,39 @@
       "text": "Angabe, dass die meisten Banken ein Mindestguthaben von ein paar hundert Euro verlangen, fehlt eine fundierte Quelle.",
       "beleg": "",
       "alter_tage": 25,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "id": "124ff2c3cd3917c274aa",
+      "typ": "praezision",
+      "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 24,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "id": "7bdec96c0329769bebe6",
+      "typ": "luecke",
+      "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 24,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "id": "a56734aa032e0ed9e0c4",
+      "typ": "luecke",
+      "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 24,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2803,17 +2838,6 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
-      "id": "5c096f87730532352820",
-      "typ": "luecke",
-      "text": "Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.",
-      "beleg": "",
-      "alter_tage": 2,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
       "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
       "id": "22e300c6973fedbbd737",
       "typ": "luecke",
@@ -3199,6 +3223,17 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
+      "id": "5c096f87730532352820",
+      "typ": "luecke",
+      "text": "Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.",
+      "beleg": "",
+      "alter_tage": 2,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
       "id": "2f7f57dfb8da49a297be",
       "typ": "luecke",
@@ -3282,6 +3317,39 @@
       "text": "Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
       "alter_tage": 1,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+      "id": "3d2d36e19ac1ec848670",
+      "typ": "luecke",
+      "text": "Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+      "id": "74ec0b50099e3723c1c2",
+      "typ": "luecke",
+      "text": "Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+      "id": "fa697489f22c6a9b4df7",
+      "typ": "luecke",
+      "text": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""

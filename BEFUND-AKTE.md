@@ -2,18 +2,18 @@
 
 _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**289 offene Befunde auf 81 Seiten · davon 52 Live-Seiten mit 176 Befunden · ältester 26 Tage · Frist 14 Tage.**
+**295 offene Befunde auf 83 Seiten · davon 53 Live-Seiten mit 179 Befunden · ältester 26 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 289 |
-| Seiten betroffen | 81 (davon live: 52) |
-| Text seit dem Befund geändert | 254 |
+| Offene Befunde | 295 |
+| Seiten betroffen | 83 (davon live: 53) |
+| Text seit dem Befund geändert | 256 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
-| Über der Frist (14 Tage) | 123 |
-| In Eskalation (21 Tage) | 42 |
+| Über der Frist (14 Tage) | 126 |
+| In Eskalation (21 Tage) | 45 |
 
 ## So schließt du einen Befund
 
@@ -33,9 +33,25 @@ _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 259 von 289 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 261 von 295 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
+
+### `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `124ff2c3cd3917c274aa` | praezision | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `7bdec96c0329769bebe6` | luecke | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `a56734aa032e0ed9e0c4` | luecke | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 124ff2c3cd3917c274aa --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7bdec96c0329769bebe6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a56734aa032e0ed9e0c4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
 
 ### `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
@@ -775,18 +791,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce4
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
-
-Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `5c096f87730532352820` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-08-10-dsl-wechselbonus-sichern` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md`
@@ -871,6 +875,18 @@ Datei: `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
+
+Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `5c096f87730532352820` | luecke | 2 T | Text unverändert seit dem Befund | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · **LIVE** (blockiert) · Risikoklasse erhoeht · 3 Befund(e)
@@ -1427,6 +1443,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f9faeecdb0a51f6dcc
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 885b9067fc764e8b1be0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden befb17bec837c9aaecda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bb167f864ceae0328e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `3d2d36e19ac1ec848670` | luecke | 0 T | Text unverändert seit dem Befund | Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `74ec0b50099e3723c1c2` | luecke | 0 T | Text unverändert seit dem Befund | Die Meldung ist in der Regel unverbindlich und kostet kaum etwas. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `fa697489f22c6a9b4df7` | luecke | 0 T | Text unverändert seit dem Befund | Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3d2d36e19ac1ec848670 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 74ec0b50099e3723c1c2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden fa697489f22c6a9b4df7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
