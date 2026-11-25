@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-24T21:21:20Z",
+  "generated_at": "2026-11-25T04:29:13Z",
   "modus": "kandidaten",
-  "commit": "cd70dc1e5c6c1c43af3f807d635055a4039b348a",
+  "commit": "3d09c33709bebec726709c25a6abadd82119fd25",
   "kapazitaet": {
-    "stichtag": "2026-11-24",
-    "basis": "2026-11-24",
+    "stichtag": "2026-11-25",
+    "basis": "2026-11-25",
     "projiziert": false,
     "artikel": 148,
     "faellig": 9,
@@ -14,7 +14,7 @@
     "naechste_frist": {
       "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
       "frist": "2026-11-27",
-      "restlaufzeit": 3
+      "restlaufzeit": 2
     },
     "budget": 10,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-24",
+      "bis": "2027-03-25",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 10,
     "empfehlung_erreicht": true,
     "hartes_limit": 21,
-    "spitze_geprueft": 55
+    "spitze_geprueft": 54
   },
   "ursachen": [
     {
@@ -161,9 +161,9 @@
     "ueberholt": 239,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 25,
+    "aeltester_tage": 26,
     "frist_tage": 14,
-    "ueber_frist": 108,
+    "ueber_frist": 123,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
