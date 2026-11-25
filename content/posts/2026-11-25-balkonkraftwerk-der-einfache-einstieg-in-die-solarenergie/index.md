@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Du hast im Herbst wieder die Stromrechnung geöffnet und fragst dich, warum die Kosten jedes Jahr höher werden. Der Gedanke, selbst etwas zur Stromversorgung beizutragen, klingt verlockend – besonders, wenn du nur einen kleinen Balkon hast. Ein Balkonkraftwerk bietet einen unkomplizierten Weg, ein Stück Solarenergie zu nutzen, ohne aufwändige Genehmigungen oder große Investitionen. In diesem Ratgeber zeige ich dir, wie du das Konzept verstehst, die Wirtschaftlichkeit prüfst und typische Stolperfallen vermeidest.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Was ist ein Balkonkraftwerk?
 
 Ein Balkonkraftwerk ist eine Mini‑Solaranlage, die du direkt an einer Steckdose betreiben kannst. Es besteht aus Solarmodulen, einem kleinen Wechselrichter und einem Stecker‑Solargerät, das die erzeugte Gleichspannung in haushaltsüblichen Wechselstrom umwandelt. Die Anlage wird häufig auf dem Balkon, der Terrasse oder dem Fensterbrett montiert und ist für eine Leistung von bis zu 600 W ausgelegt. Damit kannst du einen Teil deines Eigenverbrauchs decken, ohne ins öffentliche Netz einzuspeisen.
