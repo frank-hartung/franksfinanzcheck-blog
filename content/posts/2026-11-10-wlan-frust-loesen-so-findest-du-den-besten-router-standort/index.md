@@ -28,8 +28,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 7eea21020508e3dbda495441b13168788d77894a494b6028c8f4a0a1f8a4f367
-    geprueft_am: 2026-11-24
+    sha256: a662732cb5408eb0d3fe10e3ec4b8e2f158000ba79ba272d9350964d0f02b61d
+    geprueft_am: 2026-11-25
 quellen:
   - id: "Q1"
     titel: "WLAN-Router und Repeater richtig platzieren"
@@ -41,9 +41,6 @@ faktenfrische_aliases:
   - "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort"
 kurzantwort: "Stelle den Router möglichst zentral und frei auf, statt ihn im Schrank zu verstecken. Wände, Metall und andere Funkquellen können das Signal schwächen oder stören. Teste mehrere Standorte: Welche Position am besten funktioniert, hängt von Wohnung und Geräten ab."
 ---
-
-
-
 
 Stell dir vor, du sitzt abends auf dem Sofa. Du möchtest deine Lieblingsserie streamen. Doch das Bild stockt. Der Ladekreis dreht sich endlos.
 

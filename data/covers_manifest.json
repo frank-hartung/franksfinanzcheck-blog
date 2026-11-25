@@ -28,7 +28,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-11-25T11:35:37+00:00",
+  "ts": "2026-11-25T18:33:41+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1729,7 +1729,7 @@
  },
  "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
   "title": "Router-Standort: So findest du einen guten Platz",
-  "ts": "2026-11-24T10:40:34+00:00",
+  "ts": "2026-11-25T18:34:40+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -2822,6 +2822,15 @@
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie": {
+  "title": "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie",
+  "ts": "2026-11-25T18:35:48+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  }

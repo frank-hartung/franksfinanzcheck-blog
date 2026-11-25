@@ -17,7 +17,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: b41ebf5d7f4b61f8fa25d4ef2bb3ca781d6891e3ea5a4fe2186147e0475d917e
+    sha256: 820446b08a79426a8ce6d3c0c858803495cc044ed31ca5cb9657f02565009a61
     geprueft_am: 2026-11-25
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true

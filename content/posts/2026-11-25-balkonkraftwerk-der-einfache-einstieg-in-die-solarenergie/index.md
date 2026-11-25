@@ -6,7 +6,7 @@ draft: true
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Balkonkraftwerk", "Mini-Solaranlage", "Stecker-Solargerät"]
+keywords: ["Balkonkraftwerk", "Mini-Solaranlage", "Stecker-Solargerät", "Solarenergie"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,19 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie"
+pin_description: "*Werbung | Balkonkraftwerk: Der einfache Einstieg in die Solarenergie – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen… Mehr Spartipps auf FranksFinanzcheck! #balkonkraftwerk #minisolaranlage #steckersolargeraet"
+cover:
+  image: "images/covers/2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie.jpg"
+  alt: "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie"
+  caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 240c3917a1d7855abfe7825577c41231a875a1e32545334a757decc1af5797ab
+    geprueft_am: 2026-11-25
+
 ---
 
 Du hast im Herbst wieder die Stromrechnung geöffnet und fragst dich, warum die Kosten jedes Jahr höher werden. Der Gedanke, selbst etwas zur Stromversorgung beizutragen, klingt verlockend – besonders, wenn du nur einen kleinen Balkon hast. Ein Balkonkraftwerk bietet einen unkomplizierten Weg, ein Stück Solarenergie zu nutzen, ohne aufwändige Genehmigungen oder große Investitionen. In diesem Ratgeber zeige ich dir, wie du das Konzept verstehst, die Wirtschaftlichkeit prüfst und typische Stolperfallen vermeidest.
