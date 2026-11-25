@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-25T00:09:03Z",
+  "erzeugt": "2026-11-25T11:34:39Z",
   "stichtag": "2026-11-25",
-  "offen": 281,
-  "seiten": 79,
-  "live_seiten": 52,
-  "live_befunde": 176,
-  "ueberholt": 239,
+  "offen": 273,
+  "seiten": 77,
+  "live_seiten": 50,
+  "live_befunde": 168,
+  "ueberholt": 236,
   "ohne_fassung": 5,
   "seite_fehlt": 0,
   "entfallen": 3,
@@ -13,11 +13,10 @@
   "aeltester_tage": 26,
   "frist_tage": 14,
   "eskalation_tage": 21,
-  "ueber_frist": 123,
-  "in_eskalation": 42,
+  "ueber_frist": 115,
+  "in_eskalation": 34,
   "je_seite": {
     "2026-08-10-dsl-wechselbonus-sichern": 2,
-    "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": 4,
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": 3,
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": 4,
@@ -43,7 +42,6 @@
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": 5,
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": 3,
-    "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": 2,
     "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": 1,
@@ -153,39 +151,6 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "id": "124ff2c3cd3917c274aa",
-      "typ": "praezision",
-      "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 24,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "id": "7bdec96c0329769bebe6",
-      "typ": "luecke",
-      "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 24,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "id": "a56734aa032e0ed9e0c4",
-      "typ": "luecke",
-      "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 24,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
       "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
       "id": "3f0a88ede9d44ee910cb",
       "typ": "luecke",
@@ -213,61 +178,6 @@
       "typ": "luecke",
       "text": "Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.",
       "beleg": "",
-      "alter_tage": 23,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "id": "334751e6f61ad0033fe4",
-      "typ": "luecke",
-      "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 23,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "id": "36759a5efe5e8e5163d0",
-      "typ": "luecke",
-      "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 23,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "id": "942922d1afd7844618e9",
-      "typ": "luecke",
-      "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 23,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "id": "d41f0d5ce8798df0211b",
-      "typ": "praezision",
-      "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 23,
-      "fassung_status": "ueberholt",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "id": "e139d0769faadd04392a",
-      "typ": "luecke",
-      "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
       "alter_tage": 23,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
@@ -2515,6 +2425,50 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "3a3269aa4a2e95d780ad",
+      "typ": "luecke",
+      "text": "Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung",
+      "beleg": "",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "c3ff13d7ca048da95112",
+      "typ": "luecke",
+      "text": "Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen",
+      "beleg": "",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "ec052a0155f98740a3b5",
+      "typ": "praezision",
+      "text": "Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen",
+      "beleg": "",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+      "id": "ee3a722844f4b84b84b8",
+      "typ": "luecke",
+      "text": "Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt",
+      "beleg": "",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
       "id": "91894b9b1535765acdca",
       "typ": "luecke",
@@ -2735,6 +2689,17 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
+      "id": "5c096f87730532352820",
+      "typ": "luecke",
+      "text": "Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.",
+      "beleg": "",
+      "alter_tage": 2,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
       "id": "05be346e82c80b2a8664",
       "typ": "luecke",
@@ -2900,50 +2865,6 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
-      "id": "3a3269aa4a2e95d780ad",
-      "typ": "luecke",
-      "text": "Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung",
-      "beleg": "",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
-      "id": "c3ff13d7ca048da95112",
-      "typ": "luecke",
-      "text": "Bei einer Lastschrift kannst du die Abbuchung über deine Bank zurückgeben lassen",
-      "beleg": "",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
-      "id": "ec052a0155f98740a3b5",
-      "typ": "praezision",
-      "text": "Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen",
-      "beleg": "",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
-      "id": "ee3a722844f4b84b84b8",
-      "typ": "luecke",
-      "text": "Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt",
-      "beleg": "",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
       "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
       "id": "991bda7b2298b751f4e6",
       "typ": "praezision",
@@ -3093,17 +3014,6 @@
       "text": "Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
       "alter_tage": 4,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
-      "id": "5c096f87730532352820",
-      "typ": "luecke",
-      "text": "Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall.",
-      "beleg": "",
-      "alter_tage": 2,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
