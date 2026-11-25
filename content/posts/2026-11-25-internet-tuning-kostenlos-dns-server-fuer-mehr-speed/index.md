@@ -3,7 +3,9 @@ title: "Internet tuning kostenlos: DNS-Server für mehr Speed"
 description: Mit internet tuning kostenlos surfst du schneller und sicherer. Erfahre im Guide, wie du den DNS-Server wechselst und deine Verbindung optimierst.
 kurzantwort: Ein schnellerer DNS-Server verkürzt die Wartezeit beim Seitenaufruf spürbar. Moderne Filter blockieren schädliche Webseiten direkt auf Server-Ebene. Du entscheidest, welcher Dienst deine Daten zur Namensauflösung verarbeitet.
 date: 2026-11-25T10:55:22Z
-draft: false
+draft: true
+cadence_demoted: 2026-11-25T11:40:24Z
+cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
