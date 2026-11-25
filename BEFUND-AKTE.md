@@ -2,18 +2,18 @@
 
 _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**284 offene Befunde auf 80 Seiten · davon 51 Live-Seiten mit 171 Befunden · ältester 26 Tage · Frist 14 Tage.**
+**287 offene Befunde auf 81 Seiten · davon 52 Live-Seiten mit 174 Befunden · ältester 26 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 284 |
-| Seiten betroffen | 80 (davon live: 51) |
-| Text seit dem Befund geändert | 240 |
+| Offene Befunde | 287 |
+| Seiten betroffen | 81 (davon live: 52) |
+| Text seit dem Befund geändert | 243 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
-| Über der Frist (14 Tage) | 118 |
-| In Eskalation (21 Tage) | 37 |
+| Über der Frist (14 Tage) | 121 |
+| In Eskalation (21 Tage) | 40 |
 
 ## So schließt du einen Befund
 
@@ -33,7 +33,7 @@ _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 245 von 284 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 248 von 287 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -887,6 +887,22 @@ Datei: `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-ve
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 06bc5a6bc11098317697 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 471944cae24a034c7c00 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 780af701a2eaa465d46a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `30caa57be394afb62947` | luecke | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `32a3ea879f2cf126b3a7` | luecke | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `c583efe1ce02df3ca2d7` | luecke | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 30caa57be394afb62947 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32a3ea879f2cf126b3a7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c583efe1ce02df3ca2d7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
