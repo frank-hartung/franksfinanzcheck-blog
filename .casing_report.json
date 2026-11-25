@@ -1,21 +1,15 @@
 {
- "stand": "2026-11-24T16:27:26Z",
+ "stand": "2026-11-25T16:06:31Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 3,
- "gepruefte_dateien": 153,
- "woerter": 284498,
- "erkannte_befunde": 4,
+ "dateien": 2,
+ "gepruefte_dateien": 156,
+ "woerter": 289645,
+ "erkannte_befunde": 3,
  "befunde": 3,
  "hart": 0,
- "gefixt": 1,
+ "gefixt": 0,
  "geparkt": [],
  "dateien_liste": [
-  {
-   "pfad": "content/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/index.md",
-   "erkannte_befunde": 1,
-   "befunde": 0,
-   "woerter": 1726
-  },
   {
    "pfad": "content/posts/2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026/index.md",
    "erkannte_befunde": 1,
@@ -23,7 +17,7 @@
    "woerter": 1091
   },
   {
-   "pfad": "content/posts/2026-11-24-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
+   "pfad": "content/posts/2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
    "erkannte_befunde": 2,
    "befunde": 2,
    "woerter": 3656

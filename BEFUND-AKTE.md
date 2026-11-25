@@ -2,13 +2,13 @@
 
 _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**276 offene Befunde auf 78 Seiten · davon 51 Live-Seiten mit 171 Befunden · ältester 26 Tage · Frist 14 Tage.**
+**284 offene Befunde auf 80 Seiten · davon 51 Live-Seiten mit 171 Befunden · ältester 26 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 276 |
-| Seiten betroffen | 78 (davon live: 51) |
-| Text seit dem Befund geändert | 266 |
+| Offene Befunde | 284 |
+| Seiten betroffen | 80 (davon live: 51) |
+| Text seit dem Befund geändert | 274 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
@@ -33,7 +33,7 @@ _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 271 von 276 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 279 von 284 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -1351,6 +1351,42 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f9faeecdb0a51f6dcc
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 885b9067fc764e8b1be0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden befb17bec837c9aaecda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bb167f864ceae0328e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `22e300c6973fedbbd737` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Behauptung, dass nach 24 Monaten mit ein‑monatiger Frist gekündigt werden kann. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `44c5160c5216180ebd6a` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Unbelegte Angabe, dass eine Unterbrechung gesetzlich auf einen Arbeitstag begrenzt ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `74b9c10685d0c142d4a9` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Aussage, dass die Versorgungssicherheit beim Anbieterwechsel gesetzlich garantiert ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `78969434dfaab5679386` | praezision | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Pauschale 15 %‑Ersparnis‑Regel ohne Quellenangabe oder Modellkennzeichnung. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `f229e8455cc020e41f6d` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Fehlende Belegangabe, dass der neue Anbieter die Kündigung beim alten übernimmt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 22e300c6973fedbbd737 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 44c5160c5216180ebd6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 74b9c10685d0c142d4a9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 78969434dfaab5679386 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f229e8455cc020e41f6d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1189ae6574e7b39ffd14` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aussage, dass alle genannten DNS‑Dienste dauerhaft kostenlos sind, fehlt eine Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `4d85c7ed65b4feed178a` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Versprechen, dass der Geschwindigkeits‑Effekt bei jedem neuen Tab sofort spürbar ist, ohne Evidenz. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `4e7bace05ab581449621` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass ein schnellerer DNS-Server die Wartezeit beim Seitenaufruf spürbar verkürzt, ohne Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1189ae6574e7b39ffd14 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d85c7ed65b4feed178a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4e7bace05ab581449621 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)

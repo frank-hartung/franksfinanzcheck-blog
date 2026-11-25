@@ -1,40 +1,49 @@
 {
- "zeitstempel": "2026-11-24T18:38:36.159224+02:00",
+ "zeitstempel": "2026-11-25T18:16:39.242483+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
-  "ok": 22,
+  "ok": 20,
   "cache": 0,
-  "fehler": 3,
+  "fehler": 5,
   "uebersprungen": 0
  },
- "treffer_gesamt": 180,
- "treffer_organisch": 0,
+ "treffer_gesamt": 135,
+ "treffer_organisch": 10,
  "datenqualitaet": {
-  "anfragen_erfolgreich": 22,
-  "anfragen_organisch": 0,
-  "anfragen_rueckfall": 22,
-  "treffer_gesamt": 180,
-  "treffer_organisch": 0,
-  "treffer_rueckfall": 180,
-  "rueckfall_anteil": 1.0,
+  "anfragen_erfolgreich": 20,
+  "anfragen_organisch": 1,
+  "anfragen_rueckfall": 19,
+  "treffer_gesamt": 135,
+  "treffer_organisch": 10,
+  "treffer_rueckfall": 125,
+  "rueckfall_anteil": 0.926,
   "anbieter": {
-   "wikipedia": 22
+   "wikipedia": 19,
+   "searxng": 1
   },
-  "aussagekraft": "keine"
+  "aussagekraft": "eingeschraenkt"
  },
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
-   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=franksfinanzcheck.de&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: kei"
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
    "anfrage": "Gaskosten senken",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Gaskosten+senken&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treff"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
-   "anfrage": "Urlaubskosten planen",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Urlaubskosten+planen&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: kei"
+   "anfrage": "Zinsen vergleichen",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Zinsen vergleichen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Zinshopping Zinseszins",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Zinshopping Zinseszins': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Zugluft stoppen",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Zugluft stoppen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   }
  ],
  "rang": [
@@ -55,7 +64,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "wikipedia",
+   "quelle": "searxng",
    "sichtbar": false
   },
   {
@@ -129,86 +138,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Urlaub Mietwagen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Urlaub sparen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Urlaubskasse",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Vergleich",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Vergleichen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Versicherung",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Versicherung Selbstständige",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Versicherungen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Versicherungen kündigen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -219,7 +148,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungen prüfen Jahresende",
+   "anfrage": "Zahnzusatzversicherung",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -229,7 +158,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungsarten",
+   "anfrage": "Zahnzusatzversicherung ohne Wartezeit",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -239,7 +168,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungssumme berechnen",
+   "anfrage": "Zugreise Europa günstig",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -249,7 +178,67 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungstipps",
+   "anfrage": "Zuhause",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zweitwagen günstig versichern",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zweitwagen vermeiden",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zweitwagenregelung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zähler beobachten",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Ökostrom Anbieter wechseln",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Ökostrom Tarife vergleichen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -260,11 +249,113 @@
   }
  ],
  "wettbewerb": {
-  "domaenen": [],
-  "domaenen_gesamt": 0,
+  "domaenen": [
+   {
+    "domaene": "ing.de",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 1,
+    "durchschnitts_rang": 1.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "lexware.de",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 2,
+    "durchschnitts_rang": 2.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "bank99.at",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 3,
+    "durchschnitts_rang": 3.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "sparkasse.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 4,
+    "durchschnitts_rang": 4.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "peaks.com",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 5,
+    "durchschnitts_rang": 5.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "meetadam.io",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 6,
+    "durchschnitts_rang": 6.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "fonio.ai",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 7,
+    "durchschnitts_rang": 7.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "fixkostensenker.com",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 8,
+    "durchschnitts_rang": 8.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "ndr.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 9,
+    "durchschnitts_rang": 9.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "verivox.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 10,
+    "durchschnitts_rang": 10.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   }
+  ],
+  "domaenen_gesamt": 10,
   "merkmale": {}
  },
  "quota": {
-  "wikipedia": 22
+  "searxng": 1,
+  "wikipedia": 19
  }
 }

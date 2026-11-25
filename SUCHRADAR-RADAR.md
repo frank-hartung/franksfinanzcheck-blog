@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-24 18:38:36 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-25 18:16:39 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -8,23 +8,23 @@
 | Kennzahl | Wert |
 |---|---|
 | Anfragen geplant | 25 |
-| Erfolgreich | 22 |
+| Erfolgreich | 20 |
 | Aus dem Zwischenspeicher | 0 |
-| Fehlgeschlagen | 3 |
+| Fehlgeschlagen | 5 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 180 |
-| Davon organisch | 0 |
-| Eigene Treffer | 0 von 22 Anfragen |
+| Treffer gesamt | 135 |
+| Davon organisch | 10 |
+| Eigene Treffer | 0 von 20 Anfragen |
 
 ## Datenqualität
 
 | Kennzahl | Wert |
 |---|---|
-| Anfragen mit echtem Suchindex | 0 von 22 |
-| Anfragen nur mit Wissens-Rückfall | 22 |
-| Organische Treffer | 0 von 180 |
-| Rückfall-Anteil | 100 % |
-| Aussagekraft | keine |
+| Anfragen mit echtem Suchindex | 1 von 20 |
+| Anfragen nur mit Wissens-Rückfall | 19 |
+| Organische Treffer | 10 von 135 |
+| Rückfall-Anteil | 93 % |
+| Aussagekraft | eingeschraenkt |
 
 _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfall verhindert leere Läufe, ist aber kein Ranking._
 
@@ -32,7 +32,8 @@ _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfal
 
 | Anbieter | Abrufe | Limit |
 |---|---|---|
-| wikipedia | 22 | 300 |
+| searxng | 1 | 400 |
+| wikipedia | 19 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -40,7 +41,18 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 
 ## Wettbewerb
 
-_Keine Treffer ausgewertet._
+| Domäne | Treffer | Top 3 | Ø Rang | Bester Rang |
+|---|---|---|---|---|
+| ing.de | 1 | 1 | 1.0 | 1 |
+| lexware.de | 1 | 1 | 2.0 | 2 |
+| bank99.at | 1 | 1 | 3.0 | 3 |
+| sparkasse.de | 1 | 0 | 4.0 | 4 |
+| peaks.com | 1 | 0 | 5.0 | 5 |
+| meetadam.io | 1 | 0 | 6.0 | 6 |
+| fonio.ai | 1 | 0 | 7.0 | 7 |
+| fixkostensenker.com | 1 | 0 | 8.0 | 8 |
+| ndr.de | 1 | 0 | 9.0 | 9 |
+| verivox.de | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
 
@@ -48,7 +60,9 @@ _Keine Treffer ausgewertet._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / ht |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / https: |
-| Urlaubskosten planen | Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / ht |
+| Zinsen vergleichen | Kein Anbieter lieferte Treffer für 'Zinsen vergleichen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / http |
+| Zinshopping Zinseszins | Kein Anbieter lieferte Treffer für 'Zinshopping Zinseszins': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer /  |
+| Zugluft stoppen | Kein Anbieter lieferte Treffer für 'Zugluft stoppen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / https:/ |
 
 ## Einordnung
 

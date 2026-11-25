@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-24T18:38:36.159224+02:00",
+ "stand": "2026-11-25T18:16:39.242483+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -18,7 +18,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "wikipedia",
+   "quelle": "searxng",
    "sichtbar": false
   },
   {
@@ -92,86 +92,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Urlaub Mietwagen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Urlaub sparen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Urlaubskasse",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Vergleich",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Vergleichen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Versicherung",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Versicherung Selbstständige",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Versicherungen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Versicherungen kündigen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -182,7 +102,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungen prüfen Jahresende",
+   "anfrage": "Zahnzusatzversicherung",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -192,7 +112,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungsarten",
+   "anfrage": "Zahnzusatzversicherung ohne Wartezeit",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -202,7 +122,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungssumme berechnen",
+   "anfrage": "Zugreise Europa günstig",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -212,7 +132,67 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Versicherungstipps",
+   "anfrage": "Zuhause",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zweitwagen günstig versichern",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zweitwagen vermeiden",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zweitwagenregelung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zähler beobachten",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Ökostrom Anbieter wechseln",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Ökostrom Tarife vergleichen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

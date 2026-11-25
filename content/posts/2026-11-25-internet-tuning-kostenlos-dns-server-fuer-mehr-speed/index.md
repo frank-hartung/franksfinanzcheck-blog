@@ -2,10 +2,8 @@
 title: "Internet tuning kostenlos: DNS-Server für mehr Speed"
 description: Mit internet tuning kostenlos surfst du schneller und sicherer. Erfahre im Guide, wie du den DNS-Server wechselst und deine Verbindung optimierst.
 kurzantwort: Ein schnellerer DNS-Server verkürzt die Wartezeit beim Seitenaufruf spürbar. Moderne Filter blockieren schädliche Webseiten direkt auf Server-Ebene. Du entscheidest, welcher Dienst deine Daten zur Namensauflösung verarbeitet.
-date: 2026-11-25T10:55:22Z
-draft: true
-cadence_demoted: 2026-11-25T11:40:24Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+date: 2026-11-25T16:06:13Z
+draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -33,6 +31,16 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: f4f3b6cd88a1277ecf5351fe43ef30ba6a081fe336a1495c3eac0563d0f68610
     geprueft_am: 2026-11-25
+quellen:
+  - titel: "IP-Adressen und Filtervarianten von 1.1.1.1"
+    url: "https://developers.cloudflare.com/1.1.1.1/ip-addresses/"
+    herausgeber: "Cloudflare"
+    datum: "2026-11-25"
+  - titel: "Google Public DNS: Einrichtung und IP-Adressen"
+    url: "https://developers.google.com/speed/public-dns/docs/using"
+    herausgeber: "Google for Developers"
+    datum: "2026-11-25"
+faktencheck: 2026-11-25
 ---
 
 Dein Browser lädt quälend langsam.
@@ -226,6 +234,10 @@ Wer einmal mit einem schnellen DNS-Server gesurft ist, will nicht zurück.
 Es ist der erste Schritt zu einem optimierten digitalen Haushalt.
 Nimm dir die [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Zeit für dieses Upgrade; das ist ein Modellwert.
 Dein Browser wird es dir bei jedem Klick danken.
+
+**Weiterlesen:** [Ratgeber Internet & DSL – Tarife, WLAN und Netztechnik](../../pillar/internet-dsl/)
+
+**Rechner:** [Fixkosten-Scanner für Internet, Handy und laufende Verträge](../../werkzeuge/fixkosten-scanner/)
 
 ## Häufige Fragen
 

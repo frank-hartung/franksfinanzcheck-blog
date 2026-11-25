@@ -1,7 +1,7 @@
 {
   "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
   "titel": "DSL wechseln ohne Ausfall: So sparst du beim Internet",
-  "erzeugt": "2026-11-25 11:39 UTC",
+  "erzeugt": "2026-11-25 14:52 UTC",
   "faellig": {
     "faellig": true,
     "prio": 0,
@@ -44,9 +44,40 @@
       "zitierbar": true
     }
   ],
-  "befunde": [],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Aussage, dass die Versorgungssicherheit beim Anbieterwechsel gesetzlich garantiert ist.",
+      "stelle": "*Kein Risiko beim Wechsel:** Durch gesetzliche Regelungen ist die Versorgungssicherheit beim **Internet anbieterwechsel** garantiert.*",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Fehlende Belegangabe, dass der neue Anbieter die Kündigung beim alten übernimmt.",
+      "stelle": "*Der neue Anbieter übernimmt meist die Kündigung beim alten Dienstleister für dich.*",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Behauptung, dass nach 24 Monaten mit ein‑monatiger Frist gekündigt werden kann.",
+      "stelle": "*Nach Ablauf dieser zwei Jahre kannst du deinen Vertrag jederzeit mit einer Frist von einem Monat kündigen.*",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Unbelegte Angabe, dass eine Unterbrechung gesetzlich auf einen Arbeitstag begrenzt ist.",
+      "stelle": "*Gesetzlich ist festgelegt, dass die Unterbrechung nicht länger als einen Arbeitstag dauern darf.*",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Pauschale 15 %‑Ersparnis‑Regel ohne Quellenangabe oder Modellkennzeichnung.",
+      "stelle": "*Faustregel:** Ein Wechsel lohnt sich meistens dann, wenn die effektiven monatlichen Kosten des neuen Tarifs mindestens 15 % unter deinem aktuellen Preis liegen.*",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    }
+  ],
   "fehler": [],
-  "fassung_sha256": "e07644ba6be5f850ceab9372f4c7b7bb7e6480337ba1928a5a379732a9fd2ed1",
-  "text_sha256": "55ca77840ad5f4c13ef92803c1b6d0461b764ea2f9d164b3df7241b12e5ede10",
-  "fachpruefung": "Fehler: gemini: HTTPError; groq: HTTPError; cloudflare/@cf/openai/gpt-oss-120b: ungültiges Antwortformat"
+  "fassung_sha256": "1473f78bc82d4fcd6443549f2308bd8a618b9f6d878e9933ef0f6fb7f8b42656",
+  "text_sha256": "d53ec890155e22ea5c26292bb8d92a044261c583a748d2f92de67c82946330cb",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
 }

@@ -2,10 +2,8 @@
 title: "DSL wechseln ohne Ausfall: So sparst du beim Internet"
 description: Willst du DSL wechseln und dabei bares Geld sparen? Mit diesen Tipps gelingt der Internet Anbieterwechsel ohne Ausfallzeit und Technik-Frust.
 kurzantwort: Durch gesetzliche Regelungen ist die Versorgungssicherheit beim internet anbieterwechsel garantiert. Neukunden-Boni und Wechselprämien machen den Umstieg finanziell attraktiv. Ob du deinen Router mieten oder kaufen solltest, hängt von der geplanten Nutzungsdauer ab.
-date: 2026-11-25T10:51:47Z
-draft: true
-cadence_demoted: 2026-11-25T11:40:24Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+date: 2026-11-25T16:06:13Z
+draft: false
 tags: ["DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -33,6 +31,16 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 9a9bac13a48311967521a404c5dd546fff05af910031dfdfb3721668accf0abf
     geprueft_am: 2026-11-25
+quellen:
+  - titel: "Bundesnetzagentur – Verbraucherportal Telekommunikation: Vertrag und Laufzeit"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-11-25"
+  - titel: "Verbraucherzentrale – Probleme beim Anbieterwechsel: So wehren Sie sich"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-11-25"
+faktencheck: 2026-11-25
 ---
 
 DSL wechseln im Check: Stell dir vor, du sitzt abends auf dem Sofa. Du willst deine Lieblingsserie streamen. Doch das Bild ruckelt nur. Der Ladebalken dreht sich endlos.
@@ -222,6 +230,10 @@ Setze dir einen Termin für deinen nächsten Vertragscheck. So stellst du sicher
 Gehe jetzt den ersten Schritt. Schau in deine Unterlagen.
 
 Prüfe deine Kündigungsfrist. Der Markt wartet mit attraktiven Angeboten auf dich. Ein **Internet anbieterwechsel** ist oft der Startschuss für eine optimierte Haushaltskasse.
+
+**Weiterlesen:** [Ratgeber Internet & DSL – alle Vergleiche und Anleitungen](../../pillar/internet-dsl/)
+
+**Rechner:** [24-Monats-Effektivpreis-Rechner für DSL- und Mobilfunktarife](../../werkzeuge/effektivpreis-rechner/)
 
 ---
 
