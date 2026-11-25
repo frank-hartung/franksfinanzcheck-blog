@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-24T04:42:31Z",
+  "generated": "2026-11-25T03:29:45Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
@@ -55,7 +55,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.1 Tag(en)"
+        "letzter erfolgreicher Post vor 1.0 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -68,7 +68,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 23 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 24 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
