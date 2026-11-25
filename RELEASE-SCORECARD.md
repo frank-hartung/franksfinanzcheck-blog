@@ -68,7 +68,7 @@
 | `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-25 | **blockiert** |
 | `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-07 | **blockiert** |
 | `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **freigabe-reif** |
-| `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **blockiert** |
+| `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **freigabe-reif** |
 | `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-07 | **blockiert** |
 | `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2027-01-07 | **blockiert** |
 | `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-07 | **freigabe-reif** |
@@ -124,7 +124,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 | Check | Dimension | Wirkung | Entscheidet | Artikel |
 |---|---|---|---|---|
-| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 52 |
+| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 51 |
 | **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 5 |
 | **T1-zeichenlaenge** | technik | blockiert | Maschine (deterministisch) | 1 |
 | **T5-lesbarkeit** | technik | blockiert | Maschine (deterministisch) | 1 |
@@ -133,7 +133,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**281** offene Befunde auf **79** Seiten (live: 176 auf 52 Artikeln) · ältester **26 Tage** · Frist 14 Tage · über der Frist: **123**.
+**276** offene Befunde auf **78** Seiten (live: 171 auf 51 Artikeln) · ältester **26 Tage** · Frist 14 Tage · über der Frist: **118**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -141,9 +141,9 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-⚠️ **239 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
+⚠️ **238 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
 
-🔴 **Eskalation:** 123 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
+🔴 **Eskalation:** 118 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
 
 ✅ **F1 (Faktenalter) ist nicht die Ursache:** Die Deckung trägt den Bestand; rot ist der Inhalt, nicht der Takt.
 
@@ -153,19 +153,19 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 | Kennzahl | Wert |
 |---|---|
-| Seiten im Bestand (Posts + Ratgeber) | 148 |
-| Fällig heute / überfällig | 9 / 0 |
-| Bedarf | 3,56 Prüfungen/Tag (24,9/Woche) |
-| Angebot | 10,00/Tag (Budget 10 × 1,00 Läufe/Tag) |
-| **Deckung** | **281 %** |
+| Seiten im Bestand (Posts + Ratgeber) | 150 |
+| Fällig heute / überfällig | 11 / 0 |
+| Bedarf | 3,59 Prüfungen/Tag (25,1/Woche) |
+| Angebot | 11,00/Tag (Budget 11 × 1,00 Läufe/Tag) |
+| **Deckung** | **306 %** |
 | Rückstand abgebaut | in 0 Tagen (Frist 7 Tage) |
 | Nächste Frist | `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` am 2026-11-27 (in 2 Tagen) |
-| Empfohlenes Budget | 10 je Lauf (Limit 21) |
+| Empfohlenes Budget | 11 je Lauf (Limit 21) |
 | Spitzentag (#1039) | ✅ mitgemessen (54 Bündeltage, kein Befund) |
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
-## Blockierende Funde (53 Artikel)
+## Blockierende Funde (52 Artikel)
 
 ### `2026-08-10-dsl-wechselbonus-sichern` (blockiert, Risikoklasse standard)
 
@@ -280,10 +280,6 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 - **F4-fachbefund** [faktenalter]: 3eab428a91b1b16b7df8 (luecke): Die aktuelle Inflationsrate von +2,8 % wird nicht genannt, obwohl sie für die empfohlene regelmäßige Prüfung der Pufferhöhe die zentrale Rechengröße darstellt.; 7da9383cbc6a45e1a3ac (praezision): Der Modellwert für Lebensmittel (320 €) wird nicht mit der aktuellen Preissteigerung von +0,4 % abgeglichen, um die Validität der Kalkulationsbasis zu stützen.; da7852bcca291061c39b (praezision): Die Modellrechnung für Fixkosten berücksichtigt nicht die spezifische Teuerung bei Energie (+12,7 %), was bei der Kalkulation von Strom und Gas zu einer Unterdeckung führen kann.
 
-### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` (blockiert, Risikoklasse standard)
-
-- **F4-fachbefund** [faktenalter]: 334751e6f61ad0033fe4 (luecke): Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.; 36759a5efe5e8e5163d0 (luecke): Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.; 942922d1afd7844618e9 (luecke): Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.; d41f0d5ce8798df0211b (praezision): Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.; e139d0769faadd04392a (luecke): Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.
-
 ### `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` (blockiert, Risikoklasse erhoeht)
 
 - **F4-fachbefund** [faktenalter]: 68afba3e6a16a364ce45 (praezision): Die Kündigungsfrist in der Grundversorgung ist gesetzlich exakt auf zwei Wochen festgelegt, was für den Leser eine wichtigere Information ist als die vage Bezeichnung 'kurze Fristen'.; dc5ff05c5dda79d01373 (luecke): Es fehlt der Hinweis auf die gesetzliche Befristung der Ersatzversorgung auf maximal drei Monate, nach denen sie automatisch endet.
@@ -384,8 +380,8 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 - `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18809 Zeichen, Optimum 12.000–18.000)
 - `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18252 Zeichen, Optimum 12.000–18.000)
-- `2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18070 Zeichen, Optimum 12.000–18.000)
-- `2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11260 Zeichen, Optimum 12.000–18.000)
+- `2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18150 Zeichen, Optimum 12.000–18.000)
+- `2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11340 Zeichen, Optimum 12.000–18.000)
 
 ## Entwürfe – was vor dem Livegang noch offen ist
 
@@ -441,6 +437,8 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-24-vorrat-planen-leicht-gemacht-so-sparst-du-beim` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 90 Tage) | 2027-02-15 |
 | `2026-11-24-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 90 Tage) | 2027-02-11 |
 | `2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 

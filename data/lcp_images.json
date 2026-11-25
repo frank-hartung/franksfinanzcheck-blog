@@ -1,7 +1,11 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
+<<<<<<< HEAD
   "generatedAt": "2026-11-25T13:32:54+00:00",
+=======
+  "generatedAt": "2026-11-25T14:00:06+00:00",
+>>>>>>> origin/main
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
