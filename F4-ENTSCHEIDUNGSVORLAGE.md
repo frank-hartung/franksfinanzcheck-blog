@@ -8,7 +8,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Keine Prüfsummen im Dokument.** Maßgeblich ist, welche Befunde offen sind und ob die beanstandeten Werte heute noch im Text stehen; die Fassungsbindung führt der Ledger (`geprueft_fassung`). So altert die Vorlage nicht an fremden Commits.
 
-**171 offene Live-Befunde auf 51 Artikeln.** Für **81** gibt es frühere Entscheidungen zu diesem Befund;
+**174 offene Live-Befunde auf 52 Artikeln.** Für **84** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **90** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -217,6 +217,46 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
+
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `30caa57be394afb62947` | luecke | 2026-11-23 · 5. Entscheidung | nicht mehr im Text: 11,93 Cent | Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender… |
+| `32a3ea879f2cf126b3a7` | luecke | 2026-11-23 · 5. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der… |
+| `c583efe1ce02df3ca2d7` | luecke | 2026-11-23 · 5. Entscheidung | nicht mehr im Text: 360 € | Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine… |
+
+### `30caa57be394afb62947`
+
+**Befund:** Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft (Welle 1): Der alte Wert 11,93 Cent/kWh wurde entfernt; stattdessen verlinkt der Artikel direkt auf die BDEW-Gaspreisanalyse Herbst 2026 (12,23 / 11,67 Cent/kWh) mit Hinweis 'Marktübersicht ist kein Tarifangebot'.
+
+- Im heutigen Text nicht mehr vorhanden: 11,93 Cent
+
+### `32a3ea879f2cf126b3a7`
+
+**Befund:** Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft (Welle 1): Pflichten der Versorger bei Preisänderungen (Mindestfrist 1 Monat, Sonderkündigungsrecht, Ausnahmen, Grund-/Ersatzversorgung) sind mit direkten Bundesnetzagentur-Links dargelegt; doppelter Absatz wurde bereinigt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `c583efe1ce02df3ca2d7`
+
+**Befund:** Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.
+
+**Frühere Entscheidung (2026-11-23):** Frank Hartung (Betreiber-Freigabe über Arena-Session, 23.11.2026)
+
+> Volltext am 23.11.2026 geprüft (Welle 1): Die unbelegte 360-Euro-Ersparnis-Behauptung für Januar 2026 steht nicht mehr im Artikel; alle Beispielwerte sind als Rechenbeispiele gekennzeichnet.
+
+- Im heutigen Text nicht mehr vorhanden: 360 €
 
 ## `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`
 
@@ -2211,6 +2251,9 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4095501e717fb30d7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77520584b5afd8ebd7f7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 30caa57be394afb62947 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32a3ea879f2cf126b3a7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c583efe1ce02df3ca2d7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 29eea3c457afaba3d7bd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8a0df5531569ec042ec4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bda1b543db068b3e00ff --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
