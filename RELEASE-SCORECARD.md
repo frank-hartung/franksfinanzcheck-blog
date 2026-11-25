@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-11-25 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-11-25 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -153,11 +153,11 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 | Kennzahl | Wert |
 |---|---|
-| Seiten im Bestand (Posts + Ratgeber) | 150 |
-| Fällig heute / überfällig | 9 / 0 |
-| Bedarf | 3,59 Prüfungen/Tag (25,1/Woche) |
+| Seiten im Bestand (Posts + Ratgeber) | 151 |
+| Fällig heute / überfällig | 10 / 0 |
+| Bedarf | 3,61 Prüfungen/Tag (25,3/Woche) |
 | Angebot | 10,00/Tag (Budget 10 × 1,00 Läufe/Tag) |
-| **Deckung** | **279 %** |
+| **Deckung** | **277 %** |
 | Rückstand abgebaut | in 0 Tagen (Frist 7 Tage) |
 | Nächste Frist | `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` am 2026-11-27 (in 2 Tagen) |
 | Empfohlenes Budget | 10 je Lauf (Limit 21) |
@@ -425,6 +425,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-22-strompreis-2026-herbst-check-fuer-deine-stromkosten` | standard | nicht erforderlich | frisch geprüft vor 16 Tagen (Intervall 30 Tage) | 2026-12-09 |
 | `2026-11-22-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 90 Tage) | 2027-02-15 |
 | `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2027-01-07 |
+| `2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 | `2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 | `2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo` | standard | nicht erforderlich | frisch geprüft vor 13 Tagen (Intervall 45 Tage) | 2026-12-27 |
 | `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2027-01-09 |
