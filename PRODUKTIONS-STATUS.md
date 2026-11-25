@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-25 03:28 UTC  
-**Stufe:** WARTEND  
-**Befund:** Publikationstag, bisher 0 Artikel – Fallback-Slots (14:10 / 17:40 UTC) laufen noch. Kein Alarm. – Bestand: 3 von Gates gehalten (ältester 9 Tage: faktenfrische: 05ae2eeee6a578aac17b (luecke): Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.; 2980f6b227953c5ac8af (luecke): Keine Quelle für die Aussage, …)
+**Stand:** 2026-11-25 17:29 UTC  
+**Stufe:** P1  
+**Befund:** Heute (Mittwoch, 2026-11-25) ist ein Publikationstag – der Engine-Lauf ist FEHLGESCHLAGEN und es sind 0 Artikel erschienen (Ziel: 2). – Bestand: 5 von Gates gehalten (ältester 9 Tage: faktenfrische: 4232b77745f1559839a5 (luecke): Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesn…)
 
 | Kennzahl | Wert |
 |---|---|
@@ -12,9 +12,7 @@
 | Letzter Artikel überhaupt | 2026-11-23 (2 Tage her) |
 | Live-Artikel gesamt | 92 |
 | Förderfähig in der Re-Queue | 0 |
-| Von Gates gehalten (braucht Korrektur) | 3 |
+| Von Gates gehalten (braucht Korrektur) | 5 |
 | Mindestziel/Tag | 2 |
 
 _Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._
-
-**Zusatzbefund:** Die Content-Engine hat heute gar keinen Lauf abgeschlossen.
