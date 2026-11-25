@@ -156,7 +156,7 @@ Wenn deine Fixkosten deutlich über 50 % liegen, solltest du zuerst die großen
 
 ## Wann 1.000 € ein guter Start sind – aber nicht das Endziel
 
-Viele hören beim Thema Notgroschen zuerst die Zahl **1.000 €**; das ist eine Modellannahme. Das ist als Sofortziel sinnvoll, weil es den ersten Druck rausnimmt. Eine kaputte Waschmaschine, neue Reifen oder eine hohe Nachzahlung werfen dich dann nicht sofort aus der Bahn.
+Viele hören beim Thema finanzielle Sicherheit zuerst die Zahl **1.000 €**; das ist eine Modellannahme. Das ist als Sofortziel sinnvoll, weil es den ersten Druck rausnimmt. Eine kaputte Waschmaschine, neue Reifen oder eine hohe Nachzahlung werfen dich dann nicht sofort aus der Bahn.
 
 Trotzdem ist wichtig: Für viele Haushalte sind **1.000 €** nur der Anfang und noch kein fertiger Notgroschen.
 
@@ -174,7 +174,7 @@ So wirkt das Ziel nicht überwältigend. Und du kommst trotzdem systematisch zu 
 
 Der Zielbetrag entmutigt viele. Deshalb funktioniert der Aufbau in Stufen besser als in einem Sprung.
 
- Das ist kein perfekter, aber ein erstaunlich brauchbarer Zielwert – und er ist in zehn Minuten fertig; das ist ein Rechenbeispiel. Viele unterschätzen dabei nicht ihr Einkommen, sondern ihre festen Pflichten: Genau diese Mindestsumme gehört an den Anfang jeder Notgroschen-Rechnung.
+ Das ist kein perfekter, aber ein erstaunlich brauchbarer Zielwert – und er ist in zehn Minuten fertig; das ist ein Rechenbeispiel. Viele unterschätzen dabei nicht ihr Einkommen, sondern ihre festen Pflichten: Genau diese Mindestsumme gehört an den Anfang jeder Finanz-Rechnung.
 
 **Schritt 2 – in Etappen denken.** Ruhiger wird es nicht erst am Ziel, sondern schon bei der ersten sauberen Stufe:
 
@@ -190,18 +190,18 @@ Genau nach dem ersten Tausender bleiben viele zu lange stehen. Setz dir deshalb 
 
 **Schritt 4 – Zwischenstände feiern.** Schau nach drei Monaten auf die erste Zwischensumme und nach sechs Monaten nicht auf den Kontostand, sondern auf die Zahl deiner Monatsausgaben: Deckt der Puffer schon einen halben oder vollen Monatsbedarf im Rechenfall? Diese Marke hält den Aufbau ruhiger als der ferne Blick aufs Endziel.
 
-### Die Schutzregel: Wofür der Notgroschen nicht da ist
+### Die Schutzregel: Wofür die Rücklage nicht da ist
 
-Ein Notgroschen ist kein Urlaubstopf und kein Technikbudget. Er ist für echte Störungen: eine Reparatur, eine Nachzahlung, eine Einkommenslücke. Lege früh fest, ab wann du wirklich an ihn gehst – sonst wird aus der Rücklage ein zweites Alltagskonto.
+Deine eiserne Reserve ist kein Urlaubstopf und kein Technikbudget. Sie greift nur bei echten Störungen: eine Reparatur, eine Nachzahlung, eine Einkommenslücke. Lege früh fest, ab wann du wirklich an sie gehst – sonst wird aus dem Puffer ein zweites Alltagskonto.
 
 Vor jeder Entnahme hilft eine einzige Frage: **Löst dieses Geld gerade einen echten Notfall oder nur einen spontanen Wunsch?** Sie schützt den Puffer zuverlässiger als jede gute Absicht.
 
 ## Die häufigsten Fehler beim Aufbau der Reserve
 
-Ein Notgroschen scheitert selten an Mathematik. Meist scheitert er am Alltag. Diese Fehler sehe ich besonders oft:
+Ein finanzielles Polster scheitert selten an Mathematik. Meist scheitert es am Alltag. Diese Fehler sehe ich besonders oft:
 
 1. **Zu früh investieren:** Wer bei null Puffer schon alles in ETFs steckt, verkauft im Notfall oft im falschen Moment.
- **Den Betrag zu klein wählen:** 1.000 € sind ein guter Start, aber für viele Haushalte keine fertige Lösung; das ist eine Modellannahme.
+2. **Den Betrag zu klein wählen:** 1.000 € sind ein guter Start, aber für viele Haushalte keine fertige Lösung; das ist eine Modellannahme.
 3. **Keine Trennung vom Girokonto:** Dann wird das Geld für Urlaub, Technik oder spontane Käufe mitbenutzt.
 4. **Unregelmäßig sparen:** Was erst am Monatsende übrig bleiben soll, bleibt häufig gar nicht erhalten.
 5. **Lebenslage nicht nachziehen:** Ein neues Kind, ein Fahrzeug oder höhere Miete bedeuten fast immer auch einen größeren Bedarf.
@@ -213,16 +213,16 @@ Ein Notgroschen scheitert selten an Mathematik. Meist scheitert er am Alltag. Di
 * [ ] Kennst du die Grenze zwischen Notfall und Wunsch?
 * [ ] Hast du den Zielbetrag in den letzten zwölf Monaten neu geprüft als Modellannahme?
 
-## Warum sich ein voller Notgroschen sofort gut anfühlt
+## Warum sich ein volles Polster sofort gut anfühlt
 
-Der größte Nutzen ist nicht nur finanziell. Ein Notgroschen verändert deine Entscheidungen.
+Der größte Nutzen ist nicht nur finanziell. Eine eigene Rücklage verändert deine Entscheidungen.
 
 Wer ein Polster hat, bleibt bei Problemen ruhiger. Du musst bei einer Reparatur nicht hektisch rechnen. Du kannst Angebote vergleichen und unter Druck bessere Entscheidungen treffen.
 
 
 Genau darin steckt der eigentliche Wert. Die Reserve kauft dir Zeit. Und Zeit ist im Finanzalltag oft wichtiger als ein Prozentpunkt mehr Rendite.
 
-Wenn dein Notgroschen einmal steht, kannst du dich viel entspannter um den nächsten Schritt kümmern: Schulden abbauen, ETF-Sparplan erhöhen oder die Sparquote ausbauen. Erst das Fundament, dann der Vermögensaufbau.
+Wenn deine Rücklage einmal steht, kannst du dich viel entspannter um den nächsten Schritt kümmern: Schulden abbauen, ETF-Sparplan erhöhen oder die Sparquote ausbauen. Erst das Fundament, dann der Vermögensaufbau.
 
 **Für deinen nächsten Check:** Lege die Rücklage nicht mit dem Urlaubsgeld zusammen. Ein bereits verplanter Betrag steht bei einer kaputten Waschmaschine nur scheinbar zur Verfügung.
 
@@ -235,17 +235,17 @@ Der Notgroschen ist kein Sparziel, sondern die Antwort auf die Frage, was passie
 
 ## Häufige Fragen
 
-### Reicht ein Dispokredit nicht als Notgroschen aus?
+### Reicht ein Dispokredit nicht als Reserve aus?
 Nein. Ein Dispokredit ist teuer und kann von der Bank gekürzt werden. Eine Reserve aus eigenem Geld ist sicherer und deutlich günstiger.
 
-### Sollte ich erst Schulden tilgen oder den Notgroschen aufbauen?
-Bei teuren Schulden ist ein Parallelweg oft sinnvoll. Baue zunächst einen kleinen Mini-Notgroschen auf. Danach konzentrierst du dich auf die teuersten Kredite.
+### Sollte ich erst Schulden tilgen oder den Puffer aufbauen?
+Bei teuren Schulden ist ein Parallelweg oft sinnvoll. Baue zunächst eine kleine Startreserve auf. Danach konzentrierst du dich auf die teuersten Kredite.
 
 ### Muss der komplette Betrag sofort auf dem Konto liegen?
  Schon ein erster Puffer von 1.000 € nimmt Druck aus dem Alltag; das ist ein Modellwert. Danach wächst die Reserve Schritt für Stufe weiter.
 
-### Darf ich den Notgroschen investieren?
-Für den Notgroschen selbst ist das meist keine gute Idee. Das Geld soll stabil und schnell verfügbar bleiben. Für viele Haushalte ist Tagesgeld deshalb die sauberste Lösung.
+### Darf ich meine Sicherheitsreserve investieren?
+Für das Notfallpolster selbst ist das meist keine gute Idee. Das Geld soll stabil und schnell verfügbar bleiben. Für viele Haushalte ist Tagesgeld deshalb die sauberste Lösung.
 
 ### Was mache ich, wenn ich die Reserve aufbrauchen musste?
 Dann erfüllt sie genau ihren Zweck. Setze danach das Auffüllen wieder an erste Stelle, bis dein Sicherheitsnetz erneut steht.

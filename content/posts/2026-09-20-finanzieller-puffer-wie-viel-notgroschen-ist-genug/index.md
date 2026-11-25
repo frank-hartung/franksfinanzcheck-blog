@@ -79,7 +79,7 @@ Viele sparen oder investieren, ohne vorher ihre Basis zu sichern. Das klappt so 
 
 Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) schützt aber nicht nur dein Konto. Er schützt auch dein Depot. Wenn du in einer schlechten Börsenphase plötzlich Geld brauchst, musst du sonst vielleicht genau dann verkaufen, wenn Kurse im Keller sind. Das ist doppelt ärgerlich.
 
-**Faustregel:** Sicherheit zuerst, Rendite danach. Ein stabiler Puffer macht den Rest deiner Finanzplanung ruhiger und oft auch besser.
+**Faustregel:** Sicherheit zuerst, Rendite danach. Ein finanzieller Puffer macht den Rest deiner Finanzplanung ruhiger und oft auch besser.
 
 ## Wie viel Notgroschen reicht wirklich?
 
@@ -140,7 +140,7 @@ Oder direkt hier: Trag deine notwendigen Monatsausgaben ein und der Rechner zeig
 
 ## Wo parkst du den Notgroschen am besten?
 
-Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) muss vor allem eines können: **sofort verfügbar sein**. Hohe Rendite ist hier Nebensache. Wenn du das Geld erst kündigen oder verkaufen musst, ist es für den Notfall zu träge.
+Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) muss vor allem eines können: **sofort verfügbar sein**. Hohe Rendite ist hier Nebensache. Wenn du das Geld erst kündigen oder verkaufen musst, ist ein finanzieller Puffer für den Notfall zu träge.
 
 Darum landet der Puffer in den meisten Fällen am besten auf einem separaten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Das Geld ist nicht direkt im Girokonto sichtbar, aber meist binnen kurzer Zeit verfügbar. Genau das ist der Punkt.
 

@@ -1,14 +1,16 @@
 ---
 title: "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet"
-description: "Lohnt die Treue zum DSL-Anbieter? Vergleiche das Rückholangebot mit dem Preis eines Wechsels einschließlich Router, Bereitstellung und Laufzeit."
+description: "Lohnt die Treue beim DSL-Vertrag? Vergleiche das Rückholangebot mit einem Wechsel inklusive Router, Bereitstellung und Laufzeit."
 date: 2026-10-12T06:02:26Z
 draft: false
+cornerstone: true
 reserve_published: 2026-10-12
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["DSL-Anbieter wechseln", "DSL wechseln", "Internetanbieter", "Vertragslaufzeit", "Anbieterwechsel", "DSL Anbieter wechseln", "DSL-Anbieter", "Treue-Falle beim DSL-Vertrag"]
+keywords_fokus: ["DSL-Vertrag", "Anbieterwechsel"]
 pin_title: "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet"
 pin_description: "*Werbung | Lohnt die Treue zum DSL-Anbieter? Vergleiche das Rückholangebot mit dem Preis eines Wechsels einschließlich Router, Bereitstellung und Laufzeit. Bitte bei einem Rückholangebot um die Vertragszusammenfassung. Prüfe darin nicht nur den neuen Preis, sondern auch, ob eine neue Mindestlaufzeit beginnt."
 ai_generated: true
@@ -43,7 +45,7 @@ faktencheck: 2026-11-15
 kurzantwort: "Vergleiche beim DSL-Wechsel den gesamten Preis, die Vertragslaufzeit, den Router und den Termin der Umstellung. Prüfe zuerst deinen Vertrag und beauftrage den neuen Anbieter mit der Koordination des Wechsels. Bewahre alle Bestätigungen auf."
 ---
 
-Ein DSL-Vertrag läuft leicht weiter, obwohl sich deine Nutzung geändert hat. Ein Wechsel kann passen, muss aber nicht automatisch [Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/). Prüfe erst Preis, Leistung und Ablauf. Dann kannst du entscheiden, ob ein neuer Anbieter zu deinem Haushalt passt.
+Ein DSL-Vertrag läuft leicht weiter, obwohl sich deine Nutzung geändert hat. Willst du deinen DSL-Anbieter wechseln, musst du vorher prüfen, ob das wirklich hilft und [Geld spart](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/). Prüfe erst Preis, Leistung und Ablauf. Dann kannst du entscheiden, ob ein neuer Anbieter zu deinem Haushalt passt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

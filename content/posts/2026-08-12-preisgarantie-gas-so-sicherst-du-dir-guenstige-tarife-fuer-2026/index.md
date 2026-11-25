@@ -22,6 +22,7 @@ cover:
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas", "Gasanbieter mit Preisgarantie", "Gaspreisentwicklung 202"]
+keywords_fokus: ["Preisgarantie"]
 pin_title: "Gaspreisgarantie: Wann sich ein fester Preis lohnt"
 pin_description: "*Werbung | Lege zwei Gasangebote nebeneinander: Rechne mit demselben Jahresverbrauch und prüfe, ob die Preisgarantie so lange läuft wie der Vertrag. Notiere Garantieende und frühesten Kündigungstermin in zwei getrennten Kalenderfeldern. Liegt der erste Termin deutlich früher, bleibt ein Teil der Vertragszeit ohne den erwarteten Schutz."
 pin_text_sync: false

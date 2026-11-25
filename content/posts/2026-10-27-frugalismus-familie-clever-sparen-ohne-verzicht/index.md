@@ -10,6 +10,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen", "minimalistisch leben", "Frugalismus mit Familie"]
+keywords_fokus: ["Familie", "Frugalismus Familie"]
 pin_title: "Frugalismus mit Familie: Gemeinsam über Ausgaben entscheiden"
 pin_description: "*Werbung | Beim Sparen in der Familie sind nicht alle Ausgaben gleich wichtig. Legt gemeinsam fest, was bleiben soll und bei welchem Posten ihr Neues ausprobiert. Beziehe auch unbezahlte Zeit in die Entscheidung ein. Eine günstigere Einkaufsroute lohnt nicht für jede Familie, wenn sie den ganzen Samstag in Anspruch nimmt."
 ai_generated: true

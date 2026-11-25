@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DSL-Vergleich: So findest du den günstigsten Internettarif"
-description: "Ein DSL-Angebot ist nicht allein wegen des Rabatts günstig. Rechne alle Monate, die Anschlussgebühr und die Routermiete auf denselben Zeitraum um."
+description: "DSL-Vergleich: Ein Angebot ist nicht allein wegen des Rabatts günstig. Rechne Monate, Anschluss und Routermiete um."
 date: 2026-08-19T08:35:12Z
 draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
@@ -24,6 +24,7 @@ kurzantwort: "Vergleiche dieselbe Bandbreite am selben Anschluss. Addiere über 
 
 social_posted: true
 keywords: ["DSL-Vergleich", "Günstigeres Internet", "DSL-Tarife vergleichen", "Internetvertrag wechseln", "Internetanbieter wechseln", "DSL Vergleich", "günstiges Internet"]
+keywords_fokus: ["DSL-Vergleich", "Effektivpreis"]
 pin_title: "DSL & Internet Flat: Schnell surfen ab 9,99 €/Monat"
 pin_description: "*Werbung | Du zahlst noch über 30 € für dein Internet? DSL- und Kabeltarife gibt es schon ab 9,99 € im Monat – mit Wechselbonus und FRITZ!Box-Rabatt obendrauf. Vergleichen, wechseln, sparen: Der Wechsel-Service übernimmt sogar die Kündigung. Jetzt Speed checken!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
@@ -69,9 +70,9 @@ Angenommen, beide Anschlüsse liefern die für deinen Haushalt nötige Leistung.
 
 Über 24 Monate kostet A insgesamt 880 €, B dagegen 840 €; das ist ein Modellwert. Der niedrigere Einstiegspreis spart in diesem Beispiel also 40 € über **zwei Jahre**. Brauchst du den Anschluss nur zwölf Monate, kostet A bis zur Kündigung 460 €. Bei B endet die Zahlungspflicht nicht mit dem Ende der Nutzung. Prüfe deshalb die Bindung getrennt vom rechnerischen Monatspreis. Die Beträge sind Modellannahmen, keine verfügbaren Angebote.
 
-## Wie berechnest du den echten Effektivpreis?
+## Wie berechnest du im DSL-Vergleich den echten Effektivpreis?
 
- Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate; das ist ein Modellwert. Das ist ein Modellwert.
+Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate; das ist ein Modellwert.
 
 * **Grundgebühr der Einstiegsphase:** Oft stark rabattierte Monate (ca. 1 bis 10 oder 12 Monate); das ist ein Beispielwert.
 * **Reguläre Grundgebühr der Folgemonate:** Der Standardpreis, der bis zum Ende des 24. Monats anfällt.
@@ -83,7 +84,7 @@ Teile die Gesamtsumme nach Abzug aller Boni durch 24. Nur dieser Wert zeigt dir,
 
 ## Welche Kostenfallen lauern im Kleingedruckten?
 
- **Massive Preissprünge:** Fast alle großen Provider erhöhen nach ca. 6 bis 12 Monaten die monatliche Gebühr drastisch; das ist ein Modellwert. Wer nicht spätestens im 20. Monat den nächsten Wechsel plant, zahlt im Anschluss drauf.
+1. **Massive Preissprünge:** Fast alle großen Provider erhöhen nach ca. 6 bis 12 Monaten die monatliche Gebühr drastisch; das ist ein Modellwert. Wer nicht spätestens im 20. Monat den nächsten Wechsel plant, zahlt im Anschluss drauf.
 2. **Die Router-Mietfalle:** Mietgeräte kosten in der Regel zwischen ca. 5 € und 9 € pro Monat (das summiert sich auf ca. 120 € bis 210 € in zwei Jahren). Ein eigener Kauf-Router rechnet sich oft schon nach 18 bis 24 Monaten.
 3. **Anschlussgebühren:** Für die Aktivierung der Leitung werden oft rund 70 € fällig. Achte auf Tarife, die diese Gebühr im Rahmen von Aktionswochen „erstatten“ oder gar nicht erst erheben.
 4. **Zusatz-Abos als „Gratis-Beigabe“:** Optionen wie Sicherheitspakete oder TV-Apps sind oft drei Monate kostenlos und werden danach automatisch kostenpflichtig, wenn keine rechtzeitige Kündigung erfolgt.

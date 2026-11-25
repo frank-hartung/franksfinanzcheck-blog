@@ -1,14 +1,16 @@
 ---
 title: "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer"
-description: "Für die Kündigung deines Handyvertrags zählt nicht nur der Versand. Prüfe Enddatum, Eingangsbestätigung und Ablauf der Rufnummernmitnahme."
+description: "Deinen Handyvertrag kündigen ohne Fristfalle: Prüfe Enddatum, Eingangsbestätigung und Ablauf der Rufnummernmitnahme."
 date: 2026-10-12T06:02:53Z
 draft: false
+cornerstone: true
 reserve_published: 2026-10-12
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Handyvertrag kündigen", "Handyvertrag", "Mobilfunkvertrag", "Kündigungsfrist", "Tarifwechsel"]
+keywords_fokus: ["Handyvertrag", "Kündigungsfrist"]
 pin_title: "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer"
 pin_description: "*Werbung | Für die Kündigung deines Handyvertrags zählt nicht nur der Versand. Prüfe Enddatum, Eingangsbestätigung und Ablauf der Rufnummernmitnahme. Speichere die Bestätigung unabhängig vom Kundenportal. Wenn der Zugang nach Vertragsende wegfällt, hast du Enddatum und Vorgangsnummer trotzdem zur Hand."
 ai_generated: true
@@ -57,7 +59,6 @@ kurzantwort: "Prüfe zuerst die Laufzeit und das vereinbarte Enddatum. Nach eine
 
 
 
-
 Handyvertrag kündigen klingt einfach. In der Praxis zählen das Ende der festen Laufzeit, der Kündigungsweg und ein mögliches Gerät.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -74,25 +75,25 @@ Danach kannst du entscheiden, ob du kündigst, wechselst oder ein neues Angebot 
 
 ## Welche Kündigungsfrist gilt für deinen Handyvertrag?
 
-Die eine Kündigungsfrist für den Handyvertrag gibt es nicht. Es gibt zwei Phasen, und in jeder gilt etwas anderes. In der ersten Phase bist du gebunden. Diese Mindestlaufzeit darf bei Mobilfunkverträgen höchstens 24 Monate betragen, und daneben muss dir der Anbieter ein Angebot mit maximal zwölf Monaten machen ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)).
+Die eine feste Frist gibt es beim Handyvertrag nicht. Dein Vertrag hat zwei Phasen mit ganz eigenen Regeln. Am Anfang bist du fest gebunden. Ein neuer Tarif darf höchstens 24 Monate laufen, daneben muss ein Angebot über zwölf Monate bereitstehen ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)).
 
-Danach beginnt die zweite Phase. Verlängert sich der Vertrag stillschweigend, kannst du ihn jederzeit kündigen, mit einem Monat Frist ([§ 56 Absatz 3 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Ob du also bald raus kannst oder noch gebunden bist, entscheidet nicht der Tarifname, sondern die Phase, in der dein Vertrag gerade steckt.
+Danach startet die zweite Phase. Läuft der Handyvertrag still weiter, darfst du ihn jederzeit mit nur einem Monat Frist beenden ([§ 56 Absatz 3 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Wann du gehen kannst, hängt also nur von deiner aktuellen Phase ab.
 
-Beim Handyvertrag kommt eine Besonderheit dazu: das Gerät. Eine Ratenzahlung für das Telefon kann getrennt vom Mobilfunkdienst laufen. Dann endet mit der Kündigung der Tarif, aber nicht die Rate. Lass dir beides einzeln aufschlüsseln, bevor du das Enddatum festlegst.
+Beim Handyvertrag kommt ein wichtiger Punkt dazu: das Gerät selbst. Oft läuft der Kauf auf Raten neben dem Tarif her. Dann endet der Tarif nach der Kündigung, die Raten laufen aber weiter. Lass dir beides sauber trennen, bevor du kündigst.
 
 ## Wo findest du das passende Enddatum?
 
-Suche zuerst in der Vertragsübersicht, auf einer aktuellen Rechnung und im Kundenkonto. Notiere Beginn, Ende der festen Laufzeit und den Weg für eine Kündigung. Wenn Angaben voneinander abweichen, frag den Anbieter schriftlich. Heb die Antwort bei deinen Vertragsunterlagen auf.
+Schau zuerst auf deine letzte Rechnung und in dein Konto online. Notiere Start, Ende der Laufzeit und die Adresse für dein Schreiben. Weichen Daten ab, frag kurz per Mail nach und hebe die Antwort gut auf.
 
-Achte auf Zusatzkarten, Versicherungen und weitere Dienste. Sie können eigene Bedingungen haben.
+Prüfe auch Extras wie zweite Karten, Schutzpakete oder Abos. Sie laufen oft nach eigenen Fristen.
 
-Ein Tarifwechsel kann einzelne Leistungen ändern, auch wenn deine Rufnummer gleich bleibt. Lies deshalb nicht nur die Seite mit dem Preis.
+Ein Tarifwechsel ändert teils Laufzeit oder Extras, selbst wenn deine Nummer bleibt. Lies daher nie nur den bunten Preis.
 
-Prüfe auch die Bestätigung vor dem Klick.
+Prüfe vor dem letzten Klick alle neuen Daten.
 
-Die Bundesnetzagentur erklärt, welche Angaben zu Laufzeit und Kündigung in den Vertragsunterlagen wichtig sind. Ihre [Informationen zum Vertrag](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html) sind ein guter Start. Wenn du danach noch unsicher bist, lass dir den Beendigungszeitpunkt vom Anbieter bestätigen.
+Die Bundesnetzagentur zeigt, welche Fakten im Vertrag zählen. Ihre [Infos rund um den Vertrag](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html) geben dir einen schnellen Start. Bist du unsicher, lass dir das genaue Enddatum schriftlich nennen.
 
-Wenn dein Vertrag mehrere Leistungen bündelt, prüfe jede einzeln. Dazu können eine zweite SIM, ein Datenpaket oder ein Gerät gehören. Notiere, was weiterlaufen soll und was enden soll. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du, dass du eine Leistung kündigst, die du behalten möchtest.
+Bündelt dein Paket mehrere Dinge, prüfe jeden Posten einzeln. Dazu zählen zweite Karten, kleine Datenpakete oder das Smartphone. Schreib dir auf, was weiterlaufen darf und was weg muss. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du versehentliche Kündigungen an der falschen Stelle.
 
 ## Wie kündigst du und behältst einen Nachweis?
 
@@ -227,7 +228,8 @@ Du erkennst, ob ein Posten einmalig anfällt oder wiederkehrt.
 ## Häufige Fragen
 
 ### Kann ich einen Handyvertrag jederzeit kündigen?
-Während der ersten festen Laufzeit gelten die vereinbarten Bedingungen. Nach einer stillschweigenden Verlängerung kannst du den Vertrag grundsätzlich mit Monatsfrist kündigen. Prüfe die Voraussetzungen in [§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html) und in deinen Unterlagen.
+
+In der ersten festen Laufzeit gelten die klaren Regeln deines Vertrags. Läuft der Tarif nach dem Ende still weiter, kündigst du jederzeit zum nächsten Monat. Die genauen Details findest du in [§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html) und deinen Unterlagen.
 
 ### Muss ich die Kündigung per Einschreiben senden?
 Nicht jeder Vertrag verlangt denselben Weg. Nutze den zulässigen Kündigungsweg und bewahre einen Nachweis auf. Bei einer Kündigung über das Kundenkonto solltest du die Bestätigung speichern.

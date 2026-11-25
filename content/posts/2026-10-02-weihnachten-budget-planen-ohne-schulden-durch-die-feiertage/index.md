@@ -11,6 +11,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Dispo vermeiden", "Weihnachtsgeld anlegen", "Weihnachten", "Weihnachtsbudget planen", "Weihnachtsbudget"]
+keywords_fokus: ["Weihnachten"]
 pinwand: "Budget & Sparen | Familienfinanzen"
 pin_title: "Weihnachtsbudget planen: Geschenke und Feiertage ohne Schulden"
 pin_description: "*Werbung | Plane Weihnachten vom verfügbaren Betrag aus. Reserviere zuerst Geld für Fahrten und Essen und verteile den Rest auf deine Geschenkeliste. Schreibe auch Porto, Verpackung und Wege auf die Liste. Solche Beträge fehlen leicht im Geschenkebudget, obwohl sie spätestens im Dezember bezahlt werden müssen."
@@ -148,7 +149,7 @@ Zwölf kleine Raten merkst du im Alltag kaum. Im Dezember liegt das Geld dann be
 
 Fachleute nennen das eine rollende Rücklage. Du behandelst das Fest wie jede andere Zahlung im Jahr. Die Kfz-Versicherung planst du ja auch nicht spontan.
 
-Nutze dafür ein Unterkonto deiner Bank oder ein kostenloses [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Lege den Auftrag auf den Tag nach [dem Gehalt](../../posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/). So wächst dein Polster ganz von allein.
+Nutze dafür ein Unterkonto deiner Bank oder ein kostenloses [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Lege den Auftrag auf den Tag nach dem Gehaltseingang und orientiere dich an der [50-30-20-Regel](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/). So wächst dein Polster ganz von allein.
 
 ## Welche Kosten übersehen die meisten Haushalte?
 

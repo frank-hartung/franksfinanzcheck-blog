@@ -8,7 +8,7 @@ _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 |---|---|
 | Offene Befunde | 287 |
 | Seiten betroffen | 81 (davon live: 52) |
-| Text seit dem Befund geändert | 243 |
+| Text seit dem Befund geändert | 269 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
@@ -33,7 +33,7 @@ _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 248 von 287 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 274 von 287 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -621,6 +621,38 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a74029dd4e284794d69
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c45ea4bb1a6f2330679a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-10-dsl-wechselbonus-sichern` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1b7c9b9cac0290f71242` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `ee260c27a6bfdd60fa04` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1b7c9b9cac0290f71242 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee260c27a6bfdd60fa04 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · **LIVE** (blockiert) · Risikoklasse erhoeht · 4 Befund(e)
+
+Datei: `content/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1d4095501e717fb30d7b` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Hinweis auf einen „Wochenend‑Effekt“ bei Devisenkursen wird ohne Quellenangabe gemacht. | – |
+| `77520584b5afd8ebd7f7` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür. | – |
+| `a3be3d50280d4fe0a1d8` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben. | – |
+| `d6cc7bae16dead3e610b` | praezision | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4095501e717fb30d7b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77520584b5afd8ebd7f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/index.md`
@@ -747,6 +779,26 @@ Datei: `content/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad12cdcf94bd8459bd8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
+
+Datei: `content/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1cc830a25d3ae505dd0e` | praezision | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschriften (ohne Mandat) beträgt die gesetzliche Frist zur Rückgabe 13 Monate. | – |
+| `32f827af8f4695488e97` | praezision | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Deckung oder wegen eines berechtigten Widerspruchs erfolgt. | – |
+| `642d9c53e557ff642257` | luecke | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht autorisierter oder fehlerhafter Kartenzahlungen. | – |
+| `8230373c2c33722d66d8` | praezision | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sicherheitsmechanismen. | – |
+| `efee7b0cefffa501cc57` | praezision | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist die Lastschrift der Standard, um Zahlungsfehler zu vermeiden. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1cc830a25d3ae505dd0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32f827af8f4695488e97 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 642d9c53e557ff642257 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8230373c2c33722d66d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden efee7b0cefffa501cc57 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` · **LIVE** (blockiert) · Risikoklasse erhoeht · 2 Befund(e)
 
 Datei: `content/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/index.md`
@@ -759,6 +811,20 @@ Datei: `content/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaeh
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc1e5d50a58f50e0ade1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden def8ad23c34566c795fe --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `009906e47bcc8265b36a` | luecke | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `e0293a43782c64955b27` | luecke | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
@@ -791,56 +857,32 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce4
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-10-dsl-wechselbonus-sichern` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
+### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
 
-Datei: `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md`
+Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
-| `1b7c9b9cac0290f71242` | luecke | 6 T | Text unverändert seit dem Befund | Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `ee260c27a6bfdd60fa04` | luecke | 6 T | Text unverändert seit dem Befund | Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `5c096f87730532352820` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
 
 ```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1b7c9b9cac0290f71242 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee260c27a6bfdd60fa04 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · **LIVE** (blockiert) · Risikoklasse erhoeht · 4 Befund(e)
+### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · **LIVE** (blockiert) · Risikoklasse erhoeht · 3 Befund(e)
 
-Datei: `content/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `1d4095501e717fb30d7b` | luecke | 6 T | Text unverändert seit dem Befund | Der Hinweis auf einen „Wochenend‑Effekt“ bei Devisenkursen wird ohne Quellenangabe gemacht. | – |
-| `77520584b5afd8ebd7f7` | luecke | 6 T | Text unverändert seit dem Befund | Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür. | – |
-| `a3be3d50280d4fe0a1d8` | luecke | 6 T | Text unverändert seit dem Befund | Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben. | – |
-| `d6cc7bae16dead3e610b` | praezision | 6 T | Text unverändert seit dem Befund | Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4095501e717fb30d7b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77520584b5afd8ebd7f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
-
-Datei: `content/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/index.md`
+Datei: `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md`
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
-| `1cc830a25d3ae505dd0e` | praezision | 4 T | Text unverändert seit dem Befund | Die Frist von acht Wochen gilt für autorisierte Lastschriften (ohne Angabe von Gründen). Bei unautorisierten Lastschriften (ohne Mandat) beträgt die gesetzliche Frist zur Rückgabe 13 Monate. | – |
-| `32f827af8f4695488e97` | praezision | 4 T | Text unverändert seit dem Befund | Banken dürfen vom Zahler (Kontoinhaber) in der Regel kein Entgelt für eine Rücklastschrift verlangen, die mangels Deckung oder wegen eines berechtigten Widerspruchs erfolgt. | – |
-| `642d9c53e557ff642257` | luecke | 4 T | Text unverändert seit dem Befund | Es fehlt der Hinweis auf die gesetzliche 13-Monats-Frist gemäß Zahlungsdiensterecht (PSD2) für die Meldung nicht autorisierter oder fehlerhafter Kartenzahlungen. | – |
-| `8230373c2c33722d66d8` | praezision | 4 T | Text unverändert seit dem Befund | Die Bezeichnung als 'wirksamste Maßnahme' ist ein Superlativ ohne messbare Datenbasis oder Vergleich mit anderen Sicherheitsmechanismen. | – |
-| `efee7b0cefffa501cc57` | praezision | 4 T | Text unverändert seit dem Befund | Stromabschläge sind untypisch für Daueraufträge, da sich die Beträge nach Jahresabrechnungen meist ändern; hier ist die Lastschrift der Standard, um Zahlungsfehler zu vermeiden. | – |
+| `06bc5a6bc11098317697` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `471944cae24a034c7c00` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `780af701a2eaa465d46a` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
 
 ```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1cc830a25d3ae505dd0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32f827af8f4695488e97 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 642d9c53e557ff642257 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8230373c2c33722d66d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden efee7b0cefffa501cc57 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 06bc5a6bc11098317697 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 471944cae24a034c7c00 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 780af701a2eaa465d46a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
@@ -861,48 +903,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4126d33a9dd92716b28
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 67fbe0b49bb4e6bb48b7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden cb5f849bfd26ad8121eb --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f108d554ff8861370b64 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
-
-Datei: `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `009906e47bcc8265b36a` | luecke | 4 T | Text unverändert seit dem Befund | Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `e0293a43782c64955b27` | luecke | 4 T | Text unverändert seit dem Befund | Selbstständige sollten sechs‑ bis zwölf‑Monats‑Ausgaben als Reserve planen | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
-
-Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `5c096f87730532352820` | luecke | 2 T | Text unverändert seit dem Befund | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · **LIVE** (blockiert) · Risikoklasse erhoeht · 3 Befund(e)
-
-Datei: `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `06bc5a6bc11098317697` | luecke | 1 T | Text unverändert seit dem Befund | Keine Quelle für Umrechnungsfaktor von Kubikmetern in Kilowattstunden angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `471944cae24a034c7c00` | luecke | 1 T | Text unverändert seit dem Befund | Keine Quelle für Aufbewahrungsfrist von drei Jahren angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `780af701a2eaa465d46a` | luecke | 1 T | Text unverändert seit dem Befund | Behauptung, dass die meisten Versorger Selbstablesungen außerhalb des Fensters akzeptieren, fehlt belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 06bc5a6bc11098317697 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 471944cae24a034c7c00 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 780af701a2eaa465d46a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
@@ -1291,6 +1291,34 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 517fa8859b484cd7646
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e11e305aefae61e25820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `internet-dsl` · nicht im Live-Bestand · 2 Befund(e)
+
+Seite: `internet-dsl`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `088b234647d33a67dc6d` | praezision | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Bezeichnung als 'Markt-Benchmarks' suggeriert eine Marktabdeckung ohne Nennung von Messgrößen, Datenbasis oder Auswahlkriterien. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `b8885c27121a5cc10a85` | praezision | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die BNetzA 'garantiert' die Weiterversorgung nicht selbst; sie überwacht die gesetzlichen Anbieterpflichten, die den technischen Prozess regeln. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 088b234647d33a67dc6d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b8885c27121a5cc10a85 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `konto-karten` · nicht im Live-Bestand · 2 Befund(e)
+
+Seite: `konto-karten`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `5bf7111c673ee53be341` | praezision | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Superlativ „Mehrfach als Testsieger ausgezeichnet“ ohne messbare Daten oder Quelle. | – |
+| `b3c137c4bb2ebd44eb74` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Aussage, dass viele Banken Neukunden‑Zinsgarantien für drei bis sechs Monate bieten. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5bf7111c673ee53be341 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b3c137c4bb2ebd44eb74 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check` · nicht im Live-Bestand · 2 Befund(e)
 
 Seite: `2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check`
@@ -1321,6 +1349,26 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 10917941e9fae9a9cf0
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab0470bc947932366bc4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `2f7f57dfb8da49a297be` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `3f9faeecdb0a51f6dcc2` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `885b9067fc764e8b1be0` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `befb17bec837c9aaecda` | praezision | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `d2bb167f864ceae0328e` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2f7f57dfb8da49a297be --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f9faeecdb0a51f6dcc2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 885b9067fc764e8b1be0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden befb17bec837c9aaecda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bb167f864ceae0328e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-28-dsl-und-internet-flat-guenstig-sichern`
@@ -1339,54 +1387,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden d0a5cf7bb64eb0cd46c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec53e181336df8dc61ac --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f3f9184bfca9b097f68e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fb4d2260f4fa291c35ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `internet-dsl` · nicht im Live-Bestand · 2 Befund(e)
-
-Seite: `internet-dsl`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `088b234647d33a67dc6d` | praezision | 6 T | Text unverändert seit dem Befund | Die Bezeichnung als 'Markt-Benchmarks' suggeriert eine Marktabdeckung ohne Nennung von Messgrößen, Datenbasis oder Auswahlkriterien. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `b8885c27121a5cc10a85` | praezision | 6 T | Text unverändert seit dem Befund | Die BNetzA 'garantiert' die Weiterversorgung nicht selbst; sie überwacht die gesetzlichen Anbieterpflichten, die den technischen Prozess regeln. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 088b234647d33a67dc6d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b8885c27121a5cc10a85 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `konto-karten` · nicht im Live-Bestand · 2 Befund(e)
-
-Seite: `konto-karten`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `5bf7111c673ee53be341` | praezision | 6 T | Text unverändert seit dem Befund | Superlativ „Mehrfach als Testsieger ausgezeichnet“ ohne messbare Daten oder Quelle. | – |
-| `b3c137c4bb2ebd44eb74` | luecke | 6 T | Text unverändert seit dem Befund | Keine Quelle für die Aussage, dass viele Banken Neukunden‑Zinsgarantien für drei bis sechs Monate bieten. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5bf7111c673ee53be341 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b3c137c4bb2ebd44eb74 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026` · nicht im Live-Bestand · 5 Befund(e)
-
-Seite: `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `2f7f57dfb8da49a297be` | luecke | 2 T | Text unverändert seit dem Befund | Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `3f9faeecdb0a51f6dcc2` | luecke | 2 T | Text unverändert seit dem Befund | Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `885b9067fc764e8b1be0` | luecke | 2 T | Text unverändert seit dem Befund | Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `befb17bec837c9aaecda` | praezision | 2 T | Text unverändert seit dem Befund | Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `d2bb167f864ceae0328e` | luecke | 2 T | Text unverändert seit dem Befund | Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2f7f57dfb8da49a297be --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f9faeecdb0a51f6dcc2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 885b9067fc764e8b1be0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden befb17bec837c9aaecda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bb167f864ceae0328e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` · nicht im Live-Bestand · 5 Befund(e)

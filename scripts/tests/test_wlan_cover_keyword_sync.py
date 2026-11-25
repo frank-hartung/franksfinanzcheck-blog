@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import contextlib
+import datetime as dt
 import hashlib
 import io
 import json
@@ -91,7 +92,9 @@ class WlanCoverKeywordSyncTest(unittest.TestCase):
         self.assertEqual(abweichungen, [], f"Titel/Keyword-Drift bei Bestand/Entwürfen: {abweichungen}")
 
         ymyl_pfad = ROOT / "content" / "posts" / YMYL_ENTWURF / "index.md"
-        ymyl_ergebnis = erg.evaluate_path(ymyl_pfad)
+        ymyl_fm = _lese_frontmatter(ymyl_pfad)
+        stichtag = dt.date.fromisoformat(str(ymyl_fm["redaktionelle_pruefung"]["pruefdatum"]))
+        ymyl_ergebnis = erg.evaluate_path(ymyl_pfad, today=stichtag)
         self.assertEqual(ymyl_ergebnis["status"], "freigegeben")
         self.assertEqual(ymyl_ergebnis["findings"], [])
 

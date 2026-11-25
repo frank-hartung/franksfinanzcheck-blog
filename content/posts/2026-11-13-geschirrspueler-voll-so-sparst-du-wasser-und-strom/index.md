@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Geschirrspüler voll", "Spülmaschine beladen", "Geschirrspüler sparsam", "Wasser sparen Küche", "Geschirrspüler", "Geschirrspüler voll beladen", "Frugalismus", "Geld sparen"]
+keywords_fokus: ["Geschirrspüler", "Spülmaschine beladen"]
 pin_title: "Geschirrspüler voll beladen: Wasser und Strom sparen"
 pin_description: "*Werbung | Vergleiche beim Geschirrspüler ganze Spülgänge statt einzelne Teller. Belade die Körbe so, dass Sprüharme frei bleiben und kein zweiter Lauf nötig wird. Kontrolliere nach dem Spülgang, ob alle Flächen sauber sind. Musst du einzelne Teile erneut spülen, hat die dichtere Beladung einen Teil des Vorteils schon verbraucht."
 ai_generated: true

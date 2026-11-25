@@ -1,6 +1,6 @@
 ---
 title: "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen"
-description: "Für die erste Wohnung fallen laufende Kosten und einmalige Anschaffungen gleichzeitig an. Trenne beides, bevor du dein monatliches Budget festlegst."
+description: "Fixkosten in der ersten Wohnung ordnen: Trenne laufende Verträge und einmalige Anschaffungen, bevor du dein Budget festlegst."
 date: 2026-10-05T06:10:00Z
 lastmod: 2026-10-13
 draft: false
@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["erster eigener Haushalt", "Fixkosten ordnen", "Monatsbudget erstellen", "Wohnung anmelden", "Der erste eigene Haushalt"]
+keywords_fokus: ["Fixkosten", "Fixkosten ordnen"]
 pin_title: "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen"
 pin_description: "*Werbung | Für die erste Wohnung fallen laufende Kosten und einmalige Anschaffungen gleichzeitig an. Trenne beides, bevor du dein monatliches Budget festlegst. Notiere bei der Wohnungsübergabe, welche Verträge du selbst abschließen musst. Was im Elternhaus in einer Rechnung steckte, kann im eigenen Haushalt getrennt fällig werden."
 ai_generated: true
@@ -55,7 +56,7 @@ faktencheck: 2026-10-13
 kurzantwort: "Im ersten eigenen Haushalt entscheiden vier Blöcke über das Monatsbudget: Wohnen, Energie, Verträge und Alltag. Sortiere sie nach Fälligkeit, nicht nach Höhe, und führe ein Konto für Fixkosten getrennt vom Alltagskonto. Prüfe jeden Vertrag nach den ersten drei Monaten, sobald du deinen echten Verbrauch kennst."
 ---
 
-Die erste Miete lässt sich gut einplanen. Schwieriger sind Beträge, die erst nach dem Einzug fällig werden. Trenne Kaution, Anschaffungen und monatliche Verpflichtungen, bevor du dein Wohnbudget festlegst.
+Die erste Miete lässt sich gut einplanen. Schwieriger sind Fixkosten und Beträge, die erst nach dem Einzug fällig werden. Trenne Kaution, Anschaffungen und monatliche Verpflichtungen, bevor du dein Wohnbudget festlegst.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -93,7 +94,7 @@ Die Reihenfolge beim Einzug ist keine Geschmacksfrage. Manche Dinge müssen sofo
 
 **In der ersten Woche:** Ummeldung deiner Adresse bei der Meldebehörde und beim Arbeitgeber. Ändere die Adresse zusätzlich bei Bank, Kartenanbietern und Onlinediensten.
 
-**In den ersten zwei Wochen:** Internet beauftragen; das ist ein Beispielwert. Die Umschaltung braucht Vorlauf, besonders in Neubauten. Wer wartet, arbeitet wochenlang mit mobilen Daten.
+**In den ersten zwei Wochen:** Internet beauftragen; das ist ein Beispielwert. Die Umschaltung braucht Vorlauf, besonders in Neubauten. Wer wartet, arbeitet wochenlang mit mobilen Daten – und wer danach noch das [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) muss, merkt schnell, ob der Router-Standort zur Wohnung passt.
 
 **Im ersten Monat:** Prüfe, welche Verträge aus dem vorherigen Haushalt noch laufen. Gemeinschaftsverträge in WGs werden oft vergessen und weiter gezahlt.
 

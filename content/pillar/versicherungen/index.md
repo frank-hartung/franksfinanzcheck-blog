@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["Versicherungen vergleichen", "Privathaftpflicht", "Hausratversicherung", "Wohngebäudeversicherung", "Kfz-Versicherung"]
+keywords_fokus: ["Versicherungen", "Privathaftpflicht", "Hausratversicherung"]
 cover:
   image: "images/covers/pillar-versicherungen.jpg"
   alt: "Versicherungen: Der große Ratgeber für den richtigen Schutz"

@@ -55,7 +55,7 @@ Wer nur den monatlichen Abschlag betrachtet, vergleicht Vorauszahlungen. Das fü
 
 ## Die Abrechnung ist die Basis
 
-Nimm die letzte Gasabrechnung zur Hand. Dort stehen der abgerechnete Jahresverbrauch, der Arbeitspreis und der Grundpreis. Wenn sich die Zahl der Personen im Haushalt oder die Nutzung geändert hat, bildet der alte Verbrauch die Zukunft nur eingeschränkt ab.
+Nimm die letzte Gasabrechnung zur Hand. Dort stehen dein Jahresverbrauch, der Arbeitspreis und der Grundpreis. Wenn heute mehr oder weniger Personen im Haushalt leben, bildet der alte Wert die Zukunft nur grob ab.
 
 | Bestandteil | Was du einträgst | Worauf du achtest |
 | :--- | :--- | :--- |
@@ -67,7 +67,7 @@ Nimm die letzte Gasabrechnung zur Hand. Dort stehen der abgerechnete Jahresverbr
 
 Kleine Beträge summieren sich. Ein hoher Grundpreis fällt auch dann an, wenn du wenig heizt. Prüfe ihn deshalb getrennt vom Arbeitspreis.
 
-Der Abschlag ist eine Vorauszahlung. Eine niedrige Rate spart für sich genommen keine Energie. Sie kann lediglich eine Nachzahlung wahrscheinlicher machen, wenn sie dauerhaft unter den echten Kosten liegt. Richte den Abschlag am Verbrauch und am Vertrag aus und prüfe ihn nach der Abrechnung.
+Der Abschlag ist eine Vorauszahlung. Eine niedrige Rate spart an sich kein Gas. Sie macht eine Nachzahlung nur wahrscheinlicher, wenn sie unter den echten Kosten liegt. Passe den Abschlag an Verbrauch und Vertrag an und prüfe ihn nach jeder Abrechnung.
 
 ### Modellrechnung: Jahreskosten aus zwei Preisteilen
 
@@ -113,25 +113,25 @@ Steuern, Abgaben, Umlagen und Netzentgelte können außerhalb der Garantie liege
 
 ## Neuer Preis: Frist und Sonderrecht
 
-Ein neuer Gaspreis kündigt sich schriftlich an: Der Lieferant muss dich als Haushaltskunde mindestens einen Monat vor dem Inkrafttreten anschreiben und darlegen, was sich warum und in welchem Umfang ändert (Q1). An diese Mitteilung ist in der Regel ein Sonderkündigungsrecht geknüpft – du kannst dann sofort kündigen, ohne die sonst übliche Frist einzuhalten.
+Ein neuer Gaspreis kündigt sich schriftlich an. Der Lieferant muss dich als Haushaltskunde mindestens einen Monat vorher anschreiben. Er legt dar, was sich warum und in welchem Umfang ändert (Q1). Daran hängt meist ein Sonderrecht zur Kündigung. Du kannst den Vertrag dann beenden, ohne auf die normale Frist zu warten.
 
-Deine Kündigung muss bis zu dem Tag beim Lieferanten eingegangen sein, an dem der höhere Preis greift. Dein Vertrag endet dadurch einen Tag vor dem Wirksamwerden. Zwei Ausnahmen bleiben: eine getrennte Anpassungsklausel für hoheitlich bedingte Kosten und eine eins zu eins weitergegebene Umsatzsteuer. In beiden Fällen gibt es kein Sonderrecht – weder bei einer Erhöhung noch bei einer Senkung.
+Deine Kündigung muss spätestens am Tag vor dem neuen Preis beim Anbieter sein. Dein Vertrag endet einen Tag vor dem höheren Preis. Zwei Ausnahmen bleiben: eine eigene Klausel für hoheitliche Kosten und eine rein weitergegebene Umsatzsteuer. In beiden Fällen gilt kein Sonderrecht. Das gilt sowohl bei einer Erhöhung als auch bei einer Senkung.
 
-Bei einer zweifelhaften Erhöhung kannst du widersprechen. Nenne den Grund, etwa eine laufende Zusage oder eine zu kurze Frist. Wenn der Anbieter nicht reagiert, hilft das Beschwerde- und Schlichtungsverfahren der Behörde.
+Bei einer unklaren Erhöhung legst du Widerspruch ein. Nenne kurz den Grund, etwa eine noch laufende Zusage oder eine zu kurze Frist. Bleibt eine Antwort aus, hilft die Schlichtungsstelle der Behörde.
 
 ## Grundversorgung oder Sondertarif
 
-Wer keinen Vertrag abgeschlossen hat, wird in der Regel vom örtlichen Grundversorger beliefert. Dort gelten besondere Informationspflichten, und die Kündigungsfrist beträgt zwei Wochen (Q1). Ein Sondertarif ist ein eigener Vertrag mit eigenen Laufzeiten und Preisen. Prüfe deshalb zuerst, welche Vertragsart du hast.
+Ohne eigenen Vertrag beliefert dich meist der örtliche Grundversorger. Dort gelten feste Informationspflichten. Die Kündigungsfrist beträgt zwei Wochen (Q1). Ein Sondertarif ist ein eigener Vertrag mit festen Preisen und Fristen. Prüfe deshalb immer zuerst, in welchem Vertrag du bist.
 
-Die Grundversorgung ist nicht grundsätzlich schlecht. Sie kann aber teurer sein als ein passender Sondertarif. Umgekehrt kann ein Sondertarif dich für eine feste Zeit binden. Vergleiche nicht nur den Preis, sondern auch die Fristen.
+Die Grundversorgung ist nicht automatisch schlecht. Sie liegt aber oft höher als ein passender Sondertarif. Umgekehrt bindet dich ein Sondertarif meist für feste Monate. Vergleiche deshalb Preis und Frist zusammen.
 
-Wenn dein Anbieter nicht mehr liefert, greift die Ersatzversorgung. Sie sichert die Belieferung, ist aber meist teurer. Ein schneller Wechsel verkürzt diese Phase.
+Fällt dein Anbieter aus, springt die Ersatzversorgung ein. Sie sichert die Wärme im Haus, ist aber meist teuer. Ein zügiger Wechsel verkürzt diese Phase.
 
 ## Wenn der Anbieter nicht reagiert
 
-Die Behörde bietet ein Beschwerde- und Schlichtungsverfahren. Das hilft bei Streit über einen neuen Preis, eine Abrechnung oder einen Wechsel. Schreibe den Anbieter zuerst an und setze ihm eine Frist. Bleibt eine Antwort aus, kannst du dich an die Schlichtungsstelle wenden.
+Die Behörde bietet ein Beschwerde- und Schlichtungsverfahren. Das hilft bei Streit über einen neuen Preis, eine Rechnung oder einen Wechsel. Schreibe dem Anbieter zuerst und setze eine kurze Frist. Bleibt eine Antwort aus, wende dich an die Schlichtungsstelle.
 
-Dokumentiere deinen Fall: Vertrag, Mitteilung, Kontoauszüge und Briefe. Notiere Daten und Ansprechpartner. Das kostet wenig Zeit und erleichtert jede weitere Prüfung.
+Sammle deine Belege sauber an einem Ort: Vertrag, Schreiben, Kontoauszüge und Briefe. Notiere Datum und Gesprächspartner kurz mit. Das spart Zeit bei jeder Nachfrage.
 
 ## Verbrauch senken: ein Grad, sechs Prozent
 
@@ -145,15 +145,15 @@ Für die Grundeinstellung gelten ungefähre Werte: Stufe 3 entspricht etwa 20 Gr
 
 ## Abschlag, Bonus und Portal
 
-Prüfe bei einem Bonus, ob er einmalig oder laufend gezahlt wird. Lies die Regeln und rechne die Kosten ohne ihn. Nur so siehst du, ob der Tarif auch im Folgejahr zu deinem Budget passt.
+Prüfe bei einem Bonus, ob er einmalig oder laufend gilt. Lies die Regeln und rechne die Kosten ohne ihn. Nur so siehst du, ob der Tarif auch im zweiten Jahr passt.
 
-Ein niedriger Arbeitspreis nützt wenig, wenn der Grundpreis hoch ist. Dann frisst die Grundgebühr den Vorteil wieder. Eine kurze Bindung erhöht zudem das Risiko späterer Änderungen.
+Ein kleiner Preis pro kWh nützt wenig, wenn der Grundpreis hoch ist. Dann frisst die Grundgebühr den Vorteil auf. Eine kurze Bindung erhöht zudem das Risiko späterer Sprünge.
 
-Ein Portal zeigt eine Auswahl, nicht den gesamten Markt. Anbieter, Filter und Sortierung unterscheiden sich. Verlass dich nicht auf ein pauschales Versprechen, dass dort alle Tarife oder alle Bedingungen erscheinen. Prüfe die Unterlagen beim Anbieter, bevor du abschließt.
+Ein Portal zeigt eine Auswahl, nicht den gesamten Markt. Anbieter, Filter und Reihung weichen ab. Verlass dich nicht auf ein pauschales Versprechen, dass dort alle Tarife oder alle Bedingungen erscheinen. Prüfe die Papiere beim Anbieter vor deinem Klick.
 
-Mit Vorauszahlung verbundene Tarife lohnen einen besonders genauen Blick in die Bedingungen. Die Bundesnetzagentur weist darauf hin, dass Vorabzahlungen in der Insolvenz eines Lieferanten verloren sein können (Q1). Deine Gasversorgung steht danach trotzdem still – sie springt auf die Ersatzversorgung um. Das bereits gezahlte Geld zurückzuholen, ist dagegen mühsam und oft vergebens.
+Tarife mit Vorkasse verdienen einen genauen Blick. Die Behörde warnt, dass Vorkasse bei einer Pleite oft weg ist (Q1). Gas fließt danach weiter – du landest in der teureren Ersatzversorgung. Dein Geld holst du aber kaum noch zurück.
 
-Für den Vergleich brauchst du Postleitzahl und Verbrauch. Halte zwei Preise fest: den mit Bonus und den ohne. Bewahre das Angebot auf. So kannst du später nachvollziehen, auf welcher Grundlage du unterschrieben hast.
+Für die Suche brauchst du Postleitzahl und Verbrauch. Halte zwei Preise fest: den mit Bonus und den ohne. Speichere das Angebot ab. So siehst du später, was du gebucht hast.
 
 ## Checkliste für den Gastarifvergleich
 

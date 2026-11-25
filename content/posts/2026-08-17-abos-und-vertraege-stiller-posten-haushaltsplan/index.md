@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Abos kündigen", "wiederkehrende Kosten", "Verträge prüfen", "Fixkosten senken", "Abos und Verträge", "Haushaltsplan"]
+keywords_fokus: ["Abos", "Kündigungsfrist"]
 pin_title: "Abos und Verträge: Der stille Posten im Haushaltsplan"
 pin_description: "*Werbung | Gehe deine Abbuchungen durch und markiere Abos, die du kaum nutzt. Prüfe vor der Kündigung, ob du monatlich oder für ein ganzes Jahr zahlst. Suche im Kontoauszug nicht nur nach kleinen Monatsbeträgen. Ein Jahresabo ohne Abbuchung im letzten Monat ist im Haushalt trotzdem eine laufende Verpflichtung."
 ai_generated: true
@@ -54,7 +55,7 @@ Abos kündigen ist selten ein Erfolgserlebnis, und dabei ist es erstaunlich, wie
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Der Unterschied zu einer normalen Ausgabe liegt im Mechanismus: Du entscheidest einmal, danach entscheidet der [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/). Wer seine [Kosten senken](../../posts/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check/) will, findet hier den größten Hebel mit dem geringsten Aufwand. Die Verbraucherzentrale zählt wiederkehrende Posten deshalb zu den ersten Stellen, an denen ein kleiner Haushalt ansetzt ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)).
+Der Unterschied zu einer normalen Ausgabe liegt im Mechanismus: Du entscheidest einmal, danach entscheidet der [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/). Wer seine [Haushaltskosten senken](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) will, findet hier den größten Hebel mit dem geringsten Aufwand. Die Verbraucherzentrale zählt wiederkehrende Posten deshalb zu den ersten Stellen, an denen ein kleiner Haushalt ansetzt ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)).
 
 ## Warum kleine Beträge so schwer zu greifen sind
 
@@ -66,17 +67,17 @@ Die Gegenmaßnahme ist unspektakulär. Du musst die Posten aus ihrem Versteck ho
 
 ## Der Zwölf-Monats-Blick
 
- Öffne das Online-Banking und filtere auf den Zeitraum der letzten zwölf Monate; das ist ein Modellwert. Jetzt suchst du nicht nach Kategorien, sondern nach einem Merkmal: gleiche Beträge in gleichem Rhythmus.
+Öffne das Online-Banking und filtere deine Abos auf den Zeitraum der letzten zwölf Monate; das ist ein Modellwert. Jetzt suchst du nicht nach Kategorien, sondern nach einem Merkmal: gleiche Beträge in gleichem Rhythmus.
 
 Arbeite dabei in drei Durchgängen.
 
-1. **Monatlich:** Beträge, die jeden Monat auftauchen. Das sind die größten Posten.
+1. **Monatlich:** Beträge für Abos, die jeden Monat auftauchen. Das sind die größten Posten.
 2. **Jährlich:** Beträge, die einmal im Jahr kommen. Sie sind leicht zu übersehen, aber oft hoch.
- **Unregelmäßig:** Beträge, die alle zwei oder drei Monate erscheinen; das ist ein Beispielwert. Hier verstecken sich Zeitschriften, Clubs, Versicherungen für Kleingeräte und Cloud-Tarife.
+3. **Unregelmäßig:** Beträge für Abos, die alle zwei oder drei Monate erscheinen; das ist ein Beispielwert. Hier verstecken sich Zeitschriften, Clubs, Versicherungen für Kleingeräte und Cloud-Tarife.
 
 Der Zwölf-Monats-Zeitraum ist kein Zufall als Modellwert. Ein Jahr enthält jeden Rhythmus mindestens einmal. Wer nur drei Monate prüft, übersieht jede Jahresgebühr.
 
-## Vier Vertragsarten, vier Kündigungswege
+## Vier Vertragsarten, vier Kündigungswege für Abos
 
 Nicht jeder Vertrag wird auf dieselbe Weise beendet. Die Unterscheidung spart Zeit und Fehler.
 

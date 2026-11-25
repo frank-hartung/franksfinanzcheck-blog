@@ -10,6 +10,7 @@ categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Strategisch sparen", "Strategisch", "Reisekasse", "Frugalismus"]
+keywords_fokus: ["Reisekasse"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
 pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. Mit offen genannten Annahmen kommen über zwölf Monate bis zu 500 € zusammen. Jetzt lesen!"

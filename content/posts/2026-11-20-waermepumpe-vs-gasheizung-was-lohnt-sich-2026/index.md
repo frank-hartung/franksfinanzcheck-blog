@@ -166,7 +166,7 @@ So hast du alle Zahlen im Griff und wählst die Heizung, die wirklich zu deinem 
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Gastarife vergleichen**](/go/gas/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

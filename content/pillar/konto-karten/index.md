@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-14
 title: "Konto & Karten: Ratgeber für gebührenfreie Finanzen"
-description: "Banking ohne Gebühren: Kostenlose Girokonten, Kreditkarten ohne Jahresgebühr, Tagesgeld mit Top-Zinsen und Ratenkredite zum Bestzins."
+description: "Konto & Karten ohne Gebühren: Kostenlose Girokonten, Kreditkarten ohne Jahresgebühr, Tagesgeld mit Top-Zinsen und Ratenkredite zum Bestzins."
 date: 2026-08-08
 draft: false
 author: "Frank Hartung"
@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["Kostenloses Girokonto", "Kreditkarte ohne Jahresgebühr", "Tagesgeld", "Ratenkredit", "Banking Gebühren sparen"]
+keywords_fokus: ["Konto", "Girokonto", "Tagesgeld"]
 cover:
   image: "images/covers/pillar-konto-karten.jpg"
   alt: "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen"

@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Grundversorgung Strom", "Grundversorgung Gas", "Ersatzversorgung Umzug", "Energievertrag ohne Tarif", "Grundversorgung Strom und Gas", "Grundversorgung", "Gaspreisgarantie", "Gastarif wechseln"]
+keywords_fokus: ["Grundversorgung", "Grundversorgung Strom"]
 pin_title: "Grundversorgung Strom und Gas: Was sie leistet und kostet"
 pin_description: "*Werbung | Grundversorgung oder Sondervertrag? Kläre zuerst, welcher Tarif für deinen Anschluss gilt, und vergleiche dann Grundpreis, Arbeitspreis und Fristen. Lies den Tarifnamen von der Rechnung ab. Nicht jeder Vertrag beim örtlichen Versorger ist ein Grundversorgungsvertrag; der Anbietername allein reicht zur Zuordnung nicht."
 ai_generated: true
@@ -51,8 +52,8 @@ kurzantwort: "Die Grundversorgung ist der Tarif, den der örtliche Energieversor
 ---
 
 Ein Tarif, den du selten bewusst wählst, ist selten der günstigste.  
-Er sorgt dafür, dass du nie ohne Strom dastehst.  
-Der Preis bleibt gleich – die Grundversorgung ist nicht billiger, weil sie selbstverständlich ist.  
+Die Grundversorgung Strom sorgt dafür, dass du nie ohne Energie dastehst.  
+Der Preis bleibt gleich – sie ist nicht billiger, weil sie selbstverständlich ist.  
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -82,25 +83,26 @@ Beim Umzug hörst du beide Begriffe – sie beschreiben unterschiedliche Überg�
 
 Die **Ersatzversorgung** greift in einer Übergangszeit, wenn du Strom oder Gas verbrauchst, ohne einen Vertrag dafür zu haben. Das passiert zum Beispiel, wenn ein Vertrag ausläuft und der neue noch nicht aktiv ist.  
 
-Die **Grundversorgung** ist dauerhaft angelegt. Sie ist der Tarif, auf den du zurückfallen kannst, wenn kein Sondervertrag besteht.  
+Die **Grundversorgung** ist dauerhaft angelegt. Sie ist der Tarif, den du nutzt, wenn kein Sondervertrag besteht.
 
-In der Übergangszeit gibt es kaum Alternative, weil die Belieferung laufen muss. Danach ist die Situation nicht festgeschrieben – du kannst jederzeit zu einem anderen Tarif wechseln.  
+In der Übergangszeit gibt es kaum eine Alternative, weil Strom und Gas weiterfließen. Danach bist du aber nicht gebunden – du kannst jederzeit in einen anderen Tarif wechseln.
 
 ## Warum die Grundversorgung teurer ist?
 
-Der Grund liegt in der Struktur. Ein Sondertarif wird für ein konkretes Kundenprofil kalkuliert – Haushaltsgröße, Verbrauch, Laufzeit.
-Die Grundversorgung muss für jedes Profil passen und jederzeit verfügbar sein.  
+Der Grund liegt in der Struktur.
+Ein Sondertarif kalkuliert für ein klares Kundenprofil – also Haushaltsgröße, Verbrauch und Laufzeit.
+Die Grundversorgung muss für jedes Profil passen und jederzeit offen stehen.
 
-Sondertarife werden aktiv über Vergleichsportale und Werbung verkauft. Das erzeugt Preiswettbewerb. Die Grundversorgung wird nicht beworben, weil sie ohnehin verfügbar ist.  
+Anbieter bewerben Sondertarife aktiv auf Vergleichsportalen. Das schafft Preisdruck. Die Grundversorgung braucht keine Werbung, weil sie ohnehin als Standard gilt.
 
-Ein Vergleich mit deinen echten Verbrauchswerten zeigt, ob die Grundversorgung in deinem Netzgebiet günstiger ist. Die Verbraucherzentrale erklärt das Vorgehen in ihrem Ratgeber [So finden Sie den passenden Strom‑ oder Gastarif](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436).  
+Ein Vergleich mit deinen echten Werten zeigt, ob der Ortstarif zu teuer liegt. Die Verbraucherzentrale erklärt das Vorgehen im Ratgeber [So finden Sie den passenden Strom‑ oder Gastarif](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436).
 
 ## Kündigen aus dem Grundversorgungstarif
 
-Hier liegt der eigentliche Vorteil: kurze Fristen verhindern, dass du in einer teuren Falle steckst.
+Hier liegt der eigentliche Vorteil: kurze Fristen verhindern, dass du in einer teuren Falle steckst.  
 Die Bundesnetzagentur nennt die konkreten Fristen und Formvorschriften im [Verbraucherportal zu Kündigung und Lieferantenwechsel](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html).  
 
-Kündige nicht zuerst und suche dann einen neuen Anbieter.
+Kündige nicht zuerst und suche dann einen neuen Anbieter.  
 Beauftrage erst den neuen Vertrag und lass die Umschaltung abstimmen. Der neue Anbieter kümmert sich meist um die Abmeldung beim bisherigen Versorger.  
 
 Kündigst du zu früh, rutschst du in die **Ersatzversorgung Umzug**. Dann verlierst du den Vorteil der kurzen Frist, ohne dass ein neuer Vertrag existiert.  
@@ -109,10 +111,12 @@ Kündigst du zu früh, rutschst du in die **Ersatzversorgung Umzug**. Dann verli
 
 **Beispielrechnung** – Annahme: Ein Haushalt verbraucht 3.000 kWh Strom im Jahr. Der Grundversorgungstarif kostet 0,42 € pro kWh, ein Sondertarif 0,32 €. Grundpreis und Boni bleiben außen vor.  
 
-Rechenweg Grundversorgung: 3.000 × 0,42 € = 1.260 € im Jahr. Rechenweg Sondertarif: 3.000 × 0,32 € = 960 € im Jahr.
+Rechenweg Grundversorgung: 3.000 × 0,42 € = 1.260 € im Jahr.  
+Rechenweg Sondertarif: 3.000 × 0,32 € = 960 € im Jahr.  
 **Modellrechnung**: Der Unterschied beträgt 300 € im Jahr.  
 
-Gegenprobe: Eine Einzelperson verbraucht 1.500 kWh. Rechenweg: 1.500 × 0,42 € = 630 €; 1.500 × 0,32 € = 480 €.
+Gegenprobe: Eine Einzelperson verbraucht 1.500 kWh.  
+Rechenweg: 1.500 × 0,42 € = 630 €; 1.500 × 0,32 € = 480 €.  
 **Modellrechnung**: Der Unterschied beträgt 150 €.  
 
 Der Hebel wächst mit dem Verbrauch, und der Grundpreis kann den Vergleich verschieben. Rechne deshalb immer Arbeitspreis und Grundpreis zusammen.  
@@ -132,13 +136,13 @@ Kontrolliere nach zwei Wochen, ob du eine Bestätigung mit Lieferbeginn erhalten
 
 ## Der Abschlag im Auffangtarif
 
-Die Grundversorgung wird häufig mit einem Abschlag beliefert, der auf Vergleichswerten beruht. Wer neu in eine Wohnung zieht, hat keinen eigenen Verbrauchswert. Der Versorger setzt dann einen Wert an, der auf ähnlichen Haushalten basiert.  
+In der Grundversorgung schätzt der Versorger oft den ersten Abschlag. Wer neu einzieht, hat noch keinen eigenen Jahresverbrauch. Der Versorger nutzt dann Vergleichswerte ähnlicher Haushalte.
 
-Dieser Abschlag ist eine Prognose, keine Messung. Er kann zu hoch oder zu niedrig sein. Nach der ersten Jahresabrechnung wird er vom tatsächlichen Verbrauch korrigiert. Bis dahin zahlst du entweder zu viel oder bildest still eine Nachzahlung.  
+Dieser Abschlag ist eine Schätzung, keine Messung. Er liegt leicht zu hoch oder zu niedrig. Nach dem ersten Ablesen korrigiert die Abrechnung deinen echten Verbrauch. Bis dahin zahlst du zu viel oder sammelst eine Nachzahlung an.
 
-Prüfe nach dem ersten Zählerstand, ob dein Verbrauch plausibel ist. Vergleiche die Abrechnung mit dem Verbrauch aus deiner alten Wohnung. Wenn die Werte stark abweichen, fordere eine Anpassung des Abschlags an. Die Bundesnetzagentur erläutert den Zusammenhang von Abschlag, Verbrauch und Abrechnung im [Verbraucherportal zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/Preise-table.html).  
+Prüfe nach dem ersten Zählerstand, ob dein Wert zum Alltag passt. Vergleiche die Zahlen mit deinem Verbrauch in der alten Wohnung. Weichen die Summen stark ab, passe den Abschlag direkt an. Die Bundesnetzagentur erklärt die Regeln rund um Abschlag und Rechnung im [Verbraucherportal zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/Preise-table.html).
 
-Ein niedriger Abschlag fühlt sich im Monat gut an, führt im Folgejahr aber zu einer Nachforderung. Ein zu hoher Abschlag ist ein zinsloses Darlehen an den Versorger. Beide Varianten sind unangenehm, aber unterschiedlich schwer zu verkraften.  
+Ein zu kleiner Abschlag wirkt im Monat bequem, führt aber später zu einer Nachzahlung. Ein zu hoher Abschlag bindet unnötig dein Geld. Beide Fälle nerven, doch ein passender Betrag schützt dein Konto.
 
 ## Was beim Umzug besonders schiefgeht
 
@@ -195,22 +199,28 @@ Wer jährlich die Abrechnung prüft und die Werte notiert, erkennt [Änderungen]
 ## Häufige Fragen
 
 ### Woran erkenne ich, dass ich in der Grundversorgung bin?
-Der Tarifname steht auf der Rechnung. Häufig enthält er den Begriff Grundversorgung oder den Namen des örtlichen Versorgers ohne Zusatz. Kläre es telefonisch, wenn du unsicher bist.
+
+Der Tarifname steht auf der Rechnung. Oft nennt er das Wort Grundversorgung oder schlicht den Namen des örtlichen Versorgers. Im Zweifel klärst du das kurz per Anruf.
 
 ### Muss ich den Grundversorger nehmen?
-Nein. Die Grundversorgung ist ein Angebot, keine Pflicht. Du kannst jeden Anbieter wählen, der in deinem Netzgebiet liefert.
+
+Nein. Die Grundversorgung ist ein Netz für den Notfall, keine Pflicht. Du darfst jeden Anbieter wählen, der an deiner Adresse liefert.
 
 ### Was passiert nach einem Umzug?
-Ohne Anmeldung wirst du weiter versorgt. Kläre deshalb gleich nach dem Einzug, welcher Tarif gilt und wie lange die Übergangszeit dauert.
+
+Ohne eigenen Vertrag läuft das Netz einfach weiter. Kläre deshalb gleich beim Einzug, welcher Tarif gilt und wie lange du dort bleibst.
 
 ### Kann mir die Grundversorgung gekündigt werden?
-Das ist an enge Voraussetzungen gebunden und in der Regel nur bei Zahlungsrückständen möglich. Die Einzelheiten nennt die Bundesnetzagentur in ihrem Verbraucherportal.
+
+Das geht nur unter engen Regeln, etwa bei offenen Rechnungen. Alle Details dazu nennt die Bundesnetzagentur in ihrem Verbraucherportal.
 
 ### Ist der Grundversorgungstarif überall gleich?
-Nein. Jeder Grundversorger kalkuliert seinen Tarif selbst und meldet ihn. Deshalb lohnt der Blick auf die eigene Rechnung statt auf Vergleichswerte aus anderen Regionen.
+
+Nein. Jeder Versorger rechnet seinen Preis vor Ort selbst aus und meldet ihn. Darum zählt immer ein Blick auf deine eigene Rechnung statt fremder Zahlen.
 
 ### Zahle ich beim Wechsel eine Sperre?
-Wenn ein Anschluss gesperrt wurde, fallen dafür Entgelte an, die im Preisblatt stehen. Diese Kosten zu begleichen ist unangenehm, ändert aber nichts an deinem Recht, danach einen neuen Tarif zu wählen.
+
+Bei einer Sperre fallen Gebühren laut Preisblatt an. Nach der Zahlung dieser offenen Posten steht dir ein neuer Vertrag aber wieder offen.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Energieausweis](../../posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/)
 **Lesetipp:** [Gasrechnung senken: Spätsommer‑Check für Tarif und Heizung](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/)

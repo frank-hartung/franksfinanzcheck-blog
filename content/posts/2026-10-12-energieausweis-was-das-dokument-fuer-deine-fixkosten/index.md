@@ -12,6 +12,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Energieausweis", "Energieausweis Kosten", "Energieeffizienzklasse Haus"]
+keywords_fokus: ["Energieausweis", "Energieausweis Kosten"]
 pin_title: "Energieausweis: Was er für deine Fixkosten bedeutet"
 pin_description: "Der Energieausweis beschreibt das Gebäude, nicht deine nächste Rechnung. Unterscheide Bedarfs- und Verbrauchswert und frage nach der Heizungsart. Frage nach dem Bezugsjahr und prüfe, welche Fläche für den Kennwert verwendet wurde. Das hilft, scheinbar ähnliche Zahlen zweier Wohnungen einzuordnen."
 ai_generated: true
@@ -165,7 +166,7 @@ Sieh das Papier als Basis für deine [finanzielle](../../posts/2026-09-09-notgro
 ## Häufige Fragen
 
 ### Wie lange ist ein Energieausweis gültig?
-In der Regel gilt das Dokument ein volles Jahrzehnt lang. Wenn du jedoch größere Umbauten am Haus durchführst, solltest du einen neuen Ausweis erstellen lassen. Nur so zeigen die Werte den besseren Zustand deines Gebäudes. Das ist beim Verkauf oder bei neuer Vermietung ein großer Vorteil.
+Meist gilt das Dokument ein volles Jahrzehnt lang. Wenn du jedoch größere Umbauten am Haus durchführst, solltest du einen neuen Ausweis erstellen lassen. Nur so zeigen die Werte den besseren Zustand deines Gebäudes. Das ist beim Verkauf oder bei neuer Vermietung ein großer Vorteil.
 
 ### Wer darf einen Energieausweis ausstellen?
 Nicht jeder darf dieses Dokument rechtssicher erstellen. Die Erlaubnis ist an feste Regeln und Erfahrung gebunden. Meist sind dies Architekten, Ingenieure oder geprüfte Berater für Energie. Auch Schornsteinfeger mit passender Schulung dürfen die Ausweise ausstellen.

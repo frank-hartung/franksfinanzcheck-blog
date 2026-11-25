@@ -1,6 +1,6 @@
 ---
-title: "Gaspreiserhöhung in der Grundversorgung: Wann kannst"
-description: "Dein Grundversorger erhöht den Gaspreis? Prüfe zuerst, ob du tatsächlich in der Grundversorgung bist, und lies das Wirksamkeitsdatum im Schreiben."
+title: "Gaspreiserhöhung Grundversorgung: Wann kannst du kündigen?"
+description: "Gaspreiserhöhung in der Grundversorgung: Prüfe zuerst deine Vertragsart und lies das Wirksamkeitsdatum im Schreiben."
 date: 2026-11-09T11:26:53Z
 draft: false
 reserve_published: 2026-11-09
@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Gaspreiserhöhung Sonderkündigungsrecht", "Grundversorgung Gas kündigen", "Gastarife vergleichen", "Gasanbieter Wechsel Prämie", "Gaspreiserhöhung", "Sonderkündigungsrecht", "Gaspreisgarantie", "Gastarif wechseln"]
+keywords_fokus: ["Gaspreiserhöhung", "Sonderkündigungsrecht"]
 pin_title: "Gaspreiserhöhung in der Grundversorgung: Wann kannst du kündigen?"
 pin_description: "*Werbung | Dein Grundversorger erhöht den Gaspreis? Prüfe zuerst, ob du tatsächlich in der Grundversorgung bist, und lies das Wirksamkeitsdatum im Schreiben. Bewahre das Preisschreiben mit dem Umschlag oder der elektronischen Zustellinformation auf. So kannst du Zugang und angekündigten Änderungstermin getrennt nachvollziehen."
 ai_generated: true
@@ -22,14 +23,14 @@ redaktionelle_pruefung:
 inspiration: "Preisbremse ausgelaufen: So wehrst du dich gegen die Gaspreiserhöhung im Grundtarif"
 cover:
   image: "images/covers/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem.jpg"
-  alt: "Gaspreiserhöhung Sonderkündigungsrecht: Raus aus"
+  alt: "Gaspreiserhöhung Grundversorgung: Wann kannst du kündigen?"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: af8884ad7fb1bb19653d7da004d74140a5fa48fdd809731ea6715cf57261c364
-    geprueft_am: 2026-11-21
+    sha256: f569172022734d818b42e37729719a0415033b0086fe895c9d3c8a790e74e1d3
+    geprueft_am: 2026-11-25
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"
@@ -67,7 +68,7 @@ So hältst du finanziell Kurs.
 * **Wechsel-Vorteil:** Ein Vergleich findet Tarife mit Preisgarantie und sichert dich gegen weitere Sprünge ab.
 * **Bonus-Check:** Eine Gasanbieter Wechsel Prämie senkt die Kosten im ersten Jahr (Modellrechnung), erfordert aber eine genaue Prüfung.
 
-## Kosten sehen: Warum wird dein Gas jetzt teurer?
+## Kosten sehen: Warum kommt die Gaspreiserhöhung?
 Die staatlichen Hilfen fallen weg. 
 Das ist der Hauptgrund für den Preissprung. 
 Die Energieversorger geben die vollen Kosten nun wieder an dich weiter. 
@@ -109,9 +110,9 @@ Ich empfehle den Weg per E-Mail mit Lesebestätigung oder per Einschreiben.
 Erwähne im Betreff ausdrücklich dein Sonderkündigungsrecht aufgrund der Preiserhöhung. 
 So verhinderst du Missverständnisse. 
 
-**Faustregel:** Jede einseitige Preisänderung durch den Versorger öffnet dir die Tür für einen sofortigen Wechsel.
+**Faustregel:** Jede einseitige Gaspreiserhöhung durch den Versorger öffnet dir die Tür für einen sofortigen Wechsel.
 
-## Grundversorgung Gas kündigen: So klappt der Ausstieg
+## Grundversorgung Gas kündigen: So klappt der Ausstieg nach einer Gaspreiserhöhung
 Viele Menschen haben Angst vor dem Prozess. 
 Du fürchtest, dass plötzlich die Heizung kalt bleibt. 
 Diese Angst ist unbegründet. 
@@ -175,10 +176,10 @@ Das ist der Preis inklusive aller Boni auf das erste Jahr (Modellrechnung) gere
 Behalte auch den Preis für das zweite Jahr (Modellrechnung) im Auge. 
 Nur so triffst du eine nachhaltige Entscheidung.
 
-## Welche Fehler kosten dich beim Wechsel Geld?
-Der größte Fehler ist das Abwarten. 
+## Welche Fehler kosten dich bei einer Gaspreiserhöhung Geld?
+Der größte Fehler nach einer Gaspreiserhöhung ist das Abwarten. 
 Wer den Brief mit der Erhöhung zur Seite legt, verliert Geld. 
-Ein weiterer Fehler ist das Vertrauen auf Werbeversprechen. 
+Ein weiterer Fehler nach der Gaspreiserhöhung ist das Vertrauen auf Werbeversprechen. 
 "Wir sind die Günstigsten" stimmt selten für jeden Haushalt. 
 Jeder Wohnort hat andere Netzentgelte. 
 Deshalb ist eine individuelle Rechnung Pflicht. 

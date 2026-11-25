@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Winter Vorbereitung Wohnung", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten", "Strategien"]
+keywords_fokus: ["Heizkosten"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Heizkosten senken: Welche Maßnahmen passen zu deiner Wohnung?"
 pin_description: "*Werbung | Bevor du in Heiztechnik investierst, prüfe Heizzeiten, Thermostate und freie Heizflächen. Vergleiche den Verbrauch nur unter ähnlichen Bedingungen. Notiere beim Vergleich der Zählerstände auch Außentemperatur und Abwesenheit. Sonst schreibst du einer neuen Einstellung vielleicht einen Effekt zu, der vom Wetter stammt."

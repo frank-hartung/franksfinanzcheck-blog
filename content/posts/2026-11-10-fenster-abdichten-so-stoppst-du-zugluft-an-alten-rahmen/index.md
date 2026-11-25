@@ -1,6 +1,6 @@
 ---
 title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
-description: "Zieht es am Fensterrahmen? Finde zuerst die undichte Stelle und prüfe, ob Dichtung oder Beschlag betroffen ist, bevor du Material kaufst."
+description: "Fenster abdichten: Zieht es am Rahmen? Finde erst die undichte Stelle und prüfe Dichtung oder Beschlag vor dem Materialkauf."
 date: 2026-11-13T00:29:05Z
 draft: false
 reserve_published: 2026-11-13
@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Fenster abdichten", "Zugluft stoppen", "Heizkosten senken"]
+keywords_fokus: ["Fenster abdichten", "Zugluft stoppen"]
 pin_title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
 pin_description: "Zieht es am Fensterrahmen? Finde zuerst die undichte Stelle und prüfe, ob Dichtung oder Beschlag betroffen ist, bevor du Material kaufst. Teste die Dichtung an mehreren Stellen desselben Fensters. Ein Problem an einer Ecke erfordert nicht zwangsläufig neue Dichtungen für den ganzen Rahmen."
 ai_generated: true
@@ -46,8 +47,7 @@ affiliate_exempt_reason: "Eine Fensterdichtung wird nach Zustand und Passform au
 
 
 
-
-Spürst du am geschlossenen Fenster einen Luftzug, suche erst die undichte Stelle. Nicht jede Fuge lässt sich sinnvoll mit demselben Dichtband schließen.
+Spürst du am geschlossenen Rahmen Zugluft, solltest du nicht sofort blind Fenster abdichten. Nicht jede Fuge lässt sich sinnvoll mit demselben Dichtband schließen.
 
 Die Dichtungen sind spröde oder fehlen ganz.  
 Teure neue Fenster sind meist nicht sofort nötig.  
@@ -55,7 +55,7 @@ Oft reicht es, die alten Rahmen gezielt zu bearbeiten.
 Wer seine Fenster abdichten will, kann mit kleinen Investitionen schnell handeln.  
 
 Du sparst Geld und steigerst dein Wohlbefinden.  
-Diese Anleitung zeigt dir den Weg zum dichten Fenster ohne Zugluft.  
+Diese Anleitung zeigt dir, wie du Fenster abdichten und Zugluft stoppen kannst.  
 Du lernst, wie du Schwachstellen findest und Material richtig einsetzt.  
 So bleibt die Wärme dort, wo sie hingehört.  
 
@@ -75,7 +75,7 @@ Das treibt deine Kosten unnötig in die Höhe.
 In Altbauten verziehen sich die Rahmen oft.  
 Holz arbeitet über Jahrzehnte und bildet Spalten zwischen Flügel und Rahmen.  
 Diese Lücken verbrauchen unnötig viel Energie.  
-Das Abdichten ist eine effektive Sofortmaßnahme. –  
+Wer zuerst seine Fenster abdichten lässt oder selbst klebt, handelt sofort.  
 Du brauchst dafür nur wenig Zeit und Material.  
 
 Das Thema gehört zum ersten Schritt des 4K‑Prüfpfads: **Kosten sehen**. Stoppe den unnötigen Verbrauch, bevor du über neue Tarife nachdenkst. Du bezahlst sonst für Wärme, die du gar nicht nutzt. Wer die **Zugluft stoppen** kann, steigert sofort seinen Wohnkomfort.

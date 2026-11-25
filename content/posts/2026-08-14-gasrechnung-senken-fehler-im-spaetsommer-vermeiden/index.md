@@ -22,6 +22,7 @@ cover:
 kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein unrealistischer Abschlag, fehlende Zählerstände, ein aufgeschobener Heizungs-Check und pauschale Technik-Einstellungen. Prüfe Arbeitspreis, Grundpreis und Vorjahresverbrauch getrennt. Entlüfte nur bei Bedarf; wiederkehrender Druckverlust, Störungen und Arbeiten am Wärmeerzeuger gehören zum Fachbetrieb."
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie", "Gas spare", "Heizkosten sparen"]
+keywords_fokus: ["Gasrechnung senken"]
 pin_title: "Gasrechnung senken: Welche Fehler lassen sich vor der Heizperiode vermeiden?"
 pin_description: "*Werbung | Ist dein Gasabschlag gestiegen? Vergleiche die Zählerstände auf der Rechnung mit deinen Notizen, bevor du Verbrauch, Tarif oder Abschlag änderst. Lege Vorjahr und laufendes Jahr nebeneinander. Eine höhere Zahlung kann an mehr Kilowattstunden, einem höheren Preis oder einer geänderten Zahl von Abschlägen liegen."
 pin_text_sync: false

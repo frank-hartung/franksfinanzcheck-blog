@@ -1,14 +1,16 @@
 ---
 title: "Streaming-Bandbreite: Wie viel brauchst du wirklich?"
-description: "Wie viel Bandbreite braucht dein Haushalt fürs Streaming? Addiere gleichzeitige Streams und teste die Verbindung am Fernseher, nicht nur am Router."
+description: "Streaming-Bandbreite richtig berechnen: Addiere gleichzeitige Streams und teste die Verbindung am Fernseher statt nur am Router."
 date: 2026-11-13T00:30:17Z
 draft: false
+cornerstone: true
 reserve_published: 2026-11-13
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Streaming Bandbreite", "Internetgeschwindigkeit", "Streaming ruckelt", "Wie viel Streaming-Bandbreite", "Bandbreite", "Wie viel Streaming-Bandbreite brauchst du wirklich?", "Streaming-Bandbreite"]
+keywords_fokus: ["Streaming-Bandbreite", "Internetgeschwindigkeit"]
 pin_title: "Streaming-Bandbreite: Wie viel brauchst du wirklich?"
 pin_description: "*Werbung | Wie viel Bandbreite braucht dein Haushalt fürs Streaming? Addiere gleichzeitige Streams und teste die Verbindung am Fernseher, nicht nur am Router. Teste einen einzelnen Stream und anschließend die typische gleichzeitige Nutzung im Haushalt. So erkennst du, ob erst die Summe der Anwendungen zum Engpass wird."
 ai_generated: true
@@ -43,7 +45,7 @@ faktenfrische_aliases:
   - "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
 ---
 
-Wenn ein Film stockt, kommen der Internetanschluss, das heimische WLAN und der Streamingdienst als Ursachen infrage. Ein [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) löst nur einen Teil dieser Probleme.
+Wenn ein Film stockt, entscheidet oft die richtige Streaming-Bandbreite – neben Anschluss, WLAN und Dienst – über das Ergebnis. Ein [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) löst nur einen Teil dieser Probleme.
 
 Miss die Geschwindigkeit zuerst per Netzwerkkabel und danach am Fernseher per WLAN. Erst wenn beide Messungen zu niedrig ausfallen, lohnt sich ein Blick auf den Tarif.
 
@@ -68,7 +70,7 @@ Schaut ein Kind ein Video auf YouTube, während du einen Film in 4K streamst? Je
 
 Denk dabei nicht nur an den Fernseher oder den Laptop. Auch Handys laden im Hintergrund oft große Updates oder Fotos in die Cloud. Das zieht heimlich an deiner Leistung.
 
-Wenn du deine Nutzung kennst, kannst du die nötige Kraft der Leitung berechnen. Ein Single-Haushalt braucht viel weniger Speed als eine große Familie. Wer nur ab und zu eine Mail schreibt, kommt mit einem kleinen Tarif aus. Wer aber jeden Abend Filme in höchster Schärfe schaut, braucht eine dicke Leitung.
+Wenn du deine Nutzung kennst, kannst du die nötige Streaming-Bandbreite klar berechnen. Ein Single-Haushalt braucht viel weniger Speed als eine große Familie. Wer nur ab und zu eine Mail schreibt, kommt mit einem kleinen Tarif aus. Wer aber jeden Abend Filme in höchster Schärfe schaut, braucht eine dicke Leitung.
 
 ## Welche Faktoren bestimmen die Internetgeschwindigkeit?
 
@@ -90,7 +92,7 @@ Hier zeigen wir dir eine Modellrechnung für deinen Haushalt. Die Werte sind bew
 * Wir gehen von einer typischen Nutzung am Abend aus.
 
 **Die einfache Formel:**
-Gesamt-Bandbreite = (Anzahl der 4K-Geräte × 25 Mbps) + (Anzahl der HD-Geräte × 5 Mbps)
+Gesamte Streaming-Bandbreite = (Anzahl der 4K-Geräte × 25 Mbps) + (Anzahl der HD-Geräte × 5 Mbps)
 
 **Rechenbeispiel:**
 1. In deinem Wohnzimmer laufen zwei Fernseher mit 4K-Filmen: 2 × 25 = 50 Mbps.

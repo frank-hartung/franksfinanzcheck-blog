@@ -9,6 +9,7 @@ tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "5 einfache Frugalismus Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben"]
+keywords_fokus: ["Alltag"]
 author: "Frank Hartung"
 kurzantwort: "Frugalismus funktioniert im Alltag vor allem über die großen Hebel: Verträge prüfen, Energieverbrauch senken, Einkäufe planen, Impulskäufe bremsen und freiwerdendes Geld sofort sichern. Modellrechnungen zeigen, wie zwei oder drei Änderungen 50 € bis 200 € mehr Spielraum schaffen können. Dein tatsächlicher Vorteil hängt von deinen bisherigen Ausgaben ab."
 ai_generated: true

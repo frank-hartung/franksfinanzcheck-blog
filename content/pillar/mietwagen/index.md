@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["Mietwagen buchen", "Mietwagen günstig", "Mietwagen Fallen", "Flüge sparen", "Urlaubskasse aufbessern"]
+keywords_fokus: ["Mietwagen", "Kreditkarte", "Vollkasko"]
 cover:
   image: "images/covers/pillar-mietwagen.jpg"
   alt: "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen"

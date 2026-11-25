@@ -63,9 +63,9 @@ Dieser Ratgeber hilft dir, im Tarif-Dschungel den Durchblick zu behalten. Kein t
 
 ## Wie viel Internet-Geschwindigkeit brauchst du wirklich?
 
-Die entscheidende Frage heißt nicht: Was ist technisch möglich? Sie heißt: Was ruft dein Haushalt gleichzeitig ab? Die benötigte Bandbreite steigt zwar stetig. Aber oft langsamer als die Werbung glauben macht.
+Die erste Frage lautet nicht: Was ist im Netz maximal machbar? Sie heißt: Was nutzt dein Haushalt zugleich? Dein Bedarf steigt mit den Jahren, oft aber viel langsamer als in bunten Werbespots.
 
-Für Singles, die gelegentlich streamen und im Homeoffice arbeiten, sind **50 Mbit/s** völlig ausreichend; das ist ein Modellwert. Leben zwei Personen im Haushalt, die gleichzeitig in Videokonferenzen sitzen oder Serien schauen, bieten **100 Mbit/s** einen komfortablen Puffer. Erst wenn Kinder im Gaming-Alter dazukommen oder regelmäßig riesige Datenmengen bewegt werden, spielen Tarife mit **250 Mbit/s** ihre Stärken aus.
+Für eine Person mit Streams und Homeoffice reichen **50 Mbit/s** locker; das ist ein Modellwert. Sitzen zwei Menschen zugleich im Call oder schauen Filme, bieten **100 Mbit/s** schon viel Luft. Erst bei großen Spieledaten oder vielen Kindern zugleich spielen **250 Mbit/s** ihre Stärken aus.
 
 ### Schnelle Orientierung nach Haushalt
 
@@ -79,13 +79,13 @@ Für Singles, die gelegentlich streamen und im Homeoffice arbeiten, sind **50 Mb
 
 ### Diese Anwendungen ziehen Bandbreite
 
-- 4K-Stream (Ultra HD): ca. **15 bis 25 Mbit/s**; das ist ein Beispielwert. Das ist ein Rechenbeispiel.
-- Hochauflösende Video-Calls: ca. **5 bis 10 Mbit/s**
-- Cloud-Synchronisation: oft **10 Mbit/s** oder deutlich mehr im Upload
-- Gaming: Benötigt wenig Bandbreite, aber einen niedrigen Ping (Latenz)
-- System-Updates: Können kurzzeitig die gesamte Leitung beanspruchen
+- 4K-Stream (Ultra HD): ca. **15 bis 25 Mbit/s**; das ist ein Beispielwert.
+- Video-Calls in HD: ca. **5 bis 10 Mbit/s**
+- Cloud-Sicherung: oft **10 Mbit/s** oder mehr im Upload
+- Gaming: braucht wenig Tempo, aber eine kurze Antwortzeit (Ping)
+- System-Updates: lasten die Leitung mitunter kurz voll aus
 
-Problematisch wird es, wenn die Nutzungsprofile kollidieren. Wenn ein Familienmitglied ein Spiel-Update lädt, während ein anderes an einer wichtigen Konferenz teilnimmt, ist eine stabile Leitung mit genügend Reserven Gold wert.
+Eng wird es erst, wenn zwei große Downloads zugleich laufen. Lädt ein Kind ein großes Spiel, während du im Video-Call sprichst, brauchst du eine stabile Leitung mit Luft nach oben.
 
 ## DSL, Kabel oder Glasfaser: Was passt zu deinem Haus?
 
@@ -107,13 +107,13 @@ Kabel-Internet lockt oft mit hohen Downloadraten zu attraktiven Preisen. Besonde
 
 ### Wann Glasfaser Sinn ergibt
 
-Glasfaser (FTTH) ist die Premium-Variante. Sie bietet nicht nur enorme Download-Raten. Vor allem bietet sie einen überlegenen Upload. Wer beruflich mit Videoproduktion zu tun hat, ständig große Dateien in die Cloud schiebt oder ein [Smart Home](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/) mit Dutzenden Geräten betreibt, sollte hier zugreifen. Sofern verfügbar.
+Glasfaser (FTTH) ist die stärkste Lösung. Sie liefert nicht nur hohes Tempo beim Laden. Vor allem liefert sie extrem schnellen Upload. Wer große Videos lädt, viele Daten sichert oder ein [Smart Home](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/) betreibt, liegt hier richtig – falls verfügbar.
 
 ## Der größte Fehler: Nur auf den Startpreis schauen
 
- Aktuell werben Anbieter oft mit Preisen von **ca. 10 € bis 20 €** im ersten Halbjahr; das ist eine Modellannahme. Danach steigt der Preis nach der Lockphase auf **ca. 45 € bis 55 €**.
+Aktuell locken Tarife oft mit **ca. 10 € bis 20 €** im ersten halben Jahr; das ist eine Modellannahme. Danach steigt der Preis deutlich auf **ca. 45 € bis 55 €**.
 
- Entscheidend ist der **Effektivpreis über die gesamte Mindestlaufzeit von 24 Monaten**; das ist ein Modellwert.
+Wichtig ist allein der **Effektivpreis über volle 24 Monate**; das ist ein Modellwert.
 
 So berechnest du den echten Preis:
 
@@ -161,9 +161,9 @@ Oft wird ein Upgrade gebucht, weil das Internet im Schlafzimmer ruckelt. Doch ei
 
 Prüfe vor einem Wechsel:
 
-1. **LAN-Check:** Schließe einen Laptop direkt per Kabel an den Router an. Kommt die gebuchte Leistung dort an?
-2. **WLAN-Abdeckung:** Nutze Apps, um die Signalstärke in verschiedenen Räumen zu messen.
- **Hardware-Alter:** Ist dein Router vielleicht schon fünf oder sechs Jahre alt; das ist ein Rechenbeispiel? Dann beherrscht er moderne Standards wie Wi-Fi 6 oder 7 eventuell gar nicht.
+1. **LAN-Check:** Stecke deinen Laptop direkt per Kabel an den Router. Kommt dort das gebuchte Tempo an?
+2. **WLAN-Abdeckung:** Miss mit einer App, wie stark das Funknetz in allen Zimmern bleibt.
+3. **Hardware-Alter:** Ist dein Router schon fünf oder sechs Jahre alt; das ist ein Rechenbeispiel? Alte Geräte beherrschen oft noch kein neues WLAN wie Wi-Fi 6.
 
 ### Typische Deutung
 
@@ -221,7 +221,7 @@ Hier steht die Kostenoptimierung im Vordergrund. Oft ist ein dauerhaft günstige
 Bevor du buchst, investiere diese Viertelstunde:
 
 1. Aktuelle Kosten und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen.
- Reichen 100 Mbit/s vielleicht doch; das ist ein Rechenbeispiel?
+2. **Bandbreite prüfen:** Reichen 100 Mbit/s im Alltag vielleicht doch (Rechenbeispiel)?
 3. Verfügbarkeitscheck für DSL, Kabel und Glasfaser machen.
 4. Router-Entscheidung treffen: Kauf-Hardware vorhanden?
 5. Top 3 Angebote nach Effektivpreis (inkl. Router und Boni) vergleichen.
@@ -243,22 +243,28 @@ Bevor du buchst, investiere diese Viertelstunde:
 
 ## Häufige Fragen
 
-**Reichen 50 Mbit/s für Homeoffice und Streaming?**; das ist ein Modellwert. Das ist ein Modellwert.
-Ja, für einen normalen Haushalt mit ein bis zwei Personen ist das meist völlig ausreichend. Solange nicht drei 4K-Streams gleichzeitig laufen, bietet diese Bandbreite eine solide Basis für flüssiges Arbeiten und Entertainment.
+### Reichen 50 Mbit/s für Homeoffice und Streaming?
 
-**Wann lohnt sich Glasfaser?**
+Ja, für einen normalen Haushalt mit ein bis zwei Personen reicht das als Modellwert meist völlig aus. Solange nicht drei 4K-Streams gleichzeitig laufen, bietet diese Bandbreite eine solide Basis für flüssiges Arbeiten und Entertainment.
+
+### Wann lohnt sich Glasfaser?
+
 Glasfaser ist immer dann die richtige Wahl, wenn du maximale Ausfallsicherheit und hohe Upload-Geschwindigkeiten suchst. Auch zur Wertsteigerung einer Immobilie oder für extrem datenintensive Anwendungen ist sie die Technik der Zukunft.
 
-**Ist Kabel besser als DSL?**
+### Ist Kabel besser als DSL?
+
 Das kommt auf die Lage an. Kabel bietet oft mehr Download-Speed für das gleiche Geld. Aber in manchen Wohngebieten ist es anfälliger für Schwankungen zur Stoßzeit. DSL ist oft konsistenter in der Leistung. Aber bei der Höchstgeschwindigkeit limitiert.
 
-**Soll ich den Router lieber kaufen oder mieten?**
+### Soll ich den Router lieber kaufen oder mieten?
+
 Wirtschaftlich ist der Kauf eines eigenen Geräts meist nach etwa zwei Jahren im Vorteil; das ist ein Beispielwert. Die Miete bietet hingegen einen Rundum-Sorglos-Service inklusive Hardware-Support und schnellem Austausch bei Defekten.
 
-**Wie erkenne ich, ob mein Problem am WLAN liegt?**
+### Wie erkenne ich, ob mein Problem am WLAN liegt?
+
 Führe einen Speedtest per LAN-Kabel direkt am Router durch. Ist dieser deutlich schneller als der Test über WLAN, liegt die Ursache an deiner Funkverbindung oder der Router-Position. Nicht an deinem Tarif.
 
-**Wann sollte ich mit dem Wechsel anfangen?**
+### Wann sollte ich mit dem Wechsel anfangen?
+
 Idealerweise prüfst du deine Optionen etwa drei bis vier Monate vor Ablauf deiner [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/); das ist ein Modellwert. So hast du genügend Zeit für den Vergleich. Und der neue Anbieter kann die Kündigungs- und Umschaltprozesse rechtzeitig einleiten.
 
 ---

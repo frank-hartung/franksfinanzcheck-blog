@@ -1,6 +1,6 @@
 ---
 title: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
-description: "Nimm den Internetanschluss in deine Umzugsplanung auf: Kläre Verfügbarkeit, Schalttermin und Rufnummernmitnahme für die neue Adresse."
+description: "Umzug mit Internet: Nimm den Anschluss früh in die Planung auf und kläre Verfügbarkeit, Schalttermin sowie Rufnummer."
 date: 2026-09-04T06:10:00Z
 lastmod: 2026-11-04
 draft: false
@@ -9,6 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Umzug Internet", "Rufnummer mitnehmen", "Internet ummelden", "DSL Umzug", "Umzug mit Internet"]
+keywords_fokus: ["Umzug", "Rufnummer mitnehmen"]
 pin_title: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
 pin_description: "*Werbung | Nimm den Internetanschluss in deine Umzugsplanung auf: Kläre Verfügbarkeit, Schalttermin und Rufnummernmitnahme für die neue Adresse. Fordere den Umzugstermin schriftlich an und kläre den Zugang zur Anschlussdose. Ohne Zutritt zur Wohnung hilft dir auch ein bestätigter Technikertermin wenig."
 ai_generated: true
@@ -55,11 +56,11 @@ faktencheck: 2026-10-13
 kurzantwort: "Melde den Umzug dem Anbieter früh und schriftlich, am besten sechs bis acht Wochen vorher. Ob der Vertrag an der neuen Adresse fortgeführt oder beendet werden muss, hängt von der Verfügbarkeit ab. Die Rufnummer lässt sich in der Regel mitnehmen, aber nicht immer automatisch. Prüfe deshalb jede Bestätigung, bevor du den Router abbaust."
 ---
 
-Umzugskartons sind planbar, der Router nicht. Zwischen alter und neuer Wohnung liegt eine Zeitspanne, in der sehr viel von einer funktionierenden Leitung abhängt: Homeoffice, Schule, Bankgeschäfte, die Telefonnummer für Handwerker.
+Beim Umzug sind die Kartons planbar, der Router nicht. Zwischen alter und neuer Wohnung liegt eine Zeitspanne, in der sehr viel von einer funktionierenden Leitung abhängt: Homeoffice, Schule, Bankgeschäfte, die Telefonnummer für Handwerker.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
- Wer zwei Wochen zu spät meldet, bekommt keinen Schadenersatz für verlorene Wochen, sondern einen neuen Termin; das ist ein Modellwert.
+Wer zwei Wochen zu spät meldet, bekommt keinen Schadenersatz für verlorene Wochen, sondern einen neuen Termin; das ist ein Modellwert.
 
 ## Zwei Fragen vor dem ersten Anruf
 
@@ -101,24 +102,26 @@ Trage diesen Termin in den Kalender ein. Wenn die Nummer nach dem Umzug nicht er
 
 Die wichtigste Zahl beim Umzug ist nicht der Preis, sondern die Vorlaufzeit. Wer früh meldet, kann Termine beeinflussen. Wer spät meldet, nimmt den erstbesten.
 
- **Sechs bis acht Wochen vorher:** Verfügbarkeit an der neuen Adresse klären; das ist ein Beispielwert. Anbieter informieren, wenn du umziehst.
-2. **Vier bis fünf Wochen vorher:** Auftrag für den Umzug oder Neuvertrag erteilen. Rufnummernmitnahme ausdrücklich beantragen.
-3. **Drei Wochen vorher:** Bestätigung prüfen. Termin, Rufnummer, Preis und Laufzeit müssen schriftlich vorliegen.
-4. **Zwei Wochen vorher:** Kündigung des alten Vertrags, falls ein Wechsel nötig ist. Kündigung und Neuanmeldung aufeinander abstimmen, damit keine Lücke entsteht.
-5. **Eine Woche vorher:** Technikertermin bestätigen. Zugang zur neuen Wohnung sicherstellen.
-6. **Umzugswoche:** Gerät anschließen, Verbindung testen, Rufnummer testen.
+1. **Sechs bis acht Wochen vorher:** Verfügbarkeit am neuen Ort klären; das ist ein Beispielwert. Melde dem Anbieter deinen Umzug früh.
+2. **Vier bis fünf Wochen vorher:** Auftrag für Umzug oder Neuvertrag erteilen. Rufnummer mitnehmen – das musst du aktiv wählen.
+3. **Drei Wochen vorher:** Bestätigung prüfen. Termin, Nummer, Preis und Laufzeit brauchst du schriftlich.
+4. **Zwei Wochen vorher:** Alten Vertrag kündigen, falls nötig. Stimme alt und neu auf ein Datum ab, damit dein Netz nicht ausfällt.
+5. **Eine Woche vorher:** Termin mit dem Techniker prüfen. Kläre den freien Zugang zur neuen Wohnung.
+6. **Umzugswoche:** Router anschließen, Netz prüfen und Telefon testen.
 
-Wer diese Reihenfolge einhält, hat den größten Teil der Überraschungen abgeräumt. Die Bundesnetzagentur beschreibt unter [Anbieterwechsel](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Wechsel/artikel.html) zusätzlich, was technisch beim Umschalten passiert.
+Mit diesem Ablauf sparst du dir viel Stress am Umzugstag. Die Bundesnetzagentur erklärt unter [Anbieterwechsel](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Wechsel/artikel.html), wie der technische Wechsel abläuft.
 
 ## Modellrechnung: Die Kosten einer Lücke
 
-Diese Modellrechnung nutzt angenommene Werte. Sie zeigt eine Größenordnung, keine Marktpreise.
+Diese Modellrechnung nutzt einfache Werte. Sie zeigt die Größenordnung, keine fixen Marktpreise.
 
-Annahmen: Dein Vertrag kostet monatlich 40 €. Bei einem Umzug fällt der Anschluss für 14 Tage aus. Für die Überbrückung mietest du in der Annahme zwei Wochen mobilen Datenvolumen für 15 € pro Woche. Zusätzlich nutzt du an vier Abenden einen Coworking-Platz für 12 € pro Abend.
+Annahmen: Dein Tarif kostet 40 € im Monat. Beim Umzug fällt das Netz für 14 Tage aus. Für Ersatz buchst du zwei Wochen mobiles Netz zu je 15 €. Zudem gehst du viermal abends ins Coworking für je 12 €.
 
-Rechenweg für den Vertrag: 40 € im Monat ergeben rund 1,33 € pro Kalendertag. Bei 14 Tagen sind das rund 18,60 €, die du zahlst, ohne die Leistung zu nutzen. Rechenweg für die Überbrückung: 2 mal 15 € ergeben 30 €, 4 mal 12 € ergeben 48 €. Modellrechnung: Die Gesamtkosten der Lücke liegen bei rund 96,60 €. Eine Woche Verzögerung weniger halbiert diesen Betrag ungefähr.
+Dein Vertrag kostet etwa 1,33 € pro Tag. Für 14 Tage ohne Netz zahlst du rund 18,60 € umsonst.
 
-Der Punkt dieser Rechnung ist die Reihenfolge. Der größte Teil der Kosten entsteht nicht durch hohe Preise, sondern durch verlorene Tage.
+Der Ersatz kostet zweimal 15 € plus viermal 12 €, also 78 €. Im Modell liegt die Lücke somit bei rund 96,60 €. Eine Woche weniger Wartezeit halbiert diese Kosten fast.
+
+Die Rechnung zeigt ein klares Bild: Teuer werden nicht die Tarife, sondern verlorene Tage ohne Netz.
 
 Der Zeitplan für einen Umzug in der Übersicht:
 
@@ -131,25 +134,25 @@ Der Zeitplan für einen Umzug in der Übersicht:
 
 ## Was in der neuen Wohnung vorbereitet sein muss?
 
-Der Technikertermin scheitert selten an der Technik. Er scheitert an fehlendem Zugang. Räume die Ecke frei, in der die Anschlussdose liegt, und stelle sicher, dass jemand die Tür öffnen kann.
+Der Termin scheitert selten an der Technik. Meist fehlt schlicht der Zugang zur Dose. Räume die Ecke frei und sorge dafür, dass jemand vor Ort die Tür öffnet.
 
-Prüfe außerdem die Dose selbst. Bei einem klassischen Anschluss ist es eine Telefondose, bei Kabel ein Koaxialanschluss, bei Glasfaser ein kleiner Übergabepunkt. Fotografiere jede Dose, die du findest, und schicke das Bild an deinen Anbieter, wenn du dir unsicher bist. Diese Rückfrage klärt mehr als jede Ferndiagnose.
+Prüfe auch die Dose selbst. Beim alten Netz ist es die Telefondose, bei Kabel die runde Dose, bei Glasfaser ein kleiner Kasten. Mach ein Foto von der Dose und sende es dem Anbieter bei Fragen. Ein Bild klärt oft mehr als lange Telefonate.
 
-Hilfreich ist auch ein Blick auf die Hausverkabelung. In Mehrfamilienhäusern gibt es manchmal mehrere Netze im Haus. Wenn dein Nachbar einen anderen Anbieter nutzt als du, ist das kein Widerspruch, sondern ein Hinweis auf eine zweite Leitung im Gebäude.
+Hilfreich ist auch ein Blick in den Keller oder Hausflur. Oft gibt es im Haus mehrere Netze parallel. Nutzt dein Nachbar ein anderes Netz, ist das meist kein Fehler, sondern eine zweite Leitung im Haus.
 
-Ein letzter Punkt: Strom. Dein Router braucht eine Steckdose in der Nähe der Dose. Wenn dort keine ist, plane eine Verlängerung ein, bevor der Techniker kommt. Solche Kleinigkeiten kosten sonst einen zweiten Termin.
+Denke am Ende an den Strom. Dein Router braucht eine freie Steckdose direkt bei der Anschlussdose. Fehlt sie, lege rechtzeitig ein Kabel hin. Solche kleinen Dinge sparen dir einen zweiten Termin mit Wartezeit.
 
 ## Am Umzugstag selbst
 
-Der Tag des Umzugs ist hektisch. Deshalb hilft eine kurze Reihenfolge, damit nichts liegen bleibt.
+Der Tag ist voll mit Kisten und Helfern. Darum hilft ein kurzer Plan für dein Netz.
 
-1. **Zählerstände ablesen.** Notiere Strom- und Gaszähler in alter und neuer Wohnung mit Datum und Foto.
-2. **Anschluss testen.** Schließe den Router an und prüfe die Verbindung, bevor du alles andere aufbaust.
-3. **Rufnummer prüfen.** Rufe ein Handy an und notiere, welche Nummer angezeigt wird.
-4. **Geschwindigkeit messen.** Ein kurzer Test zeigt dir, ob die gebuchte Leistung ankommt.
-5. **Bestätigung ablegen.** Lege den Router in die neue Unterlagenmappe, nicht in einen Karton.
+1. **Zählerstände ablesen.** Notiere Strom und Gas in beiden Wohnungen mit Datum und Foto.
+2. **Anschluss testen.** Stecke den Router an und prüfe die Leitung gleich zu Beginn.
+3. **Nummer testen.** Rufe dein Handy an und schau, ob deine alte Nummer erscheint.
+4. **Speed messen.** Ein kurzer Test belegt, ob dein gebuchtes Tempo wirklich ankommt.
+5. **Papiere sichern.** Lege Router und Briefe in deine Mappe, nicht in einen Karton.
 
-Der vierte Punkt ist wichtiger, als er klingt. Wenn die Leistung an der neuen Adresse dauerhaft unter dem vereinbarten Wert liegt, ist das ein Reklamationsgrund. Ohne Messung fehlt dir die Grundlage für die Nachfrage.
+Der vierte Schritt ist im Streitfall Gold wert. Bleibt dein Tempo am neuen Ort dauerhaft zu schwach, kannst du das sofort belegen. Ohne Messwert fehlt dir jeder Nachweis.
 
 ## Wenn die Leitung an der neuen Adresse nicht verfügbar ist
 
@@ -173,12 +176,12 @@ Der Umzug ist abgeschlossen, die Kartons sind leer. Jetzt beginnt der Teil, den 
 
 Vier Wochen nach der Umschaltung hast du vier Fragen zu beantworten im Rechenfall.
 
- Ein einzelner Wert sagt wenig, drei Werte über drei Tage sagen mehr; das ist ein Rechenbeispiel.
+1. **Kommt das Tempo am Anschluss an?** Ein einzelner Wert sagt wenig, drei Werte über drei Tage sagen mehr; das ist ein Rechenbeispiel.
 2. **Stimmt die erste Rechnung?** Prüfe, ob Anschlussgebühr, erster Monat und Zusatzoptionen den vereinbarten Angaben entsprechen.
 3. **Steht die Rufnummer in den Vertragsdaten?** Sie sollte schriftlich bestätigt sein, nicht nur funktionieren.
 4. **Läuft der alte Vertrag aus?** Wenn du gewechselt hast, kontrolliere die Schlussabrechnung des alten Anbieters.
 
- Vier Wochen sind kein später Zeitpunkt, aber die Beweislage ist noch frisch; das ist ein Rechenbeispiel.
+Vier Wochen sind kein später Zeitpunkt, aber die Beweislage ist noch frisch; das ist ein Rechenbeispiel.
 
 ## Wenn zwei Anbieter dir zwei Rechnungen schicken
 

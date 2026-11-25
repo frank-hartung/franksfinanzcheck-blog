@@ -164,11 +164,11 @@ Das Beispiel zeigt den Hebel: Einzelne Kleinbeträge verpuffen im Pauschbetrag. 
 
 ## Jahres-Check: Büroausstattung steuerlich clever absetzen
 
- Zehn Minuten pro Quartal reichen; das ist ein Rechenbeispiel. In der Zeit erfasst du neue Käufe und zählst die Homeoffice-Tage. Als Nachweis genügt ein Kalendereintrag mit dem Kürzel HO.
+Zehn Minuten pro Quartal reichen; das ist ein Rechenbeispiel. In der Zeit erfasst du neue Käufe und zählst die Homeoffice-Tage. Als Nachweis genügt ein Kalendereintrag mit dem Kürzel HO.
 
 Plane auch die Erstattung ein. Wer das Geld nicht sofort ausgibt, sondern auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) legt, finanziert damit den nächsten Kauf. Mit einem Haushaltsbuch behältst du die Beträge im Blick.
 
- Liegt der Nettopreis unter 800 €; das ist ein Rechenbeispiel? Passt der Kauf noch in dieses Steuerjahr?
+Liegt der Nettopreis im Rechenbeispiel unter 800 €? Passt der Kauf noch in dieses Steuerjahr?
 
 Wer im Dezember bestellt, verschiebt den Abzug oft ins Folgejahr. Es zählt das Datum der Anschaffung.
 

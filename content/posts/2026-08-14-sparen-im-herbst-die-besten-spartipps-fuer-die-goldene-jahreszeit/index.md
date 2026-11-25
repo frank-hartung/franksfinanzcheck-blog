@@ -24,6 +24,7 @@ kurzantwort: "Prüfe zuerst Verträge mit einem nahen Termin. Der 30. November i
 
 social_posted: true
 keywords: ["Sparen im Herbst", "Herbst Spartipps", "Fixkosten senken", "Kfz Stichtag 30. November", "Finanzen optimieren", "Frugalismus", "Geld sparen", "Heizkosten senken"]
+keywords_fokus: ["Herbst"]
 pin_title: "Sparen im Herbst: Spartipps für die goldene Jahreszeit"
 pin_description: "*Werbung | Mit Beginn der Heizzeit verschieben sich die Haushaltsausgaben. Prüfe, welche Beträge regelmäßig anfallen und wofür du im Herbst Geld zurücklegen willst. Wähle für diesen Herbst eine Aufgabe mit Termin und eine ohne Frist. Der Blick in die Versicherungspolice kann dringender sein als der Einkauf einer größeren Vorratspackung."
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
