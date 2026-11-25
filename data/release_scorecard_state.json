@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generated_at": "2026-11-25T18:57:39Z",
+  "generated_at": "2026-11-25T19:49:43Z",
   "modus": "kandidaten",
-  "commit": "1f89773ada404d05cf412ea7e1d9176a1273b518",
+  "commit": "6eec2a4fc44953d01f6ecf285fe96ab104258c5d",
   "kapazitaet": {
     "stichtag": "2026-11-25",
     "basis": "2026-11-25",
     "projiziert": false,
-    "artikel": 151,
+    "artikel": 150,
     "faellig": 10,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
@@ -19,9 +19,9 @@
     "budget": 10,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 10.0,
-    "bedarf_je_tag": 3.611,
-    "bedarf_je_woche": 25.3,
-    "deckung_prozent": 276.9,
+    "bedarf_je_tag": 3.6,
+    "bedarf_je_woche": 25.2,
+    "deckung_prozent": 277.8,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -31,7 +31,7 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 151,
+    "offen_im_horizont": 150,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -158,7 +158,7 @@
     "seiten": 81,
     "live_befunde": 174,
     "live_seiten": 52,
-    "ueberholt": 241,
+    "ueberholt": 243,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 26,
@@ -315,7 +315,7 @@
       ]
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "f890bb1901c053e7477ab4e803b2d7b9d88f350f8f488be5b0efe6a4a397f111",
+      "sha256": "77d71650bc428dd8771d0dbf38be2e8984f3a252b60cbc5894e1819a9cc78ed2",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -512,7 +512,7 @@
       "checks": []
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
-      "sha256": "4cf3236d76ac26d2be3c9b421378f0cdd7ce3abde591aff27adb5565c66bbbcc",
+      "sha256": "cb6774721ee12a396219a62c35e03252a0e42f0724181b2631a0895d1e77b45a",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -526,7 +526,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-04",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -587,7 +587,7 @@
       ]
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-      "sha256": "189e0a565732b98ba5735802f9ebcf53fe314fe3cdb1af852dbc092a01df841b",
+      "sha256": "28cda7f51815b9da15ea8cd3267b2a95cfaff3e12c7ff9c11765b11e77392757",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -601,7 +601,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -698,7 +698,7 @@
       "checks": []
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
-      "sha256": "d45e188fc514076556196cf4c1ad2c411ac614ffef388d84504bd8b582a0ff91",
+      "sha256": "34e20f68cddc518030c62b479f9b1af5f0d09d9af926e12d6697ce1f0921a0e5",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -712,7 +712,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-04",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -724,7 +724,7 @@
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge unter-optimum (10338 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge unter-optimum (10661 Zeichen, Optimum 12.000–18.000)"
         }
       ]
     },
@@ -760,7 +760,7 @@
       ]
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
-      "sha256": "abcaa0d306695610920a8560f999ff9bec97b2b18160f54665d5af37de6a492f",
+      "sha256": "1fffeb0857d8298d898ab8ebd2b4da297be16cc281179e0a0f14b9ccf032e43f",
       "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -774,7 +774,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -786,7 +786,7 @@
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge unter-optimum (10302 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge unter-optimum (10631 Zeichen, Optimum 12.000–18.000)"
         }
       ]
     },
@@ -1169,7 +1169,7 @@
       "checks": []
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "3c4a3c6efc024355104950a3e513775b17c835e749e4db39a25defbb7e417ea7",
+      "sha256": "63ca02ae310b65da7798ecdd0f0a05a569f99d6c2a3bf030ad8ad753757df55c",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1183,7 +1183,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1533,7 +1533,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1898,7 +1898,7 @@
       ]
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
-      "sha256": "95f9e2829e7c5776e03bb9f2db7e94f527555e243af8eb53ede23fe1dd34f3cb",
+      "sha256": "54ff287b821a46d8feba68b1d4b9b8193749c2e4c3c1b1b04ba80e005fcff52f",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1912,7 +1912,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-31",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1954,7 +1954,7 @@
       ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "2eb51c554306ac1018f58befa8138321bdf32a1a96d23b2c138a2c67aec1be0d",
+      "sha256": "6c982b0e4ac57bc66ac267e3ec5df1f6fa5fa02318dc9ef0f95b7e0914a49dbc",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1968,7 +1968,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2011,7 +2011,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -2140,7 +2140,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
@@ -2176,7 +2176,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {

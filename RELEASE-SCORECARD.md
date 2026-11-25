@@ -141,7 +141,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-⚠️ **241 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
+⚠️ **243 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
 
 🔴 **Eskalation:** 121 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
 
@@ -153,11 +153,11 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 | Kennzahl | Wert |
 |---|---|
-| Seiten im Bestand (Posts + Ratgeber) | 151 |
+| Seiten im Bestand (Posts + Ratgeber) | 150 |
 | Fällig heute / überfällig | 10 / 0 |
-| Bedarf | 3,61 Prüfungen/Tag (25,3/Woche) |
+| Bedarf | 3,60 Prüfungen/Tag (25,2/Woche) |
 | Angebot | 10,00/Tag (Budget 10 × 1,00 Läufe/Tag) |
-| **Deckung** | **277 %** |
+| **Deckung** | **278 %** |
 | Rückstand abgebaut | in 0 Tagen (Frist 7 Tage) |
 | Nächste Frist | `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` am 2026-11-27 (in 2 Tagen) |
 | Empfohlenes Budget | 10 je Lauf (Limit 21) |
@@ -442,7 +442,6 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 | `2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 | `2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 90 Tage) | 2027-02-15 |
-| `2026-11-25-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 90 Tage) | 2027-02-11 |
 | `2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
