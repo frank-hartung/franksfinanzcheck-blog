@@ -96,13 +96,14 @@ So findest du dauerhaft deinen idealen **Einkauf Rhythmus**.
 
 ## Wann wird der Mengenrabatt zur Kostenfalle?
 
-In dieser **Modellrechnung** gehen wir von einem Zeitraum von vier Wochen aus und benötigen insgesamt 40 Portionen.  
+In dieser **Modellrechnung** gehen wir von einem Zeitraum von vier Wochen aus und benötigen insgesamt 40 Portionen.  
 Einzelne Portionen kosten laut diesem **Rechenbeispiel** 1 € pro Stück.  
 Die Großpackung senkt den Preis in dieser **Annahme** auf 0,90 € pro Portion.  
 Verbrauchst du alles, zahlst du laut **Modellrechnung** 36 € statt 40 € und sparst laut **Rechenbeispiel** 4 € im Monat.  
 
 Landen jedoch vier Portionen im Müll, ist der finanzielle Vorteil hinfällig.  
 Die Kosten für 36 einzelne Stücke lägen in dieser **Annahme** ebenfalls bei 36 €.  
+Damit verlierst du die gesamte Ersparnis.  
 
 Nur haltbare **Lebensmittel Vorrat**, die du wirklich isst, sichern deinen Vorteil.  
 Notiere, was du am Ende der Woche entsorgst.  

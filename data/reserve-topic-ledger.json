@@ -313,10 +313,10 @@
   "Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren": {
     "abgleich_fehler": 2,
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GROQ); Profi-Gate: RS5: 17 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wir schauen uns an, wie du 2027 deine Lasten senkst.; Keyword „",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-23",
-    "sperre_bis": "2026-10-26"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-25",
+    "sperre_bis": "2026-11-26"
   },
   "Gemeinschaftskonto für Paare: So teilt ihr Kosten fair": {
     "fehler": 1,
@@ -709,10 +709,10 @@
   },
   "Strom-Nachzahlung vermeiden: So berechnest du die richtigen Abschläge": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Diese Lücke summiert sich über zwölf Monate.; Profi-Gate: nur 820 Wörter / 6267 Zeiche",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-28",
-    "sperre_bis": "2026-10-31"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-25",
+    "sperre_bis": "2026-11-26"
   },
   "Stromanbieter wechseln und bis zu 300 Euro sparen": {
     "abgleich_fehler": 2,
@@ -874,10 +874,10 @@
   },
   "Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das Geld sollte mindestens zehn Jahre lang nicht benötigt werden.; Profi-Gate: nur 735",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-28",
-    "sperre_bis": "2026-10-31"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-11-25",
+    "sperre_bis": "2026-11-26"
   },
   "Wie du deine Bankgebühren um 50 % reduzieren kannst": {
     "abgleich_fehler": 1,
