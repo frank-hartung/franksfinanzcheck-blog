@@ -2,18 +2,18 @@
 
 _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**287 offene Befunde auf 81 Seiten · davon 52 Live-Seiten mit 174 Befunden · ältester 26 Tage · Frist 14 Tage.**
+**289 offene Befunde auf 81 Seiten · davon 52 Live-Seiten mit 176 Befunden · ältester 26 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 287 |
+| Offene Befunde | 289 |
 | Seiten betroffen | 81 (davon live: 52) |
-| Text seit dem Befund geändert | 243 |
+| Text seit dem Befund geändert | 254 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
-| Über der Frist (14 Tage) | 121 |
-| In Eskalation (21 Tage) | 40 |
+| Über der Frist (14 Tage) | 123 |
+| In Eskalation (21 Tage) | 42 |
 
 ## So schließt du einen Befund
 
@@ -33,25 +33,9 @@ _Stand 2026-11-25 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 248 von 287 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 259 von 289 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
-
-### `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
-
-Datei: `content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `124ff2c3cd3917c274aa` | praezision | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `7bdec96c0329769bebe6` | luecke | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `a56734aa032e0ed9e0c4` | luecke | 24 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 124ff2c3cd3917c274aa --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7bdec96c0329769bebe6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden a56734aa032e0ed9e0c4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
 
 ### `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
@@ -791,6 +775,18 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 68afba3e6a16a364ce4
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden dc5ff05c5dda79d01373 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
+
+Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `5c096f87730532352820` | luecke | 2 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-10-dsl-wechselbonus-sichern` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md`
@@ -877,18 +873,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 009906e47bcc8265b36
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e0293a43782c64955b27 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` · **LIVE** (blockiert) · Risikoklasse erhoeht · 1 Befund(e)
-
-Datei: `content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `5c096f87730532352820` | luecke | 2 T | Text unverändert seit dem Befund | Gesetze nennen konkrete Auszahlungsfristen im Einlagensicherungsfall. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5c096f87730532352820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` · **LIVE** (blockiert) · Risikoklasse erhoeht · 3 Befund(e)
 
 Datei: `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md`
@@ -903,6 +887,26 @@ Datei: `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-ve
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 06bc5a6bc11098317697 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 471944cae24a034c7c00 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 780af701a2eaa465d46a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` · **LIVE** · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `334751e6f61ad0033fe4` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `36759a5efe5e8e5163d0` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `942922d1afd7844618e9` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `d41f0d5ce8798df0211b` | praezision | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e139d0769faadd04392a` | luecke | 23 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 334751e6f61ad0033fe4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 36759a5efe5e8e5163d0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 942922d1afd7844618e9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
@@ -1321,6 +1325,42 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 10917941e9fae9a9cf0
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab0470bc947932366bc4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `22e300c6973fedbbd737` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Behauptung, dass nach 24 Monaten mit ein‑monatiger Frist gekündigt werden kann. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `44c5160c5216180ebd6a` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Unbelegte Angabe, dass eine Unterbrechung gesetzlich auf einen Arbeitstag begrenzt ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `74b9c10685d0c142d4a9` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Aussage, dass die Versorgungssicherheit beim Anbieterwechsel gesetzlich garantiert ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `78969434dfaab5679386` | praezision | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Pauschale 15 %‑Ersparnis‑Regel ohne Quellenangabe oder Modellkennzeichnung. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `f229e8455cc020e41f6d` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Fehlende Belegangabe, dass der neue Anbieter die Kündigung beim alten übernimmt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 22e300c6973fedbbd737 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 44c5160c5216180ebd6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 74b9c10685d0c142d4a9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 78969434dfaab5679386 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f229e8455cc020e41f6d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1189ae6574e7b39ffd14` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aussage, dass alle genannten DNS‑Dienste dauerhaft kostenlos sind, fehlt eine Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `4d85c7ed65b4feed178a` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Versprechen, dass der Geschwindigkeits‑Effekt bei jedem neuen Tab sofort spürbar ist, ohne Evidenz. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `4e7bace05ab581449621` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass ein schnellerer DNS-Server die Wartezeit beim Seitenaufruf spürbar verkürzt, ohne Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1189ae6574e7b39ffd14 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d85c7ed65b4feed178a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4e7bace05ab581449621 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-28-dsl-und-internet-flat-guenstig-sichern`
@@ -1387,42 +1427,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f9faeecdb0a51f6dcc
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 885b9067fc764e8b1be0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden befb17bec837c9aaecda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bb167f864ceae0328e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` · nicht im Live-Bestand · 5 Befund(e)
-
-Seite: `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `22e300c6973fedbbd737` | luecke | 0 T | Text unverändert seit dem Befund | Keine Quelle für die Behauptung, dass nach 24 Monaten mit ein‑monatiger Frist gekündigt werden kann. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `44c5160c5216180ebd6a` | luecke | 0 T | Text unverändert seit dem Befund | Unbelegte Angabe, dass eine Unterbrechung gesetzlich auf einen Arbeitstag begrenzt ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `74b9c10685d0c142d4a9` | luecke | 0 T | Text unverändert seit dem Befund | Keine Quelle für die Aussage, dass die Versorgungssicherheit beim Anbieterwechsel gesetzlich garantiert ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `78969434dfaab5679386` | praezision | 0 T | Text unverändert seit dem Befund | Pauschale 15 %‑Ersparnis‑Regel ohne Quellenangabe oder Modellkennzeichnung. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `f229e8455cc020e41f6d` | luecke | 0 T | Text unverändert seit dem Befund | Fehlende Belegangabe, dass der neue Anbieter die Kündigung beim alten übernimmt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 22e300c6973fedbbd737 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 44c5160c5216180ebd6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 74b9c10685d0c142d4a9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 78969434dfaab5679386 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden f229e8455cc020e41f6d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `1189ae6574e7b39ffd14` | luecke | 0 T | Text unverändert seit dem Befund | Aussage, dass alle genannten DNS‑Dienste dauerhaft kostenlos sind, fehlt eine Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `4d85c7ed65b4feed178a` | luecke | 0 T | Text unverändert seit dem Befund | Versprechen, dass der Geschwindigkeits‑Effekt bei jedem neuen Tab sofort spürbar ist, ohne Evidenz. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `4e7bace05ab581449621` | luecke | 0 T | Text unverändert seit dem Befund | Behauptung, dass ein schnellerer DNS-Server die Wartezeit beim Seitenaufruf spürbar verkürzt, ohne Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1189ae6574e7b39ffd14 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d85c7ed65b4feed178a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4e7bace05ab581449621 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
