@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 24.11.2026 17:00 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.11.2026 02:28 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -13,14 +13,14 @@
 ## Kommende Beiträge
 
 ### Mi, 25. November 2026
-- **07:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
-### Do, 26. November 2026
-- **07:45** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
-### Fr, 27. November 2026
 - **07:45** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
+### Do, 26. November 2026
+- **07:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
+### Fr, 27. November 2026
+- **07:45** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
 ### Mo, 30. November 2026
 - **07:45** ⏳ Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/
@@ -42,6 +42,9 @@
 ### Di, 08. Dezember 2026
 - **07:45** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+### Mi, 09. Dezember 2026
+- **07:45** ⏳ Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand? — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/
 
 ## Zuletzt veröffentlicht
 

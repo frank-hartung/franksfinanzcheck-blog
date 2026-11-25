@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
- asse-kaffee:nutzen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261124T160012Z
-DTSTART:20261124T170000Z
-DTEND:20261124T171500Z
-SUMMARY:Telegram (Kanal): Kaffeemaschine: Was kostet eine Tasse wirkli
- ch? (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine
- -stromverbrauch-was-kostet-die-tasse-kaffee/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-strom
- verbrauch-was-kostet-die-tasse-kaffee/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:telegram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wi
  ssen-musst:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261124T160012Z
+DTSTAMP:20261125T012811Z
 DTSTART:20261128T060000Z
 DTEND:20261128T061500Z
 SUMMARY:Telegram (Kanal): Geschenkkarte: Was du beim Kauf und Aufladen
@@ -38,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
  parst:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261124T160012Z
+DTSTAMP:20261125T012811Z
 DTSTART:20261129T060000Z
 DTEND:20261129T061500Z
 SUMMARY:Telegram (Kanal): Secondhand-Kleidung kaufen: So prüfst du Sto
@@ -51,11 +36,26 @@ URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
- -in-der-wohnung:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261124T160012Z
+UID:telegram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
+ asse-kaffee:nutzen:2026-12-05@franksfinanzcheck.de
+DTSTAMP:20261125T012811Z
 DTSTART:20261205T060000Z
 DTEND:20261205T061500Z
+SUMMARY:Telegram (Kanal): Kaffeemaschine: Was kostet eine Tasse wirkli
+ ch? (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine
+ -stromverbrauch-was-kostet-die-tasse-kaffee/
+URL:https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-strom
+ verbrauch-was-kostet-die-tasse-kaffee/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
+ -in-der-wohnung:nutzen:2026-12-06@franksfinanzcheck.de
+DTSTAMP:20261125T012811Z
+DTSTART:20261206T060000Z
+DTEND:20261206T061500Z
 SUMMARY:Telegram (Kanal): Mesh-WLAN nachrüsten: Wann lohnt sich die In
  vestition? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -63,21 +63,6 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  ruesten-schluss-mit-funkloechern-in-der-wohnung/
 URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
  n-schluss-mit-funkloechern-in-der-wohnung/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixk
- osten:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261124T160012Z
-DTSTART:20261206T060000Z
-DTEND:20261206T061500Z
-SUMMARY:Telegram (Kanal): Energieeffiziente Geräte: So sinken deine Fi
- xkosten (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-01-energieeffizie
- nte-geraete-so-sinken-deine-fixkosten/
-URL:https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ge
- raete-so-sinken-deine-fixkosten/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 24.11.2026 17:00 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.11.2026 02:28 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -42,6 +42,11 @@
   https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/
 - **11:30** ⏳ Notgroschen: Die Wahrheit über das finanzielle Polster — _mythos_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/
+### Mi, 09. Dezember 2026
+- **07:30** ⏳ Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/
+- **11:30** ⏳ Standby-Kosten: Was ein Stromfresser wirklich kostet — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/
 
 ## Zuletzt veröffentlicht
 
