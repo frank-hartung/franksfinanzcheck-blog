@@ -2716,5 +2716,59 @@
    "badge": "INTERNET & DSL",
    "savings": ""
   }
+ },
+ "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+  "title": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
+  "ts": "2026-11-25T14:06:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+  "title": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
+  "ts": "2026-11-25T14:09:02+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+  "title": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
+  "ts": "2026-11-25T14:11:06+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen": {
+  "title": "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen",
+  "ts": "2026-11-25T14:13:10+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+  "title": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
+  "ts": "2026-11-25T14:15:15+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+  "title": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
+  "ts": "2026-11-25T14:17:19+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
  }
 }
