@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-25T18:56:26Z",
+  "erzeugt": "2026-11-25T19:37:43Z",
   "stichtag": "2026-11-25",
   "offen": 287,
   "seiten": 81,
   "live_seiten": 52,
   "live_befunde": 174,
-  "ueberholt": 241,
+  "ueberholt": 243,
   "ohne_fassung": 5,
   "seite_fehlt": 0,
   "entfallen": 3,
@@ -2539,6 +2539,28 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+      "id": "991bda7b2298b751f4e6",
+      "typ": "praezision",
+      "text": "Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unternehmenspflichten und die Grundversorgung als Aufsichtsthemen auf.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+      "id": "ae71596724d7a243217b",
+      "typ": "luecke",
+      "text": "Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
       "id": "91894b9b1535765acdca",
       "typ": "luecke",
@@ -2919,28 +2941,6 @@
       "text": "Keine Quelle für die Aussage, dass viele Banken Neukunden‑Zinsgarantien für drei bis sechs Monate bieten.",
       "beleg": "",
       "alter_tage": 6,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
-      "id": "991bda7b2298b751f4e6",
-      "typ": "praezision",
-      "text": "Die Behauptung einer garantierten Versorgung ist rechtlich zu weitgehend; die Bundesnetzagentur führt lediglich Unternehmenspflichten und die Grundversorgung als Aufsichtsthemen auf.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
-      "id": "ae71596724d7a243217b",
-      "typ": "luecke",
-      "text": "Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 5,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
