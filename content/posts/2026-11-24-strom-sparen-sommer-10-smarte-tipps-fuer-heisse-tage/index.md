@@ -97,6 +97,11 @@ Dritter Fehler: Du wartest die Klimaanlage nicht regelmäßig – ein verstopfte
 | Filter der Klimaanlage reinigen | Alle 4 Wochen prüfen | Luftstrom bleibt optimal, Stromverbrauch sinkt |
 | Vertrag prüfen | Jahres‑Check im Fixkosten‑Cockpit | Besserer Tarif reduziert Grundkosten |
 
+
+
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
+**Lesetipp:** [Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand?](../../posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/)
+
 ## Häufige Fragen
 
 ### Wie viel kann ich durch natürliche Kühlung sparen?

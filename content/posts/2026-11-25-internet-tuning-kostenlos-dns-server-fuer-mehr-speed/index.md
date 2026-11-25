@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Ne
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Internet tuning kostenlos", "DNS wechseln tutorial", "Schneller surfen", "DNS Sicherheit", "Internet"]
+keywords: ["Internet tuning kostenlos", "DNS wechseln tutorial", "Schneller surfen", "DNS Sicherheit", "DNS-Server", "DSL-Vergleich"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
 pin_title: "Internet-Tuning für 0 €: DNS-Server wechseln Schritt für Schritt"
 pin_description: "*Werbung | Das beste Upgrade für dein Internet kostet nichts: Mit dem richtigen DNS-Server starten Seiten schneller, Streaming läuft stabiler und deine Daten sind besser geschützt. Unsere Bild-für-Bild-Anleitung führt dich durch jedes Gerät. Jetzt ausprobieren!"
@@ -164,7 +164,7 @@ Diesen Gewinn sicherst du dir durch einmalig [fünf Minuten](../../posts/2026-09
 
 Viele Nutzer machen am Anfang kleine Flüchtigkeitsfehler.
 Das führt dazu, dass die Internetverbindung kurzzeitig abbricht.
-Keine Sorge, diese Fehler lassen sich leicht beheben.
+Keine Sorge, diese [Fehler lassen](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) sich leicht beheben.
 Prüfe deine Eingaben einfach anhand dieser Liste.
 
 * **Zahlendreher:** Die Adressen bestehen aus vier Blöcken. Ein falscher Punkt blockiert den Zugang.
@@ -205,7 +205,7 @@ Bleib wachsam bei der Performance deines Anschlusses.
 
 Falls dein Anschluss trotz Tuning langsam bleibt, liegt es oft am Basistarif.
 Vergleiche dann deine Fixkosten für den Anschluss.
-Ein Anbieterwechsel spart oft mehrere hundert Euro im Jahr (Annahme).
+Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) spart oft mehrere hundert Euro im Jahr (Annahme).
 Hier kannst du aktuelle Tarife prüfen: [DSL-Vergleich starten](/go/dsl/) (Werbung).
 
 ## Fazit: Wenig Aufwand, große Wirkung
@@ -222,7 +222,7 @@ Es gibt für dich kein technisches Risiko.
 
 Wer einmal mit einem schnellen DNS-Server gesurft ist, will nicht zurück.
 Es ist der erste Schritt zu einem optimierten digitalen Haushalt.
-Nimm dir die fünf Minuten Zeit für dieses Upgrade; das ist ein Modellwert.
+Nimm dir die [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Zeit für dieses Upgrade; das ist ein Modellwert.
 Dein Browser wird es dir bei jedem Klick danken.
 
 ## Häufige Fragen

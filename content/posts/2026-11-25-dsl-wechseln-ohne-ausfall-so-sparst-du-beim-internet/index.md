@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen"]
+keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "DSL wechseln ohne Ausfall"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
 pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall – So sparst du"
 pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen Inkl. Checkliste für 2 Schritte."
@@ -52,9 +52,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
  Was vor drei Jahren noch als **highspeed Internet** galt, ist heute oft nur noch Standard; das ist ein Modellwert. Provider locken Neukunden mit hohen Rabatten. Bestandskunden hingegen zahlen oft den vollen Preis. Das nennt man in der Fachwelt oft die "Treue-Falle". Wer seinen Vertrag einfach weiterlaufen lässt, finanziert die Rabatte der Neukunden mit.
 
-Ein **DSL Tarifvergleich** zeigt schnell die Unterschiede auf. Oft bekommst du für weniger Geld eine deutlich höhere Bandbreite. Das ist besonders wichtig, wenn mehr Personen im Haushalt gleichzeitig das Internet nutzen. Homeoffice, Gaming und Streaming gleichzeitig fordern die Leitung. Ein moderner Anschluss bietet hier mehr Reserven.
+Ein **DSL Tarifvergleich** zeigt schnell die Unterschiede auf. Oft bekommst du für weniger Geld eine deutlich höhere [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/). Das ist besonders wichtig, wenn mehr Personen im Haushalt gleichzeitig das Internet nutzen. Homeoffice, Gaming und Streaming gleichzeitig fordern die Leitung. Ein moderner Anschluss bietet hier mehr Reserven.
 
-Zudem verbessern sich die Inklusivleistungen. Viele Tarife enthalten heute Flatrates in alle deutschen Netze. Früher war das oft auf das Festnetz beschränkt. Auch die Upload-Geschwindigkeit ist gestiegen. Das ist wichtig für Videokonferenzen oder das Hochladen von Fotos in die Cloud. Ein Wechsel bringt also nicht nur finanzielle Vorteile. Er hebt deinen digitalen Alltag auf ein neues Niveau.
+Zudem verbessern sich die Inklusivleistungen. Viele Tarife enthalten heute Flatrates in alle deutschen Netze. Früher war das oft auf das Festnetz beschränkt. Auch die Upload-Geschwindigkeit ist gestiegen. Das ist wichtig für Videokonferenzen oder das Hochladen von Fotos in die Cloud. Ein Wechsel bringt also nicht nur [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Vorteile. Er hebt deinen digitalen Alltag auf ein neues Niveau.
 
 ## Der 4K-Prüfpfad für deinen Internetvertrag
 
@@ -69,7 +69,7 @@ Bei FranksFinanzcheck nutzen wir den 4K-Prüfpfad. Er hilft dir, den Überblick 
 
 ## Wie gelingt der Wechsel ohne Internet-Loch?
 
-Die größte Angst ist das "Internet-Loch". Niemand möchte tagelang ohne Verbindung sein. Doch diese Sorge ist fast immer unbegründet. In Deutschland ist der Ablauf gesetzlich streng geregelt. Wenn du deinen **DSL wechseln** willst, arbeiten alter und neuer Anbieter zusammen.
+Die größte Angst ist das "Internet-Loch". Niemand möchte tagelang ohne Verbindung sein. Doch diese Sorge ist fast immer unbegründet. In Deutschland ist der Ablauf gesetzlich streng geregelt. Wenn du deinen **[DSL wechseln](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)** willst, arbeiten alter und neuer Anbieter zusammen.
 
 Der wichtigste Rat: Kündige nicht selbst. Das ist der häufigste Fehler. Überlasse die Kündigung deinem neuen Anbieter. Er stimmt den Termin direkt mit dem alten Provider ab. So ist sichergestellt, dass die Leitung erst umgeschaltet wird, wenn der neue Vertrag bereitsteht.
 
@@ -155,7 +155,7 @@ Damit du nichts vergisst, habe ich hier die wichtigsten Punkte zusammengefasst. 
 * [ ] Letzte Monatsrechnung zur Hand (wegen Kundennummer)?
 * [ ] Gewünschte Bandbreite ermittelt (z. B. 100 Mbit/s); das ist ein Modellwert?
 * [ ] Verfügbarkeitscheck an deiner Adresse durchgeführt?
-* [ ] Entscheidung getroffen: **Router mieten oder kaufen**?
+* [ ] Entscheidung getroffen: **[Router mieten oder kaufen](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)**?
 * [ ] Rufnummernmitnahme beim neuen Anbieter beauftragt?
 * [ ] Termin für die Schaltung notiert?
 * [ ] Rücksendung der alten Hardware vorbereitet?
@@ -166,7 +166,7 @@ Ein Wechsel ist kein Hexenwerk. Wenn du strukturiert vorgehst, profitierst du vo
 
  "Internet für 19 €" klingt verlockend; das ist ein Rechenbeispiel. Doch oft gilt dieser Preis nur für sechs Monate. Danach verdoppelt er sich fast. In meinem Fixkosten-Kompass lege ich Wert auf die ehrliche Rechnung.
 
-**Beispielrechnung für einen Tarifwechsel:**
+**Beispielrechnung für einen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/):**
 * Annahme: Dein alter Vertrag kostet 45 € pro Monat.
 * Annahme: Der neue Vertrag kostet 20 € in den ersten 12 Monaten und 40 € ab dem 13. Monat.
 * Annahme: Es gibt einen einmaligen Wechselbonus von 100 €.
