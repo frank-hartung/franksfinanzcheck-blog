@@ -22,15 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "Lebensmittel retten: So wirfst du weniger weg"
 cover:
-  image: "images/covers/2026-11-24-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen.jpg"
+  image: "images/covers/2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen.jpg"
   alt: "Lebensmittel retten: Clever planen statt teuer wegwerfen"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: e9fa6bdbcb07a332c054ce21a462e30a681033cb6458a2cc3cfd7e34a74953a8
-    geprueft_am: 2026-11-24
+    sha256: 29d1902edc3d9d674bac637344626e6c05ca3478016c3fa2a9bc75176db79592
+    geprueft_am: 2026-11-25
 faktenfrische_aliases:
   - "2026-11-21-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen"
   - "2026-11-22-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen"

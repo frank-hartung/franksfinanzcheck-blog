@@ -9,7 +9,7 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Essensplan Woche", "Einkauf planen", "Lebensmittel sparen", "Weniger Spontankäufe", "Wocheneinkauf"]
+keywords: ["Essensplan Woche", "Einkauf planen", "Lebensmittel sparen", "Weniger Spontankäufe", "Wocheneinkauf", "Wochenplan fürs Essen", "Wochenplan"]
 pin_title: "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe"
 pin_description: "*Werbung | Plane Mahlzeiten mit den Lebensmitteln, die zuerst verbraucht werden müssen. Ergänze auf der Einkaufsliste nur die Zutaten, die dir noch fehlen. Plane eine Mahlzeit ein, deren Zutaten sich verschieben lassen. Wenn ein Termin dazwischenkommt, kannst du frische Lebensmittel zuerst aufbrauchen."
 ai_generated: true
@@ -22,15 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "Essensplan für die Woche: Weniger Spontankäufe, weniger Reste"
 cover:
-  image: "images/covers/2026-11-24-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste.jpg"
+  image: "images/covers/2026-11-25-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste.jpg"
   alt: "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 362eb4f9f98805f0ff41ee13c2940fac78e1f5aa8787d7a7728542019373df04
-    geprueft_am: 2026-11-24
+    sha256: 56b5de0048288a6c66cde8668d75d39755b762bdbe9e59a66cfab042024036f4
+    geprueft_am: 2026-11-25
 kurzantwort: "Ein guter Essensplan für die Woche stoppt teure Spontankäufe im Markt und sorgt dafür, dass offene Zutaten ganz aufgebraucht werden. Wer erst seine Vorräte prüft, passende Gerichte kombiniert und strikt nach Liste einkauft, senkt seine Ausgaben dauerhaft ohne Verzicht."
 faktencheck: 2026-11-13
 faktenfrische_aliases:

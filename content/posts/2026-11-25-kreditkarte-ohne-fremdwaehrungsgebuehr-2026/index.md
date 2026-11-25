@@ -22,15 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026 wirklich 0 % verlangt"
 cover:
-  image: "images/covers/2026-11-24-kreditkarte-ohne-fremdwaehrungsgebuehr-2026.jpg"
+  image: "images/covers/2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026.jpg"
   alt: "Kreditkarte: Ohne Fremdwährungsgebühr 2026"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 83cb22edf1e3ad5d1b9c5dc7294add39ae9a71097f8306533f2a972d4aaa6b4a
-    geprueft_am: 2026-11-24
+    sha256: 239f6b1d94309c8c9498fd716c18395282884f44efaf5f89ffc302306882669b
+    geprueft_am: 2026-11-25
 faktenfrische_aliases:
   - "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026"
   - "2026-11-23-kreditkarte-ohne-fremdwaehrungsgebuehr-2026"

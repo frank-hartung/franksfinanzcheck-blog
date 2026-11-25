@@ -24,15 +24,15 @@ redaktionelle_pruefung:
 
 inspiration: "Vorratsplanung im Haushalt: So kaufst du seltener und günstiger ein"
 cover:
-  image: "images/covers/2026-11-24-vorrat-planen-leicht-gemacht-so-sparst-du-beim.jpg"
+  image: "images/covers/2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim.jpg"
   alt: "Vorrat planen: Wann lohnt sich ein größerer Einkauf?"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: ef757bdee7f0213af1d28f290d1a04e88294036054154043dbb3089f0910405a
-    geprueft_am: 2026-11-24
+    sha256: b05fcc6cdc5b34956964a37c994fe5a87182c17397e096e0764ece772f3c7041
+    geprueft_am: 2026-11-25
 faktencheck: 2026-11-17
 faktenfrische_aliases:
   - "2026-11-17-vorrat-planen-leicht-gemacht-so-sparst-du-beim"
