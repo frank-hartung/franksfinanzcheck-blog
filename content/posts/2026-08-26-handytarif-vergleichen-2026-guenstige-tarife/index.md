@@ -43,7 +43,6 @@ quellen:
 faktencheck: 2026-11-20
 ---
 
-
 Du brauchst nicht den günstigsten Handytarif auf einer Liste, sondern einen, der dort funktioniert, wo du ihn nutzt. Eine schlecht versorgte Bahnstrecke wird durch zusätzliches Datenvolumen nicht besser. Und für ein ungenutztes Datenpolster zahlst du auch dann, wenn der Preis pro Gigabyte niedrig aussieht.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -80,23 +79,23 @@ Addiere Anschluss, Versand und extra Karten. Ziehe einen Bonus nur ab, wenn du d
 | Summe für 24 Monate | 839,76 € | 239,76 € |
 | Differenz | | 600,00 € |
 
-Das spart hier 25 € pro Monat. Das ist aber kein fester Richtwert. Kommen einmalig 30 € für den Start hinzu, sinkt das Plus auf 570 €.
+Das spart hier 25 € pro Monat; das ist ein Modellwert. Das ist aber kein fester Richtwert. Kommen einmalig 30 € für den Start hinzu, sinkt das Plus auf 570 €.
 
 Läuft der alte Vertrag noch weiter, zähle auch diese Monate mit. Mit dem [24-Monats-Effektivpreis-Rechner](../../werkzeuge/effektivpreis-rechner/) setzt du direkt deine eigenen Werte ein.
 
 ## Wann Flexibilität mehr wert ist
 
-Ein Vertrag über zwei Jahre und ein Tarif mit kurzer Frist dienen anderen Zielen. Steht ein Umzug an oder willst du das Netz erst testen? Dann wiegt die kurze Bindung oft mehr als ein kleiner Rabatt. Notiere neben dem Preis darum stets das früheste Enddatum.
+Ein Vertrag über zwei Jahre und ein Tarif mit kurzer Frist dienen anderen Zielen; das ist ein Beispielwert. Steht ein Umzug an oder willst du das Netz erst testen? Dann wiegt die kurze Bindung oft mehr als ein kleiner Rabatt. Notiere neben dem Preis darum stets das früheste Enddatum.
 
 Bei Prepaid zahlst du vorab. Trotzdem buchen manche Pakete bei genug Guthaben neu ab. Prüfe auch den Takt der Abrechnung.
 
-Ein Paket für vier Wochen fällt öfter an als ein Tarif pro Monat. Rechne in diesem Fall alle Kosten für ein volles Jahr zusammen.
+Ein Paket für vier Wochen fällt öfter an als ein Tarif pro Monat; das ist ein Modellwert. Rechne in diesem Fall alle Kosten für ein volles Jahr zusammen.
 
 ## Vor dem Abschluss: drei Fragen ans Kleingedruckte
 
-- **Was passiert nach dem Datenlimit?** Eine Bremse und eine teure Automatik wirken sehr anders. Prüfe Preis und Stopp-Option für extra Daten.
-- **Was gilt im Ausland?** Anrufe aus Deutschland ins Ausland und Reisen mit der SIM sind zwei Paar Schuhe. Prüfe deine Zielländer und die Roaming-Regeln.
-- **Was kostet das Handy wirklich?** Addiere Startpreis, Raten und Restbetrag. Vergleiche das Paket mit dem freien Kauf plus SIM-Tarif.
+1. **Was passiert nach dem Datenlimit?** Eine Bremse und eine teure Automatik wirken sehr anders. Prüfe Preis und Stopp-Option für extra Daten.
+2. **Was gilt im Ausland?** Anrufe aus Deutschland ins Ausland und Reisen mit der SIM sind zwei Paar Schuhe. Prüfe deine Zielländer und die Roaming-Regeln.
+3. **Was kostet das Handy wirklich?** Addiere Startpreis, Raten und Restbetrag. Vergleiche das Paket mit dem freien Kauf plus SIM-Tarif.
 
 ## Angebote auf dieselbe Leistung bringen
 
@@ -108,9 +107,9 @@ Fällt dieser Vorteil weg, ist ein neuer Tarif nicht immer billiger. Umgekehrt l
 
 ### Zwei Karten, ein Haushalt: eine andere Rechnung
 
-Nehmen wir zwei einzelne Tarife zu je 12 € im Monat. Im Vergleich steht ein Hauptvertrag für 18 € mit einer Zweitkarte für 8 €. Ohne Extras kosten zwei Einzelverträge 24 €, das Paket aber 26 € pro Monat.
+Nehmen wir zwei einzelne Tarife zu je 12 € im Monat; das ist ein Rechenbeispiel. Im Vergleich steht ein Hauptvertrag für 18 € mit einer Zweitkarte für 8 €. Ohne Extras kosten zwei Einzelverträge 24 €, das Paket aber 26 € pro Monat.
 
-Auf zwölf Monate sind das 288 € gegen 312 €. Das Wort „Partnerkarte“ allein spart noch kein Geld.
+Auf zwölf Monate sind das 288 € gegen 312 €; das ist ein Rechenbeispiel. Das Wort „Partnerkarte“ allein spart noch kein Geld.
 
 Anders sieht es aus, wenn eine Karte viel mehr Daten braucht. Zwei Verträge bieten zudem ein zweites Netz als Reserve.
 
@@ -120,9 +119,9 @@ Kläre vorab, wer zahlt und ob sich beide Nummern frei mitnehmen lassen. Ein get
 
 Bei Handy-Paketen lockt oft ein sehr kleiner Startpreis. Der echte Preis steckt aber in den Raten. Trenne deshalb beide Fragen: Welches Gerät würdest du frei kaufen? Und was kostet ein guter Tarif nur mit SIM?
 
-**Modell für 24 Monate:** Ein Paket kostet 30 € im Monat plus 49 € einmalig. In zwei Jahren zahlst du 769 €. Ein reiner SIM-Tarif kostet 12 € im Monat, also 288 €.
+**Modell für 24 Monate:** Ein Paket kostet 30 € im Monat plus 49 € einmalig; das ist eine Modellannahme. In zwei Jahren zahlst du 769 €. Ein reiner SIM-Tarif kostet 12 € im Monat, also 288 €.
 
-Für das Gerät zahlst du im Paket also 481 €. Kostet das Handy im Laden 450 €, sparst du getrennt 31 €. Prüfe auch, ob das Handy am Ende dir gehört und kein Restpreis droht. Ein Mietgerät passt nicht in diesen Vergleich.
+Für das Gerät zahlst du im Paket also 481 €; das ist ein Modellwert. Kostet das Handy im Laden 450 €, sparst du getrennt 31 €. Prüfe auch, ob das Handy am Ende dir gehört und kein Restpreis droht. Ein Mietgerät passt nicht in diesen Vergleich.
 
 Vergiss das Ende der Laufzeit nicht. Fällt der Preis nach der letzten Rate von selbst? Kannst du die SIM weiter nutzen, wenn ein neues Gerät kommt? Die klare Antwort steht im Blatt zum Vertrag, nicht im Tarifnamen.
 
@@ -154,6 +153,8 @@ Lies Enddatum und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendig
 
 Hebe Kündigung, Blatt zum Vertrag und Termin der Mitnahme gut auf. Die Mitnahme der Nummer allein stoppt alte Kosten nicht automatisch.
 
+**Faustregel:** Beim Wechsel zählt der Termin: Wer die Frist verpasst, zahlt ein weiteres Jahr zum alten Preis.
+
 ## Häufige Fragen
 
 ### Wie finde ich meinen echten Datenbedarf heraus?
@@ -162,7 +163,7 @@ Sieh dir die letzten drei vollen Rechnungen an. Notiere den normalen Verbrauch u
 
 ### Lohnt ein Handy mit Vertrag oder der freie Kauf?
 
-Rechne beide Wege über volle 24 Monate durch. Ziehe vom Paketpreis die Kosten für einen reinen SIM-Tarif ab. Ist der Rest teurer als der Ladenpreis, lohnt der freie Kauf mehr.
+Rechne beide Wege über volle 24 Monate durch; das ist ein Beispielwert. Ziehe vom Paketpreis die Kosten für einen reinen SIM-Tarif ab. Ist der Rest teurer als der Ladenpreis, lohnt der freie Kauf mehr.
 
 ### Wie nehme ich meine Rufnummer sicher mit?
 

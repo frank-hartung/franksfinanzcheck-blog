@@ -88,7 +88,7 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
-Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf. Das ist ein Beispielwert.
+Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf; das ist ein Modellwert. Das ist ein Beispielwert.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
 
@@ -222,7 +222,7 @@ Eine längere Laufzeit passt, wenn vier Punkte zusammenkommen:
 - dein Verbrauch stabil ist,
 - dir Planungssicherheit wichtiger als jährliche Flexibilität ist.
 
- Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Das ist ein Rechenbeispiel. Diesen Betrag zahlst du für zusätzliche Ruhe. Das gilt aber nur, falls alle anderen Bedingungen vergleichbar sind.
+ Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**; das ist ein Beispielwert. Das ist ein Rechenbeispiel. Diesen Betrag zahlst du für zusätzliche Ruhe. Das gilt aber nur, falls alle anderen Bedingungen vergleichbar sind.
 
 ## Der Check nach dem Abschluss
 
@@ -234,7 +234,7 @@ Prüfe die Bestätigung:
 - Ist der Abschlag plausibel?
 - Wurde der alte Vertrag beendet?
 
-Setze zwei Termine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin. Das ist eine Modellannahme. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
+Setze zwei Termine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin; das ist ein Modellwert. Das ist eine Modellannahme. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Starte den Vergleich erst, wenn der Jahresverbrauch vor dir liegt: [**Gastarife vergleichen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 

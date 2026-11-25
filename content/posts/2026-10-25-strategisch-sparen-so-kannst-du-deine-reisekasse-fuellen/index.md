@@ -54,9 +54,6 @@ faktenfrische_aliases:
   - "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub"
 ---
 
-
-
-
 [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) Füllen im Check: **Eine volle Urlaubskasse beginnt mit einem klaren Ziel und einer festen Summe im Monat.** Plane Unterkunft, Anreise und Essen vor Ort nach echten Angeboten für dein Datum. Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts. Die verlinkte Übersicht belegt eine allgemeine Stabilisierung der Preise nicht.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Die Verbraucherzentrale empfiehlt damit weder das verlinkte Portal noch dessen Angebote.
@@ -205,7 +202,7 @@ Rechne: Kosten der Reise minus Geld, das schon da ist. Teile den Rest durch die 
 
 ### Sind Cashback‑Apps sicher für meine Daten?
 
-Das lässt sich nicht pauschal zusagen. Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten. Du kannst Auskunft verlangen und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen.
+ Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten; das ist ein Modellwert. Du kannst Auskunft verlangen und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen.
 
 Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Prüfe auch, wie du dein Konto schließen und deine Daten löschen lassen kannst.
 

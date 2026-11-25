@@ -60,7 +60,7 @@ Energieeffizienz im Check: Wer den Stromverbrauch senken möchte, braucht einen 
 
 Darum geht es hier konkret: Energieeffizienz.
 
-Effizienz bedeutet: Du behältst deinen Komfort, brauchst aber weniger Strom und Wärme. Damit sinken deine festen [Kosten sofort](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/). Deutsche Haushalte geben rund 30 % ihres Budgets für Energie aus.
+ Deutsche Haushalte geben rund 30 % ihres Budgets für Energie aus; das ist ein Modellwert.
 
 Das ist ein großer Teil des verfügbaren Geldes im Modellfall. Gezielte Schritte sparen dir jedes Jahr 10 bis 20 % dieser Kosten. Zugleich schützt du aktiv das Klima. Weniger Verbrauch senkt den Ausstoß von CO2.
 
@@ -74,7 +74,7 @@ Es geht um den klugen Einsatz der Technik. Ein optimierter Haushalt läuft fast 
 
 ## Wie kannst du mit smarter Beleuchtung Energie sparen?
 
-Tausche alte Glühlampen konsequent gegen LED-Leuchten aus. LEDs brauchen rund 80 % weniger Strom für die gleiche Helligkeit. Sie wandeln Energie in Licht um, nicht in Wärme.
+ LEDs brauchen rund 80 % weniger Strom für die gleiche Helligkeit; das ist ein Beispielwert. Sie wandeln Energie in Licht um, nicht in Wärme.
 
 Alte Birnen wurden sehr heiß und verschwendeten so Kraft. LEDs bleiben kühl und sind viel sicherer. Sie halten zudem bis zu 25-mal länger als alte Birnen. Das spart dir auch die Kosten für den Neukauf.
 
@@ -100,15 +100,15 @@ Das schafft zudem eine gemütliche Stimmung im Wohnzimmer. Nutze das Tageslicht 
 
 Heizung und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) kosten in den meisten Häusern am meisten; das ist ein Rechenbeispiel. Entlüfte deine Heizkörper daher regelmäßig vor jedem Winter.
 
-Luft im System verhindert, dass das warme Wasser optimal fließt. Das System muss dann viel mehr arbeiten. Das kostet dich etwa 5 % mehr Energie als nötig. Ein kleiner Schlüssel aus dem Baumarkt reicht dafür völlig aus.
+ Das kostet dich etwa 5 % mehr Energie als nötig; das ist ein Modellwert. Ein kleiner Schlüssel aus dem Baumarkt reicht dafür völlig aus.
 
 Programmierbare Thermostate sind eine sehr lohnende Investition als Modellannahme. Sie senken die Temperatur automatisch, wenn du schläfst oder arbeitest.
 
-Du musst nicht mehr selbst an den Regler denken. Ein Grad weniger spart rund 6 % deiner Heizkosten ein. Das summiert sich über die kalten Monate zu großen Beträgen.
+ Ein Grad weniger spart rund 6 % deiner Heizkosten ein; das ist ein Rechenbeispiel. Das summiert sich über die kalten Monate zu großen Beträgen.
 
 Prüfe zudem die Dichtungen an allen Fenstern und Türen. Neue Bänder aus Gummi oder Schaumstoff stoppen kalte Zugluft sofort.
 
-Du spürst den Effekt direkt durch ein besseres Raumklima. Der Wärmeverlust sinkt durch dichte Rahmen um bis zu 15 %. Das ist eine der günstigsten Methoden für mehr Effizienz.
+ Der Wärmeverlust sinkt durch dichte Rahmen um bis zu 15 %; das ist ein Rechenbeispiel. Das ist eine der günstigsten Methoden für mehr Effizienz.
 
 > 💶 **Spar-Tipp zwischendurch:** Faire Konditionen gibt es online in Minuten: [**Stromanbieter vergleichen & sparen**](/go/strom/)
 
