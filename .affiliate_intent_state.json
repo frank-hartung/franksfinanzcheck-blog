@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-24 14:28:17 UTC",
+ "generated_at": "2026-11-25 13:47:11 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 147,
- "checked_links": 326,
+ "checked_articles": 151,
+ "checked_links": 339,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -32,7 +32,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-   "line": 21,
+   "line": 22,
    "route": "strom",
    "slot": "top",
    "owner": "human",
@@ -43,7 +43,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-   "line": 196,
+   "line": 197,
    "route": "strom",
    "slot": "end",
    "owner": "human",
