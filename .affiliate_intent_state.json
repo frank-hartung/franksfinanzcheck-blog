@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-25 13:47:11 UTC",
+ "generated_at": "2026-11-26 13:26:26 UTC",
  "exit_code": 0,
  "modus": "FIX",
  "checked_articles": 151,
- "checked_links": 339,
+ "checked_links": 338,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -32,7 +32,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-   "line": 22,
+   "line": 23,
    "route": "strom",
    "slot": "top",
    "owner": "human",
@@ -43,7 +43,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-   "line": 197,
+   "line": 198,
    "route": "strom",
    "slot": "end",
    "owner": "human",
@@ -94,6 +94,39 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+   "line": 10,
+   "route": "allgemein",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+   "line": 45,
+   "route": "allgemein",
+   "slot": "mid",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
+   "line": 108,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []
