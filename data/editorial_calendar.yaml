@@ -1,5 +1,5 @@
-generated_at: '2026-11-25T13:29:16Z'
-start_date: '2026-11-26'
+generated_at: '2026-11-26T13:07:45Z'
+start_date: '2026-11-27'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
 - date: '2026-11-27'
@@ -111,7 +111,7 @@ slots:
 
     - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
 
-    - [niche_hook] Günstige Angebote für Internet und TV'
+    - [niche_hook] DSL-Tarife im Vergleich: Die günstigsten Anbieter'
 - date: '2026-12-09'
   weekday: Wed
   slot: 6
@@ -136,95 +136,16 @@ slots:
 - date: '2026-12-11'
   weekday: Fri
   slot: 7
-  topic: 'Campingurlaub 2026: So hältst du die Kosten im Rahmen'
-  pillar: mietwagen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [niche_hook] Campingurlaub 2026: So hältst du die Kosten im Rahmen
-
-    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
-
-    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
-    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
-
-    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
-- date: '2026-12-14'
-  weekday: Mon
-  slot: 8
-  topic: Die Vorteile einer kostenlosen Kreditkarten-Umstellung
-  pillar: konto-karten
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
-
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
-
-    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
-    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
-    Monaten wieder fallen.
-
-    - [evergreen] Kontoeröffnung mit günstigen Gebühren'
-- date: '2026-12-16'
-  weekday: Wed
-  slot: 9
-  topic: DSL- und Internet-Flat günstig sichern
+  topic: 'Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
   pillar: internet-dsl
   source: topics
   campaign: black-friday-tarife-2026
   cta: Jetzt DSL- & Handytarife vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
-
-    - [niche_hook] Günstige Angebote für Internet und TV
-
-    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
     - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.'
-- date: '2026-12-18'
-  weekday: Fri
-  slot: 10
-  topic: 'Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte mit Wärmepumpe'
-  pillar: strom-sparen
-  source: topics
-  campaign: winter-energie-2026-27
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
-
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
-
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
-- date: '2026-12-21'
-  weekday: Mon
-  slot: 11
-  topic: Internet-Tarife im Vergleich
-  pillar: internet-dsl
-  source: topics
-  campaign: black-friday-tarife-2026
-  cta: Jetzt DSL- & Handytarife vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
+    Rechnung bleibt hoch, der Speed trotzdem mau.
 
     - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
     sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
@@ -232,14 +153,30 @@ slots:
 
     - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
+- date: '2026-12-14'
+  weekday: Mon
+  slot: 8
+  topic: Die besten Mietwagen-Anbieter für junge Fahrer
+  pillar: mietwagen
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
 
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
-- date: '2026-12-23'
+    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
+
+    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
+    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+
+    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
+
+    - [niche_hook] Billig fliegen im Winter: 10 Geheimtipps'
+- date: '2026-12-16'
   weekday: Wed
-  slot: 12
-  topic: 'Strom sparen im Sommer: 10 Tipps für heiße Monate'
+  slot: 9
+  topic: 'Gas-Abschlag winterfest: So planst du die Heizsaison richtig'
   pillar: strom-sparen
   source: topics
   campaign: winter-energie-2026-27
@@ -247,7 +184,29 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [niche_hook] Strom und Gas vergleichen und sparen
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [evergreen] Heizperiode vorbereiten im Spätsommer
+
+    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+- date: '2026-12-18'
+  weekday: Fri
+  slot: 10
+  topic: 'Steckdosenleiste mit Schalter: Der unterschätzte Hebel am Arbeitsplatz'
+  pillar: strom-sparen
+  source: topics
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
 
     - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
     merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -255,5 +214,45 @@ slots:
     - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
     ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
 
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
+    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+- date: '2026-12-21'
+  weekday: Mon
+  slot: 11
+  topic: 'Haustier im Alltag: Diese laufenden Ausgaben kommen dazu'
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
+
+    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.
+
+    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
+    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+    spontane Wechsel übers Jahr verteilt.'
+- date: '2026-12-23'
+  weekday: Wed
+  slot: 12
+  topic: Die besten Apps für das Sparen von Geld
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
+
+    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.
+
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs'

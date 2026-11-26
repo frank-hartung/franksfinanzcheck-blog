@@ -1,5 +1,5 @@
-generated_at: '2026-11-25T13:29:16Z'
-day: '2026-11-25'
+generated_at: '2026-11-26T13:07:45Z'
+day: '2026-11-26'
 mode: deterministic
 teams:
   trending:
@@ -253,61 +253,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Campingurlaub 2026: So hältst du die Kosten im Rahmen'
+  - topic: 'Billig fliegen im Winter: 10 Geheimtipps'
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Campingurlaub 2026: So hältst du die Kosten im Rahmen'
+    source: 'topics:Billig fliegen im Winter: 10 Geheimtipps'
     score: 0.55
     keywords:
-    - Camping
-    - Urlaub sparen
-    - Campingplatz
-  - topic: 'Grundlast messen: Wo dein Strom nachts hingeht'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Grundlast messen: Wo dein Strom nachts hingeht'
-    score: 0.55
-    keywords:
-    - Grundlast Strom
-    - Stromverbrauch nachts
-    - Zähler beobachten
-  - topic: Günstige Angebote für Internet und TV
+    - Flugvergleich
+    - Billigflüge
+    - Reisekosten sparen
+  - topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:Günstige Angebote für Internet und TV
+    source: 'topics:DSL-Tarife im Vergleich: Die günstigsten Anbieter'
     score: 0.55
     keywords:
-    - Internet
-    - TV
-    - Günstig
-  - topic: 'Private Unfallversicherung: Für wen sie sich wirklich lohnt'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Private Unfallversicherung: Für wen sie sich wirklich lohnt'
-    score: 0.55
-    keywords:
-    - Unfallversicherung
-    - Private Unfallversicherung
-    - Absicherung
-  - topic: Strom und Gas vergleichen und sparen
+    - DSL-Tarife
+    - günstige Anbieter
+    - Internetvergleich
+  - topic: Energiekosten im Haushalt senken mit Smart-Home-Geräten
     pillar: strom-sparen
     signal: niche_hook
-    source: topics:Strom und Gas vergleichen und sparen
+    source: topics:Energiekosten im Haushalt senken mit Smart-Home-Geräten
     score: 0.55
     keywords:
-    - Strom
-    - Gas
-    - Vergleichen
-    - Sparen
-  - topic: 'Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    - Energiekosten
+    - Smart-Home-Geräte
+    - Haushalt
+  - topic: Günstige Reiseversicherungen für den Sommerurlaub finden
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    source: topics:Günstige Reiseversicherungen für den Sommerurlaub finden
     score: 0.55
     keywords:
-    - Zahnzusatzversicherung
-    - Zahnarztkosten sparen
-    - Zahnersatz versichern
+    - Reiseversicherung
+    - Sommerurlaub
+    - Versicherungsvergleich
+  - topic: 'Versicherungen im Vergleich: Was du wissen musst'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Versicherungen im Vergleich: Was du wissen musst'
+    score: 0.55
+    keywords:
+    - Versicherungen
+    - Vergleich
+    - Wissenswertes
+  - topic: Wie du beim Mietwagenkauf Geld sparen kannst
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Wie du beim Mietwagenkauf Geld sparen kannst
+    score: 0.55
+    keywords:
+    - Mietwagenkauf
+    - Geld sparen
+    - Tipps
 live_web:
   enabled: false
   findings: []

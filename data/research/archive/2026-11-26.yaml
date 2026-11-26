@@ -1,5 +1,5 @@
-generated_at: '2026-10-27T09:20:17Z'
-day: '2026-10-27'
+generated_at: '2026-11-26T13:07:45Z'
+day: '2026-11-26'
 mode: deterministic
 teams:
   trending:
@@ -28,13 +28,13 @@ teams:
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.65
+    score: 0.7
   - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
       Ergebnis nimmt, lässt oft bares Geld liegen.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
-    score: 0.65
+    score: 0.7
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -83,63 +83,73 @@ teams:
     signal: news
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
+  - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
+      ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+      statt sie automatisch zu verlängern.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
+    score: 0.8
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.8
   evergreen:
-  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     pillar: frugalismus
     signal: evergreen
-    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     score: 0.85
-    keywords:
-    - Neujahrsvorsätze Geld
-    - finanzielle Ziele 2027
-    - Sparziele erreichen
-    - Gewohnheiten ändern
-  - topic: Energiekosten senken mit kleinen Veränderungen
+    keywords: []
+  - topic: Heizperiode vorbereiten im Spätsommer
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Energiekosten senken mit kleinen Veränderungen
+    source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.85
     keywords:
-    - Energie
-    - Kosten
-    - SparTipps
-  - topic: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+    - Heizperiode vorbereiten im Spätsommer
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: Die besten DSL-Tarife für Zuhause und unterwegs
     pillar: internet-dsl
     signal: evergreen
-    source: 'topics:WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+    source: topics:Die besten DSL-Tarife für Zuhause und unterwegs
     score: 0.85
     keywords:
-    - WLAN verbessern
-    - DSL Hacks
-    - Schnelles Internet zuhause
-    - Mesh Netzwerk
-  - topic: 'Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
+    - DSL-Tarife
+    - Zuhause
+    - unterwegs
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
     pillar: mietwagen
     signal: evergreen
-    source: 'topics:Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
     score: 0.85
     keywords:
-    - E-Auto Mietwagen
-    - Elektromobilität
-    - Urlaub
-  - topic: 10 Tipps für günstige Reisekreditkarten
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: Kontoeröffnung mit günstigen Gebühren
     pillar: konto-karten
     signal: evergreen
-    source: topics:10 Tipps für günstige Reisekreditkarten
+    source: topics:Kontoeröffnung mit günstigen Gebühren
     score: 0.85
     keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     score: 0.85
     keywords:
-    - Rechtsschutzversicherung
-    - Rechtsschutz Leistungen
-    - Rechtsstreit versichern
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -243,61 +253,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: DSL- und Internet-Flat günstig sichern
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:DSL- und Internet-Flat günstig sichern
-    score: 0.55
-    keywords:
-    - DSL Vergleich
-    - Internetvertrag wechseln
-    - Günstiges Internet
-    - Wechselbonus
-  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
-    score: 0.55
-    keywords:
-    - E-Auto Ladekosten
-    - Stromtarif E-Auto
-    - Wallbox sparen
-  - topic: 'Hauskauf finanzieren: Darlehen clever vergleichen'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Hauskauf finanzieren: Darlehen clever vergleichen'
-    score: 0.55
-    keywords:
-    - Baufinanzierung
-    - Immobilienkredit
-    - Hauskauf Finanzierung
-  - topic: 'Kartenzahlung mit PIN: So bleibt die Karte sicher'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Kartenzahlung mit PIN: So bleibt die Karte sicher'
-    score: 0.55
-    keywords:
-    - Kartenzahlung PIN
-    - Karte sichern
-    - Kontaktlos zahlen
-  - topic: 'Mietwagen für die Stadt: Kleine Autos im Vergleich'
+  - topic: 'Billig fliegen im Winter: 10 Geheimtipps'
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Mietwagen für die Stadt: Kleine Autos im Vergleich'
+    source: 'topics:Billig fliegen im Winter: 10 Geheimtipps'
     score: 0.55
     keywords:
-    - Mietwagen
-    - Stadtverkehr
-    - Kleine Autos
-  - topic: So kannst du deine Heizkosten um 20 % senken
+    - Flugvergleich
+    - Billigflüge
+    - Reisekosten sparen
+  - topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    score: 0.55
+    keywords:
+    - DSL-Tarife
+    - günstige Anbieter
+    - Internetvergleich
+  - topic: Energiekosten im Haushalt senken mit Smart-Home-Geräten
     pillar: strom-sparen
     signal: niche_hook
-    source: topics:So kannst du deine Heizkosten um 20 % senken
+    source: topics:Energiekosten im Haushalt senken mit Smart-Home-Geräten
     score: 0.55
     keywords:
-    - Heizkosten sparen
-    - energiesparende Tipps
-    - Heizperiode
+    - Energiekosten
+    - Smart-Home-Geräte
+    - Haushalt
+  - topic: Günstige Reiseversicherungen für den Sommerurlaub finden
+    pillar: versicherungen
+    signal: niche_hook
+    source: topics:Günstige Reiseversicherungen für den Sommerurlaub finden
+    score: 0.55
+    keywords:
+    - Reiseversicherung
+    - Sommerurlaub
+    - Versicherungsvergleich
+  - topic: 'Versicherungen im Vergleich: Was du wissen musst'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Versicherungen im Vergleich: Was du wissen musst'
+    score: 0.55
+    keywords:
+    - Versicherungen
+    - Vergleich
+    - Wissenswertes
+  - topic: Wie du beim Mietwagenkauf Geld sparen kannst
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Wie du beim Mietwagenkauf Geld sparen kannst
+    score: 0.55
+    keywords:
+    - Mietwagenkauf
+    - Geld sparen
+    - Tipps
 live_web:
   enabled: false
   findings: []
