@@ -1,6 +1,6 @@
 # Release-Bestand – Selbstheilung
 
-**Stand:** 2026-11-25T15:30:59Z · **Status:** nichts-zu-heilen
+**Stand:** 2026-11-26T15:03:16Z · **Status:** nichts-zu-heilen
 
 Die Scorecard misst; dieser Lauf heilt nur die sichere, deterministische Teilmenge.
 Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird vollständig zurückgerollt.
@@ -13,6 +13,7 @@ Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird volls
 - `2026-08-10-dsl-wechselbonus-sichern` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
@@ -38,6 +39,7 @@ Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird volls
 - `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
