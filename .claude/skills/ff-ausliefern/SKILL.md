@@ -22,6 +22,7 @@ wörtlich aus `CLAUDE.md` übernommen – inklusive der Vorgänge (#676, #740, #
 - Ein Alarm-Issue ist offen und lässt sich nicht schließen.
 - Du willst mergen, reben oder einen Konflikt auflösen.
 - Backup, Restore-Drill, Environment oder Secrets sind das Thema.
+- Bei ausdrücklicher Prüfung einer Nginx-Konfiguration: `nginx-config-security-reviewer` nutzen; Ergebnisse manuell überprüfen, Änderungen und Reload nur nach Freigabe. Der Blog nutzt derzeit kein Nginx.
 
 ## Die harten Kernregeln
 

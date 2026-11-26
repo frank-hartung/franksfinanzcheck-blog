@@ -348,6 +348,15 @@
     "webapp-testing": {
       "quelle": "anthropics/skills",
       "lizenz": "Apache-2.0"
+    },
+    "nginx-config-security-reviewer": {
+      "quelle": "https://prompts.chat/prompts/cmvoxlypi000bkz08hly85q7t_nginx-config-security-reviewer",
+      "lizenz": "CC0-1.0",
+      "ausnahme": {
+        "grund": "CC0-1.0 ist in der Freilizenzliste der K6-Wache nicht erfasst; der Lizenztext der Prompt-Inhalte liegt bei.",
+        "entscheidung": "Prompt-Inhalt unter CC0 übernommen; Lizenz und Zuordnung zum Skill erneut prüfen, insbesondere bei Upstream-Änderungen.",
+        "faellig": "2027-06-30"
+      }
     }
   },
   "eigene": {
