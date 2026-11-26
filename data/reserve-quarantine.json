@@ -1,156 +1,173 @@
 {
-  "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
-    "datei_sha256": "3ae51bd89f1372f9c5c977b32e387376818fa9574fd44382e98364ec28750b59",
+  "2026-11-26-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+    "datei_sha256": "4574b92d07e41dccce3b87c89b6d0b2d073af0ad613a62269deeec004b483a6d",
     "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
+    "first": "2026-11-26T13:32:17Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
-  "2026-11-25-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
-    "datei_sha256": "a65c70db7737b0a3103282df6f654728b53e0d070a1d1c2e310ba0478b1042f3",
-    "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+  "2026-11-26-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+    "datei_sha256": "9b7e186625e6f65c9ab045e871809ce304a388f236eed2ae58187cc932337643",
+    "first": "2026-11-26T13:32:17Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: prüfe einmal deine aktuellen konditionen, halte den unterschied schriftlich fest und wiederhole den che"
   },
-  "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
-    "datei_sha256": "a7e25297b53a41f3d927d1041899712ac82698e85935e790c74ee4d467a737de",
+  "2026-11-26-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+    "datei_sha256": "b9334feb1bdc8f26273aa1ba8dbc5e97d39b83e4d4bde1be39098933aeabf3a0",
     "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
+    "first": "2026-11-26T13:32:17Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
-  "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen": {
-    "datei_sha256": "48308ce543cf35537c5bcc5664147918b636436987e7780403070a584ba994f0",
+  "2026-11-26-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen": {
+    "datei_sha256": "7d02d3a4fe4e94a57f71d76964853a2352dca79b352594fcb325e2f5c08cc88e",
     "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
+    "first": "2026-11-26T13:32:17Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
-  "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
-    "datei_sha256": "73574404601e174f6070af7a97fcf571d16d2334902fe721239cb09dafcf0bed",
+  "2026-11-26-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+    "datei_sha256": "e28f0cabff6b441814e06098ac5eb5481bf455fe3ff78f105869b83b9245beb6",
     "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
+    "first": "2026-11-26T13:32:17Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
-  "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
-    "datei_sha256": "3ea14cf4adaaf57d75473d16f615c83eb0e85fbc15853a0f1e9b48b722f7b89d",
+  "2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus": {
+    "datei_sha256": "f6086a06baa795d3eec577c273fa211cfbe6d2bd315cd12fdfb91f82054b9732",
+    "first": "2026-11-26T13:32:17Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Nutzer denken, dass 1.000 Megabit pro Sekunde alle Probleme lösen.",
+    "hits": 1,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:45824364231"
+    ],
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: viele nutzer denken, dass <n>.<n> megabit pro sekunde alle probleme lösen."
+  },
+  "2026-11-26-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+    "datei_sha256": "8302f95972e8706985edbdc50d2ff92ffe01216292aae49258337e080e89d0c6",
     "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
+    "first": "2026-11-26T13:32:17Z",
     "grund": "Reserve-Qualitäts-Gate: Umfang: 979 Wörter / 7344 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
     "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
   },
-  "2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
-    "datei_sha256": "f358e542037d38e72e016468b6b4b2de094237bf6a002770093a42a8b597b8bd",
+  "2026-11-26-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
+    "datei_sha256": "a3d6113e2092a0906e634035b3fd66f3d6f6fa70a1f7fa54e7fdb6198491ff77",
     "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
+    "first": "2026-11-26T13:32:17Z",
     "grund": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
     "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: - jahresgebühr: <n> € oder niedriger als <n> €."
   },
-  "2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
-    "datei_sha256": "1418519b6224fc807b96848000c8e2788f1f80c102c1f529666259186d6857fe",
-    "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
-    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+  "2026-11-26-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
+    "datei_sha256": "8ef98214788d0d67fc62b16e9913e6ad7ed46015b93e60c561be725f9fe7e432",
+    "first": "2026-11-26T13:32:17Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
-    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: prüfe einmal deine aktuellen konditionen, halte den unterschied schriftlich fest und wiederhole den che"
   },
-  "2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage": {
-    "datei_sha256": "85c69992c85bd2e5001d93a684a3bb9993eb7c6f49e68a1e87910ae7a7a803bc",
-    "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
-    "grund": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das reduziert den Bedarf an Klimaanlagenbetrieb um bis zu 30 %.",
+  "2026-11-26-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage": {
+    "datei_sha256": "5e035622a25097f69d67382987e0426adaee254c2790410eefc4335f21c1782f",
+    "first": "2026-11-26T13:32:17Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
-    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: das reduziert den bedarf an klimaanlagenbetrieb um bis zu <n> %."
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: prüfe einmal deine aktuellen konditionen, halte den unterschied schriftlich fest und wiederhole den che"
   },
-  "2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
-    "datei_sha256": "a8862022a568dc6f8785f78e440fa01d09d5c4542786c930891790c8b409ea2a",
-    "fassung_gewechselt": true,
-    "first": "2026-11-25T19:16:45Z",
-    "grund": "Reserve-Qualitäts-Gate: Umfang: 650 Wörter / 4708 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+  "2026-11-26-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+    "datei_sha256": "e477e7b65465372b38e5ee15a9e2fcd1a55cf891c034db0681e9f69c9ca391d8",
+    "first": "2026-11-26T13:32:17Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
-    "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: prüfe einmal deine aktuellen konditionen, halte den unterschied schriftlich fest und wiederhole den che"
   },
-  "2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt": {
+  "2026-11-26-wlan-verbessern-verstaerker-oder-mesh-was-passt": {
     "datei_sha256": "e408cf07ce68e40edbe4c9ff4cc2388a8978a3575fac07d8a387aba8c40d4911",
     "fassung_gewechselt": true,
     "first": "2026-11-25T19:16:45Z",
+    "geschont": true,
     "grund": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Für ein Haus bis 150 m² reichen meist zwei Knoten.",
-    "hits": 1,
+    "heiler": [
+      "redaktions_standard.py",
+      "check_titles.py",
+      "lesbarkeit_heiler.py",
+      "profi_polish.py"
+    ],
+    "hits": 2,
     "klasse": "heilbar",
     "laeufe": [
-      "run:45678501059"
+      "run:45678501059",
+      "run:45824364231"
     ],
-    "last": "2026-11-25T19:16:45Z",
-    "lauf": "run:45678501059",
+    "last": "2026-11-26T13:32:17Z",
+    "lauf": "run:45824364231",
     "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: für ein haus bis <n> m² reichen meist zwei knoten."
   }
 }

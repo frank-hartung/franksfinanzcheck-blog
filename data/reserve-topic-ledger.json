@@ -434,10 +434,12 @@
     "sperre_bis": "2027-04-05"
   },
   "Homeoffice: So planst du die Leitung für zwei Arbeitsplätze": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-11-09",
-    "sperre_bis": "2026-11-10"
+    "fehler": 0,
+    "grund": "produziert: homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-26",
+    "letzter_versuch": "2026-11-26",
+    "sperre_bis": "2027-05-25"
   },
   "Hund & Katze: Lohnt sich eine Tierversicherung?": {
     "abgleich_fehler": 1,
