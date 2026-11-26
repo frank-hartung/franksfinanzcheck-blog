@@ -22,15 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "Strom sparen im Sommer: 10 Tipps für heiße Monate"
 cover:
-  image: "images/covers/2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage.jpg"
+  image: "images/covers/2026-11-26-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage.jpg"
   alt: "Strom sparen Sommer: 10 smarte Tipps für heiße Tage"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: a5c1b252447412afd8f313c8168637b59c3da43c711e1289b391320a6b445e1a
-    geprueft_am: 2026-11-25
+    sha256: 4f774fb19e8119571176c9989656794ea837a0025ac2d3cd5ce3983c33a9e1bf
+    geprueft_am: 2026-11-26
 faktenfrische_aliases:
   - "2026-11-24-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage"
   - "2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage"

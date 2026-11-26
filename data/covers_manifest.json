@@ -2896,5 +2896,41 @@
    "badge": "KONTO & FINANZEN",
    "savings": ""
   }
+ },
+ "2026-11-26-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
+  "title": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
+  "ts": "2026-11-26T14:05:53+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-26-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage": {
+  "title": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
+  "ts": "2026-11-26T14:05:54+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-26-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+  "title": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
+  "ts": "2026-11-26T14:05:56+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-26-wlan-verbessern-verstaerker-oder-mesh-was-passt": {
+  "title": "WLAN verbessern: Verstärker oder Mesh – was passt?",
+  "ts": "2026-11-26T14:05:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  }
 }

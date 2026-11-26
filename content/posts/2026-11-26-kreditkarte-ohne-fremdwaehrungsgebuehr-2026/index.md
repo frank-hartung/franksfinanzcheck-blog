@@ -29,8 +29,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 9b029a1c3fc70e6a0cd5ee18729a770cfd2806276253592ea8b44199ece429a0
-    geprueft_am: 2026-11-25
+    sha256: c49bfe1d7bddee48120c2162f479588c7fe5f0eb88af89a590c2e5ac43c341a4
+    geprueft_am: 2026-11-26
 faktenfrische_aliases:
   - "2026-11-22-kreditkarte-ohne-fremdwaehrungsgebuehr-2026"
   - "2026-11-23-kreditkarte-ohne-fremdwaehrungsgebuehr-2026"
