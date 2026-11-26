@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:instagram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloecher
- n-in-der-wohnung:nutzen:2026-11-25@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
-DTSTART:20261125T174500Z
-DTEND:20261125T180000Z
-SUMMARY:Instagram: Mesh-WLAN nachrüsten: Wann lohnt sich die Investiti
- on? (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten
- -schluss-mit-funkloechern-in-der-wohnung/
-URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
- n-schluss-mit-funkloechern-in-der-wohnung/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:instagram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fix
  kosten:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261126T104500Z
 DTEND:20261126T110000Z
 SUMMARY:Instagram: Energieeffiziente Geräte: So sinken deine Fixkosten
@@ -38,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-w
  issen-musst:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261128T104500Z
 DTEND:20261128T110000Z
 SUMMARY:Instagram: Geschenkkarte: Was du beim Kauf und Aufladen wissen
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-
  sparst:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261129T104500Z
 DTEND:20261129T110000Z
 SUMMARY:Instagram: Secondhand-Kleidung kaufen: So prüfst du Stoff\, Nä
@@ -68,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-
  tasse-kaffee:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261201T104500Z
 DTEND:20261201T110000Z
 SUMMARY:Instagram: Kaffeemaschine: Was kostet eine Tasse wirklich? (nu
@@ -81,24 +66,24 @@ URL:https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-strom
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-03@fr
- anksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+UID:instagram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloecher
+ n-in-der-wohnung:nutzen:2026-12-03@franksfinanzcheck.de
+DTSTAMP:20261126T010150Z
 DTSTART:20261203T104500Z
 DTEND:20261203T110000Z
-SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
- tvertrag (nutzen)
+SUMMARY:Instagram: Mesh-WLAN nachrüsten: Wann lohnt sich die Investiti
+ on? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
- ern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
+ : https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten
+ -schluss-mit-funkloechern-in-der-wohnung/
+URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
+ n-schluss-mit-funkloechern-in-der-wohnung/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-h
  eizkosten:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261205T104500Z
 DTEND:20261205T110000Z
 SUMMARY:Instagram: Gas-Anbieter wechseln: Strategien gegen hohe Heizko
@@ -111,24 +96,24 @@ URL:https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechsel
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
- utzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-06@fr
+ anksfinanzcheck.de
+DTSTAMP:20261126T010150Z
 DTSTART:20261206T104500Z
 DTEND:20261206T110000Z
-SUMMARY:Instagram: Geld abheben im Ausland: Wo die Gebühren wirklich e
- ntstehen (nutzen)
+SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
+ tvertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
- nd-gebuehren-vermeiden/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
- and-gebuehren-vermeiden/
+ : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
+ ern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-
  strom:nutzen:2026-12-08@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261208T104500Z
 DTEND:20261208T110000Z
 SUMMARY:Instagram: Geschirrspüler voll beladen: Wasser und Strom spare
@@ -138,6 +123,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
  so-sparst-du-wasser-und-strom/
 URL:https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll
  -so-sparst-du-wasser-und-strom/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
+ utzen:2026-12-10@franksfinanzcheck.de
+DTSTAMP:20261126T010150Z
+DTSTART:20261210T104500Z
+DTEND:20261210T110000Z
+SUMMARY:Instagram: Geld abheben im Ausland: Wo die Gebühren wirklich e
+ ntstehen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
+ nd-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

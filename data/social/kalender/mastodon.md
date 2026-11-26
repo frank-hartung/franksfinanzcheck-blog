@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 25.11.2026 16:45 (Europe/Berlin)  
+> Automatisch aktualisiert: 26.11.2026 02:01 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Mi, 25. November 2026
-- **11:30** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
 ### Fr, 27. November 2026
 - **07:30** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
@@ -48,6 +45,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 26.11.2026 02:01 · Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte → https://mastodon.social/@FranksFinanzcheck/117680040155212119
 - ✅ 25.11.2026 16:45 · Geschenkkarte: Was du beim Kauf und Aufladen wissen musst → https://mastodon.social/@FranksFinanzcheck/117677853811296490
 - ✅ 24.11.2026 04:22 · Geschirrspüler voll beladen: Wasser und Strom sparen → https://mastodon.social/@FranksFinanzcheck/117669268722299454
 - ✅ 23.11.2026 17:08 · September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen → https://mastodon.social/@FranksFinanzcheck/117666620863784302
@@ -57,7 +55,6 @@
 - ✅ 18.11.2026 23:37 · WLAN-Frust lösen: So findest du den besten Router Standort → https://mastodon.social/@FranksFinanzcheck/117639837069950225
 - ✅ 18.11.2026 15:15 · Flugverspätung Entschädigung: So holst du dein Geld zurück → https://mastodon.social/@FranksFinanzcheck/117637863727269953
 - ✅ 17.11.2026 00:45 · Waschmaschine beladen: Weniger Kosten bei jedem Waschgang → https://mastodon.social/@FranksFinanzcheck/117628781271452138
-- ✅ 16.11.2026 14:46 · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € → https://mastodon.social/@FranksFinanzcheck/117626425285672414
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

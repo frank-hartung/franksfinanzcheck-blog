@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:linkedin:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wi
  ssen-musst:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261126T064500Z
 DTEND:20261126T070000Z
 SUMMARY:LinkedIn: Geschenkkarte: Was du beim Kauf und Aufladen wissen 
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
  parst:nutzen:2026-11-27@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261127T064500Z
 DTEND:20261127T070000Z
 SUMMARY:LinkedIn: Secondhand-Kleidung kaufen: So prüfst du Stoff\, Näh
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
  asse-kaffee:nutzen:2026-11-30@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261130T064500Z
 DTEND:20261130T070000Z
 SUMMARY:LinkedIn: Kaffeemaschine: Was kostet eine Tasse wirklich? (nut
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
  -in-der-wohnung:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261201T064500Z
 DTEND:20261201T070000Z
 SUMMARY:LinkedIn: Mesh-WLAN nachrüsten: Wann lohnt sich die Investitio
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixk
  osten:nutzen:2026-12-02@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261202T064500Z
 DTEND:20261202T070000Z
 SUMMARY:LinkedIn: Energieeffiziente Geräte: So sinken deine Fixkosten 
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-03@fra
  nksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261203T064500Z
 DTEND:20261203T070000Z
 SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
@@ -97,7 +97,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-he
  izkosten:nutzen:2026-12-04@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261204T064500Z
 DTEND:20261204T070000Z
 SUMMARY:LinkedIn: Gas-Anbieter wechseln: Strategien gegen hohe Heizkos
@@ -112,7 +112,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
  tzen:2026-12-07@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261207T064500Z
 DTEND:20261207T070000Z
 SUMMARY:LinkedIn: Geld abheben im Ausland: Wo die Gebühren wirklich en
@@ -127,7 +127,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-s
  trom:nutzen:2026-12-08@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261208T064500Z
 DTEND:20261208T070000Z
 SUMMARY:LinkedIn: Geschirrspüler voll beladen: Wasser und Strom sparen
@@ -142,7 +142,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
  bieterwechsel:nutzen:2026-12-09@franksfinanzcheck.de
-DTSTAMP:20261125T154551Z
+DTSTAMP:20261126T010150Z
 DTSTART:20261209T064500Z
 DTEND:20261209T070000Z
 SUMMARY:LinkedIn: DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten und Effe
@@ -152,6 +152,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
  praxis-tipps-fuer-den-anbieterwechsel/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
  n-praxis-tipps-fuer-den-anbieterwechsel/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-f
+ ixkosten:nutzen:2026-12-10@franksfinanzcheck.de
+DTSTAMP:20261126T010150Z
+DTSTART:20261210T064500Z
+DTEND:20261210T070000Z
+SUMMARY:LinkedIn: Mehrwegflaschen Pfand: Was kostet das Getränk ohne P
+ fand? (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-
+ so-optimierst-du-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfan
+ d-so-optimierst-du-deine-fixkosten/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

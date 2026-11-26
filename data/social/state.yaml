@@ -1668,6 +1668,26 @@ history:
     #Girokonto #Konto #Tagesgeld #Zinsen'
   ref: '117677853811296490'
   ai: false
+- posted_at: '2026-11-26T02:01:39.815865+01:00'
+  channel: mastodon
+  slug: 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst
+  title: 'Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117680040155212119
+  ok: true
+  text: '💶 Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte
+
+
+    Hochwertige Secondhand-Kleidung erkennst du an dichten Naturfasern wie Wolle,
+    Baumwolle oder Leinen sowie an festen Nähten und leichtgängigen Reißverschlüssen.
+
+
+    https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
+  ref: '117680040155212119'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1693,4 +1713,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-25T16:45:49.225940+01:00'
+updated_at: '2026-11-26T02:01:49.778319+01:00'
