@@ -1,52 +1,53 @@
 {
- "zeitstempel": "2026-11-25T18:16:39.242483+02:00",
+ "zeitstempel": "2026-11-26T17:57:57.670559+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
-  "ok": 20,
+  "ok": 22,
   "cache": 0,
-  "fehler": 5,
+  "fehler": 3,
   "uebersprungen": 0
  },
- "treffer_gesamt": 135,
- "treffer_organisch": 10,
+ "treffer_gesamt": 149,
+ "treffer_organisch": 0,
  "datenqualitaet": {
-  "anfragen_erfolgreich": 20,
-  "anfragen_organisch": 1,
-  "anfragen_rueckfall": 19,
-  "treffer_gesamt": 135,
-  "treffer_organisch": 10,
-  "treffer_rueckfall": 125,
-  "rueckfall_anteil": 0.926,
+  "anfragen_erfolgreich": 22,
+  "anfragen_organisch": 0,
+  "anfragen_rueckfall": 22,
+  "treffer_gesamt": 149,
+  "treffer_organisch": 0,
+  "treffer_rueckfall": 149,
+  "rueckfall_anteil": 1.0,
   "anbieter": {
-   "wikipedia": 19,
-   "searxng": 1
+   "wikipedia": 22
   },
-  "aussagekraft": "eingeschraenkt"
+  "aussagekraft": "keine"
  },
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
-   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=franksfinanzcheck.de&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: kei"
   },
   {
    "anfrage": "Gaskosten senken",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
-  },
-  {
-   "anfrage": "Zinsen vergleichen",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Zinsen vergleichen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Gaskosten+senken&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treff"
   },
   {
    "anfrage": "Zinshopping Zinseszins",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Zinshopping Zinseszins': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
-  },
-  {
-   "anfrage": "Zugluft stoppen",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Zugluft stoppen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Zinshopping Zinseszins': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Zinshopping+Zinseszins&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite:"
   }
  ],
  "rang": [
+  {
+   "anfrage": "5G Router",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
   {
    "anfrage": "DSL Anbieter Vergleich",
    "eigener_rang": 0,
@@ -64,7 +65,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "searxng",
+   "quelle": "wikipedia",
    "sichtbar": false
   },
   {
@@ -148,7 +149,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Zahnzusatzversicherung",
+   "anfrage": "Zahnzusatzversicherung ohne Wartezeit",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -158,7 +159,17 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Zahnzusatzversicherung ohne Wartezeit",
+   "anfrage": "Zinsen vergleichen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zugluft stoppen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -249,113 +260,11 @@
   }
  ],
  "wettbewerb": {
-  "domaenen": [
-   {
-    "domaene": "ing.de",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 1,
-    "durchschnitts_rang": 1.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "lexware.de",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 2,
-    "durchschnitts_rang": 2.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "bank99.at",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 3,
-    "durchschnitts_rang": 3.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "sparkasse.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 4,
-    "durchschnitts_rang": 4.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "peaks.com",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 5,
-    "durchschnitts_rang": 5.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "meetadam.io",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 6,
-    "durchschnitts_rang": 6.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "fonio.ai",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 7,
-    "durchschnitts_rang": 7.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "fixkostensenker.com",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 8,
-    "durchschnitts_rang": 8.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "ndr.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 9,
-    "durchschnitts_rang": 9.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "verivox.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 10,
-    "durchschnitts_rang": 10.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   }
-  ],
-  "domaenen_gesamt": 10,
+  "domaenen": [],
+  "domaenen_gesamt": 0,
   "merkmale": {}
  },
  "quota": {
-  "searxng": 1,
-  "wikipedia": 19
+  "wikipedia": 22
  }
 }

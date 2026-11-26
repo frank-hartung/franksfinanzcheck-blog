@@ -1,6 +1,16 @@
 {
- "stand": "2026-11-25T18:16:39.242483+02:00",
+ "stand": "2026-11-26T17:57:57.670559+02:00",
  "rankings": [
+  {
+   "anfrage": "5G Router",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
   {
    "anfrage": "DSL Anbieter Vergleich",
    "eigener_rang": 0,
@@ -18,7 +28,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "searxng",
+   "quelle": "wikipedia",
    "sichtbar": false
   },
   {
@@ -102,7 +112,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Zahnzusatzversicherung",
+   "anfrage": "Zahnzusatzversicherung ohne Wartezeit",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -112,7 +122,17 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Zahnzusatzversicherung ohne Wartezeit",
+   "anfrage": "Zinsen vergleichen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Zugluft stoppen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
