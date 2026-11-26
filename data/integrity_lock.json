@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-24T10:59:23.724636+00:00",
-  "head": "1fe3cfc",
+  "signed_at": "2026-11-26T11:36:39.997449+00:00",
+  "head": "1f0d9fd",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -34,7 +34,7 @@
     "scripts/check24_links.yaml": "054ec34a1b75703d5120b88094253b980a60136baec10358bae70b8705038946",
     "scripts/check_covers.py": "f2d9eb9e9133740bba0bd6eb6812d54783ba4aad086297c2d2d407adc8be1d0d",
     "scripts/content_audit.py": "45e07881f24005e63decd400fd2974499511fcc7d45ae21c5973e997f55695e3",
-    "scripts/fazit_schmiede.py": "6061f841227adefff0105331ba13d1d10fad0cd87c7c3364fe35593158ab0ca4",
+    "scripts/fazit_schmiede.py": "621b8d967aa45ee5cf521af956ce4c302c696b8bd85d221926b31483a122bd88",
     "scripts/generate_covers.py": "6f222a1314e59a3ee265f839ef7e460df45a75f07a4d6acc26d2f5c0cdf29bd2",
     "scripts/hardcases_guard.py": "15ffd843f106c7e7dfc4246d8e4ab7944e2db0238bb35bdd4529414d29631996",
     "scripts/internal_linker.py": "6273ffb63c128c5ead3abb657dd61a95c317b5d98f570b673d343a1654793d54",
@@ -59,46 +59,16 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "cca0100770096916ccbf40aef390dbe73679784f5c5eddde86eea32e276168b7",
-  "audit_start_sha256": "ffea1e1d04b08872decbac0fac60cfac326638a6ebe11aecae4c4649f6673964",
+  "files_sha256": "e716806fb41a3e095d33bff71bfc2fdbba595cf703f2939bc9e1619bb3e349f4",
+  "audit_start_sha256": "f9061a288212228b1b38f8faf98f3ed244d418caebbafd8baed412539a2f8101",
   "audit": [
-    {
-      "date": "2026-11-03",
-      "art": "heal",
-      "head": "e3c74ed06",
-      "geaendert": [
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "2e31f3cfb",
-              "datum": "2026-11-03",
-              "betreff": "fix(faktenfrische): F4 bekommt einen echten Schließweg – Dauer-Alarm #912 endet (#1038)"
-            },
-            {
-              "sha": "a44a12469",
-              "datum": "2026-11-03",
-              "betreff": "Faktenfrische #996: Dauerheilung – Pin-Rückfälle, Register, Prompt-Regel 11 (#1037)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "9abb7c9dc116226414fa81dabd11801d3c8a11b2c492029273e869af4abc274a",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-04",
       "art": "set-current",
       "head": "038b04fee",
       "geaendert": [],
       "files_sha256": "9abb7c9dc116226414fa81dabd11801d3c8a11b2c492029273e869af4abc274a",
-      "prev_sha256": "ffea1e1d04b08872decbac0fac60cfac326638a6ebe11aecae4c4649f6673964"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-04",
@@ -402,8 +372,38 @@
       "art": "set-current",
       "head": "1fe3cfc",
       "geaendert": [],
-      "prev_sha256": "ca6a2e90a6e7e133edb7b45a94aa01c4c55a064490d3fb5bf59aaee5ec36be53",
-      "files_sha256": "cca0100770096916ccbf40aef390dbe73679784f5c5eddde86eea32e276168b7"
+      "files_sha256": "cca0100770096916ccbf40aef390dbe73679784f5c5eddde86eea32e276168b7",
+      "prev_sha256": "ca6a2e90a6e7e133edb7b45a94aa01c4c55a064490d3fb5bf59aaee5ec36be53"
+    },
+    {
+      "date": "2026-11-26",
+      "art": "heal",
+      "head": "1f0d9fd",
+      "geaendert": [
+        "scripts/fazit_schmiede.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/fazit_schmiede.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "1f0d9fd",
+              "datum": "2026-11-26",
+              "betreff": "fix(pipeline): Faktenfrische (#1380), Regression (#1376), Reserve-Deadlock & Fazit-RS5 (#1230), Meta-YAML (#1384), Struktur (#1383), Werkbank-Auto-Close (#1194)"
+            },
+            {
+              "sha": "8a47339",
+              "datum": "2026-11-26",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "97864f79c3540d025cd844f79e13a23fcf2efa0c5ae80708eb057437d16b21ac",
+      "files_sha256": "e716806fb41a3e095d33bff71bfc2fdbba595cf703f2939bc9e1619bb3e349f4"
     }
   ]
 }
