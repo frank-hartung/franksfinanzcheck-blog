@@ -273,10 +273,6 @@ produktion:
     rolle: "Vergleichs- und Alternativseiten als Seitenmuster"
     kanaele: [suchmaschine, website]
 ausgeschlossen:
-  nginx-config-security-reviewer:
-    grund: "Kein Nginx im Blog-Betrieb; GitHub Pages und Cloudflare übernehmen die Auslieferung."
-    entscheidung: "Auf Wunsch installiert für zukünftige Nginx-Prüfungen, nicht im aktuellen Produktionsbetrieb."
-    faellig: "2027-06-30"
   # Geschäftsmodell eines SaaS: der Blog verkauft keine Software.
   ads:
     grund: "bezahlte Kampagnen (Google/Meta/LinkedIn) – der Blog hat kein Werbebudget und keine Paid-Konten"

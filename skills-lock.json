@@ -229,14 +229,6 @@
       "skillPath": "skills/marketing-psychology/SKILL.md",
       "computedHash": "50d735eb0f5c36f379ed2200f21aeacc9b9ad85667b5d33ec6111857352a1340"
     },
-    "nginx-config-security-reviewer": {
-      "source": ".claude/skills/nginx-config-security-reviewer",
-      "sourceType": "local",
-      "sourceUrl": "https://prompts.chat/api/prompts/cmvoxlypi000bkz08hly85q7t",
-      "skillPath": "SKILL.md",
-      "computedHash": "5dd2b8fbb126bb4fdabba29bace41bc8d2c728bd89766b954bdba67fd4186ce2",
-      "sourceMirror": "https://github.com/laravelcompany/laravelcompany.com/blob/6671598e7b9ebd32eece15cd8ecb7c746eab621e/src/content/prompts/csv-nginx-config-security-reviewer-0df9c27a289198cc.json"
-    },
     "offers": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
