@@ -29,7 +29,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 0d11baa579713c8900e15f89341d8020a4dc56c8818924d1886024efe3bee3d5
+    sha256: a7a911ce26c04675dd18698b64a8fdc041b38b05423a18ab284e3b0999f304d8
     geprueft_am: 2026-11-26
 faktenfrische_aliases:
   - "2026-11-23-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen"

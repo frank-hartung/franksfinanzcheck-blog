@@ -2,14 +2,14 @@
   "target": 6,
   "ready": 0,
   "pool_size": 12,
-  "generated_at": "2026-11-26T18:37:08Z",
+  "generated_at": "2026-11-26T19:07:02Z",
   "candidates": [
     {
       "slug": "2026-11-26-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "27d1de1d7a74a205230797e24cb4b683efa33b6db416664d72a7ee8e4d2a507d",
+      "sha256": "1ba46bc3d8ce0e61972eff7577624d4f33d0fed2d25a772e1ab65189e927ae90",
       "flesch": 69.8,
-      "measured_at": "2026-11-26T18:35:32Z",
+      "measured_at": "2026-11-26T19:05:26Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-26-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -31,9 +31,9 @@
     {
       "slug": "2026-11-26-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "fb37518596f75291f6d3a5678872cb4a1d1b9cca078c26837978129c77fa9863",
+      "sha256": "d557756f8d02708f3e78008f9a355149bda0d3cb4af26b76e7779c57c4dd1d7d",
       "flesch": 72.9,
-      "measured_at": "2026-11-26T18:35:34Z",
+      "measured_at": "2026-11-26T19:05:28Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
         "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen."
@@ -52,9 +52,9 @@
     {
       "slug": "2026-11-26-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "a1d92ba09a1284221a8809903ad1dc681c81bd26ca4c28a8213a1d4d9c2d815e",
+      "sha256": "c0ffa5b03ab99ae7d3560bcd17f23dd3fef868e85961595a600d1c016c1217e0",
       "flesch": 63.8,
-      "measured_at": "2026-11-26T18:36:01Z",
+      "measured_at": "2026-11-26T19:05:55Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-26-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -76,9 +76,9 @@
     {
       "slug": "2026-11-26-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
       "ready": false,
-      "sha256": "154dcdf6236e91aad8138b164af928f2b24138036f6905464e9cc8becf252318",
+      "sha256": "e747fef8ca61abad02bccc0ce51ff73ff63e92f8147196618eafe518cd240e7e",
       "flesch": 63.2,
-      "measured_at": "2026-11-26T18:36:28Z",
+      "measured_at": "2026-11-26T19:06:22Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-26-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -100,9 +100,9 @@
     {
       "slug": "2026-11-26-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "ready": false,
-      "sha256": "2abcd3f3c57f565c0577be1a56f618a0799ae117c70ec07f6f5b7607224e750c",
+      "sha256": "67a8b597c715266d0a617f724b4923e236fe2943db799d01f13cd4fb6514b50f",
       "flesch": 62.4,
-      "measured_at": "2026-11-26T18:36:55Z",
+      "measured_at": "2026-11-26T19:06:49Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-26-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -124,9 +124,9 @@
     {
       "slug": "2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
       "ready": false,
-      "sha256": "67ce849da8e255fa8399021eb9e9d6ae14dd22aa696806702e4d35993565968a",
+      "sha256": "04be5d54aa9d95c0b3d2f99c4e8da59883fd13c24a9d0d106d15353e75965a89",
       "flesch": 60.9,
-      "measured_at": "2026-11-26T18:36:56Z",
+      "measured_at": "2026-11-26T19:06:50Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Nutzer denken, dass 1.000 Megabit pro Sekunde alle Probleme lösen.",
       "details": [
         "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Nutzer denken, dass 1.000 Megabit pro Sekunde alle Probleme lösen."
@@ -145,12 +145,12 @@
     {
       "slug": "2026-11-26-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
       "ready": false,
-      "sha256": "a9cb81d0159f4c5a6e42af21056c6c3d4ce25ee5317003bb613c524002a51ec7",
+      "sha256": "870d0169a832b13f51e187e1cf9b94f39cb03db2cc50076e3cea0f39dfc13ff7",
       "flesch": 60.4,
-      "measured_at": "2026-11-26T18:36:58Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 979 Wörter / 7344 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "measured_at": "2026-11-26T19:06:52Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 988 Wörter / 7412 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
-        "Umfang: 979 Wörter / 7344 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "Umfang: 988 Wörter / 7412 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
       "score": 0.905,
       "parts": {
@@ -168,7 +168,7 @@
       "ready": false,
       "sha256": "24a916508acf80d85742ba334fc4f18d33b7c47fc89b6a483221dc1e1f0c2a17",
       "flesch": 60.0,
-      "measured_at": "2026-11-26T18:37:00Z",
+      "measured_at": "2026-11-26T19:06:54Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
       "details": [
         "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
@@ -190,7 +190,7 @@
       "ready": false,
       "sha256": "d77dbf78570621d40b5f0b4896fe469dedaa103474d3d9a5dc3fb9d177034c36",
       "flesch": 70.6,
-      "measured_at": "2026-11-26T18:37:03Z",
+      "measured_at": "2026-11-26T19:06:57Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
         "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen."
@@ -209,13 +209,13 @@
     {
       "slug": "2026-11-26-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
       "ready": false,
-      "sha256": "19445dbd854149a5f85121e4ad89392b83bdea4c6f8906bf4d7bdd2abdfad0de",
-      "flesch": 60.2,
-      "measured_at": "2026-11-26T18:37:05Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
+      "sha256": "8dba601fd99bd8e2a78f3572a90222847427d700e6a4bb9e93df68a43f6bc65b",
+      "flesch": 60.6,
+      "measured_at": "2026-11-26T19:06:59Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
-        "RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
-        "Umfang: 859 Wörter / 6186 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
+        "Umfang: 798 Wörter / 5763 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
       "score": 0.931,
       "parts": {
@@ -231,13 +231,13 @@
     {
       "slug": "2026-11-26-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "d57406157a67c6f02ccd028485318f4f81a669700265327e35d09bb1a071c719",
-      "flesch": 57.6,
-      "measured_at": "2026-11-26T18:37:06Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
+      "sha256": "eabd48ddc92eec49b26a5d0d7739f5b7908cda04faf487c97dfd4d43b4a185c9",
+      "flesch": 58.0,
+      "measured_at": "2026-11-26T19:07:01Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
-        "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
-        "Umfang: 838 Wörter / 6088 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+        "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
+        "Umfang: 824 Wörter / 5971 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
         "FAQ: nur 3 Fragen (Premium verlangt 4)"
       ],
       "score": 0.897,
@@ -254,20 +254,20 @@
     {
       "slug": "2026-11-26-wlan-verbessern-verstaerker-oder-mesh-was-passt",
       "ready": false,
-      "sha256": "b23a2a537a3e70ceef5b0f1ac9c1630faa1ea087f9450e81554b1b413e4f6bf1",
-      "flesch": 62.8,
-      "measured_at": "2026-11-26T18:37:08Z",
+      "sha256": "196cce830ceb8a78dfd70f6c4473c79ebd9e6cfcabafd31cc96ddf94f464f7f7",
+      "flesch": 63.7,
+      "measured_at": "2026-11-26T19:07:02Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Für ein Haus bis 150 m² reichen meist zwei Knoten.",
       "details": [
         "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Für ein Haus bis 150 m² reichen meist zwei Knoten.",
-        "Umfang: 798 Wörter / 5713 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "Umfang: 846 Wörter / 6014 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
-      "score": 0.917,
+      "score": 0.897,
       "parts": {
         "spelling": 0.92,
         "meta": 1.0,
         "structure": 0.7,
-        "typography": 0.88,
+        "typography": 0.6799999999999999,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
@@ -275,40 +275,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "45876772003",
+    "kind": "full",
+    "run_id": "45877410903",
     "run_attempt": "1"
-  },
-  "geschont": [
-    {
-      "slug": "2026-11-26-wlan-verbessern-verstaerker-oder-mesh-was-passt",
-      "klasse": "heilbar",
-      "hits": 2,
-      "heiler": [
-        "redaktions_standard.py",
-        "check_titles.py",
-        "lesbarkeit_heiler.py",
-        "profi_polish.py"
-      ],
-      "warum": "Vorab-Befunde des Reserve-Qualitäts-Gates (RS1–RS8, Titel R1–R5, Flesch) heilen redaktions_standard.py, check_titles.py und lesbarkeit_heiler.py in der Reserve-Kette (#710)."
-    }
-  ],
-  "recert": {
-    "at": "2026-11-26T18:37:08Z",
-    "renewed": [
-      "2026-11-26-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
-      "2026-11-26-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
-      "2026-11-26-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
-      "2026-11-26-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
-      "2026-11-26-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
-      "2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
-      "2026-11-26-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
-      "2026-11-26-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
-      "2026-11-26-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
-      "2026-11-26-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
-      "2026-11-26-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
-      "2026-11-26-wlan-verbessern-verstaerker-oder-mesh-was-passt"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

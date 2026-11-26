@@ -29,7 +29,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: b37383941d5d2d6acdc328aa669fb37894625eebcbd6714acfc76eaf7531b728
+    sha256: a3a12e0a912316b2c38a3c95ab7d9eb7d2555baa8eb396baad21fb01499127ed
     geprueft_am: 2026-11-26
 faktenfrische_aliases:
   - "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch"
@@ -72,10 +72,12 @@ Du gewinnst Qualität, ohne einen Cent extra auszugeben.
 
 ## Wie organisiere ich einen Kleidertausch im Freundeskreis?
 
-Suche dir zuerst eine motivierte Runde. Eine einfache Nachricht in deiner Messenger‑App genügt meistens für den Start.
+Suche dir zuerst eine motivierte Runde.  
+Eine einfache Nachricht in deiner Messenger‑App genügt meistens für den Start.  
 Dort nennst du Termin, Ort und die Spielregeln.  
 
-Jeder Teilnehmer gibt kurz Bescheid, was er zum Event mitbringt. Das schafft Transparenz und steigert die Vorfreude auf die neuen Stücke.
+Jeder Teilnehmer gibt kurz Bescheid, was er zum Event mitbringt.  
+Das schafft Transparenz und steigert die Vorfreude auf die neuen Stücke.  
 So stellst du sicher, dass für jeden Geschmack etwas dabei ist.  
 
 ## Checkliste für deine erste Runde
@@ -99,13 +101,15 @@ So stellst du sicher, dass für jeden Geschmack etwas dabei ist.
 | Schlechte Sortierung | Beschädigte Kleidung sorgt für Ärger | Nur saubere, intakte Ware zulassen |
 | Keine Dokumentation | Der Überblick über die Stücke geht verloren | Führe eine einfache Liste der Sachen |
 
-Fehlt eine klare Übersicht, weiß niemand mehr, wer welches Teil besitzt. Das führt oft zu unnötigen Rückfragen oder Unmut in der Gruppe. Eine einfache Tabelle löst dieses Problem sofort.
+Fehlt eine klare Übersicht, weiß niemand mehr, wer welches Teil besitzt.  
+Das führt oft zu unnötigen Rückfragen oder Unmut in der Gruppe.  
+Eine einfache Tabelle löst dieses Problem sofort.  
 So bleibt die Stimmung während des gesamten Events entspannt.  
 
 ## Faustregel für den Austauschwert
 
 **Faustregel:** Ein getauschtes Teil sollte qualitativ dem mitgebrachten Gegenstand entsprechen.
-So bleibt die Dynamik in der Gruppe für alle Beteiligten fair.
+So bleibt die Dynamik in der Gruppe für alle Beteiligten fair.  
 Beide Seiten profitieren am Ende von einem ausgewogenen Preis‑Leistungs‑Verhältnis.  
 
 ## So gehst du vor: Schrittfolge
@@ -124,17 +128,22 @@ Beide Seiten profitieren am Ende von einem ausgewogenen Preis‑Leistungs‑Verh
 | Bluse (Gr. 36) | sehr gut | Schal (Einheitsgröße) | Lukas |
 | Pullover (Gr. L) | ok | 2 T‑Shirts (Gr. S) (Annahme) | Maria |
 
-Die Tabelle lässt sich leicht per Smartphone mit allen teilen. So wissen alle Gäste sofort, welche Schätze noch verfügbar sind.
+Die Tabelle lässt sich leicht per Smartphone mit allen teilen.  
+So wissen alle Gäste sofort, welche Schätze noch verfügbar sind.  
 Das spart Zeit und verhindert doppelte Anfragen für das gleiche Kleidungsstück.  
 
 ## Kleidung weitergeben – Mehrwert für die Umwelt
 
-Beim **Secondhand tauschen** verlängerst du die Lebensdauer deiner Garderobe aktiv. Du vermeidest Müll und sparst Wasser für die aufwendige Neuproduktion. Das **Kleidung weitergeben** schont somit direkt unsere Umwelt und Ressourcen.
+Beim **Secondhand tauschen** verlängerst du die Lebensdauer deiner Garderobe aktiv.  
+Du vermeidest Müll und sparst Wasser für die aufwendige Neuproduktion.  
+Das **Kleidung weitergeben** schont somit direkt unsere Umwelt und Ressourcen.  
 Jeder Tausch ist ein messbarer Beitrag zum persönlichen Klimaschutz.  
 
 ## Fazit
 
-Ein Kleidertausch im Freundeskreis organisiert sich fast von selbst. Du sparst Geld, entdeckst neue Styles und handelst ökologisch sinnvoll. Klare Regeln und eine einfache Tabelle sorgen für einen reibungslosen Ablauf.
+Ein Kleidertausch im Freundeskreis organisiert sich fast von selbst.  
+Du sparst Geld, entdeckst neue Styles und handelst ökologisch sinnvoll.  
+Klare Regeln und eine einfache Tabelle sorgen für einen reibungslosen Ablauf.  
 Probiere es aus und starte deinen eigenen **Kleiderkreislauf** für mehr Nachhaltigkeit.  
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) **Lesetipp:** [Secondhand‑Kleidung kaufen: So prüfst du Stoff, Nähte](../../posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/)
@@ -144,6 +153,7 @@ Probiere es aus und starte deinen eigenen **Kleiderkreislauf** für mehr Nachhal
 ### Wie oft sollte ich einen Kleidertausch veranstalten?
 Ein regelmäßiger Rhythmus passt deine Garderobe an die aktuelle Jahreszeit an.
 So bleibt dein Schrank übersichtlich und aktuell.
+Du kannst halbjährlich oder vierteljährlich planen, je nach Bedarf.
 
 ### Was, wenn jemand ein beschädigtes Teil mitbringt?
 Klare Regeln im Vorfeld verhindern solche Situationen meist komplett.

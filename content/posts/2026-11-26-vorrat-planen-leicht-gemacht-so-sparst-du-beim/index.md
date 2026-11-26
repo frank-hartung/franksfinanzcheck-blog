@@ -46,15 +46,13 @@ faktenfrische_aliases:
   - "2026-11-25-vorrat-planen-leicht-gemacht-so-sparst-du-beim"
 ---
 
-Du stehst vor dem Supermarktregal.  
-Die XXL‑Packung Nudeln lockt mit Rabatt.  
+Du stehst vor dem Regal, die XXL‑Packung Nudeln lockt mit Rabatt.  
 Zu Hause liegen bereits angebrochene Tüten in der hintersten Ecke.  
-Dein tatsächlicher Verbrauch entscheidet, ob du sparst.  
+Dein tatsächlicher Verbrauch entscheidet, ob du wirklich sparst.  
 
 Der Preis am Regal sagt nichts über deine Ersparnis.  
-Nur ein durchdachter **Lebensmittel Vorrat** lohnt sich.  
-Planung ersetzt spontane Aktionen.  
-So behältst du die Kontrolle.  
+Nur ein durchdachter **Lebensmittel Vorrat** bringt Nutzen.  
+Planung ersetzt spontane Aktionen und gibt dir die Kontrolle zurück.  
 
 **Das Wichtigste in Kürze**
 
@@ -81,10 +79,11 @@ Achte auf Verbrauchs‑ und Mindesthaltbarkeitsdatum.
 
 ## Wie groß sollte der Vorrat sein?
 
-Blicke auf die Tage bis zum nächsten Einkauf. Zähle, wie viele Mahlzeiten du zu Hause zubereitest.
+Blicke auf die Tage bis zum nächsten Einkauf und zähle, wie viele Mahlzeiten du zu Hause zubereitest.  
 Gäste, Schichtdienst oder Reisen verändern den Bedarf sofort.  
 
-Reserviere keinen Platz für riesige Mengen ohne festen Plan. Vergleiche eine gewöhnliche Woche mit einer stressigen Ausnahmephase.
+Reserviere keinen Platz für riesige Mengen ohne festen Plan.  
+Vergleiche eine gewöhnliche Woche mit einer stressigen Ausnahmephase.  
 So findest du dauerhaft deinen idealen **Einkauf Rhythmus**.  
 
 | Frage | Was sie für den Einkauf bedeutet |
@@ -95,24 +94,28 @@ So findest du dauerhaft deinen idealen **Einkauf Rhythmus**.
 
 ## Wann wird der Mengenrabatt zur Kostenfalle?
 
-In dieser **Modellrechnung** gehen wir von einem Zeitraum von vier Wochen aus und benötigen insgesamt 40 Portionen. Einzelne Portionen kosten laut diesem **Rechenbeispiel** 1 € pro Stück. Die Großpackung senkt den Preis in dieser **Annahme** auf 0,90 € pro Portion.
+In dieser **Modellrechnung** gehen wir von einem Zeitraum von vier Wochen aus und benötigen insgesamt 40 Portionen. Einzelne Portionen kosten laut diesem **Rechenbeispiel** 1 € pro Stück. Die Großpackung senkt den Preis in dieser **Annahme** auf 0,90 € pro Portion.  
 Verbrauchst du alles, zahlst du laut **Modellrechnung** 36 € statt 40 € und sparst laut **Rechenbeispiel** 4 € im Monat.  
 
-Landen jedoch vier Portionen im Müll, ist der finanzielle Vorteil hinfällig. Die Kosten für 36 einzelne Stücke lägen in dieser **Annahme** ebenfalls bei 36 €.
+Landen jedoch vier Portionen im Müll, ist der finanzielle Vorteil hinfällig. Die Kosten für 36 einzelne Stücke lägen in dieser **Annahme** ebenfalls bei 36 €.  
 Damit verlierst du die gesamte Ersparnis.  
 
-Nur haltbare **Lebensmittel Vorrat**, die du wirklich isst, sichern deinen Vorteil. Notiere, was du am Ende der Woche entsorgst.
+Nur haltbare **Lebensmittel Vorrat**, die du wirklich isst, sichern deinen Vorteil.  
+Notiere, was du am Ende der Woche entsorgst.  
 So erkennst du, ob der Rabatt sinnvoll war.  
 
 ## Wie gelingt der Test für den nächsten Einkauf?
 
-Wähle ein Produkt, das du häufig nutzt. Notiere den aktuellen Bestand und den gezahlten Preis.
+Wähle ein Produkt, das du häufig nutzt.  
+Notiere den aktuellen Bestand und den gezahlten Preis.  
 So prüfst du deine Strategie zum **Vorrat planen** und kontrollierst die Kosten.  
 
-Beim nächsten Einkauf vergleichst du den tatsächlichen Verbrauch mit deiner Vorhersage. Passt die große Packung zu deinem Alltag?
+Beim nächsten Einkauf vergleichst du den tatsächlichen Verbrauch mit deiner Vorhersage.  
+Passt die große Packung zu deinem Alltag?  
 **Vorrat planen leicht gemacht** bedeutet, den Überblick zu behalten.  
 
-Passe deinen Plan an bevorstehende Termine oder Reisen an. Kaufe frische Lebensmittel nur für die verbleibenden Tage bis zur Abfahrt.
+Passe deinen Plan an bevorstehende Termine oder Reisen an.  
+Kaufe frische Lebensmittel nur für die verbleibenden Tage bis zur Abfahrt.  
 Ein Vorrat, der zu deinem Kalender passt, schont deine Nerven und dein Konto.  
 
 ## So gehst du vor
@@ -127,22 +130,29 @@ Ein Vorrat, der zu deinem Kalender passt, schont deine Nerven und dein Konto.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 
-
 ## Fazit: Vorrat planen – Wann lohnt sich ein größerer Einkauf
 
-Der Hebel bei **Vorrat planen: Wann lohnt sich ein größerer Einkauf?** sitzt nicht im Verzicht, sondern im Nachrechnen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Vorrat planen: Wann lohnt sich ein größerer Einkauf?** liegt im Nachrechnen.  
+Kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu beachtlichen Ersparnissen.  
+Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.  
 
 ## Häufige Fragen
 
 ### Wie starte ich am besten mit dem Sparen im Alltag?
-Der erste Schritt ist immer eine lückenlose Übersicht deiner Ausgaben. Führe für mindestens zwei bis drei Monate ein Haushaltsbuch, um versteckte Kostenfresser wie Abos, tägliche Snacks und unnötige Verträge sofort zu entlarven.
+
+Der erste Schritt ist eine lückenlose Übersicht deiner Ausgaben.
+Führe für mindestens zwei bis drei Monate ein Haushaltsbuch, um versteckte Kostenfresser wie Abos, tägliche Snacks und unnötige Verträge sofort zu entlarven.
 
 ### Wie viel Geld sollte ich als Notgroschen aufbauen?
-Als eiserne Reserve gelten 3 bis 6 Monatsausgaben. Dieses Geld gehört auf ein gut verzinstes, täglich verfügbares Tagesgeldkonto, um bei unvorhergesehenen Notfällen (Autoreparatur, kaputte Waschmaschine) sofort handlungsfähig zu sein.
+
+Als eiserne Reserve gelten 3 bis 6 Monatsausgaben.
+Dieses Geld gehört auf ein gut verzinstes, täglich verfügbares Tagesgeldkonto, um bei unvorhergesehenen Notfällen sofort handlungsfähig zu sein.
 
 ### Sollte ich Verträge wie Strom und Internet wirklich jährlich prüfen?
-Ja, absolut! Treue zahlt sich bei Dienstleistern leider fast nie aus – im Gegenteil: Neukunden erhalten saubere Rabatte und Wechselboni, während Bestandskunden oft viel zu viel zahlen. Ein jährlicher Vergleich sichert dir dauerhaft die besten Preise.
 
+Ja, absolut!
+Treue zahlt sich bei Dienstleistern selten aus – Neukunden erhalten Rabatte und Wechselboni, während Bestandskunden oft zu viel zahlen.
+Ein jährlicher Vergleich sichert dir dauerhaft die besten Preise.
 
 ---
 
