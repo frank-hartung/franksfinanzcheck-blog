@@ -191,6 +191,7 @@ _RS5_MODELLZUSATZ_RE = re.compile(
 FAZIT_TEXT_QUELLEN = (
     ("fazit_schmiede", "generate_fazit_text.sentence_map"),
     ("fazit_schmiede", "generate_fazit_text.s3"),
+    ("fazit_schmiede", "LEGACY_FAZIT_BAUSTEINE"),
 )
 
 # Klartext-Hausformeln anderer SSOTs: (modul, attribut). Auch hier gilt:
@@ -530,6 +531,11 @@ def haus_fazit_bausteine() -> tuple[re.Pattern | None, tuple[str, ...]]:
     smap, _ = _ssot_wert("fazit_schmiede", "generate_fazit_text.sentence_map")
     if isinstance(smap, dict):
         for v in smap.values():
+            if isinstance(v, str) and len(_vergleichsform(v)) >= 40:
+                saetze.add(_vergleichsform(v).rstrip("."))
+    legacy, _ = _ssot_wert("fazit_schmiede", "LEGACY_FAZIT_BAUSTEINE")
+    if isinstance(legacy, (list, tuple)):
+        for v in legacy:
             if isinstance(v, str) and len(_vergleichsform(v)) >= 40:
                 saetze.add(_vergleichsform(v).rstrip("."))
     geordnet = tuple(sorted(saetze, key=len, reverse=True))

@@ -263,3 +263,16 @@ jobs:
           else
             echo "Issue existiert bereits – kein Duplikat."
           fi
+
+      - name: Offene Werkbank-Störungen schließen (Quellen wieder erreichbar)
+        if: ${{ steps.lauf.outcome == 'success' && github.event.inputs.modus != 'dry-run' && github.event.inputs.modus != 'gate' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label werkbank \
+            --json number,title \
+            | jq -r '.[] | select(.title | startswith("Werkbank: keine belegfähige Quelle erreicht")) | .number'); do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
+              --comment "✅ Behoben: \`scripts/antwortwerk.py --plan\` liefert wieder belegfähige Quellen ([Run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}))."
+            echo "→ Issue #$n geschlossen."
+          done

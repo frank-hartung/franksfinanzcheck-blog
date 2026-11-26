@@ -370,10 +370,21 @@ class FazitSchmiedeUndCacheTests(unittest.TestCase):
         self.assertIn("fazit_schmiede",
                       dg.haus_template_grund(s3[:-1] + "; das ist ein Rechenbeispiel."))
         verlinkt = s3.replace(
+            "kurzer Abgleich",
+            "[kurzer Abgleich](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)",
+        )[:-1] + "; das ist ein Modellwert."
+        self.assertIn("fazit_schmiede", dg.haus_template_grund(verlinkt))
+
+        # Historische Live-Artikel mit altem S3 („fünf Minuten reichen.“) bleiben
+        # über LEGACY_FAZIT_BAUSTEINE ebenfalls erkannt (#1230).
+        legacy, luecke2 = dg._ssot_wert("fazit_schmiede", "LEGACY_FAZIT_BAUSTEINE")
+        self.assertEqual(luecke2, "")
+        alt_s3 = legacy[0]
+        alt_verlinkt = alt_s3.replace(
             "fünf Minuten",
             "[fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)",
         )[:-1] + "; das ist ein Modellwert."
-        self.assertIn("fazit_schmiede", dg.haus_template_grund(verlinkt))
+        self.assertIn("fazit_schmiede", dg.haus_template_grund(alt_verlinkt))
 
     def test_eigener_redaktionssatz_neben_s3_bleibt_gemessen(self):
         """Kein Freibrief (C19): echter Fließtext neben S3 hebt die Ausnahme auf."""

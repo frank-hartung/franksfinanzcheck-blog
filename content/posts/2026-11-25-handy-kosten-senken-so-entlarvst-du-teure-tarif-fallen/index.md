@@ -1,7 +1,7 @@
 ---
 title: "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen"
 description: Suchst du neue Tarife für dein Handy? Ich zeige dir, wie du echte Schnäppchen von Lockangeboten unterscheidest und dauerhaft Fixkosten sparst.
-kurzantwort: Prüfe deinen realen Datenverbrauch der letzten drei Monate in den Einstellungen deines Geräts. Trenne den Kauf von Hardware strikt von deinem Mobilfunkvertrag, um die volle Kostenkontrolle zu behalten.
+kurzantwort: Prüfe deinen realen Datenverbrauch der letzten Abrechnungszeiträume in den Einstellungen deines Geräts. Trenne den Kauf von Hardware strikt von deinem Mobilfunkvertrag, um die volle Kostenkontrolle zu behalten.
 date: 2026-11-25T13:25:23Z
 draft: true
 reserve: true
@@ -263,7 +263,7 @@ Wer auf das neueste Feature verzichtet, spart oft noch einmal deutlich bei der G
 
 ## Fazit: Handy-Kosten senken – So entlarvst du teure Tarif-Fallen
 
-Der Hebel bei **Handy-Kosten senken: So entlarvst du teure Tarif-Fallen** sitzt nicht im Verzicht, sondern im Nachrechnen. Mit dem passenden SIM-Only-Tarif und einem separat gekauften Smartphone sparst du auf zwei Jahre gerechnet massiv Geld. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Handy-Kosten senken: So entlarvst du teure Tarif-Fallen** sitzt nicht im Verzicht, sondern im Nachrechnen. Mit dem passenden SIM-Only-Tarif und einem separat gekauften Smartphone senkst du deine laufenden Mobilfunkkosten spürbar. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – ein kurzer Abgleich reicht.
 
 ## Häufige Fragen
 

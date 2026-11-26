@@ -211,7 +211,7 @@ Vermeide diese Punkte, und deine Erfolgsquote wird steigen. Es geht nicht um Per
 
 ## Fazit: Lebensmittel retten – Clever planen statt teuer wegwerfen
 
-Der Hebel bei **Lebensmittel retten: Clever planen statt teuer wegwerfen** sitzt nicht im Verzicht, sondern im Nachrechnen. Indem du die Tarife vergleichst und regelmäßig wechselst, holst du ohne Komfortverzicht das Maximum aus deinem Haushaltsbudget heraus. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Lebensmittel retten: Clever planen statt teuer wegwerfen** sitzt nicht im Verzicht, sondern im Nachrechnen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – ein kurzer Abgleich reicht.
 
 ## Häufige Fragen
 

@@ -99,10 +99,12 @@ SERIE_MIN = 3         # S2: ab so vielen gleich beginnenden H2 in Folge
 NEU_TOLERANZ = 2      # neue Artikel dürfen so viele Mikro-Abschnitte haben
 
 # Kurze Rubriken mit legitimer Kürze (Kanon des Hauses).
+# `weiterrechnen und vertiefen` ist der offizielle Werkzeug-Anhang mit
+# Rechner-Links (konsistent mit scripts/faktenfrische_befund_ledger.py).
 EXEMPT_RX = re.compile(
     r"^(das wichtigste in k|kurzantwort|auf einen blick|inhalt|"
     r"quellen|transparenz|über (den|die) autor|h(ä|ae)ufige fragen|"
-    r"faq|weiterlesen|fazit)",
+    r"faq|weiterlesen|weiterrechnen und vertiefen|fazit)",
     re.I,
 )
 
@@ -280,7 +282,12 @@ def _selftest() -> list[str]:
         fehler.append(f"Fall 1: Mikro-Erkennung falsch ({r['mikro_titel']})")
 
     # Fall 2: Kanon-Rubriken sind befreit (kurz ist dort legitim).
-    art2 = fm + f"## Das Wichtigste in Kürze\n\n- Punkt eins\n- Punkt zwei\n\n## Fazit\n\n{kurz}\n"
+    art2 = (
+        fm
+        + f"## Das Wichtigste in Kürze\n\n- Punkt eins\n- Punkt zwei\n\n"
+        + f"## Weiterrechnen und vertiefen\n\n- [Rechner](/rechner/)\n\n"
+        + f"## Fazit\n\n{kurz}\n"
+    )
     if analyse(art2)["mikro"] != 0:
         fehler.append("Fall 2: Kanon-Rubrik fälschlich als Mikro-Abschnitt gewertet")
 

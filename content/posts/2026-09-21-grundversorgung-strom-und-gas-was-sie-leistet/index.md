@@ -76,7 +76,7 @@ Vier typische Fälle führen dich dorthin.
 In den ersten drei Fällen bemerkst du den Wechsel meist nur an der Rechnung.  
 Die Bundesnetzagentur beschreibt in ihren [Fachinformationen zu Strom und Gas](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html), wie das Verhältnis zwischen Grundversorgung, Sondervertrag und Ersatzversorgung aufgebaut ist.  
 
-## Ersatzversorgung und Grundversorgung
+### Ersatzversorgung und Grundversorgung
 
 Beim Umzug hörst du beide Begriffe – sie beschreiben unterschiedliche Übergänge.  
 
@@ -95,7 +95,7 @@ Sondertarife werden aktiv über Vergleichsportale und Werbung verkauft. Das erze
 
 Ein Vergleich mit deinen echten Verbrauchswerten zeigt, ob die Grundversorgung in deinem Netzgebiet günstiger ist. Die Verbraucherzentrale erklärt das Vorgehen in ihrem Ratgeber [So finden Sie den passenden Strom‑ oder Gastarif](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436).  
 
-## Kündigen aus dem Grundversorgungstarif
+### Kündigen aus dem Grundversorgungstarif
 
 Hier liegt der eigentliche Vorteil: kurze Fristen verhindern, dass du in einer teuren Falle steckst.
 Die Bundesnetzagentur nennt die konkreten Fristen und Formvorschriften im [Verbraucherportal zu Kündigung und Lieferantenwechsel](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html).  
@@ -122,7 +122,7 @@ Der Hebel wächst mit dem Verbrauch, und der Grundpreis kann den Vergleich versc
 | 3.000 kWh | 1.260 € | 960 € | 300 € |
 | 1.500 kWh | 630 € | 480 € | 150 € |
 
-## Der Ausweg in drei Schritten
+### Der Ausweg in drei Schritten
 
 1. **Verbrauch notieren.** [Zählerstand ablesen](../../posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/) und den Jahresverbrauch aus der letzten Abrechnung übernehmen.
 2. **Sondertarife vergleichen.** Achte auf Laufzeit, [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), Preisgarantie und Bonusbedingungen. Ein Neukundenbonus verzerrt den ersten Jahresvergleich.
@@ -150,13 +150,13 @@ Zwei Situationen tauchen in Beschwerden immer wieder auf.
 
 Eine einfache Vorkehrung: Fotografiere bei der Schlüsselübergabe den Zählerstand und notiere Tag und Uhrzeit. Diese Notiz schützt dich später, wenn die Zuordnung strittig wird. Siehe dazu unseren Beitrag [Sicher heizen – so schützt dich eine Preisgarantie (Gas)](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/).  
 
-## Wann die Grundversorgung trotzdem sinnvoll ist
+### Wann die Grundversorgung trotzdem sinnvoll ist
 
 Manche Situationen rechtfertigen die Grundversorgung. Wer nur wenige Monate eine Zwischenlösung braucht, profitiert von den kurzen Fristen. Ein Sondervertrag mit langer Laufzeit lohnt sich dort nicht.  
 
 Kurzfristige Umzüge oder Haushalte in Auflösung zählen ebenfalls dazu. Entscheide bewusst, damit die Grundversorgung nicht unbeabsichtigt bleibt.  
 
-## Was du beim Vergleich richtig einstellst
+### Was du beim Vergleich richtig einstellst
 
 Vier Angaben bestimmen das Ergebnis eines Tarifvergleichs.  
 

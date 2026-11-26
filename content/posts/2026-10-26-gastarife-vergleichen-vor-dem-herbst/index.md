@@ -127,7 +127,7 @@ Die Grundversorgung ist nicht grundsätzlich schlecht. Sie kann aber teurer sein
 
 Wenn dein Anbieter nicht mehr liefert, greift die Ersatzversorgung. Sie sichert die Belieferung, ist aber meist teurer. Ein schneller Wechsel verkürzt diese Phase.
 
-## Wenn der Anbieter nicht reagiert
+### Wenn der Anbieter nicht reagiert
 
 Die Behörde bietet ein Beschwerde- und Schlichtungsverfahren. Das hilft bei Streit über einen neuen Preis, eine Abrechnung oder einen Wechsel. Schreibe den Anbieter zuerst an und setze ihm eine Frist. Bleibt eine Antwort aus, kannst du dich an die Schlichtungsstelle wenden.
 

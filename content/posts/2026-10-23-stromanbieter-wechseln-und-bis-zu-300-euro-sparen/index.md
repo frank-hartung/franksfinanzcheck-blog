@@ -130,7 +130,7 @@ Prüfe zwei Termine: das Ende der Bindung und das Ende der Garantie. Danach gilt
 
 Vorsicht bei Vorkasse. Die Behörde warnt, dass Vorauszahlungen bei einer Insolvenz des Anbieters verloren gehen können (Q1). Die Versorgung ist über die Ersatzversorgung gesichert, dein vorausgezahltes Geld nicht.
 
-## Häufige Fehler beim Wechsel
+### Häufige Fehler beim Wechsel
 
 - Nur den Arbeitspreis vergleichen und den Grundpreis übersehen.
 - Den Bonus als dauerhaften Rabatt behandeln.

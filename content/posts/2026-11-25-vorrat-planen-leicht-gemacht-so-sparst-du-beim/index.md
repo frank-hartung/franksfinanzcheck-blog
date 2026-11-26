@@ -123,7 +123,7 @@ Passe deinen Plan an bevorstehende Termine oder Reisen an.
 Kaufe frische Lebensmittel nur für die verbleibenden Tage bis zur Abfahrt.  
 Ein Vorrat, der zu deinem Kalender passt, schont deine Nerven und dein Konto.  
 
-## So gehst du vor
+### So gehst du vor
 
 1. Sichte deine Bestände in Kühlschrank, Gefrierfach und Vorratskammer lückenlos.
 2. Erstelle einen Mahlzeitenplan aus den Zutaten mit nahendem Ablaufdatum.
@@ -138,12 +138,12 @@ Ein Vorrat, der zu deinem Kalender passt, schont deine Nerven und dein Konto.
 
 ## Fazit: Vorrat planen – Wann lohnt sich ein größerer Einkauf
 
-Der Hebel bei **Vorrat planen: Wann lohnt sich ein größerer Einkauf?** sitzt nicht im Verzicht, sondern im Nachrechnen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Vorrat planen: Wann lohnt sich ein größerer Einkauf?** sitzt nicht im Verzicht, sondern im Nachrechnen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – ein kurzer Abgleich reicht.
 
 ## Häufige Fragen
 
 ### Wie starte ich am besten mit dem Sparen im Alltag?
-Der erste Schritt ist immer eine lückenlose Übersicht deiner Ausgaben. Führe für mindestens zwei bis drei Monate ein Haushaltsbuch, um versteckte Kostenfresser wie Abos, tägliche Snacks und unnötige Verträge sofort zu entlarven.
+Der erste Schritt ist immer eine lückenlose Übersicht deiner Ausgaben. Führe über einen längeren Zeitraum konsequent ein Haushaltsbuch, um versteckte Kostenfresser wie Abos, tägliche Snacks und unnötige Verträge sofort zu entlarven.
 
 ### Wie viel Geld sollte ich als Notgroschen aufbauen?
 Als eiserne Reserve gelten 3 bis 6 Monatsausgaben. Dieses Geld gehört auf ein gut verzinstes, täglich verfügbares Tagesgeldkonto, um bei unvorhergesehenen Notfällen (Autoreparatur, kaputte Waschmaschine) sofort handlungsfähig zu sein.

@@ -350,11 +350,12 @@ HEALER_CHAIN = [
     # erst erzeugt (schneller, kein Cover-Churn, keine KI-/Render-Kosten).
     ("generate_covers.py", ["--slug", "{slug}"], "slug"),
     # --- Phase 3 (Sofort-Optimierung) ---
-    # WF-54C4/#583: Ein Reserve-Artikel darf nicht erst beim Deploy auffallen,
-    # wenn seine Erstrecherche fehlt. Der echte Rechercheweg läuft
-    # datei-bezirkelt; ohne belastbaren Beleg bleibt der Kandidat Entwurf und
-    # die Zertifizierung meldet den konkreten Grund.
-    ("faktenfrische.py", ["--apply"], "file"),
+    # WF-54C4/#583 & #1230: Ein Reserve-Artikel darf nicht erst beim Deploy
+    # auffallen, wenn seine Erstrecherche fehlt. Die Reserve-Kette selbst darf
+    # den Entwurf vor der anschließenden Neuzertifizierung beschreiben
+    # (`--erlaube-reserve`, nur im `--file`-Einzelpfad erlaubt); der reguläre
+    # Korpus-Lauf von faktenfrische.py schützt Reserve-Entwürfe weiterhin (#900).
+    ("faktenfrische.py", ["--apply", "--erlaube-reserve"], "file"),
     ("meta_optimizer.py", ["--fix", "--ai"], "file"),
     ("check_titles.py", ["--fix"]),
     # Cover-Referenzen prüfen/heilen. Läuft korpusweit (er hält sich an die

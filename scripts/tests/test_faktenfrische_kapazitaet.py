@@ -1353,8 +1353,8 @@ class AusfallToleranzTest(unittest.TestCase):
 
     def test_sieben_tage_ausfall_ist_mit_sockel_5_und_vorlauf_14_tragbar(self):
         cfg = ff.lade_config()
-        self.assertEqual(int(cfg["budget"]["max_artikel_pro_lauf"]), 10,
-                         "Gemessene Betriebsuntergrenze: Sockel 10 (18.11.2026)")
+        self.assertEqual(int(cfg["budget"]["max_artikel_pro_lauf"]), 11,
+                         "Gemessene Betriebsuntergrenze: Sockel 11 (26.11.2026, #1376)")
         self.assertEqual(int(cfg["planung"]["vorlauf_tage"]), 14,
                          "Der Vorlauf trägt die 7-Tage-Toleranz")
         for start in (3, 10, 20):

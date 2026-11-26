@@ -233,6 +233,45 @@ class BelegpflichtTest(unittest.TestCase):
         fehler = faktenfrische.queue_invariante(q)
         self.assertTrue(any("`befund` ist gesetzt" in f for f in fehler), fehler)
 
+    def test_redating_projektion_im_ledger_ist_gueltiger_beleg(self):
+        """#1380: Top-Level `fachbefunde` bewahrt den Ursprungs-Slug, während
+        `uebersicht.fachbefunde` den Befund auf den umbenannten Slug projiziert.
+        Die Invariante akzeptiert den projizierten Slug genau dann, wenn
+        `(id, ursprungs_slug)` im Top-Level-Ledger existiert."""
+        qd = faktenfrische.queue_daten_bauen(
+            uebersicht={"fachbefunde": [{
+                "id": "a" * 20,
+                "slug": "2026-11-22-strompreis-herbst-check",
+                "ursprungs_slug": "2026-11-09-strompreis-herbst-check",
+                "typ": "luecke",
+            }]},
+            fachbefunde=[{
+                "id": "a" * 20,
+                "slug": "2026-11-09-strompreis-herbst-check",
+                "typ": "luecke",
+            }],
+            kapazitaet={}, abbrueche=[],
+            arbeitsvorrat=[{
+                "slug": "2026-11-22-strompreis-herbst-check",
+                "titel": "Strompreis", "grund": "frisch", "faellig": False,
+                "frist": "2026-12-22", "geo": 80,
+                "befund": True, "unvollstaendig": True,
+            }],
+            erzeugt="2026-11-26 10:00 UTC", laeufe=[])
+        self.assertEqual(faktenfrische.queue_invariante(qd), [])
+
+        # Gegenprobe: Gefälschte Projektion mit fremder ID darf nicht durchgehen.
+        gefaelscht = json.loads(json.dumps(qd))
+        gefaelscht["uebersicht"]["fachbefunde"][0]["id"] = "f" * 20
+        fehler = faktenfrische.queue_invariante(gefaelscht)
+        self.assertTrue(any("`befund` ist gesetzt" in f for f in fehler), fehler)
+
+        # Gegenprobe: Projektion mit nicht passendem Ursprungs-Slug darf nicht durchgehen.
+        falscher_ursprung = json.loads(json.dumps(qd))
+        falscher_ursprung["uebersicht"]["fachbefunde"][0]["ursprungs_slug"] = "anderer-slug"
+        fehler2 = faktenfrische.queue_invariante(falscher_ursprung)
+        self.assertTrue(any("`befund` ist gesetzt" in f for f in fehler2), fehler2)
+
     def test_unvollstaendig_ohne_beleg_ist_ein_widerspruch(self):
         q = bauen()
         q["offen"][0]["unvollstaendig"] = True  # weder Abbruch noch Befund

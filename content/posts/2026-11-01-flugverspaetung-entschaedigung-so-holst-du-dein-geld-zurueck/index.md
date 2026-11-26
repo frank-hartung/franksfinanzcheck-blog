@@ -223,7 +223,7 @@ Prüfe diesen Weg, wenn du keine Provision an ein Portal zahlen willst. Welche S
 
 Er schützt deine Interessen als kleiner Bürger gegen große Konzerne. Es passt perfekt zum Ziel, Kosten zu kontrollieren. Du investierst Zeit statt Geld. Am Ende steht oft eine faire Lösung.
 
-## Checkliste für den Ernstfall
+### Checkliste für den Ernstfall
 
 Damit du nichts vergisst, hilft eine Liste. Drucke sie aus oder speichere sie auf dem Handy. So bleibst du ruhig, wenn es am Gate hektisch wird.
 

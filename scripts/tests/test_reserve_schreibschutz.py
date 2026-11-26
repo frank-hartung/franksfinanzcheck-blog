@@ -301,6 +301,44 @@ class VertragTest(unittest.TestCase):
                 self.assertIn("reserve_schreibschutz", quelle)
                 self.assertIn("ist_bytegebunden", quelle)
 
+    def test_faktenfrische_schuetzt_korpus_und_erlaubt_nur_reserve_kette(self):
+        """#1230: Korpus-Lauf lässt bytegebundene Entwürfe unangetastet;
+        nur `reserve_finisher.py` mit `--file --erlaube-reserve` darf die
+        Erstrecherche vor der Neuzertifizierung ausführen."""
+        import faktenfrische as ff
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pfad = Path(tmp) / "index.md"
+            pfad.write_text(RESERVE_ENTWURF, encoding="utf-8")
+            art = {
+                "slug": "2026-11-25-probe",
+                "titel": "Probe",
+                "pfad": str(pfad),
+                "bereich": "posts",
+                "_faellig": {"faellig": True, "grund": "Erstrecherche", "frist": None},
+                "_geo": {"prozent": 50, "offen": []},
+            }
+            # 1) Default (Korpus-Lauf): bytegebunden bleibt unangetastet (#900).
+            eintrag, offen = ff.verarbeite_seite(art, {}, trocken=True, schreiben=False)
+            self.assertFalse(offen)
+            self.assertIn("übersprungen", eintrag["fachpruefung"])
+
+            # 2) Reserve-Kette (`erlaube_reserve=True`): Recherche wird ausgeführt.
+            with patch.object(ff, "recherchiere", return_value={"treffer": [], "fehler": []}) as r_mock, \
+                 patch.object(ff, "claude_fachpruefung", return_value=([], [], "offline")), \
+                 patch.object(ff, "dossier_schreiben"):
+                eintrag2, _ = ff.verarbeite_seite(
+                    art, {}, trocken=True, schreiben=False, erlaube_reserve=True
+                )
+            r_mock.assert_called_once()
+            self.assertNotIn("übersprungen", eintrag2["fachpruefung"])
+
+            # 3) CLI: `--erlaube-reserve` ohne `--file` ist unzulässig (fail-closed).
+            with patch.object(ff.sys, "argv", ["faktenfrische.py", "--erlaube-reserve"]):
+                with self.assertRaises(SystemExit) as cm:
+                    ff.main()
+            self.assertEqual(cm.exception.code, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

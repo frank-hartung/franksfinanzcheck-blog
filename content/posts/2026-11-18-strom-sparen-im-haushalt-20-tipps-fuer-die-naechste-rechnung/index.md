@@ -70,7 +70,7 @@ Geräte, die jeden Tag laufen, bringen den größten Hebel. Kleine Schritte im A
 > **Rechenbeispiel:**
 > Dein TV läuft drei Stunden am Tag. Im Standby zieht er 1 W rund um die Uhr. Das sind rund 9 kWh im Jahr. Schaltest du ihn ganz aus, sparst du diese 9 kWh – also etwa 2,70 € bei 30 Cent pro kWh. Ein kleiner Schritt, der bei vielen Geräten rasch wächst.
 
-## Licht klug nutzen
+### Licht klug nutzen
 
 Gutes Licht macht Räume warm und hell, kostet aber oft zu viel. Moderne LED-Lampen brauchen wenig Strom und halten sehr lange. Mit fünf kleinen Schritten drückst du die Kosten fürs Licht.
 
@@ -85,7 +85,7 @@ Gutes Licht macht Räume warm und hell, kostet aber oft zu viel. Moderne LED-Lam
 > **Rechenbeispiel:**
 > Tausche 20 alte Birnen (60 W) gegen LED (10 W). Jede Lampe spart 50 W. Bei vier Stunden Licht am Tag sinkt der Bedarf von 1 752 kWh auf 292 kWh im Jahr. Du sparst 1 460 kWh, also rund 438 € bei 30 Cent pro kWh.
 
-## Heizung und Warmwasser: Strom sparen ohne Komfortverlust
+### Heizung und Warmwasser: Strom sparen ohne Komfortverlust
 
 Warmes Wasser mit Strom kostet im Jahr oft besonders viel. Schon einfache Kniffe senken den Bedarf spürbar, ohne dass du frieren musst.
 
@@ -100,7 +100,7 @@ Warmes Wasser mit Strom kostet im Jahr oft besonders viel. Schon einfache Kniffe
 > **Rechenbeispiel:**
 > Dein Gerät zieht 2 kW und läuft eine Stunde am Tag. Im Jahr sind das 730 kWh. Mit halber Zeit (30 Minuten) sinkt der Bedarf auf 365 kWh. Bei 30 Cent pro kWh sparst du rund 109,50 € im Jahr.
 
-## Stromtarif prüfen und fair wechseln
+### Stromtarif prüfen und fair wechseln
 
 Ein teurer Tarif frisst viele kleine Sparerfolge wieder auf. Prüfe deinen Preis am besten im Herbst vor dem Winter. Diese fünf Punkte zählen beim Vergleich.
 

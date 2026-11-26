@@ -189,7 +189,7 @@ Wenn ein Anbieter die Vorgabe aus deiner Sicht missachtet, halte den Ablauf fest
 
 Ein Screenshot kann helfen, den Weg zu erklären.
 
-## So gehst du Schritt für Schritt vor
+### So gehst du Schritt für Schritt vor
 
 1. Öffne Rechnung, Vertragsübersicht und Kundenkonto.
 

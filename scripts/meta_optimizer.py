@@ -80,8 +80,20 @@ def load_articles(files=None):
             continue
 
         def get(key, _fm=fm):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
+            m = re.search(rf"^{key}:[ \t]*[\"']?(.+?)[\"']?[ \t]*$", _fm, re.M)
             return m.group(1).strip() if m else ""
+
+        def get_keywords(_fm=fm):
+            inline = get("keywords", _fm)
+            if inline:
+                return inline
+            # YAML-Blockliste (#1384): `keywords:\n- Wert 1\n- Wert 2`
+            m = re.search(r"^keywords:[ \t]*\n((?:^[ \t]*-[ \t]+.+\n?)+)", _fm, re.M)
+            if not m:
+                return ""
+            items = [re.sub(r"^[ \t]*-[ \t]+", "", z).strip().strip('"\'')
+                     for z in m.group(1).splitlines() if z.strip()]
+            return "[" + ", ".join(f'"{it}"' for it in items) + "]"
 
         anrede_raw = get("anrede").strip('"').lower()
         arts.append({
@@ -89,8 +101,8 @@ def load_articles(files=None):
             "slug": slug_of(path),
             "title": get("title"),
             "description": get("description"),
-            "keywords": get("keywords"),
-            "cover": get("cover"),
+            "keywords": get_keywords(),
+            "cover": get("cover") or ("image:" if re.search(r"^cover:[ \t]*\n[ \t]+image:", fm, re.M) else ""),
             "fm": fm,
             "body": body,
             "path": path,

@@ -1513,7 +1513,8 @@ def lauf_eintrag(art: dict, fassung: dict, dossier: dict, quellen: list[dict],
 
 
 def verarbeite_seite(art: dict, cfg: dict, *, trocken: bool = False,
-                     schreiben: bool = False) -> tuple[dict, bool]:
+                     schreiben: bool = False,
+                     erlaube_reserve: bool = False) -> tuple[dict, bool]:
     """Eine Seite prüfen, schreiben, bilanzieren: (Lauf-Eintrag, bleibt_offen).
 
     Eine Seite ist eine Einheit. Wirft sie, fängt `main()` den Fehler und
@@ -1527,15 +1528,20 @@ def verarbeite_seite(art: dict, cfg: dict, *, trocken: bool = False,
     Reife-Zertifikat `data/reserve-readiness.json` auf Bytes, die es nicht
     mehr gab – der Nachweis war ungültig, ohne dass eine Zeile fehlschlug.
     Genau die Fehlklasse, gegen die `reserve_schreibschutz` gebaut wurde:
-    drei Heiler fragen den Schutz, dieser fragte ihn nicht. Ein Entwurf, der
-    auf seine Veröffentlichung wartet, ist kein Faktenfrische-Kandidat: Er
-    wird gemeldet und übersprungen, nie geschrieben.
+    drei Heiler fragen den Schutz, dieser fragte ihn nicht. Im Korpus-Lauf
+    bleibt jeder bytegebundene Reserve-Entwurf unangetastet (`erlaube_reserve=False`).
+
+    AUSNAHME NUR FÜR DIE RESERVE-KETTE SELBST (#1230, reserve_schreibschutz.py):
+    Ruft `reserve_finisher.py` gezielt eine einzelne Datei mit
+    `--file <pfad> --erlaube-reserve` auf, ist die Erstrecherche erlaubt, weil
+    die Reserve-Kette unmittelbar danach neu zertifiziert. Ohne diese Weiche
+    hingen neue Reserve-Entwürfe ohne `faktencheck`/`quellen` im Deadlock.
     """
     try:
         roh = Path(art["pfad"]).read_text(encoding="utf-8")
     except (KeyError, OSError):
         roh = ""
-    if schutz.ist_bytegebunden(roh):
+    if not erlaube_reserve and schutz.ist_bytegebunden(roh):
         print(f"\n▸ {art['titel'][:70]}\n  Fälligkeit: {art['_faellig']['grund']}")
         print("  ⏸ " + schutz.schutzvermerk(art["slug"], "faktenfrische.py"))
         return (lauf_eintrag(
@@ -1811,6 +1817,38 @@ def selftest() -> int:
                                else e for e in qd["offen"]]}
     pruefe("ST9k", any("Befunddaten" in f
                        for f in queue_invariante(kaputt3)), True)
+    # Re-Dating-Vertrag (#1380): Ein Befund im Top-Level-Ledger behält seinen
+    # Ursprungs-Slug (Provenienz für historische Entscheidungen), während
+    # `uebersicht.fachbefunde` ihn über `faktenfrische_aliases` auf den
+    # heutigen Slug projiziert. Nur eine durch `(id, ursprungs_slug)` im
+    # Top-Level-Ledger gedeckte Projektion legitimiert den neuen Slug.
+    qd_alias = queue_daten_bauen(
+        uebersicht={"fachbefunde": [{
+            "id": "d" * 20,
+            "slug": "2026-11-22-strompreis",
+            "ursprungs_slug": "2026-11-09-strompreis",
+            "typ": "luecke",
+        }]},
+        fachbefunde=[{"id": "d" * 20, "slug": "2026-11-09-strompreis",
+                      "typ": "luecke"}],
+        kapazitaet={}, abbrueche=[],
+        arbeitsvorrat=[{
+            "slug": "2026-11-22-strompreis", "titel": "Strompreis",
+            "grund": "frisch", "faellig": False, "frist": "2026-12-22",
+            "geo": 80, "befund": True, "unvollstaendig": False,
+        }],
+        laeufe=[], erzeugt="2026-11-26 10:00 UTC")
+    pruefe("ST9l", queue_invariante(qd_alias), [])
+    kaputt4 = {
+        **qd_alias,
+        "uebersicht": {"fachbefunde": [{
+            "id": "e" * 20,  # fremde ID – im Top-Level-Ledger nicht vorhanden
+            "slug": "2026-11-22-strompreis",
+            "ursprungs_slug": "2026-11-09-strompreis",
+            "typ": "luecke",
+        }]},
+    }
+    pruefe("ST9m", bool(queue_invariante(kaputt4)), True)
 
     if fehler:
         print("🛑 Selbsttest FAKTENFRISCHE rot:")
@@ -1954,10 +1992,31 @@ def queue_invariante(daten: dict) -> list[str]:
 
     # Befund-Einträge müssen im Ledger belegt sein – ein gesetztes `befund`
     # ohne Eintrag wäre eine Behauptung, keine Messung.
+    # Top-Level `fachbefunde` bewahrt den Ursprungs-Slug (Provenienz für
+    # historische Entscheidungen); `uebersicht.fachbefunde` enthält die über
+    # `faktenfrische_aliases` auf den heutigen Slug projizierten offenen
+    # Befunde (#1380). Ein projizierter Slug zählt nur dann als belegt, wenn
+    # derselbe Befund (`id` UND `ursprungs_slug == top.slug`) tatsächlich im
+    # Top-Level-Ledger steht – kein erfundenes Flag ohne Ledger-Beleg.
     befund_slugs = {b.get("slug") for b in daten["fachbefunde"]
                     if isinstance(b, dict)}
     befund_slugs |= {b.get("ursprungs_slug") for b in daten["fachbefunde"]
                      if isinstance(b, dict)}
+    top_belege = {
+        (b.get("id"), b.get("slug"))
+        for b in daten["fachbefunde"]
+        if isinstance(b, dict) and b.get("id") and b.get("slug")
+    }
+    uebersicht_obj = daten.get("uebersicht")
+    if isinstance(uebersicht_obj, dict):
+        for proj in uebersicht_obj.get("fachbefunde") or []:
+            if not isinstance(proj, dict):
+                continue
+            p_slug = proj.get("slug")
+            p_ursprung = proj.get("ursprungs_slug")
+            p_id = proj.get("id")
+            if p_slug and p_ursprung and (p_id, p_ursprung) in top_belege:
+                befund_slugs.add(p_slug)
     # Ein Abbruch ist ebenfalls ein Beleg – er steht in `abbrueche` mit dem
     # Slug der Seite. Ohne ihn ist `unvollstaendig` eine unbelegte Behauptung
     # (siehe die Prüfungen unten).
@@ -2184,6 +2243,25 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
         neu["status"] = queue_status_von(neu)
         return neu
 
+    uebersicht_alt = alt.get("uebersicht") or {}
+    uebersicht_eff = uebersicht_alt
+    if isinstance(uebersicht_alt, dict):
+        top_slugs = {b.get("slug") for b in fachbefunde if isinstance(b, dict)}
+        vorhandene_proj = {
+            (b.get("id"), b.get("slug"))
+            for b in (uebersicht_alt.get("fachbefunde") or [])
+            if isinstance(b, dict)
+        }
+        braucht_proj = any(
+            b.get("slug") not in top_slugs
+            and b.get("ursprungs_slug") in top_slugs
+            and (b.get("id"), b.get("slug")) not in vorhandene_proj
+            for b in offene
+            if isinstance(b, dict)
+        )
+        if braucht_proj:
+            uebersicht_eff = dict(uebersicht_alt, fachbefunde=offene)
+
     # VORABPRÜFUNG AM ABGELEITETEN DATENSATZ (17.11.2026)
     # ---------------------------------------------------
     # Zwei Dinge waren bisher falsch: Die Vorabprüfung verweigerte eine
@@ -2217,13 +2295,13 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
             # eine Seite lag mit abgeleitetem Status `unvollstaendig` in
             # `vorlauf`, weil das Flag geerbt und nie neu geprüft wurde.
             probe = dict(
-                alt, arbeitsvorrat=vorrat_neu,
+                alt, uebersicht=uebersicht_eff, arbeitsvorrat=vorrat_neu,
                 offen=[e for e in vorrat_neu
                        if e["status"] in QUEUE_STATUS_ARBEIT],
                 vorlauf=[e for e in vorrat_neu if e["status"] == "vorlauf"])
         else:
             probe = dict(
-                alt, arbeitsvorrat=vorrat_neu,
+                alt, uebersicht=uebersicht_eff, arbeitsvorrat=vorrat_neu,
                 offen=[_fakten_neu(e) for e in alt.get("offen") or []],
                 vorlauf=[_fakten_neu(e) for e in alt.get("vorlauf") or []])
         probleme = queue_invariante(probe)
@@ -2240,7 +2318,7 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
 
     try:
         neu = queue_daten_bauen(
-            uebersicht=alt.get("uebersicht") or {},
+            uebersicht=uebersicht_eff,
             fachbefunde=fachbefunde,
             kapazitaet=alt.get("kapazitaet") or {},
             abbrueche=abbrueche,
@@ -2291,6 +2369,10 @@ def main() -> int:
     p.add_argument("--neu", action="store_true",
                    help="nur Artikel ohne `faktencheck` (Content-Erstellung)")
     p.add_argument("--file", help="genau diesen Artikel prüfen (Pfad zur index.md)")
+    p.add_argument("--erlaube-reserve", action="store_true",
+                   help="nur zusammen mit --file: erlaubt der Reserve-Kette "
+                        "(reserve_finisher.py), einen Reserve-Entwurf vor der "
+                        "Neuzertifizierung zu prüfen (#1230)")
     p.add_argument("--max", type=int, help="Budget je Lauf überschreiben")
     p.add_argument("--scope", choices=("alle", "posts", "pillar"), default="alle",
                    help="Bereich: posts = Blogartikel, pillar = Ratgeberseiten, "
@@ -2324,6 +2406,8 @@ def main() -> int:
         return 0
     if args.max is not None and args.max < 1:
         p.error("--max muss mindestens 1 sein")
+    if args.erlaube_reserve and not args.file:
+        p.error("--erlaube-reserve ist nur zusammen mit --file zulässig")
 
     # Sabotage-Schutz: kein Schreibvorgang ohne grünen Selbsttest.
     if args.apply and selftest() != 0:
@@ -2403,7 +2487,8 @@ def main() -> int:
         # ihnen die Befunde der Seiten, die längst geschrieben waren.
         try:
             eintrag, offen = verarbeite_seite(
-                art, cfg, trocken=args.offline, schreiben=args.apply)
+                art, cfg, trocken=args.offline, schreiben=args.apply,
+                erlaube_reserve=bool(args.erlaube_reserve and args.file))
         except Exception as exc:  # noqa: BLE001 – Beweise überleben den Fehler
             fehler = f"{type(exc).__name__}: {exc}"
             abbrueche.append({"slug": art.get("slug") or "?", "fehler": fehler})

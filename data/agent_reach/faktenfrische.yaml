@@ -45,7 +45,12 @@ budget:
   # `max_artikel_pro_lauf`-Zeile doppelt in der Datei (Rest eines
   # Heil-Laufs, #1021). PyYAML nimmt still den letzten Wert – der
   # Artefakt-Wächter hat den Doppel-Schlüssel gefunden.
-  max_artikel_pro_lauf: 10      # Sockel = Untergrenze; Automatik hebt bis zum Limit
+  max_artikel_pro_lauf: 11      # Sockel = Untergrenze; Automatik hebt bis zum Limit
+  # NACHMESSUNG 26.11.2026 (#1376, 150 Artikel im Bestand): Bei Sockel 10
+  # reißt der 7-Tage-Ausfall ab Tag 3 drei Saison-Fristen (30-Tage-Intervall
+  # ab 03.11. → 05.12.); Sockel 11 ist die kleinste gemessene Untergrenze mit
+  # 0 Verletzungen auf allen Starttagen (3, 10 und 20). Fachintervalle und
+  # Prüfkriterien bleiben unverändert.
   # 02.11.2026 (#912): 112 Seiten benötigen 3,01 Prüfungen/Tag bei
   # 110 % Mindestdeckung – Sockel 3 → 4. 04.11.2026 (#1039): 4 → 12.
   # 06.11.2026 (#1107): Die Bündel-Begründung von #1039 war ein MESSFEHLER

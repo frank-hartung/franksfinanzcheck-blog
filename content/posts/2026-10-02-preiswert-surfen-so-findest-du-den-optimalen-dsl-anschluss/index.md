@@ -131,7 +131,7 @@ Erhöht dein alter Anbieter den Preis, darfst du sofort kündigen. Das gilt auch
 
 Der zweite Hebel ist dein Router. Du musst kein Gerät mieten, sondern darfst ein eigenes anschließen. Einmal gekauft, sparst du jeden Monat die Miete.
 
-## Wie du deine Fixkosten mit dem 4K‑Prüfpfad prüfst
+### Wie du deine Fixkosten mit dem 4K‑Prüfpfad prüfst
 
 Der 4K‑Prüfpfad ist das Herz meines Fixkosten‑Kompasses. Er bringt Ordnung in deinen Vertrag:
 
@@ -185,7 +185,7 @@ Bleibt der Anschluss auch per Kabel langsam, miss das Tempo an mehreren Tagen. L
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**DSL-Tarif prüfen & sparen**](/go/dsl/)
 
 
-## Schritt‑für‑Schritt zum günstigen Anschluss
+### Schritt‑für‑Schritt zum günstigen Anschluss
 
 So gehst du vor:  
 

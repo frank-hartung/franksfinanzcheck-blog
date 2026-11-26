@@ -71,15 +71,15 @@ except Exception:
     def ROUTE_SNIFFER(text, pillar="", title=""):
         return "allgemein"
 
-# --- FAQ-POOL PRO AFFILIATE-ROUTE (100% redaktionelle Qualität) ---
+# --- FAQ-POOL PRO AFFILIATE-ROUTE (100% redaktionelle Qualität, RS5-konform) ---
 FAQ_POOL = {
     "girokonto": [
         ("Welche C24 Bank Angebote lohnen sich wirklich?",
          "Die C24 Bank bietet ein absolut erstklassiges, dauerhaft kostenloses Girokonto mit hervorragenden Konditionen, einer intuitiven App und einer echten Mastercard. **Jetzt C24 Bank Angebote vergleichen** ist der einfachste Weg, um lästige Kontoführungsgebühren für immer aus deinem Alltag zu verbannen."),
         ("Ist ein Kontowechsel nicht furchtbar kompliziert?",
-         "Nein, überhaupt nicht! Dank des gesetzlichen Kontowechselservice erledigt die neue Bank den gesamten Papierkram für dich vollautomatisch innerhalb von 10 Minuten. Alle Lastschriften und Daueraufträge werden sicher übertragen, ohne dass du Verträge manuell umschreiben musst."),
+         "Nein, überhaupt nicht! Dank des gesetzlichen Kontowechselservice erledigt die neue Bank den gesamten Papierkram für dich vollautomatisch und ohne großen Zeitaufwand. Alle Lastschriften und Daueraufträge werden sicher übertragen, ohne dass du Verträge manuell umschreiben musst."),
         ("Wie sicher ist mein Geld bei der C24 Bank?",
-         "Dein Guthaben ist über die gesetzliche deutsche Einlagensicherung bis zu 100.000 € pro Kunde vollkommen abgesichert. Zudem profitierst du von der lizenzierten Regulierung durch die Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin).")
+         "Dein Guthaben ist im Rahmen der gesetzlichen deutschen Einlagensicherung geschützt. Zudem profitierst du von der lizenzierten Regulierung durch die Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin).")
     ],
     "tagesgeld": [
         ("Wie finde ich die besten Tagesgeld-Zinsen?",
@@ -95,13 +95,13 @@ FAQ_POOL = {
         ("Was passiert beim Wechsel, stehe ich plötzlich im Dunkeln?",
          "Nein, das ist gesetzlich absolut ausgeschlossen. Die lückenlose Stromversorgung ist durch den örtlichen Grundversorger jederzeit garantiert. Der Wechsel ist ein reiner, geräuschloser Verwaltungsakt."),
         ("Worauf muss ich bei den Vertragslaufzeiten achten?",
-         "Wähle am besten Tarife mit einer maximalen Laufzeit von 12 Monaten und einer kurzen Kündigungsfrist von einem Monat. Vermeide lange Vorkasse-Modelle oder Paket-Tarife, um flexibel auf Preisänderungen reagieren zu können.")
+         "Wähle am besten Tarife mit überschaubarer Erstvertragslaufzeit und kurzer Kündigungsfrist. Vermeide lange Vorkasse-Modelle oder Paket-Tarife, um flexibel auf Preisänderungen reagieren zu können.")
     ],
     "gas": [
         ("Wann ist der beste Zeitpunkt für einen Gastarif-Vergleich?",
          "Am besten vergleichst du deine Konditionen im Spätsommer oder frühen Herbst vor Beginn der Heizperiode. So sicherst du dir die besten Preise und gehst entspannt in die kalte Jahreszeit."),
         ("Was ist eine Preisgarantie und wie lange sollte sie laufen?",
-         "Eine Preisgarantie schützt dich vor unvorhergesehenen Preiserhöhungen des Anbieters. Sie sollte idealerweise die gesamte Erstvertragslaufzeit (meist 12 Monate) abdecken, um maximale Planungssicherheit zu bieten."),
+         "Eine Preisgarantie schützt dich vor unvorhergesehenen Preiserhöhungen des Anbieters. Sie sollte idealerweise die gesamte vereinbarte Erstvertragslaufzeit abdecken, um maximale Planungssicherheit zu bieten."),
         ("Wie läuft der Wechsel des Gasanbieters ab?",
          "Der Wechsel ist kinderleicht: Du suchst dir online einen günstigen Tarif aus, füllst den Antrag aus und der neue Anbieter übernimmt die Kündigung beim alten Versorger vollautomatisch für dich.")
     ],
@@ -109,7 +109,7 @@ FAQ_POOL = {
         ("Wie sichere ich mir den besten DSL-Wechselbonus?",
          "Die besten DSL-Wechselboni und Cashbacks gibt es beim Online-Vergleich. Indem du deinen alten Vertrag kündigst und über ein Vergleichsportal neu abschließt, sparst du oft mehrere hundert Euro im Vergleich zum Verbleib beim Altanbieter."),
         ("Welche Internet-Geschwindigkeit brauche ich wirklich?",
-         "Für Singles und normales Surfen reichen 50 Mbit/s völlig aus. Familien oder WGs mit mehreren Streaming-Geräten und Homeoffice-Nutzung fahren mit 100 bis 250 Mbit/s am besten."),
+         "Für Singles und normales Surfen genügt in der Regel ein solider Einsteigertarif. Familien oder WGs mit mehreren parallelen Streams, Videokonferenzen und Homeoffice profitieren dagegen von leistungsstärkeren Anschlüssen mit hoher Bandbreite."),
         ("Wie lange dauert ein Anbieterwechsel beim Internet?",
          "Der Wechsel dauert meist wenige Wochen. Am Tag der Umschaltung sorgt das gesetzliche Übergangs-Protokoll dafür, dass der Ausfall meist nur wenige Minuten bis maximal einen Tag beträgt.")
     ],
@@ -131,22 +131,22 @@ FAQ_POOL = {
     ],
     "kfz-versicherung": [
         ("Wann kann ich meine KFZ-Versicherung kündigen?",
-         "Der Stichtag für die meisten KFZ-Versicherungen ist der 30. November, da die Verträge meist zum 31. Dezember enden. Bei Preiserhöhungen hast du zudem ein Sonderkündigungsrecht von 4 Wochen."),
+         "Der Stichtag für die meisten KFZ-Versicherungen ist der 30. November, da die Verträge meist zum 31. Dezember enden. Bei Preiserhöhungen hast du zudem ein gesetzliches Sonderkündigungsrecht innerhalb der im Schreiben genannten Frist."),
         ("Wann lohnt sich Teilkasko und wann Vollkasko?",
-         "Vollkasko lohnt sich meist für Neuwagen in den ersten 3 bis 5 Jahren sowie für finanzierte Fahrzeuge. Für ältere Gebrauchtwagen reicht eine Teilkasko oder die reine Haftpflicht oft völlig aus."),
+         "Vollkasko lohnt sich meist für Neuwagen, jüngere Gebrauchtwagen sowie finanzierte Fahrzeuge. Für ältere Gebrauchtwagen reicht eine Teilkasko oder die reine Haftpflicht oft völlig aus."),
         ("Wie beeinflusst die SF-Klasse meinen Beitrag?",
          "Deine Schadenfreiheitsklasse (SF-Klasse) drückt deine unfallfreien Jahre aus. Je höher die Klasse, desto niedriger ist dein Versicherungsbeitrag. Sie lässt sich beim Fahrzeug- oder Versicherungswechsel problemlos mitnehmen.")
     ],
     "handytarife": [
         ("Sollte ich ein Handy mit Vertrag oder ohne kaufen?",
-         "In den meisten Fällen ist der getrennte Kauf (günstiges Smartphone bar kaufen + separater SIM-Only-Tarif) über die Laufzeit von 24 Monaten gerechnet deutlich günstiger als ein teurer Kombi-Vertrag."),
+         "In den meisten Fällen ist der getrennte Kauf (günstiges Smartphone bar kaufen + separater SIM-Only-Tarif) über die gesamte Vertragslaufzeit gerechnet deutlich günstiger als ein teurer Kombi-Vertrag."),
         ("Wie viel Datenvolumen ist im Alltag sinnvoll?",
-         "Für normales Surfen, Social Media und gelegentliches Musik-Streaming reichen 10 bis 15 GB Datenvolumen vollkommen aus. Wer viel unterwegs hochauflösende Videos schaut, sollte Tarife ab 20 GB oder Unlimited wählen."),
+         "Für normales Surfen, Messenger und gelegentliches Musik-Streaming genügt meist ein mittleres Datenpaket. Wer unterwegs häufig hochauflösende Videos schaut oder mobil arbeitet, sollte zu einem großzügigen Datenpaket oder einem Unlimited-Tarif greifen."),
         ("Kann ich meine Handynummer beim Anbieterwechsel mitnehmen?",
          "Ja, die Rufnummernmitnahme ist gesetzlich garantiert und für dich seit Ende 2021 vollkommen kostenlos. Du kannst sie meist direkt im Bestellprozess beim neuen Anbieter beauftragen.")
     ],
     "kreditkarte": [
-        ("What is die beste kostenlose Kreditkarte?",
+        ("Was macht eine gute kostenlose Kreditkarte aus?",
          "Die ideale kostenlose Kreditkarte verlangt keine Jahresgebühr und ermöglicht weltweit kostenfreie Zahlungen sowie Bargeldabhebungen ohne versteckte Fremdwährungsgebühren im Ausland."),
         ("Was ist der Unterschied zwischen Charge-, Credit- und Debitkarte?",
          "Eine Debitkarte bucht Umsätze sofort vom Girokonto ab (wie bei der C24 Bank). Eine Charge-Karte sammelt die Beträge und bucht sie monatlich ab. Eine echte Credit-Karte bietet dir einen echten Kreditrahmen mit Ratenzahlungsoption."),
@@ -159,7 +159,7 @@ FAQ_POOL = {
         ("Was bedeutet die Bonitätsprüfung beim Kredit?",
          "Die Bank prüft vor der Kreditvergabe dein Einkommen und deine SCHUFA-Auskunft, um das Ausfallrisiko einzuschätzen. Ein stabiles Einkommen und ein hoher SCHUFA-Score sichern dir die besten Zinskonditionen."),
         ("Kann ich einen Kredit vorzeitig kostenlos zurückzahlen?",
-         "Ja, gesetzlich darf die Bank bei vorzeitiger Tilgung maximal 1 % des Restbetrags als Vorfälligkeitsentschädigung verlangen (bei weniger als 12 Monaten Restlaufzeit nur 0,5 %). Viele moderne Banken bieten jedoch kostenfreie Sondertilgungen an.")
+         "Ja, bei regulären Verbraucherdarlehen ist die Vorfälligkeitsentschädigung gesetzlich gedeckelt, wobei die genaue Höhe von der Restlaufzeit abhängt. Viele moderne Banken bieten zudem kostenfreie Sondertilgungen an.")
     ],
     "unfallversicherung": [
         ("Wer braucht eine private Unfallversicherung?",
@@ -175,13 +175,13 @@ FAQ_POOL = {
         ("Wie hoch sollte die Deckungssumme sein?",
          "Die Deckungssumme sollte mindestens 10 Millionen Euro betragen, besser sind 50 Millionen Euro. Der Aufpreis für extrem hohe Deckungssummen beträgt meist nur wenige Cent im Jahr."),
         ("Sind meine Familie und Kinder automatisch mitversichert?",
-         "Ehepartner und minderjährige Kinder können problemlos über einen gemeinsamen Familientarif günstig mitversichert werden. Achte darauf, dass deliktunfähige Kinder (unter 7 Jahren, im Straßenverkehr unter 10 Jahren) explizit im Tarif eingeschlossen sind.")
+         "Ehepartner und minderjährige Kinder können problemlos über einen gemeinsamen Familientarif günstig mitversichert werden. Achte darauf, dass auch deliktunfähige Kinder je nach Alter und gesetzlicher Haftungsgrenze explizit im Tarif eingeschlossen sind.")
     ],
     "hausrat": [
         ("Wann lohnt sich eine Hausratversicherung wirklich?",
          "Sie lohnt sich, wenn der Gesamtwert deines Hausrats (Möbel, Kleidung, Elektronik) so hoch ist, dass du ihn im Schadensfall (Brand, Einbruch, Leitungswasser) nicht aus eigener Tasche ersetzen könntest."),
         ("Wie wird die Versicherungssumme richtig ermittelt?",
-         "Um eine Unterversicherung zu vermeiden, vereinbaren die meisten Versicherer eine Pauschale von ca. 650 € pro Quadratmeter Wohnfläche. In diesem Fall verzichtet die Versicherung im Schadensfall auf eine genaue Prüfung des Gesamtwerts."),
+         "Um eine Unterversicherung zu vermeiden, vereinbaren die meisten Versicherer eine feste Quadratmeterpauschale nach Wohnfläche gemäß Tarifbedingungen. In diesem Fall verzichtet die Versicherung im Schadensfall auf eine genaue Prüfung des Gesamtwerts."),
         ("Sind Fahrräder in der Hausratversicherung automatisch geschützt?",
          "Fahrräder sind meist nur bei Einbruchdiebstahl aus dem verschlossenen Keller geschützt. Für Diebstähle auf offener Straße benötigst du eine zusätzliche Fahrrad-Klausel im Vertrag oder eine separate Fahrradversicherung.")
     ],
@@ -191,18 +191,18 @@ FAQ_POOL = {
         ("Was übernimmt die gesetzliche Krankenkasse beim Zahnarzt?",
          "Die gesetzliche Kasse zahlt nur eine Basis-Regelversorgung (z.B. einfache Amalgamfüllungen oder einfache Brücken). Für hochwertige Keramikkronen, Implantate oder professionelle Zahnreinigung zahlst du ohne Zusatzversicherung oft hunderte Euro selbst."),
         ("Worauf muss ich bei den Zahnstaffeln in den ersten Jahren achten?",
-         "Fast alle Tarife begrenzen die Erstattungssumme in den ersten 3 bis 4 Jahren (Zahnstaffel). Achte darauf, einen Tarif mit einer möglichst hohen Anfangs-Zahnstaffel und ohne Begrenzung bei unfallbedingten Behandlungen zu wählen.")
+         "Fast alle Tarife begrenzen die Erstattungssumme in den ersten Versicherungsjahren über eine Zahnstaffel. Achte darauf, einen Tarif mit einer möglichst hohen Anfangs-Zahnstaffel und ohne Begrenzung bei unfallbedingten Behandlungen zu wählen.")
     ],
     "reisekrankenversicherung": [
         ("Reicht die normale gesetzliche Krankenkasse im Ausland nicht aus?",
          "Nein, die gesetzliche Kasse zahlt nur in Ländern mit Sozialversicherungsabkommen (z.B. EU) und dort auch nur nach den oft sehr geringen Sätzen des Reiselandes. Einen medizinisch notwendigen Rücktransport nach Deutschland zahlt die gesetzliche Kasse grundsätzlich nie – diesen musst du komplett selbst tragen."),
         ("Was kostet eine gute Auslandsreisekrankenversicherung?",
-         "Eine hervorragende Jahres-Auslandsreisekrankenversicherung für beliebig viele Reisen bis zu je 8 Wochen Dauer kostet für Singles meist nur 10 bis 15 € im Jahr und ist damit ein absolutes Schnäppchen."),
+         "Eine solide Jahres-Auslandsreisekrankenversicherung deckt beliebig viele Urlaubsreisen innerhalb der vertraglichen Höchstreisedauer ab und zählt im Vergleich zu Behandlungskosten im Ausland meist zu den günstigsten Policen überhaupt."),
         ("Gilt die Versicherung auch für längere Reisen (z.B. Weltreisen)?",
-         "Die Standard-Jahrestarife gelten meist nur für Reisen bis maximal 56 Tage am Stück. Für längere Aufenthalte (Auslandsjahr, Sabbatical) benötigst du eine spezielle Langzeit-Reisekrankenversicherung, die monatlich abgerechnet wird.")
+         "Die Standard-Jahrestarife gelten meist nur für zeitlich begrenzte Einzelreisen gemäß den jeweiligen Versicherungsbedingungen. Für längere Aufenthalte (Auslandsjahr, Sabbatical) benötigst du eine spezielle Langzeit-Reisekrankenversicherung, die flexibel nach Reisedauer abgerechnet wird.")
     ],
     "hunde": [
-        ("What is der Unterschied zwischen OP- und Krankenvollversicherung?",
+        ("Worin liegt der Unterschied zwischen OP- und Krankenvollversicherung?",
          "Die reine OP-Versicherung zahlt nur die Kosten für chirurgische Eingriffe und deren Nachsorge. Die Vollkrankenversicherung übernimmt zusätzlich auch normale Tierarztbesuche, Diagnostik, Medikamente und Vorsorgeleistungen – ist dafür aber auch deutlich teurer."),
         ("Lohnt sich eine Hundekrankenversicherung wirklich?",
          "Ja, denn moderne Tiermedizin ist hochprofessionell und extrem teuer. Eine schwere Operation oder chronische Krankheiten können schnell mehrere tausend Euro kosten. Die Versicherung schützt dich vor schweren finanziellen Entscheidungen im Ernstfall."),
@@ -211,13 +211,23 @@ FAQ_POOL = {
     ],
     "allgemein": [
         ("Wie starte ich am besten mit dem Sparen im Alltag?",
-         "Der erste Schritt ist immer eine lückenlose Übersicht deiner Ausgaben. Führe für mindestens zwei bis drei Monate ein Haushaltsbuch, um versteckte Kostenfresser wie Abos, tägliche Snacks und unnötige Verträge sofort zu entlarven."),
+         "Der erste Schritt ist immer eine lückenlose Übersicht deiner Ausgaben. Führe über einen längeren Zeitraum konsequent ein Haushaltsbuch, um versteckte Kostenfresser wie Abos, tägliche Snacks und unnötige Verträge sofort zu entlarven."),
         ("Wie viel Geld sollte ich als Notgroschen aufbauen?",
          "Als eiserne Reserve gelten 3 bis 6 Monatsausgaben. Dieses Geld gehört auf ein gut verzinstes, täglich verfügbares Tagesgeldkonto, um bei unvorhergesehenen Notfällen (Autoreparatur, kaputte Waschmaschine) sofort handlungsfähig zu sein."),
         ("Sollte ich Verträge wie Strom und Internet wirklich jährlich prüfen?",
          "Ja, absolut! Treue zahlt sich bei Dienstleistern leider fast nie aus – im Gegenteil: Neukunden erhalten saubere Rabatte und Wechselboni, während Bestandskunden oft viel zu viel zahlen. Ein jährlicher Vergleich sichert dir dauerhaft die besten Preise.")
     ]
 }
+
+# Historische Fazit-Bausteine vor der RS5-Bereinigung (#1230, 26.11.2026):
+# Werden nicht mehr neu erzeugt, aber von duplikat_guard.py per AST gelesen,
+# damit bestehende Live-Artikel weiter als Haus-Fazit erkannt werden.
+LEGACY_FAZIT_BAUSTEINE = (
+    "Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich "
+    "fest und wiederhole den Check jährlich – fünf Minuten reichen.",
+    "Mit dem passenden SIM-Only-Tarif und einem separat gekauften Smartphone "
+    "sparst du auf zwei Jahre gerechnet massiv Geld.",
+)
 
 # Fallbacks
 FAQ_POOL["fluege"] = FAQ_POOL["reisen"]
@@ -267,7 +277,7 @@ def generate_fazit_text(title: str, route: str) -> str:
         "tagesgeld": "Nutze attraktive Tagesgeld-Angebote der C24 Bank, um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen.",
         "kredit": "Ein genauer Online-Vergleich verhilft dir zum günstigsten Ratenkredit und spart dir bares Geld bei Zinsen und Raten.",
         "kfz-versicherung": "Ein jährlicher Vergleich der KFZ-Versicherung spart oft mehrere hundert Euro bei identischen oder sogar besseren Leistungen.",
-        "handytarife": "Mit dem passenden SIM-Only-Tarif und einem separat gekauften Smartphone sparst du auf zwei Jahre gerechnet massiv Geld.",
+        "handytarife": "Mit dem passenden SIM-Only-Tarif und einem separat gekauften Smartphone senkst du deine laufenden Mobilfunkkosten spürbar.",
         "kreditkarte": "Eine gebührenfreie Kreditkarte ohne Auslandseinsatzentgelt ist der ideale Begleiter für weltweite Flexibilität und zinsfreies Bezahlen.",
         "unfallversicherung": "Eine private Unfallversicherung schließt wichtige Lücken der gesetzlichen Absicherung und sichert dich im Ernstfall finanziell ab.",
         "haftpflicht": "Eine Privathaftpflichtversicherung ist der wichtigste und gleichzeitig günstigste Schutz, den jeder absolut unverzichtbar besitzen sollte.",
@@ -285,9 +295,10 @@ def generate_fazit_text(title: str, route: str) -> str:
     # Rahmen – Route-spezifischer Satz (s2) bleibt die eigentliche Aussage.
     s1 = f"Der Hebel bei **{cleantitle}** sitzt nicht im Verzicht, sondern im Nachrechnen."
     s2 = sentence_map.get(route, sentence_map["allgemein"])
-    # Kein Emoji-Doppel, kein „fang heute an“: der konkrete Nachschlag-Step.
+    # Kein Emoji-Doppel, kein „fang heute an“ und keine unbelegte Zeitangabe (RS5, #1230):
+    # der konkrete Nachschlag-Step.
     s3 = ("Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich "
-          "fest und wiederhole den Check jährlich – fünf Minuten reichen.")
+          "fest und wiederhole den Check jährlich – ein kurzer Abgleich reicht.")
     
     # Ueberschriftentraeger: „## Fazit: <H1 komplett> schlau nutzen“ war dreifach
     # kaputt – (1) der CTA-Satz „schlau nutzen“ klebte in der Ueberschrift (Hugo
@@ -531,6 +542,25 @@ def selftest() -> list[str]:
     if "50-30-20-Regel" not in f11 or "](" in f11:
         fehler.append("Selftest Fall 11: Titelpräfix zerstört oder Markdown-Rest im Fazit!")
 
+    # Fall 12 (#1230): Keine Sprachfehler ("What is") und kein RS5-Blocker im Pool
+    for route, eintraege in FAQ_POOL.items():
+        for q, _ in eintraege:
+            if "What is" in q:
+                fehler.append(f"Selftest Fall 12: Denglisch-Frage in FAQ_POOL[{route}]: {q}")
+    try:
+        import redaktions_standard as rs
+        for route in sorted(set(FAQ_POOL.keys()) | {"standard", "heizoel", "bu", "reise", "urlaub", "haushalt", "sparen"}):
+            fz_hits = rs._reserve_numeric_claim_findings(generate_fazit_text("Testtitel", route))
+            if fz_hits:
+                fehler.append(f"Selftest Fall 12: Fazit[{route}] reißt RS5: {fz_hits[0]}")
+        for route, eintraege in FAQ_POOL.items():
+            for q, a in eintraege:
+                faq_hits = rs._reserve_numeric_claim_findings(f"### {q}\n\n{a}")
+                if faq_hits:
+                    fehler.append(f"Selftest Fall 12: FAQ[{route}] reißt RS5: {faq_hits[0]}")
+    except Exception:  # noqa: BLE001 – fail-open nur falls Modul im Fremd-Kontext fehlt
+        pass
+
     return fehler
 
 
@@ -540,7 +570,7 @@ def main() -> int:
         print("🛑 FAZIT-SCHMIEDE-SELBSTTEST FEHLGESCHLAGEN – Sabotage verhindert!")
         print("\n".join(stf))
         return 2
-    print("✅ Fazit-Schmiede-Selbsttest: 11 Faelle gruen.")
+    print("✅ Fazit-Schmiede-Selbsttest: 12 Faelle gruen.")
 
     # Finde alle Posts
     from post_utils import list_post_paths

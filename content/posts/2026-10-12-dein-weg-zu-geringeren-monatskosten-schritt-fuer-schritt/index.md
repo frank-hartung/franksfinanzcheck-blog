@@ -145,7 +145,7 @@ Deine Lebensumstände ändern sich ständig durch Jobwechsel oder Umzüge. Desha
 3. **Digital-Inventur (Quartalsweise):** Welche Streaming-Dienste nutzt du wirklich aktiv? Ein Wechselmodell zwischen den Anbietern spart leicht einen zweistelligen Euro-Betrag monatlich ein.
 4. **Banken & Gebühren:** Zahlst du noch [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)? Ein Wechsel zu einer Direktbank spart nach Erfahrungswerten oft einen dreistelligen Euro-Betrag im Jahr.
 
-## Welche typischen Fehler kosten dich massiv Geld?
+### Welche typischen Fehler kosten dich massiv Geld?
 
 Viele Menschen scheitern trotz Sparwillen an den gleichen Mustern. Hier siehst du die teuersten Stolperfallen im Überblick:
 
@@ -170,6 +170,8 @@ Gesamt: 144 €/Monat.
 
 **Ergebnis:**
 Du sparst monatlich **111 €**. Auf das Jahr gerechnet ergibt das **1.332 € netto mehr** auf deinem Konto. Deine Ersparnis hängt von deinen Verträgen ab. Es kommt darauf an, wie du sie nutzt.
+
+Übertrage diese Logik direkt auf deine eigenen Kontoauszüge und prüfe zuerst die zwei Posten mit der höchsten jährlichen Belastung. So erzielst du schon im ersten Schritt einen spürbaren Effekt ohne komplizierte Tabellen.
 
 ## So gehst du vor: Dein 4-K-Prüfpfad in fünf Schritten
 
