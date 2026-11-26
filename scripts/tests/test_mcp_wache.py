@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regressionstests der MCP-Wache (`.mcp.json`).
+"""Regressionstests für Standard, Diagnoseprofil und Export (ohne Browser/Netz).
 
 Der Vertrag in vier Sätzen (26.10.2026):
   1. Jeder Server ist exakt gepinnt – ein Range ist eine Hoffnung.
@@ -15,9 +15,10 @@ import json
 import sys
 import tempfile
 import unittest
-from contextlib import redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -129,8 +130,9 @@ class DateiTests(unittest.TestCase):
             code = wache.main(list(args))
         return code, out.getvalue()
 
-    def test_echte_konfiguration_ist_sauber(self):
-        self.assertEqual(wache.pruefe(wache.lade()), [])
+    def test_realer_standard_und_diagnose_sind_sauber(self):
+        self.assertEqual(wache.lade(), {"mcpServers": {}})
+        self.assertEqual(wache.main([]), 0)
 
     def test_fehlende_datei_ist_ein_befund(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -155,6 +157,151 @@ class DateiTests(unittest.TestCase):
         self.assertEqual(code, 1)
         daten = json.loads(out)
         self.assertTrue(daten["befunde"])
+
+
+class BedarfsprofilTests(unittest.TestCase):
+    def setUp(self):
+        self.standard = {"mcpServers": {}}
+        self.einstellungen = {}
+        self.agent = wache.lade_profil(wache.PROFIL)
+        self.server = self.agent["mcpServers"][0]["playwright"]
+
+    def befunde(self):
+        return wache.pruefe_projekt(self.standard, self.agent, self.einstellungen)[1]
+
+    def test_autostart_selbst_des_gehaerteten_servers_ist_ein_befund(self):
+        self.standard = {"mcpServers": {"playwright": self.server}}
+        self.assertTrue(any(f.startswith("M7") for f in self.befunde()))
+
+    def test_kein_autostart_ueber_die_agent_einstellung(self):
+        self.einstellungen["agent"] = "ff-browserdiagnose"
+        self.assertTrue(any(f.startswith("M7") for f in self.befunde()))
+
+    def test_werkzeugauswahl_ist_genau_und_ohne_wildcards(self):
+        for tools in (None, [], ["mcp__playwright__*"], [*wache.DIAGNOSE_TOOLS, "Bash"],
+                      [wache.DIAGNOSE_TOOLS[0]] * 5):
+            with self.subTest(tools=tools):
+                self.agent["tools"] = tools
+                self.assertTrue(self.befunde())
+
+    def test_nur_eine_inline_definition_keine_globale_referenz(self):
+        for inline in ([], ["playwright"], [self.agent["mcpServers"][0], "anderer"], [{}]):
+            with self.subTest(inline=inline):
+                self.agent["mcpServers"] = inline
+                self.assertTrue(self.befunde())
+
+    def test_keine_stille_ausweitung_der_ausgabe_oder_befugnisse(self):
+        args = self.server["args"]
+        for flag, wert in (("--snapshot-mode", "full"), ("--codegen", "typescript"),
+                           ("--console-level", "debug"), ("--output-dir", ".cache/../docs")):
+            with self.subTest(flag=flag):
+                i = args.index(flag) + 1
+                self.server["args"] = args[:i] + [wert] + args[i + 1:]
+                self.assertTrue(self.befunde())
+        for extra in (["--snapshot-mode=full"], ["--snapshot-mode", "full"], ["--caps", "vision"]):
+            with self.subTest(extra=extra):
+                self.server["args"] = args + extra
+                self.assertTrue(self.befunde())
+        self.server["args"] = [a for a in args if a != "--no-webmcp"]
+        self.assertTrue(self.befunde())
+
+    def test_m1_bis_m6_pruefen_das_tatsaechlich_aktivierte_profil(self):
+        self.server["args"][1] = "@playwright/mcp@latest"
+        self.assertTrue(any(f.startswith("M3") for f in self.befunde()))
+        self.server["command"] = "ein-anderer-starter"
+        self.assertTrue(any(f.startswith("M7") for f in self.befunde()))
+
+    def test_export_ist_reines_mcp_json_aus_der_geprueften_quelle(self):
+        out = StringIO()
+        with redirect_stdout(out):
+            self.assertEqual(wache.main(["--export-profil"]), 0)
+        config = json.loads(out.getvalue())
+        self.assertEqual(config, {"mcpServers": {"playwright": self.server}})
+        self.assertEqual(wache.pruefe(config), [])
+
+    def test_export_schreibt_bei_fehlern_keine_konfiguration(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            f = Path(tmp) / "agent.md"
+            for inhalt in (None, "# Titel", "---\n{nope}\n---\n", "---\n[]\n---\n",
+                           '---\n{"tools":[], "tools":["Bash"]}\n---\n'):
+                with self.subTest(inhalt=inhalt), patch.object(wache, "PROFIL", f):
+                    if inhalt is not None:
+                        f.write_text(inhalt, encoding="utf-8")
+                    out, err = StringIO(), StringIO()
+                    with redirect_stdout(out), redirect_stderr(err):
+                        self.assertEqual(wache.main(["--export-profil"]), 1)
+                    self.assertEqual(out.getvalue(), "")
+                    self.assertTrue(err.getvalue().strip())
+
+
+class DiagnoseAufrufTests(unittest.TestCase):
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.root = Path(tmp.name).resolve()
+
+    def event(self, tool, args):
+        return {"hook_event_name": "PreToolUse", "tool_name": "mcp__playwright__browser_" + tool,
+                "tool_input": args, "cwd": str(self.root)}
+
+    def pruefe(self, tool, **args):
+        return wache.pruefe_aufruf(self.event(tool, args), self.root)
+
+    def test_textsuche_und_gezielter_snapshot_duerfen_durch(self):
+        self.assertIsNone(self.pruefe("find", text="Suchbegriff"))
+        self.assertIsNotNone(self.pruefe("find", text=" "))
+        self.assertIsNone(self.pruefe("snapshot", target="#ff-suche-eingabe"))
+        self.assertIsNone(self.pruefe("snapshot", depth=2))
+        self.assertIsNotNone(self.pruefe("snapshot"))
+        self.assertIsNotNone(self.pruefe("snapshot", target=" "))
+        for wert in (0, -1, 4, True, None, "2"):
+            with self.subTest(wert=wert):
+                self.assertIsNotNone(self.pruefe("snapshot", depth=wert))
+
+    def test_vollbaum_nur_in_lokale_belegdatei(self):
+        self.assertIsNone(self.pruefe("snapshot", filename=".cache/mcp/befund.yml"))
+        for ungueltig in ("", "/tmp/beleg", "docs/beleg", ".cache/mcp/../../datei", ".cache/mcp/..",
+                          ".cache/mcp/../mcp/beleg", ".cache/mcp/unter/beleg", r".cache/mcp/..\datei"):
+            with self.subTest(datei=ungueltig):
+                self.assertIsNotNone(self.pruefe("snapshot", filename=ungueltig))
+        event = self.event("snapshot", {"filename": ".cache/mcp/befund.yml"})
+        self.assertIsNotNone(wache.pruefe_aufruf({**event, "cwd": str(self.root / "docs")}, self.root))
+
+    def test_belege_folgen_keinem_symlink(self):
+        ordner = self.root / ".cache" / "mcp"
+        ordner.parent.mkdir()
+        ordner.symlink_to(self.root, target_is_directory=True)
+        self.assertIsNotNone(self.pruefe("find", text="Suche", filename=".cache/mcp/beleg.yml"))
+        ordner.unlink()
+        ordner.mkdir()
+        (ordner / "beleg.yml").symlink_to(self.root / "anderer-pfad")
+        self.assertIsNotNone(self.pruefe("snapshot", filename=".cache/mcp/beleg.yml"))
+
+    def test_protokolle_nur_gezielt_oder_als_beleg(self):
+        self.assertIsNotNone(self.pruefe("console_messages", level="debug"))
+        self.assertIsNone(self.pruefe("console_messages", level="warning"))
+        self.assertIsNotNone(self.pruefe("network_requests"))
+        self.assertIsNotNone(self.pruefe("network_requests", filter="pagefind", static=True))
+        self.assertIsNone(self.pruefe("network_requests", filter="pagefind"))
+        self.assertIsNone(self.pruefe("network_requests", filename=".cache/mcp/netz.txt"))
+
+    def test_hook_erhaelt_berechtigungsabfrage_und_blockiert_fehler_ohne_rohdaten(self):
+        for daten, erwartet in ((self.event("snapshot", {"depth": 2}), 0),
+                                (self.event("snapshot", {"target": " ", "privat": "NIE-AUSGEBEN"}), 2),
+                                (self.event("evaluate", {}), 2), (None, 2), ("kaputt", 2)):
+            with self.subTest(daten=daten):
+                out, err = StringIO(), StringIO()
+                stdin = StringIO(daten if isinstance(daten, str) else json.dumps(daten))
+                with patch.object(sys, "stdin", stdin), redirect_stdout(out), redirect_stderr(err):
+                    self.assertEqual(wache.main(["--vor-aufruf"]), erwartet)
+                self.assertEqual(out.getvalue(), "")  # nie ein automatisches „allow“
+                self.assertEqual(bool(err.getvalue()), erwartet == 2)
+                self.assertNotIn("NIE-AUSGEBEN", err.getvalue())
+
+    def test_hook_darf_im_echten_profil_nicht_fehlen(self):
+        profil = wache.lade_profil(wache.PROFIL)
+        profil["hooks"] = {}
+        self.assertTrue(any(f.startswith("M7") for f in wache.pruefe_projekt(wache.lade(), profil, {})[1]))
 
 
 class SelbsttestTests(unittest.TestCase):

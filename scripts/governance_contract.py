@@ -687,11 +687,8 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Wiedervorlage existierte (test_versicherungs_cluster_verlinkung),
           # aber der Artikel kam über einen Automatik-Commit ohne PR.
           "pillar_wiedervorlage.py",
-          # MCP-Wache (26.10.2026): `.mcp.json` gibt KI-Agenten Werkzeuge in
-          # diesem Repo – ein npm-Paket ohne Pin, eine Netzbefugnis ohne Grenze
-          # und ein Dateizugriff ohne Not. Die Wache hält Pinning (M3), die
-          # Server-Allowlist (M4), die Herkunftsziele (M5) und den Geheimnis-
-          # Freiraum (M2) fest. Ohne C6 liefe ihr Selbsttest nie.
+          # MCP-Wache: Projektstandard ohne Server; nur das Bedarfsprofil
+          # ff-browserdiagnose startet den gepinnten Browser (M1–M7).
           "mcp_wache.py",
           # Skill-Vertrag (01.11.2026): Der Agenten-Leitfaden war 2.532 Zeilen
           # lang und wurde auf repo-eigene Skills umgelegt. Ohne diese Wache

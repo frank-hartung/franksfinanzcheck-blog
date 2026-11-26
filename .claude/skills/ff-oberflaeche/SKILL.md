@@ -74,6 +74,8 @@ deshalb keinen zweiten Text hier.
 | Wie gehe ich fertigen UI-Code durch, bevor ich „erledigt" melde? | `references/web-richtlinien.md` (24 Punkte in sechs Gruppen, jeder Punkt mit Gate oder Fundstelle) |
 | Hält meine Bewegung die Skala, hat jeder Lift ein Druck-Feedback, animiert etwas Layout-Eigenschaften? | `scripts/bewegungs_wache.py` (B1–B6, `npm run bewegung:check`, **in `GUARDS`**) – die Skala (13 Stufen) steht in `DESIGN.md` §6.1 und maschinenlesbar in `data/design/regelwerk.yaml`; Layout-Ausnahmen nur, wenn sie in §6.1 **namentlich** genannt sind. Ausnahmen mit Grund, Entscheidung **und Frist** in `data/bewegungs_wache_ausnahmen.yaml`. **Druck-Feedback je Flächentyp** (Button `scale(.97)`, Karte nur `translateY(0)`, Zeile `translateX(0)`, `:active` hinter `:hover` und mit dem Elternkontext der Basisregel) steht als Tabelle in `DESIGN.md` §6.2. Vorgang: `BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md` (Nachtrag 2) |
 
+Offener Befund im gerenderten Browser? Den Projektagenten `ff-browserdiagnose` nur dafür hinzuziehen ([Runbook](../../../docs/ANLEITUNG-PLAYWRIGHT-MCP.md)). Wiederholbares gehört direkt in die vorhandenen Specs unter `e2e/`.
+
 ## Kommando-Notausgang
 
 ```bash
