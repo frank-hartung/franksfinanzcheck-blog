@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 26.11.2026 16:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.11.2026 02:02 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -42,6 +42,9 @@
 ### Do, 10. Dezember 2026
 - **07:45** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+### Fr, 11. Dezember 2026
+- **07:45** ⏳ Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand? — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/
 
 ## Zuletzt veröffentlicht
 

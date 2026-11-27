@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 26.11.2026 16:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.11.2026 02:02 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -12,33 +12,30 @@
 
 ## Kommende Beiträge
 
-### Do, 26. November 2026
-- **18:45** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
 ### Sa, 28. November 2026
-- **11:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
-### So, 29. November 2026
-- **11:45** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
-### Di, 01. Dezember 2026
 - **11:45** ⏳ Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/
+### So, 29. November 2026
+- **11:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
+### Di, 01. Dezember 2026
+- **11:45** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
 ### Do, 03. Dezember 2026
-- **11:45** ⏳ Energieeffiziente Geräte: So sinken deine Fixkosten — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/
+- **11:45** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
 ### Sa, 05. Dezember 2026
 - **11:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### So, 06. Dezember 2026
-- **11:45** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
+- **11:45** ⏳ Energieeffiziente Geräte: So sinken deine Fixkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/
 ### Di, 08. Dezember 2026
 - **11:45** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
 ### Do, 10. Dezember 2026
-- **11:45** ⏳ Geschirrspüler voll beladen: Wasser und Strom sparen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/
+- **11:45** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
 
 ## Zuletzt veröffentlicht
 

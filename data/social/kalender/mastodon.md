@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 26.11.2026 16:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.11.2026 02:02 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -42,6 +42,11 @@
   https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/
 - **11:30** ⏳ Standby-Kosten: Was ein Stromfresser wirklich kostet — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/
+### Fr, 11. Dezember 2026
+- **07:30** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
+- **11:30** ⏳ Finanzielle Freiheit: Wie du eine Sparroutine aufbaust — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
 
 ## Zuletzt veröffentlicht
 
