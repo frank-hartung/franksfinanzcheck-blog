@@ -1,8 +1,8 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-11-26 13:26:26 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-11-27 13:23:18 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 151 · **Gateway-Links:** 338 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
+**Geprüfte Artikel:** 152 · **Gateway-Links:** 341 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
 ## 🟡 Hinweise – nicht blockierend (ehrliches Cross-Selling, redaktioneller Prüfpunkt)
 
@@ -10,13 +10,13 @@
 
 - `content/posts/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert/index.md`:261 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-10-16-dns-server-aendern-fuer-schnelleres-internet/index.md`:186 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
-- `content/posts/2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026/index.md`:169 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026/index.md`:41 [top] /go/allgemein/ «CHECK24-Vergleichsportal öffnen» – top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026/index.md`:120 [mid] /go/allgemein/ «Fixkosten auf CHECK24 prüfen» – mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026/index.md`:159 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie/index.md`:41 [top] /go/allgemein/ «CHECK24-Vergleichsportal öffnen» – top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie/index.md`:76 [mid] /go/allgemein/ «Fixkosten auf CHECK24 prüfen» – mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie/index.md`:139 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
+- `content/posts/2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus/index.md`:49 [top] /go/reisen/ «Reiseangebote vergleichen» – top-CTA führt zu „Pauschalreisen“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 
 ### IW4 – Nie-Paare (2)
 

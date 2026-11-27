@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-26 13:26:26 UTC",
+ "generated_at": "2026-11-27 13:23:18 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 151,
- "checked_links": 338,
+ "checked_articles": 152,
+ "checked_links": 341,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -50,17 +50,6 @@
    "severity": "P3",
    "blocking": false,
    "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-20-waermepumpe-vs-gasheizung-was-lohnt-sich-2026",
-   "line": 138,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   },
   {
    "code": "IW2",
@@ -127,6 +116,17 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
+   "line": 14,
+   "route": "reisen",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "top-CTA führt zu „Pauschalreisen“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []
