@@ -402,3 +402,5 @@
 {"ts": "2026-11-27T15:42:52Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen", "rules": ["B2", "B3", "B5"]}
 {"ts": "2026-11-27T15:42:52Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-27T15:42:52Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 11}
+{"ts": "2026-11-27T17:41:12Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-27T17:41:12Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
