@@ -32,6 +32,8 @@ faktencheck: 2026-11-27
 
 Du hast Geld übrig, das du nicht sofort brauchst, und überlegst, wo du es am besten anlegen kannst. Die beiden beliebtesten Optionen für private Sparer sind Festgeld und Tagesgeld. Beide Produkte versprechen Zinsen, doch die Bedingungen unterscheiden sich grundlegend. In diesem Ratgeber erfährst du, welche Variante zu deiner Lebenssituation passt, wie du Zinsen vergleichen kannst und welche Fallen du vermeiden solltest.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Festgeld – sichere Verzinsung
 
 Festgeld bedeutet, dass du einen festen Betrag für eine festgelegte Laufzeit auf einem Konto lässt. Während dieser Zeit kannst du nicht über das Geld verfügen, dafür ist der Zinssatz meist höher als beim Tagesgeld. Die Zinsen werden am Ende der Laufzeit oder monatlich gutgeschrieben – das hängt vom Anbieter ab. Der Vertrag endet automatisch, du kannst das Kapital dann ohne Vorfälligkeitsentschädigung wieder abheben.
