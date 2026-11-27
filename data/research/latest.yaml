@@ -1,5 +1,5 @@
-generated_at: '2026-11-26T13:07:45Z'
-day: '2026-11-26'
+generated_at: '2026-11-27T13:06:05Z'
+day: '2026-11-27'
 mode: deterministic
 teams:
   trending:
@@ -253,60 +253,62 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Billig fliegen im Winter: 10 Geheimtipps'
-    pillar: mietwagen
-    signal: niche_hook
-    source: 'topics:Billig fliegen im Winter: 10 Geheimtipps'
-    score: 0.55
-    keywords:
-    - Flugvergleich
-    - Billigflüge
-    - Reisekosten sparen
-  - topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+  - topic: 'DSL-Anbieter wechseln: Wie du den besten Tarif findest'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    source: 'topics:DSL-Anbieter wechseln: Wie du den besten Tarif findest'
+    score: 0.55
+    keywords:
+    - DSL-Anbieter
+    - Wechsel
+    - Tarif
+  - topic: 'DSL-Tarife im Vergleich: Welcher ist der beste?'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:DSL-Tarife im Vergleich: Welcher ist der beste?'
     score: 0.55
     keywords:
     - DSL-Tarife
-    - günstige Anbieter
     - Internetvergleich
-  - topic: Energiekosten im Haushalt senken mit Smart-Home-Geräten
-    pillar: strom-sparen
+    - DSL-Anbieter
+  - topic: 'Hauskauf finanzieren: Darlehen clever vergleichen'
+    pillar: konto-karten
     signal: niche_hook
-    source: topics:Energiekosten im Haushalt senken mit Smart-Home-Geräten
+    source: 'topics:Hauskauf finanzieren: Darlehen clever vergleichen'
     score: 0.55
     keywords:
-    - Energiekosten
-    - Smart-Home-Geräte
-    - Haushalt
-  - topic: Günstige Reiseversicherungen für den Sommerurlaub finden
-    pillar: versicherungen
+    - Baufinanzierung
+    - Immobilienkredit
+    - Hauskauf Finanzierung
+  - topic: 'Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden noch?'
+    pillar: konto-karten
     signal: niche_hook
-    source: topics:Günstige Reiseversicherungen für den Sommerurlaub finden
+    source: 'topics:Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden
+      noch?'
     score: 0.55
     keywords:
-    - Reiseversicherung
-    - Sommerurlaub
-    - Versicherungsvergleich
-  - topic: 'Versicherungen im Vergleich: Was du wissen musst'
+    - Tagesgeld Neukundenzins
+    - Zinshopping Zinseszins
+    - Geld sicher anlegen 2026
+    - Tagesgeldkonto Zinsgarantie
+  - topic: Versicherungen für dein Fahrzeug und dich
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Versicherungen im Vergleich: Was du wissen musst'
+    source: topics:Versicherungen für dein Fahrzeug und dich
     score: 0.55
     keywords:
     - Versicherungen
-    - Vergleich
-    - Wissenswertes
-  - topic: Wie du beim Mietwagenkauf Geld sparen kannst
-    pillar: mietwagen
+    - Fahrzeug
+    - Schutz
+  - topic: 'Versicherungen im Überblick: Was brauchst du wirklich?'
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Wie du beim Mietwagenkauf Geld sparen kannst
+    source: 'topics:Versicherungen im Überblick: Was brauchst du wirklich?'
     score: 0.55
     keywords:
-    - Mietwagenkauf
-    - Geld sparen
-    - Tipps
+    - Versicherungen
+    - Versicherungsvergleich
+    - Risikomanagement
 live_web:
   enabled: false
   findings: []
