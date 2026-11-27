@@ -29,7 +29,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 043edc7209dce02f69ff0c07403b28cff1aec486133d799b921bfdc324aa0c42
+    sha256: e0cbf9ec2173e9a82813c36242eb4c427103c06151a67a54d88d83170207ef08
     geprueft_am: 2026-11-27
 faktenfrische_aliases:
   - "2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus"

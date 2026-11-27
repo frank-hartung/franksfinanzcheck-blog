@@ -29,7 +29,7 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 407c5908676cf917033c050ac7d6e64a184b0b3fcdd7987f2bdeac917dc49035
+    sha256: 00bbbdabba2d06f228bc19f6783f8b4d6cbe4033780aa5ef2b7a2ae870901845
     geprueft_am: 2026-11-27
 faktenfrische_aliases:
   - "2026-11-22-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch"
