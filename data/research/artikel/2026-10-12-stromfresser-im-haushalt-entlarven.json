@@ -1,77 +1,39 @@
 {
   "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
   "titel": "Stromfresser im Haushalt entlarven",
-  "erzeugt": "2026-10-13 12:07 UTC",
+  "erzeugt": "2026-11-27 14:15 UTC",
   "faellig": {
     "faellig": true,
-    "prio": 0,
+    "prio": 1,
     "klasse": "YMYL",
-    "grund": "Erstrecherche – noch nie faktengeprüft",
-    "alter_tage": null,
-    "intervall": 45
+    "grund": "45 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL)",
+    "alter_tage": 45,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 0
   },
   "geo": {
-    "punkte": 3,
+    "punkte": 6,
     "maximum": 6,
-    "prozent": 50,
-    "offen": [
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
-      "Sichtbares Prüfdatum (`faktencheck:`)"
-    ],
+    "prozent": 100,
+    "offen": [],
     "treffer": {
-      "kurzantwort": false,
+      "kurzantwort": true,
       "faq": true,
-      "quellen": false,
+      "quellen": true,
       "zahlen": true,
       "tabelle": true,
-      "faktencheck": false
+      "faktencheck": true
     }
   },
-  "treffer": [
-    {
-      "titel": "Referenzseite bundesnetzagentur.de",
-      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "datum": "",
-      "quelle": "bundesnetzagentur.de",
-      "kanal": "web",
-      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n\n*   [Allgemeines](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start2.html)\n            *   [Unterversorgungsfeststellung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/Unterversorgungsfeststellungen/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und",
-      "score": 2,
-      "belegfaehig": true,
-      "herausgeber": "Bundesnetzagentur",
-      "rang": 1,
-      "zitierbar": true
-    }
-  ],
-  "befunde": [
-    {
-      "typ": "veraltet",
-      "text": "Der im Artikel genannte durchschnittliche Strompreis von 30 Cent pro kWh ist veraltet; die Bundesnetzagentur gibt aktuell einen durchschnittlichen Endkundenpreis von rund 40 Cent pro kWh an.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-    },
-    {
-      "typ": "luecke",
-      "text": "Der Artikel erwähnt nicht die verpflichtende EU-Energieeffizienzkennzeichnung, die von der Bundesnetzagentur gefordert wird und bei der Auswahl neuer Geräte hilft, Energie zu sparen.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-    },
-    {
-      "typ": "praezision",
-      "text": "Die angegebenen Stand‑by‑Leistungen (z. B. 5 W für einen Fernseher) sind zu hoch; die Bundesnetzagentur weist darauf hin, dass typische Stand‑by‑Werte von Unterhaltungselektronik meist zwischen 0,5 W und 2 W liegen.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-    },
-    {
-      "typ": "luecke",
-      "text": "Der Artikel nennt nur kostenpflichtige Messgeräte, obwohl die Bundesnetzagentur ein kostenloses Online‑Tool zur Analyse des Stromverbrauchs bereitstellt, das hier nicht erwähnt wird.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-    },
-    {
-      "typ": "praezision",
-      "text": "Die Amortisationsrechnung für den Austausch eines alten Kühlschranks (9 Jahre) ist unpräzise; die Bundesnetzagentur empfiehlt, dass sich Investitionen in energieeffiziente Geräte innerhalb von maximal 5 Jahren amortisieren sollten.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-    }
-  ],
+  "treffer": [],
+  "befunde": [],
   "fehler": [
-    "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
-    "Verbraucherzentrale – Energie: Feed nicht lesbar"
-  ]
+    "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "d0a78a727ca2bfae8db37413336919d8081777c3804ef2dd34445ab074ce1bdb",
+  "text_sha256": "8280d7532ab6a2b45430c54f2d60edbf245e2acedd170a5993585398a2c890ab",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
 }

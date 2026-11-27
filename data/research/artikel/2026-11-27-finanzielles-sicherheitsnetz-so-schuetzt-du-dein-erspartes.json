@@ -1,0 +1,41 @@
+{
+  "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+  "titel": "Finanzielles Sicherheitsnetz: So schützt du dein Erspartes",
+  "erzeugt": "2026-11-27 14:15 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 4,
+    "maximum": 6,
+    "prozent": 67,
+    "offen": [
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
+    "bundesbank.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "7fbddcf618f4a9b7362881e6433731a4bdf1e6ce9f798cb09539f75ccae58871",
+  "text_sha256": "61da67f7db82b7baae9db0fcf692b81307a2f924501878956f1cc092ba1497ca",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
+}
