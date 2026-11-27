@@ -2,17 +2,17 @@
   "target": 6,
   "ready": 0,
   "pool_size": 12,
-  "generated_at": "2026-11-26T19:07:02Z",
+  "generated_at": "2026-11-27T13:22:19Z",
   "candidates": [
     {
-      "slug": "2026-11-26-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "slug": "2026-11-27-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "1ba46bc3d8ce0e61972eff7577624d4f33d0fed2d25a772e1ab65189e927ae90",
+      "sha256": "dff9d5fb57e06cba42f0fc9d07dfc01ed8431d6ae3dc997e674a228467e0b4e6",
       "flesch": 69.8,
-      "measured_at": "2026-11-26T19:05:26Z",
+      "measured_at": "2026-11-27T13:20:51Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-26-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-27-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -29,11 +29,11 @@
       }
     },
     {
-      "slug": "2026-11-26-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "slug": "2026-11-27-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "d557756f8d02708f3e78008f9a355149bda0d3cb4af26b76e7779c57c4dd1d7d",
+      "sha256": "c4c67f19e79618fadad09ec45af95ad5c514ff311eba1ea80042aa3d692ff61e",
       "flesch": 72.9,
-      "measured_at": "2026-11-26T19:05:28Z",
+      "measured_at": "2026-11-27T13:20:54Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
         "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen."
@@ -50,14 +50,14 @@
       }
     },
     {
-      "slug": "2026-11-26-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "slug": "2026-11-27-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "c0ffa5b03ab99ae7d3560bcd17f23dd3fef868e85961595a600d1c016c1217e0",
+      "sha256": "fb21da4f2ca519a3ca4211729ee9053f85d5a35adf2a3cb9334116b864abd23b",
       "flesch": 63.8,
-      "measured_at": "2026-11-26T19:05:55Z",
+      "measured_at": "2026-11-27T13:21:17Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-26-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-27-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -74,14 +74,14 @@
       }
     },
     {
-      "slug": "2026-11-26-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
+      "slug": "2026-11-27-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
       "ready": false,
-      "sha256": "e747fef8ca61abad02bccc0ce51ff73ff63e92f8147196618eafe518cd240e7e",
+      "sha256": "a6a44b137da75efd2b580418a5597609866b31947740e538b0499beaa52e5ca2",
       "flesch": 63.2,
-      "measured_at": "2026-11-26T19:06:22Z",
+      "measured_at": "2026-11-27T13:21:42Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-26-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-27-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -98,14 +98,14 @@
       }
     },
     {
-      "slug": "2026-11-26-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "slug": "2026-11-27-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "ready": false,
-      "sha256": "67a8b597c715266d0a617f724b4923e236fe2943db799d01f13cd4fb6514b50f",
+      "sha256": "7a50ed7216f39888e44d1ae0e2c6f409710348e7a4cab592b7815ad0b9e10495",
       "flesch": 62.4,
-      "measured_at": "2026-11-26T19:06:49Z",
+      "measured_at": "2026-11-27T13:22:06Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-26-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-27-heizperiode-beginn-2026-warum-der-gas-check-im-oktober: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -122,11 +122,11 @@
       }
     },
     {
-      "slug": "2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
+      "slug": "2026-11-27-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
       "ready": false,
-      "sha256": "04be5d54aa9d95c0b3d2f99c4e8da59883fd13c24a9d0d106d15353e75965a89",
+      "sha256": "9bacee4f001a87fd50d093a9a08f5ffdf331cba094334c845497d0c49e5d0c66",
       "flesch": 60.9,
-      "measured_at": "2026-11-26T19:06:50Z",
+      "measured_at": "2026-11-27T13:22:08Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Nutzer denken, dass 1.000 Megabit pro Sekunde alle Probleme lösen.",
       "details": [
         "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Nutzer denken, dass 1.000 Megabit pro Sekunde alle Probleme lösen."
@@ -143,11 +143,11 @@
       }
     },
     {
-      "slug": "2026-11-26-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+      "slug": "2026-11-27-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
       "ready": false,
-      "sha256": "870d0169a832b13f51e187e1cf9b94f39cb03db2cc50076e3cea0f39dfc13ff7",
+      "sha256": "bfc6e155822f4de492a5a5ef8983342baf2b1b3ae55dbfba99888ff563d3822a",
       "flesch": 60.4,
-      "measured_at": "2026-11-26T19:06:52Z",
+      "measured_at": "2026-11-27T13:22:10Z",
       "reason": "Reserve-Qualitäts-Gate: Umfang: 988 Wörter / 7412 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
         "Umfang: 988 Wörter / 7412 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
@@ -164,11 +164,11 @@
       }
     },
     {
-      "slug": "2026-11-26-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+      "slug": "2026-11-27-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
       "ready": false,
-      "sha256": "24a916508acf80d85742ba334fc4f18d33b7c47fc89b6a483221dc1e1f0c2a17",
+      "sha256": "0d6a124ec5a2b83df7b9b8d018cfd9102c7e9775908f83e3010c9057f5c98342",
       "flesch": 60.0,
-      "measured_at": "2026-11-26T19:06:54Z",
+      "measured_at": "2026-11-27T13:22:12Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
       "details": [
         "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - Jahresgebühr: 0 € oder niedriger als 30 €.",
@@ -186,11 +186,11 @@
       }
     },
     {
-      "slug": "2026-11-26-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "slug": "2026-11-27-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
       "ready": false,
-      "sha256": "d77dbf78570621d40b5f0b4896fe469dedaa103474d3d9a5dc3fb9d177034c36",
+      "sha256": "26a8ad7d4892e74444aa589e4cce2d515f9cd5869aab23c7956683a64a4a7741",
       "flesch": 70.6,
-      "measured_at": "2026-11-26T19:06:57Z",
+      "measured_at": "2026-11-27T13:22:14Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
         "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen."
@@ -207,11 +207,11 @@
       }
     },
     {
-      "slug": "2026-11-26-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
+      "slug": "2026-11-27-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
       "ready": false,
-      "sha256": "8dba601fd99bd8e2a78f3572a90222847427d700e6a4bb9e93df68a43f6bc65b",
+      "sha256": "60898116d3e30072453af88275781155267ff21665dde02cf6bd05e4c05525a0",
       "flesch": 60.6,
-      "measured_at": "2026-11-26T19:06:59Z",
+      "measured_at": "2026-11-27T13:22:16Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
         "RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
@@ -229,11 +229,11 @@
       }
     },
     {
-      "slug": "2026-11-26-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+      "slug": "2026-11-27-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "eabd48ddc92eec49b26a5d0d7739f5b7908cda04faf487c97dfd4d43b4a185c9",
+      "sha256": "fd2d9c93322584d6bb65d8ed468de40b0660d056f6caa498eb4f9980bb932221",
       "flesch": 58.0,
-      "measured_at": "2026-11-26T19:07:01Z",
+      "measured_at": "2026-11-27T13:22:17Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
       "details": [
         "RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Prüfe deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.",
@@ -252,11 +252,11 @@
       }
     },
     {
-      "slug": "2026-11-26-wlan-verbessern-verstaerker-oder-mesh-was-passt",
+      "slug": "2026-11-27-wlan-verbessern-verstaerker-oder-mesh-was-passt",
       "ready": false,
-      "sha256": "196cce830ceb8a78dfd70f6c4473c79ebd9e6cfcabafd31cc96ddf94f464f7f7",
+      "sha256": "dd4352da5d01ad6fbd5ec07c7b4dae7d223f1411b1a105c7d4103af641766fa3",
       "flesch": 63.7,
-      "measured_at": "2026-11-26T19:07:02Z",
+      "measured_at": "2026-11-27T13:22:19Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Für ein Haus bis 150 m² reichen meist zwei Knoten.",
       "details": [
         "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Für ein Haus bis 150 m² reichen meist zwei Knoten.",
@@ -276,7 +276,21 @@
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "45877410903",
+    "run_id": "46002220332",
     "run_attempt": "1"
-  }
+  },
+  "geschont": [
+    {
+      "slug": "2026-11-27-wlan-verbessern-verstaerker-oder-mesh-was-passt",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "redaktions_standard.py",
+        "check_titles.py",
+        "lesbarkeit_heiler.py",
+        "profi_polish.py"
+      ],
+      "warum": "Vorab-Befunde des Reserve-Qualitäts-Gates (RS1–RS8, Titel R1–R5, Flesch) heilen redaktions_standard.py, check_titles.py und lesbarkeit_heiler.py in der Reserve-Kette (#710)."
+    }
+  ]
 }
