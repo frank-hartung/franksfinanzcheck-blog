@@ -6,7 +6,7 @@ draft: true
 tags: ["Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Festgeld", "Zinsen vergleichen", "Geld anlegen"]
+keywords: ["Zinsen vergleichen", "Geld anlegen", "Festgeld vs. Tagesgeld"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,19 @@ redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
+pin_description: "*Werbung | Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen? – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen… Mehr Spartipps auf FranksFinanzcheck! #zinsen #vergleichen #geld"
+cover:
+  image: "images/covers/2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen.jpg"
+  alt: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
+  caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 69dd574811be2a3d443193eb09c0cdc88bba0c808b0aef67ef5fe10d846748ea
+    geprueft_am: 2026-11-27
+faktencheck: 2026-11-27
 ---
 
 Du hast Geld übrig, das du nicht sofort brauchst, und überlegst, wo du es am besten anlegen kannst. Die beiden beliebtesten Optionen für private Sparer sind Festgeld und Tagesgeld. Beide Produkte versprechen Zinsen, doch die Bedingungen unterscheiden sich grundlegend. In diesem Ratgeber erfährst du, welche Variante zu deiner Lebenssituation passt, wie du Zinsen vergleichen kannst und welche Fallen du vermeiden solltest.
@@ -96,6 +109,11 @@ Du vergleichst Angebot C mit 1,9 % Jahreszins, Zinsen werden jährlich gutge
 C: 10.000 € × 0,019 = 190 € Zinsen.  
 D: Monatliche Zinsformel: 10.000 € × (1 + 0,0185 ÷ 12)¹² ≈ 10.000 € × 1,0187 ≈ 187 € Zinsen.  
 Obwohl D einen niedrigeren Nominalzins hat, reduziert die monatliche Gutschrift den Unterschied nur leicht. Ohne diese Rechnung würdest du fälschlich denken, C sei eindeutig besser.
+
+
+
+**Weiterlesen:** [Ratgeber Konto Karten](../../pillar/konto-karten/)
+**Lesetipp:** [Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen](../../posts/2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

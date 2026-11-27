@@ -191,7 +191,7 @@ Erhöht dein Anbieter den Preis, prüfe zuerst den Grund. Steigen Steuern oder k
 
 Steigt der Preis für einen geschützten Bestandteil, prüfe einen Widerspruch und hole bei Bedarf Rat. Nach der [Bundesnetzagentur zu Preisänderungen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) müssen Haushaltskunden grundsätzlich mindestens einen Monat vorher klar über Grund, Voraussetzungen und Umfang der Änderung sowie ihr Sonderkündigungsrecht informiert werden; in der Grundversorgung gelten zusätzliche Informationspflichten.
 
-Einseitige [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) sind besonders geregelt: Wer zum Zeitpunkt der Änderung kündigt, braucht keine Frist abzuwarten; der Vertrag endet am Vortag. Zwei Ausnahmen bleiben: eine vereinbarte separierte Klausel für bestimmte hoheitliche Änderungen und die reine Weitergabe einer Umsatzsteueränderung. Sieh deshalb den Wortlaut deiner Klausel und dein Schreiben an.
+Einseitige [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) sind besonders geregelt: Wer zum Zeitpunkt der Änderung kündigt, braucht keine Frist abzuwarten; der Vertrag endet am Vortag. Zwei Ausnahmen bleiben: eine vereinbarte separierte Klausel für bestimmte hoheitliche [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) und die reine Weitergabe einer Umsatzsteueränderung. Sieh deshalb den Wortlaut deiner Klausel und dein Schreiben an.
 
 Gehe strukturiert vor:
 1. Prüfe die schriftliche Ankündigung gegen deine Vertragsunterlagen.

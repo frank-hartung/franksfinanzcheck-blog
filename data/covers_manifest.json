@@ -28,7 +28,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-11-25T21:32:02+00:00",
+  "ts": "2026-11-27T14:50:45+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -3053,6 +3053,15 @@
  "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen": {
   "title": "Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen",
   "ts": "2026-11-27T14:43:40+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen": {
+  "title": "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?",
+  "ts": "2026-11-27T14:51:55+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",

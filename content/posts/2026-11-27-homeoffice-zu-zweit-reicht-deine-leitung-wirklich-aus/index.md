@@ -134,6 +134,11 @@ Dein Router ist die Zentrale. Er muss die Datenpakete sortieren. Wenn zwei Perso
 
 Der Hebel bei **Homeoffice zu zweit: Reicht deine Leitung wirklich aus?** sitzt nicht im Verzicht, sondern im Nachrechnen. Durch geschicktes Timing beim Buchen und einen unabhängigen Preisvergleich reist du vollkommen entspannt zum absoluten Schnäppchenpreis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
+
+
+**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
+**Lesetipp:** [Mesh-WLAN nachrüsten: Wann lohnt sich die Investition?](../../posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/)
+
 ## Häufige Fragen
 
 ### Wie viel Mbit/s brauche ich für 2 Personen im Homeoffice?

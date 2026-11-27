@@ -1,17 +1,17 @@
 {
   "schema": 2,
-  "erzeugt": "2026-11-25 21:35 UTC",
+  "erzeugt": "2026-11-27 14:54 UTC",
   "uebersicht": {
-    "gesamt": 150,
+    "gesamt": 154,
     "ratgeber": 6,
-    "faellig": 10,
+    "faellig": 13,
     "vorlauf": 0,
     "bearbeitet": 10,
     "budget": 10,
     "budget_quelle": "Sockel (Erstellungstakt (--neu))",
-    "geo_schnitt": 92,
-    "befunde": 298,
-    "befunde_im_lauf": 3,
+    "geo_schnitt": 91,
+    "befunde": 301,
+    "befunde_im_lauf": 8,
     "fachbefunde": [
       {
         "id": "1b7c9b9cac0290f71242",
@@ -993,51 +993,6 @@
         "fassung_sha256": "111ecf33a147bd4e0453f6bcf68e094185835ce9b73b59cd09e57bb573aca719",
         "text_sha256": "b45594c74aad9f7e89f0da0baf59a6725936ba352b7576d237cc771bb90b44a6",
         "zuletzt_gesehen": "2026-11-23 15:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "334751e6f61ad0033fe4",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "36759a5efe5e8e5163d0",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "942922d1afd7844618e9",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "d41f0d5ce8798df0211b",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "e139d0769faadd04392a",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
       },
       {
         "typ": "praezision",
@@ -2906,7 +2861,7 @@
         "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
         "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
         "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
-        "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+        "zuletzt_gesehen": "2026-11-25 21:35 UTC"
       },
       {
         "typ": "luecke",
@@ -2917,7 +2872,7 @@
         "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
         "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
         "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
-        "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+        "zuletzt_gesehen": "2026-11-25 21:35 UTC"
       },
       {
         "typ": "luecke",
@@ -2928,7 +2883,7 @@
         "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
         "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
         "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
-        "zuletzt_gesehen": "2026-11-25 21:34 UTC"
+        "zuletzt_gesehen": "2026-11-25 21:35 UTC"
       },
       {
         "id": "22e300c6973fedbbd737",
@@ -3017,6 +2972,94 @@
         "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
         "zuletzt_gesehen": "2026-11-25 14:53 UTC",
         "herkunft": "dossier-nachlese"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
+        "stelle": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
+        "beleg": "",
+        "id": "260694ca9f8aa3c67016",
+        "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+        "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+        "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
+        "stelle": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
+        "beleg": "",
+        "id": "2b139ae02e3770919d4a",
+        "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+        "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+        "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
+        "stelle": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
+        "beleg": "",
+        "id": "2b893d34db225ebefcd2",
+        "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+        "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+        "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
+        "stelle": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
+        "beleg": "",
+        "id": "3b14c4212263b135196f",
+        "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+        "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+        "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert.",
+        "stelle": "In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert.",
+        "beleg": "",
+        "id": "7e668458569543e65dc1",
+        "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+        "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+        "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch.",
+        "stelle": "Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch.",
+        "beleg": "",
+        "id": "881c9d4195869fc66428",
+        "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+        "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+        "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte).",
+        "stelle": "* Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte).",
+        "beleg": "",
+        "id": "c420d1b8d8baf0d8c1d7",
+        "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+        "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+        "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Zinsen für Dispokredit liegen oft im zweistelligen Bereich.",
+        "stelle": "Die Zinsen für diese Form der Kreditaufnahme liegen oft im zweistelligen Bereich.",
+        "beleg": "",
+        "id": "eda7f1ca70fc77112c16",
+        "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+        "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+        "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+        "zuletzt_gesehen": "2026-11-27 14:54 UTC"
       },
       {
         "typ": "luecke",
@@ -3126,14 +3169,14 @@
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 13,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 16,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 23,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 9,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 10,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 27,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 10,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 13,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     },
-    "deckung_prozent": 277.8,
-    "bedarf_je_woche": 25.2,
-    "abbau_tage": 0,
+    "deckung_prozent": 271.9,
+    "bedarf_je_woche": 25.7,
+    "abbau_tage": 1,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
   },
@@ -6550,6 +6593,94 @@
     },
     {
       "typ": "luecke",
+      "text": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
+      "stelle": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
+      "beleg": "",
+      "id": "260694ca9f8aa3c67016",
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+      "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
+      "stelle": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
+      "beleg": "",
+      "id": "2b139ae02e3770919d4a",
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+      "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
+      "stelle": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
+      "beleg": "",
+      "id": "2b893d34db225ebefcd2",
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+      "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
+      "stelle": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
+      "beleg": "",
+      "id": "3b14c4212263b135196f",
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+      "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert.",
+      "stelle": "In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert.",
+      "beleg": "",
+      "id": "7e668458569543e65dc1",
+      "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+      "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+      "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch.",
+      "stelle": "Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch.",
+      "beleg": "",
+      "id": "881c9d4195869fc66428",
+      "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+      "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+      "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte).",
+      "stelle": "* Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte).",
+      "beleg": "",
+      "id": "c420d1b8d8baf0d8c1d7",
+      "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+      "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+      "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Zinsen für Dispokredit liegen oft im zweistelligen Bereich.",
+      "stelle": "Die Zinsen für diese Form der Kreditaufnahme liegen oft im zweistelligen Bereich.",
+      "beleg": "",
+      "id": "eda7f1ca70fc77112c16",
+      "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+      "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+      "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+      "zuletzt_gesehen": "2026-11-27 14:54 UTC"
+    },
+    {
+      "typ": "luecke",
       "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
       "id": "760cdea8544be9d1c7c0",
@@ -6699,95 +6830,179 @@
     }
   ],
   "kapazitaet": {
-    "stichtag": "2026-11-25",
-    "basis": "2026-11-25",
+    "stichtag": "2026-11-27",
+    "basis": "2026-11-27",
     "projiziert": false,
-    "artikel": 150,
-    "faellig": 10,
+    "artikel": 154,
+    "faellig": 16,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
-      "frist": "2026-11-27",
-      "restlaufzeit": 2
+      "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
+      "frist": "2026-11-28",
+      "restlaufzeit": 1
     },
     "budget": 10,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 10.0,
-    "bedarf_je_tag": 3.6,
-    "bedarf_je_woche": 25.2,
-    "deckung_prozent": 277.8,
+    "bedarf_je_tag": 3.678,
+    "bedarf_je_woche": 25.7,
+    "deckung_prozent": 271.9,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": 1,
     "verletzungen_alt": 0,
-    "verletzungen_neu": 0,
+    "verletzungen_neu": 6,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
-    "verletzungen": [],
-    "offen_im_horizont": 150,
-    "puenktlich": true,
+    "verletzungen": [
+      {
+        "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
+        "titel": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": false,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
+        "titel": "7 Gewohnheiten für finanzielle Freiheit",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": false,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
+        "titel": "Stromfresser im Haushalt entlarven",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": false,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen",
+        "titel": "Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": false,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-11-27-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
+        "titel": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": false,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-11-27-wlan-verbessern-verstaerker-oder-mesh-was-passt",
+        "titel": "WLAN verbessern: Verstärker oder Mesh – was passt?",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": false,
+        "folgeprüfung": false
+      }
+    ],
+    "offen_im_horizont": 154,
+    "puenktlich": false,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-25",
+      "bis": "2027-03-27",
       "tage": 120,
-      "weg_frei": true,
-      "erstverletzung": null,
-      "erstverletzung_seite": null,
-      "erstverletzung_frist": null,
-      "verletzungen": 0,
-      "seiten": 0,
+      "weg_frei": false,
+      "erstverletzung": "2026-11-28",
+      "erstverletzung_seite": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
+      "erstverletzung_frist": "2026-11-27",
+      "verletzungen": 6,
+      "seiten": 6,
       "rueckstand_verletzungen": 0
     }
   },
   "abbrueche": [],
-  "arbeitsvorrat": [],
-  "offen": [],
+  "arbeitsvorrat": [
+    {
+      "slug": "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen",
+      "titel": "Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "faellig": true,
+      "frist": null,
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "faellig"
+    },
+    {
+      "slug": "2026-11-27-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
+      "titel": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "faellig": true,
+      "frist": null,
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "faellig"
+    },
+    {
+      "slug": "2026-11-27-wlan-verbessern-verstaerker-oder-mesh-was-passt",
+      "titel": "WLAN verbessern: Verstärker oder Mesh – was passt?",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "faellig": true,
+      "frist": null,
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "faellig"
+    }
+  ],
+  "offen": [
+    {
+      "slug": "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen",
+      "titel": "Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "faellig": true,
+      "frist": null,
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "faellig"
+    },
+    {
+      "slug": "2026-11-27-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
+      "titel": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "faellig": true,
+      "frist": null,
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "faellig"
+    },
+    {
+      "slug": "2026-11-27-wlan-verbessern-verstaerker-oder-mesh-was-passt",
+      "titel": "WLAN verbessern: Verstärker oder Mesh – was passt?",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "faellig": true,
+      "frist": null,
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "faellig"
+    }
+  ],
   "vorlauf": [],
   "laeufe": [
     {
-      "slug": "2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie",
-      "titel": "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie",
-      "fassung_sha256": "fd9a4d38b49aff843bfe06ab49c8cd2765e0d951cd22e20a22d0c05f43ed94d6",
-      "text_sha256": "38a992591e45a6af2383c2404bb827245ad02ae0489d032b364d9a45830a69c8",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen.",
-          "stelle": "Die Amortisationsdauer von etwa zehn Jahren entspricht einer gängigen Erwartungshaltung für kleine Solaranlagen (Faustregel: bei 10‑jähriger Lebensdauer sollte die Investition innerhalb dieser Zeit zu",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme.",
-          "stelle": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme, jedoch können allgemeine Förderungen für Photovoltaik‑Anlagen unter bestimmten Voraussetzungen gelten.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
-          "stelle": "Der rechtliche Rahmen verlangt, dass du das Gerät beim Netzbetreiber anmeldest. Die Meldung ist in der Regel unverbindlich und kostet kaum etwas.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        }
-      ],
-      "geo": 50,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b); 2 Befund(e) ohne belegbaren Textanker verworfen",
-      "aenderungen": [
-        "faktencheck: 2026-11-25"
-      ]
-    },
-    {
-      "slug": "2026-11-25-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "slug": "2026-11-27-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "titel": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
       "fassung_sha256": "3df7d1b2b2a0b718c359d3addbb9bf151b0324c69c578679f9e1f53d422e0037",
       "text_sha256": "c626cb71089c36b645bc135ffc712225bb20adf244f280402a3021cc47a8ef5c",
@@ -6804,7 +7019,7 @@
       ]
     },
     {
-      "slug": "2026-11-25-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "slug": "2026-11-27-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "titel": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
       "fassung_sha256": "4ec01edfb0309c488c2be1ee48afd8f824663d621bb51050831501482c2c487b",
       "text_sha256": "d765e29a2904f7d22ce19c3c25afce67f00b015901332d1a63d1dcc8cc12620e",
@@ -6821,10 +7036,98 @@
       ]
     },
     {
-      "slug": "2026-11-25-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "titel": "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?",
+      "fassung_sha256": "96efa54cd13bc3ea665b78917b2cd85cae8da3b2f33cbd3b6bdfd6a408669685",
+      "text_sha256": "01c9ccab4f21fd4be6cea506b80bdc895c59d625beaca4a657fb366112928625",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
+          "stelle": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
+          "stelle": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
+          "beleg": ""
+        },
+        {
+          "typ": "praezision",
+          "text": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
+          "stelle": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
+          "stelle": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
+          "beleg": ""
+        }
+      ],
+      "geo": 50,
+      "fehler": [
+        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
+      "aenderungen": [
+        "faktencheck: 2026-11-27"
+      ]
+    },
+    {
+      "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes",
+      "titel": "Finanzielles Sicherheitsnetz: So schützt du dein Erspartes",
+      "fassung_sha256": "af9cd6f53c8b83ddf9e9591c0084a940b4c02cf847f0008cc638712dbe6d545a",
+      "text_sha256": "a4714f20154336b0cd2cf946345c0de6d3bce8f8557573bbb39b3f9fb7d3937e",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte).",
+          "stelle": "* Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte).",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch.",
+          "stelle": "Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert.",
+          "stelle": "In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Zinsen für Dispokredit liegen oft im zweistelligen Bereich.",
+          "stelle": "Die Zinsen für diese Form der Kreditaufnahme liegen oft im zweistelligen Bereich.",
+          "beleg": ""
+        }
+      ],
+      "geo": 67,
+      "fehler": [
+        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen",
+      "aenderungen": [
+        "faktencheck: 2026-11-27"
+      ]
+    },
+    {
+      "slug": "2026-11-27-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen",
       "titel": "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen",
-      "fassung_sha256": "9e366dcdd8afe19ef586024b58db5e07cf704f8d3bd54dd0a4958c6ab57f2fb0",
-      "text_sha256": "06a8b7fd1ad7bac8f81cf763afc9c5f2a8ae2b91d7eddcc190e856d08a41fb0b",
+      "fassung_sha256": "4982794ddce241b8c8cf0907b593257b554494411ba6cef42eda7ef3fed58161",
+      "text_sha256": "289bf96c3248e9c78e11a813ad111566a2670daf731097fb148058620686bdc9",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6838,7 +7141,7 @@
       ]
     },
     {
-      "slug": "2026-11-25-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
+      "slug": "2026-11-27-heizperiode-beginn-2026-warum-der-gas-check-im-oktober",
       "titel": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
       "fassung_sha256": "6b26433ad93c6499e87b683eb8f5830f229017319ad10582f7a20dab3247bdab",
       "text_sha256": "e50c7691b67a1ff0013df0e8df7f5686edbf76a43f5acdaa54f8bb3d636b1e1f",
@@ -6855,10 +7158,10 @@
       ]
     },
     {
-      "slug": "2026-11-25-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
-      "titel": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
-      "fassung_sha256": "6f696a11d74e37d18f8d23bc7477d297f17ea014d8b50deb6595ea09bd3af948",
-      "text_sha256": "18335dfaabbe145583472446d90a379d64a76895a42e851052ff0a85f62847fd",
+      "slug": "2026-11-27-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
+      "titel": "Homeoffice zu zweit: Reicht deine Leitung wirklich aus?",
+      "fassung_sha256": "8cac8a2b9523d0cb30d2832ffa304ee297dc47d3642ef1afb63e7916dcca07fa",
+      "text_sha256": "c62f7ac39f3565d49cadc1b0b5998de7562ff66bc04420682e2b404e1cc24b78",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
@@ -6872,9 +7175,26 @@
       ]
     },
     {
-      "slug": "2026-11-25-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
+      "slug": "2026-11-27-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch",
+      "titel": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
+      "fassung_sha256": "8f7b56eea1b6b559c03be05df757e2f20c18f62ef77bafbf0a0fe0815c2869ec",
+      "text_sha256": "be17e5c45dab173705271279dee520a33522fc6df588141bbfcd3cb80a37c72f",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 0,
+      "quellen": 0,
+      "befunde": [],
+      "geo": 67,
+      "fehler": [],
+      "fachpruefung": "übersprungen (bytegebundener Reserve-Entwurf)",
+      "aenderungen": [
+        "unangetastet: bytegebundener Reserve-Entwurf (#900) – Nachmessung gehört zur Reserve-Kette, nicht in diesen Lauf"
+      ]
+    },
+    {
+      "slug": "2026-11-27-kreditkarte-ohne-fremdwaehrungsgebuehr-2026",
       "titel": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
-      "fassung_sha256": "e5c8de5042249c2d9978a007a69b823682121c2df727f90b247f007beb3175bc",
+      "fassung_sha256": "d46d5a75d668b1d70a7deda32b5336c416e040f2dea4a1af3b60dc6f15546ce8",
       "text_sha256": "fc42da2a2ab2934c505f38d464ec678052c35c96385b9a36243998c6f1794a5c",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
@@ -6889,44 +7209,10 @@
       ]
     },
     {
-      "slug": "2026-11-25-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
+      "slug": "2026-11-27-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen",
       "titel": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
       "fassung_sha256": "8f9ae8faa41c1c71008ef51c5e1f9aefa8516ad7e812ed9efeafadcc00e3e7dc",
       "text_sha256": "b87658f2aeb2587578dd57fa7cb9cca19a29c9b17800cbfc96cace92afe57686",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
-      "geo": 67,
-      "fehler": [],
-      "fachpruefung": "übersprungen (bytegebundener Reserve-Entwurf)",
-      "aenderungen": [
-        "unangetastet: bytegebundener Reserve-Entwurf (#900) – Nachmessung gehört zur Reserve-Kette, nicht in diesen Lauf"
-      ]
-    },
-    {
-      "slug": "2026-11-25-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage",
-      "titel": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
-      "fassung_sha256": "ed432392a6fc4685a023ee3e740c0489d096c412b82a74d21db94c40317e6294",
-      "text_sha256": "224453cb8b03b115386238735fd767e132a210f99bb16fbd41692e9317008ac4",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
-      "geo": 67,
-      "fehler": [],
-      "fachpruefung": "übersprungen (bytegebundener Reserve-Entwurf)",
-      "aenderungen": [
-        "unangetastet: bytegebundener Reserve-Entwurf (#900) – Nachmessung gehört zur Reserve-Kette, nicht in diesen Lauf"
-      ]
-    },
-    {
-      "slug": "2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt",
-      "titel": "WLAN verbessern: Verstärker oder Mesh – was passt?",
-      "fassung_sha256": "08ee2855c88d602ba5f0cc772915c3276e863e7adc01139a75ab7a6a35889f19",
-      "text_sha256": "fc64031e82ded16f0335bbe992deac955c6c3a9826501d1314fe8a641e83be76",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
