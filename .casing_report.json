@@ -1,9 +1,9 @@
 {
- "stand": "2026-11-26T15:47:40Z",
+ "stand": "2026-11-27T15:36:37Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
  "dateien": 2,
- "gepruefte_dateien": 156,
- "woerter": 290148,
+ "gepruefte_dateien": 159,
+ "woerter": 297539,
  "erkannte_befunde": 3,
  "befunde": 3,
  "hart": 0,
@@ -17,7 +17,7 @@
    "woerter": 1091
   },
   {
-   "pfad": "content/posts/2026-11-26-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
+   "pfad": "content/posts/2026-11-27-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
    "erkannte_befunde": 2,
    "befunde": 2,
    "woerter": 3719
