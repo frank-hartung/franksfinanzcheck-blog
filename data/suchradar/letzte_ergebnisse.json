@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-26T17:57:57.670559+02:00",
+ "zeitstempel": "2026-11-27T17:47:17.184780+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -8,15 +8,15 @@
   "fehler": 3,
   "uebersprungen": 0
  },
- "treffer_gesamt": 149,
+ "treffer_gesamt": 157,
  "treffer_organisch": 0,
  "datenqualitaet": {
   "anfragen_erfolgreich": 22,
   "anfragen_organisch": 0,
   "anfragen_rueckfall": 22,
-  "treffer_gesamt": 149,
+  "treffer_gesamt": 157,
   "treffer_organisch": 0,
-  "treffer_rueckfall": 149,
+  "treffer_rueckfall": 157,
   "rueckfall_anteil": 1.0,
   "anbieter": {
    "wikipedia": 22
@@ -40,6 +40,16 @@
  "rang": [
   {
    "anfrage": "5G Router",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Abdeckung Wohnung",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -140,16 +150,6 @@
   },
   {
    "anfrage": "Versicherungen kündigen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Zahnzusatzversicherung ohne Wartezeit",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
