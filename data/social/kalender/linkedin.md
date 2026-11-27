@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 27.11.2026 02:02 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.11.2026 16:17 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 27. November 2026
-- **07:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
 ### Mo, 30. November 2026
 - **07:45** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
@@ -28,20 +25,20 @@
 - **07:45** ⏳ Energieeffiziente Geräte: So sinken deine Fixkosten — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/
 ### Fr, 04. Dezember 2026
-- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+- **07:45** ⏳ Finanzielles Sicherheitsnetz: So schützt du dein Erspartes — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes/
 ### Mo, 07. Dezember 2026
 - **07:45** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
 ### Di, 08. Dezember 2026
-- **07:45** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
+- **07:45** ⏳ Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen/
 ### Mi, 09. Dezember 2026
 - **07:45** ⏳ Geschirrspüler voll beladen: Wasser und Strom sparen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/
 ### Do, 10. Dezember 2026
-- **07:45** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Fr, 11. Dezember 2026
 - **07:45** ⏳ Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/

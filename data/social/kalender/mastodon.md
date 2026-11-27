@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 27.11.2026 02:02 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.11.2026 16:17 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Fr, 27. November 2026
-- **07:30** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
 - **11:30** ⏳ Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/
 ### Mo, 30. November 2026
@@ -43,13 +41,14 @@
 - **11:30** ⏳ Standby-Kosten: Was ein Stromfresser wirklich kostet — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/
 ### Fr, 11. Dezember 2026
-- **07:30** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _zahl_ · Evergreen  
+- **07:30** ⏳ Finanzielles Sicherheitsnetz: So schützt du dein Erspartes — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes/
+- **11:30** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
-- **11:30** ⏳ Finanzielle Freiheit: Wie du eine Sparroutine aufbaust — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 27.11.2026 16:16 · Kaffeemaschine: Was kostet eine Tasse wirklich? → https://mastodon.social/@FranksFinanzcheck/117689065463151103
 - ✅ 26.11.2026 02:01 · Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte → https://mastodon.social/@FranksFinanzcheck/117680040155212119
 - ✅ 25.11.2026 16:45 · Geschenkkarte: Was du beim Kauf und Aufladen wissen musst → https://mastodon.social/@FranksFinanzcheck/117677853811296490
 - ✅ 24.11.2026 04:22 · Geschirrspüler voll beladen: Wasser und Strom sparen → https://mastodon.social/@FranksFinanzcheck/117669268722299454
@@ -59,7 +58,6 @@
 - ✅ 20.11.2026 15:08 · Fenster abdichten: So stoppst du Zugluft an alten Rahmen → https://mastodon.social/@FranksFinanzcheck/117649160681794420
 - ✅ 18.11.2026 23:37 · WLAN-Frust lösen: So findest du den besten Router Standort → https://mastodon.social/@FranksFinanzcheck/117639837069950225
 - ✅ 18.11.2026 15:15 · Flugverspätung Entschädigung: So holst du dein Geld zurück → https://mastodon.social/@FranksFinanzcheck/117637863727269953
-- ✅ 17.11.2026 00:45 · Waschmaschine beladen: Weniger Kosten bei jedem Waschgang → https://mastodon.social/@FranksFinanzcheck/117628781271452138
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
