@@ -178,3 +178,5 @@
 {"ts": "2026-11-27T13:23:49Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-27T13:24:09Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-27T13:27:05Z", "module": "fix_spaces", "action": "apply", "input": {"files": 151}, "output": {"fixes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-11-27T14:04:10Z", "module": "pinterest_link_guard", "action": "local", "input": {"targets": 96}, "output": {"problems": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-11-27T14:04:10Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}

@@ -430,3 +430,5 @@
 {"ts": "2026-11-27T10:58:51Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
 {"ts": "2026-11-27T13:27:29Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-27T13:27:29Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
+{"ts": "2026-11-27T14:04:08Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-27T14:04:08Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
