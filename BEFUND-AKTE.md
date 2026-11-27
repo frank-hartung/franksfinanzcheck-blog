@@ -8,7 +8,7 @@ _Stand 2026-11-27 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 |---|---|
 | Offene Befunde | 298 |
 | Seiten betroffen | 84 (davon live: 52) |
-| Text seit dem Befund geändert | 251 |
+| Text seit dem Befund geändert | 255 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
@@ -33,7 +33,7 @@ _Stand 2026-11-27 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 256 von 298 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 260 von 298 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -1357,6 +1357,24 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d85c7ed65b4feed178
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4e7bace05ab581449621 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes` · nicht im Live-Bestand · 4 Befund(e)
+
+Seite: `2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `7e668458569543e65dc1` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert. | – |
+| `881c9d4195869fc66428` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch. | – |
+| `c420d1b8d8baf0d8c1d7` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte). | – |
+| `eda7f1ca70fc77112c16` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Zinsen für Dispokredit liegen oft im zweistelligen Bereich. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7e668458569543e65dc1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 881c9d4195869fc66428 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c420d1b8d8baf0d8c1d7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden eda7f1ca70fc77112c16 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-28-dsl-und-internet-flat-guenstig-sichern`
@@ -1457,24 +1475,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 260694ca9f8aa3c6701
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2b139ae02e3770919d4a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2b893d34db225ebefcd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3b14c4212263b135196f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes` · nicht im Live-Bestand · 4 Befund(e)
-
-Seite: `2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `7e668458569543e65dc1` | luecke | 0 T | Text unverändert seit dem Befund | In Deutschland und der EU sind Beträge bis 100.000 € pro Bank und Kunde gesetzlich geschützt; das ist ein Modellwert. | – |
-| `881c9d4195869fc66428` | luecke | 0 T | Text unverändert seit dem Befund | Die Zinsen für überzogene Konten sind in Deutschland traditionell sehr hoch. | – |
-| `c420d1b8d8baf0d8c1d7` | luecke | 0 T | Text unverändert seit dem Befund | Die ideale Höhe liegt oft zwischen drei und sechs Monatsausgaben (Modellannahme für Privathaushalte). | – |
-| `eda7f1ca70fc77112c16` | luecke | 0 T | Text unverändert seit dem Befund | Die Zinsen für Dispokredit liegen oft im zweistelligen Bereich. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7e668458569543e65dc1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 881c9d4195869fc66428 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden c420d1b8d8baf0d8c1d7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden eda7f1ca70fc77112c16 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
