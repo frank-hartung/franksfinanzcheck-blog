@@ -6,54 +6,39 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:instagram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fix
- kosten:nutzen:2026-11-27@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
-DTSTART:20261127T174500Z
-DTEND:20261127T180000Z
-SUMMARY:Instagram: Energieeffiziente Geräte: So sinken deine Fixkosten
-  (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ger
- aete-so-sinken-deine-fixkosten/
-URL:https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ge
- raete-so-sinken-deine-fixkosten/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-d
- ein-erspartes:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+UID:instagram:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-h
+ eizkosten:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
 DTSTART:20261128T104500Z
 DTEND:20261128T110000Z
-SUMMARY:Instagram: Finanzielles Sicherheitsnetz: So schützt du dein Er
- spartes (nutzen)
+SUMMARY:Instagram: Gas-Anbieter wechseln: Strategien gegen hohe Heizko
+ sten (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-27-finanzielles-sicherhe
- itsnetz-so-schuetzt-du-dein-erspartes/
-URL:https://franksfinanzcheck.de/posts/2026-11-27-finanzielles-sicherh
- eitsnetz-so-schuetzt-du-dein-erspartes/
+ : https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln
+ -strategien-gegen-hohe-heizkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechsel
+ n-strategien-gegen-hohe-heizkosten/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-
- sparst:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+UID:instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
+ utzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
 DTSTART:20261129T104500Z
 DTEND:20261129T110000Z
-SUMMARY:Instagram: Secondhand-Kleidung kaufen: So prüfst du Stoff\, Nä
- hte (nutzen)
+SUMMARY:Instagram: Geld abheben im Ausland: Wo die Gebühren wirklich e
+ ntstehen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-s
- o-erkennst-du-qualitaet-sparst/
-URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
- so-erkennst-du-qualitaet-sparst/
+ : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
+ nd-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-
  tasse-kaffee:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+DTSTAMP:20261127T233356Z
 DTSTART:20261201T104500Z
 DTEND:20261201T110000Z
 SUMMARY:Instagram: Kaffeemaschine: Was kostet eine Tasse wirklich? (nu
@@ -68,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloecher
  n-in-der-wohnung:nutzen:2026-12-03@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+DTSTAMP:20261127T233356Z
 DTSTART:20261203T104500Z
 DTEND:20261203T110000Z
 SUMMARY:Instagram: Mesh-WLAN nachrüsten: Wann lohnt sich die Investiti
@@ -81,39 +66,39 @@ URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-h
- eizkosten:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+UID:instagram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fix
+ kosten:nutzen:2026-12-05@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
 DTSTART:20261205T104500Z
 DTEND:20261205T110000Z
-SUMMARY:Instagram: Gas-Anbieter wechseln: Strategien gegen hohe Heizko
- sten (nutzen)
+SUMMARY:Instagram: Energieeffiziente Geräte: So sinken deine Fixkosten
+  (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln
- -strategien-gegen-hohe-heizkosten/
-URL:https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechsel
- n-strategien-gegen-hohe-heizkosten/
+ : https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ger
+ aete-so-sinken-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ge
+ raete-so-sinken-deine-fixkosten/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt
- -zinsen:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-06@fr
+ anksfinanzcheck.de
+DTSTAMP:20261127T233356Z
 DTSTART:20261206T104500Z
 DTEND:20261206T110000Z
-SUMMARY:Instagram: Notgroschen anlegen: Wo dein Geld sicher parkt & Zi
- nsen (nutzen)
+SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
+ tvertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-27-notgroschen-anlegen-w
- o-dein-geld-sicher-parkt-zinsen/
-URL:https://franksfinanzcheck.de/posts/2026-11-27-notgroschen-anlegen-
- wo-dein-geld-sicher-parkt-zinsen/
+ : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
+ ern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-
  strom:nutzen:2026-12-08@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+DTSTAMP:20261127T233356Z
 DTSTART:20261208T104500Z
 DTEND:20261208T110000Z
 SUMMARY:Instagram: Geschirrspüler voll beladen: Wasser und Strom spare
@@ -126,18 +111,33 @@ URL:https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-12-10@fr
- anksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+UID:instagram:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-a
+ nbieterwechsel:nutzen:2026-12-10@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
 DTSTART:20261210T104500Z
 DTEND:20261210T110000Z
-SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
- tvertrag (nutzen)
+SUMMARY:Instagram: DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten und Eff
+ ektivpreis (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
- ern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
+ : https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln
+ -praxis-tipps-fuer-den-anbieterwechsel/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-
+ fixkosten:nutzen:2026-12-12@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
+DTSTART:20261212T104500Z
+DTEND:20261212T110000Z
+SUMMARY:Instagram: Mehrwegflaschen Pfand: Was kostet das Getränk ohne 
+ Pfand? (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand
+ -so-optimierst-du-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfan
+ d-so-optimierst-du-deine-fixkosten/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

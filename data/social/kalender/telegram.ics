@@ -6,54 +6,39 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-he
- izkosten:nutzen:2026-11-27@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
-DTSTART:20261127T170000Z
-DTEND:20261127T171500Z
-SUMMARY:Telegram (Kanal): Gas-Anbieter wechseln: Strategien gegen hohe
-  Heizkosten (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-w
- echseln-strategien-gegen-hohe-heizkosten/
-URL:https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechsel
- n-strategien-gegen-hohe-heizkosten/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-de
- in-erspartes:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+UID:telegram:2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-s
+ trom:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
 DTSTART:20261128T060000Z
 DTEND:20261128T061500Z
-SUMMARY:Telegram (Kanal): Finanzielles Sicherheitsnetz: So schützt du 
- dein Erspartes (nutzen)
+SUMMARY:Telegram (Kanal): Geschirrspüler voll beladen: Wasser und Stro
+ m sparen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-27-finanzielles-s
- icherheitsnetz-so-schuetzt-du-dein-erspartes/
-URL:https://franksfinanzcheck.de/posts/2026-11-27-finanzielles-sicherh
- eitsnetz-so-schuetzt-du-dein-erspartes/
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-13-geschirrspuele
+ r-voll-so-sparst-du-wasser-und-strom/
+URL:https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll
+ -so-sparst-du-wasser-und-strom/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-s
- parst:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+UID:telegram:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
+ bieterwechsel:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
 DTSTART:20261129T060000Z
 DTEND:20261129T061500Z
-SUMMARY:Telegram (Kanal): Secondhand-Kleidung kaufen: So prüfst du Sto
- ff\, Nähte (nutzen)
+SUMMARY:Telegram (Kanal): DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten 
+ und Effektivpreis (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kle
- idung-so-erkennst-du-qualitaet-sparst/
-URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
- so-erkennst-du-qualitaet-sparst/
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-w
+ echseln-praxis-tipps-fuer-den-anbieterwechsel/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
  asse-kaffee:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+DTSTAMP:20261127T233356Z
 DTSTART:20261205T060000Z
 DTEND:20261205T061500Z
 SUMMARY:Telegram (Kanal): Kaffeemaschine: Was kostet eine Tasse wirkli
@@ -68,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
  -in-der-wohnung:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261127T151706Z
+DTSTAMP:20261127T233356Z
 DTSTART:20261206T060000Z
 DTEND:20261206T061500Z
 SUMMARY:Telegram (Kanal): Mesh-WLAN nachrüsten: Wann lohnt sich die In
@@ -78,6 +63,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  ruesten-schluss-mit-funkloechern-in-der-wohnung/
 URL:https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachrueste
  n-schluss-mit-funkloechern-in-der-wohnung/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixk
+ osten:nutzen:2026-12-12@franksfinanzcheck.de
+DTSTAMP:20261127T233356Z
+DTSTART:20261212T060000Z
+DTEND:20261212T061500Z
+SUMMARY:Telegram (Kanal): Energieeffiziente Geräte: So sinken deine Fi
+ xkosten (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-01-energieeffizie
+ nte-geraete-so-sinken-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-ge
+ raete-so-sinken-deine-fixkosten/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

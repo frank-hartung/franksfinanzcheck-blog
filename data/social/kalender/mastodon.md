@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 27.11.2026 16:17 (Europe/Berlin)  
+> Automatisch aktualisiert: 28.11.2026 00:33 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 27. November 2026
-- **11:30** ⏳ Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/
 ### Mo, 30. November 2026
 - **07:30** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/
@@ -41,13 +38,13 @@
 - **11:30** ⏳ Standby-Kosten: Was ein Stromfresser wirklich kostet — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/
 ### Fr, 11. Dezember 2026
-- **07:30** ⏳ Finanzielles Sicherheitsnetz: So schützt du dein Erspartes — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes/
-- **11:30** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _zahl_ · Evergreen  
+- **07:30** ⏳ Finanzielles sicherheitsnetz so schuetzt du dein erspartes — _nutzen_ · Launch
+- **07:30** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 28.11.2026 00:33 · Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? → https://mastodon.social/@FranksFinanzcheck/117691019121580551
 - ✅ 27.11.2026 16:16 · Kaffeemaschine: Was kostet eine Tasse wirklich? → https://mastodon.social/@FranksFinanzcheck/117689065463151103
 - ✅ 26.11.2026 02:01 · Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte → https://mastodon.social/@FranksFinanzcheck/117680040155212119
 - ✅ 25.11.2026 16:45 · Geschenkkarte: Was du beim Kauf und Aufladen wissen musst → https://mastodon.social/@FranksFinanzcheck/117677853811296490
@@ -57,7 +54,6 @@
 - ✅ 20.11.2026 23:15 · Wie viel Bandbreite brauchst du fürs Streaming? → https://mastodon.social/@FranksFinanzcheck/117651076043563430
 - ✅ 20.11.2026 15:08 · Fenster abdichten: So stoppst du Zugluft an alten Rahmen → https://mastodon.social/@FranksFinanzcheck/117649160681794420
 - ✅ 18.11.2026 23:37 · WLAN-Frust lösen: So findest du den besten Router Standort → https://mastodon.social/@FranksFinanzcheck/117639837069950225
-- ✅ 18.11.2026 15:15 · Flugverspätung Entschädigung: So holst du dein Geld zurück → https://mastodon.social/@FranksFinanzcheck/117637863727269953
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

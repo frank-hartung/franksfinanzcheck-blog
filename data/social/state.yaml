@@ -1709,6 +1709,26 @@ history:
     #Gasrechnung #Heizkosten #Stromsparen #Energiekosten'
   ref: '117689065463151103'
   ai: false
+- posted_at: '2026-11-28T00:33:46.427777+01:00'
+  channel: mastodon
+  slug: 2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung
+  title: 'Mesh-WLAN nachrüsten: Wann lohnt sich die Investition?'
+  angle: mythos
+  url: https://mastodon.social/@FranksFinanzcheck/117691019121580551
+  ok: true
+  text: 'Mythos: „Ein teurerer Tarif ist automatisch der schnellere.“
+
+
+    Fakt: Ein Mesh-WLAN ersetzt einzelne Funklöcher durch vernetzte Knotenpunkte,
+    die deine Wohnung nahtlos unter einem einzigen Netzwerknamen versorgen.
+
+
+    https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #WLAN #Internet #DSL #Handytarif'
+  ref: '117691019121580551'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1734,4 +1754,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-27T16:17:05.354456+01:00'
+updated_at: '2026-11-28T00:33:55.500042+01:00'
