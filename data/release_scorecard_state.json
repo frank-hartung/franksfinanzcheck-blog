@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "generated_at": "2026-11-26T19:08:42Z",
+  "generated_at": "2026-11-27T02:28:41Z",
   "modus": "kandidaten",
-  "commit": "7db187c7c7ee66ba438afeabe8fb2494f44a9ea4",
+  "commit": "59af63822c8aa7e15d1fe456856e3a46a3c7c7a7",
   "kapazitaet": {
-    "stichtag": "2026-11-26",
-    "basis": "2026-11-26",
+    "stichtag": "2026-11-27",
+    "basis": "2026-11-27",
     "projiziert": false,
     "artikel": 151,
-    "faellig": 10,
+    "faellig": 13,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
-      "frist": "2026-11-27",
+      "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
+      "frist": "2026-11-28",
       "restlaufzeit": 1
     },
-    "budget": 10,
+    "budget": 13,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 10.0,
+    "kapazitaet_je_tag": 13.0,
     "bedarf_je_tag": 3.611,
     "bedarf_je_woche": 25.3,
-    "deckung_prozent": 276.9,
+    "deckung_prozent": 360.0,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-26",
+      "bis": "2027-03-27",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -47,10 +47,10 @@
       "rueckstand_verletzungen": 0
     },
     "sockel": 10,
-    "empfohlenes_budget": 10,
+    "empfohlenes_budget": 13,
     "empfehlung_erreicht": true,
     "hartes_limit": 21,
-    "spitze_geprueft": 58
+    "spitze_geprueft": 56
   },
   "ursachen": [
     {
@@ -132,6 +132,17 @@
       "anzahl": 5
     },
     {
+      "check": "F1-faktenfrische",
+      "dimension": "faktenalter",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/faktenfrische.py faelligkeit() (SSOT-Intervalle)",
+      "artikel": [
+        "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen"
+      ],
+      "anzahl": 1
+    },
+    {
       "check": "T1-zeichenlaenge",
       "dimension": "technik",
       "wirkung": "blockiert",
@@ -162,9 +173,9 @@
     "ueberholt": 256,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 27,
+    "aeltester_tage": 28,
     "frist_tage": 14,
-    "ueber_frist": 144,
+    "ueber_frist": 154,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
@@ -1511,12 +1522,12 @@
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
       "sha256": "01f1dba45abfdf002d7e3b91f8a212b9947d421f16191c9f550c1547470e253f",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1525,7 +1536,14 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F1-faktenfrische",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "45 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL) – keine Veröffentlichung ohne aktuellen Beleg"
+        }
+      ]
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
       "sha256": "53f6010c7834c886bb950e62bccaa59601322eaa334c2fb15f0b7457252f7f86",
