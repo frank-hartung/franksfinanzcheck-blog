@@ -1,6 +1,5 @@
 {"date": "2026-08-13", "kritisch": 0, "fest": 0}
 {"date": "2026-08-13", "kritisch": 0, "fest": 0}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
 {"date": "2026-08-14", "kritisch": 0, "fest": 0}
 {"date": "2026-08-14", "kritisch": 0, "fest": 1}
 {"date": "2026-08-14", "kritisch": 0, "fest": 0}
@@ -398,3 +397,4 @@
 {"date": "2026-11-24", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-11-25", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-11-25", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-27", "kritisch": 0, "fest": 0, "modus": "verify"}

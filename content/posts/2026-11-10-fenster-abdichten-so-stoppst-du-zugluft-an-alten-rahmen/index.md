@@ -48,6 +48,7 @@ affiliate_exempt_reason: "Eine Fensterdichtung wird nach Zustand und Passform au
 
 
 
+
 Spürst du am geschlossenen Fenster einen Luftzug, suche erst die undichte Stelle. Nicht jede Fuge lässt sich sinnvoll mit demselben Dichtband schließen.
 
 Die Dichtungen sind spröde oder fehlen ganz.  

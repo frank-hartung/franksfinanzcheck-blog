@@ -46,6 +46,7 @@ faktenfrische_aliases:
 
 
 
+
 Mehrwegflaschen Pfand im Check: Auf dem Kassenbon stehen Getränkepreis und Pfand getrennt. Für deinen Haushalt heißt das: Geld ist bis zur Rückgabe gebunden, aber nicht endgültig ausgegeben.
 
 Es ist eine Art zinsloses Darlehen an den Handel – du leihst dem Supermarkt dein Geld ohne Gegenleistung. Wer seine leeren Gefäße konsequent zurückbringt, handelt wirtschaftlich klug. In meinem Fixkosten-Cockpit bei FranksFinanzcheck betrachten wir genau solche kleinen Posten. Kleinvieh macht auch Mist.

@@ -724,6 +724,76 @@
       "mikro": 11,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-11-27-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": true
+    },
+    "2026-11-27-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+      "mikro": 7,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
+      "mikro": 7,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage": {
+      "mikro": 7,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-27-wlan-verbessern-verstaerker-oder-mesh-was-passt": {
+      "mikro": 11,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -732,5 +802,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-11-25"
+  "stand": "2026-11-27"
 }

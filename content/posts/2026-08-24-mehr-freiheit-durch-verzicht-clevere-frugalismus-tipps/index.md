@@ -25,7 +25,7 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 social_posted: true
 keywords: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus Tipps"]
 pin_title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-pin_description: "*Werbung | Frugalismus-Tipps: Weniger ausgeben, ohne auf alles zu verzichten: Wähle eine Ausgabe, die dir wenig bringt, und entscheide bewusst, wofür du das Geld… Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geld #sparen"
+pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, 5 Hacks für den Alltag und eine Fallstudie mit rund 380 € Ersparnis pro Monat. So gewinnst du Zeit und finanzielle Freiheit. Jetzt Guide lesen!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
@@ -47,7 +47,7 @@ Bedeutet Sparen für dich grauen Alltag? Schlechte Laune und Verzicht? Dann verw
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Frugalisten verzichten nicht auf Dinge, die Freude bringen. Sie streichen nur Ausgaben ohne Wert: Impulskäufe, ungenutzte Abos, teure Statussymbole.
+Frugalisten verzichten nicht auf Dinge, die Freude bringen. Du streichst nur Ausgaben ohne Wert: Impulskäufe, ungenutzte Abos, teure Statussymbole.
 
 Mit den richtigen **[Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)‑Tipps** kann dir jeden Monat ein Überschuss bleiben. Die Beispielrechnungen unten arbeiten mit offen gelegten Annahmen, damit du die Größenordnung auf deine Zahlen übertragen kannst. Er liegt auf einem guten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) oder in breiten Sparplänen. Dort arbeitet er für dich.
 
@@ -236,7 +236,7 @@ Führe zwei bis drei Monate ein Haushaltsbuch; das ist ein Beispielwert. Notiere
 
 ### Was mache ich mit dem ersparten Geld?
 
-Zuerst füllst du deinen Notgroschen. Ein Tagesgeldkonto ist dafür ideal. Alles darüber fließt in breite ETF‑Sparpläne. Sie sind günstig und weltweit gestreut.
+Zuerst füllst du deinen Notgroschen. Ein Tagesgeldkonto ist dafür ideal. Alles darüber fließt in breite ETF‑Sparpläne. Du bist günstig und weltweit gestreut.
 
 ### Wie wirkt sich Inflation auf meine Frugalismus‑Strategie aus?
 

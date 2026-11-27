@@ -384,3 +384,5 @@
 {"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-25T19:37:31.845045+00:00", "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-27T14:45:53.596797+00:00", "slug": "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-27T14:45:53.596797+00:00", "slug": "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen", "regel": "RS5", "aktion": "fix-deterministisch"}

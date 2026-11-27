@@ -130,6 +130,10 @@ Es ist ein weit verbreiteter Irrglaube, dass ein schnellerer Tarif automatisch a
 
 Dein Router ist die Zentrale. Er muss die Datenpakete sortieren. Wenn zwei Personen gleichzeitig arbeiten, muss der Router entscheiden, welches Paket zuerst gesendet wird. Günstige Router von der Stange stoßen hier schnell an ihre Grenzen. Du hast zu wenig Arbeitsspeicher oder einen zu schwachen Prozessor. Ein hochwertiger Router kann den Datenverkehr priorisieren. Du kannst dort zum Beispiel einstellen, dass Video-Konferenzen immer Vorrang vor Windows-Updates haben. Das sichert die Qualität deiner Arbeit, ohne dass du einen teureren Tarif buchen musst.
 
+## Fazit: Homeoffice zu zweit – Reicht deine Leitung wirklich aus
+
+Der Hebel bei **Homeoffice zu zweit: Reicht deine Leitung wirklich aus?** sitzt nicht im Verzicht, sondern im Nachrechnen. Durch geschicktes Timing beim Buchen und einen unabhängigen Preisvergleich reist du vollkommen entspannt zum absoluten Schnäppchenpreis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+
 ## Häufige Fragen
 
 ### Wie viel Mbit/s brauche ich für 2 Personen im Homeoffice?

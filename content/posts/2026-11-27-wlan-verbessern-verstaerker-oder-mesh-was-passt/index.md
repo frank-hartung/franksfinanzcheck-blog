@@ -50,7 +50,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 ## Was ist ein WLAN‑Verstärker?
 
-Ein WLAN‑Verstärker nimmt das vorhandene Signal auf und sendet es weiter. Du steckst das Gerät in eine Steckdose nahe der schwachen Zone. Die gleiche SSID bleibt erhalten, sodass du keinen Netzwerkwechsel bemerkst. Der Verstärker wirkt wie ein Echo, das das Signal in die gewünschte Richtung lenkt.  
+Ein WLAN‑Verstärker nimmt das vorhandene Signal auf und sendet es weiter. Du steckst das Gerät in eine Steckdose nahe der schwachen Zone. Die gleiche SSID bleibt erhalten, sodass du keinen Netzwerkwechsel bemerkst. Der Verstärker wirkt wie ein Echo, das Signal in die gewünschte Richtung lenkt.  
 
 ## Was ist ein Mesh‑Netz?
 

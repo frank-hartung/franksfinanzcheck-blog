@@ -3040,5 +3040,23 @@
    "badge": "INTERNET & DSL",
    "savings": ""
   }
+ },
+ "2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes": {
+  "title": "Finanzielles Sicherheitsnetz: So schützt du dein Erspartes",
+  "ts": "2026-11-27T14:43:38+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen": {
+  "title": "Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen",
+  "ts": "2026-11-27T14:43:40+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
  }
 }
