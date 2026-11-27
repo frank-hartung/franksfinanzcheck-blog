@@ -64,7 +64,7 @@ Gute **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-c
 
 ![Merkkarte: Kernaussagen zu Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 [Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Überblick“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Das Wichtigste in Kürze
