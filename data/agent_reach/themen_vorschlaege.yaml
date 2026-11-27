@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Einigung im Tarifstreit der Metall- und Elektroindustrie
+  url: https://www.tagesschau.de/wirtschaft/tarifabschluss-metall-elektroindustrie-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-27T01:31:30'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Nvidia-Skandal: US-Regierung setzt Megaspeed auf schwarze Liste'
   url: https://www.tagesschau.de/wirtschaft/unternehmen/megaspeed-us-regierung-sperrliste-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -415,4 +422,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-24T11:22:38'
+zuletzt_ergaenzt: '2026-11-27T01:31:30'
