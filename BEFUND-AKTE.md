@@ -8,7 +8,7 @@ _Stand 2026-11-28 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 |---|---|
 | Offene Befunde | 298 |
 | Seiten betroffen | 84 (davon live: 52) |
-| Text seit dem Befund geändert | 255 |
+| Text seit dem Befund geändert | 264 |
 | Altbestand ohne Fassungs-Hash | 5 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Entfallen (Beitrag entfernt, s. data/faktenfrische_entfernt.yaml) | 3 |
@@ -33,7 +33,7 @@ _Stand 2026-11-28 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 260 von 298 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 269 von 298 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -1321,6 +1321,26 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 10917941e9fae9a9cf0
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab0470bc947932366bc4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `2f7f57dfb8da49a297be` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `3f9faeecdb0a51f6dcc2` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `885b9067fc764e8b1be0` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `befb17bec837c9aaecda` | praezision | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `d2bb167f864ceae0328e` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2f7f57dfb8da49a297be --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f9faeecdb0a51f6dcc2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 885b9067fc764e8b1be0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden befb17bec837c9aaecda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bb167f864ceae0328e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet`
@@ -1355,6 +1375,24 @@ Seite: `2026-11-25-internet-tuning-kostenlos-dns-server-fuer-mehr-speed`
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1189ae6574e7b39ffd14 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d85c7ed65b4feed178a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4e7bace05ab581449621 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen` · nicht im Live-Bestand · 4 Befund(e)
+
+Seite: `2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `260694ca9f8aa3c67016` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete. | – |
+| `2b139ae02e3770919d4a` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken. | – |
+| `2b893d34db225ebefcd2` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer. | – |
+| `3b14c4212263b135196f` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | In der Regel gibt es keine vorzeitige Kündigung ohne Kosten. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 260694ca9f8aa3c67016 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2b139ae02e3770919d4a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2b893d34db225ebefcd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3b14c4212263b135196f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-27-finanzielles-sicherheitsnetz-so-schuetzt-du-dein-erspartes` · nicht im Live-Bestand · 4 Befund(e)
@@ -1423,26 +1461,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5bf7111c673ee53be34
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b3c137c4bb2ebd44eb74 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026` · nicht im Live-Bestand · 5 Befund(e)
-
-Seite: `2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `2f7f57dfb8da49a297be` | luecke | 5 T | Text unverändert seit dem Befund | Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `3f9faeecdb0a51f6dcc2` | luecke | 5 T | Text unverändert seit dem Befund | Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `885b9067fc764e8b1be0` | luecke | 5 T | Text unverändert seit dem Befund | Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `befb17bec837c9aaecda` | praezision | 5 T | Text unverändert seit dem Befund | Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `d2bb167f864ceae0328e` | luecke | 5 T | Text unverändert seit dem Befund | Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2f7f57dfb8da49a297be --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3f9faeecdb0a51f6dcc2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 885b9067fc764e8b1be0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden befb17bec837c9aaecda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bb167f864ceae0328e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie` · nicht im Live-Bestand · 3 Befund(e)
 
 Seite: `2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie`
@@ -1457,24 +1475,6 @@ Seite: `2026-11-25-balkonkraftwerk-der-einfache-einstieg-in-die-solarenergie`
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3d2d36e19ac1ec848670 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 74ec0b50099e3723c1c2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fa697489f22c6a9b4df7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen` · nicht im Live-Bestand · 4 Befund(e)
-
-Seite: `2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `260694ca9f8aa3c67016` | luecke | 1 T | Text unverändert seit dem Befund | Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete. | – |
-| `2b139ae02e3770919d4a` | praezision | 1 T | Text unverändert seit dem Befund | Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken. | – |
-| `2b893d34db225ebefcd2` | luecke | 1 T | Text unverändert seit dem Befund | Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer. | – |
-| `3b14c4212263b135196f` | luecke | 1 T | Text unverändert seit dem Befund | In der Regel gibt es keine vorzeitige Kündigung ohne Kosten. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 260694ca9f8aa3c67016 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2b139ae02e3770919d4a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2b893d34db225ebefcd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3b14c4212263b135196f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)

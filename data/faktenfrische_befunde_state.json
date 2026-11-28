@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-28T00:01:17Z",
+  "erzeugt": "2026-11-28T14:37:43Z",
   "stichtag": "2026-11-28",
   "offen": 298,
   "seiten": 84,
   "live_seiten": 52,
   "live_befunde": 174,
-  "ueberholt": 255,
+  "ueberholt": 264,
   "ohne_fassung": 5,
   "seite_fehlt": 0,
   "entfallen": 3,
@@ -2784,6 +2784,61 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "id": "2f7f57dfb8da49a297be",
+      "typ": "luecke",
+      "text": "Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "id": "3f9faeecdb0a51f6dcc2",
+      "typ": "luecke",
+      "text": "Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "id": "885b9067fc764e8b1be0",
+      "typ": "luecke",
+      "text": "Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "id": "befb17bec837c9aaecda",
+      "typ": "praezision",
+      "text": "Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
+      "id": "d2bb167f864ceae0328e",
+      "typ": "luecke",
+      "text": "Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 5,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-11-25-dsl-wechseln-ohne-ausfall-so-sparst-du-beim-internet",
       "id": "22e300c6973fedbbd737",
       "typ": "luecke",
@@ -2867,6 +2922,50 @@
       "text": "Behauptung, dass ein schnellerer DNS-Server die Wartezeit beim Seitenaufruf spürbar verkürzt, ohne Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
       "alter_tage": 3,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "id": "260694ca9f8aa3c67016",
+      "typ": "luecke",
+      "text": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
+      "beleg": "",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "id": "2b139ae02e3770919d4a",
+      "typ": "praezision",
+      "text": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
+      "beleg": "",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "id": "2b893d34db225ebefcd2",
+      "typ": "luecke",
+      "text": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
+      "beleg": "",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+      "id": "3b14c4212263b135196f",
+      "typ": "luecke",
+      "text": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
+      "beleg": "",
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -3224,61 +3323,6 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
-      "id": "2f7f57dfb8da49a297be",
-      "typ": "luecke",
-      "text": "Keine belegbare Quelle für die Behauptung, dass ein Stromspeicher erst ab einem Eigenverbrauch von 50 % wirtschaftlich sinnvoll ist.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
-      "id": "3f9faeecdb0a51f6dcc2",
-      "typ": "luecke",
-      "text": "Keine Fundstelle für die Faustregel, dass die jährliche Einsparung mindestens 10 % der Investitionssumme betragen muss.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
-      "id": "885b9067fc764e8b1be0",
-      "typ": "luecke",
-      "text": "Keine Quelle für die Angabe, dass pro 1 000 kWh Jahresverbrauch etwa 1 kW installierte PV‑Leistung empfohlen wird.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
-      "id": "befb17bec837c9aaecda",
-      "typ": "praezision",
-      "text": "Die Aussage, dass nach der Amortisation „kostenloser Strom“ entsteht, lässt die weiterhin anfallenden Betriebs‑ und Wartungskosten sowie die Degradation der Module außer Acht.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-23-photovoltaik-lohnt-sich-eine-solaranlage-2026",
-      "id": "d2bb167f864ceae0328e",
-      "typ": "luecke",
-      "text": "Fehlende Quelle für den durchschnittlichen Netzpreis von 0,30 €/kWh, der als Basis für die Einsparungsrechnung dient.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
       "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
       "id": "06bc5a6bc11098317697",
       "typ": "luecke",
@@ -3340,50 +3384,6 @@
       "text": "Für Balkonkraftwerke gibt es derzeit keine speziellen Förderprogramme.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
       "alter_tage": 3,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
-      "id": "260694ca9f8aa3c67016",
-      "typ": "luecke",
-      "text": "Der Freibetrag beträgt 1.000 € für Alleinstehende, 2.000 € für Verheiratete.",
-      "beleg": "",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
-      "id": "2b139ae02e3770919d4a",
-      "typ": "praezision",
-      "text": "Der CHECK24‑Vergleichsrechner hilft, aktuelle Angebote schnell zu überblicken.",
-      "beleg": "",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
-      "id": "2b893d34db225ebefcd2",
-      "typ": "luecke",
-      "text": "Zinsen aus beiden Produkten unterliegen der Abgeltungssteuer.",
-      "beleg": "",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
-      "id": "3b14c4212263b135196f",
-      "typ": "luecke",
-      "text": "In der Regel gibt es keine vorzeitige Kündigung ohne Kosten.",
-      "beleg": "",
-      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
