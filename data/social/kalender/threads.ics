@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:threads:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-
  in-der-wohnung:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261128T151500Z
 DTEND:20261128T153000Z
 SUMMARY:Threads: Mesh-WLAN nachrüsten: Wann lohnt sich die Investition
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixko
  sten:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261128T193000Z
 DTEND:20261128T194500Z
 SUMMARY:Threads: Energieeffiziente Geräte: So sinken deine Fixkosten (
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-29@fran
  ksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261129T081500Z
 DTEND:20261129T083000Z
 SUMMARY:Threads: DSL-Wechselbonus sichern: So sparst du beim Internetv
@@ -52,7 +52,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-ta
  sse-kaffee:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261129T151500Z
 DTEND:20261129T153000Z
 SUMMARY:Threads: Kaffeemaschine: Was kostet eine Tasse wirklich? (nutzen)
@@ -66,7 +66,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nut
  zen:2026-11-30@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261130T081500Z
 DTEND:20261130T083000Z
 SUMMARY:Threads: Geld abheben im Ausland: Wo die Gebühren wirklich ent
@@ -81,7 +81,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-st
  rom:nutzen:2026-11-30@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261130T151500Z
 DTEND:20261130T153000Z
 SUMMARY:Threads: Geschirrspüler voll beladen: Wasser und Strom sparen 
@@ -96,7 +96,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anb
  ieterwechsel:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261201T081500Z
 DTEND:20261201T083000Z
 SUMMARY:Threads: DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten und Effek
@@ -111,7 +111,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-hei
  zkosten:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261201T151500Z
 DTEND:20261201T153000Z
 SUMMARY:Threads: Gas-Anbieter wechseln: Strategien gegen hohe Heizkost
@@ -126,7 +126,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
  :nutzen:2026-12-02@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261202T081500Z
 DTEND:20261202T083000Z
 SUMMARY:Threads: Abos und Verträge: Der stille Posten im Haushaltsplan
@@ -141,7 +141,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fi
  xkosten:nutzen:2026-12-02@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261202T151500Z
 DTEND:20261202T153000Z
 SUMMARY:Threads: Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pf
@@ -156,7 +156,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-o
  hne-gebuehren:nutzen:2026-12-03@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261203T081500Z
 DTEND:20261203T083000Z
 SUMMARY:Threads: Kostenloses Girokonto: Ein Konto ohne Gebühren finden
@@ -171,7 +171,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarant
  ie-gas:nutzen:2026-12-03@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261203T151500Z
 DTEND:20261203T153000Z
 SUMMARY:Threads: Sicher heizen: Welche Kosten sind geschützt (nutzen)
@@ -185,7 +185,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
  et:nutzen:2026-12-04@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261204T081500Z
 DTEND:20261204T083000Z
 SUMMARY:Threads: DSL-Vergleich: So findest du den günstigsten Internet
@@ -200,7 +200,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-
  tarife-fuer-2026:nutzen:2026-12-04@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261204T151500Z
 DTEND:20261204T153000Z
 SUMMARY:Threads: Preisgarantie Gas: So sicherst du günstige Tarife (nu
@@ -215,7 +215,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nut
  zen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261205T081500Z
 DTEND:20261205T083000Z
 SUMMARY:Threads: Haushaltsbuch führen: App\, Excel oder Stift im Vergl
@@ -230,7 +230,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermei
  den:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261205T151500Z
 DTEND:20261205T153000Z
 SUMMARY:Threads: Gasrechnung senken: Welche Fehler lassen sich vor (nu
@@ -245,7 +245,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nut
  zen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261206T081500Z
 DTEND:20261206T083000Z
 SUMMARY:Threads: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
@@ -260,7 +260,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-
  finden:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261206T151500Z
 DTEND:20261206T153000Z
 SUMMARY:Threads: Energiediebe stoppen: So kannst du Stromfresser finde
@@ -275,7 +275,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismu
  s-tipps:nutzen:2026-12-07@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261207T081500Z
 DTEND:20261207T083000Z
 SUMMARY:Threads: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzich
@@ -290,7 +290,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preis
  spruengen:nutzen:2026-12-07@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261207T151500Z
 DTEND:20261207T153000Z
 SUMMARY:Threads: Preisgarantie Gas: So prüfst du das Schreiben (nutzen)
@@ -304,7 +304,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-26-dns-server-wechseln-schnelleres-sichereres-inte
  rnet:nutzen:2026-12-08@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261208T081500Z
 DTEND:20261208T083000Z
 SUMMARY:Threads: DNS-Server wechseln: Datenschutz\, Filter und Einrich
@@ -319,7 +319,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nutz
  en:2026-12-08@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261208T151500Z
 DTEND:20261208T153000Z
 SUMMARY:Threads: Warmwasser sparen: Was kostet dich eine Dusche? (nutzen)
@@ -333,7 +333,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-eck
  e:nutzen:2026-12-09@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261209T081500Z
 DTEND:20261209T083000Z
 SUMMARY:Threads: WLAN verbessern: So bringst du stabilen Speed in jede
@@ -348,7 +348,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefe
  n:nutzen:2026-12-09@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261209T151500Z
 DTEND:20261209T153000Z
 SUMMARY:Threads: Lastschrift und Dauerauftrag: Was du prüfen solltest 
@@ -363,7 +363,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaeh
  ler-noch-lohnt:nutzen:2026-12-10@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261210T081500Z
 DTEND:20261210T083000Z
 SUMMARY:Threads: Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lo
@@ -378,7 +378,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-d
  eine-rechte:nutzen:2026-12-10@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261210T151500Z
 DTEND:20261210T153000Z
 SUMMARY:Threads: Störung beim Internetanbieter: So sicherst du deine R
@@ -393,7 +393,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-s
  chnaeppchen:nutzen:2026-12-11@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261211T081500Z
 DTEND:20261211T083000Z
 SUMMARY:Threads: September-Roadtrip: Clevere Wege zum Mietwagen-Schnäp
@@ -408,7 +408,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:nu
  tzen:2026-12-11@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261211T151500Z
 DTEND:20261211T153000Z
 SUMMARY:Threads: Handytarife vergleichen: Welches Angebot passt zu dir
@@ -423,7 +423,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahl
  en:nutzen:2026-12-12@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261212T081500Z
 DTEND:20261212T083000Z
 SUMMARY:Threads: Kreditkarte vergleichen: Kostenlos und sicher zahlen 
@@ -438,7 +438,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitn
  ehmen:nutzen:2026-12-12@franksfinanzcheck.de
-DTSTAMP:20261128T141923Z
+DTSTAMP:20261128T142207Z
 DTSTART:20261212T151500Z
 DTEND:20261212T153000Z
 SUMMARY:Threads: Umzug mit Internet: Anschluss und Rufnummer mitnehmen
