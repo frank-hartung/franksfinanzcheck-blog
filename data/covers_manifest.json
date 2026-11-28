@@ -3067,5 +3067,104 @@
    "badge": "KONTO & FINANZEN",
    "savings": ""
   }
+ },
+ "2026-11-28-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+  "title": "Carsharing oder eigenes Auto: Welche Kosten fallen an?",
+  "ts": "2026-11-28T12:39:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-11-28-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+  "title": "Grundlast messen: Wie viel Strom verbraucht dein Haushalt",
+  "ts": "2026-11-28T12:40:48+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-28-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+  "title": "Ferienwohnungen vergleichen: Was kostet eine Nacht mit",
+  "ts": "2026-11-28T12:42:10+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-11-28-handy-kosten-senken-so-entlarvst-du-teure-tarif-fallen": {
+  "title": "Handy-Kosten senken: So entlarvst du teure Tarif-Fallen",
+  "ts": "2026-11-28T12:43:33+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-28-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+  "title": "Heizperiode Beginn 2026: Warum der Gas-Check im Oktober",
+  "ts": "2026-11-28T12:44:55+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-28-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus": {
+  "title": "Homeoffice zu zweit: Reicht deine Leitung wirklich aus?",
+  "ts": "2026-11-28T12:46:18+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-28-kleiderkreislauf-im-freundeskreis-so-klappt-dein-tausch": {
+  "title": "Kleidertausch: So klappt dein Tausch – Secondhand tauschen",
+  "ts": "2026-11-28T12:47:41+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-28-kreditkarte-ohne-fremdwaehrungsgebuehr-2026": {
+  "title": "Kreditkarte: Ohne Fremdwährungsgebühr 2026",
+  "ts": "2026-11-28T12:49:03+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-11-28-lebensmittel-retten-clever-planen-statt-teuer-wegwerfen": {
+  "title": "Lebensmittel retten: Clever planen statt teuer wegwerfen",
+  "ts": "2026-11-28T12:50:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-28-strom-sparen-sommer-10-smarte-tipps-fuer-heisse-tage": {
+  "title": "Strom sparen Sommer: 10 smarte Tipps für heiße Tage",
+  "ts": "2026-11-28T12:51:48+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-28-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+  "title": "Vorrat planen: Wann lohnt sich ein größerer Einkauf?",
+  "ts": "2026-11-28T12:53:10+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
  }
 }
