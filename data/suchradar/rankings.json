@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-27T17:47:17.184780+02:00",
+ "stand": "2026-11-28T16:41:38.515366+02:00",
  "rankings": [
   {
    "anfrage": "5G Router",
@@ -13,6 +13,16 @@
   },
   {
    "anfrage": "Abdeckung Wohnung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Abschlag zu niedrig",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -113,16 +123,6 @@
   },
   {
    "anfrage": "Versicherungen kündigen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Zinsen vergleichen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
