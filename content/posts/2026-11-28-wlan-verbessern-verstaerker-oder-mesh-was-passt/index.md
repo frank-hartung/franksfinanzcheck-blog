@@ -22,15 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
 cover:
-  image: "images/covers/2026-11-27-wlan-verbessern-verstaerker-oder-mesh-was-passt.jpg"
+  image: "images/covers/2026-11-28-wlan-verbessern-verstaerker-oder-mesh-was-passt.jpg"
   alt: "WLAN verbessern: Verstärker oder Mesh – was passt?"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 9c43e219c56b0d83df025691c78618f09bd7fd631b320cc1f02a54b0c0a7fe8a
-    geprueft_am: 2026-11-27
+    sha256: 047e11c0ad989e7b48447cbbbbea48bbd53806e6f3ffb0a00c0dfb39d06654f9
+    geprueft_am: 2026-11-28
 faktenfrische_aliases:
   - "2026-11-24-wlan-verbessern-verstaerker-oder-mesh-was-passt"
   - "2026-11-25-wlan-verbessern-verstaerker-oder-mesh-was-passt"
