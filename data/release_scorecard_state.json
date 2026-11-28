@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-28T14:07:39Z",
-  "modus": "live",
-  "commit": "5d390f8300f5e055e4313ca627dc0a273c47fdf9",
+  "generated_at": "2026-11-28T14:41:30Z",
+  "modus": "kandidaten",
+  "commit": "596039335fef6bc894032a33dc5940207211bb1e",
   "kapazitaet": {
     "stichtag": "2026-11-28",
     "basis": "2026-11-28",
@@ -197,7 +197,7 @@
     "seiten": 84,
     "live_befunde": 174,
     "live_seiten": 52,
-    "ueberholt": 255,
+    "ueberholt": 264,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 29,
@@ -676,7 +676,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "c1d2f25e505b20fa7da7e82307f1bca43a1f576f856308fc400ef695e66245d4",
+      "sha256": "c2b196466b1303201f57342da68377f16a7a049e1aa7584e5d41ace7fd23e481",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -690,7 +690,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
