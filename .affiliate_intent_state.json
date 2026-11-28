@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-27 13:23:18 UTC",
+ "generated_at": "2026-11-28 12:37:40 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 152,
- "checked_links": 341,
+ "checked_articles": 155,
+ "checked_links": 348,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -32,7 +32,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-   "line": 23,
+   "line": 24,
    "route": "strom",
    "slot": "top",
    "owner": "human",
@@ -43,7 +43,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-   "line": 198,
+   "line": 199,
    "route": "strom",
    "slot": "end",
    "owner": "human",
@@ -119,7 +119,18 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-26-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
+   "slug": "2026-11-27-festgeld-vs-tagesgeld-wo-gibt-es-die-besten-zinsen",
+   "line": 111,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Tagesgeld der C24 Bank“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-27-homeoffice-zu-zweit-reicht-deine-leitung-wirklich-aus",
    "line": 14,
    "route": "reisen",
    "slot": "top",
