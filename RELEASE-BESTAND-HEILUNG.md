@@ -1,6 +1,6 @@
 # Release-Bestand – Selbstheilung
 
-**Stand:** 2026-11-26T15:03:16Z · **Status:** nichts-zu-heilen
+**Stand:** 2026-11-28T14:07:08Z · **Status:** nichts-zu-heilen
 
 Die Scorecard misst; dieser Lauf heilt nur die sichere, deterministische Teilmenge.
 Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird vollständig zurückgerollt.
@@ -39,13 +39,13 @@ Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird volls
 - `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
-- `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` (F1-faktenfrische): kein sicherer deterministischer Bestandsheiler
 - `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund

@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generated_at": "2026-11-26T15:03:16Z",
+  "generated_at": "2026-11-28T14:07:08Z",
   "modus": "apply",
   "status": "nichts-zu-heilen",
-  "basis_commit": "e316133ae35e5c017c16c0ffaefccb9f1b5841a2",
+  "basis_commit": "5d390f8300f5e055e4313ca627dc0a273c47fdf9",
   "baseline_blocker": [
     [
       "2026-08-10-dsl-wechselbonus-sichern",
@@ -126,10 +126,6 @@
       "F4-fachbefund"
     ],
     [
-      "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "F4-fachbefund"
-    ],
-    [
       "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
       "F4-fachbefund"
     ],
@@ -152,6 +148,10 @@
     [
       "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
       "F4-fachbefund"
+    ],
+    [
+      "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
+      "F1-faktenfrische"
     ],
     [
       "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
@@ -227,11 +227,11 @@
     ]
   ],
   "baseline_hashes": {
-    "2026-08-10-dsl-wechselbonus-sichern": "820ca02e0861bfac94472a5037c82de552fc8b1508c908d7a0a973df12b89b80",
-    "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": "e5b4717a50b3346d9de57b17a25509c48c19b9593a7d09becc300334bd8d3e8e",
+    "2026-08-10-dsl-wechselbonus-sichern": "bc8c8c8c72ef53d6a81bcec13931570528650af28063c7df0a3880694d00d4fa",
+    "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": "cc37a324ed35b76983d12bf41d58c3b33ba2f95c4fd2d943b7e8d77ec915379a",
     "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": "c8b50def9e6eb51e8f247db44334d2b8f52ed002075ca20f9af825075127ebd5",
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": "f844c911d647376418b076950aaaac984acaf6f154999ace9553ecd8925e1daf",
-    "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": "44922fbaaf6376f6683a3e937fa6e4c48b9c5bf0b35d2a805a93a50e9fa7c4b6",
+    "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": "15cbb741a477c7c8bd0baffb101475e2007c60565aa064cbb2f9689a39faa06f",
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": "5372ac6cb7eccd4807f13afeed3eba6a913b369e4492a7f2712924a965a01728",
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": "f21b7e8ea74798a6218da2cc8b9106ad70adc5e351060e6c5dd1d1ee7387d43a",
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": "e71ab8bbcb09cfeaa490f1b6b388930c735470fe78ec09a73d5bf3a89432755c",
@@ -240,53 +240,53 @@
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": "b42995eb0dfd6ad543c6517e09f7bd74b44621569aa8411a4be206569d588de3",
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": "0307520adcfb9497d0b6dd6fde5962f01c9c1e87335aba6e1711d4e13f68ecb0",
     "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": "9078e2412b494d3fb25cc238e1f644c508156cb2674d18f798b3df516e77c6dc",
-    "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": "bd962d4690e7f8e8fc1ae3af8f805867c35758d3ab05e70cd6973657f119f61c",
-    "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": "cb21061ce033793b893dfd6aeb93639e7692c84ab92b86b90679c5810583008a",
+    "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": "7a4e85285f8b7d75507347738b089afeeae1afccb969a31a428af0b4d3cdb978",
+    "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": "f0e76e9fcd7f40ad26c2baa8641d633c4190b9ba1cd409e5b42e4cc8960a8b13",
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": "0771d214ebafe8ce04aca9a834b2d2d3421fd442dc72282e83c9b935bd7769de",
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": "28cda7f51815b9da15ea8cd3267b2a95cfaff3e12c7ff9c11765b11e77392757",
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": "8ed03120fad5eb8fe01817649eca8831ba146f677850150bcd0be96c40dfd6b6",
-    "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": "52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e",
+    "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": "c1d2f25e505b20fa7da7e82307f1bca43a1f576f856308fc400ef695e66245d4",
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": "e7725a8d83c8d1629c9b03a779da12d180f1f550597907dbd2185395b322996e",
-    "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": "04e1b7e3d7860587928ffe29545173b08cf153a380725619cec967f2a79276eb",
+    "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": "2862a04c31e2d5e6ea9fd8245aea35b1de685f9b45b62d3b6d824958d5c78511",
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": "34e20f68cddc518030c62b479f9b1af5f0d09d9af926e12d6697ce1f0921a0e5",
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": "6da27aad419bd3da24aed398ee7a46240b4743145a4d96e0aa6e288548d98e52",
-    "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": "5f87caf7d1bf7b39fd3f35bfe088363f6325040074c5b424d37a835ccce15cb8",
+    "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": "1f327c5c1654fcd11447bc5c4022714d172a87d05b0e1fa4309c8fca01681a45",
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": "78a47f7b40b892410d8adfbe6403545970cfc1ee00067fb6af4a0a1d61eda56e",
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": "70dde77cb5d853294ddb4aecac3f86214d2736a0ab8928234663192ba2a0c4c3",
-    "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": "850f5a83a661797c1197eb1a862195c1f5b4caf33882e8886af6ad4f650f21b6",
-    "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": "ef01912d37e6db86503370172dcf5f5172a5114689ac959faff0d46885c7b07a",
-    "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": "1f927be67c7f2d6293e9436e860d8d8713423dfac4ebe3371c7ede10fb95fcd5",
+    "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": "2c74b4641f4c1d60799916f3e16cbab11eacaba3cd75bc690869a895dcdecfd1",
+    "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": "49bbb3e8a848a41fdf64b1a2b65cb89b2ab63ffa908fa1e05136ec4bcb5201ea",
+    "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": "5155315e04929dc6061f7be089eede70b340a502a49901824edafb096c4ab2a8",
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": "12d8f8e6a61dd43ecb27c0af0e297a5f13784c32f7e879b02ad356271e799758",
-    "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": "27c69d7be6372aa96bd1975183f6898c3aee7516bfd41f211e7c269701f0ba0f",
+    "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": "385e9d6330dfadf73602e83b7594f0b234c3d67669455a0338994e0008eb7f8e",
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": "6745cad7b490f4bccf2378802253b7acfdf2be536e66325b8a060ebfd2ae0d08",
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": "b63216e98943011bb9f5a781d2e8bf11a307f7540c90ffd9a825aecba748c2a7",
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": "ad9c5b8dc62c939a4a89edf395ef584b35de482edf56de3aa40044abdfda8c50",
-    "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": "176041fa61f6777cfce460c4ade36bbbb47ce40b9b8e73ddacbfbd5a9d868544",
-    "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": "477bf997faa25fe52ae18e0b6645ccbebbf74edf714bb5ecf9612228bc2e0f84",
-    "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": "c8e24fbe6a53c57f6cbcce926361cd8380296ea8e74d20f9e821264721403ab9",
+    "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": "6762661f34118c567eefc68b2dc9945492b93236a1a953d6e3cdb978ea968e89",
+    "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": "88995f4f29c57320974f766e1a2b36f6e9fdb1701c96da9ec7ea2fdf3d5cd81b",
+    "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": "1b72bcd3b73eea2aaab3d59db06f62b34e7657308985dceede6bc0ab378cc2a0",
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": "738054f927f8829f7c931ec90f8117e5757a4633bb2ef517c6759096514a91ad",
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": "616f600bfdccb77cf3ed63ee3ead85f0feee87cc354218675199b089a78dde66",
-    "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": "c05cb178f960c8a01b2d43a92206b4ae42cbef070729bc5da249806510d767ae",
-    "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": "2d5016195a155397db529ad55cf503c82b6e717d122b8a199f69f4647847bbb4",
-    "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": "9157a067135839cbdfbeb259b0e0ea7644bbd959bd9aaf41515e1af7a0d7ecaa",
-    "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": "e83de247505c436fae726d2dd0b07626d6a368b288850556e937e53bd7df7160",
-    "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": "ad63041a48eee27fc2bcadcc1554e73d432888f7b579ede1e62f5043a7048519",
+    "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": "4ffc7256363802469c3f0bd1318cc1455cd83b071b0ab9f52712835ec688ba81",
+    "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": "612a50ca5d64b6da7cda039ac928203eaf479547a4821355e036e93f3eafb5b5",
+    "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": "166e4435136657b865481f217a97be2372b7932649cb981b5705e49e8742c964",
+    "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": "ac1cc479872383719d9a28f8ff60cd02de76f61d885a173dfdc1a75ded97a10a",
+    "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": "0bc9da35828d1824eb3e44e94a3c79942866bdd2e4cd557ddf33cf224022b1d7",
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": "ee3398b1d684be99843c1576a43a3b1002468fa0613e7a033184267ca3411207",
-    "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": "bbb5406f79a4df09f9003e603c9029bed16145860985ce61e5b11ed9340be8b8",
+    "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": "2a545157e36841173145496fb456cb476131e15af892e2ce866aadb008370811",
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": "1a10d28b2299b364768d5e2d0517ff28b970f33fa6c2f56e75d67c4417b66ecf",
-    "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": "9844273472448ee441cfabf5bee48564ee3d7822999b65088a538045906fe20c",
+    "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": "b31cd3d23b285370fad1efc50bcd26d047374096f7896fa8b3868e97df36bf13",
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": "b99d9c9e6e0b6f0e47407bc68b09f7ec50a12ad0c0f62c972242c95221848da3",
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": "c9b2293a09189cc0634f8c276a8d6975054d47381f7e35d6dcd49a8f2283abdd",
-    "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": "37dfc973756766058d81182c8579a87dff014d4aea89b25570b7af6f4bc37335",
+    "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": "a28e1e8d0ab5662cb7251217c3e299ff599b7c525e45f01bd3284121812c9d3e",
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": "509ca1c53d87d60c6848ee4941cea770768a5476e0cc5c4e08dc0a2f5c9f08bd",
-    "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": "fdabab53a03b8ef9c89d473dd2a663244bf45b822d43eb021c05f00804d0d757",
-    "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": "906bedd97763916a16c399b0499fce7aaf55c4775f0327277cd8c5de15e174e6",
+    "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": "c59e6b9482fb88d010bed79d43900f796bf828cbcbac5d279024eaa744dc1dc8",
+    "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": "7b5162e5ef7b6b88d04c14a343d8001c4bbafb2f9e08f7f034e89d2aa7b1142d",
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": "50867061334c4b577c556300c08d8921154f06a06b43852ba1554a957814e3cc",
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": "01f1dba45abfdf002d7e3b91f8a212b9947d421f16191c9f550c1547470e253f",
-    "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": "53f6010c7834c886bb950e62bccaa59601322eaa334c2fb15f0b7457252f7f86",
+    "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": "a1851767424403ad028adb5836e277a53e44bccb5c896ea8d335bbe05a5054bb",
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": "82d056d9a62855cd8903efeaf5c3197027a2c3d96ca0cfb78dc9c6b805ed5b9e",
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": "974ac3a226609532c865e25ab8a1a3dcf1d2b17f6045ed43d06f87bf5465fb41",
-    "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": "816bba6ceb30155c3887e2027e09b8d2466487154a5145baeb94d53f8c140193",
+    "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": "17c201c6cfa74197bb44769bc31e497b7d4da65fc965b17859f2a808b0cf7b06",
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": "23ca544a915d888f47181d95e19316afb6d35784d2d40e97d5a697e4991f191a",
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": "8fccbebdce7d61253754a9b65a4691b1d890571b443e0a24b73f6c67f55a584d",
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": "b6fd0b71ea464eca46d849c9f2cdfe034eb8d934ede4a0cafa43eb8ec030a989",
@@ -296,29 +296,29 @@
     "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": "7d08447c94a62b239efa60827d06fc292d79ab9b2cc46a41d6c908ed296cf41a",
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": "6c464c548824b5b108f42adf1cbbca85536812357c6eb8d20d1b605c4e34c152",
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": "8eea2b7a70ae14e12acbf94d15dc4f30a5c04f37c725e7b97003b4cf3c4f675e",
-    "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": "3679553e025e048365b6cc3666c06a8b0234e6795d1e5a916a435b04d81f5a88",
+    "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": "457b77a9051751defad5bb892dbb3586c16f065fd94600f783b60a12c4d72035",
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": "d5b2ad45ec208ed7451352e4bb7e1db3d0a44296906c4c301df6379f4b62e9ea",
     "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": "8f2b6943ed1c731c0d259a96ed04022f884253fb781989bf7e535f2f5cac3601",
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": "7a43b97fcd3e7e077d56364945d1fbbd27ffd795169586351bf662eb2b06077c",
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": "4bd5994900d1e794cae7c4f359305b5d694b64662c48a456159adbdd6b7ebead",
-    "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": "4dd2358ea948dc0f0a8a2fffa54688acd123d1beb14f2439645456e192b70ea6",
+    "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": "7a176286709169bede0f25cf20ed116d1319b294867632e86f875dd69df73e1d",
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": "8677ae773b878ad24e576ce84754114c80d6487289a73efb08d50b21c0a3d926",
-    "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": "2144bd43b93ff47fc33043264719d27427bded320074c089c1306e849fe63d45",
-    "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": "13c684c1a91392829fa82c4f9082711cee249f375a30341fb710e7d7606f206f",
-    "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": "b9266f14a92cb4dcbc873da3e8a8880ad71fa048bbb2ee76b598c4519cd0e184",
+    "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": "cd7b78f31938b4e1e73e3a00e7e3b290ea733d8ed3774404e9d5f50808ff9aef",
+    "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": "9b1d6f3b64c31f2b82e520f1868d3a56315dc6d27ff67915e63d0e64619314f4",
+    "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": "3ebdf701bbbb2103dd03f2c93d0ea1a1dddedd28f7b50ba4576195f31e342413",
     "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten": "9417b0021dc3367f75044f941ff19229863b2450c4ed39858c51d3fb3976bea7",
     "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck": "3397003b677f9bd8a902548550c2696920e4e4c4dc4c3a37c92a74f657fbe2f6",
-    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": "f4d3c3e52c6b228e8a73627aac0971adcbba28cff7630a96fb4e89f4b778e59e",
-    "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": "4ab369618564067bf2589e58e2fdea9378fa3efe76d0546878268e2f189c4689",
+    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": "9c0b95a19b4fa31a32b0525bffc4f390693d156fdb21e4330e5a0eb308152ef8",
+    "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": "1facb33a80874f8efcf9029cfc9e8d47a012e4df43d5fb65c4f19ee1326215ed",
     "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": "da9f2474ae398e59a7c95c20ff733247b38bf92a080cfc21f1bb19aba63f3486",
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": "a22db33fa4d1fca3fe4428ae40f5f5d81f1bd76c09cb5d09e3e2378dfa4bfd8d",
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": "1ff7f05c3ee0ba91ddec564a313464904caf84f8772a778d3262b7004d8040ea",
     "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst": "ff3fba7de122199bdec9805c35d2256b6823de5b3d5da09b58b064763d9586eb",
-    "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": "e75f7c91dfde04514b6501ca8675326a314247e8254566bcba2777c206ddb532",
-    "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": "7653d8d4d61a2ecc5bfa6f85c418ab156371a7aaf798b0d745523f5a684c3a48",
+    "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": "5a0b312f0ada6ce8aef68e7518d934ad816bd5cb9c82e2c56f19fbb6d9843081",
+    "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": "a6e082eba08e6deaf0fe3e38eb52a559f257ba3ef3175a51e94ec52364989c99",
     "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst": "d69e0c0e8e404985dd230895abb37e9be50dad4fb62b068595031c98c6e5c7e2",
     "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": "58a8fd2627c6c806eba495e2eab2ac5e2c8421d3fb821c7244b605dba96fd9d5",
-    "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": "5bc1ca94d808368d6dd3d8de01c170c13d12aa7ab9138038db3dc0c691b60003"
+    "2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": "87aa235d97ee558674ab96b7cdaca1a03ab796aff6b52f6e2b7bfc89379ce832"
   },
   "artikel": [],
   "uebergaben": [
@@ -527,13 +527,6 @@
       ]
     },
     {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "grund": "menschlicher Prüfstand: F4-fachbefund",
-      "checks": [
-        "F4-fachbefund"
-      ]
-    },
-    {
       "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
       "grund": "menschlicher Prüfstand: F4-fachbefund",
       "checks": [
@@ -573,6 +566,13 @@
       "grund": "menschlicher Prüfstand: F4-fachbefund",
       "checks": [
         "F4-fachbefund"
+      ]
+    },
+    {
+      "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
+      "grund": "kein sicherer deterministischer Bestandsheiler",
+      "checks": [
+        "F1-faktenfrische"
       ]
     },
     {
