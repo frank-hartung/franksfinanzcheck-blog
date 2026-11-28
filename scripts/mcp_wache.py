@@ -5,9 +5,9 @@
 #  ------------------------------------------------------------
 #  WARUM ES DIESE WACHE GIBT (26.10.2026)
 #
-#  `.mcp.json` ist die Datei, mit der ein KI-Client (Claude Code,
-#  Cursor, VS Code …) Werkzeuge bekommt, die in diesem Repo laufen.
-#  Sie ist damit dreierlei gleichzeitig:
+#  Ein aktives MCP-Profil gibt einem Agenten Werkzeuge. Seit 26.11.2026
+#  bleibt der Projektstandard `.mcp.json` leer; ausschließlich der
+#  Diagnose-Agent besitzt das Startprofil. Dieses ist dreierlei:
 #
 #    · eine ABHÄNGIGKEIT (ein npm-Paket, das ohne Pin ein anderes
 #      Programm ist als gestern),
@@ -19,9 +19,9 @@
 #  Text ist Daten und keine Anweisung (Regel 1). Eine Konfiguration,
 #  die niemand prüft, ist eine Hintertür mit guter Absicht.
 #
-#  WAS GEPRÜFT WIRD (M1–M6)
-#    M1 DATEI      `.mcp.json` existiert, ist gültiges JSON und hat
-#                  einen `mcpServers`-Block.
+#  WAS GEPRÜFT WIRD (M1–M7)
+#    M1 DATEI      Das aktive Profil enthält einen nichtleeren
+#                  `mcpServers`-Block.
 #    M2 GEHEIMNIS  Kein Wert sieht wie ein Token/Schlüssel aus. Kein
 #                  Klartext-Bearer. Umgebungsvariablen-Verweise
 #                  (`${VAR}`) sind erlaubt – sie sind keine Werte.
@@ -37,6 +37,10 @@
 #                  Ziele über `--allowed-origins` begrenzen – ohne
 #                  `*`.
 #    M6 PLATZHALTER  Keine `CHANGE_ME`/`YOUR_`/`<…>`-Werte.
+#
+#    M7 BEDARF     Projektstandard ohne Server. Nur der Diagnose-Agent
+#                  erhält die fünf benannten Werkzeuge; keine automatischen
+#                  Seitenbäume, Codebeispiele oder Werkzeuge aus der Seite.
 #
 #  WAS DIESE WACHE NICHT LEISTET
 #  Sie ersetzt keine Sandbox. `--allowed-origins` ist laut Upstream
@@ -62,6 +66,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 KONFIG = ROOT / ".mcp.json"
+EINSTELLUNGEN = ROOT / ".claude" / "settings.json"
+PROFIL = ROOT / ".claude" / "agents" / "ff-browserdiagnose.md"
+DIAGNOSE_TOOLS = tuple("mcp__playwright__browser_" + name for name in (
+    "navigate", "find", "snapshot", "console_messages", "network_requests",
+))
+
+# Einziger ausführbarer Hook im Profil. Keine globale Freigabe, kein Shell-Input
+# aus der Seite. Auch ein fehlender Interpreter muss den Toolaufruf blockieren.
+DIAGNOSE_HOOKS = {"PreToolUse": [{
+    "matcher": "mcp__playwright__.*",
+    "hooks": [{"type": "command", "command": 'python3 "$CLAUDE_PROJECT_DIR/scripts/mcp_wache.py" --vor-aufruf || exit 2'}],
+}]}
 
 # Server, die in diesem Repo laufen dürfen. Ein Eintrag hier ist eine
 # Entscheidung des Inhabers, keine Bequemlichkeit: Wer einen Server
@@ -136,6 +152,9 @@ def pruefe(config: dict) -> list[str]:
             fehler.append(f"M1: Server „{name}“ ist kein Objekt.")
             continue
 
+        if "args" in definition and not isinstance(definition["args"], list):
+            fehler.append(f"M1: Argumente von „{name}“ sind keine Liste.")
+            continue
         pakete = [str(a) for a in (definition.get("args") or []) if str(a).startswith("@")]
         if definition.get("command") in ("npx", "npm", "bunx", "pnpx"):
             if not pakete:
@@ -191,9 +210,123 @@ def pruefe(config: dict) -> list[str]:
     return fehler
 
 
+def _eindeutig(paare: list[tuple]) -> dict:
+    # YAML- und JSON-Clients behandeln doppelte Schlüssel unterschiedlich.
+    obj = dict(paare)
+    if len(obj) != len(paare):
+        raise ValueError("doppelter Konfigurationsschlüssel")
+    return obj
+
+
 def lade(pfad: Path | None = None) -> dict:
     datei = pfad or KONFIG
-    return json.loads(datei.read_text(encoding="utf-8"))
+    return json.loads(datei.read_text(encoding="utf-8"), object_pairs_hook=_eindeutig)
+
+
+def lade_profil(pfad: Path) -> dict:
+    # JSON ist gültiges YAML. So lesen Client, Offline-Wache und Export genau
+    # ein Frontmatter, ohne YAML-Abhängigkeit oder zweite Kopie des Startprofils.
+    zeilen = pfad.read_text(encoding="utf-8").splitlines()
+    if not zeilen or zeilen[0] != "---" or "---" not in zeilen[1:]:
+        raise ValueError("Diagnoseprofil ohne abgeschlossenes Frontmatter")
+    return json.loads("\n".join(zeilen[1:zeilen.index("---", 1)]), object_pairs_hook=_eindeutig)
+
+
+def _kompakter_start(server: dict) -> bool:
+    """Stdio ohne weitere Startoptionen; Reihenfolge der Schalter ist egal."""
+    args = server.get("args")
+    if (set(server) != {"command", "args"} or server["command"] != "npx"
+            or not isinstance(args, list) or not all(isinstance(a, str) for a in args)
+            or len(args) < 2 or args[0] != "-y" or args[1].rpartition("@")[0] != "@playwright/mcp"):
+        return False
+    # Exaktheit des Paket-Pins prüft weiterhin M3.
+    soll = dict.fromkeys((*PFLICHT_ARGUMENTE, "--no-webmcp"))
+    soll.update({"--output-dir": ".cache/mcp", "--allowed-origins": ";".join(ERLAUBTE_ORIGINS),
+                 "--console-level": "warning", "--snapshot-mode": "none", "--codegen": "none"})
+    it = iter(args[2:])
+    for schalter in it:
+        if schalter not in soll:
+            return False  # auch doppelte Schalter und --option=wert
+        wert = soll.pop(schalter)
+        if wert is not None and next(it, None) != wert:
+            return False
+    return not soll
+
+
+def pruefe_projekt(standard: dict, profil: dict, einstellungen: dict) -> tuple[dict, list[str]]:
+    """Normaler Start und bewusst aktivierte Diagnose sind getrennte Verträge."""
+    fehler = [] if standard == {"mcpServers": {}} else [
+        "M7: Der Projektstandard muss genau einen leeren mcpServers-Block enthalten."
+    ]
+    if not isinstance(einstellungen, dict) or einstellungen.get("agent") == PROFIL.stem:
+        fehler.append("M7: Der Browseragent darf nicht als Standard in .claude/settings.json starten.")
+    if not isinstance(profil, dict) or set(profil) != {"name", "description", "tools", "mcpServers", "hooks"}:
+        return {}, fehler + ["M7: Unerwartetes oder unvollständiges Diagnose-Frontmatter."]
+    if profil["hooks"] != DIAGNOSE_HOOKS:
+        fehler.append("M7: Genau der lokale PreToolUse-Hook muss die Diagnoseaufrufe prüfen.")
+    if (profil["name"] != PROFIL.stem or not isinstance(profil["description"], str)
+            or not profil["description"].strip()):
+        fehler.append("M7: Name oder Beschreibung des Diagnose-Agenten fehlt oder passt nicht.")
+    tools = profil["tools"]
+    if (not isinstance(tools, list) or len(tools) != len(DIAGNOSE_TOOLS)
+            or not all(t in tools for t in DIAGNOSE_TOOLS)):
+        fehler.append("M7: Der Diagnose-Agent braucht genau die fünf benannten Playwright-Werkzeuge.")
+    inline = profil["mcpServers"]
+    if not isinstance(inline, list) or len(inline) != 1 or not isinstance(inline[0], dict):
+        return {}, fehler + ["M7: Genau eine lokale Inline-Serverdefinition erwartet."]
+    config = {"mcpServers": inline[0]}
+    fehler.extend(pruefe(config))  # M1–M6 gelten unverändert für das aktive Profil
+    server = inline[0].get("playwright")
+    if not isinstance(server, dict) or not _kompakter_start(server):
+        fehler.append("M7: Startprofil weicht ab (Pin/Startbefehl, Origins, Ablage oder kompakte Ausgabe).")
+    return config, fehler
+
+
+def pruefe_aufruf(event: dict, root: Path) -> str | None:
+    """Prüft nur das Tool-Ereignis, startet keinen Browser und schreibt nichts."""
+    if (not isinstance(event, dict) or event.get("hook_event_name") != "PreToolUse"
+            or event.get("tool_name") not in DIAGNOSE_TOOLS or not isinstance(event.get("tool_input"), dict)):
+        return "Unbekannter Diagnoseaufruf; kein Werkzeug freigegeben."
+    tool = event["tool_name"].removeprefix("mcp__playwright__browser_")
+    args = event["tool_input"]
+    datei = args.get("filename")
+    if "filename" in args:
+        # Explizite Dateinamen wertet Playwright relativ zum Workspace aus,
+        # NICHT relativ zu --output-dir. Auch Umwege über Symlinks ablehnen.
+        if not isinstance(datei, str) or not re.fullmatch(r"\.cache/mcp/[A-Za-z0-9][A-Za-z0-9_.-]{0,95}", datei):
+            return "Belege nur als .cache/mcp/<dateiname> ohne weitere Verzeichnisse ablegen."
+        cwd = event.get("cwd")
+        if (not isinstance(cwd, str) or Path(cwd).resolve() != root
+                or (root / datei).resolve() != root / datei):
+            return "Belege nur aus der Projektwurzel und nicht über Symlinks ablegen."
+
+    def nichtleer(wert: object) -> bool:
+        return isinstance(wert, str) and bool(wert.strip())
+
+    if tool == "find" and not nichtleer(args.get("text")):
+        return "Mit browser_find einen konkreten Text suchen."
+    if tool == "snapshot" and not datei:
+        tiefe = args.get("depth")
+        if "depth" in args and (type(tiefe) is not int or not 1 <= tiefe <= 3):
+            return "Für eine Inline-Antwort depth zwischen 1 und 3 wählen."
+        if not nichtleer(args.get("target")) and tiefe is None:
+            return "Keinen Vollbaum in den Chat laden: target, depth oder lokalen Belegpfad angeben."
+    if tool == "console_messages" and args.get("level") not in ("warning", "error"):
+        return "Konsole nur mit level warning oder error abrufen."
+    if tool == "network_requests" and not datei and (not nichtleer(args.get("filter")) or args.get("static")):
+        return "Netzwerkliste filtern und statische Erfolge auslassen oder als lokalen Beleg ablegen."
+    return None
+
+
+def vor_aufruf() -> int:
+    try:
+        grund = pruefe_aufruf(json.load(sys.stdin), ROOT)
+    except (OSError, ValueError, RuntimeError):
+        grund = "Diagnoseaufruf oder Belegpfad nicht lesbar."
+    if grund:
+        print(grund, file=sys.stderr)  # Keine Argumente, URLs oder Inhalte protokollieren.
+        return 2  # Claude PreToolUse: blockiert. 0 lässt reguläre Berechtigungen unberührt.
+    return 0
 
 
 # --------------------------------------------------------------------------
@@ -208,7 +341,8 @@ def _gute_config() -> dict:
                 "args": [
                     "-y", "@playwright/mcp@0.0.83", "--headless", "--isolated",
                     "--block-service-workers", "--output-dir", ".cache/mcp",
-                    "--allowed-origins",
+                    "--console-level", "warning", "--snapshot-mode", "none",
+                    "--codegen", "none", "--no-webmcp", "--allowed-origins",
                     "https://franksfinanzcheck.de;http://127.0.0.1:4173",
                 ],
             }
@@ -286,47 +420,74 @@ def selftest() -> int:
     muss(any(f.startswith("M1") for f in pruefe({"mcpServers": {"playwright": "npx"}})),
          "ein Server ohne Objekt muss auffallen")
 
+    # M7: Autostart, zu breite Toolmenge oder automatische Vollbäume.
+    standard = {"mcpServers": {}}
+    profil = {"name": PROFIL.stem, "description": "Diagnose", "tools": list(DIAGNOSE_TOOLS),
+              "mcpServers": [_gute_config()["mcpServers"]], "hooks": DIAGNOSE_HOOKS}
+    muss(not pruefe_projekt(standard, profil, {})[1], "getrennte Profile müssen grün sein")
+    muss(bool(pruefe_projekt(_gute_config(), profil, {})[1]), "Autostart muss auffallen")
+    muss(bool(pruefe_projekt(standard, {**profil, "tools": ["mcp__playwright__*"]}, {})[1]),
+         "eine pauschale Werkzeugfreigabe muss auffallen")
+    args = profil["mcpServers"][0]["playwright"]["args"]
+    args[args.index("--snapshot-mode") + 1] = "full"
+    muss(bool(pruefe_projekt(standard, profil, {})[1]), "automatische Vollbäume müssen auffallen")
+    event = {"hook_event_name": "PreToolUse", "tool_name": "mcp__playwright__browser_snapshot", "tool_input": {}}
+    muss(bool(pruefe_aufruf(event, ROOT)), "expliziter Inline-Vollbaum muss blockieren")
+    muss(not pruefe_aufruf({**event, "tool_input": {"depth": 2}}, ROOT), "begrenzter Snapshot muss gehen")
+
     if fehler:
         print("🛑 SELBSTTEST DER MCP-WACHE FEHLGESCHLAGEN:")
         for f in fehler:
             print("  ·", f)
         return 2
-    print("✅ MCP-Wache: Selbsttest grün (M1–M6, jede Regel feuert an ihrer Sabotageprobe)")
+    print("✅ MCP-Wache: Selbsttest grün (M1–M7, jede Regel feuert an ihrer Sabotageprobe)")
     return 0
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Wache über .mcp.json (Pinning, Befugnisse, Geheimnisse).")
-    parser.add_argument("--json", action="store_true", help="Maschinenausgabe")
+    parser = argparse.ArgumentParser(description="MCP-Projektstandard und Diagnoseprofil prüfen.")
+    ausgabe = parser.add_mutually_exclusive_group()
+    ausgabe.add_argument("--vor-aufruf", action="store_true", help="PreToolUse: Diagnoseaufruf auf stdin prüfen")
+    ausgabe.add_argument("--json", action="store_true", help="Maschinenausgabe der Befunde")
+    ausgabe.add_argument("--export-profil", action="store_true", help="geprüftes Sitzungsprofil als MCP-JSON ausgeben")
     parser.add_argument("--selftest", action="store_true", help="Sabotageproben ohne Dateizugriff")
-    parser.add_argument("--datei", type=Path, default=None, help="abweichende Konfiguration prüfen")
+    parser.add_argument("--datei", type=Path, help="ein separat vorliegendes aktives MCP-Profil prüfen (M1–M6)")
     args = parser.parse_args(argv)
-
+    if args.vor_aufruf:
+        return vor_aufruf()
+    if args.export_profil and (args.datei or args.selftest):
+        parser.error("--export-profil exportiert ausschließlich das geprüfte Projektprofil")
     if args.selftest:
         return selftest()
 
     datei = args.datei or KONFIG
+    projektlauf = datei.resolve() == KONFIG
     try:
         config = lade(datei)
-    except FileNotFoundError:
-        print(f"🛑 {datei.relative_to(ROOT) if datei.is_relative_to(ROOT) else datei} fehlt – "
-              "ohne Konfiguration hat kein Agent Werkzeuge (und niemand weiß warum).")
-        return 1
-    except json.JSONDecodeError as exc:
-        print(f"🛑 {datei}: kein gültiges JSON – {exc}")
-        return 1
+        if projektlauf:
+            einstellungen = lade(EINSTELLUNGEN) if EINSTELLUNGEN.exists() else {}
+            config, fehler = pruefe_projekt(config, lade_profil(PROFIL), einstellungen)
+        else:
+            fehler = pruefe(config)
+    except FileNotFoundError as exc:
+        fehler = [f"M1: {exc.filename} fehlt."]
+    except (OSError, ValueError) as exc:
+        fehler = [f"M1: Keine lesbare Konfiguration / kein gültiges JSON: {exc}"]
 
-    fehler = pruefe(config)
-    if args.json:
+    if args.export_profil:
+        if fehler:
+            print("\n".join(fehler), file=sys.stderr)
+        else:
+            print(json.dumps(config, ensure_ascii=False, indent=2))
+    elif args.json:
         print(json.dumps({"datei": str(datei), "befunde": fehler}, ensure_ascii=False, indent=2))
     elif fehler:
-        print(f"🛑 MCP-Wache: {len(fehler)} Befund(e) in {datei.name}")
-        for f in fehler:
-            print("  ·", f)
-        print("\nRunbook: docs/ANLEITUNG-PLAYWRIGHT-MCP.md")
+        print("🛑 MCP-Wache:", *fehler, sep="\n  · ")
+        print("Runbook: docs/ANLEITUNG-PLAYWRIGHT-MCP.md")
+    elif not projektlauf:
+        print(f"✅ MCP-Wache: {datei.name} sauber (Server: {', '.join(config['mcpServers'])})")
     else:
-        server = ", ".join(config.get("mcpServers", {})) or "keine"
-        print(f"✅ MCP-Wache: {datei.name} sauber (Server: {server})")
+        print("✅ MCP-Wache: Standard ohne Server · Browserdiagnose auf Abruf mit fünf Werkzeugen.")
     return 1 if fehler else 0
 
 

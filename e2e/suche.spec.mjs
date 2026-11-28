@@ -43,10 +43,15 @@ test.describe('Suche auf /suche/', () => {
   test('Suchmaske ist beschriftet und erscheint mit JavaScript', async ({ page }) => {
     await page.goto('/suche/');
     await expect(page.locator(FORMULAR)).toBeVisible();
-    const feld = page.getByLabel('Suchbegriff');
+    const suche = page.getByRole('search');
+    await expect(suche).toBeVisible();
+    // Genau das tatsächlich benutzte Eingabefeld muss im Accessibility-Baum
+    // mit Rolle und vollständigem Namen erscheinen, nicht irgendein Label.
+    const feld = suche.locator(EINGABE);
     await expect(feld).toBeVisible();
+    await expect(feld).toHaveRole('searchbox');
+    await expect(feld).toHaveAccessibleName('Suchbegriff');
     await expect(feld).toHaveAttribute('type', 'search');
-    await expect(page.getByRole('search')).toBeVisible();
   });
 
   test('„Tagesgeld“ liefert Artikel oder Ratgeber mit internen Links', async ({ page, baseURL }) => {

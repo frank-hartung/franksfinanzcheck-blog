@@ -93,7 +93,8 @@ node scripts/tests/figma_plugin_sim.mjs               # Plugin ohne Figma bauen 
 npm run test:a11y:browser                            # axe-core im gerenderten DOM (WCAG 2.1/2.2 AA, Desktop + Mobile)
 python3 scripts/cwv_feld_wache.py                    # Felddaten (CrUX/PSI) – verbindlich, Exit 0/1/2
 node scripts/lighthouse_live.mjs                     # Laborwerte der AUSGELIEFERTEN Seite (Diagnose)
-python3 scripts/mcp_wache.py                         # .mcp.json: Pinning, Server-Allowlist, Ziele, Ablage
+python3 scripts/mcp_wache.py                         # leerer Standard, gehärtetes Bedarfsprofil ff-browserdiagnose
+npm run test:mcp                                     # Offline-Regression inkl. Werkzeugauswahl und Aufruf-Hook
 ```
 
 E2E-Architektur (Details in `e2e/`-Datei-Köpfen): zero-dependency
