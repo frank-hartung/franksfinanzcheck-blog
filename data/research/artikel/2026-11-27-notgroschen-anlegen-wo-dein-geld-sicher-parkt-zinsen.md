@@ -1,6 +1,6 @@
 # Faktenfrische: Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-27 14:15 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-28 13:31 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen/index.md`

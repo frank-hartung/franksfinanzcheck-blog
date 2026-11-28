@@ -1,11 +1,11 @@
 # Faktenfrische: Der erste eigene Haushalt: Fixkosten von Anfang an ordnen
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-27 14:15 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-28 13:31 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/index.md`
 - **Themenwelt:** frugalismus
-- **Fälligkeit:** 45 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL) (Klasse: YMYL)
+- **Fälligkeit:** 46 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL) (Klasse: YMYL)
 - **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** erster eigener Haushalt, Fixkosten ordnen, Monatsbudget erstellen, Wohnung anmelden, Der erste eigene Haushalt, Inflation, Verbraucherpreise, Sparquote, Haushaltsbudget, erste, eigene, Haushalt
 - **Kanäle:** rss:Statistisches Bundesamt – Pressemitteilungen, web:destatis.de

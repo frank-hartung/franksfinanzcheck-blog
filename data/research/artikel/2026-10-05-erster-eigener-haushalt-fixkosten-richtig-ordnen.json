@@ -1,16 +1,16 @@
 {
   "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
   "titel": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
-  "erzeugt": "2026-11-27 14:15 UTC",
+  "erzeugt": "2026-11-28 13:31 UTC",
   "faellig": {
     "faellig": true,
     "prio": 1,
     "klasse": "YMYL",
-    "grund": "45 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL)",
-    "alter_tage": 45,
+    "grund": "46 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL)",
+    "alter_tage": 46,
     "intervall": 45,
     "frist": "2026-11-27",
-    "restlaufzeit": 0
+    "restlaufzeit": -1
   },
   "geo": {
     "punkte": 6,

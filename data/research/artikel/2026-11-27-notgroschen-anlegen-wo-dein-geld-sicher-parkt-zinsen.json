@@ -1,7 +1,7 @@
 {
   "slug": "2026-11-27-notgroschen-anlegen-wo-dein-geld-sicher-parkt-zinsen",
   "titel": "Notgroschen anlegen: Wo dein Geld sicher parkt & Zinsen",
-  "erzeugt": "2026-11-27 14:15 UTC",
+  "erzeugt": "2026-11-28 13:31 UTC",
   "faellig": {
     "faellig": true,
     "prio": 0,
@@ -35,7 +35,7 @@
     "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
     "bundesbank.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
   ],
-  "fassung_sha256": "393c6a59a62b9229faff36ad282b70c8f4bc473057d7e828de6530bca65d8764",
-  "text_sha256": "dff565eb6513538544f5cfa41f204481213112b12ceb4169e930919d669bc20e",
+  "fassung_sha256": "1200e870e7c8bfa7e2658534633b0489617f3dca0c107d809a6bedabc19b2b72",
+  "text_sha256": "3245ba9e613c81866ad24a5dc36f04badb76a448f0d352818dc711505165de5e",
   "fachpruefung": "übersprungen (keine Fundstellen)"
 }

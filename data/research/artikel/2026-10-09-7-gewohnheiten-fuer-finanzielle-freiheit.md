@@ -1,11 +1,11 @@
 # Faktenfrische: 7 Gewohnheiten für finanzielle Freiheit
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-27 14:15 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-28 13:31 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit/index.md`
 - **Themenwelt:** frugalismus
-- **Fälligkeit:** 45 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL) (Klasse: YMYL)
+- **Fälligkeit:** 46 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL) (Klasse: YMYL)
 - **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** 7 Gewohnheiten für finanzielle Freiheit, Gewohnheiten, finanzielle, Inflation, Verbraucherpreise, Sparquote, Haushaltsbudget, Freiheit
 - **Kanäle:** rss:Statistisches Bundesamt – Pressemitteilungen, web:destatis.de
