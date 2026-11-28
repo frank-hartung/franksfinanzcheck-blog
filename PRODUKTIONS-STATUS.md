@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-28 00:41 UTC  
+**Stand:** 2026-11-28 02:34 UTC  
 **Stufe:** P1  
-**Befund:** Am letzten Publikationstag (Freitag, 2026-11-27) sind **0 Artikel** erschienen (Ziel: 2). – Bestand: 7 von Gates gehalten (ältester 12 Tage: faktenfrische: 30d4af7eef58e74bd3b6 (luecke): 20 % des Einkommens für Sparen/Vorsorge; 676ef4593c35f53c18f1 (luecke): Faustregel: Fixkosten > 60 % erfordern Handlungsbedarf; 7fe…)
+**Befund:** Am letzten Publikationstag (Freitag, 2026-11-27) sind **0 Artikel** erschienen (Ziel: 2). – Bestand: 7 von Gates gehalten (ältester 12 Tage: faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg)
 
 | Kennzahl | Wert |
 |---|---|
