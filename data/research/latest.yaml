@@ -1,5 +1,5 @@
-generated_at: '2026-11-27T13:06:05Z'
-day: '2026-11-27'
+generated_at: '2026-11-28T12:21:00Z'
+day: '2026-11-28'
 mode: deterministic
 teams:
   trending:
@@ -253,62 +253,64 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'DSL-Anbieter wechseln: Wie du den besten Tarif findest'
+  - topic: 'Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:DSL-Anbieter wechseln: Wie du den besten Tarif findest'
+    source: 'topics:Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
     score: 0.55
     keywords:
-    - DSL-Anbieter
-    - Wechsel
-    - Tarif
-  - topic: 'DSL-Tarife im Vergleich: Welcher ist der beste?'
+    - Black Friday Internet Angebote
+    - DSL Deals Black Friday
+    - Internet Tarif Angebote November
+  - topic: DSL- und Internet-Flat günstig sichern
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:DSL-Tarife im Vergleich: Welcher ist der beste?'
+    source: topics:DSL- und Internet-Flat günstig sichern
     score: 0.55
     keywords:
-    - DSL-Tarife
-    - Internetvergleich
-    - DSL-Anbieter
-  - topic: 'Hauskauf finanzieren: Darlehen clever vergleichen'
+    - DSL Vergleich
+    - Internetvertrag wechseln
+    - Günstiges Internet
+    - Wechselbonus
+  - topic: 'Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Hauskauf finanzieren: Darlehen clever vergleichen'
+    source: 'topics:Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
     score: 0.55
     keywords:
-    - Baufinanzierung
-    - Immobilienkredit
-    - Hauskauf Finanzierung
-  - topic: 'Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden noch?'
+    - Dispozinsen senken
+    - Überziehungszinsen
+    - Bank verhandeln
+  - topic: Kontoeröffnung mit günstigen Gebühren
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden
-      noch?'
+    source: topics:Kontoeröffnung mit günstigen Gebühren
     score: 0.55
     keywords:
-    - Tagesgeld Neukundenzins
-    - Zinshopping Zinseszins
-    - Geld sicher anlegen 2026
-    - Tagesgeldkonto Zinsgarantie
-  - topic: Versicherungen für dein Fahrzeug und dich
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Waschmaschine richtig beladen: So sparst du Strom und Wasser'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Waschmaschine richtig beladen: So sparst du Strom und Wasser'
+    score: 0.55
+    keywords:
+    - Waschmaschine beladen
+    - Waschgang sparen
+    - Wasserverbrauch Haushalt
+  - topic: 'Winterreifen-Pflicht 2026: Zahlt die Kaskoversicherung bei einem Unfall
+      auf Sommerreifen?'
     pillar: versicherungen
     signal: niche_hook
-    source: topics:Versicherungen für dein Fahrzeug und dich
+    source: 'topics:Winterreifen-Pflicht 2026: Zahlt die Kaskoversicherung bei einem
+      Unfall auf Sommerreifen?'
     score: 0.55
     keywords:
-    - Versicherungen
-    - Fahrzeug
-    - Schutz
-  - topic: 'Versicherungen im Überblick: Was brauchst du wirklich?'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Versicherungen im Überblick: Was brauchst du wirklich?'
-    score: 0.55
-    keywords:
-    - Versicherungen
-    - Versicherungsvergleich
-    - Risikomanagement
+    - Winterreifenpflicht Versicherungsschutz
+    - Unfall mit Sommerreifen
+    - Grobe Fahrlässigkeit Kasko
+    - Winterreifen Alpine Symbol
 live_web:
   enabled: false
   findings: []
