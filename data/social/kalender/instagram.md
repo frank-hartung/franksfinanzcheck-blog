@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 28.11.2026 00:33 (Europe/Berlin)  
+> Automatisch aktualisiert: 28.11.2026 15:19 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Sa, 28. November 2026
-- **11:45** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
+- **18:45** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
 ### So, 29. November 2026
 - **11:45** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  

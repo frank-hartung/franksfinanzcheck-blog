@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 28.11.2026 00:33 (Europe/Berlin)  
+> Automatisch aktualisiert: 28.11.2026 15:19 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -13,8 +13,8 @@
 ## Kommende Beiträge
 
 ### Sa, 28. November 2026
-- **07:00** ⏳ Geschirrspüler voll beladen: Wasser und Strom sparen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/
+- **18:00** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
 ### So, 29. November 2026
 - **07:00** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/

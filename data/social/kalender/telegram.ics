@@ -6,24 +6,24 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-s
- trom:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261127T233356Z
-DTSTART:20261128T060000Z
-DTEND:20261128T061500Z
-SUMMARY:Telegram (Kanal): Geschirrspüler voll beladen: Wasser und Stro
- m sparen (nutzen)
+UID:telegram:2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-he
+ izkosten:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261128T141923Z
+DTSTART:20261128T170000Z
+DTEND:20261128T171500Z
+SUMMARY:Telegram (Kanal): Gas-Anbieter wechseln: Strategien gegen hohe
+  Heizkosten (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-13-geschirrspuele
- r-voll-so-sparst-du-wasser-und-strom/
-URL:https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll
- -so-sparst-du-wasser-und-strom/
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-w
+ echseln-strategien-gegen-hohe-heizkosten/
+URL:https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechsel
+ n-strategien-gegen-hohe-heizkosten/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
  bieterwechsel:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261127T233356Z
+DTSTAMP:20261128T141923Z
 DTSTART:20261129T060000Z
 DTEND:20261129T061500Z
 SUMMARY:Telegram (Kanal): DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten 
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-t
  asse-kaffee:nutzen:2026-12-05@franksfinanzcheck.de
-DTSTAMP:20261127T233356Z
+DTSTAMP:20261128T141923Z
 DTSTART:20261205T060000Z
 DTEND:20261205T061500Z
 SUMMARY:Telegram (Kanal): Kaffeemaschine: Was kostet eine Tasse wirkli
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern
  -in-der-wohnung:nutzen:2026-12-06@franksfinanzcheck.de
-DTSTAMP:20261127T233356Z
+DTSTAMP:20261128T141923Z
 DTSTART:20261206T060000Z
 DTEND:20261206T061500Z
 SUMMARY:Telegram (Kanal): Mesh-WLAN nachrüsten: Wann lohnt sich die In
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixk
  osten:nutzen:2026-12-12@franksfinanzcheck.de
-DTSTAMP:20261127T233356Z
+DTSTAMP:20261128T141923Z
 DTSTART:20261212T060000Z
 DTEND:20261212T061500Z
 SUMMARY:Telegram (Kanal): Energieeffiziente Geräte: So sinken deine Fi

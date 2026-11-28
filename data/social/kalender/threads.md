@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 28.11.2026 00:33 (Europe/Berlin)  
+> Automatisch aktualisiert: 28.11.2026 15:19 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,50 +13,50 @@
 ## Kommende Beiträge
 
 ### Sa, 28. November 2026
-- **09:15** ⏳ Energieeffiziente Geräte: So sinken deine Fixkosten — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/
-- **16:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-### So, 29. November 2026
-- **09:15** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
 - **16:15** ⏳ Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/
+- **20:30** ⏳ Energieeffiziente Geräte: So sinken deine Fixkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/
+### So, 29. November 2026
+- **09:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+- **16:15** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
 ### Mo, 30. November 2026
-- **09:15** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
-- **16:15** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
+- **09:15** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
-### Di, 01. Dezember 2026
-- **09:15** ⏳ Geschirrspüler voll beladen: Wasser und Strom sparen — _nutzen_ · Launch  
+- **16:15** ⏳ Geschirrspüler voll beladen: Wasser und Strom sparen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom/
-- **16:15** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
+### Di, 01. Dezember 2026
+- **09:15** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+- **16:15** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
 ### Mi, 02. Dezember 2026
-- **09:15** ⏳ Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/
-- **16:15** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
+- **09:15** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/
+- **16:15** ⏳ Mehrwegflaschen Pfand: Was kostet das Getränk ohne Pfand? — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-20-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten/
 ### Do, 03. Dezember 2026
-- **09:15** ⏳ Sicher heizen: Welche Kosten sind geschützt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-- **16:15** ⏳ Kostenloses Girokonto: Ein Konto ohne Gebühren finden — _nutzen_ · Launch  
+- **09:15** ⏳ Kostenloses Girokonto: Ein Konto ohne Gebühren finden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
+- **16:15** ⏳ Sicher heizen: Welche Kosten sind geschützt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 ### Fr, 04. Dezember 2026
-- **09:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
-- **16:15** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _nutzen_ · Launch  
+- **09:15** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
+- **16:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Sa, 05. Dezember 2026
-- **09:15** ⏳ Gasrechnung senken: Welche Fehler lassen sich vor — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
-- **16:15** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _nutzen_ · Launch  
+- **09:15** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/
+- **16:15** ⏳ Gasrechnung senken: Welche Fehler lassen sich vor — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 ### So, 06. Dezember 2026
-- **09:15** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
-- **16:15** ⏳ Mietwagen ohne Kautionsfallen: So sparst du im Urlaub — _nutzen_ · Launch  
+- **09:15** ⏳ Mietwagen ohne Kautionsfallen: So sparst du im Urlaub — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/
+- **16:15** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
 ### Mo, 07. Dezember 2026
 - **09:15** ⏳ Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/
