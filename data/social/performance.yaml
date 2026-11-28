@@ -1,28 +1,25 @@
 version: 1
-generated_at: '2026-11-27T13:46:49.073408+00:00'
+generated_at: '2026-11-28T12:54:28.325101+00:00'
 window_days: 60
 min_samples: 3
 channels:
   mastodon:
-    samples: 5
+    samples: 3
     angles:
-      nutzen:
-        score: 1.0
-        samples: 3
-      vergleich:
-        score: 1.0
-        samples: 1
       takeaway:
         score: 1.0
         samples: 1
+      nutzen:
+        score: 1.0
+        samples: 2
     pillars:
       frugalismus:
         score: 1.0
-        samples: 2
+        samples: 1
         cooldown_factor: 1.0
       strom-sparen:
         score: 1.0
-        samples: 3
+        samples: 2
         cooldown_factor: 1.0
     has_signal: false
     top: []
