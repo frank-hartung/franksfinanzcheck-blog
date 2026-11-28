@@ -1,42 +1,70 @@
 {
   "version": 1,
-  "generated_at": "2026-11-27T19:53:42Z",
+  "generated_at": "2026-11-28T00:02:22Z",
   "modus": "kandidaten",
-  "commit": "03472ecac5781b9bbe4c82a74cfacc47e6c2221c",
+  "commit": "87bc8abd24ddc7bbe6a00f85cba08681fb1c53b7",
   "kapazitaet": {
-    "stichtag": "2026-11-27",
-    "basis": "2026-11-27",
+    "stichtag": "2026-11-28",
+    "basis": "2026-11-28",
     "projiziert": false,
     "artikel": 154,
-    "faellig": 14,
-    "ueberfaellig": 0,
-    "ueberfaellig_max_tage": 0,
+    "faellig": 15,
+    "ueberfaellig": 3,
+    "ueberfaellig_max_tage": 1,
     "naechste_frist": {
-      "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
-      "frist": "2026-11-28",
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "frist": "2026-11-29",
       "restlaufzeit": 1
     },
-    "budget": 14,
+    "budget": 15,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 14.0,
+    "kapazitaet_je_tag": 15.0,
     "bedarf_je_tag": 3.678,
     "bedarf_je_woche": 25.7,
-    "deckung_prozent": 380.7,
+    "deckung_prozent": 407.9,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
     "abbau_tage": 0,
-    "verletzungen_alt": 0,
+    "verletzungen_alt": 3,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
-    "verletzungen": [],
+    "verletzungen": [
+      {
+        "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
+        "titel": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
+        "titel": "7 Gewohnheiten für finanzielle Freiheit",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
+        "titel": "Stromfresser im Haushalt entlarven",
+        "frist": "2026-11-27",
+        "tag": "2026-11-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      }
+    ],
     "offen_im_horizont": 154,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-27",
+      "bis": "2027-03-28",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -44,13 +72,13 @@
       "erstverletzung_frist": null,
       "verletzungen": 0,
       "seiten": 0,
-      "rueckstand_verletzungen": 0
+      "rueckstand_verletzungen": 3
     },
     "sockel": 10,
-    "empfohlenes_budget": 14,
+    "empfohlenes_budget": 15,
     "empfehlung_erreicht": true,
     "hartes_limit": 21,
-    "spitze_geprueft": 56
+    "spitze_geprueft": 55
   },
   "ursachen": [
     {
@@ -172,9 +200,9 @@
     "ueberholt": 255,
     "ohne_fassung": 5,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 28,
+    "aeltester_tage": 29,
     "frist_tage": 14,
-    "ueber_frist": 149,
+    "ueber_frist": 165,
     "je_slug": {
       "2026-08-10-dsl-wechselbonus-sichern": 2,
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
@@ -1523,7 +1551,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
@@ -1532,7 +1560,7 @@
           "check": "F1-faktenfrische",
           "dimension": "faktenalter",
           "wirkung": "blockiert",
-          "detail": "45 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL) – keine Veröffentlichung ohne aktuellen Beleg"
+          "detail": "46 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL) – keine Veröffentlichung ohne aktuellen Beleg"
         }
       ]
     },
